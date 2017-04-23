@@ -44,7 +44,7 @@ export class Categories extends React.Component {
 
   deleteCategory(index) {
     this.props.dispatch({
-      type: 'main.DELETE_CATEGORY',
+      type: 'DELETE_CATEGORY',
       index
     });
   }
@@ -55,7 +55,7 @@ export class Categories extends React.Component {
     });
 
     this.props.dispatch({
-      type: 'main.RESET_API_SAVE_SUCCESS'
+      type: 'RESET_API_SAVE_SUCCESS'
     });
 
     this.props.dispatch({

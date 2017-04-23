@@ -49,14 +49,14 @@ export class EditIdea extends React.Component {
 
     updateEditIdeaTitle(text) {
         this.props.dispatch({
-            type: 'main.UPDATE_EDIT_IDEA_TITLE',
+            type: 'UPDATE_EDIT_IDEA_TITLE',
             value: text,
         });
     }
 
     updateEditIdeaDescription(text) {
         this.props.dispatch({
-            type: 'main.UPDATE_EDIT_IDEA_DESCRIPTION',
+            type: 'UPDATE_EDIT_IDEA_DESCRIPTION',
             value: text,
         });
     }
@@ -71,7 +71,7 @@ export class EditIdea extends React.Component {
         if (eventId !== 200) {
             if (eventId !== 100) {
                 this.props.dispatch({
-                    type: 'main.UPDATE_EDIT_IDEA_CATEGORY',
+                    type: 'UPDATE_EDIT_IDEA_CATEGORY',
                     value: eventId
                 });
             }
@@ -86,7 +86,7 @@ export class EditIdea extends React.Component {
         // 100 is reserved for blank priority
         if (eventId !== 100) {
             this.props.dispatch({
-                type: 'main.UPDATE_EDIT_IDEA_PRIORITY',
+                type: 'UPDATE_EDIT_IDEA_PRIORITY',
                 value: eventId,
             });
         }
@@ -100,34 +100,34 @@ export class EditIdea extends React.Component {
         });
 
         this.props.dispatch({
-            type: 'main.UPDATE_EDIT_IDEA_TITLE',
+            type: 'UPDATE_EDIT_IDEA_TITLE',
             value: this.props.initialIdeaTitle,
         });
 
         this.props.dispatch({
-            type: 'main.UPDATE_EDIT_IDEA_DESCRIPTION',
+            type: 'UPDATE_EDIT_IDEA_DESCRIPTION',
             value: this.props.initialIdeaDescription,
         });
 
         this.props.dispatch({
-            type: 'main.UPDATE_EDIT_IDEA_CATEGORY',
+            type: 'UPDATE_EDIT_IDEA_CATEGORY',
             value: this.props.initialIdeaCategory
         });
 
         this.props.dispatch({
-            type: 'main.UPDATE_EDIT_IDEA_PRIORITY',
+            type: 'UPDATE_EDIT_IDEA_PRIORITY',
             value: this.props.initialIdeaPriority
         });
 
         this.props.dispatch({
-            type: 'main.SET_EDIT_IDEA_INDEX',
+            type: 'SET_EDIT_IDEA_INDEX',
             index: this.props.editIdeaIndex
         });
     }
 
     updateIdea() {
         this.props.dispatch({
-            type: 'main.UPDATE_IDEA'
+            type: 'UPDATE_IDEA'
         });
 
         this.navigateBack();

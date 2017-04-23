@@ -46,14 +46,14 @@ export class AddIdea extends React.Component {
 
   updateNewIdeaTitle(text) {
     this.props.dispatch({
-      type: 'main.UPDATE_NEW_IDEA_TITLE',
+      type: 'UPDATE_NEW_IDEA_TITLE',
       value: text
     });
   }
 
   updateNewIdeaDescription(text) {
     this.props.dispatch({
-      type: 'main.UPDATE_NEW_IDEA_DESCRIPTION',
+      type: 'UPDATE_NEW_IDEA_DESCRIPTION',
       value: text
     });
   }
@@ -68,7 +68,7 @@ export class AddIdea extends React.Component {
     if (eventId !== 200) {
       if (eventId !== 100) {
         this.props.dispatch({
-          type: 'main.UPDATE_NEW_IDEA_CATEGORY',
+          type: 'UPDATE_NEW_IDEA_CATEGORY',
           value: eventId,
         });
       }
@@ -83,7 +83,7 @@ export class AddIdea extends React.Component {
     // 100 is reserved for blank priority
     if (eventId !== 100) {
       this.props.dispatch({
-        type: 'main.UPDATE_NEW_IDEA_PRIORITY',
+        type: 'UPDATE_NEW_IDEA_PRIORITY',
         value: eventId,
       });
     }
@@ -96,19 +96,19 @@ export class AddIdea extends React.Component {
       // TODO: First we will save this data here, display loading then do the below when apiSaveSuccess received
 
       this.props.dispatch({
-        type: 'main.ADD_NEW_IDEA'
+        type: 'ADD_NEW_IDEA'
       });
 
       Actions.ideas();
     }
     else {
       this.props.dispatch({
-        type: 'main.USER_ERROR',
+        type: 'USER_ERROR',
         message: 'You forgot to enter your idea'
       });
       setTimeout(() => {
         this.props.dispatch({
-          type: 'main.RESET_USER_ERROR'
+          type: 'RESET_USER_ERROR'
         });
       }, 2500);
     }
@@ -116,7 +116,7 @@ export class AddIdea extends React.Component {
 
   componentDidMount() {
     this.props.dispatch({
-      type: 'main.RESET_USER_ERROR'
+      type: 'RESET_USER_ERROR'
     });
   }
 

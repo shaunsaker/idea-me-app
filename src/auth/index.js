@@ -10,7 +10,7 @@ export default class Auth {
         return new Promise(resolve => {
             firestack.auth.getCurrentUser()
                 .then((user) => {
-                    response.authenticated = true;
+                    response.authenticated = user.message.authenticated;
                     response.message = user;
                     resolve(response);
                 })

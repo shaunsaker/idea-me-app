@@ -38,14 +38,14 @@ export class SignIn extends React.Component {
 
     updateUserEmail(text) {
         this.props.dispatch({
-            type: 'main.UPDATE_USER_EMAIL',
+            type: 'UPDATE_USER_EMAIL',
             value: text
         });
     }
 
     updateUserPassword(text) {
         this.props.dispatch({
-            type: 'main.UPDATE_USER_PASSWORD',
+            type: 'UPDATE_USER_PASSWORD',
             value: text
         });
     }
@@ -64,12 +64,12 @@ export class SignIn extends React.Component {
         }
         else if (this.props.userPassword && this.props.userPassword.length < 6) {
             this.props.dispatch({
-                type: 'main.USER_ERROR',
+                type: 'USER_ERROR',
                 message: 'Password should be at least 6 characters long'
             });
             setTimeout(() => {
                 this.props.dispatch({
-                    type: 'main.RESET_USER_ERROR'
+                    type: 'RESET_USER_ERROR'
                 });
             }, 2500);  
         }
@@ -77,12 +77,12 @@ export class SignIn extends React.Component {
             const emptyInput = this.props.userEmail ? 'password' : 'email';
 
             this.props.dispatch({
-                type: 'main.USER_ERROR',
+                type: 'USER_ERROR',
                 message: 'You forgot to enter your ' + emptyInput
             });
             setTimeout(() => {
                 this.props.dispatch({
-                    type: 'main.RESET_USER_ERROR'
+                    type: 'RESET_USER_ERROR'
                 });
             }, 2500);
         }

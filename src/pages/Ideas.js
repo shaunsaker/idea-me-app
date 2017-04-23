@@ -79,7 +79,7 @@ export class Ideas extends React.Component {
 
   deleteIdea(index) {
     this.props.dispatch({
-      type: 'main.DELETE_IDEA',
+      type: 'DELETE_IDEA',
       index
     });
   }
@@ -90,7 +90,7 @@ export class Ideas extends React.Component {
     });
 
     this.props.dispatch({
-      type: 'main.RESET_API_SAVE_SUCCESS'
+      type: 'RESET_API_SAVE_SUCCESS'
     });
 
     this.props.dispatch({

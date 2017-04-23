@@ -35,7 +35,7 @@ export class AddCategory extends React.Component {
 
   updateNewCategoryValue(text) {
     this.props.dispatch({
-      type: 'main.UPDATE_NEW_CATEGORY_VALUE',
+      type: 'UPDATE_NEW_CATEGORY_VALUE',
       value: text
     });
   }
@@ -44,19 +44,19 @@ export class AddCategory extends React.Component {
 
     if (this.props.newCategoryValue) {
       this.props.dispatch({
-        type: 'main.ADD_NEW_CATEGORY'
+        type: 'ADD_NEW_CATEGORY'
       });
 
       this.navigateBack();
     }
     else {
       this.props.dispatch({
-        type: 'main.USER_ERROR',
+        type: 'USER_ERROR',
         message: 'You forgot to enter a category'
       });
       setTimeout(() => {
         this.props.dispatch({
-          type: 'main.RESET_USER_ERROR'
+          type: 'RESET_USER_ERROR'
         });
       }, 2500);
     }
@@ -64,7 +64,7 @@ export class AddCategory extends React.Component {
 
   componentDidMount() {
     this.props.dispatch({
-      type: 'main.RESET_USER_ERROR'
+      type: 'RESET_USER_ERROR'
     });
   }
 
