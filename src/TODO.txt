@@ -1,0 +1,17 @@
+TODO
+
+Border radius must be width of element / 2
+Check elevations
+Check flexDirections
+Check Dropdown component
+Check ErrorMessage component
+Check TextArea multiple lines
+Pass params to EditIdea
+Check Categories
+Check Ideas
+
+ENHANCEMENTS
+
+2x res for lightbulb image
+Dropdown component animation
+ErrorMessage component animation

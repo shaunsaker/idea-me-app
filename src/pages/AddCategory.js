@@ -1,0 +1,106 @@
+import React from "react";
+import {
+  View
+} from "react-native";
+import { connect } from "react-redux";
+import { Actions } from "react-native-router-flux";
+
+import styles from '../styles/pages/AddCategory';
+import styleConstants from '../styles/styleConstants';
+
+import Header from '../components/Header';
+import Input from '../components/Input';
+import FooterButton from '../components/FooterButton';
+import ErrorMessage from '../components/ErrorMessage';
+
+export class AddCategory extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.navigateBack = this.navigateBack.bind(this);
+    this.updateNewCategoryValue = this.updateNewCategoryValue.bind(this);
+    this.addNewCategory = this.addNewCategory.bind(this);
+  }
+
+  static get propTypes() {
+    return {
+      newCategoryValue: React.PropTypes.string,
+      errorMessage: React.PropTypes.string
+    };
+  }
+
+  navigateBack() {
+    Actions.pop();
+  }
+
+  updateNewCategoryValue(text) {
+    this.props.dispatch({
+      type: 'main.UPDATE_NEW_CATEGORY_VALUE',
+      value: text
+    });
+  }
+
+  addNewCategory() {
+
+    if (this.props.newCategoryValue) {
+      this.props.dispatch({
+        type: 'main.ADD_NEW_CATEGORY'
+      });
+
+      this.navigateBack();
+    }
+    else {
+      this.props.dispatch({
+        type: 'main.USER_ERROR',
+        message: 'You forgot to enter a category'
+      });
+      setTimeout(() => {
+        this.props.dispatch({
+          type: 'main.RESET_USER_ERROR'
+        });
+      }, 2500);
+    }
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'main.RESET_USER_ERROR'
+    });
+  }
+
+  render() {
+    const errorMessage = this.props.errorMessage ?
+      <ErrorMessage text={this.props.errorMessage} />
+      :
+      null;
+
+    return (
+      <View style={{ height: '100%' }}>
+        <View
+          style={styles.container}>
+          <Header
+            handlePress={this.navigateBack} />
+          <View style={styles.inputArea}>
+            <Input
+              placeholder="Enter new category..."
+              value={this.props.newCategoryValue}
+              handleChange={this.updateNewCategoryValue} />
+          </View>
+          <FooterButton
+            text='ADD CATEGORY'
+            handlePress={this.addNewCategory} />
+        </View >
+        { errorMessage }
+      </View>
+    );
+  }
+}
+
+function MapStateToProps(state) {
+  return ({
+    newCategoryValue: state.main.newCategory.value,
+    errorMessage: state.main.user.errorMessage
+  });
+}
+
+export default connect(MapStateToProps)(AddCategory);
