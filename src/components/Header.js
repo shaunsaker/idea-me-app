@@ -40,6 +40,8 @@ export default class Header extends React.Component {
             <TouchableOpacity
                 onPress={this.props.handlePress} >
                 <Icon
+                    color={styleConstants.white}
+                    size={36}
                     name='chevron-left'
                     style={styles.leftIcon} />
             </TouchableOpacity>;
@@ -54,16 +56,6 @@ export default class Header extends React.Component {
                 :
             null;
 
-        const viewIdeasButton = this.props.viewIdeas ?
-            <ViewButton size={36} ideas={true} />
-                :
-            null;
-
-        const viewCategoriesButton = this.props.viewCategories ?
-            <ViewButton size={36} categories={true} />
-                :
-            null;
-
         const homePageStyles = this.props.home ?
             {justifyContent: 'center' }
             :
@@ -75,14 +67,12 @@ export default class Header extends React.Component {
                     <TouchableOpacity
                         style={styles.logoContainer}
                         onPress={this.navigateIdeas}>
-                        <Image src={lightBulb} width={50} height={50} style={styles.image} />
+                        <Image source={lightBulb} width={50} height={50} style={styles.image} />
                         <Text style={[styles.title, styleConstants.dekko]}>IDEA ME!</Text>
                     </TouchableOpacity>
                     <View style={styles.rightIcon}>
                         {addIdeaButton}
                         {addCategoryButton}
-                        {viewIdeasButton}
-                        {viewCategoriesButton}
                     </View>
                 </View>
                 );

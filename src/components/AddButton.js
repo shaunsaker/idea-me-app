@@ -42,7 +42,7 @@ export default class AddButton extends React.Component {
             <TouchableOpacity
                 style={buttonStyles}
                 onPress={() => this.navigate(to)}>
-                <Icon name='plus' style={styles.icon} />
+                <Icon name='plus' style={styles.icon} color={styleConstants.white} />
             </TouchableOpacity>
         );
     }

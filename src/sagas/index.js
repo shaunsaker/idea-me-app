@@ -1,4 +1,4 @@
-import { takeLatest } from 'redux-saga';
+import { takeLatest } from 'redux-saga/effects';
 import { fork } from 'redux-saga/effects';
 
 import { getUserAuth } from './auth';

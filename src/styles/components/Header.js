@@ -12,14 +12,10 @@ const styles = {
         width: '100%',
     },
     leftIcon: {
-        color: styleConstants.white,
-        fontSize: 36,
         position: 'absolute',
         left: 0
     },
     rightIcon: {
-        color: styleConstants.white,
-        fontSize: 36,
         position: 'absolute',
         right: 0,
         top: 0
