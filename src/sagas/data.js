@@ -10,12 +10,12 @@ export function* saveUserIdeas(action) {
     if (saveResponse) {
         if (saveResponse.success) {
             yield put({
-                type: 'main.API_SAVE_SUCCESS',
+                type: 'API_SAVE_SUCCESS',
             });
         }
         else {
             yield put({
-                type: 'main.USER_ERROR',
+                type: 'USER_ERROR',
                 message: saveResponse.message // TODO: Check this
             });
         }
@@ -30,12 +30,12 @@ export function* saveUserCategories(action) {
     if (saveResponse) {
         if (saveResponse.success) {
             yield put({
-                type: 'main.API_SAVE_SUCCESS',
+                type: 'API_SAVE_SUCCESS',
             });
         }
         else {
             yield put({
-                type: 'main.USER_ERROR',
+                type: 'USER_ERROR',
                 message: saveResponse.message // TODO: Check this
             });
         }
@@ -50,13 +50,13 @@ export function* loadUserData(action) {
     if (loadResponse) {
         if (loadResponse.success) {
             yield put({
-                type: 'main.API_LOAD_SUCCESS',
+                type: 'API_LOAD_SUCCESS',
                 data: loadResponse.message
             });
         }
         else {
             yield put({
-                type: 'main.USER_ERROR',
+                type: 'USER_ERROR',
                 message: loadResponse.message
             });
         }

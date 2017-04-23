@@ -8,16 +8,16 @@ const response = {
 export default class Auth {
     static getUserAuth() {
         return new Promise(resolve => {
-            Firebase.auth().onAuthStateChanged(user => {
-                if (user) {
+            firestack.auth.getCurrentUser()
+                .then((user) => {
                     response.authenticated = true;
                     response.message = user;
                     resolve(response);
-                }
-                else {
+                })
+                .catch(error => {
+                    response.message = error;
                     resolve(response);
-                }
-            });
+                });
         });
     }
 

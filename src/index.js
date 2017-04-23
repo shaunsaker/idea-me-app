@@ -10,7 +10,7 @@ import Scenes from './routes';
 const ConnectedRouter = connect()(Router)
 
 export default function Init() {
-	class ideaMe extends React.Component
+	class ideaMeApp extends React.Component
 	{
 		render() {
 			return (
@@ -21,5 +21,5 @@ export default function Init() {
 		}
 	}
 
-	AppRegistry.registerComponent('ideaMe', () => ideaMe);
+	AppRegistry.registerComponent('ideaMeApp', () => ideaMeApp);
 }

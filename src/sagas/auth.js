@@ -9,13 +9,13 @@ export function* getUserAuth() {
 
     if (getUserAuthResponse.authenticated) {
         yield put({
-            type: 'main.SIGN_IN_USER',
+            type: 'SIGN_IN_USER',
             uid: getUserAuthResponse.message.uid
         });
     }
     else {
         yield put({
-            type: 'main.REDIRECT_USER_TO_SIGN_IN',
+            type: 'REDIRECT_USER_TO_SIGN_IN',
         });   
     }
 }
@@ -27,7 +27,7 @@ export function* signInUser(action) {
 
     if (signUpUserResponse.authenticated) {
         yield put({
-            type: 'main.SIGN_IN_USER',
+            type: 'SIGN_IN_USER',
             uid: signUpUserResponse.message.uid
         });
     }
@@ -37,13 +37,13 @@ export function* signInUser(action) {
 
         if (signInUserResponse.authenticated) {
             yield put({
-                type: 'main.SIGN_IN_USER',
+                type: 'SIGN_IN_USER',
                 uid: signInUserResponse.message.uid
             });
         }
         else {
             yield put({
-                type: 'main.USER_ERROR',
+                type: 'USER_ERROR',
                 message: signInUserResponse.message.message
             });
         }
