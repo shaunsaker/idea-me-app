@@ -12,7 +12,7 @@ export default class AddButton extends React.Component {
     constructor(props) {
         super(props);
 
-        this.navigateAddIdea = this.navigateAddIdea.bind(this);
+        this.navigate = this.navigate.bind(this);
     }
 
     static get propTypes() {
@@ -42,7 +42,7 @@ export default class AddButton extends React.Component {
             <TouchableOpacity
                 style={buttonStyles}
                 onPress={() => this.navigate(to)}>
-                <Icon name='plus' style={styles.icon} color={styleConstants.white} />
+                <Icon name='plus' size={this.props.size} style={styles.icon} color={styleConstants.white} />
             </TouchableOpacity>
         );
     }

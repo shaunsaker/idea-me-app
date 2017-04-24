@@ -3,21 +3,21 @@ import styleConstants from '../styleConstants';
 const styles = {
     container: {
         display: 'flex',
-        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 92
+        paddingTop: 92,
+        backgroundColor: styleConstants.blue
     },
     categoriesContainer: {
         flex: 1,
-        width: '100%',
         overflow: 'auto',
         maxWidth: 360,
         marginBottom: 16
     },
     categoryItem: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'relative',
@@ -46,7 +46,7 @@ const styles = {
         color: styleConstants.grey,
         backgroundColor: styleConstants.white,
         padding: 8,
-        borderRadius: '50%',
+        // borderRadius: '50%',
         fontSize: 41,
         marginLeft: 16,
         minWidth: 41,

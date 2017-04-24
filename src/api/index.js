@@ -11,7 +11,7 @@ export default class ApiData {
 
         // If we did not receive the uid via props, get the uid from firestack
         if (!uid) {
-            uid = firestack.auth().getCurrentUser().user.uid; // TODO: Check this
+            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
         }
         
         const userData = action.ideas;
@@ -36,7 +36,7 @@ export default class ApiData {
 
         // If we did not receive the uid via props, get the uid from firestack
         if (!uid) {
-            uid = firestack.auth().getCurrentUser().user.uid; // TODO: Check this
+            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
         }
         
         const userData = action.categories;
@@ -61,8 +61,10 @@ export default class ApiData {
 
         // If we did not receive the uid via props, get the uid from firestack
         if (!uid) {
-            uid = firestack.auth().getCurrentUser().user.uid; // TODO: Check this
+            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
         }
+
+        console.log(uid);
         
         let userData;
 

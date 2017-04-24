@@ -26,6 +26,8 @@ export default class Input extends React.Component {
             <TextInput
                 value={this.props.value ? this.props.value : ''}
                 placeholder={this.props.placeholder ? this.props.placeholder : ''} 
+                placeholderTextColor={styleConstants.grey}
+                underlineColorAndroid={styleConstants.white}
                 style={[styles.input, styleConstants.sourceSansPro]}
                 onChangeText={(text) => this.props.handleChange(text)} 
                 secureTextEntry={this.props.type === 'password' ? true : false} 

@@ -3,6 +3,7 @@ import styleConstants from '../styleConstants';
 const styles = {
     errorMessageWrapper: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center'
     },
     errorMessageContainer: {
@@ -16,6 +17,7 @@ const styles = {
         paddingRight: 16,
         borderRadius: 32,
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
     },

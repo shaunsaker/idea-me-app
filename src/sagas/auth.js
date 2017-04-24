@@ -10,7 +10,7 @@ export function* getUserAuth() {
     if (getUserAuthResponse.authenticated) {
         yield put({
             type: 'SIGN_IN_USER',
-            uid: getUserAuthResponse.message.uid
+            uid: getUserAuthResponse.message.user.uid
         });
     }
     else {

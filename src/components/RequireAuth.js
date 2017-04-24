@@ -13,7 +13,11 @@ export default function (WrappedComponent) {
   class Auth extends React.Component {
     static get propTypes() {
       return {
-        authenticated: React.PropTypes.bool
+        authenticated: React.PropTypes.bool,
+        uid: React.PropTypes.string,
+        apiLoadSuccess: React.PropTypes.bool,
+        redirectUserToSignIn: React.PropTypes.bool
+
       };
     }
 
@@ -34,7 +38,8 @@ export default function (WrappedComponent) {
     componentDidUpdate() {
       if (this.props.authenticated && !this.props.apiLoadSuccess) {
         this.props.dispatch({
-          type: 'loadUserData'
+          type: 'loadUserData',
+          uid: this.props.uid
         });
       }
       else if (this.props.redirectUserToSignIn) {
@@ -57,6 +62,7 @@ export default function (WrappedComponent) {
   function mapStateToProps(state) {
     return { 
       authenticated: state.main.user.authenticated,
+      uid: state.main.user.uid,
       apiLoadSuccess: state.main.user.apiLoadSuccess,
       redirectUserToSignIn: state.main.user.signInRedirect
     };

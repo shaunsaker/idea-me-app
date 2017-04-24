@@ -7,14 +7,15 @@ const styles = {
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 92
+        paddingTop: 92,
+        backgroundColor: styleConstants.blue
     },
     passwordContainer: {
 
     },
     passwordText: {
-        color: styleConstants.white,
-        fontSize: 18
+        color: styleConstants.clearWhite,
+        fontSize: 16
     }
 };
 

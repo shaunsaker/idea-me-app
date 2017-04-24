@@ -7,6 +7,8 @@ const styles = {
         height: 40,
         marginBottom: 16,
         fontSize: 16,
+        backgroundColor: styleConstants.white,
+        paddingHorizontal: 16,
     }
 };
 

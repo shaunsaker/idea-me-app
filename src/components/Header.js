@@ -67,7 +67,7 @@ export default class Header extends React.Component {
                     <TouchableOpacity
                         style={styles.logoContainer}
                         onPress={this.navigateIdeas}>
-                        <Image source={lightBulb} width={50} height={50} style={styles.image} />
+                        <Image source={lightBulb} style={styles.image} />
                         <Text style={[styles.title, styleConstants.dekko]}>IDEA ME!</Text>
                     </TouchableOpacity>
                     <View style={styles.rightIcon}>

@@ -3,13 +3,12 @@ import styleConstants from '../styleConstants';
 const styles = {
     headerContainer: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
         top: 0,
-        margin: 'auto',
-        marginTop: 16,
-        width: '100%',
+        paddingTop: 16,
     },
     leftIcon: {
         position: 'absolute',
@@ -22,17 +21,17 @@ const styles = {
     },
     logoContainer: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
     image: {
         marginRight: 12,
-        marginBottom: 8
+        marginBottom: 8,
+        width: 36,
+        height: 36
     },
     title: {
-        fontSize: 36
-    },
-    subtitle: {
         fontSize: 24
     },
 };

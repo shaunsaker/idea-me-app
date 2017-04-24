@@ -2,9 +2,11 @@ import styleConstants from '../styleConstants';
 
 const styles = {
     button: {
-        padding: 16,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         margin: 16,
-        borderRadius: 32,
+        borderRadius: 40,
         backgroundColor: styleConstants.yellow,
         width: 280,
         elevation: 4,
@@ -15,10 +17,10 @@ const styles = {
             height: 2,
             width: 0
         },
-        height: 68
+        height: 68,
     },
     buttonText: {
-        fontSize: 24,
+        fontSize: 20,
     }
 };
 

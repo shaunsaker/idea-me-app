@@ -3,15 +3,16 @@ import styleConstants from '../styleConstants';
 const styles = {
     container: {
         display: 'flex',
-        height: '100%',
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
         position: 'relative',
         paddingTop: 92,
+        backgroundColor: styleConstants.blue
     },
     infoContainer: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
         position: 'relative',
         width: '100%',
@@ -25,6 +26,7 @@ const styles = {
     },
     ideaItem: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         position: 'relative',
@@ -32,11 +34,12 @@ const styles = {
         padding: 16,
         flexWrap: 'wrap',
         backgroundColor: styleConstants.white,
-        borderRadius: 32,
+        // borderRadius: 32,
         boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
     },
     textContainer: {
         display: 'flex',
+        flexDirection: 'row',
         alignItems: 'flex-start',
         flex: 1
     },
@@ -57,13 +60,14 @@ const styles = {
         paddingRight: 16,
         backgroundColor: styleConstants.blue,
         color: styleConstants.white,
-        borderRadius: 32,
+        // borderRadius: 32,
         marginLeft: 16,
         boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24)',
     },
     priority: {
         fontWeight: 700,
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
         width: 41,
         height: 41,
@@ -72,6 +76,7 @@ const styles = {
     },
     labelsContainer: {
         display: 'flex',
+        flexDirection: 'row',
         flex: 1,
         justifyContent: 'flex-end',
     },
@@ -79,7 +84,7 @@ const styles = {
         color: styleConstants.blue,
         backgroundColor: styleConstants.white,
         padding: 8,
-        borderRadius: '50%',
+        // borderRadius: '50%',
         fontSize: 41,
         marginLeft: 16,
         minWidth: 41,
@@ -90,7 +95,7 @@ const styles = {
         color: styleConstants.grey,
         backgroundColor: styleConstants.white,
         padding: 8,
-        borderRadius: '50%',
+        // borderRadius: '50%',
         fontSize: 41,
         marginLeft: 16,
         minWidth: 41,

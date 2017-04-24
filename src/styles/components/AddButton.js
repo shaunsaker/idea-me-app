@@ -2,9 +2,13 @@ import styleConstants from '../styleConstants';
 
 const styles = {
     button: {
-        padding: 16,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         margin: 16,
-        borderRadius: '50%',
+        width: 120,
+        height: 120,
+        borderRadius: 60,
         borderWidth: 8,
         borderColor: styleConstants.white,
         backgroundColor: 'transparent',
@@ -16,9 +20,6 @@ const styles = {
             height: 2,
             width: 0
         },
-    },
-    icon: {
-        color: styleConstants.white,
     }
 };
 

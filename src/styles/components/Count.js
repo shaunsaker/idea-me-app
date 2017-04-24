@@ -3,6 +3,7 @@ import styleConstants from '../styleConstants';
 const styles = {
     countContainer: {
         display: 'flex',
+        flexDirection: 'row',
         position: 'absolute',
         right: 16
     },
