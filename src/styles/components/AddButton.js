@@ -2,7 +2,7 @@ import styleConstants from '../styleConstants';
 
 const styles = {
     button: {
-        display: 'flex',
+        
         justifyContent: 'center',
         alignItems: 'center',
         margin: 16,

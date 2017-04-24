@@ -2,15 +2,16 @@ import styleConstants from '../styleConstants';
 
 const styles = {
     container: {
-        display: 'flex',
+        flex: 1,
+        
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 92,
+        paddingTop: 72,
         backgroundColor: styleConstants.blue
     },
     inputArea: {
-        display: 'flex',
+        
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'

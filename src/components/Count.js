@@ -25,9 +25,9 @@ export default class Count extends React.Component {
             <View style={styles.countContainer}>
                 <Text style={[styles.countText, ...styleConstants.sourceSansPro]}>
                     {this.props.count}
-                    <Text style={styles.separator}>/</Text>
+                    <Text style={styles.separator}> / </Text>
                     {this.props.total}
-                    <Text style={styles.unit}>{this.props.unit}</Text>
+                    <Text style={styles.unit}>{' ' + this.props.unit}</Text>
                 </Text>
             </View>
         );

@@ -35,7 +35,7 @@ export default class Header extends React.Component {
 
     render() {
         const backButton = this.props.allowBack === false ?
-            null
+            <View />
             :
             <TouchableOpacity
                 onPress={this.props.handlePress} >
@@ -49,7 +49,7 @@ export default class Header extends React.Component {
         const addIdeaButton = this.props.ideas ?
             <AddButton size={36} ideas={true} />
                 :
-            null;
+            <View />
 
         const addCategoryButton = this.props.categories ?
             <AddButton size={36} categories={true} />

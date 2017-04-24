@@ -3,7 +3,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  ScrollView
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -165,7 +166,7 @@ export class Ideas extends React.Component {
       });
 
       ideas =
-        <View style={styles.ideasContainer}>
+        <ScrollView style={styles.ideasContainer}>
           <FlatList
             data={currentCategoryIdeas}
             renderItem={(value, index) =>
@@ -208,7 +209,7 @@ export class Ideas extends React.Component {
                 </View>
               </View>
             } />
-        </View>;
+        </ScrollView>;
     }
 
     return (

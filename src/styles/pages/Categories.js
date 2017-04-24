@@ -2,21 +2,20 @@ import styleConstants from '../styleConstants';
 
 const styles = {
     container: {
-        display: 'flex',
+        flex: 1,
+        
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 92,
+        paddingTop: 72,
         backgroundColor: styleConstants.blue
     },
     categoriesContainer: {
         flex: 1,
-        overflow: 'auto',
-        maxWidth: 360,
         marginBottom: 16
     },
     categoryItem: {
-        display: 'flex',
+        
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

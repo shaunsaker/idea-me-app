@@ -1,31 +1,27 @@
+import { Dimensions } from "react-native";
 import styleConstants from '../styleConstants'; 
+
+const windowWidth = Dimensions.get('window').width;
 
 const styles = {
     container: {
-        display: 'flex',
+        flex: 1,
+        
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 92,
+        paddingTop: 72,
         backgroundColor: styleConstants.blue
     },
     infoContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        position: 'relative',
-        width: '100%',
-        maxWidth: 720
+        
     },
     ideasContainer: {
         flex: 1,
-        width: '100%',
-        overflow: 'auto',
-        maxWidth: 720,
     },
     ideaItem: {
-        display: 'flex',
+        
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
@@ -38,7 +34,7 @@ const styles = {
         boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
     },
     textContainer: {
-        display: 'flex',
+        
         flexDirection: 'row',
         alignItems: 'flex-start',
         flex: 1
@@ -66,7 +62,7 @@ const styles = {
     },
     priority: {
         fontWeight: 700,
-        display: 'flex',
+        
         flexDirection: 'row',
         justifyContent: 'center',
         width: 41,
@@ -75,7 +71,7 @@ const styles = {
         color: styleConstants.blue
     },
     labelsContainer: {
-        display: 'flex',
+        
         flexDirection: 'row',
         flex: 1,
         justifyContent: 'flex-end',

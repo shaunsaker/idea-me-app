@@ -1,26 +1,27 @@
+import { Dimensions } from 'react-native';
 import styleConstants from '../styleConstants'; 
+
+const windowWidth = Dimensions.get('window').width;
 
 const styles = {
     headerContainer: {
-        display: 'flex',
+        
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         position: 'absolute',
+        width: windowWidth,
         top: 0,
         paddingTop: 16,
     },
-    leftIcon: {
-        position: 'absolute',
-        left: 0
+    leftIcon: { 
+        paddingLeft: 16
     },
     rightIcon: {
-        position: 'absolute',
-        right: 0,
-        top: 0
+        paddingRight: 16
     },
     logoContainer: {
-        display: 'flex',
+        
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

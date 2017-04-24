@@ -33,7 +33,7 @@ export default class Dropdown extends React.Component {
 
     toggleExpanded() {
         this.setState({
-            isExpanded: !isExpanded
+            isExpanded: !this.state.isExpanded
         });
     }
 
@@ -43,10 +43,11 @@ export default class Dropdown extends React.Component {
                 {
                     this.props.editItem ?
                         <TouchableOpacity
+                            style={styles.dropdownItemAdd}
                             onPress={() => { this.props.handleSelect(200) }} >
-                            <Icon name='pencil' style={styles.editIcon} />
+                            <Icon name='pencil' size={18} style={styles.editIcon} />
                             <Text
-                                style={[styles.dropdownItem, styles.dropdownItemAdd, styleConstants.sourceSansPro]}>
+                                style={[styles.dropdownItemText, styleConstants.sourceSansPro]}>
                                 Edit Categories
                             </Text>
                         </TouchableOpacity>
@@ -57,21 +58,23 @@ export default class Dropdown extends React.Component {
                     this.props.displayText ?
                         null :
                         <TouchableOpacity
+                            style={styles.dropdownItem}
                             onPress={() => { this.props.handleSelect(100) }} >
                             <Text
-                                style={[styles.dropdownItem, styleConstants.sourceSansPro]}>
+                                style={[styles.dropdownItemText, styleConstants.sourceSansPro]}>
                                 All
                             </Text>
                         </TouchableOpacity>
                 }
 
-                <Flatlist
+                <FlatList
                     data={this.props.values}
                     renderItem={(value, index) =>
                         <TouchableOpacity
+                            style={styles.dropdownItem}
                             onPress={(index) => { this.props.handleSelect(index) }} >
                             <Text
-                                style={[styles.dropdownItem, styleConstants.sourceSansPro]}>
+                                style={[styles.dropdownItemText, styleConstants.sourceSansPro]}>
                                 {value}
                             </Text>
                         </TouchableOpacity>
@@ -79,12 +82,12 @@ export default class Dropdown extends React.Component {
             </View>;
 
         return (
-            <View>
+            <View style={styles.dropdownContainer}>
                 <TouchableOpacity
-                    style={styles.dropDownButton}
+                    style={styles.dropdownButton}
                     onPress={this.toggleExpanded} >
                     <Text
-                        style={styleConstants.sourceSansProp} >
+                        style={[styles.dropdownItemText, styleConstants.sourceSansPro]} >
                         {this.props.value ? this.props.value : this.props.displayText}
                     </Text>
                 </TouchableOpacity>
