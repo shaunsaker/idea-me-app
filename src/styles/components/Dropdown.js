@@ -39,7 +39,7 @@ const styles = {
         backgroundColor: styleConstants.white,
         position: 'absolute',
         top: 52,
-        width: 280
+        width: 280,
     },
     dropdownItem: {
         

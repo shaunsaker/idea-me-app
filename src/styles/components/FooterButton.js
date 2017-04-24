@@ -1,8 +1,7 @@
 import styleConstants from '../styleConstants'; 
 
 const styles = {
-    button: {
-        
+    button: {        
         justifyContent: 'center',
         alignItems: 'center',
         margin: 16,

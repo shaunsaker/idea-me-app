@@ -2,15 +2,10 @@ TODO
 
 Use svg for logo and style fill/path using styleConstants
 Border radius must be width of element / 2
-Check elevations
-Check flexDirections
-Check Dropdown component
 Check ErrorMessage component
-Check TextArea multiple lines
 Pass params to EditIdea
-Check Categories
-Check Ideas
 ActivityIndicator not working - create own component
+Keyboard Avoiding Views
 
 ENHANCEMENTS
 
