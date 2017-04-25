@@ -95,15 +95,10 @@ export class Categories extends React.Component {
   }
 
   render() {
-    const categoriesList = [
-      'Haha',
-      'Testing'
-    ]
-
     const categories =
       <FlatList
         keyExtractor={item => 'category' + item} 
-        data={categoriesList}
+        data={this.props.categories}
         renderItem={this.renderItem}/>;
 
     return (

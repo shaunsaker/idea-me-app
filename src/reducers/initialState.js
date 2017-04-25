@@ -15,10 +15,10 @@ const initialState = {
         'Low'
     ],
     categories: [
-      
+
     ],
     ideas: [
-        
+
     ],
     newIdea: {
         title: null,
@@ -28,7 +28,7 @@ const initialState = {
     },
     newCategory: {
         value: null,
-    },  
+    },
     editIdea: {
         title: null,
         description: null,

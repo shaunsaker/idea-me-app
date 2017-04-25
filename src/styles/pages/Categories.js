@@ -24,22 +24,16 @@ const styles = {
         paddingVertical: 8,
         flexWrap: 'wrap',
         borderRadius: 32,
+        borderWidth: 1,
+        borderColor: styleConstants.grey,
         backgroundColor: styleConstants.white,
-        elevation: 2,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
     },
     categoryTextContainer: {
 
     },
     categoryText: {
         fontSize: 16,
-        color: styleConstants.secondary
+        color: styleConstants.secondary,
     },
 };
 

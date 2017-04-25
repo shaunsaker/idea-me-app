@@ -20,7 +20,8 @@ const styles = {
     },
     buttonText: {
         fontSize: 24,
-        color: styleConstants.primary
+        color: styleConstants.primary,
+        paddingHorizontal: 4,
     }
 };
 

@@ -36,7 +36,7 @@ export class AddCategory extends React.Component {
   updateNewCategoryValue(text) {
     this.props.dispatch({
       type: 'UPDATE_NEW_CATEGORY_VALUE',
-      value: text
+      value: text.trim()
     });
   }
 

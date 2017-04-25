@@ -22,6 +22,7 @@ export default class ApiData {
             })
             .then(() => {
                 response.success = true;
+                response.message = null;
                 resolve(response);
             })
             .catch(error => {
@@ -47,6 +48,7 @@ export default class ApiData {
             })
             .then(() => {
                 response.success = true;
+                response.message = null;
                 resolve(response);
             })
             .catch(error => {
@@ -63,8 +65,6 @@ export default class ApiData {
         if (!uid) {
             uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
         }
-
-        console.log(uid);
         
         let userData;
 
