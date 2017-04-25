@@ -9,6 +9,7 @@ import {
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
@@ -111,6 +112,55 @@ export class Ideas extends React.Component {
     }
   }
 
+  renderItem = ({ item, index }) => {
+    return (
+      <View
+        style={styles.ideaItem} >
+        <View style={styles.textContainer}>
+          <Text style={[styles.ideaTextTitle, styleConstants.ranga]}>
+            {item.title}
+          </Text>
+          <Text style={[styles.ideaTextDescription, styleConstants.robotoCondensed]}>
+            {item.description}
+          </Text>
+        </View>
+        <View
+          style={styles.labelsContainer} >
+          {
+            this.state.currentCategory === 'All' && (item.categoryId === 0 || item.categoryId) ?
+              <View style={styles.ideaChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.categories[item.categoryId]}</Text></View>
+              :
+              <View></View>
+          }
+          {
+            item.priorityId === 0 || item.priorityId ?
+              <View style={styles.priorityChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.priorities[item.priorityId].split('')[0]}</Text></View>
+              :
+              <View></View>
+          }
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => this.editIdea({ ...item, index })} >
+            <Icon
+              name='pencil'
+              color={styleConstants.white}
+              size={24}
+              style={styles.icon} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => this.deleteIdea(index)} >
+            <MaterialIcon
+              name='close'
+              color={styleConstants.white}
+              size={24}
+              style={styles.icon} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
   render() {
     let counter = 0;
     let ideas = <View style={{ flex: 1 }}></View>;
@@ -168,47 +218,9 @@ export class Ideas extends React.Component {
       ideas =
         <ScrollView style={styles.ideasContainer}>
           <FlatList
+            keyExtractor={item => 'idea' + item.title}
             data={currentCategoryIdeas}
-            renderItem={(value, index) =>
-              <View
-                style={styles.ideaItem} >
-                <View style={styles.textContainer}>
-                  <Text style={[styles.ideaTextTitle, styleConstants.robotoCondensed]}>
-                    {value.title}
-                  </Text>
-                  <Text style={[styles.ideaTextDescription, styleConstants.robotoCondensed]}>
-                    {value.description}
-                  </Text>
-                </View>
-                <View
-                  style={styles.labelsContainer} >
-                  {
-                    this.state.currentCategory == 'All' && (value.categoryId === 0 || value.categoryId) ?
-                      <Text style={[styles.ideaChip, styleConstants.robotoCondensed]}>{this.props.categories[value.categoryId]}</Text>
-                      :
-                      <View></View>
-                  }
-                  {
-                    value.priorityId === 0 || value.priorityId ?
-                      <Text style={[styles.ideaChip, styles.priority, styleConstants.robotoCondensed]}>{this.props.priorities[value.priorityId].split('')[0]}</Text>
-                      :
-                      <View></View>
-                  }
-                  <TouchableOpacity
-                    onPress={() => this.editIdea({ ...value, index })} >
-                    <Icon
-                      name='pencil'
-                      style={styles.editIcon} />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => this.deleteIdea(index)} >
-                    <Icon
-                      name='close'
-                      style={styles.deleteIcon} />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            } />
+            renderItem={this.renderItem} />
         </ScrollView>;
     }
 
@@ -228,7 +240,107 @@ export class Ideas extends React.Component {
             values={this.props.categories}
             editItem={true} />
         </View>
+        {/*<ScrollView style={styles.ideasContainer}>
+          <View
+            style={styles.ideaItem} >
+            <View style={styles.textContainer}>
+              <Text style={[styles.ideaTextTitle, styleConstants.ranga]}>
+                Haha Haha
+              </Text>
+              <Text style={[styles.ideaTextDescription, styleConstants.robotoCondensed]}>
+                Blah Blah Blaha Blaha Blaha balaha Blah Blah Blaha Blaha Blaha balaha
+              </Text>
+            </View>
+            <View
+              style={styles.labelsContainer} >
+              <View style={styles.ideaChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>Category</Text></View>
+              <View style={styles.priorityChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>H</Text></View>
+              <TouchableOpacity 
+                style={styles.iconContainer}>
+                <Icon
+                  name='pencil'
+                  color={styleConstants.white}
+                  size={24}
+                  style={styles.icon} />
+              </TouchableOpacity>
+              <TouchableOpacity 
+                style={styles.iconContainer}>
+                <MaterialIcon
+                  name='close'
+                  color={styleConstants.white}
+                  size={24}
+                  style={styles.icon} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View
+            style={styles.ideaItem} >
+            <View style={styles.textContainer}>
+              <Text style={[styles.ideaTextTitle, styleConstants.ranga]}>
+                Haha Haha
+              </Text>
+              <Text style={[styles.ideaTextDescription, styleConstants.robotoCondensed]}>
+                Blah Blah Blaha Blaha Blaha balaha Blah Blah Blaha Blaha Blaha balaha
+              </Text>
+            </View>
+            <View
+              style={styles.labelsContainer} >
+              <View style={styles.ideaChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>Category</Text></View>
+              <View style={styles.priorityChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>H</Text></View>
+              <TouchableOpacity 
+                style={styles.iconContainer}>
+                <Icon
+                  name='pencil'
+                  color={styleConstants.white}
+                  size={24}
+                  style={styles.icon} />
+              </TouchableOpacity>
+              <TouchableOpacity 
+                style={styles.iconContainer}>
+                <MaterialIcon
+                  name='close'
+                  color={styleConstants.white}
+                  size={24}
+                  style={styles.icon} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View
+            style={styles.ideaItem} >
+            <View style={styles.textContainer}>
+              <Text style={[styles.ideaTextTitle, styleConstants.ranga]}>
+                Haha Haha
+              </Text>
+              <Text style={[styles.ideaTextDescription, styleConstants.robotoCondensed]}>
+                Blah Blah Blaha Blaha Blaha balaha Blah Blah Blaha Blaha Blaha balaha
+              </Text>
+            </View>
+            <View
+              style={styles.labelsContainer} >
+              <View style={styles.ideaChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>Category</Text></View>
+              <View style={styles.priorityChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>H</Text></View>
+              <TouchableOpacity 
+                style={styles.iconContainer}>
+                <Icon
+                  name='pencil'
+                  color={styleConstants.white}
+                  size={24}
+                  style={styles.icon} />
+              </TouchableOpacity>
+              <TouchableOpacity 
+                style={styles.iconContainer}>
+                <MaterialIcon
+                  name='close'
+                  color={styleConstants.white}
+                  size={24}
+                  style={styles.icon} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>*/}
+
         {ideas}
+
         <FooterButton
           text='SAVE IDEAS'
           handlePress={this.saveUserIdeas}

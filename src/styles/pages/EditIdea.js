@@ -7,7 +7,7 @@ const styles = {
         justifyContent: 'space-between',    
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 72,
+        paddingTop: 56,
         backgroundColor: styleConstants.primary
     },
     inputArea: {

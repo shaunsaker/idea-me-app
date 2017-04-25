@@ -10,91 +10,83 @@ const styles = {
         justifyContent: 'space-around',
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 72,
+        paddingTop: 56,
         backgroundColor: styleConstants.primary
     },
     infoContainer: {
-        
+        marginBottom: 16
     },
     ideasContainer: {
         flex: 1,
+        width: windowWidth,
+        paddingHorizontal: 14,
     },
-    ideaItem: {        
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        position: 'relative',
-        marginBottom: 8,
+    ideaItem: {   
+        backgroundColor: styleConstants.primary,
         padding: 16,
-        flexWrap: 'wrap',
-        backgroundColor: styleConstants.white,
-        // borderRadius: 32,
-        // boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
+        borderRadius: 32,
+        borderWidth: 1,
+        borderColor: styleConstants.secondary,
+        marginBottom: 16,
+        marginHorizontal: 2
     },
-    textContainer: {
-        
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        flex: 1
-    },
+    textContainer: {        
+
+    },  
     ideaTextTitle: {
-        fontSize: 18,
-        flex: 1
+        fontSize: 24
     },
     ideaTextDescription: {
-        fontSize: 16,
-        color: styleConstants.grey,
-        flex: 2
-    },
-    ideaChip: {
-        fontSize: 18,
-        paddingTop: 8,
-        paddingBottom: 8,
-        paddingLeft: 16,
-        paddingRight: 16,
-        backgroundColor: styleConstants.primary,
-        color: styleConstants.white,
-        // borderRadius: 32,
-        marginLeft: 16,
-        // boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24)',
-    },
-    priority: {
-        fontWeight: 700,        
-        flexDirection: 'row',
-        justifyContent: 'center',
-        width: 41,
-        height: 41,
-        backgroundColor: styleConstants.white,
-        color: styleConstants.primary
+        fontSize: 16
     },
     labelsContainer: {        
         flexDirection: 'row',
-        flex: 1,
         justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginTop: 8
     },
-    editIcon: {
-        color: styleConstants.primary,
-        backgroundColor: styleConstants.white,
-        padding: 8,
-        // borderRadius: '50%',
-        fontSize: 41,
-        marginLeft: 16,
-        minWidth: 41,
-        // boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+    ideaChip: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: styleConstants.secondary,
+        borderRadius: 32,
+        height: 50,
+        marginRight: 8
     },
-    deleteIcon: {
-        color: styleConstants.grey,
-        backgroundColor: styleConstants.white,
-        padding: 8,
-        // borderRadius: '50%',
-        fontSize: 41,
-        marginLeft: 16,
-        minWidth: 41,
-        // boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+    priorityChip: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: styleConstants.secondary,
+        borderRadius: 25,
+        height: 50,
+        width: 50,
     },
-    footer: {
-        position: 'absolute',
-        bottom: 0
+    text: {
+        fontSize: 16,
+        color: styleConstants.secondary
+    },
+    iconContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        backgroundColor: styleConstants.secondary,
+        marginLeft: 8,
+        elevation: 4,
+        shadowColor: "#000000",
+        shadowOpacity: 0.6,
+        shadowRadius: 2,
+        shadowOffset: {
+            height: 2,
+            width: 0
+        },
+    },
+    icon: {
+
     }
 };
 

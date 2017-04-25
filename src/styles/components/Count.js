@@ -6,7 +6,7 @@ const styles = {
         justifyContent: 'center',
     },
     countText: {
-        fontSize: 18,
+        fontSize: 16,
         color: styleConstants.secondary
     },
 };

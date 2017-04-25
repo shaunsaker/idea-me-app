@@ -6,7 +6,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 72,
+        paddingTop: 56,
         backgroundColor: styleConstants.primary
     },
     categoriesContainer: {
