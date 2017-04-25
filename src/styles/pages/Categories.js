@@ -2,8 +2,7 @@ import styleConstants from '../styleConstants';
 
 const styles = {
     container: {
-        flex: 1,
-        
+        flex: 1,        
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
@@ -12,20 +11,21 @@ const styles = {
     },
     categoriesContainer: {
         flex: 1,
-        marginBottom: 16
+        marginBottom: 16,
     },
-    categoryItem: {
-        
+    categoryItem: {   
+        width: 280,     
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'relative',
         marginBottom: 8,
-        padding: 16,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
         flexWrap: 'wrap',
-        backgroundColor: styleConstants.white,
         borderRadius: 32,
-        elevation: 4,
+        backgroundColor: styleConstants.white,
+        elevation: 2,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,
@@ -38,20 +38,9 @@ const styles = {
 
     },
     categoryText: {
-        fontSize: 18,
-        flex: 1
+        fontSize: 16,
+        color: styleConstants.secondary
     },
-    deleteIcon: {
-        color: styleConstants.grey,
-        backgroundColor: styleConstants.white,
-        padding: 8,
-        // borderRadius: '50%',
-        fontSize: 41,
-        marginLeft: 16,
-        minWidth: 41,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-        cursor: 'pointer'
-    }
 };
 
 export default styles;

@@ -26,6 +26,7 @@ export default class TextArea extends React.Component {
                 value={this.props.value ? this.props.value : ''}
                 placeholder={this.props.placeholder ? this.props.placeholder : ''} 
                 placeholderTextColor={styleConstants.grey}
+                underlineColorAndroid={styleConstants.secondary}
                 style={[styles.textarea, styleConstants.robotoCondensed]}
                 onChangeText={(text) => this.props.handleChange(text)} 
                 multiline={true} />

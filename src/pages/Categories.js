@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from '../styles/pages/Categories';
 import styleConstants from '../styles/styleConstants';
@@ -75,24 +75,35 @@ export class Categories extends React.Component {
     }
   }
 
+  renderItem({ item, index}) {
+    return (
+      <View
+        style={styles.categoryItem}>
+        <View style={styles.categoryTextContainer}>
+          <Text style={[styles.categoryText, styleConstants.robotoCondensed]}>{item}</Text>
+        </View>
+        <TouchableOpacity style={styles.iconContainer}
+          onPress={() => this.deleteCategory(index)} >
+          <Icon
+            name='close'
+            size={24}
+            color={styleConstants.grey} />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
+    const categoriesList = [
+      'Haha',
+      'Testing'
+    ]
+
     const categories =
       <FlatList
-        data={this.props.categories}
-        renderItem={(value, index) =>
-          <View
-            style={styles.categoryItem}>
-            <View style={styles.categoryTextContainer}>
-              <Text style={[styles.categoryText, styleConstants.robotoCondensed]}>{value}</Text>
-            </View>
-            <TouchableOpacity style={styles.iconContainer}
-              onPress={() => this.deleteCategory(index)} >
-              <Icon
-                name='close'
-                style={styles.deleteIcon} />
-            </TouchableOpacity>
-          </View>
-        } />;
+        keyExtractor={item => 'category' + item} 
+        data={categoriesList}
+        renderItem={this.renderItem}/>;
 
     return (
       <View

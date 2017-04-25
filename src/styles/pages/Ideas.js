@@ -31,7 +31,7 @@ const styles = {
         flexWrap: 'wrap',
         backgroundColor: styleConstants.white,
         // borderRadius: 32,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
+        // boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
     },
     textContainer: {
         
@@ -58,7 +58,7 @@ const styles = {
         color: styleConstants.white,
         // borderRadius: 32,
         marginLeft: 16,
-        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24)',
+        // boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24)',
     },
     priority: {
         fontWeight: 700,
@@ -84,8 +84,7 @@ const styles = {
         fontSize: 41,
         marginLeft: 16,
         minWidth: 41,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-        cursor: 'pointer'
+        // boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
     },
     deleteIcon: {
         color: styleConstants.grey,
@@ -95,8 +94,7 @@ const styles = {
         fontSize: 41,
         marginLeft: 16,
         minWidth: 41,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-        cursor: 'pointer'
+        // boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
     },
     footer: {
         position: 'absolute',

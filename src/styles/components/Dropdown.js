@@ -11,10 +11,10 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: styleConstants.secondary,
+        backgroundColor: styleConstants.primary,
         borderRadius: 32,
         marginBottom: 16,
-        elevation: 1,
+        elevation: 2,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,
@@ -23,7 +23,7 @@ const styles = {
             width: 0
         },
         width: 280,
-        paddingVertical: 6,
+        paddingVertical: 8,
     },
     dropdownItemsContainer: {
         borderRadius: 32,
@@ -40,6 +40,7 @@ const styles = {
         position: 'absolute',
         top: 52,
         width: 280,
+        zIndex: 1
     },
     dropdownItem: {        
         flexDirection: 'row',
@@ -58,8 +59,8 @@ const styles = {
         paddingVertical: 6,
     },
     dropdownButtonText: {
-        color: styleConstants.primary,
-        fontSize: 20,
+        color: styleConstants.secondary,
+        fontSize: 24,
         width: 200,
         textAlign: 'center'
     },
