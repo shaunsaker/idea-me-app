@@ -5,6 +5,7 @@ const styles = {
         width: 280,
         fontSize: 16,
         color: styleConstants.black,
+        height: 42.5
     }
 };
 

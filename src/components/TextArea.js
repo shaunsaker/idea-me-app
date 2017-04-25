@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    TextInput
+    TextInput,
 } from "react-native";
 
 import styles from '../styles/components/TextArea';
@@ -9,6 +9,12 @@ import styleConstants from '../styles/styleConstants';
 export default class TextArea extends React.Component {
     constructor(props) {
         super(props);
+
+        this.changeInputHeight = this.changeInputHeight.bind(this);
+
+        this.state = {
+            height: 0,
+        }
     }
 
     static get propTypes() {
@@ -20,6 +26,12 @@ export default class TextArea extends React.Component {
         };
     }
 
+    changeInputHeight(newHeight) {
+        this.setState({
+            height: newHeight
+        });
+    }
+
     render() {
         return (
             <TextInput
@@ -27,9 +39,11 @@ export default class TextArea extends React.Component {
                 placeholder={this.props.placeholder ? this.props.placeholder : ''} 
                 placeholderTextColor={styleConstants.grey}
                 underlineColorAndroid={styleConstants.secondary}
-                style={[styles.textarea, styleConstants.robotoCondensed]}
+                style={[styles.textarea, {height: Math.max(42.5, this.state.height)}, styleConstants.robotoCondensed]}
                 onChangeText={(text) => this.props.handleChange(text)} 
-                multiline={true} />
+                editable={true}
+                multiline={true} 
+                onContentSizeChange={event => this.changeInputHeight(event.nativeEvent.contentSize.height)}/>
         );
     }
 }
