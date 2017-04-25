@@ -1,9 +1,11 @@
 import React from "react";
 import {
-  View
+  View,
+  TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 import styles from '../styles/pages/AddIdea';
 import styleConstants from '../styles/styleConstants';
@@ -121,6 +123,20 @@ export class AddIdea extends React.Component {
   }
 
   render() {
+    const deleteIcon = this.props.newIdeaDescription && this.props.newIdeaDescription.length ?
+      <View style={styles.deleteContainer}>
+        <TouchableOpacity
+          style={styles.delete}
+          onPress={() => this.updateNewIdeaDescription('')}>
+          <MaterialIcon
+            name='close'
+            color={styleConstants.grey}
+            size={18} />
+        </TouchableOpacity>
+      </View>
+      :
+      null;
+
     const errorMessage = this.props.errorMessage ?
       <ErrorMessage text={this.props.errorMessage} />
       :
@@ -137,23 +153,26 @@ export class AddIdea extends React.Component {
               placeholder="What's the big idea?"
               value={this.props.newIdeaTitle}
               handleChange={this.updateNewIdeaTitle} />
-            <TextArea 
-              placeholder="Enter your description here..."
-              value={this.props.newIdeaDescription}
-              handleChange={this.updateNewIdeaDescription} />
+            <View style={styles.textAreaContainer}>
+              <TextArea
+                placeholder="Enter your description here..."
+                value={this.props.newIdeaDescription}
+                handleChange={this.updateNewIdeaDescription} />
+              {deleteIcon}
+            </View>
             <Dropdown
               displayText='Select a Category'
               value={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
               handleSelect={this.selectCategory}
-              values={this.props.categories} 
-              editItem={true} 
+              values={this.props.categories}
+              editItem={true}
               pushContent={true} />
             <Dropdown
               displayText='Select a Priority'
               value={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
               handleSelect={this.selectPriority}
-              values={this.props.priorities} 
-              pushContent={true} 
+              values={this.props.priorities}
+              pushContent={true}
               height={105} />
           </View>
           <FooterButton
@@ -161,7 +180,7 @@ export class AddIdea extends React.Component {
             handlePress={this.addNewIdea} />
         </View >
         {errorMessage}
-      </View>
+      </View >
     );
   }
 }

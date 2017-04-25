@@ -39,7 +39,7 @@ export default class TextArea extends React.Component {
                 placeholder={this.props.placeholder ? this.props.placeholder : ''} 
                 placeholderTextColor={styleConstants.grey}
                 underlineColorAndroid={styleConstants.secondary}
-                style={[styles.textarea, {height: Math.max(42.5, this.state.height)}, styleConstants.robotoCondensed]}
+                style={[styles.textarea, {height: Math.max(50.5, this.state.height)}, styleConstants.robotoCondensed]}
                 onChangeText={(text) => this.props.handleChange(text)} 
                 editable={true}
                 multiline={true} 
