@@ -23,6 +23,7 @@ export class Categories extends React.Component {
     this.navigateBack = this.navigateBack.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
     this.saveUserCategories = this.saveUserCategories.bind(this);
+    this.renderItem = this.renderItem.bind(this);
 
     this.state = {
       loading: false

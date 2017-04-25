@@ -22,6 +22,7 @@ export default class Dropdown extends React.Component {
         }
 
         this.toggleExpanded = this.toggleExpanded.bind(this);
+        this.renderItem = this.renderItem.bind(this);
     }
 
     static get propTypes() {
@@ -30,7 +31,8 @@ export default class Dropdown extends React.Component {
             value: React.PropTypes.string,
             handleSelect: React.PropTypes.func.isRequired,
             values: React.PropTypes.array.isRequired,
-            editItem: React.PropTypes.bool
+            editItem: React.PropTypes.bool,
+            pushContent: React.PropTypes.bool
         };
     }
 
@@ -59,15 +61,36 @@ export default class Dropdown extends React.Component {
                 {
                     toValue: 0
                 }
-            ).start();   
+            ).start();
         }
     }
 
+    renderItem({ item, index }) {
+        return (
+            <TouchableOpacity
+                style={styles.dropdownItem}
+                onPress={(index) => { this.toggleExpanded(); this.props.handleSelect(index) }} >
+                <Text
+                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                    {item}
+                </Text>
+            </TouchableOpacity>
+        );
+    }
+
     render() {
+        const pushContentStyles = this.props.pushContent ?
+            {
+                position: 'relative',
+                top: 8,
+            }
+            :
+            {}
+
         const itemList =
             <Animated.View
-                style={[styles.dropdownItemsWrapper, { height: this.state.height }]}>
-                <ScrollView style={styles.dropdownItemsContainer}>
+                style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
+                <View style={styles.dropdownItemsContainer}>
                     {
                         this.props.editItem ?
                             <TouchableOpacity
@@ -82,32 +105,26 @@ export default class Dropdown extends React.Component {
                             :
                             null
                     }
-                    {
-                        this.props.displayText ?
-                            null :
-                            <TouchableOpacity
-                                style={styles.dropdownItem}
-                                onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
-                                <Text
-                                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
-                                    All
-                                </Text>
-                            </TouchableOpacity>
-                    }
+                    <ScrollView>
+                        {
+                            this.props.displayText ?
+                                null :
+                                <TouchableOpacity
+                                    style={styles.dropdownItem}
+                                    onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
+                                    <Text
+                                        style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                                        All
+                                    </Text>
+                                </TouchableOpacity>
+                        }
 
-                    <FlatList
-                        data={this.props.values}
-                        renderItem={(value, index) =>
-                            <TouchableOpacity
-                                style={styles.dropdownItem}
-                                onPress={(index) => { this.toggleExpanded(); this.props.handleSelect(index) }} >
-                                <Text
-                                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
-                                    {value}
-                                </Text>
-                            </TouchableOpacity>
-                        } />
-                </ScrollView>
+                        <FlatList
+                            keyExtractor={item => 'dropdown' + item}
+                            data={this.props.values}
+                            renderItem={this.renderItem} />
+                    </ScrollView>
+                </View>
             </Animated.View>
 
         return (
@@ -120,7 +137,7 @@ export default class Dropdown extends React.Component {
                         {this.props.value ? this.props.value : this.props.displayText}
                     </Text>
                 </TouchableOpacity>
-                { itemList }
+                {itemList}
             </View>
         );
     }

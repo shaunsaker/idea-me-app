@@ -146,12 +146,14 @@ export class AddIdea extends React.Component {
               value={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
               handleSelect={this.selectCategory}
               values={this.props.categories} 
-              editItem={true} />
+              editItem={true} 
+              pushContent={true} />
             <Dropdown
               displayText='Select a Priority'
               value={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
               handleSelect={this.selectPriority}
-              values={this.props.priorities} />
+              values={this.props.priorities} 
+              pushContent={true} />
           </View>
           <FooterButton
             text='ADD IDEA'
