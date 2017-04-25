@@ -135,7 +135,13 @@ export default function (state = initialState, action) {
 
         case 'DELETE_IDEA':
             new_state = cloneObject(state);
-            new_state.ideas.splice(action.index, 1);
+            let id;
+            new_state.ideas.map((value, index) => {
+                if (value.title === action.title) {
+                    id = index;
+                }
+            });
+            new_state.ideas.splice(id, 1);
             return new_state;
 
         case 'ADD_NEW_CATEGORY':

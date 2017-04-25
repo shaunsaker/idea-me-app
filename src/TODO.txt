@@ -1,15 +1,11 @@
 TODO
 
-Use svg for logo and style fill/path using styleConstants
-Border radius must be width of element / 2
+Edit ideas (need a way to pass props to the page)
 Check ErrorMessage component
-Pass params to EditIdea
+ErrorMessage component animation
 ActivityIndicator not working - create own component
 Keyboard Avoiding Views
 Grow and Animate height of textArea input
 
 ENHANCEMENTS
 
-2x res for lightbulb image
-Dropdown component animation
-ErrorMessage component animation

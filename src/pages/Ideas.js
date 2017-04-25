@@ -79,10 +79,10 @@ export class Ideas extends React.Component {
     // TODO
   }
 
-  deleteIdea(index) {
+  deleteIdea(title) {
     this.props.dispatch({
       type: 'DELETE_IDEA',
-      index
+      title
     });
   }
 
@@ -149,7 +149,7 @@ export class Ideas extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconContainer}
-            onPress={() => this.deleteIdea(index)} >
+            onPress={() => this.deleteIdea(item.title)} >
             <MaterialIcon
               name='close'
               color={styleConstants.white}
