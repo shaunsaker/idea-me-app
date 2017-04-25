@@ -5,16 +5,13 @@ import {
     TouchableOpacity,
     Image
 } from "react-native";
+import { Actions } from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Octicon from 'react-native-vector-icons/Octicons';
-import { Actions } from "react-native-router-flux";
 
 import styles from '../styles/components/Header';
 import styleConstants from '../styles/styleConstants';
-
-import AddButton from '../components/AddButton';    
-import ViewButton from '../components/ViewButton';
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -35,50 +32,59 @@ export default class Header extends React.Component {
 
     render() {
         const backButton = this.props.allowBack === false ?
-            <View />
+            null
             :
             <TouchableOpacity
-                onPress={this.props.handlePress} >
+                onPress={this.props.handlePress}
+                style={styles.leftIcon} >
                 <MaterialIcon
                     color={styleConstants.secondary}
                     size={36}
-                    name='chevron-left'
-                    style={styles.leftIcon} />
+                    name='chevron-left' />
             </TouchableOpacity>;
 
-        const addIdeaButton = this.props.ideas ?
-            <AddButton size={36} ideas={true} />
-                :
-            <View />
-
-        const addCategoryButton = this.props.categories ?
-            <AddButton size={36} categories={true} />
-                :
+        const addIdeaButton = this.props.addIdea ?
+            <TouchableOpacity
+                style={styles.rightIcon}
+                onPress={() => Actions.addIdea()}>
+                <MaterialIcon
+                    name='add'
+                    color={styleConstants.secondary}
+                    size={36} />
+            </TouchableOpacity>
+            :
             null;
 
-        const homePageStyles = this.props.home ?
-            {justifyContent: 'center' }
+        const addCategoryButton = this.props.addCategory ?
+            <TouchableOpacity
+                style={styles.rightIcon}
+                onPress={() => Actions.addCategory()}>
+                <MaterialIcon
+                    name='add'
+                    color={styleConstants.secondary}
+                    size={36} />
+            </TouchableOpacity>
             :
-            {};
+            null;
 
         return (
-            <View style={[styles.headerContainer, homePageStyles]}>
-                    {backButton}
-                    <TouchableOpacity
-                        style={styles.logoContainer}
-                        onPress={this.navigateIdeas}>
-                        <Octicon 
-                            name='light-bulb' 
-                            size={24} 
-                            color={styleConstants.secondary} 
-                            style={styles.lightbulb} /> 
-                        <Text style={[styles.title, styleConstants.ranga]}>IDEA ME!</Text>
-                    </TouchableOpacity>
-                    <View style={styles.rightIcon}>
-                        {addIdeaButton}
-                        {addCategoryButton}
-                    </View>
+            <View style={styles.headerContainer}>
+                {backButton}
+                <TouchableOpacity
+                    style={styles.logoContainer}
+                    onPress={this.navigateIdeas}>
+                    <Octicon
+                        name='light-bulb'
+                        size={24}
+                        color={styleConstants.secondary}
+                        style={styles.lightbulb} />
+                    <Text style={[styles.title, styleConstants.ranga]}>IDEA ME!</Text>
+                </TouchableOpacity>
+                <View style={styles.rightIcon}>
+                    {addIdeaButton}
+                    {addCategoryButton}
                 </View>
-                );
+            </View>
+        );
     }
 }

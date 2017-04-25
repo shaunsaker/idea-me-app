@@ -14,28 +14,28 @@ const styles = {
         paddingTop: 16,
     },
     leftIcon: { 
-        paddingLeft: 16
+        position: 'absolute',
+        top: 12,
+        left: 8,
     },
     rightIcon: {
-        paddingRight: 16
+        position: 'absolute',
+        top: 6,
+        right: 8,
     },
-    logoContainer: {        
+    logoContainer: {      
+        flex: 1,  
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    image: {
-        marginRight: 12,
-        marginBottom: 8,
-        width: 36,
-        height: 36
+        zIndex: -1
     },
     title: {
         fontSize: 24,
-        color: styleConstants.secondary
+        color: styleConstants.secondary,
+        paddingHorizontal: 4
     },
     lightbulb: {
-        marginRight: 4,
         marginBottom: 4
     }
 };

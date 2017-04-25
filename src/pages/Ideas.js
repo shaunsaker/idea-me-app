@@ -216,7 +216,7 @@ export class Ideas extends React.Component {
       <View style={styles.container}>
         <Header
           handlePress={this.navigateBack}
-          ideas={true} />
+          addIdea={true} />
         <View style={styles.infoContainer}>
           <Dropdown
             value={this.state.currentCategory}

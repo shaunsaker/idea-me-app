@@ -110,7 +110,7 @@ export class Categories extends React.Component {
         style={styles.container}>
         <Header
           handlePress={this.navigateBack}
-          categories={true} />
+          addCategory={true} />
         <View style={styles.categoriesContainer}>
           {categories}
         </View>
