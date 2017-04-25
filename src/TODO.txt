@@ -7,6 +7,7 @@ Pass params to EditIdea
 ActivityIndicator not working - create own component
 Keyboard Avoiding Views
 Grow and Animate height of textArea input
+Test Scrollview on dropdown
 
 ENHANCEMENTS
 

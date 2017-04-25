@@ -3,7 +3,9 @@ import {
     View,
     Text,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Animated,
+    ScrollView,
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -15,7 +17,8 @@ export default class Dropdown extends React.Component {
         super(props);
 
         this.state = {
-            isExpanded: false
+            isExpanded: false,
+            height: new Animated.Value(0)
         }
 
         this.toggleExpanded = this.toggleExpanded.bind(this);
@@ -32,54 +35,80 @@ export default class Dropdown extends React.Component {
     }
 
     toggleExpanded() {
-        this.setState({
-            isExpanded: !this.state.isExpanded
-        });
+
+        // Check if the dropdown is open/closed
+        if (!this.state.isExpanded) {
+            this.setState({
+                isExpanded: true
+            });
+
+            Animated.timing(
+                this.state.height,
+                {
+                    toValue: 200
+                }
+            ).start();
+        }
+        else {
+            this.setState({
+                isExpanded: false
+            });
+
+            Animated.timing(
+                this.state.height,
+                {
+                    toValue: 0
+                }
+            ).start();   
+        }
     }
 
     render() {
         const itemList =
-            <View style={styles.dropdownItemsContainer}>
-                {
-                    this.props.editItem ?
-                        <TouchableOpacity
-                            style={styles.dropdownItemAdd}
-                            onPress={() => { this.toggleExpanded(); this.props.handleSelect(200) }} >
-                            <Icon name='pencil' size={18} style={styles.editIcon} />
-                            <Text
-                                style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
-                                Edit Categories
-                            </Text>
-                        </TouchableOpacity>
-                        :
-                        null
-                }
-                {
-                    this.props.displayText ?
-                        null :
-                        <TouchableOpacity
-                            style={styles.dropdownItem}
-                            onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
-                            <Text
-                                style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
-                                All
-                            </Text>
-                        </TouchableOpacity>
-                }
+            <Animated.View
+                style={[styles.dropdownItemsWrapper, { height: this.state.height }]}>
+                <ScrollView style={styles.dropdownItemsContainer}>
+                    {
+                        this.props.editItem ?
+                            <TouchableOpacity
+                                style={styles.dropdownItemAdd}
+                                onPress={() => { this.toggleExpanded(); this.props.handleSelect(200) }} >
+                                <Icon name='pencil' size={18} style={styles.editIcon} />
+                                <Text
+                                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                                    Edit Categories
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            null
+                    }
+                    {
+                        this.props.displayText ?
+                            null :
+                            <TouchableOpacity
+                                style={styles.dropdownItem}
+                                onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
+                                <Text
+                                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                                    All
+                                </Text>
+                            </TouchableOpacity>
+                    }
 
-                <FlatList
-                    data={this.props.values}
-                    renderItem={(value, index) =>
-                        <TouchableOpacity
-                            style={styles.dropdownItem}
-                            onPress={(index) => { this.toggleExpanded(); this.props.handleSelect(index) }} >
-                            <Text
-                                style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
-                                {value}
-                            </Text>
-                        </TouchableOpacity>
-                    } />
-            </View>;
+                    <FlatList
+                        data={this.props.values}
+                        renderItem={(value, index) =>
+                            <TouchableOpacity
+                                style={styles.dropdownItem}
+                                onPress={(index) => { this.toggleExpanded(); this.props.handleSelect(index) }} >
+                                <Text
+                                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                                    {value}
+                                </Text>
+                            </TouchableOpacity>
+                        } />
+                </ScrollView>
+            </Animated.View>
 
         return (
             <View style={styles.dropdownContainer}>
@@ -91,12 +120,7 @@ export default class Dropdown extends React.Component {
                         {this.props.value ? this.props.value : this.props.displayText}
                     </Text>
                 </TouchableOpacity>
-                {
-                    this.state.isExpanded ?
-                        itemList
-                        :
-                        null
-                }
+                { itemList }
             </View>
         );
     }
