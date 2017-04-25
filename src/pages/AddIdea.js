@@ -108,11 +108,6 @@ export class AddIdea extends React.Component {
         type: 'USER_ERROR',
         message: 'You forgot to enter your idea'
       });
-      setTimeout(() => {
-        this.props.dispatch({
-          type: 'RESET_USER_ERROR'
-        });
-      }, 2500);
     }
   }
 

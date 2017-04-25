@@ -1,22 +1,19 @@
+import { Dimensions } from "react-native";
 import styleConstants from '../styleConstants'; 
 
+const windowWidth = Dimensions.get('window').width;
+
 const styles = {
-    errorMessageWrapper: {
-        
+    errorMessageWrapper: {        
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     errorMessageContainer: {
         position: 'absolute',
-        bottom: 16,
-        minWidth: 280,
-        backgroundColor: styleConstants.clearBlack,
-        paddingTop: 22,
-        paddingBottom: 22,
-        paddingLeft: 16,
-        paddingRight: 16,
-        borderRadius: 32,
-        
+        width: windowWidth,
+        minHeight: 84,
+        backgroundColor: styleConstants.black, 
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
@@ -27,8 +24,7 @@ const styles = {
         color: styleConstants.white
     },
     icon: {
-        color: styleConstants.red,
-        fontSize: 18,
+        marginTop: 2,
         marginRight: 8
     }
 };

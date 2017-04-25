@@ -34,10 +34,12 @@ const styles = {
 
     },  
     ideaTextTitle: {
-        fontSize: 24
+        fontSize: 24,
+        color: styleConstants.secondary
     },
     ideaTextDescription: {
-        fontSize: 16
+        fontSize: 16,
+        color: styleConstants.grey
     },
     labelsContainer: {        
         flexDirection: 'row',

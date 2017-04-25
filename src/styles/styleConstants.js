@@ -8,7 +8,7 @@ styleConstants.robotoCondensed = {
 }
 
 styleConstants.primary = '#fafafa';
-styleConstants.secondary = '#555';
+styleConstants.secondary = '#333';
 styleConstants.red = '#d32f2f';
 styleConstants.white = '#fafafa';
 styleConstants.clearWhite = 'rgba(255, 255, 255, 0.5)';

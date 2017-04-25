@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-  View,
-  ActivityIndicator
+  View
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import styles from '../styles/components/RequireAuth';
 import styleConstants from '../styles/styleConstants';
+
+import Spinner from './Spinner';
 
 export default function (WrappedComponent) {
   class Auth extends React.Component {
@@ -52,7 +53,9 @@ export default function (WrappedComponent) {
         <WrappedComponent {...this.props} />
         :
         <View style={styles.container}>
-          <ActivityIndicator />
+          <Spinner
+            size={64}
+            color={styleConstants.secondary} />
         </View>
 
       return wrapper;

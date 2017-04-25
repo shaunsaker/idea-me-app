@@ -66,7 +66,7 @@ const styles = {
     },
     dropdownButtonText: {
         color: styleConstants.primary,
-        fontSize: 20,
+        fontSize: 24,
         textAlign: 'center',
         width: 240
     },

@@ -1,16 +1,21 @@
 import React from "react";
-
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+    View,
+    Text,
+    Animated
+} from "react-native";
+import { connect } from 'react-redux';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from '../styles/components/ErrorMessage';
 import styleConstants from '../styles/styleConstants';
 
-export default class ErrorMessage extends React.Component {
+export class ErrorMessage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            showErrorMessage: true
+            bottom: new Animated.Value(-200)
         }
     }
 
@@ -21,25 +26,45 @@ export default class ErrorMessage extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.showErrorMessage) {
+        Animated.timing(
+            this.state.bottom,
+            {
+                toValue: 0
+            }
+        ).start();
+
+        setTimeout(() => {
+            Animated.timing(
+                this.state.bottom,
+                {
+                    toValue: -200
+                }
+            ).start();
+
             setTimeout(() => {
-                this.setState({
-                    showErrorMessage: false
+                this.props.dispatch({
+                type: 'RESET_USER_ERROR'
                 });
-            }, 2000);
-        }
+            }, 1000);
+        }, 2000);
     }
 
     render() {
         return (
             <View style={styles.errorMessageWrapper}>
-                <View key='errorMessage' style={styles.errorMessageContainer}>
-                    <Icon name='exclamation-triangle' style={styles.icon} />
-                    <Text style={[ styles.errorMessageText, styleConstants.robotoCondensed ]}>
+                <Animated.View style={[styles.errorMessageContainer, {bottom: this.state.bottom}]}>
+                    <MaterialIcon
+                        name='error-outline'
+                        color={styleConstants.red}
+                        size={24}
+                        style={styles.icon} />
+                    <Text style={[styles.errorMessageText, styleConstants.robotoCondensed]}>
                         {this.props.text}
                     </Text>
-                </View>
+                </Animated.View>
             </View>
         );
     }
 }
+
+export default connect()(ErrorMessage);

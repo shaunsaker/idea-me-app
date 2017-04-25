@@ -1,11 +1,6 @@
 TODO
 
-Edit ideas (need a way to pass props to the page)
-Check ErrorMessage component
-ErrorMessage component animation
-ActivityIndicator not working - create own component
-Keyboard Avoiding Views
-Grow and Animate height of textArea input
+
 
 ENHANCEMENTS
 

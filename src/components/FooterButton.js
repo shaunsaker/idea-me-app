@@ -2,11 +2,12 @@ import React from "react";
 import {
     Text, 
     TouchableOpacity,
-    ActivityIndicator
 } from "react-native";
 
 import styles from '../styles/components/FooterButton';
 import styleConstants from '../styles/styleConstants';
+
+import Spinner from './Spinner';
 
 export default class FooterButton extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ export default class FooterButton extends React.Component {
 
     render() {
         const content = this.props.loading ?
-            <ActivityIndicator />
+            <Spinner />
             :
             <Text style={[ styles.buttonText, styleConstants.ranga ]}>{this.props.text}</Text>;
 
