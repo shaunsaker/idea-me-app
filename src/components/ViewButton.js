@@ -4,7 +4,7 @@ import {
     ActivityIndicator
 } from "react-native";
 import { Actions } from "react-native-router-flux";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/EvilIcons';
 
 import styles from '../styles/components/AddButton';
 import styleConstants from '../styles/styleConstants';
@@ -28,8 +28,8 @@ export default class ViewButton extends React.Component {
             :
             <Icon
                 name='eye'
-                size={48}
-                color={styleConstants.white}
+                size={64}
+                color={styleConstants.secondary}
                 style={styles.icon} />
         return (
             <TouchableOpacity

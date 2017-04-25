@@ -83,7 +83,7 @@ export class Categories extends React.Component {
           <View
             style={styles.categoryItem}>
             <View style={styles.categoryTextContainer}>
-              <Text style={[styles.categoryText, styleConstants.sourceSansPro]}>{value}</Text>
+              <Text style={[styles.categoryText, styleConstants.robotoCondensed]}>{value}</Text>
             </View>
             <TouchableOpacity style={styles.iconContainer}
               onPress={() => this.deleteCategory(index)} >

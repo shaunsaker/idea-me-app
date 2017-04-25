@@ -11,10 +11,10 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: styleConstants.white,
+        backgroundColor: styleConstants.secondary,
         borderRadius: 32,
         marginBottom: 16,
-        elevation: 4,
+        elevation: 1,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,
@@ -23,11 +23,11 @@ const styles = {
             width: 0
         },
         width: 280,
-        paddingVertical: 12,
+        paddingVertical: 6,
     },
     dropdownItemsContainer: {
         borderRadius: 32,
-        elevation: 4,
+        elevation: 2,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,
@@ -41,27 +41,33 @@ const styles = {
         top: 52,
         width: 280,
     },
-    dropdownItem: {
-        
+    dropdownItem: {        
         flexDirection: 'row',
         justifyContent: 'center',
         backgroundColor: styleConstants.white,
-        paddingVertical: 12,
+        paddingVertical: 6,
     },
-    dropdownItemAdd: {
-        
+    dropdownItemAdd: {        
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',        
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderStyle: 'solid',
-        borderColor: styleConstants.blue,
+        borderColor: styleConstants.secondary,
         backgroundColor: styleConstants.white,
-        paddingVertical: 12,
+        paddingVertical: 6,
+    },
+    dropdownButtonText: {
+        color: styleConstants.primary,
+        fontSize: 20,
+        width: 200,
+        textAlign: 'center'
     },
     dropdownItemText: {
-        color: styleConstants.black,
-        fontSize: 18,
+        color: styleConstants.secondary,
+        fontSize: 16,
+        width: 200,
+        textAlign: 'center'
     },
     editIcon: {
         marginRight: 12

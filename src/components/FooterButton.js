@@ -25,7 +25,7 @@ export default class FooterButton extends React.Component {
         const content = this.props.loading ?
             <ActivityIndicator />
             :
-            <Text style={[ styles.buttonText, styleConstants.dekko ]}>{this.props.text}</Text>;
+            <Text style={[ styles.buttonText, styleConstants.ranga ]}>{this.props.text}</Text>;
 
         return (
             <TouchableOpacity

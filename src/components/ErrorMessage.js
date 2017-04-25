@@ -35,7 +35,7 @@ export default class ErrorMessage extends React.Component {
             <View style={styles.errorMessageWrapper}>
                 <View key='errorMessage' style={styles.errorMessageContainer}>
                     <Icon name='exclamation-triangle' style={styles.icon} />
-                    <Text style={[ styles.errorMessageText, styleConstants.sourceSansPro ]}>
+                    <Text style={[ styles.errorMessageText, styleConstants.robotoCondensed ]}>
                         {this.props.text}
                     </Text>
                 </View>

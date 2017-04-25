@@ -12,7 +12,7 @@ const styles = {
         alignItems: 'center',
         position: 'relative',
         paddingTop: 72,
-        backgroundColor: styleConstants.blue
+        backgroundColor: styleConstants.primary
     },
     infoContainer: {
         
@@ -54,7 +54,7 @@ const styles = {
         paddingBottom: 8,
         paddingLeft: 16,
         paddingRight: 16,
-        backgroundColor: styleConstants.blue,
+        backgroundColor: styleConstants.primary,
         color: styleConstants.white,
         // borderRadius: 32,
         marginLeft: 16,
@@ -68,7 +68,7 @@ const styles = {
         width: 41,
         height: 41,
         backgroundColor: styleConstants.white,
-        color: styleConstants.blue
+        color: styleConstants.primary
     },
     labelsContainer: {
         
@@ -77,7 +77,7 @@ const styles = {
         justifyContent: 'flex-end',
     },
     editIcon: {
-        color: styleConstants.blue,
+        color: styleConstants.primary,
         backgroundColor: styleConstants.white,
         padding: 8,
         // borderRadius: '50%',

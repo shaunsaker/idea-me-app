@@ -4,8 +4,7 @@ import styleConstants from '../styleConstants';
 const windowWidth = Dimensions.get('window').width;
 
 const styles = {
-    headerContainer: {
-        
+    headerContainer: {        
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -20,8 +19,7 @@ const styles = {
     rightIcon: {
         paddingRight: 16
     },
-    logoContainer: {
-        
+    logoContainer: {        
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -33,8 +31,13 @@ const styles = {
         height: 36
     },
     title: {
-        fontSize: 24
+        fontSize: 24,
+        color: styleConstants.secondary
     },
+    lightbulb: {
+        marginRight: 4,
+        marginBottom: 4
+    }
 };
 
 export default styles;

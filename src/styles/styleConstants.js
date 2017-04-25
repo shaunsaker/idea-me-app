@@ -1,19 +1,19 @@
 const styleConstants = {};
 
-styleConstants.dekko = {
-    fontFamily: 'ArchitectsDaughter'
+styleConstants.ranga = {
+    fontFamily: 'Ranga-Regular'
 }
-styleConstants.sourceSansPro = {
-    fontFamily: 'SourceSansPro-Regular'
+styleConstants.robotoCondensed = {
+    fontFamily: 'RobotoCondensed-Regular'
 }
 
-styleConstants.blue = '#03a9f4';
-styleConstants.yellow = '#ffff00';
-styleConstants.red = '#d32f2f';
+styleConstants.primary = '#fafafa';
+styleConstants.secondary = '#9E9E9E';
+styleConstants.danger = '#d32f2f';
 styleConstants.white = '#fafafa';
-styleConstants.grey = '#9E9E9E';
-styleConstants.black = 'rgb(33, 33, 33)';
 styleConstants.clearWhite = 'rgba(255, 255, 255, 0.5)';
+styleConstants.black = '#212121';
 styleConstants.clearBlack = 'rgba(33, 33, 33, 0.95)';
+styleConstants.grey = '#9E9E9E';
 
 export default styleConstants;

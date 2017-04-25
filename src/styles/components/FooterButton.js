@@ -6,7 +6,7 @@ const styles = {
         alignItems: 'center',
         margin: 16,
         borderRadius: 40,
-        backgroundColor: styleConstants.yellow,
+        backgroundColor: styleConstants.secondary,
         width: 280,
         elevation: 4,
         shadowColor: "#000000",
@@ -19,7 +19,8 @@ const styles = {
         height: 68,
     },
     buttonText: {
-        fontSize: 20,
+        fontSize: 24,
+        color: styleConstants.primary
     }
 };
 

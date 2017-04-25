@@ -44,10 +44,10 @@ export default class Dropdown extends React.Component {
                     this.props.editItem ?
                         <TouchableOpacity
                             style={styles.dropdownItemAdd}
-                            onPress={() => { this.props.handleSelect(200) }} >
+                            onPress={() => { this.toggleExpanded(); this.props.handleSelect(200) }} >
                             <Icon name='pencil' size={18} style={styles.editIcon} />
                             <Text
-                                style={[styles.dropdownItemText, styleConstants.sourceSansPro]}>
+                                style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
                                 Edit Categories
                             </Text>
                         </TouchableOpacity>
@@ -59,9 +59,9 @@ export default class Dropdown extends React.Component {
                         null :
                         <TouchableOpacity
                             style={styles.dropdownItem}
-                            onPress={() => { this.props.handleSelect(100) }} >
+                            onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
                             <Text
-                                style={[styles.dropdownItemText, styleConstants.sourceSansPro]}>
+                                style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
                                 All
                             </Text>
                         </TouchableOpacity>
@@ -72,9 +72,9 @@ export default class Dropdown extends React.Component {
                     renderItem={(value, index) =>
                         <TouchableOpacity
                             style={styles.dropdownItem}
-                            onPress={(index) => { this.props.handleSelect(index) }} >
+                            onPress={(index) => { this.toggleExpanded(); this.props.handleSelect(index) }} >
                             <Text
-                                style={[styles.dropdownItemText, styleConstants.sourceSansPro]}>
+                                style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
                                 {value}
                             </Text>
                         </TouchableOpacity>
@@ -87,7 +87,7 @@ export default class Dropdown extends React.Component {
                     style={styles.dropdownButton}
                     onPress={this.toggleExpanded} >
                     <Text
-                        style={[styles.dropdownItemText, styleConstants.sourceSansPro]} >
+                        style={[styles.dropdownButtonText, styleConstants.ranga]} >
                         {this.props.value ? this.props.value : this.props.displayText}
                     </Text>
                 </TouchableOpacity>

@@ -3,7 +3,7 @@ import {
     TouchableOpacity
 } from "react-native";
 import { Actions } from "react-native-router-flux";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from '../styles/components/AddButton';
 import styleConstants from '../styles/styleConstants';
@@ -42,7 +42,11 @@ export default class AddButton extends React.Component {
             <TouchableOpacity
                 style={buttonStyles}
                 onPress={() => this.navigate(to)}>
-                <Icon name='plus' size={this.props.size} style={styles.icon} color={styleConstants.white} />
+                <Icon 
+                    name='add' 
+                    size={this.props.size} 
+                    style={styles.icon} 
+                    color={styleConstants.secondary} />
             </TouchableOpacity>
         );
     }

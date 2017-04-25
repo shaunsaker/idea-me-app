@@ -6,14 +6,14 @@ import {
     Image
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Octicon from 'react-native-vector-icons/Octicons';
 import { Actions } from "react-native-router-flux";
-
-import lightBulb from '../styles/img/lightbulb.png';
 
 import styles from '../styles/components/Header';
 import styleConstants from '../styles/styleConstants';
 
-import AddButton from '../components/AddButton';
+import AddButton from '../components/AddButton';    
 import ViewButton from '../components/ViewButton';
 
 export default class Header extends React.Component {
@@ -39,8 +39,8 @@ export default class Header extends React.Component {
             :
             <TouchableOpacity
                 onPress={this.props.handlePress} >
-                <Icon
-                    color={styleConstants.white}
+                <MaterialIcon
+                    color={styleConstants.secondary}
                     size={36}
                     name='chevron-left'
                     style={styles.leftIcon} />
@@ -67,8 +67,12 @@ export default class Header extends React.Component {
                     <TouchableOpacity
                         style={styles.logoContainer}
                         onPress={this.navigateIdeas}>
-                        <Image source={lightBulb} style={styles.image} />
-                        <Text style={[styles.title, styleConstants.dekko]}>IDEA ME!</Text>
+                        <Octicon 
+                            name='light-bulb' 
+                            size={24} 
+                            color={styleConstants.secondary} 
+                            style={styles.lightbulb} /> 
+                        <Text style={[styles.title, styleConstants.ranga]}>IDEA ME!</Text>
                     </TouchableOpacity>
                     <View style={styles.rightIcon}>
                         {addIdeaButton}

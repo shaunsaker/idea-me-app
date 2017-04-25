@@ -124,7 +124,7 @@ export class SignIn extends React.Component {
                                 value={this.props.userPassword}
                                 handleChange={this.updateUserPassword}
                                 type='password' />
-                            <Text style={[styles.passwordText, styleConstants.sourceSansPro ]}>*Password at least 6 characters long</Text>
+                            <Text style={[styles.passwordText, styleConstants.robotoCondensed ]}>*Password at least 6 characters long</Text>
                         </View>
                     </View>
                     <FooterButton

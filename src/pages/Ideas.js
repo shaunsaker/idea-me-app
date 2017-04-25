@@ -173,10 +173,10 @@ export class Ideas extends React.Component {
               <View
                 style={styles.ideaItem} >
                 <View style={styles.textContainer}>
-                  <Text style={[styles.ideaTextTitle, styleConstants.sourceSansPro]}>
+                  <Text style={[styles.ideaTextTitle, styleConstants.robotoCondensed]}>
                     {value.title}
                   </Text>
-                  <Text style={[styles.ideaTextDescription, styleConstants.sourceSansPro]}>
+                  <Text style={[styles.ideaTextDescription, styleConstants.robotoCondensed]}>
                     {value.description}
                   </Text>
                 </View>
@@ -184,13 +184,13 @@ export class Ideas extends React.Component {
                   style={styles.labelsContainer} >
                   {
                     this.state.currentCategory == 'All' && (value.categoryId === 0 || value.categoryId) ?
-                      <Text style={[styles.ideaChip, styleConstants.sourceSansPro]}>{this.props.categories[value.categoryId]}</Text>
+                      <Text style={[styles.ideaChip, styleConstants.robotoCondensed]}>{this.props.categories[value.categoryId]}</Text>
                       :
                       <View></View>
                   }
                   {
                     value.priorityId === 0 || value.priorityId ?
-                      <Text style={[styles.ideaChip, styles.priority, styleConstants.sourceSansPro]}>{this.props.priorities[value.priorityId].split('')[0]}</Text>
+                      <Text style={[styles.ideaChip, styles.priority, styleConstants.robotoCondensed]}>{this.props.priorities[value.priorityId].split('')[0]}</Text>
                       :
                       <View></View>
                   }
