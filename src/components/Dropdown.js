@@ -70,7 +70,7 @@ export default class Dropdown extends React.Component {
         return (
             <TouchableOpacity
                 style={styles.dropdownItem}
-                onPress={(index) => { this.toggleExpanded(); this.props.handleSelect(index) }} >
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(index) }} >
                 <Text
                     style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
                     {item}
