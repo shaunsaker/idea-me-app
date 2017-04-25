@@ -218,15 +218,15 @@ export class Ideas extends React.Component {
           handlePress={this.navigateBack}
           addIdea={true} />
         <View style={styles.infoContainer}>
+          <Count
+            count={counter}
+            total={this.props.ideas ? this.props.ideas.length : 0}
+            unit='ideas' />
           <Dropdown
             value={this.state.currentCategory}
             handleSelect={this.selectCategory}
             values={this.props.categories}
             editItem={true} />
-          <Count
-            count={counter}
-            total={this.props.ideas ? this.props.ideas.length : 0}
-            unit='ideas' />
         </View>
         {ideas}
         <FooterButton

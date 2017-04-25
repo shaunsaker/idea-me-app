@@ -1,14 +1,13 @@
 import styleConstants from '../styleConstants'; 
 
 const styles = {
-    countContainer: {
-        
+    countContainer: {        
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     countText: {
         fontSize: 18,
-        color: styleConstants.white
+        color: styleConstants.secondary
     },
 };
 

@@ -37,6 +37,7 @@ export default class Dropdown extends React.Component {
     }
 
     toggleExpanded() {
+        const itemCount = (this.props.editItem ? 1 : 0) + (this.props.displayText ? 0 : 1) + this.props.values.length;
 
         // Check if the dropdown is open/closed
         if (!this.state.isExpanded) {
@@ -47,7 +48,7 @@ export default class Dropdown extends React.Component {
             Animated.timing(
                 this.state.height,
                 {
-                    toValue: this.props.height ? this.props.height : 200
+                    toValue: itemCount * 36
                 }
             ).start();
         }
@@ -83,9 +84,10 @@ export default class Dropdown extends React.Component {
             {
                 position: 'relative',
                 top: 8,
+                marginTop: 0
             }
             :
-            {}
+            { marginTop: 16 };
 
         const itemList =
             <Animated.View
@@ -125,7 +127,7 @@ export default class Dropdown extends React.Component {
                             renderItem={this.renderItem} />
                     </ScrollView>
                 </View>
-            </Animated.View>
+            </Animated.View>;
 
         return (
             <View style={styles.dropdownContainer}>

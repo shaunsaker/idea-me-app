@@ -5,8 +5,7 @@ const windowWidth = Dimensions.get('window').width;
 
 const styles = {
     container: {
-        flex: 1,
-        
+        flex: 1,        
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -20,8 +19,7 @@ const styles = {
     ideasContainer: {
         flex: 1,
     },
-    ideaItem: {
-        
+    ideaItem: {        
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
@@ -61,8 +59,7 @@ const styles = {
         // boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24)',
     },
     priority: {
-        fontWeight: 700,
-        
+        fontWeight: 700,        
         flexDirection: 'row',
         justifyContent: 'center',
         width: 41,
@@ -70,8 +67,7 @@ const styles = {
         backgroundColor: styleConstants.white,
         color: styleConstants.primary
     },
-    labelsContainer: {
-        
+    labelsContainer: {        
         flexDirection: 'row',
         flex: 1,
         justifyContent: 'flex-end',

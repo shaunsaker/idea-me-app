@@ -67,7 +67,8 @@ const styles = {
     dropdownButtonText: {
         color: styleConstants.primary,
         fontSize: 24,
-        textAlign: 'center'
+        textAlign: 'center',
+        width: 240
     },
     dropdownItemText: {
         color: styleConstants.secondary,
