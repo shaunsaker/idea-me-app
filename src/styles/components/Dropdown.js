@@ -45,13 +45,14 @@ const styles = {
         backgroundColor: styleConstants.white,
     },
     dropdownItemsContainer: {
-
+        alignItems: 'center'
     },
     dropdownItem: {        
         flexDirection: 'row',
         justifyContent: 'center',
         backgroundColor: styleConstants.white,
         paddingVertical: 6,
+        width: 240
     },
     dropdownItemAdd: {        
         flexDirection: 'row',
@@ -66,13 +67,11 @@ const styles = {
     dropdownButtonText: {
         color: styleConstants.primary,
         fontSize: 24,
-        width: 200,
         textAlign: 'center'
     },
     dropdownItemText: {
         color: styleConstants.secondary,
         fontSize: 16,
-        width: 200,
         textAlign: 'center'
     },
     editIcon: {

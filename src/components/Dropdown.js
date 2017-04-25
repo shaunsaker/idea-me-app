@@ -47,7 +47,7 @@ export default class Dropdown extends React.Component {
             Animated.timing(
                 this.state.height,
                 {
-                    toValue: 200
+                    toValue: this.props.height ? this.props.height : 200
                 }
             ).start();
         }

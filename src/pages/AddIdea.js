@@ -153,7 +153,8 @@ export class AddIdea extends React.Component {
               value={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
               handleSelect={this.selectPriority}
               values={this.props.priorities} 
-              pushContent={true} />
+              pushContent={true} 
+              height={105} />
           </View>
           <FooterButton
             text='ADD IDEA'
