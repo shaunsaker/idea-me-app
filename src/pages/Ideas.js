@@ -75,8 +75,7 @@ export class Ideas extends React.Component {
   }
 
   editIdea(idea) {
-    // browserHistory.push(`/edit-idea?title=${idea.title}&description=${idea.description}&categoryId=${idea.categoryId}&priorityId=${idea.priorityId}&id=${idea.index}`);
-    // TODO
+    Actions.editIdea(idea);
   }
 
   deleteIdea(title) {

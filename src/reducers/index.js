@@ -107,9 +107,9 @@ export default function (state = initialState, action) {
             new_state.editIdea.priorityId = action.value;
             return new_state;
 
-        case 'SET_EDIT_IDEA_INDEX':
+        case 'SET_EDIT_IDEA_ID':
             new_state = cloneObject(state);
-            new_state.editIdea.index = action.index;
+            new_state.editIdea.id = action.id;
             return new_state;
 
         case 'UPDATE_NEW_CATEGORY_VALUE':
@@ -173,7 +173,7 @@ export default function (state = initialState, action) {
         case 'UPDATE_IDEA':
             new_state = cloneObject(state);
             for (let i = 0; i < new_state.ideas.length; i++) {
-                if (i === new_state.editIdea.index) {
+                if (new_state.ideas[i].title === new_state.editIdea.id) {
                     new_state.ideas[i].title = new_state.editIdea.title;
                     new_state.ideas[i].description = new_state.editIdea.description;
                     new_state.ideas[i].categoryId = new_state.editIdea.categoryId;

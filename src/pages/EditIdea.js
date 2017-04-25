@@ -1,9 +1,11 @@
 import React from "react";
 import {
-    View
+    View,
+    TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 import styles from '../styles/pages/EditIdea';
 import styleConstants from '../styles/styleConstants';
@@ -35,7 +37,7 @@ export class EditIdea extends React.Component {
             initialIdeaDescription: React.PropTypes.string,
             initialIdeaCategory: React.PropTypes.number.isRequired,
             initialIdeaPriority: React.PropTypes.number.isRequired,
-            editIdeaIndex: React.PropTypes.number.isRequired,
+            editIdeaTitle: React.PropTypes.number.isRequired,
             editIdeaTitle: React.PropTypes.string,
             editIdeaDescription: React.PropTypes.string,
             editIdeaCategory: React.PropTypes.number,
@@ -120,8 +122,8 @@ export class EditIdea extends React.Component {
         });
 
         this.props.dispatch({
-            type: 'SET_EDIT_IDEA_INDEX',
-            index: this.props.editIdeaIndex
+            type: 'SET_EDIT_IDEA_ID',
+            id: this.props.initialIdeaTitle
         });
     }
 
@@ -134,30 +136,49 @@ export class EditIdea extends React.Component {
     }
 
     render() {
+        const deleteIcon = this.props.editIdeaDescription && this.props.editIdeaDescription.length ?
+            <View style={styles.deleteContainer}>
+                <TouchableOpacity
+                    style={styles.delete}
+                    onPress={() => this.updateEditIdeaDescription('')}>
+                    <MaterialIcon
+                        name='close'
+                        color={styleConstants.grey}
+                        size={18} />
+                </TouchableOpacity>
+            </View>
+            :
+            null;
+
         return (
             <View
                 style={styles.container}>
-                <Header 
+                <Header
                     handlePress={this.navigateBack} />
                 <View style={styles.inputArea}>
                     <Input
                         value={this.props.editIdeaTitle ? this.props.editIdeaTitle : this.props.initialIdeaTitle}
                         handleChange={this.updateEditIdeaTitle} />
-                    <TextArea
-                        value={this.props.editIdeaDescription ? this.props.editIdeaDescription : this.props.initialIdeaDescription}
-                        placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...'}
-                        handleChange={this.updateEditIdeaDescription} />
+                    <View style={styles.textAreaContainer}>
+                        <TextArea
+                            value={this.props.editIdeaDescription !== null ? this.props.editIdeaDescription : this.props.initialIdeaDescription}
+                            placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...'}
+                            handleChange={this.updateEditIdeaDescription} />
+                        {deleteIcon}
+                    </View>
                     <Dropdown
                         displayText='Select a Category'
                         value={this.props.editIdeaCategory !== null ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
                         handleSelect={this.selectCategory}
                         values={this.props.categories}
-                        editItem={true} />
+                        editItem={true}
+                        pushContent={true} />
                     <Dropdown
                         displayText='Select a Priority'
                         value={this.props.editIdeaPriority !== null ? this.props.priorities[this.props.editIdeaPriority] : this.props.priorities[this.props.initialIdeaPriority]}
                         handleSelect={this.selectPriority}
-                        values={this.props.priorities} />
+                        values={this.props.priorities}
+                        pushContent={true} />
                 </View>
                 <FooterButton
                     text='UPDATE IDEA'
@@ -171,11 +192,10 @@ function MapStateToProps(state) {
     return ({
         categories: state.main.categories,
         priorities: state.main.priorities,
-        initialIdeaTitle: state.routing.locationBeforeTransitions.query.title,
-        initialIdeaDescription: state.routing.locationBeforeTransitions.query.description,
-        initialIdeaCategory: Number(state.routing.locationBeforeTransitions.query.categoryId),
-        initialIdeaPriority: Number(state.routing.locationBeforeTransitions.query.priorityId),
-        editIdeaIndex: Number(state.routing.locationBeforeTransitions.query.id),
+        initialIdeaTitle: state.routes.scene.title,
+        initialIdeaDescription: state.routes.scene.description,
+        initialIdeaCategory: Number(state.routes.scene.categoryId),
+        initialIdeaPriority: Number(state.routes.scene.priorityId),
         editIdeaTitle: state.main.editIdea.title,
         editIdeaDescription: state.main.editIdea.description,
         editIdeaCategory: state.main.editIdea.categoryId,
