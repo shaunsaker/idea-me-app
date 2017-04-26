@@ -1,7 +1,8 @@
 TODO
 
-Test Dropdown ScrollView (20 categories)
-On Api Success, lightbulb turns yellow and backgroundColor turns white (lights up the room)
+Account for ideas and categories of the same title
+Autocapitalize Ideas and Description and Categories
 
 ENHANCEMENTS
 
+On Api Success, lightbulb turns yellow and backgroundColor turns white (lights up the room)

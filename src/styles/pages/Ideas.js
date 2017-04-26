@@ -24,6 +24,7 @@ const styles = {
     ideaItem: {   
         backgroundColor: styleConstants.white,
         padding: 16,
+        paddingTop: 8,
         borderRadius: 32,
         borderWidth: 1,
         borderColor: styleConstants.primary,

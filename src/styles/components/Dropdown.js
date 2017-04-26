@@ -25,6 +25,9 @@ const styles = {
         paddingVertical: 8,
         marginTop: 16
     },
+    scrollViewContent: {
+        paddingBottom: 48 
+    },
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 56,
