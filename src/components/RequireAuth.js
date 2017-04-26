@@ -44,15 +44,11 @@ export default function (WrappedComponent) {
         Actions.signIn();
       }
     } 
-    
-    /*
-this.props.authenticated && this.props.apiLoadSuccess ? 
-        <WrappedComponent {...this.props} />
-        :
-    */
 
     render() {
-      const wrapper = 
+      const wrapper = this.props.authenticated && this.props.apiLoadSuccess ? 
+        <WrappedComponent {...this.props} />
+        :
         <Splash />
 
       return wrapper;

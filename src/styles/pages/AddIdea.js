@@ -20,7 +20,16 @@ const styles = {
         position: 'absolute',
         top: 0,
         right: 0,
-        elevation: 4
+        backgroundColor: styleConstants.white,
+        borderRadius: 12,
+        elevation: 2,
+        shadowColor: "#000000",
+        shadowOpacity: 0.6,
+        shadowRadius: 2,
+        shadowOffset: {
+            height: 2,
+            width: 0
+        },
     },
     delete: {
         justifyContent: 'center',
