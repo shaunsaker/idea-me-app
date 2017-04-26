@@ -32,11 +32,12 @@ const styles = {
     },
     title: {
         fontSize: 24,
-        color: styleConstants.secondary,
+        color: styleConstants.primary,
         paddingHorizontal: 4
     },
     lightbulb: {
-        marginBottom: 4
+        marginBottom: 4,
+
     }
 };
 

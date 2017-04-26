@@ -55,7 +55,7 @@ export default function (WrappedComponent) {
         <View style={styles.container}>
           <Spinner
             size={64}
-            color={styleConstants.secondary} />
+            color={styleConstants.primary} />
         </View>
 
       return wrapper;

@@ -11,7 +11,7 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: styleConstants.secondary,
+        backgroundColor: styleConstants.primary,
         borderRadius: 32,
         elevation: 4,
         shadowColor: "#000000",
@@ -45,7 +45,7 @@ const styles = {
         backgroundColor: styleConstants.white,
     },
     dropdownItemsContainer: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     dropdownItem: {        
         flexDirection: 'row',
@@ -60,18 +60,18 @@ const styles = {
         alignItems: 'center',        
         borderBottomWidth: 1,
         borderStyle: 'solid',
-        borderColor: styleConstants.secondary,
+        borderColor: styleConstants.primary,
         backgroundColor: styleConstants.white,
         paddingVertical: 6,
     },
     dropdownButtonText: {
-        color: styleConstants.primary,
+        color: styleConstants.white,
         fontSize: 24,
         textAlign: 'center',
         width: 240
     },
     dropdownItemText: {
-        color: styleConstants.secondary,
+        color: styleConstants.primary,
         fontSize: 16,
         textAlign: 'center'
     },

@@ -38,7 +38,7 @@ export default class Header extends React.Component {
                 onPress={this.props.handlePress}
                 style={styles.leftIcon} >
                 <MaterialIcon
-                    color={styleConstants.secondary}
+                    color={styleConstants.primary}
                     size={36}
                     name='chevron-left' />
             </TouchableOpacity>;
@@ -49,7 +49,7 @@ export default class Header extends React.Component {
                 onPress={() => Actions.addIdea()}>
                 <MaterialIcon
                     name='add'
-                    color={styleConstants.secondary}
+                    color={styleConstants.primary}
                     size={36} />
             </TouchableOpacity>
             :
@@ -61,7 +61,7 @@ export default class Header extends React.Component {
                 onPress={() => Actions.addCategory()}>
                 <MaterialIcon
                     name='add'
-                    color={styleConstants.secondary}
+                    color={styleConstants.primary}
                     size={36} />
             </TouchableOpacity>
             :

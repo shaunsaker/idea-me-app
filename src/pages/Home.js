@@ -25,7 +25,7 @@ export default class Home extends React.Component {
           onPress={() => Actions.addIdea()}>
           <MaterialIcon
             name='add'
-            color={styleConstants.secondary}
+            color={styleConstants.white}
             size={48} />
         </TouchableOpacity>
         <TouchableOpacity
@@ -33,7 +33,7 @@ export default class Home extends React.Component {
           onPress={() => Actions.ideas()}>
           <EvilIcon
             name='eye'
-            color={styleConstants.secondary}
+            color={styleConstants.white}
             size={64} />
         </TouchableOpacity>
       </View >

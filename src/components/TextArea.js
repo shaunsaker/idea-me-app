@@ -1,6 +1,7 @@
 import React from "react";
 import {
     TextInput,
+    Animated
 } from "react-native";
 
 import styles from '../styles/components/TextArea';
@@ -12,8 +13,11 @@ export default class TextArea extends React.Component {
 
         this.changeInputHeight = this.changeInputHeight.bind(this);
 
+        this.initialInputHeight = 50.5;
+
         this.state = {
             height: 0,
+            animatedHeight: new Animated.Value(this.initialInputHeight)
         }
     }
 
@@ -27,23 +31,36 @@ export default class TextArea extends React.Component {
     }
 
     changeInputHeight(newHeight) {
-        this.setState({
-            height: newHeight
-        });
+        if (newHeight !== this.state.height) {
+            this.setState({
+                height: newHeight
+            });
+
+            Animated.timing(
+                this.state.animatedHeight,
+                {
+                    toValue: newHeight
+                }
+            ).start();
+        }
     }
 
     render() {
+        const inputHeight = Math.max(this.initialInputHeight, this.state.height);
+
         return (
-            <TextInput
-                value={this.props.value ? this.props.value : ''}
-                placeholder={this.props.placeholder ? this.props.placeholder : ''} 
-                placeholderTextColor={styleConstants.grey}
-                underlineColorAndroid={styleConstants.secondary}
-                style={[styles.textarea, {height: Math.max(50.5, this.state.height)}, styleConstants.robotoCondensed]}
-                onChangeText={(text) => this.props.handleChange(text)} 
-                editable={true}
-                multiline={true} 
-                onContentSizeChange={event => this.changeInputHeight(event.nativeEvent.contentSize.height)}/>
+            <Animated.View style={{height: this.state.animatedHeight}}>
+                <TextInput
+                    value={this.props.value ? this.props.value : ''}
+                    placeholder={this.props.placeholder ? this.props.placeholder : ''} 
+                    placeholderTextColor={styleConstants.grey}
+                    underlineColorAndroid={styleConstants.primary}
+                    style={[styles.textarea, {height: inputHeight}, styleConstants.robotoCondensed]}
+                    onChangeText={(text) => this.props.handleChange(text)}                  
+                    onChange={event => this.changeInputHeight(event.nativeEvent.contentSize.height)}
+                    editable={true}
+                    multiline={true} />
+            </Animated.View>
         );
     }
 }

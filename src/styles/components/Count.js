@@ -7,7 +7,7 @@ const styles = {
     },
     countText: {
         fontSize: 16,
-        color: styleConstants.secondary
+        color: styleConstants.primary
     },
 };
 

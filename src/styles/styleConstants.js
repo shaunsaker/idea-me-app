@@ -7,8 +7,8 @@ styleConstants.robotoCondensed = {
     fontFamily: 'RobotoCondensed-Regular'
 }
 
-styleConstants.primary = '#fafafa';
-styleConstants.secondary = '#333';
+styleConstants.primary = '#333';
+styleConstants.secondary = '#fdd835';
 styleConstants.red = '#d32f2f';
 styleConstants.white = '#fafafa';
 styleConstants.clearWhite = 'rgba(255, 255, 255, 0.5)';

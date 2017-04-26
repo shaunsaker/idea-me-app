@@ -42,7 +42,7 @@ export default class Spinner extends React.Component {
                 <Octicon
                     name='light-bulb'
                     size={this.props.size ? this.props.size : 32}
-                    color={this.props.color ? this.props.color : styleConstants.primary}
+                    color={this.props.color ? this.props.color : styleConstants.white}
                     style={styles.lightbulb} />
             </Animated.View>
         );

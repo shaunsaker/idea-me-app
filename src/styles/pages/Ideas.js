@@ -11,7 +11,7 @@ const styles = {
         alignItems: 'center',
         position: 'relative',
         paddingTop: 56,
-        backgroundColor: styleConstants.primary
+        backgroundColor: styleConstants.white
     },
     infoContainer: {
         marginBottom: 16
@@ -22,11 +22,11 @@ const styles = {
         paddingHorizontal: 14,
     },
     ideaItem: {   
-        backgroundColor: styleConstants.primary,
+        backgroundColor: styleConstants.white,
         padding: 16,
         borderRadius: 32,
         borderWidth: 1,
-        borderColor: styleConstants.secondary,
+        borderColor: styleConstants.primary,
         marginBottom: 16,
         marginHorizontal: 2
     },
@@ -35,7 +35,7 @@ const styles = {
     },  
     ideaTextTitle: {
         fontSize: 24,
-        color: styleConstants.secondary
+        color: styleConstants.primary
     },
     ideaTextDescription: {
         fontSize: 16,
@@ -52,7 +52,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: styleConstants.secondary,
+        borderColor: styleConstants.primary,
         borderRadius: 32,
         height: 50,
         marginRight: 8
@@ -61,14 +61,14 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: styleConstants.secondary,
+        borderColor: styleConstants.primary,
         borderRadius: 25,
         height: 50,
         width: 50,
     },
     text: {
         fontSize: 16,
-        color: styleConstants.secondary
+        color: styleConstants.primary
     },
     iconContainer: {
         justifyContent: 'center',
@@ -76,7 +76,7 @@ const styles = {
         width: 50,
         height: 50,
         borderRadius: 25,
-        backgroundColor: styleConstants.secondary,
+        backgroundColor: styleConstants.primary,
         marginLeft: 8,
         elevation: 4,
         shadowColor: "#000000",

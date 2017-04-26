@@ -6,7 +6,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        backgroundColor: styleConstants.primary
+        backgroundColor: styleConstants.white
     },
     button: {        
         justifyContent: 'center',
@@ -15,9 +15,7 @@ const styles = {
         width: 120,
         height: 120,
         borderRadius: 60,
-        borderWidth: 8,
-        borderColor: styleConstants.white,
-        backgroundColor: 'transparent',
+        backgroundColor: styleConstants.primary,
         elevation: 4,
         shadowColor: "#000000",
         shadowOpacity: 0.6,

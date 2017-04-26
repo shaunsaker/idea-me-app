@@ -7,7 +7,7 @@ const styles = {
         alignItems: 'center',
         position: 'relative',
         paddingTop: 56,
-        backgroundColor: styleConstants.primary
+        backgroundColor: styleConstants.white
     },
     categoriesContainer: {
         flex: 1,
@@ -33,7 +33,7 @@ const styles = {
     },
     categoryText: {
         fontSize: 16,
-        color: styleConstants.secondary,
+        color: styleConstants.primary,
     },
 };
 
