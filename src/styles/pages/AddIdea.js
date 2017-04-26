@@ -19,7 +19,8 @@ const styles = {
     deleteContainer: {
         position: 'absolute',
         top: 0,
-        right: 0
+        right: 0,
+        elevation: 4
     },
     delete: {
         justifyContent: 'center',

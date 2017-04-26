@@ -5,10 +5,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import styles from '../styles/components/RequireAuth';
-import styleConstants from '../styles/styleConstants';
-
-import Spinner from './Spinner';
+import Splash from './Splash';
 
 export default function (WrappedComponent) {
   class Auth extends React.Component {
@@ -47,16 +44,16 @@ export default function (WrappedComponent) {
         Actions.signIn();
       }
     } 
-
-    render() {
-      const wrapper = this.props.authenticated && this.props.apiLoadSuccess ? 
+    
+    /*
+this.props.authenticated && this.props.apiLoadSuccess ? 
         <WrappedComponent {...this.props} />
         :
-        <View style={styles.container}>
-          <Spinner
-            size={64}
-            color={styleConstants.primary} />
-        </View>
+    */
+
+    render() {
+      const wrapper = 
+        <Splash />
 
       return wrapper;
     }

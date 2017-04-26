@@ -10,6 +10,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
+        backgroundColor: styleConstants.primary
     },
 };
 

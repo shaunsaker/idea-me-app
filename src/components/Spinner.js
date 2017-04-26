@@ -1,7 +1,7 @@
 import React from "react";
 import {
     View,
-    Animated
+    Animated,
 } from "react-native";
 import Octicon from 'react-native-vector-icons/Octicons';
 
@@ -26,7 +26,7 @@ export default class Spinner extends React.Component {
             this.spinValue,
             {
                 toValue: 1,
-                duration: 1000
+                duration: 1000,
             }
         ).start(() => this.spin());
     }
@@ -38,12 +38,11 @@ export default class Spinner extends React.Component {
         });
 
         return (
-            <Animated.View style={{transform: [{rotate: spin}] }}>
+            <Animated.View style={[styles.lightbulb, {transform: [{rotate: spin}] }]}>
                 <Octicon
                     name='light-bulb'
                     size={this.props.size ? this.props.size : 32}
-                    color={this.props.color ? this.props.color : styleConstants.white}
-                    style={styles.lightbulb} />
+                    color={this.props.color ? this.props.color : styleConstants.white} />
             </Animated.View>
         );
     }
