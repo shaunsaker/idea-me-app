@@ -1,6 +1,7 @@
 TODO
 
 Test Dropdown ScrollView (20 categories)
+On Api Success, lightbulb turns yellow and backgroundColor turns white (lights up the room)
 
 ENHANCEMENTS
 

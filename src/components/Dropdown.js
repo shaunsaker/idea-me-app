@@ -107,7 +107,7 @@ export default class Dropdown extends React.Component {
                             :
                             null
                     }
-                    <ScrollView>
+                    <ScrollView style={{marginBottom: 42}}>
                         {
                             this.props.displayText ?
                                 null :

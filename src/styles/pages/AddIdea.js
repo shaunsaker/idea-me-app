@@ -10,7 +10,7 @@ const styles = {
         backgroundColor: styleConstants.white
     },
     inputArea: {
-        justifyContent: 'center',
+        flex: 1,
         alignItems: 'center',
     },
     textAreaContainer: {

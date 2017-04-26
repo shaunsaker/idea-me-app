@@ -43,6 +43,7 @@ const styles = {
             width: 0
         },
         backgroundColor: styleConstants.white,
+        maxHeight: 200,
     },
     dropdownItemsContainer: {
         alignItems: 'center',

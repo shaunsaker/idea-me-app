@@ -58,6 +58,7 @@ export default class TextArea extends React.Component {
                     style={[styles.textarea, {height: inputHeight}, styleConstants.robotoCondensed]}
                     onChangeText={(text) => this.props.handleChange(text)}                  
                     onChange={event => this.changeInputHeight(event.nativeEvent.contentSize.height)}
+                    onContentSizeChange={event => this.changeInputHeight(event.nativeEvent.contentSize.height)}
                     editable={true}
                     multiline={true} />
             </Animated.View>
