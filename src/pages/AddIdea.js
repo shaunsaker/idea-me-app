@@ -94,9 +94,6 @@ export class AddIdea extends React.Component {
   addNewIdea() {
 
     if (this.props.newIdeaTitle) {
-
-      // TODO: First we will save this data here, display loading then do the below when apiSaveSuccess received
-
       this.props.dispatch({
         type: 'ADD_NEW_IDEA'
       });

@@ -13,7 +13,7 @@ const styles = {
         position: 'absolute',
         width: windowWidth,
         minHeight: 84,
-        backgroundColor: styleConstants.black, 
+        backgroundColor: styleConstants.secondary, 
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
@@ -21,7 +21,7 @@ const styles = {
     errorMessageText: {
         fontSize: 18,
         textAlign: 'center',
-        color: styleConstants.white
+        color: styleConstants.primary
     },
     icon: {
         marginTop: 2,

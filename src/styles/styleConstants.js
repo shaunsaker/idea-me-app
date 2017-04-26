@@ -6,14 +6,11 @@ styleConstants.ranga = {
 styleConstants.robotoCondensed = {
     fontFamily: 'RobotoCondensed-Regular'
 }
-
-styleConstants.primary = '#333';
+// #39313c
+styleConstants.primary = '#393140';
 styleConstants.secondary = '#fdd835';
 styleConstants.red = '#d32f2f';
-styleConstants.white = '#fafafa';
-styleConstants.clearWhite = 'rgba(255, 255, 255, 0.5)';
-styleConstants.black = '#212121';
-styleConstants.clearBlack = 'rgba(33, 33, 33, 0.95)';
-styleConstants.grey = '#9E9E9E';
+styleConstants.white = '#f4f7fd';
+styleConstants.grey = '#808092';
 
 export default styleConstants;

@@ -1,8 +1,8 @@
 TODO
 
-Account for ideas and categories of the same title
-Autocapitalize Ideas and Description and Categories
-
-ENHANCEMENTS
-
+Autofocus inputs
+Any other flatList optimisations
 On Api Success, lightbulb turns yellow and backgroundColor turns white (lights up the room)
+No Action Button home screen - use footer nav instead (header only contains logo and back?)
+Input pushes up initially (view wrapper)
+Use localstorage (check firestack)

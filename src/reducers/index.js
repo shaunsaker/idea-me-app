@@ -2,6 +2,8 @@ let cloneObject = function (obj) {
     return JSON.parse(JSON.stringify(obj))
 }
 
+import utilities from '../utilities';
+
 import initialState from './initialState';
 
 export default function (state = initialState, action) {
@@ -120,8 +122,10 @@ export default function (state = initialState, action) {
         case 'ADD_NEW_IDEA':
             new_state = cloneObject(state);
             if (new_state.ideas) {
-                new_state.newIdea.title.trim();
-                new_state.newIdea.description.trim();
+                new_state.newIdea.title = utilities.firstCharToUppercase(new_state.newIdea.title.trim());
+                if (new_state.newIdea.description) {
+                    new_state.newIdea.description = utilities.firstCharToUppercase(new_state.newIdea.description.trim());
+                }
                 new_state.ideas.unshift(new_state.newIdea);
             }
             else {
@@ -148,7 +152,7 @@ export default function (state = initialState, action) {
 
         case 'ADD_NEW_CATEGORY':
             new_state = cloneObject(state);
-            new_state.categories.push(new_state.newCategory.value.trim());
+            new_state.categories.push(utilities.firstCharToUppercase(new_state.newCategory.value.trim()));
             new_state.newCategory = {
                 value: null,
             }
@@ -176,8 +180,10 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             for (let i = 0; i < new_state.ideas.length; i++) {
                 if (new_state.ideas[i].title === new_state.editIdea.id) {
-                    new_state.ideas[i].title = new_state.editIdea.title.trim();
-                    new_state.ideas[i].description = new_state.editIdea.description.trim();
+                    new_state.ideas[i].title = utilities.firstCharToUppercase(new_state.editIdea.title.trim());
+                    if (new_state.ideas[i].description) {
+                        new_state.ideas[i].description = utilities.firstCharToUppercase(new_state.editIdea.description.trim());
+                    }
                     new_state.ideas[i].categoryId = new_state.editIdea.categoryId;
                     new_state.ideas[i].priorityId = new_state.editIdea.priorityId;
                     break;
