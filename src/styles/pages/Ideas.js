@@ -77,6 +77,8 @@ const styles = {
         width: 50,
         height: 50,
         borderRadius: 25,
+        borderWidth: 1,
+        borderColor: styleConstants.white,
         backgroundColor: styleConstants.primary,
         marginLeft: 8,
         elevation: 4,

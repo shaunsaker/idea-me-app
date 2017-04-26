@@ -31,7 +31,8 @@ export default class Input extends React.Component {
                 style={[styles.input, styleConstants.robotoCondensed]}
                 onChangeText={(text) => this.props.handleChange(text)} 
                 secureTextEntry={this.props.type === 'password' ? true : false} 
-                keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'} />
+                keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'} 
+                autoFocus={this.props.autoFocus} />
         );
     }
 }

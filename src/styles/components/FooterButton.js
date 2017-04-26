@@ -4,8 +4,10 @@ const styles = {
     button: {        
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 16,
         borderRadius: 40,
+        borderWidth: 1,
+        marginVertical: 16,
+        borderColor: styleConstants.white,
         backgroundColor: styleConstants.primary,
         width: 280,
         elevation: 4,
@@ -22,7 +24,7 @@ const styles = {
         fontSize: 24,
         color: styleConstants.white,
         paddingHorizontal: 4,
-    }
+    },
 };
 
 export default styles;

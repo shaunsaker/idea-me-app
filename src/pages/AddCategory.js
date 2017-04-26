@@ -84,7 +84,8 @@ export class AddCategory extends React.Component {
             <Input
               placeholder="Enter new category..."
               value={this.props.newCategoryValue}
-              handleChange={this.updateNewCategoryValue} />
+              handleChange={this.updateNewCategoryValue} 
+              autoFocus={true} />
           </View>
           <FooterButton
             text='ADD CATEGORY'

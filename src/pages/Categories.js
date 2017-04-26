@@ -88,7 +88,7 @@ export class Categories extends React.Component {
           <Icon
             name='close'
             size={24}
-            color={styleConstants.grey} />
+            color={styleConstants.white} />
         </TouchableOpacity>
       </View>
     );

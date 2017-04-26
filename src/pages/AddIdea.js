@@ -144,7 +144,8 @@ export class AddIdea extends React.Component {
             <Input
               placeholder="What's the big idea?"
               value={this.props.newIdeaTitle}
-              handleChange={this.updateNewIdeaTitle} />
+              handleChange={this.updateNewIdeaTitle} 
+              autoFocus={true} />
             <View style={styles.textAreaContainer}>
               <TextArea
                 placeholder="Enter your description here..."

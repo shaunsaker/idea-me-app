@@ -15,6 +15,8 @@ const styles = {
         width: 120,
         height: 120,
         borderRadius: 60,
+        borderWidth: 1,
+        borderColor: styleConstants.white,
         backgroundColor: styleConstants.primary,
         elevation: 4,
         shadowColor: "#000000",

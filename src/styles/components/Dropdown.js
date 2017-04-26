@@ -13,6 +13,8 @@ const styles = {
         alignItems: 'center',
         backgroundColor: styleConstants.primary,
         borderRadius: 32,
+        borderWidth: 1,
+        borderColor: styleConstants.white,
         elevation: 4,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
