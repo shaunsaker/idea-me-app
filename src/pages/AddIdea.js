@@ -49,14 +49,14 @@ export class AddIdea extends React.Component {
   updateNewIdeaTitle(text) {
     this.props.dispatch({
       type: 'UPDATE_NEW_IDEA_TITLE',
-      value: text.trim()
+      value: text
     });
   }
 
   updateNewIdeaDescription(text) {
     this.props.dispatch({
       type: 'UPDATE_NEW_IDEA_DESCRIPTION',
-      value: text.trim()
+      value: text
     });
   }
 
