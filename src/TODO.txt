@@ -1,10 +1,8 @@
 TODO
 
-Any other flatList optimisations
-Apply new idea title incrementing to categories
-On Api Success, lightbulb turns yellow and backgroundColor turns white (lights up the room)
-No Action Button home screen - use footer nav instead (header only contains logo and back?)
 Input pushes up initially (view wrapper)
+Dropdown inner items border radius issues
 Use localstorage (check firestack)
 Keyboard avoiding
-Check SignIn styles and add autofocus
+No Action Button home screen - use footer nav instead (header only contains logo and back?)
+On Api Success, lightbulb turns yellow and backgroundColor turns white (lights up the room)

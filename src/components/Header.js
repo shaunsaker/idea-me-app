@@ -3,7 +3,7 @@ import {
     View,
     Text,
     TouchableOpacity,
-    Image
+    StatusBar
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -69,6 +69,7 @@ export default class Header extends React.Component {
 
         return (
             <View style={styles.headerContainer}>
+                <StatusBar backgroundColor={styleConstants.primary} />
                 {backButton}
                 <TouchableOpacity
                     style={styles.logoContainer}
