@@ -1,6 +1,7 @@
 TODO
 
-Use React-Native stylesheet instead of plain style objects
+Handle network error at signUpUser
+Spinner needs centering
 Any other flatList optimisations
 Apply new idea title incrementing to categories
 On Api Success, lightbulb turns yellow and backgroundColor turns white (lights up the room)

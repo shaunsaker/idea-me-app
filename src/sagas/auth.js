@@ -31,6 +31,14 @@ export function* signInUser(action) {
             uid: signUpUserResponse.message.uid
         });
     }
+
+    // Handle network errors, if any
+    else if (signUpUserResponse.message.errorMessage.indexOf('A network') > -1) {
+        yield put({
+            type: 'USER_ERROR',
+            message: 'A network error has occured.'
+        });
+    }
     else {
         const signInUserResponse = yield call(Auth.signInUser, action);
         console.log('signInUserResponse', signInUserResponse);

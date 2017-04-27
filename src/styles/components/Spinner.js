@@ -3,7 +3,7 @@ import styleConstants from '../styleConstants';
 
 const styles = StyleSheet.create({
     lightbulb: {
-        paddingLeft: 13
+        paddingLeft: 7,
     }
 });
 
