@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: styleConstants.black,
         height: 50,
-        paddingRight: 24,
+        paddingRight: 28,
     }
 });
 

@@ -13,7 +13,7 @@ export default class TextArea extends React.Component {
 
         this.changeInputHeight = this.changeInputHeight.bind(this);
 
-        this.initialInputHeight = 50.5;
+        this.initialInputHeight = 41.5;
 
         this.state = {
             height: 0,
@@ -31,7 +31,7 @@ export default class TextArea extends React.Component {
     }
 
     changeInputHeight(newHeight) {
-        if (newHeight !== this.state.height) {
+        if (newHeight !== this.state.height && newHeight >= this.initialInputHeight) {
             this.setState({
                 height: newHeight
             });
@@ -46,8 +46,6 @@ export default class TextArea extends React.Component {
     }
 
     render() {
-        const inputHeight = Math.max(this.initialInputHeight, this.state.height);
-
         return (
             <Animated.View style={{height: this.state.animatedHeight}}>
                 <TextInput
@@ -55,7 +53,7 @@ export default class TextArea extends React.Component {
                     placeholder={this.props.placeholder ? this.props.placeholder : ''} 
                     placeholderTextColor={styleConstants.grey}
                     underlineColorAndroid={styleConstants.grey}
-                    style={[styles.textarea, {height: inputHeight}, styleConstants.robotoCondensed]}
+                    style={[styles.textarea, {height: Math.max(this.initialInputHeight, this.state.height)}, styleConstants.robotoCondensed]}
                     onChangeText={(text) => this.props.handleChange(text)}                  
                     onChange={event => this.changeInputHeight(event.nativeEvent.contentSize.height)}
                     onContentSizeChange={event => this.changeInputHeight(event.nativeEvent.contentSize.height)}

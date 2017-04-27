@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
         width: 280,
         fontSize: 16,
         color: styleConstants.primary,
+        height: 41.5,
     }
 });
 

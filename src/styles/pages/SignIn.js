@@ -3,7 +3,7 @@ import styleConstants from '../styleConstants';
 
 const styles = StyleSheet.create({
     container: {        
-        height: '100%',
+        flex: 1,        
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'relative',
