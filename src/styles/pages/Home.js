@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
-const styles = {
+const styles = StyleSheet.create({
     container: {
         flex: 1,        
         justifyContent: 'center',
@@ -27,6 +28,6 @@ const styles = {
             width: 0
         },
     }
-};
+});
 
 export default styles;

@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
-const styles = {
+const styles = StyleSheet.create({
     container: {
         flex: 1,        
         justifyContent: 'space-between',    
@@ -40,6 +41,6 @@ const styles = {
         borderWidth: 1,
         borderColor: styleConstants.grey,
     }
-};
+});
 
 export default styles;

@@ -1,8 +1,8 @@
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
-const styles = {
-    container: {
-        
+const styles = StyleSheet.create({
+    container: {        
         height: '100%',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -10,13 +10,10 @@ const styles = {
         paddingTop: 56,
         backgroundColor: styleConstants.white
     },
-    passwordContainer: {
-
-    },
     passwordText: {
-        color: styleConstants.clearWhite,
+        color: styleConstants.grey,
         fontSize: 16
     }
-};
+});
 
 export default styles;

@@ -117,14 +117,15 @@ export class SignIn extends React.Component {
                             placeholder="Email..."
                             value={this.props.userEmail}
                             handleChange={this.updateUserEmail} 
-                            keyboardType='email-address' />
+                            keyboardType='email-address' 
+                            autoFocus={true} />
                         <View style={styles.passwordContainer}>
                             <Input
                                 placeholder="Password..."
                                 value={this.props.userPassword}
                                 handleChange={this.updateUserPassword}
                                 type='password' />
-                            <Text style={[styles.passwordText, styleConstants.robotoCondensed ]}>*Password at least 6 characters long</Text>
+                            <Text style={[styles.passwordText, styleConstants.robotoCondensed ]}>* Password at least 6 characters long</Text>
                         </View>
                     </View>
                     <FooterButton

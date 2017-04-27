@@ -1,9 +1,10 @@
 import { Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
 const window = Dimensions.get('window');
 
-const styles = {
+const styles = StyleSheet.create({
     container: {
         width: window.width,
         height: window.height,
@@ -12,6 +13,6 @@ const styles = {
         position: 'relative',
         backgroundColor: styleConstants.primary
     },
-};
+});
 
 export default styles;

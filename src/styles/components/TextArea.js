@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
-const styles = {
+const styles = StyleSheet.create({
     textarea: {
         width: 280,
         fontSize: 16,
@@ -8,6 +9,6 @@ const styles = {
         height: 50,
         paddingRight: 24,
     }
-};
+});
 
 export default styles;

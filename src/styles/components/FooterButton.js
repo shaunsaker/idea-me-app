@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
-const styles = {
+const styles = StyleSheet.create({
     button: {        
         justifyContent: 'center',
         alignItems: 'center',
@@ -25,6 +26,6 @@ const styles = {
         color: styleConstants.white,
         paddingHorizontal: 4,
     },
-};
+});
 
 export default styles;

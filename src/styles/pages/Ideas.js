@@ -1,9 +1,10 @@
 import { Dimensions } from "react-native";
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
 const windowWidth = Dimensions.get('window').width;
 
-const styles = {
+const styles = StyleSheet.create({
     container: {
         flex: 1,        
         flexDirection: 'column',
@@ -30,9 +31,6 @@ const styles = {
         borderColor: styleConstants.grey,
         marginBottom: 16,
         marginHorizontal: 2
-    },
-    textContainer: {        
-
     },  
     ideaTextTitle: {
         fontSize: 24,
@@ -90,9 +88,6 @@ const styles = {
             width: 0
         },
     },
-    icon: {
-
-    }
-};
+});
 
 export default styles;

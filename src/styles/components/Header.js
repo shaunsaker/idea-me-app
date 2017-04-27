@@ -1,9 +1,10 @@
 import { Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
 const windowWidth = Dimensions.get('window').width;
 
-const styles = {
+const styles = StyleSheet.create({
     headerContainer: {        
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -37,8 +38,7 @@ const styles = {
     },
     lightbulb: {
         marginBottom: 4,
-
     }
-};
+});
 
 export default styles;

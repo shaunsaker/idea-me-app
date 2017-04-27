@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
-const styles = {
+const styles = StyleSheet.create({
     countContainer: {        
         flexDirection: 'row',
         justifyContent: 'center',
@@ -9,6 +10,6 @@ const styles = {
         fontSize: 16,
         color: styleConstants.primary
     },
-};
+});
 
 export default styles;

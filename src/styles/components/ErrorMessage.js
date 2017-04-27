@@ -1,9 +1,10 @@
 import { Dimensions } from "react-native";
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
 const windowWidth = Dimensions.get('window').width;
 
-const styles = {
+const styles = StyleSheet.create({
     errorMessageWrapper: {        
         flexDirection: 'row',
         justifyContent: 'center',
@@ -27,6 +28,6 @@ const styles = {
         marginTop: 2,
         marginRight: 8
     }
-};
+});
 
 export default styles;

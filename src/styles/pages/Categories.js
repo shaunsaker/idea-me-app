@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native';
 import styleConstants from '../styleConstants'; 
 
-const styles = {
+const styles = StyleSheet.create({
     container: {
         flex: 1,        
         justifyContent: 'center',
@@ -28,9 +29,6 @@ const styles = {
         borderColor: styleConstants.grey,
         backgroundColor: styleConstants.white,
     },
-    categoryTextContainer: {
-
-    },
     categoryText: {
         fontSize: 16,
         color: styleConstants.primary,
@@ -54,6 +52,6 @@ const styles = {
             width: 0
         },
     }
-};
+});
 
 export default styles;
