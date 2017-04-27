@@ -1,6 +1,5 @@
 TODO
 
-Dropdown inner items border radius issues / Scrollview style issues
 Use localstorage (check firestack)
 Keyboard avoiding
 No Action Button home screen - use footer nav instead (header only contains logo and back?)

@@ -107,24 +107,26 @@ export default class Dropdown extends React.Component {
                             :
                             null
                     }
-                    <ScrollView contentContainerStyle={styles.scrollViewContent}>
-                        {
-                            this.props.displayText ?
-                                null :
-                                <TouchableOpacity
-                                    style={styles.dropdownItem}
-                                    onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
-                                    <Text
-                                        style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
-                                        All
-                                    </Text>
-                                </TouchableOpacity>
-                        }
+                    <ScrollView>
+                        <View style={styles.dropdownItemsContainer}>
+                            {
+                                this.props.displayText ?
+                                    null :
+                                    <TouchableOpacity
+                                        style={styles.dropdownItem}
+                                        onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
+                                        <Text
+                                            style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                                            All
+                                        </Text>
+                                    </TouchableOpacity>
+                            }
 
-                        <FlatList
-                            keyExtractor={item => 'dropdown' + item}
-                            data={this.props.values}
-                            renderItem={this.renderItem} />
+                            <FlatList
+                                keyExtractor={item => 'dropdown' + item}
+                                data={this.props.values}
+                                renderItem={this.renderItem} />
+                        </View>
                     </ScrollView>
                 </View>
             </Animated.View>;

@@ -28,9 +28,6 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         marginTop: 16
     },
-    scrollViewContent: {
-        paddingBottom: 48 
-    },
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 56,
@@ -52,7 +49,9 @@ const styles = StyleSheet.create({
         maxHeight: 200,
     },
     dropdownItemsContainer: {
+        flex: 1,
         alignItems: 'center',
+        paddingBottom: 16
     },
     dropdownItem: {        
         flexDirection: 'row',
