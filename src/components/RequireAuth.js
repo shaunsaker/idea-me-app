@@ -26,14 +26,18 @@ export default function (WrappedComponent) {
         });
       }
 
+      // When a user is signed in and reloads app
       if (this.props.authenticated && !this.props.apiLoadSuccess) {
         this.props.dispatch({
-          type: 'loadUserData'
+          type: 'loadUserData',
+          uid: this.props.uid
         });
       }
     }
 
     componentDidUpdate() {
+
+      // When a user signs in
       if (this.props.authenticated && !this.props.apiLoadSuccess) {
         this.props.dispatch({
           type: 'loadUserData',

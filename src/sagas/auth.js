@@ -26,9 +26,11 @@ export function* signInUser(action) {
     console.log('signUpUserResponse', signUpUserResponse);
 
     if (signUpUserResponse.authenticated) {
+        const uid = signUpUserResponse.message.uid || signUpUserResponse.message.user.uid;
+
         yield put({
             type: 'SIGN_IN_USER',
-            uid: signUpUserResponse.message.uid
+            uid: uid
         });
     }
 
@@ -44,9 +46,11 @@ export function* signInUser(action) {
         console.log('signInUserResponse', signInUserResponse);
 
         if (signInUserResponse.authenticated) {
+            const uid = signInUserResponse.message.uid || signInUserResponse.message.user.uid;
+
             yield put({
                 type: 'SIGN_IN_USER',
-                uid: signInUserResponse.message.uid
+                uid: uid
             });
         }
         else {

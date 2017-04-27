@@ -11,7 +11,7 @@ export default class ApiData {
 
         // If we did not receive the uid via props, get the uid from firestack
         if (!uid) {
-            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
+            uid = firestack.auth.getCurrentUser().user.uid; // BUG: This does not work after first time sign in
         }
         
         const userData = action.ideas;
