@@ -17,7 +17,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Count from '../components/Count';
-import FooterButton from "../components/FooterButton";
+import Loader from "../components/Loader";
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -223,10 +223,15 @@ export class Ideas extends React.Component {
         </ScrollView>;
     }
 
+    const loader = !this.state.loading ?
+      <Loader />
+      :
+      null;
+
     return (
       <View style={styles.container}>
         <Header
-          handlePress={this.navigateBack}
+          allowBack={false}
           addIdea={true} />
         <View style={styles.infoContainer}>
           <Count
@@ -241,11 +246,8 @@ export class Ideas extends React.Component {
         </View>
 
         {ideas}
+        {loader}
 
-        <FooterButton
-          text='SAVE IDEAS'
-          handlePress={this.saveUserIdeas}
-          loading={this.state.loading} />
       </View >
     );
   }
