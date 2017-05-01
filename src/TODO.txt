@@ -1,6 +1,12 @@
 TODO
 
-Use localstorage (check firestack)
-Keyboard avoiding
-No Action Button home screen - use footer nav instead (header only contains logo and back?)
-On Api Success, lightbulb turns yellow and backgroundColor turns white (lights up the room)
+Remove home page
+No Action Button home screen - use footer nav instead (header only contains logo and back)
+Ideas horizontal scroll
+User scroll hinting
+Status bar in app.js. Widgets in app.js (header, error message + footer nav).
+Auto save categories and ideas. Display error if necessary. Thin line loader.
+Animate glow on spinner and remove rotation.
+Keyboard avoiding (Jono fixes)
+Inputs need more padding
+Create material inputs

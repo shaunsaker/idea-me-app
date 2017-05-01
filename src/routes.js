@@ -2,7 +2,6 @@ import React from 'react';
 import { Actions, ActionConst, Scene } from 'react-native-router-flux';
 
 // Pages
-import Home from './pages/Home';
 import Ideas from './pages/Ideas';
 import AddIdea from './pages/AddIdea';
 import EditIdea from './pages/EditIdea';
@@ -13,8 +12,7 @@ import RequireAuth from './components/RequireAuth';
 
 const Scenes = Actions.create(
 	<Scene key='root' hideNavBar={true}>
-		<Scene key='home' title='Home' component={RequireAuth(Home)} initial={true} />
-		<Scene key='ideas' title='Ideas' component={Ideas} />
+		<Scene key='ideas' title='Ideas' component={RequireAuth(Ideas)} initial={true} />
         <Scene key='addIdea' title='Add Idea' component={AddIdea} />
         <Scene key='editIdea' title='Edit Idea' component={EditIdea} />
         <Scene key='categories' title='Categories' component={Categories} />
