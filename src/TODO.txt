@@ -1,8 +1,7 @@
 TODO
 
-Keyboard avoiding (Jono fixes)
-Inputs need more padding
 Guest Login
+iOS testing
 
 V2
 

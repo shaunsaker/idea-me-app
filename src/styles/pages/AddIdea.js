@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.white
     },
     inputArea: {
+        flex: 1,
         alignItems: 'center',
     },
     textAreaContainer: {

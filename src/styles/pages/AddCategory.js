@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
         paddingTop: 56,
         backgroundColor: styleConstants.white
     },
-    inputArea: {        
+    inputArea: {     
+        flex: 1,   
         justifyContent: 'center',
         alignItems: 'center'
     }
