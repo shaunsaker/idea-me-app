@@ -39,20 +39,22 @@ export default function (WrappedComponent) {
 
       // When a user signs in
       if (this.props.authenticated && !this.props.apiLoadSuccess) {
-        this.props.dispatch({
-          type: 'loadUserData',
-          uid: this.props.uid
-        });
+        setTimeout(() => {
+          this.props.dispatch({
+            type: 'loadUserData',
+            uid: this.props.uid
+          });
+        }, 1500);
       }
       else if (this.props.redirectUserToSignIn) {
         Actions.signIn();
       }
-    } 
+    }
 
     render() {
       const wrapper = this.props.authenticated && this.props.apiLoadSuccess ? 
         <WrappedComponent {...this.props} />
-        :
+        : 
         <Splash />
 
       return wrapper;

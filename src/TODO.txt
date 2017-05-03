@@ -1,12 +1,14 @@
 TODO
 
-Remove home page
-No Action Button home screen - use footer nav instead (header only contains logo and back)
-Ideas horizontal scroll
-User scroll hinting
-Status bar in app.js. Widgets in app.js (header, error message + footer nav).
-Auto save categories and ideas. Display error if necessary. Thin line loader.
 Animate glow on spinner and remove rotation.
 Keyboard avoiding (Jono fixes)
 Inputs need more padding
+Guest Login
+
+V2
+
+Auto save categories and ideas. Display error if necessary. Thin line loader.
+Ideas horizontal scroll
+User scroll hinting
 Create material inputs
+Indicate slow connection on Splash if slow load
