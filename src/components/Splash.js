@@ -6,13 +6,13 @@ import {
 import styles from '../styles/components/Splash';
 import styleConstants from '../styles/styleConstants';
 
-import GlowLoader from './GlowLoader';
+import Spinner from './Spinner';
 
 export default class Auth extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <GlowLoader
+                <Spinner
                     size={64} />
             </View>
         );

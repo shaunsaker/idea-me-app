@@ -1,6 +1,5 @@
 TODO
 
-Animate glow on spinner and remove rotation.
 Keyboard avoiding (Jono fixes)
 Inputs need more padding
 Guest Login

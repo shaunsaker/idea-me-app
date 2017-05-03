@@ -68,11 +68,13 @@ export class Categories extends React.Component {
 
   componentDidUpdate() {
     if (this.props.errorMessage || this.props.apiSaveSuccess) {
-      if (this.state.loading) {
-        this.setState({
-          loading: false
-        });
-      }
+      setTimeout(() => {
+        if (this.state.loading) {
+          this.setState({
+            loading: false
+          });
+        }
+      }, 1500);
     }
   }
 

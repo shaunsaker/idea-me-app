@@ -1,6 +1,7 @@
 import React from "react";
 import {
     View,
+    Text,
     Animated,
 } from "react-native";
 import Octicon from 'react-native-vector-icons/Octicons';
@@ -11,39 +12,47 @@ import styleConstants from '../styles/styleConstants';
 export default class Spinner extends React.Component {
     constructor(props) {
         super(props);
-        
-        this.spinValue = new Animated.Value(0);
+
+        this.animatedValue = new Animated.Value(0);
     }
 
     componentDidMount() {
-        this.spin();
+        this.glow();
     }
 
-    spin() {
-        this.spinValue.setValue(0);
-
-        Animated.timing(
-            this.spinValue,
-            {
-                toValue: 1,
-                duration: 1000,
-            }
-        ).start(() => this.spin());
+    glow() {
+        Animated.sequence([
+            Animated.timing(
+                this.animatedValue,
+                {
+                    toValue: 100,
+                    duration: 1500,
+                }
+            ),
+            Animated.timing(
+                this.animatedValue,
+                {
+                    toValue: 0,
+                    duration: 1500,
+                }
+            )
+        ]).start(() => this.glow());
     }
 
     render() {
-        const spin = this.spinValue.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['0deg', '360deg']
+        const animatedColor = this.animatedValue.interpolate({
+            inputRange: [0, 100],
+            outputRange: ['rgba(255, 255, 255, 1)', 'rgba(253, 216, 53, 1)']
         });
 
+        const animatedSize = null;
+
         return (
-            <Animated.View style={[styles.lightbulb, {transform: [{rotate: spin}] }]}>
+            <Animated.Text style={{ color: animatedColor }}>
                 <Octicon
                     name='light-bulb'
-                    size={this.props.size ? this.props.size : 32}
-                    color={this.props.color ? this.props.color : styleConstants.white} />
-            </Animated.View>
+                    size={this.props.size ? this.props.size : 32} />
+            </Animated.Text>
         );
     }
 }

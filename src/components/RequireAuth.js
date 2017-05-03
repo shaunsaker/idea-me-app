@@ -50,11 +50,16 @@ export default function (WrappedComponent) {
         Actions.signIn();
       }
     }
+    /*
 
-    render() {
-      const wrapper = this.props.authenticated && this.props.apiLoadSuccess ? 
+    this.props.authenticated && this.props.apiLoadSuccess ? 
         <WrappedComponent {...this.props} />
         : 
+
+        */
+
+    render() {
+      const wrapper = 
         <Splash />
 
       return wrapper;
