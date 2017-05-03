@@ -111,7 +111,8 @@ export class SignIn extends React.Component {
             <View style={{ height: '100%' }}>
                 <View style={styles.container}>
                     <Header
-                        allowBack={false} />
+                        allowBack={false} 
+                        blockHome={true} />
                     <View style={styles.inputContainer}>
                         <Input
                             placeholder="Email..."

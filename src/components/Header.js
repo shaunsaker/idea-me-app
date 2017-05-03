@@ -73,7 +73,7 @@ export default class Header extends React.Component {
                 {backButton}
                 <TouchableOpacity
                     style={styles.logoContainer}
-                    onPress={this.navigateIdeas}>
+                    onPress={this.props.blockHome ? null : this.navigateIdeas}>
                     <Octicon
                         name='light-bulb'
                         size={24}

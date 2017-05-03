@@ -3,6 +3,7 @@ import {
     View,
     Text,
     Animated,
+    Easing
 } from "react-native";
 import Octicon from 'react-native-vector-icons/Octicons';
 
@@ -33,7 +34,7 @@ export default class Spinner extends React.Component {
                 this.animatedValue,
                 {
                     toValue: 0,
-                    duration: 1500,
+                    duration: 750,
                 }
             )
         ]).start(() => this.glow());
@@ -45,14 +46,19 @@ export default class Spinner extends React.Component {
             outputRange: ['rgba(255, 255, 255, 1)', 'rgba(253, 216, 53, 1)']
         });
 
-        const animatedSize = null;
+        const animatedSize = this.animatedValue.interpolate({
+            inputRange: [0, 100],
+            outputRange: [1, 1.1]
+        });
 
         return (
-            <Animated.Text style={{ color: animatedColor }}>
-                <Octicon
-                    name='light-bulb'
-                    size={this.props.size ? this.props.size : 32} />
-            </Animated.Text>
+            <Animated.View style={{transform: [{scale: animatedSize}]}}>
+                <Animated.Text style={{ color: animatedColor }}>
+                    <Octicon
+                        name='light-bulb'
+                        size={this.props.size ? this.props.size : 32} />
+                </Animated.Text>
+            </Animated.View>
         );
     }
 }
