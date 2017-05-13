@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     },
 });
 
-import Spinner from './Spinner';
+import GlowLoader from './GlowLoader';
 
 export default class Auth extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Spinner
+                <GlowLoader
                     size={64} />
             </View>
         );

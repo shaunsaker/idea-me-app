@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class Spinner extends React.Component {
+export default class GlowLoader extends React.Component {
     constructor(props) {
         super(props);
 

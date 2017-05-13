@@ -7,7 +7,7 @@ import {
 
 import styleConstants from '../styles/styleConstants';
 
-import Spinner from './Spinner';
+import GlowLoader from './GlowLoader';
 
 const styles = StyleSheet.create({
     button: {        
@@ -51,7 +51,7 @@ export default class FooterButton extends React.Component {
 
     render() {
         const content = this.props.loading ?
-            <Spinner />
+            <GlowLoader />
             :
             <Text style={[ styles.buttonText, styleConstants.ranga ]}>{this.props.text}</Text>;
 
