@@ -1,7 +1,8 @@
 import React from "react";
 import {
     View,
-    Text
+    Text,
+    StatusBar,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -52,7 +53,7 @@ export class SignIn extends React.Component {
     signIn() {
         if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
             this.setState({
-                loading: true 
+                loading: true
             });
 
             this.props.dispatch({
@@ -70,7 +71,7 @@ export class SignIn extends React.Component {
                 this.props.dispatch({
                     type: 'RESET_USER_ERROR'
                 });
-            }, 2500);  
+            }, 2500);
         }
         else {
             const emptyInput = this.props.userEmail ? 'password' : 'email';
@@ -107,29 +108,28 @@ export class SignIn extends React.Component {
             null;
 
         return (
-            <View style={{ height: '100%' }}>
-                <View style={styles.container}>
-                    <View style={styles.inputContainer}>
+            <View style={styles.container}>
+                <StatusBar backgroundColor={styleConstants.primary} />
+                <View style={styles.inputContainer}>
+                    <Input
+                        placeholder="Email..."
+                        value={this.props.userEmail}
+                        handleChange={this.updateUserEmail}
+                        keyboardType='email-address'
+                        autoFocus={true} />
+                    <View style={styles.passwordContainer}>
                         <Input
-                            placeholder="Email..."
-                            value={this.props.userEmail}
-                            handleChange={this.updateUserEmail} 
-                            keyboardType='email-address' 
-                            autoFocus={true} />
-                        <View style={styles.passwordContainer}>
-                            <Input
-                                placeholder="Password..."
-                                value={this.props.userPassword}
-                                handleChange={this.updateUserPassword}
-                                type='password' />
-                            <Text style={[styles.passwordText, styleConstants.robotoCondensed ]}>* Password at least 6 characters long</Text>
-                        </View>
+                            placeholder="Password..."
+                            value={this.props.userPassword}
+                            handleChange={this.updateUserPassword}
+                            type='password' />
+                        <Text style={[styles.passwordText, styleConstants.robotoCondensed]}>* Password at least 6 characters long</Text>
                     </View>
-                    <FooterButton
-                        text='SIGN IN'
-                        loading={this.state.loading}
-                        handlePress={this.signIn} />
                 </View>
+                <FooterButton
+                    text='SIGN IN'
+                    loading={this.state.loading}
+                    handlePress={this.signIn} />
                 {errorMessage}
             </View>
         );

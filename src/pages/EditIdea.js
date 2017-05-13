@@ -1,7 +1,8 @@
 import React from "react";
 import {
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar,
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
@@ -152,6 +153,7 @@ export class EditIdea extends React.Component {
         return (
             <View
                 style={styles.container}>
+                <StatusBar backgroundColor={styleConstants.primary} />
                 <View style={styles.inputArea}>
                     <Input
                         value={this.props.editIdeaTitle ? this.props.editIdeaTitle : this.props.initialIdeaTitle}

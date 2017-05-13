@@ -1,6 +1,5 @@
 TODO
 
-Ideas listview does not rerender when a new category is selected => force render
 Use tabbar (react-native-router-flux)
 Use default navbar (react-native-router-flux)
 Ideas Menu

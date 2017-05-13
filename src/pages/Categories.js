@@ -3,7 +3,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  StatusBar,
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
@@ -105,6 +106,7 @@ export class Categories extends React.Component {
     return (
       <View
         style={styles.container}>
+        <StatusBar backgroundColor={styleConstants.primary} />
         <View style={styles.categoriesContainer}>
           {categories}
         </View>

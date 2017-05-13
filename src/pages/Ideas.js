@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
+  StatusBar
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -208,6 +209,7 @@ export class Ideas extends React.Component {
 
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor={styleConstants.primary} />
         <View style={styles.infoContainer}>
           <Count
             count={counter}

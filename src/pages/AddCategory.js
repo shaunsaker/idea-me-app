@@ -1,6 +1,7 @@
 import React from "react";
 import {
-  View
+  View,
+  StatusBar,
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
@@ -74,22 +75,21 @@ export class AddCategory extends React.Component {
       null;
 
     return (
-      <View style={{ height: '100%' }}>
-        <View
-          style={styles.container}>
-          <View style={styles.inputArea}>
-            <Input
-              placeholder="Enter new category..."
-              value={this.props.newCategoryValue}
-              handleChange={this.updateNewCategoryValue} 
-              autoFocus={true} />
-          </View>
-          <FooterButton
-            text='ADD CATEGORY'
-            handlePress={this.addNewCategory} />
-        </View >
-        { errorMessage }
-      </View>
+      <View
+        style={styles.container}>
+        <StatusBar backgroundColor={styleConstants.primary} />
+        <View style={styles.inputArea}>
+          <Input
+            placeholder="Enter new category..."
+            value={this.props.newCategoryValue}
+            handleChange={this.updateNewCategoryValue}
+            autoFocus={true} />
+        </View>
+        <FooterButton
+          text='ADD CATEGORY'
+          handlePress={this.addNewCategory} />
+        {errorMessage}
+      </View >
     );
   }
 }

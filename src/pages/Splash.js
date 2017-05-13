@@ -3,6 +3,7 @@ import {
     View,
     StyleSheet,
     Dimensions,
+    StatusBar,
 } from "react-native";
 
 import styleConstants from '../styles/styleConstants';
@@ -26,6 +27,7 @@ export default class Splash extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar backgroundColor={styleConstants.primary} />
                 <GlowLoader
                     size={64} />
             </View>

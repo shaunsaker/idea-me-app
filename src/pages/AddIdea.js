@@ -1,7 +1,8 @@
 import React from "react";
 import {
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar,
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
@@ -134,41 +135,40 @@ export class AddIdea extends React.Component {
       null;
 
     return (
-      <View style={{ height: '100%' }}>
-        <View
-          style={styles.container}>
-          <View style={styles.inputArea}>
-            <Input
-              placeholder="What's the big idea?"
-              value={this.props.newIdeaTitle}
-              handleChange={this.updateNewIdeaTitle} 
-              autoFocus={true} />
-            <View style={styles.textAreaContainer}>
-              <TextArea
-                placeholder="Enter your description here..."
-                value={this.props.newIdeaDescription}
-                handleChange={this.updateNewIdeaDescription} />
-              {deleteIcon}
-            </View>
-            <Dropdown
-              displayText='Select a Category'
-              value={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
-              handleSelect={this.selectCategory}
-              values={this.props.categories}
-              editItem={true}
-              pushContent={true} />
-            <Dropdown
-              displayText='Select a Priority'
-              value={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
-              handleSelect={this.selectPriority}
-              values={this.props.priorities}
-              pushContent={true}
-              height={105} />
+      <View
+        style={styles.container}>
+        <StatusBar backgroundColor={styleConstants.primary} />
+        <View style={styles.inputArea}>
+          <Input
+            placeholder="What's the big idea?"
+            value={this.props.newIdeaTitle}
+            handleChange={this.updateNewIdeaTitle}
+            autoFocus={true} />
+          <View style={styles.textAreaContainer}>
+            <TextArea
+              placeholder="Enter your description here..."
+              value={this.props.newIdeaDescription}
+              handleChange={this.updateNewIdeaDescription} />
+            {deleteIcon}
           </View>
-          <FooterButton
-            text='ADD IDEA'
-            handlePress={this.addNewIdea} />
-        </View >
+          <Dropdown
+            displayText='Select a Category'
+            value={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
+            handleSelect={this.selectCategory}
+            values={this.props.categories}
+            editItem={true}
+            pushContent={true} />
+          <Dropdown
+            displayText='Select a Priority'
+            value={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
+            handleSelect={this.selectPriority}
+            values={this.props.priorities}
+            pushContent={true}
+            height={105} />
+        </View>
+        <FooterButton
+          text='ADD IDEA'
+          handlePress={this.addNewIdea} />
         {errorMessage}
       </View >
     );
