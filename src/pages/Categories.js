@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/pages/Categories';
 import styleConstants from '../styles/styleConstants';
 
-import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 
@@ -106,9 +105,6 @@ export class Categories extends React.Component {
     return (
       <View
         style={styles.container}>
-        <Header
-          handlePress={this.navigateBack}
-          addCategory={true} />
         <View style={styles.categoriesContainer}>
           {categories}
         </View>

@@ -6,7 +6,6 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 import Growl from '../components/Growl';
@@ -110,9 +109,6 @@ export class SignIn extends React.Component {
         return (
             <View style={{ height: '100%' }}>
                 <View style={styles.container}>
-                    <Header
-                        allowBack={false} 
-                        blockHome={true} />
                     <View style={styles.inputContainer}>
                         <Input
                             placeholder="Email..."

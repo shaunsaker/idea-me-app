@@ -8,7 +8,6 @@ import { Actions } from "react-native-router-flux";
 import styles from '../styles/pages/AddCategory';
 import styleConstants from '../styles/styleConstants';
 
-import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 import Growl from '../components/Growl';
@@ -78,8 +77,6 @@ export class AddCategory extends React.Component {
       <View style={{ height: '100%' }}>
         <View
           style={styles.container}>
-          <Header
-            handlePress={this.navigateBack} />
           <View style={styles.inputArea}>
             <Input
               placeholder="Enter new category..."

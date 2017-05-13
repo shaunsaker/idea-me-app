@@ -8,6 +8,7 @@ styleConstants.robotoCondensed = {
 }
 // #39313c
 styleConstants.primary = '#393140';
+styleConstants.transPrimary = 'rgba(57, 49, 64, 0.15)'
 styleConstants.secondary = '#fdd835';
 styleConstants.danger = '#d32f2f';
 styleConstants.success = '#00ff00';

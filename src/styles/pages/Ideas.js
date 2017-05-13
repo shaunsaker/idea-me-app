@@ -11,11 +11,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         position: 'relative',
-        paddingTop: 56,
-        backgroundColor: styleConstants.white
+        backgroundColor: styleConstants.white,
+        marginTop: 56,
+        paddingBottom: 56,
+        marginBottom: -6
     },
     infoContainer: {
-        marginBottom: 16
+        marginVertical: 16
     },
     ideasContainer: {
         flex: 1,

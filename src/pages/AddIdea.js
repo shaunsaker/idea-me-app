@@ -10,7 +10,6 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import styles from '../styles/pages/AddIdea';
 import styleConstants from '../styles/styleConstants';
 
-import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Dropdown from '../components/Dropdown';
@@ -138,8 +137,6 @@ export class AddIdea extends React.Component {
       <View style={{ height: '100%' }}>
         <View
           style={styles.container}>
-          <Header
-            handlePress={this.navigateBack} />
           <View style={styles.inputArea}>
             <Input
               placeholder="What's the big idea?"

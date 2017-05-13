@@ -13,10 +13,8 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
-import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Count from '../components/Count';
-import FooterButton from "../components/FooterButton";
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -27,7 +25,6 @@ export class Ideas extends React.Component {
     this.selectCategory = this.selectCategory.bind(this);
     this.editIdea = this.editIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
-    this.saveUserIdeas = this.saveUserIdeas.bind(this);
 
     this.state = {
       currentCategory: 'All',
@@ -81,22 +78,6 @@ export class Ideas extends React.Component {
     this.props.dispatch({
       type: 'DELETE_IDEA',
       title
-    });
-  }
-
-  saveUserIdeas() {
-    this.setState({
-      loading: true
-    });
-
-    this.props.dispatch({
-      type: 'RESET_API_SAVE_SUCCESS'
-    });
-
-    this.props.dispatch({
-      type: 'saveUserIdeas',
-      uid: this.props.uid,
-      ideas: this.props.ideas
     });
   }
 
@@ -227,9 +208,6 @@ export class Ideas extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Header
-          handlePress={this.navigateBack}
-          addIdea={true} />
         <View style={styles.infoContainer}>
           <Count
             count={counter}
@@ -243,11 +221,6 @@ export class Ideas extends React.Component {
         </View>
 
         {ideas}
-
-        <FooterButton
-          text='SAVE IDEAS'
-          handlePress={this.saveUserIdeas}
-          loading={this.state.loading} />
       </View >
     );
   }

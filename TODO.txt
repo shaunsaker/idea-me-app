@@ -2,6 +2,9 @@ TODO
 
 Use tabbar (react-native-router-flux)
 Use default navbar (react-native-router-flux)
+Style idea item cards (have much more space to play with now)
+    Text sizes
+    Priority on own line and more descriptive
 Auto save categories and ideas. Display error if necessary. 
 Profile page with settings, help, logout, about app, user details (can edit and upload new profile photo)
 Create material inputs

@@ -10,7 +10,6 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import styles from '../styles/pages/EditIdea';
 import styleConstants from '../styles/styleConstants';
 
-import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Dropdown from '../components/Dropdown';
@@ -153,8 +152,6 @@ export class EditIdea extends React.Component {
         return (
             <View
                 style={styles.container}>
-                <Header
-                    handlePress={this.navigateBack} />
                 <View style={styles.inputArea}>
                     <Input
                         value={this.props.editIdeaTitle ? this.props.editIdeaTitle : this.props.initialIdeaTitle}
