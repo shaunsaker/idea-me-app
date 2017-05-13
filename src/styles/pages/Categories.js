@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
     categoriesContainer: {
         flex: 1,
-        marginBottom: 16,
+        marginTop: 16,
     },
     categoryItem: {   
         width: 280,     
@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
     iconContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 36,
+        height: 36,
+        borderRadius: 18,
         borderWidth: 1,
         borderColor: styleConstants.white,
         backgroundColor: styleConstants.primary,
