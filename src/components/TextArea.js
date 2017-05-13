@@ -1,11 +1,21 @@
 import React from "react";
 import {
     TextInput,
-    Animated
+    Animated,
+    StyleSheet,
 } from "react-native";
 
-import styles from '../styles/components/TextArea';
 import styleConstants from '../styles/styleConstants';
+
+const styles = StyleSheet.create({
+    textarea: {
+        width: 280,
+        fontSize: 16,
+        color: styleConstants.black,
+        height: 50,
+        paddingRight: 28,
+    }
+});
 
 export default class TextArea extends React.Component {
     constructor(props) {

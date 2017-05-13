@@ -1,10 +1,24 @@
 import React from 'react';
 import {
-    View
+    View,
+    StyleSheet,
+    Dimensions,
 } from "react-native";
 
-import styles from '../styles/components/Splash';
 import styleConstants from '../styles/styleConstants';
+
+const window = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+    container: {
+        width: window.width,
+        height: window.height,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        backgroundColor: styleConstants.primary
+    },
+});
 
 import Spinner from './Spinner';
 

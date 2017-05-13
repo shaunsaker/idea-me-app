@@ -2,13 +2,42 @@ import React from "react";
 import {
     View,
     Text,
-    Animated
+    Animated,
+    StyleSheet,
+    Dimensions,
 } from "react-native";
 import { connect } from 'react-redux';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-import styles from '../styles/components/ErrorMessage';
 import styleConstants from '../styles/styleConstants';
+
+const windowWidth = Dimensions.get('window').width;
+
+const styles = StyleSheet.create({
+    errorMessageWrapper: {        
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    errorMessageContainer: {
+        position: 'absolute',
+        width: windowWidth,
+        minHeight: 84,
+        backgroundColor: styleConstants.secondary, 
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    errorMessageText: {
+        fontSize: 18,
+        textAlign: 'center',
+        color: styleConstants.primary
+    },
+    icon: {
+        marginTop: 2,
+        marginRight: 8
+    }
+});
 
 export class ErrorMessage extends React.Component {
     constructor(props) {

@@ -3,12 +3,18 @@ import {
     View,
     Text,
     Animated,
-    Easing
+    Easing,
+    StyleSheet,
 } from "react-native";
 import Octicon from 'react-native-vector-icons/Octicons';
 
-import styles from '../styles/components/Spinner';
 import styleConstants from '../styles/styleConstants';
+
+const styles = StyleSheet.create({
+    lightbulb: {
+        paddingLeft: 7,
+    }
+});
 
 export default class Spinner extends React.Component {
     constructor(props) {

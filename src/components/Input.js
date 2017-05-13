@@ -1,10 +1,19 @@
 import React from "react";
 import {
-    TextInput
+    TextInput,
+    StyleSheet,
 } from "react-native";
 
-import styles from '../styles/components/Input';
 import styleConstants from '../styles/styleConstants';
+
+const styles = StyleSheet.create({
+    input: {
+        width: 280,
+        fontSize: 16,
+        color: styleConstants.primary,
+        height: 41.5,
+    }
+});
 
 export default class Input extends React.Component {
     constructor(props) {

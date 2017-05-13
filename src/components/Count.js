@@ -1,11 +1,22 @@
 import React from "react";
 import {
     View,
-    Text
+    Text,
+    StyleSheet,
 } from "react-native";
 
-import styles from '../styles/components/Count';
 import styleConstants from '../styles/styleConstants';
+
+const styles = StyleSheet.create({
+    countContainer: {        
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    countText: {
+        fontSize: 16,
+        color: styleConstants.primary
+    },
+});
 
 export default class Count extends React.Component {
     constructor(props) {
