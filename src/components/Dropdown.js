@@ -193,8 +193,8 @@ export default class Dropdown extends React.Component {
                         keyExtractor={item => 'dropdown' + item}
                         data={this.props.values}
                         renderItem={this.renderItem} 
-                        ListHeaderComponent={() => header}
-                        ListFooterComponent={() => footer}/>
+                        ListHeaderComponent={this.props.editItem ? () => header : null}
+                        ListFooterComponent={this.props.showAllOption ? () => footer : null}/>
                 </View>
             </Animated.View>;
 

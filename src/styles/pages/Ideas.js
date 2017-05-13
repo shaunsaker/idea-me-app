@@ -13,8 +13,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         backgroundColor: styleConstants.white,
         marginTop: 56,
-        paddingBottom: 56,
-        marginBottom: -6
+        paddingBottom: 56
     },
     infoContainer: {
         marginVertical: 16

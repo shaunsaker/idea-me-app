@@ -86,7 +86,7 @@ export class AddCategory extends React.Component {
             autoFocus={true} />
         </View>
         <FooterButton
-          text='ADD CATEGORY'
+          iconName='check'
           handlePress={this.addNewCategory} />
         {errorMessage}
       </View >

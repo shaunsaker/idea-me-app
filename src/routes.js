@@ -10,7 +10,6 @@ import {
     Scene,
     Modal,
 } from 'react-native-router-flux';
-import OctIcon from 'react-native-vector-icons/Octicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import RequireAuth from './components/RequireAuth';
@@ -27,29 +26,6 @@ import tabBarStyles from './styles/components/TabBar';
 import navBarStyles from './styles/components/NavBar';
 import styleConstants from './styles/styleConstants';
 
-const TabIcon = ({ selected, title }) => {
-    if (title === 'IdeasTab') {
-        return (
-            <View style={tabBarStyles.iconContainer}>
-                <OctIcon
-                    name='light-bulb'
-                    size={24}
-                    color={selected ? styleConstants.secondary : styleConstants.primary} />
-            </View>
-        );
-    }
-    else if (title === 'AddIdeaTab') {
-        return (
-            <View style={tabBarStyles.iconContainer}>
-                <MaterialIcon
-                    name='add'
-                    size={28}
-                    color={selected ? styleConstants.secondary : styleConstants.primary} />
-            </View>
-        );  
-    }
-}
-
 const navBarContainerStyles = Platform.OS === 'ios' ?
 	navBarStyles.containerIOS
 	:
@@ -63,6 +39,16 @@ const backIcon =
 			color={styleConstants.white}
 			size={36}
 			style={{ marginTop: -6, marginLeft: -6 }} />
+	</TouchableOpacity>;
+
+const closeIcon =
+	<TouchableOpacity
+		onPress={() => Actions.pop()}>
+		<MaterialIcon
+			name='close'
+			color={styleConstants.white}
+			size={28}
+			style={{ marginTop: -2}} />
 	</TouchableOpacity>;
 
 const Scenes = Actions.create(
@@ -86,10 +72,10 @@ const Scenes = Actions.create(
 		<Scene key='app' component={Modal} type={ActionConst.REPLACE}>
 			<Scene
 				key="tabbar"
-				tabs={true}
+				tabs={false}
 				tabBarStyle={tabBarStyles.container}
 				tabBarIconContainerStyle={tabBarStyles.iconContainer}>
-				<Scene key="ideasTab" title="IdeasTab" icon={TabIcon}>
+				<Scene key="ideasTab" title="IdeasTab">
 					<Scene
 						key='ideas'
 						title='Idea Me'
@@ -98,28 +84,51 @@ const Scenes = Actions.create(
 						titleStyle={[navBarStyles.text, styleConstants.ranga]}
 						renderBackButton={() => null} />
 				</Scene>
-				<Scene key="addIdeaTab" title="AddIdeaTab" icon={TabIcon}>
+				<Scene key="addIdeaTab" title="AddIdeaTab">
 					<Scene
 						key='addIdea'
 						title='Add Your Idea'
 						component={AddIdea}
 						navigationBarStyle={navBarContainerStyles}
-						titleStyle={[navBarStyles.text, styleConstants.ranga]} />
+						titleStyle={[navBarStyles.text, styleConstants.ranga]} 
+						type={ActionConst.PUSH} 
+						renderBackButton={() => null} 
+						renderRightButton={() => closeIcon}/>
 				</Scene>
-				{/*<Scene key="profileTab" title="ProfileTab" icon={TabIcon} initial={true}>
+				<Scene key="editIdeaTab" title="EditIdeaTab">
 					<Scene
-						key='profile'
-						title='Profile'
-						component={Profile}
+						key='editIdea'
+						title='Edit Your Idea'
+						component={EditIdea}
 						navigationBarStyle={navBarContainerStyles}
-						titleStyle={[navBarStyles.text, styleConstants.ranga]}
-						renderRightButton={() => menuIcon} />
-				</Scene>*/}
+						titleStyle={[navBarStyles.text, styleConstants.ranga]} 
+						type={ActionConst.PUSH} 
+						renderBackButton={() => null} 
+						renderRightButton={() => closeIcon}/>
+				</Scene>
+				<Scene key="categoriesTab" title="CategoriesTab">
+					<Scene
+						key='categories'
+						title='Categories'
+						component={Categories}
+						navigationBarStyle={navBarContainerStyles}
+						titleStyle={[navBarStyles.text, styleConstants.ranga]} 
+						type={ActionConst.PUSH} 
+						renderBackButton={() => backIcon} />
+				</Scene>
+				<Scene key="addCategoryTab" title="AddCategoryTab">
+					<Scene
+						key='addCategory'
+						title='Add a Category'
+						component={AddCategory}
+						navigationBarStyle={navBarContainerStyles}
+						titleStyle={[navBarStyles.text, styleConstants.ranga]} 
+						type={ActionConst.PUSH} 
+						renderBackButton={() => null} 
+						renderRightButton={() => closeIcon}/>
+				</Scene>
 			</Scene>
         </Scene>
-        {/*<Scene key='editIdea' title='Edit Idea' component={EditIdea} />
-        <Scene key='categories' title='Categories' component={Categories} />
-        <Scene key='addCategory' title='Add Category' component={AddCategory} />*/}
 	</Scene>
 )
 

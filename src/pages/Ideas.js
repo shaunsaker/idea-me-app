@@ -14,8 +14,9 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
-import Dropdown from '../components/Dropdown';
 import Count from '../components/Count';
+import Dropdown from '../components/Dropdown';
+import FooterButton from '../components/FooterButton';
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export class Ideas extends React.Component {
   }
 
   navigateCategories() {
-    Actions.categories();
+    Actions.categoriesTab();
   }
 
   selectCategory(eventId) {
@@ -72,7 +73,7 @@ export class Ideas extends React.Component {
   }
 
   editIdea(idea) {
-    Actions.editIdea(idea);
+    Actions.editIdeaTab(idea);
   }
 
   deleteIdea(title) {
@@ -219,10 +220,13 @@ export class Ideas extends React.Component {
             value={this.state.currentCategory}
             handleSelect={this.selectCategory}
             values={this.props.categories}
-            editItem={true} />
+            editItem={true}
+            showAllOption={true} />
         </View>
-
         {ideas}
+        <FooterButton 
+          iconName='add'
+          handlePress={() => Actions.addIdeaTab()} />
       </View >
     );
   }

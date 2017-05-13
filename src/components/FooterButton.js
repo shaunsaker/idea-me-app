@@ -4,22 +4,21 @@ import {
     TouchableOpacity,
     StyleSheet,
 } from "react-native";
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../styles/styleConstants';
 
-import GlowLoader from './GlowLoader';
-
 const styles = StyleSheet.create({
-    button: {        
+    button: {   
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,     
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 40,
-        borderWidth: 1,
         marginVertical: 16,
-        borderColor: styleConstants.white,
-        backgroundColor: styleConstants.primary,
-        width: 280,
-        elevation: 4,
+        backgroundColor: styleConstants.white,
+        elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,
@@ -27,12 +26,10 @@ const styles = StyleSheet.create({
             height: 2,
             width: 0
         },
-        height: 68,
+        height: 56,
     },
-    buttonText: {
-        fontSize: 24,
-        color: styleConstants.white,
-        paddingHorizontal: 4,
+    icon: {
+
     },
 });
 
@@ -43,23 +40,21 @@ export default class FooterButton extends React.Component {
 
     static get propTypes() {
         return {
-            text: React.PropTypes.string.isRequired,
+            iconName: React.PropTypes.string.isRequired,
             handlePress: React.PropTypes.func.isRequired,
-            loading: React.PropTypes.bool
         };
     }
 
     render() {
-        const content = this.props.loading ?
-            <GlowLoader />
-            :
-            <Text style={[ styles.buttonText, styleConstants.ranga ]}>{this.props.text}</Text>;
-
         return (
             <TouchableOpacity
                 style={styles.button}
                 onPress={this.props.handlePress} >
-                {content}
+                <MaterialIcon
+                    name={this.props.iconName}
+                    size={28}
+                    color={styleConstants.primary}
+                    style={styles.icon} />
             </TouchableOpacity>
         );
     }

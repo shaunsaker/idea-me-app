@@ -37,7 +37,7 @@ export class EditIdea extends React.Component {
             initialIdeaDescription: React.PropTypes.string,
             initialIdeaCategory: React.PropTypes.number.isRequired,
             initialIdeaPriority: React.PropTypes.number.isRequired,
-            editIdeaTitle: React.PropTypes.number.isRequired,
+            editIdeaTitle: React.PropTypes.number,
             editIdeaTitle: React.PropTypes.string,
             editIdeaDescription: React.PropTypes.string,
             editIdeaCategory: React.PropTypes.number,
@@ -64,7 +64,7 @@ export class EditIdea extends React.Component {
     }
 
     navigateCategories() {
-        Actions.categories();
+        Actions.categoriesTab();
     }
 
     selectCategory(eventId) {
@@ -180,7 +180,7 @@ export class EditIdea extends React.Component {
                         pushContent={true} />
                 </View>
                 <FooterButton
-                    text='UPDATE IDEA'
+                    iconName='check'
                     handlePress={this.updateIdea} />
             </View >
         );

@@ -20,7 +20,6 @@ export class Categories extends React.Component {
   constructor(props) {
     super(props);
 
-    this.navigateBack = this.navigateBack.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
     this.saveUserCategories = this.saveUserCategories.bind(this);
     this.renderItem = this.renderItem.bind(this);
@@ -111,9 +110,8 @@ export class Categories extends React.Component {
           {categories}
         </View>
         <FooterButton
-          text='SAVE CATEGORIES'
-          loading={this.state.loading}
-          handlePress={this.saveUserCategories} />
+          iconName='add'
+          handlePress={() => Actions.addCategoryTab()} />
       </View >
     );
   }

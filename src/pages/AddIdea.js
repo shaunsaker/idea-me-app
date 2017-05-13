@@ -61,7 +61,7 @@ export class AddIdea extends React.Component {
   }
 
   navigateCategories() {
-    Actions.categories();
+    Actions.categoriesTab();
   }
 
   selectCategory(eventId) {
@@ -167,7 +167,7 @@ export class AddIdea extends React.Component {
             height={105} />
         </View>
         <FooterButton
-          text='ADD IDEA'
+          iconName='check'
           handlePress={this.addNewIdea} />
         {errorMessage}
       </View >
