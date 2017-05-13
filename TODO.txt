@@ -1,0 +1,17 @@
+TODO
+
+Use horizontal scroll on ideas (each idea is a card)
+    User scroll hinting on page load / display some of next card
+Use tabbar (react-native-router-flux)
+Use default navbar (react-native-router-flux)
+Auto save categories and ideas. Display error if necessary. 
+Profile page with settings, help, logout, about app, user details (can edit and upload new profile photo)
+Thin line loader component.
+Create material inputs
+Facebook Login
+Google Login
+Guest Login
+Splash screen
+    Hints at content
+    Displays sign in options
+iOS testing
