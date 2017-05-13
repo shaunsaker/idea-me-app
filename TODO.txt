@@ -1,6 +1,5 @@
 TODO
 
-When needing full width and position absolute, use absolute stretch instead of Dimensions
 ErrorMessage => Growl components (has success too)
 Auto save categories and ideas. Display error if necessary. 
 Use tabbar (react-native-router-flux)

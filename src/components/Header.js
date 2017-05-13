@@ -4,7 +4,6 @@ import {
     Text,
     TouchableOpacity,
     StatusBar,
-    Dimensions,
     StyleSheet,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
@@ -14,16 +13,15 @@ import Octicon from 'react-native-vector-icons/Octicons';
 
 import styleConstants from '../styles/styleConstants';
 
-const windowWidth = Dimensions.get('window').width;
-
 const styles = StyleSheet.create({
     headerContainer: {        
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'absolute',
-        width: windowWidth,
         top: 0,
+        left: 0,
+        right: 0,
         paddingTop: 16,
     },
     leftIcon: { 

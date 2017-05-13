@@ -4,14 +4,11 @@ import {
     Text,
     Animated,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 import { connect } from 'react-redux';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../styles/styleConstants';
-
-const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     errorMessageWrapper: {        
@@ -21,7 +18,8 @@ const styles = StyleSheet.create({
     },
     errorMessageContainer: {
         position: 'absolute',
-        width: windowWidth,
+        left: 0,
+        right: 0,
         minHeight: 84,
         backgroundColor: styleConstants.secondary, 
         flexDirection: 'row',
