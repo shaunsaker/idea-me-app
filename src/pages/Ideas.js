@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
-  ScrollView
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -217,12 +216,13 @@ export class Ideas extends React.Component {
       });
 
       ideas =
-        <ScrollView style={styles.ideasContainer}>
-          <FlatList
-            keyExtractor={item => 'idea' + item.title}
-            data={currentCategoryIdeas}
-            renderItem={this.renderItem} />
-        </ScrollView>;
+        <FlatList
+          keyExtractor={item => 'idea' + item.title}
+          data={currentCategoryIdeas}
+          renderItem={this.renderItem} 
+          style={styles.ideasContainer} 
+          horizontal={true} 
+          pagingEnabled={true} />
     }
 
     return (

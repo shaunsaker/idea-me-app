@@ -1,7 +1,5 @@
 TODO
 
-Use horizontal scroll on ideas (each idea is a card)
-    User scroll hinting on page load / display some of next card
 Use tabbar (react-native-router-flux)
 Use default navbar (react-native-router-flux)
 Auto save categories and ideas. Display error if necessary. 

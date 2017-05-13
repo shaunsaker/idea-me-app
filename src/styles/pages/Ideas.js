@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
     ideasContainer: {
         flex: 1,
         width: windowWidth,
-        paddingHorizontal: 14,
     },
     ideaItem: {   
+        width: windowWidth - 32,
+        flex: 1,
         backgroundColor: styleConstants.white,
         padding: 16,
         paddingTop: 8,
@@ -30,8 +31,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: styleConstants.grey,
         marginBottom: 16,
-        marginHorizontal: 2
+        marginHorizontal: 16
     },  
+    textContainer: {
+        flex: 4
+    },
     ideaTextTitle: {
         fontSize: 24,
         color: styleConstants.primary
@@ -40,11 +44,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: styleConstants.grey
     },
-    labelsContainer: {        
+    labelsContainer: {      
+        flex: 1,  
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        marginTop: 8
+        marginTop: 8,
     },
     ideaChip: {
         flex: 1,
