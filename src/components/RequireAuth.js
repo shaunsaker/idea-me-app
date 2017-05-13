@@ -1,21 +1,15 @@
 import React from 'react';
-import {
-  View
-} from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import Splash from './Splash';
-
 export default function (WrappedComponent) {
-  class Auth extends React.Component {
+  class RequireAuth extends React.Component {
     static get propTypes() {
       return {
         authenticated: React.PropTypes.bool,
         uid: React.PropTypes.string,
         apiLoadSuccess: React.PropTypes.bool,
         redirectUserToSignIn: React.PropTypes.bool
-
       };
     }
 
@@ -46,18 +40,16 @@ export default function (WrappedComponent) {
           });
         }, 1500);
       }
+      else if (this.props.apiLoadSuccess) {
+        Actions.ideas();
+      }
       else if (this.props.redirectUserToSignIn) {
         Actions.signIn();
       }
     }
 
     render() {
-      const wrapper = this.props.authenticated && this.props.apiLoadSuccess ?
-        <WrappedComponent {...this.props} />
-        :
-        <Splash />
-
-      return wrapper;
+      return <WrappedComponent {...this.props} />;
     }
   }
 
@@ -70,5 +62,5 @@ export default function (WrappedComponent) {
     };
   }
 
-  return connect(mapStateToProps)(Auth);
+  return connect(mapStateToProps)(RequireAuth);
 }

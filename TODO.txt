@@ -1,9 +1,8 @@
 TODO
 
-ErrorMessage => Growl components (has success too)
-Auto save categories and ideas. Display error if necessary. 
 Use tabbar (react-native-router-flux)
 Use default navbar (react-native-router-flux)
+Auto save categories and ideas. Display error if necessary. 
 Profile page with settings, help, logout, about app, user details (can edit and upload new profile photo)
 Create material inputs
 Facebook Login

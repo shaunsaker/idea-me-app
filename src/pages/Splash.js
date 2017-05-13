@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
     },
 });
 
-import GlowLoader from './GlowLoader';
+import GlowLoader from '../components/GlowLoader';
 
-export default class Auth extends React.Component {
+export default class Splash extends React.Component {
     render() {
         return (
             <View style={styles.container}>

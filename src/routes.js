@@ -1,18 +1,27 @@
 import React from 'react';
-import { Actions, ActionConst, Scene } from 'react-native-router-flux';
+import {
+    Platform
+} from 'react-native';
+import { 
+    Actions, 
+    ActionConst, 
+    Scene 
+} from 'react-native-router-flux';
 
-// Pages
+import RequireAuth from './components/RequireAuth';
+
+import Splash from './pages/Splash';
+import SignIn from './pages/SignIn';
 import Ideas from './pages/Ideas';
 import AddIdea from './pages/AddIdea';
 import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
 import AddCategory from './pages/AddCategory';
-import SignIn from './pages/SignIn';
-import RequireAuth from './components/RequireAuth';
 
 const Scenes = Actions.create(
 	<Scene key='root' hideNavBar={true}>
-		<Scene key='ideas' title='Ideas' component={RequireAuth(Ideas)} initial={true} />
+        <Scene key='splash' title='Splash' component={RequireAuth(Splash)} initial={true} />
+		<Scene key='ideas' title='Ideas' component={Ideas} />
         <Scene key='addIdea' title='Add Idea' component={AddIdea} />
         <Scene key='editIdea' title='Edit Idea' component={EditIdea} />
         <Scene key='categories' title='Categories' component={Categories} />
