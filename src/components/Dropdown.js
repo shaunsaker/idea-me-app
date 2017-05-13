@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     FlatList,
     Animated,
-    ScrollView,
     StyleSheet,
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -32,14 +31,14 @@ const styles = StyleSheet.create({
             height: 2,
             width: 0
         },
-        width: 280,
+        width: 200,
         paddingVertical: 8,
         marginTop: 16
     },
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 56,
-        width: 280,
+        width: 200,
         zIndex: 1,
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
@@ -56,17 +55,11 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.white,
         maxHeight: 200,
     },
-    dropdownItemsContainer: {
-        flex: 1,
-        alignItems: 'center',
-        paddingBottom: 16
-    },
     dropdownItem: {        
         flexDirection: 'row',
         justifyContent: 'center',
-        backgroundColor: styleConstants.white,
         paddingVertical: 6,
-        width: 240
+        width: 200
     },
     dropdownItemAdd: {        
         flexDirection: 'row',
@@ -75,22 +68,22 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderStyle: 'solid',
         borderColor: styleConstants.primary,
-        backgroundColor: styleConstants.white,
+        backgroundColor: styleConstants.transPrimary,
         paddingVertical: 6,
     },
     dropdownButtonText: {
         color: styleConstants.white,
         fontSize: 24,
         textAlign: 'center',
-        width: 240
+        width: 200,
     },
     dropdownItemText: {
         color: styleConstants.primary,
         fontSize: 16,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     editIcon: {
-        marginRight: 12
+        marginRight: 12,
     }
 });
 
@@ -171,45 +164,26 @@ export default class Dropdown extends React.Component {
             :
             { marginTop: 16 };
 
+        const header = 
+            <TouchableOpacity
+                style={styles.dropdownItemAdd}
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(200) }} >
+                <Icon name='pencil' size={18} style={styles.editIcon} />
+                <Text
+                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                    Edit Categories
+                </Text>
+            </TouchableOpacity>;
+
         const itemList =
             <Animated.View
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
                 <View style={styles.dropdownItemsContainer}>
-                    {
-                        this.props.editItem ?
-                            <TouchableOpacity
-                                style={styles.dropdownItemAdd}
-                                onPress={() => { this.toggleExpanded(); this.props.handleSelect(200) }} >
-                                <Icon name='pencil' size={18} style={styles.editIcon} />
-                                <Text
-                                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
-                                    Edit Categories
-                                </Text>
-                            </TouchableOpacity>
-                            :
-                            null
-                    }
-                    <ScrollView>
-                        <View style={styles.dropdownItemsContainer}>
-                            {
-                                this.props.displayText ?
-                                    null :
-                                    <TouchableOpacity
-                                        style={styles.dropdownItem}
-                                        onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
-                                        <Text
-                                            style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
-                                            All
-                                        </Text>
-                                    </TouchableOpacity>
-                            }
-
-                            <FlatList
-                                keyExtractor={item => 'dropdown' + item}
-                                data={this.props.values}
-                                renderItem={this.renderItem} />
-                        </View>
-                    </ScrollView>
+                    <FlatList
+                        keyExtractor={item => 'dropdown' + item}
+                        data={this.props.values}
+                        renderItem={this.renderItem} 
+                        ListHeaderComponent={() => header}/>
                 </View>
             </Animated.View>;
 

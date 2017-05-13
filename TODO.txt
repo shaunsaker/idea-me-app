@@ -1,12 +1,12 @@
 TODO
 
+Ideas Menu
+    About App
+    Report a Bug
+    Logout
 Use tabbar (react-native-router-flux)
 Use default navbar (react-native-router-flux)
-Style idea item cards (have much more space to play with now)
-    Text sizes
-    Priority on own line and more descriptive
-Auto save categories and ideas. Display error if necessary. 
-Profile page with settings, help, logout, about app, user details (can edit and upload new profile photo)
+Save on add new idea, edit idea, delete idea, add new category, delete category (specific api calls instead of bulk)
 Create material inputs
 Facebook Login
 Google Login
