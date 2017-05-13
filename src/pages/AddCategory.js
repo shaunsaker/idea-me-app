@@ -11,7 +11,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
-import ErrorMessage from '../components/ErrorMessage';
+import Growl from '../components/Growl';
 
 export class AddCategory extends React.Component {
   constructor(props) {
@@ -70,7 +70,7 @@ export class AddCategory extends React.Component {
 
   render() {
     const errorMessage = this.props.errorMessage ?
-      <ErrorMessage text={this.props.errorMessage} />
+      <Growl text={this.props.errorMessage} />
       :
       null;
 

@@ -3,10 +3,10 @@ import {
     View,
     Text,
     Animated,
-    StyleSheet,
+	StyleSheet,
 } from "react-native";
-import { connect } from 'react-redux';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -21,23 +21,24 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         minHeight: 84,
-        backgroundColor: styleConstants.secondary, 
-        flexDirection: 'row',
+        backgroundColor: styleConstants.primary, 
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+		padding: 8,
+		paddingBottom: 16
     },
-    errorMessageText: {
+    messageText: {
         fontSize: 18,
         textAlign: 'center',
-        color: styleConstants.primary
+        color: styleConstants.white,
     },
     icon: {
         marginTop: 2,
-        marginRight: 8
+        marginRight: 8,
     }
 });
 
-export class ErrorMessage extends React.Component {
+export class Growl extends React.Component {
     constructor(props) {
         super(props);
 
@@ -48,7 +49,8 @@ export class ErrorMessage extends React.Component {
 
     static get propTypes() {
         return {
-            text: React.PropTypes.string.isRequired
+            text: React.PropTypes.string.isRequired,
+			success: React.PropTypes.bool,
         };
     }
 
@@ -77,15 +79,17 @@ export class ErrorMessage extends React.Component {
     }
 
     render() {
+		const iconName = this.props.success ? 'check' : 'error-outline';
+
         return (
             <View style={styles.errorMessageWrapper}>
                 <Animated.View style={[styles.errorMessageContainer, {bottom: this.state.bottom}]}>
                     <MaterialIcon
-                        name='error-outline'
-                        color={styleConstants.red}
+                        name={iconName}
+                        color={this.props.success ? styleConstants.success : styleConstants.danger}
                         size={24}
                         style={styles.icon} />
-                    <Text style={[styles.errorMessageText, styleConstants.robotoCondensed]}>
+                    <Text style={[styles.messageText, styleConstants.montserratLight]}>
                         {this.props.text}
                     </Text>
                 </Animated.View>
@@ -94,4 +98,4 @@ export class ErrorMessage extends React.Component {
     }
 }
 
-export default connect()(ErrorMessage);
+export default connect()(Growl);

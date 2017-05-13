@@ -15,7 +15,7 @@ import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Dropdown from '../components/Dropdown';
 import FooterButton from '../components/FooterButton';
-import ErrorMessage from '../components/ErrorMessage';
+import Growl from '../components/Growl';
 
 export class AddIdea extends React.Component {
   constructor(props) {
@@ -130,7 +130,7 @@ export class AddIdea extends React.Component {
       null;
 
     const errorMessage = this.props.errorMessage ?
-      <ErrorMessage text={this.props.errorMessage} />
+      <Growl text={this.props.errorMessage} />
       :
       null;
 
