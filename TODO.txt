@@ -1,11 +1,12 @@
 TODO
 
+Ideas listview does not rerender when a new category is selected => force render
+Use tabbar (react-native-router-flux)
+Use default navbar (react-native-router-flux)
 Ideas Menu
     About App
     Report a Bug
     Logout
-Use tabbar (react-native-router-flux)
-Use default navbar (react-native-router-flux)
 Save on add new idea, edit idea, delete idea, add new category, delete category (specific api calls instead of bulk)
 Create material inputs
 Facebook Login

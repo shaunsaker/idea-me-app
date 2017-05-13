@@ -175,6 +175,16 @@ export default class Dropdown extends React.Component {
                 </Text>
             </TouchableOpacity>;
 
+        const footer = 
+            <TouchableOpacity
+                style={styles.dropdownItem}
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
+                <Text
+                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                    All
+                </Text>
+            </TouchableOpacity>;
+            
         const itemList =
             <Animated.View
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
@@ -183,7 +193,8 @@ export default class Dropdown extends React.Component {
                         keyExtractor={item => 'dropdown' + item}
                         data={this.props.values}
                         renderItem={this.renderItem} 
-                        ListHeaderComponent={() => header}/>
+                        ListHeaderComponent={() => header}
+                        ListFooterComponent={() => footer}/>
                 </View>
             </Animated.View>;
 
