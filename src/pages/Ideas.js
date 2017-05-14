@@ -107,34 +107,45 @@ export class Ideas extends React.Component {
             {item.description}
           </Text>
         </View>
+        <TouchableOpacity
+          style={styles.deleteIconContainer}
+          onPress={() => this.deleteIdea(item.title)} >
+          <MaterialIcon
+            name='close'
+            color={styleConstants.primary}
+            size={24}
+            style={styles.icon} />
+        </TouchableOpacity>
         <View
           style={styles.labelsContainer} >
           {
             this.state.currentCategory === 'All' && (item.categoryId === 0 || item.categoryId) ?
-              <View style={styles.ideaChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.categories[item.categoryId]}</Text></View>
+              <View style={styles.categoryChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.categories[item.categoryId]}</Text></View>
               :
               <View></View>
           }
           {
             item.priorityId === 0 || item.priorityId ?
-              <View style={styles.priorityChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.priorities[item.priorityId].split('')[0]}</Text></View>
+              <View style={styles.priorityChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.priorities[item.priorityId] + ' Priority'}</Text></View>
               :
               <View></View>
           }
+        </View>
+        <View style={styles.footerButtonsContainer}>
           <TouchableOpacity
-            style={styles.iconContainer}
+            style={styles.shareIconContainer}
             onPress={() => this.editIdea({ ...item, index })} >
-            <Icon
-              name='pencil'
+            <MaterialIcon
+              name='share'
               color={styleConstants.white}
               size={24}
               style={styles.icon} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.iconContainer}
-            onPress={() => this.deleteIdea(item.title)} >
-            <MaterialIcon
-              name='close'
+            style={styles.editIconContainer}
+            onPress={() => this.editIdea({ ...item, index })} >
+            <Icon
+              name='pencil'
               color={styleConstants.white}
               size={24}
               style={styles.icon} />
@@ -202,9 +213,9 @@ export class Ideas extends React.Component {
         <FlatList
           keyExtractor={item => 'idea' + item.title}
           data={currentCategoryIdeas}
-          renderItem={this.renderItem} 
-          style={styles.ideasContainer} 
-          horizontal={true} 
+          renderItem={this.renderItem}
+          style={styles.ideasContainer}
+          horizontal={true}
           pagingEnabled={true} />
     }
 
@@ -224,7 +235,7 @@ export class Ideas extends React.Component {
             showAllOption={true} />
         </View>
         {ideas}
-        <FooterButton 
+        <FooterButton
           iconName='add'
           handlePress={() => Actions.addIdeaTab()} />
       </View >

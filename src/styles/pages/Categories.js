@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         borderRadius: 18,
         borderWidth: 1,
         borderColor: styleConstants.white,
-        backgroundColor: styleConstants.primary,
+        backgroundColor: styleConstants.grey,
         marginLeft: 8,
         elevation: 4,
         shadowColor: "#000000",

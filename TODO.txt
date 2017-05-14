@@ -1,13 +1,14 @@
 TODO
 
-Use tabbar (react-native-router-flux)
-Use default navbar (react-native-router-flux)
+Migrate back to custom navbar and simple scenes
+Delete modal (are you sure you want to delete this idea?)
+Save on add new idea, edit idea, delete idea, add new category, delete category (specific api calls instead of bulk)
+Remove unnecessary code in pages (from navigation changes)
 Ideas Menu
     About App
     Report a Bug
     Logout
-Save on add new idea, edit idea, delete idea, add new category, delete category (specific api calls instead of bulk)
-Create material inputs
+Create material inputs (and general input styling)
 Facebook Login
 Google Login
 Guest Login

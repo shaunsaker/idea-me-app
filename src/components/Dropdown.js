@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: styleConstants.primary,
+        backgroundColor: styleConstants.grey,
         borderRadius: 32,
         borderWidth: 1,
         borderColor: styleConstants.white,

@@ -23,69 +23,95 @@ const styles = StyleSheet.create({
         width: windowWidth,
     },
     ideaItem: {   
+        position: 'relative',
         width: windowWidth - 32,
         flex: 1,
         backgroundColor: styleConstants.white,
-        padding: 16,
-        paddingTop: 8,
         borderRadius: 16,
-        borderWidth: 1,
-        borderColor: styleConstants.grey,
-        marginBottom: 16,
-        marginHorizontal: 16
+        margin: 16,
+        marginTop: 12,
+        elevation: 5,
+        shadowColor: "#000000",
+        shadowOpacity: 0.6,
+        shadowRadius: 2,
+        shadowOffset: {
+            height: 2,
+            width: 0
+        },
     },  
     textContainer: {
-        flex: 4
+        flex: 4,
+        paddingHorizontal: 16,
+        paddingTop: 16,
+        paddingBottom: 66,
     },
     ideaTextTitle: {
-        fontSize: 24,
-        color: styleConstants.primary
+        fontSize: 28,
+        color: styleConstants.primary,
+        marginRight: 36,
     },
     ideaTextDescription: {
         fontSize: 16,
-        color: styleConstants.grey
+        color: styleConstants.grey,
+        paddingTop: 8
     },
     labelsContainer: {      
-        flex: 1,  
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        marginTop: 8,
+        marginHorizontal: 16,
+        marginVertical: 8
     },
-    ideaChip: {
+    categoryChip: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
         borderColor: styleConstants.grey,
         borderRadius: 32,
-        height: 50,
         marginRight: 8
     },
     priorityChip: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
         borderColor: styleConstants.grey,
-        borderRadius: 25,
-        height: 50,
-        width: 50,
+        borderRadius: 32,
     },
     text: {
         fontSize: 16,
         color: styleConstants.primary
     },
-    iconContainer: {
+    footerButtonsContainer: {
+        flexDirection: 'row',
+    },
+    shareIconContainer: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 50,
+        backgroundColor: styleConstants.secondary,
+        borderBottomLeftRadius: 16,
         height: 50,
-        borderRadius: 25,
-        borderWidth: 1,
-        borderColor: styleConstants.white,
-        backgroundColor: styleConstants.primary,
-        marginLeft: 8,
-        elevation: 4,
+    },
+    editIconContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: styleConstants.grey,
+        borderBottomRightRadius: 16,
+        height: 50,
+    },
+    deleteIconContainer: {
+        position: 'absolute',
+        top: 16,
+        right: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        backgroundColor: styleConstants.white,
+        elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,

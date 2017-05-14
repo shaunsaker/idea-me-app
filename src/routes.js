@@ -24,6 +24,7 @@ import AddCategory from './pages/AddCategory';
 
 import tabBarStyles from './styles/components/TabBar';
 import navBarStyles from './styles/components/NavBar';
+
 import styleConstants from './styles/styleConstants';
 
 const navBarContainerStyles = Platform.OS === 'ios' ?
