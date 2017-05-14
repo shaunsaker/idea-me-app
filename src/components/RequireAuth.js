@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 export default function (WrappedComponent) {
   class RequireAuth extends React.Component {
@@ -19,6 +19,9 @@ export default function (WrappedComponent) {
           type: 'getUserAuth'
         });
       }
+      else {
+        Actions.ideas({type: ActionConst.RESET});
+      }
 
       // When a user is signed in and reloads app
       if (this.props.authenticated && !this.props.apiLoadSuccess) {
@@ -30,6 +33,7 @@ export default function (WrappedComponent) {
     }
 
     componentDidUpdate() {
+      console.log('Component did update')
 
       // When a user signs in
       if (this.props.authenticated && !this.props.apiLoadSuccess) {

@@ -1,7 +1,5 @@
 TODO
 
-Dont allow back to Splash screen
-Back from ideas screen should exit app?
 Remove unnecessary code in pages (from navigation changes)
 Check proptypes and default props
 Facebook Login

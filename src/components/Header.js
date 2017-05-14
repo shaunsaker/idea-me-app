@@ -21,6 +21,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import styleConstants from '../styles/styleConstants';
+
 const windowWidth = Dimensions.get('window').width;
 
 // Create a status bar height on iOS only
@@ -55,7 +57,8 @@ const styles = StyleSheet.create({
 	textContainer: {
 		alignSelf: 'stretch',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		marginTop: 2
 	},
 });
 

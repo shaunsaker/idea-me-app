@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   FlatList,
   Share,
+  BackAndroid,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -46,6 +47,18 @@ export class Ideas extends React.Component {
       errorMessage: React.PropTypes.string,
       apiSaveSuccess: React.PropTypes.bool,
     };
+  }
+
+  componentWillMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this.handleBackAndroid);
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.handleBackAndroid);
+  }
+
+  handleBackAndroid() {
+    BackAndroid.exitApp();
   }
 
   selectCategory(eventId) {
