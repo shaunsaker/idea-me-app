@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 8,
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
-        elevation: 2,
+        elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,
@@ -112,7 +112,7 @@ export default class Dropdown extends React.Component {
     }
 
     toggleExpanded() {
-        const itemCount = (this.props.editItem ? 1 : 0) + (this.props.displayText ? 0 : 1) + this.props.values.length;
+        const itemCount = (this.props.editItem ? 1 : 0) + (this.props.showAllOption ? 1 : 0) + this.props.values.length;
 
         // Check if the dropdown is open/closed
         if (!this.state.isExpanded) {

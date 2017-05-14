@@ -1,8 +1,12 @@
 TODO
 
 Save on add new idea, edit idea, delete idea, add new category, delete category (specific api calls instead of bulk)
+    Handle errors with Growl
     Remove unnecessary code in pages (from navigation changes)
-    On api save, dropdown does not open
+    Check proptypes and default props
+Splash logo positioning
+Dont allow back to Splash screen
+Back from ideas screen should exit app?
 Facebook Login
     FB Login manager (full customisation)
 Google Login
@@ -15,5 +19,7 @@ Splash screen
     Hints at content
     Displays sign in options
 iOS testing
+On api save, dropdown does not open
+    Could be related to modal issue
 Delete modal (are you sure you want to delete this idea?)
     Modal does not get completely unmounted after close (common issue which will be fixed in RN 0.45)

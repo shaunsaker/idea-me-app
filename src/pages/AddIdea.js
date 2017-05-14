@@ -99,10 +99,20 @@ export class AddIdea extends React.Component {
         if (newIdeaDescription) {
           newIdeaDescription = utilities.firstCharToUppercase(newIdeaDescription.trim());
         }
-        ideas.unshift(this.props.newIdea);
+        ideas.unshift({
+          title: newIdeaTitle,
+          description: newIdeaDescription,
+          categoryId: this.props.newIdeaCategory,
+          priorityId: this.props.newIdeaPriority
+        });
       }
       else {
-        ideas = [this.props.newIdea];
+        ideas = [{
+          title: newIdeaTitle,
+          description: newIdeaDescription,
+          categoryId: this.props.newIdeaCategory,
+          priorityId: this.props.newIdeaPriority
+        }];
       }
 
       this.props.dispatch({

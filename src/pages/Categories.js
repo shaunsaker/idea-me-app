@@ -16,7 +16,7 @@ import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 import DeleteModal from '../components/DeleteModal';
-import Loader from '../components/Loader';
+import Growl from '../components/Growl';
 
 export class Categories extends React.Component {
   constructor(props) {
@@ -143,10 +143,10 @@ export class Categories extends React.Component {
       :
       <View />;
 
-    const loader = this.props.loading ?
-      <Loader />
-      :
-      null;
+    const errorMessage = this.props.errorMessage ?
+        <Growl text={this.props.errorMessage} />
+        :
+        null;
 
     return (
       <View
@@ -166,7 +166,7 @@ export class Categories extends React.Component {
           iconName='add'
           handlePress={() => Actions.addCategory()} />
         {deleteModal}
-        {loader}
+        {errorMessage}
       </View >
     );
   }

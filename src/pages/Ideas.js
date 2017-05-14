@@ -19,14 +19,12 @@ import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
 import FooterButton from '../components/FooterButton';
 import DeleteModal from '../components/DeleteModal';
-import Loader from '../components/Loader';
+import Growl from '../components/Growl';
 
 export class Ideas extends React.Component {
   constructor(props) {
     super(props);
 
-    this.navigateBack = this.navigateBack.bind(this);
-    this.navigateCategories = this.navigateCategories.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
     this.editIdea = this.editIdea.bind(this);
     this.shareIdea = this.shareIdea.bind(this);
@@ -50,14 +48,6 @@ export class Ideas extends React.Component {
     };
   }
 
-  navigateBack() {
-    Actions.pop();
-  }
-
-  navigateCategories() {
-    Actions.categories();
-  }
-
   selectCategory(eventId) {
 
     // 100 is reserved for 'All' categories, 200 is reserved as the categories button
@@ -74,7 +64,7 @@ export class Ideas extends React.Component {
       }
     }
     else {
-      this.navigateCategories();
+      Actions.categories();
     }
   }
 
@@ -273,10 +263,10 @@ export class Ideas extends React.Component {
       :
       <View />;
 
-    const loader = this.props.loading ?
-      <Loader />
-      :
-      null;
+    const errorMessage = this.props.errorMessage ?
+        <Growl text={this.props.errorMessage} />
+        :
+        null;
 
     return (
       <View style={styles.container}>
@@ -303,7 +293,7 @@ export class Ideas extends React.Component {
           iconName='add'
           handlePress={() => Actions.addIdea()} />
         {deleteModal}
-        {loader}
+        {errorMessage}
       </View >
     );
   }

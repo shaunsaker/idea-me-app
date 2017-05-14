@@ -56,6 +56,7 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             new_state.app.loading = false;
             new_state.user.apiSaveSuccess = false;
+            new_state.user.errorMessage = null;
             return new_state;
 
         case 'USER_ERROR':
