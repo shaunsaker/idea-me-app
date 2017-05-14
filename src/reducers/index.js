@@ -79,7 +79,7 @@ export default function (state = initialState, action) {
             new_state.newIdea.description = null;
             new_state.newIdea.categoryId = null;
             new_state.newIdea.priorityId = null;
-            new_state.app.loading = false;
+            new_state.app.loading = true;
             return new_state;
 
         case 'UPDATE_USER_CATEGORIES':

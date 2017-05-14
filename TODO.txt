@@ -1,6 +1,5 @@
 TODO
 
-Input Styling
 Save on add new idea, edit idea, delete idea, add new category, delete category (specific api calls instead of bulk)
     Remove unnecessary code in pages (from navigation changes)
 Facebook Login

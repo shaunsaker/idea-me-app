@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
+import utilities from '../utilities';
+
 import styles from '../styles/pages/EditIdea';
 import styleConstants from '../styles/styleConstants';
 
@@ -20,7 +22,6 @@ export class EditIdea extends React.Component {
     constructor(props) {
         super(props);
 
-        this.navigateBack = this.navigateBack.bind(this);
         this.updateEditIdeaTitle = this.updateEditIdeaTitle.bind(this);
         this.updateEditIdeaDescription = this.updateEditIdeaDescription.bind(this);
         this.navigateCategories = this.navigateCategories.bind(this);
@@ -43,10 +44,6 @@ export class EditIdea extends React.Component {
             editIdeaCategory: React.PropTypes.number,
             editIdeaPriority: React.PropTypes.number,
         };
-    }
-
-    navigateBack() {
-        Actions.pop();
     }
 
     updateEditIdeaTitle(text) {
@@ -128,11 +125,32 @@ export class EditIdea extends React.Component {
     }
 
     updateIdea() {
+        let ideas = this.props.ideas;
+
+        for (let i = 0; i < ideas.length; i++) {
+            if (ideas[i].title === this.props.initialIdeaTitle) {
+                ideas[i].title = utilities.firstCharToUppercase(this.props.editIdeaTitle.trim());
+                if (ideas[i].description) {
+                    ideas[i].description = utilities.firstCharToUppercase(this.props.editIdeaDescription.trim());
+                }
+                ideas[i].categoryId = this.props.editIdeaCategory;
+                ideas[i].priorityId = this.props.editIdeaPriority;
+                break;
+            }
+        }
+
         this.props.dispatch({
-            type: 'UPDATE_IDEA'
+            type: 'UPDATE_USER_IDEAS',
+            ideas
         });
 
-        this.navigateBack();
+        this.props.dispatch({
+            type: 'saveUserIdeas',
+            ideas,
+            uid: this.props.uid
+        });
+
+        Actions.pop();
     }
 
     render() {
@@ -153,12 +171,12 @@ export class EditIdea extends React.Component {
         return (
             <View
                 style={styles.container}>
-                <Header 
+                <Header
                     backgroundColor={styleConstants.primary}
                     text='Edit Idea'
                     textSize={28}
                     textColor={styleConstants.white}
-                    textStyle={styleConstants.ranga} 
+                    textStyle={styleConstants.ranga}
                     rightIconName='close'
                     rightIconColor={styleConstants.white}
                     rightIconSize={28}
@@ -208,6 +226,8 @@ function MapStateToProps(state) {
         editIdeaDescription: state.main.editIdea.description,
         editIdeaCategory: state.main.editIdea.categoryId,
         editIdeaPriority: state.main.editIdea.priorityId,
+        ideas: state.main.ideas,
+        uid: state.main.user.uid,
     });
 }
 
