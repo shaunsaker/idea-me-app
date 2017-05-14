@@ -1,7 +1,15 @@
 TODO
 
-Remove unnecessary code in pages (from navigation changes)
-Check proptypes and default props
+Disable back button to splash screen (previous commit not working)
+Optimise code
+    Remove unnecessary
+    Check proptypes
+    Lifecycle methods at top with other methods following order of this bindings
+    All imports used
+    All bindings used
+    All methods used
+    Icons named by Icon type, ie. MaterialIcon (should be no plain Icon)
+    Check reducers
 Facebook Login
     FB Login manager (full customisation)
 Google Login

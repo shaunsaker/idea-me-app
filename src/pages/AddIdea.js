@@ -25,7 +25,6 @@ export class AddIdea extends React.Component {
 
     this.updateNewIdeaTitle = this.updateNewIdeaTitle.bind(this);
     this.updateNewIdeaDescription = this.updateNewIdeaDescription.bind(this);
-    this.navigateCategories = this.navigateCategories.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
     this.selectPriority = this.selectPriority.bind(this);
     this.addNewIdea = this.addNewIdea.bind(this);
@@ -35,12 +34,21 @@ export class AddIdea extends React.Component {
     return {
       categories: React.PropTypes.array.isRequired,
       priorities: React.PropTypes.array.isRequired,
+      newIdea: React.PropTypes.object,
       newIdeaTitle: React.PropTypes.string,
       newIdeaDescription: React.PropTypes.string,
       newIdeaCategory: React.PropTypes.string,
       newIdeaPriority: React.PropTypes.string,
-      errorMessage: React.PropTypes.string
-    };
+      errorMessage: React.PropTypes.string,
+      ideas: React.PropTypes.array,
+      uid: React.PropTypes.string,
+    }
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'RESET_USER_ERROR'
+    });
   }
 
   updateNewIdeaTitle(text) {
@@ -57,10 +65,6 @@ export class AddIdea extends React.Component {
     });
   }
 
-  navigateCategories() {
-    Actions.categories();
-  }
-
   selectCategory(eventId) {
 
     // 100 is reserved for blank categories, 200 is reserved as the categories button
@@ -73,7 +77,7 @@ export class AddIdea extends React.Component {
       }
     }
     else {
-      this.navigateCategories();
+      Actions.categories();
     }
   }
 
@@ -134,12 +138,6 @@ export class AddIdea extends React.Component {
         message: 'You forgot to enter your idea'
       });
     }
-  }
-
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'RESET_USER_ERROR'
-    });
   }
 
   render() {

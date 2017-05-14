@@ -26,8 +26,16 @@ export class AddCategory extends React.Component {
   static get propTypes() {
     return {
       newCategoryValue: React.PropTypes.string,
-      errorMessage: React.PropTypes.string
+      errorMessage: React.PropTypes.string,
+      categories: React.PropTypes.array,
+      uid: React.PropTypes.string,
     };
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'RESET_USER_ERROR'
+    });
   }
 
   updateNewCategoryValue(text) {
@@ -73,12 +81,6 @@ export class AddCategory extends React.Component {
         });
       }, 2500);
     }
-  }
-
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'RESET_USER_ERROR'
-    });
   }
 
   render() {

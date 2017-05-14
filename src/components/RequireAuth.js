@@ -33,7 +33,6 @@ export default function (WrappedComponent) {
     }
 
     componentDidUpdate() {
-      console.log('Component did update')
 
       // When a user signs in
       if (this.props.authenticated && !this.props.apiLoadSuccess) {
