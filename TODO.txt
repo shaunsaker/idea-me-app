@@ -1,20 +1,19 @@
 TODO
 
-Migrate back to custom navbar and simple scenes
-Delete modal (are you sure you want to delete this idea?)
-    Modal does not get completely unmounted after close (common issue which will be fixed in RN 0.45)
+Input Styling
 Save on add new idea, edit idea, delete idea, add new category, delete category (specific api calls instead of bulk)
-Remove unnecessary code in pages (from navigation changes)
-Ideas Menu
-    About App
-    Report a Bug
-    Logout
-Create material inputs (and general input styling)
+    Remove unnecessary code in pages (from navigation changes)
 Facebook Login
     FB Login manager (full customisation)
 Google Login
 Guest Login
+Ideas Menu
+    About App
+    Report a Bug
+    Logout
 Splash screen
     Hints at content
     Displays sign in options
 iOS testing
+Delete modal (are you sure you want to delete this idea?)
+    Modal does not get completely unmounted after close (common issue which will be fixed in RN 0.45)

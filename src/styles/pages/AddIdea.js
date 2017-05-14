@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     inputArea: {
         flex: 1,
         alignItems: 'center',
+        marginVertical: 16
     },
     textAreaContainer: {
         position: 'relative',

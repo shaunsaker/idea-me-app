@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         },
         width: 200,
         paddingVertical: 4,
-        marginTop: 8
+        marginTop: 16
     },
     dropdownItemsWrapper: {
         position: 'absolute',

@@ -9,9 +9,10 @@ import styleConstants from '../styles/styleConstants';
 const styles = StyleSheet.create({
     input: {
         width: 280,
-        fontSize: 16,
+        fontSize: 18,
         color: styleConstants.primary,
-        height: 41.5,
+        paddingBottom: 16,
+        height: 41.5 + 16
     }
 });
 

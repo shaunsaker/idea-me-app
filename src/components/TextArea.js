@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         width: 280,
         fontSize: 16,
         color: styleConstants.black,
-        height: 50,
+        paddingBottom: 16,
         paddingRight: 28,
     }
 });
@@ -23,7 +23,7 @@ export default class TextArea extends React.Component {
 
         this.changeInputHeight = this.changeInputHeight.bind(this);
 
-        this.initialInputHeight = 41.5;
+        this.initialInputHeight = 41.5 + 16;
 
         this.state = {
             height: 0,
