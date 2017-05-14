@@ -4,7 +4,7 @@ import styleConstants from '../styleConstants';
 const styles = StyleSheet.create({
     container: {
         flex: 1,        
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
         backgroundColor: styleConstants.white
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     inputArea: {
         flex: 1,
         alignItems: 'center',
-        marginVertical: 16
+        marginVertical: 16,
     },
     textAreaContainer: {
         position: 'relative',

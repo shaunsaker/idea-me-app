@@ -12,6 +12,7 @@ import styleConstants from '../styles/styleConstants';
 const styles = StyleSheet.create({
 	container: {
 		position: 'absolute',
+		top: 56,
 		left: 0,
 		right: 0,
 		height: 5,
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
 	loader: {
 		position: 'absolute',
 		left: -100,
-		bottom: 1,
+		bottom: 0,
 		width: 100,
 		height: 5,
 	}

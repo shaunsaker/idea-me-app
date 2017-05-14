@@ -13,12 +13,10 @@ export default class ApiData {
         if (!uid) {
             uid = firestack.auth.getCurrentUser().user.uid; // BUG: This does not work after first time sign in
         }
-        
-        const userData = action.ideas;
 
         return new Promise(resolve => {
             firestack.database.ref(uid).update({ // PLEASE NOTE: use database as method and not as instance, ie. not database()
-                ideas: userData
+                ideas: action.ideas
             })
             .then(() => {
                 response.success = true;
@@ -39,12 +37,10 @@ export default class ApiData {
         if (!uid) {
             uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
         }
-        
-        const userData = action.categories;
 
         return new Promise(resolve => {
             firestack.database.ref(uid).update({ // PLEASE NOTE: use database as method and not as instance, ie. not database()
-                categories: userData
+                categories: action.categories
             })
             .then(() => {
                 response.success = true;

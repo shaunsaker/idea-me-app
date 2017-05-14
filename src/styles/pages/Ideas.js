@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
         paddingBottom: 56
     },
     infoContainer: {
-        marginVertical: 8
+        marginTop: 16,
+        marginBottom: 8
     },
     ideasContainer: {
         flex: 1,

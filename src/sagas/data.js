@@ -4,11 +4,11 @@ import ApiData from '../api/index';
 
 export function* saveUserIdeas(action) {
 
-    const saveIdeasResponse = yield call(ApiData.saveUserIdeas, action);
-    console.log('saveIdeasResponse', saveIdeasResponse);
+    const saveUserIdeasResponse = yield call(ApiData.saveUserIdeas, action);
+    console.log('saveUserIdeasResponse', saveUserIdeasResponse);
 
-    if (saveIdeasResponse) {
-        if (saveIdeasResponse.success) {
+    if (saveUserIdeasResponse) {
+        if (saveUserIdeasResponse.success) {
             yield put({
                 type: 'API_SAVE_SUCCESS',
             });
@@ -16,7 +16,7 @@ export function* saveUserIdeas(action) {
         else {
             yield put({
                 type: 'USER_ERROR',
-                message: saveIdeasResponse.message // TODO: Check this
+                message: saveUserIdeasResponse.message // TODO: Check this
             });
         }
     }
@@ -24,11 +24,11 @@ export function* saveUserIdeas(action) {
 
 export function* saveUserCategories(action) {
 
-    const saveCategoriesResponse = yield call(ApiData.saveUserCategories, action);
-    console.log('saveCategoriesResponse', saveCategoriesResponse);
+    const saveUserCategoriesResponse = yield call(ApiData.saveUserCategories, action);
+    console.log('saveUserCategoriesResponse', saveUserCategoriesResponse);
 
-    if (saveCategoriesResponse) {
-        if (saveCategoriesResponse.success) {
+    if (saveUserCategoriesResponse) {
+        if (saveUserCategoriesResponse.success) {
             yield put({
                 type: 'API_SAVE_SUCCESS',
             });
@@ -36,7 +36,7 @@ export function* saveUserCategories(action) {
         else {
             yield put({
                 type: 'USER_ERROR',
-                message: saveCategoriesResponse.message // TODO: Check this
+                message: saveUserCategoriesResponse.message // TODO: Check this
             });
         }
     }
@@ -44,14 +44,14 @@ export function* saveUserCategories(action) {
 
 export function* loadUserData(action) {
 
-    const loadResponse = yield call(ApiData.loadUserData, action);
-    console.log('loadResponse', loadResponse);
+    const loadUserDataResponse = yield call(ApiData.loadUserData, action);
+    console.log('loadUserDataResponse', loadUserDataResponse);
 
-    if (loadResponse) {
-        if (loadResponse.success) {
+    if (loadUserDataResponse) {
+        if (loadUserDataResponse.success) {
 
             // Firebase is returning objects instead of arrays (?!) so we may need to pre-process this data
-            const preProcessed = loadResponse.message;
+            const preProcessed = loadUserDataResponse.message;
             let processed = {
                 ideas: [],
                 categories: []
@@ -91,7 +91,7 @@ export function* loadUserData(action) {
         else {
             yield put({
                 type: 'USER_ERROR',
-                message: loadResponse.message
+                message: loadUserDataResponse.message
             });
         }
     }

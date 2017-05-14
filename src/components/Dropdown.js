@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     dropdownItemsWrapper: {
         position: 'absolute',
-        top: 42,
+        top: 52,
         width: 200,
         zIndex: 1,
         borderTopLeftRadius: 8,

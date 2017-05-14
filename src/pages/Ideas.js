@@ -19,6 +19,7 @@ import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
 import FooterButton from '../components/FooterButton';
 import DeleteModal from '../components/DeleteModal';
+import Loader from '../components/Loader';
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -93,12 +94,31 @@ export class Ideas extends React.Component {
     .catch((error) => console.log('Share error:', error.message));
   }
 
-  deleteIdea(title) {
+  deleteIdea(title) { 
+    this.toggleDeleteModal();
+
+    this.setState({
+      loading: true
+    });
+
     this.props.dispatch({
       type: 'DELETE_IDEA',
       title
     });
-    this.toggleDeleteModal();
+
+    let id;
+    this.props.ideas.map((value, index) => {
+        if (value.title === title) {
+            id = index;
+        }
+    });
+    const newIdeas = this.props.ideas.splice(id, 1);
+
+    this.props.dispatch({
+      type: 'saveUserIdeas',
+      ideas: newIdeas,
+      uid: this.props.uid
+    });
   }
 
   componentDidUpdate() {
@@ -114,7 +134,7 @@ export class Ideas extends React.Component {
   }
 
   toggleDeleteModal(index, title) {
-    if (index && title) {
+    if ((index || index === 0) && title) {
       this.setState({
         showDeleteModal: !this.state.showDeleteModal,
         showDeleteModalTitle: title,
@@ -262,6 +282,11 @@ export class Ideas extends React.Component {
       :
       <View />;
 
+    const loader = this.state.loading ?
+      <Loader />
+      :
+      null;
+
     return (
       <View style={styles.container}>
         <Header 
@@ -287,6 +312,7 @@ export class Ideas extends React.Component {
           iconName='add'
           handlePress={() => Actions.addIdea()} />
         {deleteModal}
+        {loader}
       </View >
     );
   }
