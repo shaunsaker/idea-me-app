@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         paddingBottom: 56
     },
     infoContainer: {
-        marginVertical: 16
+        marginVertical: 8
     },
     ideasContainer: {
         flex: 1,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.white,
         borderRadius: 16,
         margin: 16,
-        marginTop: 12,
+        marginTop: 8,
         elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,

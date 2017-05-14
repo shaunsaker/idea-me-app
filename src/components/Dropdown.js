@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         borderRadius: 32,
         borderWidth: 1,
         borderColor: styleConstants.white,
-        elevation: 4,
+        elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
             width: 0
         },
         width: 200,
-        paddingVertical: 8,
-        marginTop: 16
+        paddingVertical: 4,
+        marginTop: 8
     },
     dropdownItemsWrapper: {
         position: 'absolute',

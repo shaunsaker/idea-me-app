@@ -112,7 +112,7 @@ export class Ideas extends React.Component {
           onPress={() => this.deleteIdea(item.title)} >
           <MaterialIcon
             name='close'
-            color={styleConstants.primary}
+            color={styleConstants.grey}
             size={24}
             style={styles.icon} />
         </TouchableOpacity>
