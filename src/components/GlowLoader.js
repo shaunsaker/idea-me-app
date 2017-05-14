@@ -11,9 +11,10 @@ import Octicon from 'react-native-vector-icons/Octicons';
 import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
-    lightbulb: {
-        paddingLeft: 7,
-    }
+    container: {
+        paddingLeft: 13,
+        marginTop: -36
+    },
 });
 
 export default class GlowLoader extends React.Component {
@@ -58,7 +59,7 @@ export default class GlowLoader extends React.Component {
         });
 
         return (
-            <Animated.View style={{transform: [{scale: animatedSize}]}}>
+            <Animated.View style={[styles.container, {transform: [{scale: animatedSize}]}]}>
                 <Animated.Text style={{ color: animatedColor }}>
                     <Octicon
                         name='light-bulb'

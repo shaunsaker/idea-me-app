@@ -27,7 +27,7 @@ export default class Splash extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor={styleConstants.primary} />
+                <StatusBar backgroundColor={styleConstants.transPrimary} />
                 <GlowLoader
                     size={64} />
             </View>

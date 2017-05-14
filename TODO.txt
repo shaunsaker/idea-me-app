@@ -1,12 +1,9 @@
 TODO
 
-Save on add new idea, edit idea, delete idea, add new category, delete category (specific api calls instead of bulk)
-    Handle errors with Growl
-    Remove unnecessary code in pages (from navigation changes)
-    Check proptypes and default props
-Splash logo positioning
 Dont allow back to Splash screen
 Back from ideas screen should exit app?
+Remove unnecessary code in pages (from navigation changes)
+Check proptypes and default props
 Facebook Login
     FB Login manager (full customisation)
 Google Login

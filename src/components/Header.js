@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
 const CustomStatusBar = ({backgroundColor, ...props}) => (
   <View style={[styles.statusBar, { backgroundColor }]}>
-    <StatusBar backgroundColor={backgroundColor} {...props} />
+    <StatusBar backgroundColor={styleConstants.transPrimary} {...props} />
   </View>
 );
 
