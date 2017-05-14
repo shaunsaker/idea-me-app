@@ -35,7 +35,6 @@ export class Ideas extends React.Component {
 
     this.state = {
       currentCategory: 'All',
-      loading: false,
       showDeleteModal: false,
       showDeleteModalTitle: null,
     }
@@ -97,22 +96,19 @@ export class Ideas extends React.Component {
   deleteIdea(title) { 
     this.toggleDeleteModal();
 
-    this.setState({
-      loading: true
-    });
-
-    this.props.dispatch({
-      type: 'DELETE_IDEA',
-      title
-    });
-
     let id;
     this.props.ideas.map((value, index) => {
         if (value.title === title) {
             id = index;
         }
     });
-    const newIdeas = this.props.ideas.splice(id, 1);
+    let newIdeas = this.props.ideas;
+    newIdeas.splice(id, 1);
+
+    this.props.dispatch({
+      type: 'UPDATE_USER_IDEAS',
+      ideas: newIdeas
+    });
 
     this.props.dispatch({
       type: 'saveUserIdeas',
@@ -124,21 +120,18 @@ export class Ideas extends React.Component {
   componentDidUpdate() {
     if (this.props.errorMessage || this.props.apiSaveSuccess) {
       setTimeout(() => {
-        if (this.state.loading) {
-          this.setState({
-            loading: false
-          });
-        }
+        this.props.dispatch({
+          type: 'SET_LOADING_FALSE'
+        });
       }, 1500);
     }
   }
 
-  toggleDeleteModal(index, title) {
-    if ((index || index === 0) && title) {
+  toggleDeleteModal(title) {
+    if (title) {
       this.setState({
         showDeleteModal: !this.state.showDeleteModal,
         showDeleteModalTitle: title,
-        showDeleteModalIndex: index
       });
     }
     else {
@@ -282,7 +275,7 @@ export class Ideas extends React.Component {
       :
       <View />;
 
-    const loader = this.state.loading ?
+    const loader = this.props.loading ?
       <Loader />
       :
       null;
@@ -326,6 +319,7 @@ function MapStateToProps(state) {
     uid: state.main.user.uid,
     errorMessage: state.main.user.errorMessage,
     apiSaveSuccess: state.main.user.apiSaveSuccess,
+    loading: state.main.app.loading
   });
 }
 

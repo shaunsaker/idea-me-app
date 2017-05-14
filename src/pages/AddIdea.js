@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
+import utilities from '../utilities';
+
 import styles from '../styles/pages/AddIdea';
 import styleConstants from '../styles/styleConstants';
 
@@ -21,7 +23,6 @@ export class AddIdea extends React.Component {
   constructor(props) {
     super(props);
 
-    this.navigateBack = this.navigateBack.bind(this);
     this.updateNewIdeaTitle = this.updateNewIdeaTitle.bind(this);
     this.updateNewIdeaDescription = this.updateNewIdeaDescription.bind(this);
     this.navigateCategories = this.navigateCategories.bind(this);
@@ -40,10 +41,6 @@ export class AddIdea extends React.Component {
       newIdeaPriority: React.PropTypes.string,
       errorMessage: React.PropTypes.string
     };
-  }
-
-  navigateBack() {
-    Actions.pop();
   }
 
   updateNewIdeaTitle(text) {
@@ -92,13 +89,34 @@ export class AddIdea extends React.Component {
   }
 
   addNewIdea() {
-
     if (this.props.newIdeaTitle) {
+      let ideas = this.props.ideas;
+      let newIdeaTitle = this.props.newIdeaTitle;
+      let newIdeaDescription = this.props.newIdeaDescription;
+
+      if (ideas) {
+        newIdeaTitle = utilities.firstCharToUppercase(newIdeaTitle.trim());
+        if (newIdeaDescription) {
+          newIdeaDescription = utilities.firstCharToUppercase(newIdeaDescription.trim());
+        }
+        ideas.unshift(this.props.newIdea);
+      }
+      else {
+        ideas = [this.props.newIdea];
+      }
+
       this.props.dispatch({
-        type: 'ADD_NEW_IDEA'
+        type: 'UPDATE_USER_IDEAS',
+        ideas
       });
 
-      Actions.ideas();
+      this.props.dispatch({
+        type: 'saveUserIdeas',
+        ideas,
+        uid: this.props.uid
+      });
+
+      Actions.pop();
     }
     else {
       this.props.dispatch({
@@ -137,12 +155,12 @@ export class AddIdea extends React.Component {
     return (
       <View
         style={styles.container}>
-        <Header 
+        <Header
           backgroundColor={styleConstants.primary}
           text='Add an Idea'
           textSize={28}
           textColor={styleConstants.white}
-          textStyle={styleConstants.ranga} 
+          textStyle={styleConstants.ranga}
           rightIconName='close'
           rightIconColor={styleConstants.white}
           rightIconSize={28}
@@ -188,11 +206,14 @@ function MapStateToProps(state) {
   return ({
     categories: state.main.categories,
     priorities: state.main.priorities,
+    newIdea: state.main.newIdea,
     newIdeaTitle: state.main.newIdea.title,
     newIdeaDescription: state.main.newIdea.description,
     newIdeaCategory: state.main.categories[state.main.newIdea.categoryId],
     newIdeaPriority: state.main.priorities[state.main.newIdea.priorityId],
-    errorMessage: state.main.user.errorMessage
+    errorMessage: state.main.user.errorMessage,
+    ideas: state.main.ideas,
+    uid: state.main.user.uid
   });
 }
 

@@ -4,11 +4,14 @@ import {
     Text,
     Animated,
 	StyleSheet,
+    Dimensions,
 } from "react-native";
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 
 import styleConstants from '../styles/styleConstants';
+
+const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     errorMessageWrapper: {        
@@ -18,19 +21,19 @@ const styles = StyleSheet.create({
     },
     errorMessageContainer: {
         position: 'absolute',
-        left: 0,
-        right: 0,
+        width: window.width,
         minHeight: 84,
-        backgroundColor: styleConstants.primary, 
+        backgroundColor: styleConstants.secondary, 
         justifyContent: 'center',
         alignItems: 'center',
 		padding: 8,
-		paddingBottom: 16
+		paddingBottom: 16,
+        elevation: 100
     },
     messageText: {
         fontSize: 18,
         textAlign: 'center',
-        color: styleConstants.white,
+        color: styleConstants.primary,
     },
     icon: {
         marginTop: 2,
@@ -43,7 +46,7 @@ export class Growl extends React.Component {
         super(props);
 
         this.state = {
-            bottom: new Animated.Value(-200)
+            bottom: new Animated.Value(-84)
         }
     }
 

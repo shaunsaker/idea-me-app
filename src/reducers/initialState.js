@@ -1,4 +1,7 @@
 const initialState = {
+    app: {
+        loading: false
+    },
     user: {
         authenticated: null,
         uid: null,

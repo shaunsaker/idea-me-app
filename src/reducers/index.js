@@ -57,6 +57,11 @@ export default function (state = initialState, action) {
             new_state.user.apiSaveSuccess = false;
             return new_state;
 
+        case 'SET_LOADING_FALSE':
+            new_state = cloneObject(state);
+            new_state.app.loading = false;
+            return new_state;
+
         case 'USER_ERROR':
             new_state = cloneObject(state);
             new_state.user.errorMessage = action.message;
@@ -65,6 +70,22 @@ export default function (state = initialState, action) {
         case 'RESET_USER_ERROR':
             new_state = cloneObject(state);
             new_state.user.errorMessage = null;
+            return new_state;
+
+        case 'UPDATE_USER_IDEAS':
+            new_state = cloneObject(state);
+            new_state.ideas = action.ideas;
+            new_state.newIdea.title = null;
+            new_state.newIdea.description = null;
+            new_state.newIdea.categoryId = null;
+            new_state.newIdea.priorityId = null;
+            new_state.app.loading = false;
+            return new_state;
+
+        case 'UPDATE_USER_CATEGORIES':
+            new_state = cloneObject(state);
+            new_state.categories = action.categories;
+            new_state.app.loading = false;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_TITLE':
@@ -117,37 +138,6 @@ export default function (state = initialState, action) {
         case 'UPDATE_NEW_CATEGORY_VALUE':
             new_state = cloneObject(state);
             new_state.newCategory.value = action.value;
-            return new_state;
-
-        case 'ADD_NEW_IDEA':
-            new_state = cloneObject(state);
-            if (new_state.ideas) {
-                new_state.newIdea.title = utilities.firstCharToUppercase(new_state.newIdea.title.trim());
-                if (new_state.newIdea.description) {
-                    new_state.newIdea.description = utilities.firstCharToUppercase(new_state.newIdea.description.trim());
-                }
-                new_state.ideas.unshift(new_state.newIdea);
-            }
-            else {
-                new_state.ideas = [new_state.newIdea];
-            }
-            new_state.newIdea = {
-                title: null,
-                description: null,
-                categoryId: null,
-                priorityId: null
-            }
-            return new_state;
-
-        case 'DELETE_IDEA':
-            new_state = cloneObject(state);
-            let id;
-            new_state.ideas.map((value, index) => {
-                if (value.title === action.title) {
-                    id = index;
-                }
-            });
-            new_state.ideas.splice(id, 1);
             return new_state;
 
         case 'ADD_NEW_CATEGORY':
