@@ -52,14 +52,10 @@ export default function (state = initialState, action) {
             new_state.user.errorMessage = null;
             return new_state;
 
-        case 'RESET_API_SAVE_SUCCESS':
-            new_state = cloneObject(state);
-            new_state.user.apiSaveSuccess = false;
-            return new_state;
-
         case 'SET_LOADING_FALSE':
             new_state = cloneObject(state);
             new_state.app.loading = false;
+            new_state.user.apiSaveSuccess = false;
             return new_state;
 
         case 'USER_ERROR':
@@ -85,7 +81,8 @@ export default function (state = initialState, action) {
         case 'UPDATE_USER_CATEGORIES':
             new_state = cloneObject(state);
             new_state.categories = action.categories;
-            new_state.app.loading = false;
+            new_state.newCategory.value = null;
+            new_state.app.loading = true;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_TITLE':
@@ -164,21 +161,6 @@ export default function (state = initialState, action) {
                     value.categoryId--;
                 }
             });
-            return new_state;
-
-        case 'UPDATE_IDEA':
-            new_state = cloneObject(state);
-            for (let i = 0; i < new_state.ideas.length; i++) {
-                if (new_state.ideas[i].title === new_state.editIdea.id) {
-                    new_state.ideas[i].title = utilities.firstCharToUppercase(new_state.editIdea.title.trim());
-                    if (new_state.ideas[i].description) {
-                        new_state.ideas[i].description = utilities.firstCharToUppercase(new_state.editIdea.description.trim());
-                    }
-                    new_state.ideas[i].categoryId = new_state.editIdea.categoryId;
-                    new_state.ideas[i].priorityId = new_state.editIdea.priorityId;
-                    break;
-                }
-            }
             return new_state;
 
         default:

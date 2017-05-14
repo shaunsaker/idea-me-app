@@ -5,6 +5,8 @@ import {
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
+import utilities from '../utilities';
+
 import styles from '../styles/pages/AddCategory';
 import styleConstants from '../styles/styleConstants';
 
@@ -17,7 +19,6 @@ export class AddCategory extends React.Component {
   constructor(props) {
     super(props);
 
-    this.navigateBack = this.navigateBack.bind(this);
     this.updateNewCategoryValue = this.updateNewCategoryValue.bind(this);
     this.addNewCategory = this.addNewCategory.bind(this);
   }
@@ -29,10 +30,6 @@ export class AddCategory extends React.Component {
     };
   }
 
-  navigateBack() {
-    Actions.pop();
-  }
-
   updateNewCategoryValue(text) {
     this.props.dispatch({
       type: 'UPDATE_NEW_CATEGORY_VALUE',
@@ -41,13 +38,29 @@ export class AddCategory extends React.Component {
   }
 
   addNewCategory() {
-
     if (this.props.newCategoryValue) {
+      let categories = this.props.categories;
+
+      if (categories) {
+        const newCategory = utilities.firstCharToUppercase(this.props.newCategoryValue.trim());
+        categories.push(newCategory);
+      }
+      else {
+        categories = [this.props.newCategoryValue.trim()];
+      }
+
       this.props.dispatch({
-        type: 'ADD_NEW_CATEGORY'
+        type: 'UPDATE_USER_CATEGORIES',
+        categories
       });
 
-      this.navigateBack();
+      this.props.dispatch({
+        type: 'saveUserCategories',
+        categories,
+        uid: this.props.uid
+      });
+
+      Actions.pop();
     }
     else {
       this.props.dispatch({
@@ -106,7 +119,9 @@ export class AddCategory extends React.Component {
 function MapStateToProps(state) {
   return ({
     newCategoryValue: state.main.newCategory.value,
-    errorMessage: state.main.user.errorMessage
+    errorMessage: state.main.user.errorMessage,
+    categories: state.main.categories,
+    uid: state.main.user.uid,
   });
 }
 

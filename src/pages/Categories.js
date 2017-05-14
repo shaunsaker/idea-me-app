@@ -16,18 +16,17 @@ import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 import DeleteModal from '../components/DeleteModal';
+import Loader from '../components/Loader';
 
 export class Categories extends React.Component {
   constructor(props) {
     super(props);
 
     this.deleteCategory = this.deleteCategory.bind(this);
-    this.saveUserCategories = this.saveUserCategories.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.renderItem = this.renderItem.bind(this);
 
     this.state = {
-      loading: false,
       showDeleteModal: false,
       showDeleteModalTitle: null,
       showDeleteModalIndex: null,
@@ -43,43 +42,53 @@ export class Categories extends React.Component {
     };
   }
 
-  navigateBack() {
-    Actions.pop();
-  }
-
   deleteCategory(index) {
-    this.props.dispatch({
-      type: 'DELETE_CATEGORY',
-      index
-    });
     this.toggleDeleteModal();
-  }
 
-  saveUserCategories() {
-    this.setState({
-      loading: true
+    let newCategories = this.props.categories;
+    newCategories.splice(index, 1);
+
+    // set all matching categoryIds to null
+    // all categoryIds above index should be decreased by 1
+    let newIdeas = this.props.ideas;
+
+    newIdeas.map((value) => {
+        if (value.categoryId === index) {
+            value.categoryId = null;
+        }
+        else if (value.categoryId > index) {
+            value.categoryId--;
+        }
     });
 
     this.props.dispatch({
-      type: 'RESET_API_SAVE_SUCCESS'
+      type: 'UPDATE_USER_CATEGORIES',
+      categories: newCategories
+    });
+
+    this.props.dispatch({
+      type: 'UPDATE_USER_IDEAS',
+      ideas: newIdeas
     });
 
     this.props.dispatch({
       type: 'saveUserCategories',
-      uid: this.props.uid,
-      categories: this.props.categories
+      categories: newCategories,
+      uid: this.props.uid
+    });
+
+    this.props.dispatch({
+      type: 'saveUserIdeas',
+      ideas: newIdeas,
+      uid: this.props.uid
     });
   }
 
   componentDidUpdate() {
     if (this.props.errorMessage || this.props.apiSaveSuccess) {
-      setTimeout(() => {
-        if (this.state.loading) {
-          this.setState({
-            loading: false
-          });
-        }
-      }, 1500);
+      this.props.dispatch({
+        type: 'SET_LOADING_FALSE'
+      });
     }
   }
 
@@ -134,6 +143,11 @@ export class Categories extends React.Component {
       :
       <View />;
 
+    const loader = this.props.loading ?
+      <Loader />
+      :
+      null;
+
     return (
       <View
         style={styles.container}>
@@ -152,6 +166,7 @@ export class Categories extends React.Component {
           iconName='add'
           handlePress={() => Actions.addCategory()} />
         {deleteModal}
+        {loader}
       </View >
     );
   }
@@ -160,9 +175,11 @@ export class Categories extends React.Component {
 function MapStateToProps(state) {
   return ({
     categories: state.main.categories,
+    ideas: state.main.ideas,
     uid: state.main.user.uid,
     errorMessage: state.main.user.errorMessage,
-    apiSaveSuccess: state.main.user.apiSaveSuccess
+    apiSaveSuccess: state.main.user.apiSaveSuccess,
+    loading: state.main.app.loading,
   });
 }
 

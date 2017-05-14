@@ -119,11 +119,9 @@ export class Ideas extends React.Component {
 
   componentDidUpdate() {
     if (this.props.errorMessage || this.props.apiSaveSuccess) {
-      setTimeout(() => {
-        this.props.dispatch({
-          type: 'SET_LOADING_FALSE'
-        });
-      }, 1500);
+      this.props.dispatch({
+        type: 'SET_LOADING_FALSE'
+      });
     }
   }
 
