@@ -4,7 +4,8 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
-  StatusBar
+  StatusBar,
+  Share,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -26,6 +27,7 @@ export class Ideas extends React.Component {
     this.navigateCategories = this.navigateCategories.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
     this.editIdea = this.editIdea.bind(this);
+    this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
 
     this.state = {
@@ -74,6 +76,17 @@ export class Ideas extends React.Component {
 
   editIdea(idea) {
     Actions.editIdeaTab(idea);
+  }
+
+  shareIdea(idea) {
+    const description = idea.description ? idea.description : '';
+    Share.share({
+      message: 'My new idea off the IdeaMe App: ' + idea.title + '. ' + description,
+    }, {
+      dialogTitle: 'Share Your Idea',
+    })
+    .then( /* Do nothing */)
+    .catch((error) => console.log('Share error:', error.message));
   }
 
   deleteIdea(title) {
@@ -134,7 +147,7 @@ export class Ideas extends React.Component {
         <View style={styles.footerButtonsContainer}>
           <TouchableOpacity
             style={styles.shareIconContainer}
-            onPress={() => this.editIdea({ ...item, index })} >
+            onPress={() => this.shareIdea({ ...item})} >
             <MaterialIcon
               name='share'
               color={styleConstants.white}
@@ -143,7 +156,7 @@ export class Ideas extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.editIconContainer}
-            onPress={() => this.editIdea({ ...item, index })} >
+            onPress={() => this.editIdea({ ...item})} >
             <Icon
               name='pencil'
               color={styleConstants.white}
