@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   TouchableOpacity,
-  StatusBar,
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
@@ -11,6 +10,7 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import styles from '../styles/pages/AddIdea';
 import styleConstants from '../styles/styleConstants';
 
+import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Dropdown from '../components/Dropdown';
@@ -61,7 +61,7 @@ export class AddIdea extends React.Component {
   }
 
   navigateCategories() {
-    Actions.categoriesTab();
+    Actions.categories();
   }
 
   selectCategory(eventId) {
@@ -137,7 +137,16 @@ export class AddIdea extends React.Component {
     return (
       <View
         style={styles.container}>
-        <StatusBar backgroundColor={styleConstants.primary} />
+        <Header 
+          backgroundColor={styleConstants.primary}
+          text='Add an Idea'
+          textSize={28}
+          textColor={styleConstants.white}
+          textStyle={styleConstants.ranga} 
+          rightIconName='close'
+          rightIconColor={styleConstants.white}
+          rightIconSize={28}
+          handleRightIconPress={() => Actions.pop()} />
         <View style={styles.inputArea}>
           <Input
             placeholder="What's the big idea?"

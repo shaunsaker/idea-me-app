@@ -97,7 +97,7 @@ export class SignIn extends React.Component {
             }
         }
         else if (this.props.authenticated) {
-            Actions.home();
+            Actions.ideas();
         }
     }
 

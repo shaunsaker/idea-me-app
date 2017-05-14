@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'relative',
         backgroundColor: styleConstants.white,
-        marginTop: 56,
         paddingBottom: 56
     },
     infoContainer: {
@@ -28,6 +27,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: styleConstants.white,
         borderRadius: 16,
+        borderWidth: 1,
+        borderColor: styleConstants.white,
         margin: 16,
         marginTop: 8,
         elevation: 5,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: styleConstants.grey,
+        backgroundColor: styleConstants.primary,
         borderBottomRightRadius: 16,
         height: 50,
     },

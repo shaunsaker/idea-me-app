@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
-  StatusBar,
   Share,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
@@ -15,6 +14,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
+import Header from '../components/Header';
 import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
 import FooterButton from '../components/FooterButton';
@@ -51,7 +51,7 @@ export class Ideas extends React.Component {
   }
 
   navigateCategories() {
-    Actions.categoriesTab();
+    Actions.categories();
   }
 
   selectCategory(eventId) {
@@ -75,7 +75,7 @@ export class Ideas extends React.Component {
   }
 
   editIdea(idea) {
-    Actions.editIdeaTab(idea);
+    Actions.editIdea(idea);
   }
 
   shareIdea(idea) {
@@ -234,7 +234,12 @@ export class Ideas extends React.Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={styleConstants.primary} />
+        <Header 
+          backgroundColor={styleConstants.primary}
+          text='Idea Me'
+          textSize={28}
+          textColor={styleConstants.white}
+          textStyle={styleConstants.ranga} />
         <View style={styles.infoContainer}>
           <Count
             count={counter}
@@ -250,7 +255,7 @@ export class Ideas extends React.Component {
         {ideas}
         <FooterButton
           iconName='add'
-          handlePress={() => Actions.addIdeaTab()} />
+          handlePress={() => Actions.addIdea()} />
       </View >
     );
   }

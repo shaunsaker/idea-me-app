@@ -10,6 +10,7 @@ Ideas Menu
     Logout
 Create material inputs (and general input styling)
 Facebook Login
+    FB Login manager (full customisation)
 Google Login
 Guest Login
 Splash screen

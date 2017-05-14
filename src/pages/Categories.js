@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
-  StatusBar,
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
@@ -13,6 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/pages/Categories';
 import styleConstants from '../styles/styleConstants';
 
+import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 
@@ -105,13 +105,22 @@ export class Categories extends React.Component {
     return (
       <View
         style={styles.container}>
-        <StatusBar backgroundColor={styleConstants.primary} />
+        <Header 
+          backgroundColor={styleConstants.primary}
+          text='Categories'
+          textSize={28}
+          textColor={styleConstants.white}
+          textStyle={styleConstants.ranga} 
+          leftIconName='chevron-left'
+          leftIconColor={styleConstants.white}
+          leftIconSize={36}
+          handleLeftIconPress={() => Actions.pop()} />
         <View style={styles.categoriesContainer}>
           {categories}
         </View>
         <FooterButton
           iconName='add'
-          handlePress={() => Actions.addCategoryTab()} />
+          handlePress={() => Actions.addCategory()} />
       </View >
     );
   }

@@ -1,7 +1,6 @@
 import React from "react";
 import {
   View,
-  StatusBar,
 } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
@@ -9,6 +8,7 @@ import { Actions } from "react-native-router-flux";
 import styles from '../styles/pages/AddCategory';
 import styleConstants from '../styles/styleConstants';
 
+import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 import Growl from '../components/Growl';
@@ -77,7 +77,16 @@ export class AddCategory extends React.Component {
     return (
       <View
         style={styles.container}>
-        <StatusBar backgroundColor={styleConstants.primary} />
+        <Header 
+          backgroundColor={styleConstants.primary}
+          text='Add a Category'
+          textSize={28}
+          textColor={styleConstants.white}
+          textStyle={styleConstants.ranga} 
+          rightIconName='close'
+          rightIconColor={styleConstants.white}
+          rightIconSize={28}
+          handleRightIconPress={() => Actions.pop()} />
         <View style={styles.inputArea}>
           <Input
             placeholder="Enter new category..."
