@@ -15,6 +15,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
+import DeleteModal from '../components/DeleteModal';
 
 export class Categories extends React.Component {
   constructor(props) {
@@ -22,10 +23,14 @@ export class Categories extends React.Component {
 
     this.deleteCategory = this.deleteCategory.bind(this);
     this.saveUserCategories = this.saveUserCategories.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.renderItem = this.renderItem.bind(this);
 
     this.state = {
-      loading: false
+      loading: false,
+      showDeleteModal: false,
+      showDeleteModalTitle: null,
+      showDeleteModalIndex: null,
     }
   }
 
@@ -47,6 +52,7 @@ export class Categories extends React.Component {
       type: 'DELETE_CATEGORY',
       index
     });
+    this.toggleDeleteModal();
   }
 
   saveUserCategories() {
@@ -77,7 +83,22 @@ export class Categories extends React.Component {
     }
   }
 
-  renderItem({ item, index}) {
+  toggleDeleteModal(index, title) {
+    if ((index || index === 0) && title) {
+      this.setState({
+        showDeleteModal: !this.state.showDeleteModal,
+        showDeleteModalTitle: title,
+        showDeleteModalIndex: index
+      });
+    }
+    else {
+      this.setState({
+        showDeleteModal: !this.state.showDeleteModal,
+      });
+    }
+  }
+
+  renderItem({ item, index }) {
     return (
       <View
         style={styles.categoryItem}>
@@ -85,7 +106,7 @@ export class Categories extends React.Component {
           <Text style={[styles.categoryText, styleConstants.robotoCondensed]}>{item}</Text>
         </View>
         <TouchableOpacity style={styles.iconContainer}
-          onPress={() => this.deleteCategory(index)} >
+          onPress={() => this.toggleDeleteModal(index, item)} >
           <Icon
             name='close'
             size={24}
@@ -98,29 +119,39 @@ export class Categories extends React.Component {
   render() {
     const categories =
       <FlatList
-        keyExtractor={item => 'category' + item} 
+        keyExtractor={item => 'category' + item}
         data={this.props.categories}
-        renderItem={this.renderItem}/>;
+        renderItem={this.renderItem} 
+        contentContainerStyle={styles.categoriesContainer} />;
+
+    const deleteModal = this.state.showDeleteModal ?
+      <DeleteModal
+        text={'Are you sure you want to delete ' + this.state.showDeleteModalTitle + '?'}
+        leftIconName='check'
+        handleLeftIconPress={() => this.deleteCategory(this.state.showDeleteModalIndex)}
+        rightIconName='close'
+        handleRightIconPress={this.toggleDeleteModal} />
+      :
+      <View />;
 
     return (
       <View
         style={styles.container}>
-        <Header 
+        <Header
           backgroundColor={styleConstants.primary}
           text='Categories'
           textSize={28}
           textColor={styleConstants.white}
-          textStyle={styleConstants.ranga} 
+          textStyle={styleConstants.ranga}
           leftIconName='chevron-left'
           leftIconColor={styleConstants.white}
           leftIconSize={36}
           handleLeftIconPress={() => Actions.pop()} />
-        <View style={styles.categoriesContainer}>
-          {categories}
-        </View>
+        {categories}
         <FooterButton
           iconName='add'
           handlePress={() => Actions.addCategory()} />
+        {deleteModal}
       </View >
     );
   }

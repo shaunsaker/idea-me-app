@@ -34,7 +34,7 @@ export default class Count extends React.Component {
     render() {
         return (
             <View style={styles.countContainer}>
-                <Text style={[styles.countText, ...styleConstants.robotoCondensed]}>
+                <Text style={[styles.countText, styleConstants.robotoCondensed]}>
                     {this.props.count}
                     <Text style={styles.separator}> / </Text>
                     {this.props.total}

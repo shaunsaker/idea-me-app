@@ -18,6 +18,7 @@ import Header from '../components/Header';
 import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
 import FooterButton from '../components/FooterButton';
+import DeleteModal from '../components/DeleteModal';
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -29,10 +30,13 @@ export class Ideas extends React.Component {
     this.editIdea = this.editIdea.bind(this);
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
 
     this.state = {
       currentCategory: 'All',
-      loading: false
+      loading: false,
+      showDeleteModal: false,
+      showDeleteModalTitle: null,
     }
   }
 
@@ -94,6 +98,7 @@ export class Ideas extends React.Component {
       type: 'DELETE_IDEA',
       title
     });
+    this.toggleDeleteModal();
   }
 
   componentDidUpdate() {
@@ -105,6 +110,21 @@ export class Ideas extends React.Component {
           });
         }
       }, 1500);
+    }
+  }
+
+  toggleDeleteModal(index, title) {
+    if (index && title) {
+      this.setState({
+        showDeleteModal: !this.state.showDeleteModal,
+        showDeleteModalTitle: title,
+        showDeleteModalIndex: index
+      });
+    }
+    else {
+      this.setState({
+        showDeleteModal: !this.state.showDeleteModal,
+      });
     }
   }
 
@@ -122,7 +142,7 @@ export class Ideas extends React.Component {
         </View>
         <TouchableOpacity
           style={styles.deleteIconContainer}
-          onPress={() => this.deleteIdea(item.title)} >
+          onPress={() => this.toggleDeleteModal(item.title)} >
           <MaterialIcon
             name='close'
             color={styleConstants.grey}
@@ -232,6 +252,16 @@ export class Ideas extends React.Component {
           pagingEnabled={true} />
     }
 
+    const deleteModal = this.state.showDeleteModal ?
+      <DeleteModal 
+        text={'Are you sure you want to delete ' + this.state.showDeleteModalTitle + '?'} 
+        leftIconName='check' 
+        handleLeftIconPress={() => this.deleteIdea(this.state.showDeleteModalTitle)}
+        rightIconName='close'
+        handleRightIconPress={this.toggleDeleteModal} />
+      :
+      <View />;
+
     return (
       <View style={styles.container}>
         <Header 
@@ -256,6 +286,7 @@ export class Ideas extends React.Component {
         <FooterButton
           iconName='add'
           handlePress={() => Actions.addIdea()} />
+        {deleteModal}
       </View >
     );
   }

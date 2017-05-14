@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: styleConstants.primary,
+        backgroundColor: styleConstants.white,
         borderRadius: 32,
         borderWidth: 1,
         borderColor: styleConstants.white,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     dropdownItemsWrapper: {
         position: 'absolute',
-        top: 56,
+        top: 42,
         width: 200,
         zIndex: 1,
         borderTopLeftRadius: 8,
@@ -68,11 +68,11 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderStyle: 'solid',
         borderColor: styleConstants.primary,
-        backgroundColor: styleConstants.transPrimary,
+        backgroundColor: styleConstants.grey,
         paddingVertical: 6,
     },
     dropdownButtonText: {
-        color: styleConstants.white,
+        color: styleConstants.primary,
         fontSize: 24,
         textAlign: 'center',
         width: 200,
@@ -168,9 +168,9 @@ export default class Dropdown extends React.Component {
             <TouchableOpacity
                 style={styles.dropdownItemAdd}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(200) }} >
-                <Icon name='pencil' size={18} style={styles.editIcon} />
+                <Icon name='pencil' size={18} color={styleConstants.white} style={styles.editIcon} />
                 <Text
-                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                    style={[styles.dropdownItemText, {color:styleConstants.white}, styleConstants.robotoCondensed]}>
                     Edit Categories
                 </Text>
             </TouchableOpacity>;

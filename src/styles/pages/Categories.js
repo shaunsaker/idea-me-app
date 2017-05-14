@@ -7,11 +7,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        backgroundColor: styleConstants.white
+        backgroundColor: styleConstants.white,
     },
     categoriesContainer: {
         flex: 1,
-        marginTop: 16,
+        justifyContent: 'center',
+        paddingBottom: 56
     },
     categoryItem: {   
         width: 280,     
