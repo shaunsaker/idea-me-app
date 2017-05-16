@@ -1,6 +1,7 @@
 TODO
 
-Categories with the same name break the app
+Cant see growl anymore
+User errors are being reset four times (or add category page is rendering four times)
 Optimise code
     Remove unnecessary
     Check proptypes

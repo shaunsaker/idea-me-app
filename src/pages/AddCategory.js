@@ -48,27 +48,43 @@ export class AddCategory extends React.Component {
   addNewCategory() {
     if (this.props.newCategoryValue) {
       let categories = this.props.categories;
+      const newCategory = utilities.firstCharToUppercase(this.props.newCategoryValue.trim());
+      let categoryPresent = false;
 
-      if (categories) {
-        const newCategory = utilities.firstCharToUppercase(this.props.newCategoryValue.trim());
-        categories.push(newCategory);
+      // Check if this category exists already
+      categories.map((value) => {                                           
+        if (value === newCategory) {
+          categoryPresent = true;
+        }
+      });
+
+      if (!categoryPresent) {                         
+        if (categories) {                                           
+          categories.push(newCategory);
+        }
+        else {
+          categories = [this.props.newCategoryValue.trim()];
+        }
+
+        this.props.dispatch({
+          type: 'UPDATE_USER_CATEGORIES',
+          categories
+        });
+
+        this.props.dispatch({
+          type: 'saveUserCategories',
+          categories,
+          uid: this.props.uid
+        });
+
+        Actions.pop();
       }
       else {
-        categories = [this.props.newCategoryValue.trim()];
+        this.props.dispatch({
+          type: 'USER_ERROR',
+          message: 'This category already exists'
+        });
       }
-
-      this.props.dispatch({
-        type: 'UPDATE_USER_CATEGORIES',
-        categories
-      });
-
-      this.props.dispatch({
-        type: 'saveUserCategories',
-        categories,
-        uid: this.props.uid
-      });
-
-      Actions.pop();
     }
     else {
       this.props.dispatch({
@@ -92,12 +108,12 @@ export class AddCategory extends React.Component {
     return (
       <View
         style={styles.container}>
-        <Header 
+        <Header
           backgroundColor={styleConstants.primary}
           text='Add a Category'
           textSize={28}
           textColor={styleConstants.white}
-          textStyle={styleConstants.ranga} 
+          textStyle={styleConstants.ranga}
           rightIconName='close'
           rightIconColor={styleConstants.white}
           rightIconSize={28}
