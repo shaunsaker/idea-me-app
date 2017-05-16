@@ -16,6 +16,7 @@ import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 import DeleteModal from '../components/DeleteModal';
+import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
 export class Categories extends React.Component {
@@ -38,7 +39,8 @@ export class Categories extends React.Component {
       categories: React.PropTypes.array.isRequired,
       uid: React.PropTypes.string,
       errorMessage: React.PropTypes.string,
-      apiSaveSuccess: React.PropTypes.bool
+      apiSaveSuccess: React.PropTypes.bool,
+      loading: React.PropTypes.bool,
     };
   }
 
@@ -143,6 +145,11 @@ export class Categories extends React.Component {
       :
       <View />;
 
+    const loader = this.props.loading ?
+        <Loader positionStyle={{ bottom: 56}} />
+        :
+        null;
+
     const errorMessage = this.props.errorMessage ?
         <Growl text={this.props.errorMessage} />
         :
@@ -166,6 +173,7 @@ export class Categories extends React.Component {
           iconName='add'
           handlePress={() => Actions.addCategory()} />
         {deleteModal}
+        {loader}
         {errorMessage}
       </View >
     );

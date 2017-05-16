@@ -1,6 +1,6 @@
 TODO
 
-Disable back button to splash screen (previous commit not working)
+Categories with the same name break the app
 Optimise code
     Remove unnecessary
     Check proptypes
@@ -18,11 +18,8 @@ Ideas Menu
     About App
     Report a Bug
     Logout
-Splash screen
+Signin screen
     Hints at content
     Displays sign in options
 iOS testing
-On api save, dropdown does not open
-    Could be related to modal issue
-Delete modal (are you sure you want to delete this idea?)
-    Modal does not get completely unmounted after close (common issue which will be fixed in RN 0.45)
+Various Android zIndex issues to be fixed in RN 0.45.0

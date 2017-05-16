@@ -12,7 +12,7 @@ import styleConstants from '../styles/styleConstants';
 const styles = StyleSheet.create({
 	container: {
 		position: 'absolute',
-		top: 56,
+		bottom: 0,
 		left: 0,
 		right: 0,
 		height: 5,
@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
 	loader: {
 		position: 'absolute',
 		left: -100,
-		bottom: 0,
 		width: 100,
 		height: 5,
 	}
@@ -41,11 +40,12 @@ export default class Loader extends React.Component{
     static get propTypes() {
       return {
 		color: React.PropTypes.string,
+		positionStyle: React.PropTypes.object,
       };
     }
 
 	static defaultProps = {
-		color: styleConstants.secondary
+		color: styleConstants.secondary,
 	}
 
 	componentDidMount() {
@@ -80,13 +80,8 @@ export default class Loader extends React.Component{
 	}
 
 	render() {
-		const positionStyle = this.props.positionTop ?
-			{ top: 56 }
-			:
-			{ bottom : 0}; 
-
 		return (
-			<Animated.View style={[styles.container, positionStyle, {opacity: this.opacity}]}>
+			<Animated.View style={[styles.container, this.props.positionStyle, {opacity: this.opacity}]}>
 				<Animated.View style={[styles.loader, {left: this.position}, {backgroundColor: this.props.color}]} />
 			</Animated.View>
 		);

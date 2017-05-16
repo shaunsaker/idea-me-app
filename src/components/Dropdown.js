@@ -33,13 +33,12 @@ const styles = StyleSheet.create({
         },
         width: 200,
         paddingVertical: 4,
-        marginTop: 16
+        marginTop: 16,
     },
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 52,
         width: 200,
-        zIndex: 1,
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         borderBottomLeftRadius: 32,
@@ -54,6 +53,7 @@ const styles = StyleSheet.create({
         },
         backgroundColor: styleConstants.white,
         maxHeight: 200,
+        zIndex: 1
     },
     dropdownItem: {        
         flexDirection: 'row',

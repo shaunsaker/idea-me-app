@@ -19,6 +19,7 @@ import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
 import FooterButton from '../components/FooterButton';
 import DeleteModal from '../components/DeleteModal';
+import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
 export class Ideas extends React.Component {
@@ -45,6 +46,7 @@ export class Ideas extends React.Component {
       uid: React.PropTypes.string.isRequired,
       errorMessage: React.PropTypes.string,
       apiSaveSuccess: React.PropTypes.bool,
+      loading: React.PropTypes.bool,
     };
   }
 
@@ -263,6 +265,11 @@ export class Ideas extends React.Component {
       :
       <View />;
 
+    const loader = this.props.loading ?
+        <Loader positionStyle={{ bottom: 56 }} />
+        :
+        null;
+
     const errorMessage = this.props.errorMessage ?
         <Growl text={this.props.errorMessage} />
         :
@@ -293,6 +300,7 @@ export class Ideas extends React.Component {
           iconName='add'
           handlePress={() => Actions.addIdea()} />
         {deleteModal}
+        {loader}
         {errorMessage}
       </View >
     );

@@ -30,7 +30,8 @@ const Scenes = Actions.create(
 		<Scene
 			key='ideas'
 			title='Idea Me'
-			component={Ideas} />
+			component={Ideas}
+			type={ActionConst.REPLACE} />
 		<Scene
 			key='addIdea'
 			title='Add Your Idea'

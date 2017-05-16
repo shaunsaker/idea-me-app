@@ -9,6 +9,7 @@ import { Actions } from 'react-native-router-flux';
 
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
+import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
 import styles from '../styles/pages/SignIn';
@@ -21,10 +22,6 @@ export class SignIn extends React.Component {
         this.updateUserEmail = this.updateUserEmail.bind(this);
         this.updateUserPassword = this.updateUserPassword.bind(this);
         this.signIn = this.signIn.bind(this);
-
-        this.state = {
-            loading: false
-        }
     }
 
     static get propTypes() {
@@ -32,7 +29,8 @@ export class SignIn extends React.Component {
             userEmail: React.PropTypes.string,
             userPassword: React.PropTypes.string,
             errorMessage: React.PropTypes.string,
-            authenticated: React.PropTypes.bool
+            authenticated: React.PropTypes.bool,
+            loading: React.PropTypes.bool,
         };
     }
 
@@ -52,8 +50,8 @@ export class SignIn extends React.Component {
 
     signIn() {
         if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
-            this.setState({
-                loading: true
+            this.props.dispatch({
+                type: 'SET_LOADING_TRUE'
             });
 
             this.props.dispatch({
@@ -97,11 +95,20 @@ export class SignIn extends React.Component {
             }
         }
         else if (this.props.authenticated) {
+            this.props.dispatch({
+                type: 'SET_LOADING_FALSE'
+            });
+
             Actions.ideas();
         }
     }
 
     render() {
+        const loader = this.props.loading ?
+            <Loader positionStyle={{bottom: 56}}/>
+            :
+            null;
+        
         const errorMessage = this.props.errorMessage ?
             <Growl text={this.props.errorMessage} />
             :
@@ -127,9 +134,9 @@ export class SignIn extends React.Component {
                     </View>
                 </View>
                 <FooterButton
-                    text='SIGN IN'
-                    loading={this.state.loading}
+                    iconName='check'
                     handlePress={this.signIn} />
+                {loader}
                 {errorMessage}
             </View>
         );
@@ -141,7 +148,8 @@ function MapStateToProps(state) {
         userEmail: state.main.user.email,
         userPassword: state.main.user.password,
         errorMessage: state.main.user.errorMessage,
-        authenticated: state.main.user.authenticated
+        authenticated: state.main.user.authenticated,
+        loading: state.main.app.loading,
     });
 }
 

@@ -52,6 +52,11 @@ export default function (state = initialState, action) {
             new_state.user.errorMessage = null;
             return new_state;
 
+        case 'SET_LOADING_TRUE':
+            new_state = cloneObject(state);
+            new_state.app.loading = true;
+            return new_state;
+
         case 'SET_LOADING_FALSE':
             new_state = cloneObject(state);
             new_state.app.loading = false;
