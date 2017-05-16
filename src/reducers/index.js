@@ -12,13 +12,11 @@ export default function (state = initialState, action) {
         case 'UPDATE_USER_EMAIL':
             new_state = cloneObject(state);
             new_state.user.email = action.value;
-            new_state.user.errorMessage = null;
             return new_state;
 
         case 'UPDATE_USER_PASSWORD':
             new_state = cloneObject(state);
             new_state.user.password = action.value;
-            new_state.user.errorMessage = null;
             return new_state;
 
         case 'REDIRECT_USER_TO_SIGN_IN':
@@ -30,14 +28,12 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             new_state.user.authenticated = true;
             new_state.user.uid = action.uid;
-            new_state.user.errorMessage = null;
             new_state.user.signInRedirect = false;
             return new_state;
 
         case 'API_SAVE_SUCCESS':
             new_state = cloneObject(state);
             new_state.user.apiSaveSuccess = true;
-            new_state.user.errorMessage = null;
             return new_state;
 
         case 'API_LOAD_SUCCESS':
@@ -49,7 +45,6 @@ export default function (state = initialState, action) {
                 new_state.categories = action.data.categories;
             }
             new_state.user.apiLoadSuccess = true;
-            new_state.user.errorMessage = null;
             return new_state;
 
         case 'SET_LOADING_TRUE':
@@ -61,15 +56,16 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             new_state.app.loading = false;
             new_state.user.apiSaveSuccess = false;
-            new_state.user.errorMessage = null;
             return new_state;
 
         case 'USER_ERROR':
+            console.log('Setting User Error')
             new_state = cloneObject(state);
             new_state.user.errorMessage = action.message;
             return new_state;
 
         case 'RESET_USER_ERROR':
+            console.log('Resetting user error');
             new_state = cloneObject(state);
             new_state.user.errorMessage = null;
             return new_state;
@@ -94,13 +90,11 @@ export default function (state = initialState, action) {
         case 'UPDATE_NEW_IDEA_TITLE':
             new_state = cloneObject(state);
             new_state.newIdea.title = action.value;
-            new_state.user.errorMessage = null;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_DESCRIPTION':
             new_state = cloneObject(state);
             new_state.newIdea.description = action.value;
-            new_state.user.errorMessage = null;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_CATEGORY':

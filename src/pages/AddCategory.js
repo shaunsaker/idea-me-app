@@ -33,9 +33,11 @@ export class AddCategory extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'RESET_USER_ERROR'
-    });
+    if (this.props.errorMessage) {
+      this.props.dispatch({
+        type: 'RESET_USER_ERROR'
+      });
+    }
   }
 
   updateNewCategoryValue(text) {
@@ -52,14 +54,14 @@ export class AddCategory extends React.Component {
       let categoryPresent = false;
 
       // Check if this category exists already
-      categories.map((value) => {                                           
+      categories.map((value) => {
         if (value === newCategory) {
           categoryPresent = true;
         }
       });
 
-      if (!categoryPresent) {                         
-        if (categories) {                                           
+      if (!categoryPresent) {
+        if (categories) {
           categories.push(newCategory);
         }
         else {
@@ -84,6 +86,12 @@ export class AddCategory extends React.Component {
           type: 'USER_ERROR',
           message: 'This category already exists'
         });
+
+        setTimeout(() => {
+          this.props.dispatch({
+            type: 'RESET_USER_ERROR'
+          });
+        }, 2500);
       }
     }
     else {
@@ -91,6 +99,7 @@ export class AddCategory extends React.Component {
         type: 'USER_ERROR',
         message: 'You forgot to enter a category'
       });
+
       setTimeout(() => {
         this.props.dispatch({
           type: 'RESET_USER_ERROR'
@@ -100,6 +109,7 @@ export class AddCategory extends React.Component {
   }
 
   render() {
+    console.log('Error message', this.props.errorMessage);
     const errorMessage = this.props.errorMessage ?
       <Growl text={this.props.errorMessage} />
       :

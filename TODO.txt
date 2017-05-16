@@ -11,6 +11,7 @@ Optimise code
     All methods used
     Icons named by Icon type, ie. MaterialIcon (should be no plain Icon)
     Check reducers
+    User errors should contain resets
 Facebook Login
     FB Login manager (full customisation)
 Google Login
@@ -24,3 +25,4 @@ Signin screen
     Displays sign in options
 iOS testing
 Various Android zIndex issues to be fixed in RN 0.45.0
+While the glow loader is loading it will be cool to be able to tap it and make it grow
