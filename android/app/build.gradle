@@ -126,6 +126,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fbsdk')
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile project(':react-native-firestack')
     compile project(':react-native-vector-icons')
     compile(project(':react-native-firestack')){ exclude group: 'com.google.android.gms' }

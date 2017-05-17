@@ -1,28 +1,42 @@
-TODO
+TODOS
+    Setup react-native-fbsdk
+        Facebook Login
+            FB Login manager (full customisation)
+    Setup react-native-google-signin
+        Google Login (customised)
+    Guest Login
+    Signin screen
+        Hints at content
+        Displays sign in options
+    Get current location on app load
+    Save user data on sign up
+    Handle User errors correctly
+    Profile Page
+        And all the trimmings
+        Menu
+            About App
+            Report a Bug
+            Logout
+    Use Tabbar
+        Ideas/Home
+        Add Idea
+        Profile Page
 
-Cant see growl anymore
-User errors are being reset four times (or add category page is rendering four times)
-Optimise code
-    Remove unnecessary
-    Check proptypes
-    Lifecycle methods at top with other methods following order of this bindings
-    All imports used
-    All bindings used
-    All methods used
-    Icons named by Icon type, ie. MaterialIcon (should be no plain Icon)
-    Check reducers
-    User errors should contain resets
-Facebook Login
-    FB Login manager (full customisation)
-Google Login
-Guest Login
-Ideas Menu
-    About App
-    Report a Bug
-    Logout
-Signin screen
-    Hints at content
-    Displays sign in options
-iOS testing
-Various Android zIndex issues to be fixed in RN 0.45.0
-While the glow loader is loading it will be cool to be able to tap it and make it grow
+FUTURE TODOS
+    Integrate react-native-fbsdk on iOS
+    Integrate react-native-google-signin on iOS
+
+LESS IMPORTANT TODOS
+    Optimise code
+        Remove unnecessary
+        Check proptypes
+        Lifecycle methods at top with other methods following order of this bindings
+        All imports used
+        All bindings used
+        All methods used
+        Icons named by Icon type, ie. MaterialIcon (should be no plain Icon)
+        Check reducers
+        User errors should contain resets
+    iOS testing
+    Various Android zIndex issues to be fixed in RN 0.45.0
+    While the glow loader is loading it will be cool to be able to tap it and make it grow
