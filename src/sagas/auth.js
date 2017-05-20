@@ -62,6 +62,29 @@ export function* signInUser(action) {
     }
 }
 
+export function* signInUserWithFacebook(action) {
+
+	const signInFacebookResponse = yield call(Auth.signInUserWithFacebook, action);
+	console.log('signInFacebookResponse', signInFacebookResponse);
+
+	if (signInFacebookResponse.authenticated) {
+		const uid = signInFacebookResponse.message.user.uid;
+		yield put({
+			type: 'SIGN_IN_USER',
+			uid: uid,
+			userEmail: signInFacebookResponse.message.user.email,
+			userName: signInFacebookResponse.message.user.displayName,
+			userPhotoUrl: signInFacebookResponse.message.user.photoUrl,
+		});
+	}
+	else {
+		yield put({
+			type: 'AUTH_ERROR',
+			message: signInFacebookResponse.message // TODO: Check this
+		});
+	}
+}
+
 export function* signOutUser() {
 
 	const signOutUserResponse = yield call(Auth.signOutUser);

@@ -1,13 +1,12 @@
 TODOS
 
-    Temp Signout button in header (redirect to signin page)
-        Current signin page to be called SignInWithEmail
     Facebook Login
         FB Login manager (full customisation)
+    Current signin page to be called SignInWithEmail 
     Setup react-native-google-signin
         Google Login (customised)
     Guest Login
-    Signin screen
+    Welcome page / Sign in screen
         See Zomato
         Description about app
         Image underlay
@@ -30,6 +29,7 @@ TODOS
     Categories redux actions with comments
     Integrate requireAuth into Splash page
     User auth flow is not working correctly with data
+    Password reset
     Prepopulate idea on signup
     Profile icon highlighted on signup (indicate action required, ie. complete your profile)
     Idea card

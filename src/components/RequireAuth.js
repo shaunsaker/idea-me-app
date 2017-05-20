@@ -47,7 +47,7 @@ export default function (WrappedComponent) {
         Actions.ideas();
       }
       else if (this.props.redirectUserToSignIn) {
-        Actions.signIn();
+        Actions.welcome();
       }
     }
 

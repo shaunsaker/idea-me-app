@@ -8,6 +8,7 @@ import {
 import RequireAuth from './components/RequireAuth';
 
 import Splash from './pages/Splash';
+import Welcome from './pages/Welcome';
 import SignIn from './pages/SignIn';
 import Ideas from './pages/Ideas';
 import AddIdea from './pages/AddIdea';
@@ -19,34 +20,31 @@ const Scenes = Actions.create(
 	<Scene key='root' hideNavBar={true}>
 		<Scene
 			key='splash'
-			title='Splash'
 			component={RequireAuth(Splash)}
 			initial={true} />
 		<Scene
-			key='signIn'
-			title='Sign In with Email'
-			component={SignIn}
+			key='welcome'
+			component={Welcome}
+			initial={false}
 			type={ActionConst.RESET} />
 		<Scene
+			key='signIn'
+			component={SignIn} />
+		<Scene
 			key='ideas'
-			title='Idea Me'
 			component={Ideas}
 			type={ActionConst.REPLACE} />
 		<Scene
 			key='addIdea'
-			title='Add Your Idea'
 			component={AddIdea} />
 		<Scene
 			key='editIdea'
-			title='Edit Your Idea'
 			component={EditIdea} />
 		<Scene
 			key='categories'
-			title='Categories'
 			component={Categories} />
 		<Scene
 			key='addCategory'
-			title='Add a Category'
 			component={AddCategory} />
 	</Scene>
 )

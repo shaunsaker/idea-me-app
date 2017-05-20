@@ -197,7 +197,7 @@ export class Ideas extends React.Component {
       type: 'signOutUser'
     });
 
-    Actions.signIn();
+    Actions.welcome();
   }
 
   render() {

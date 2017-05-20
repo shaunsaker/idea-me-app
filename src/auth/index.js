@@ -51,6 +51,22 @@ export default class Auth {
         });
     }
 
+    static signInUserWithFacebook(action) {
+        return new Promise(resolve => {
+            firestack.auth.signInWithProvider('facebook', action.accessToken, '')
+                .then((user) => {
+                    response.authenticated = true;
+                    response.message = user;
+                    resolve(response);
+                })
+                .catch(error => {
+					response.authenticated = false;
+                    response.message = error;
+                    resolve(response);
+                });
+        });
+    }
+
     static signOutUser() {
         return new Promise(resolve => {
             firestack.auth.signOut()
