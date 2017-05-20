@@ -50,4 +50,19 @@ export default class Auth {
                 });
         });
     }
+
+    static signOutUser() {
+        return new Promise(resolve => {
+            firestack.auth.signOut()
+                .then((user) => {
+					response.success = true;
+                    resolve(response);
+                })
+                .catch(error => {
+					response.success = false;
+                    response.message = error;
+                    resolve(response);
+                });
+        });
+    }
 }

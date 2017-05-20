@@ -31,6 +31,13 @@ export default function (state = initialState, action) {
             new_state.user.signInRedirect = false;
             return new_state;
 
+        case 'SIGN_OUT_USER':
+            new_state = cloneObject(state);
+            new_state.user.authenticated = false;
+            new_state.user.uid = null;
+            new_state.user.signInRedirect = true;
+            return new_state;
+
         case 'API_SAVE_SUCCESS':
             new_state = cloneObject(state);
             new_state.user.apiSaveSuccess = true;

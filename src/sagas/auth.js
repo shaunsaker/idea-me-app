@@ -61,3 +61,21 @@ export function* signInUser(action) {
         }
     }
 }
+
+export function* signOutUser() {
+
+	const signOutUserResponse = yield call(Auth.signOutUser);
+	console.log('signOutUserResponse', signOutUserResponse);
+
+	if (signOutUserResponse.success) {
+		yield put({
+			type: 'SIGN_OUT_USER',
+		});
+	}
+	else {
+		yield put({
+			type: 'USER_ERROR',
+			message: signOutUserResponse.message // TODO: Check this
+		});
+	}
+}

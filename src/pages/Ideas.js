@@ -31,6 +31,7 @@ export class Ideas extends React.Component {
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.signOut = this.signOut.bind(this);
 
     this.state = {
       currentCategory: 'All',
@@ -191,6 +192,14 @@ export class Ideas extends React.Component {
     );
   }
 
+  signOut() {
+    this.props.dispatch({
+      type: 'signOutUser'
+    });
+
+    Actions.signIn();
+  }
+
   render() {
     let counter = 0;
     let ideas = <View style={{ flex: 1 }}></View>;
@@ -282,7 +291,9 @@ export class Ideas extends React.Component {
           text='Idea Me'
           textSize={28}
           textColor={styleConstants.white}
-          textStyle={styleConstants.ranga} />
+          textStyle={styleConstants.ranga} 
+          rightIconName='info'
+          handleRightIconPress={this.signOut}/>
         <View style={styles.infoContainer}>
           <Count
             count={counter}

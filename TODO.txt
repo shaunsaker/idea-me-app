@@ -1,16 +1,19 @@
 TODOS
-    Setup react-native-fbsdk
-        Facebook Login
-            FB Login manager (full customisation)
+
+    Temp Signout button in header (redirect to signin page)
+        Current signin page to be called SignInWithEmail
+    Facebook Login
+        FB Login manager (full customisation)
     Setup react-native-google-signin
         Google Login (customised)
     Guest Login
     Signin screen
-        Hints at content
-        Displays sign in options
+        See Zomato
+        Description about app
+        Image underlay
+        Displays sign in options as ghost buttons
     Get current location on app load
     Save user data on sign up
-    Handle User errors correctly
     Profile Page
         And all the trimmings
         Menu
@@ -21,6 +24,16 @@ TODOS
         Ideas/Home
         Add Idea
         Profile Page
+    Custom icons
+    Sound when idea added
+    Reconfigure errors per action (ie. AUTH_ERROR, API_ERROR, STORAGE_ERROR etc)
+    Categories redux actions with comments
+    Integrate requireAuth into Splash page
+    User auth flow is not working correctly with data
+    Prepopulate idea on signup
+    Profile icon highlighted on signup (indicate action required, ie. complete your profile)
+    Idea card
+        Display edit, share and delete icons as dropdown
 
 FUTURE TODOS
     Integrate react-native-fbsdk on iOS
