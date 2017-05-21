@@ -5,8 +5,6 @@ import {
 	Scene,
 } from 'react-native-router-flux';
 
-import RequireAuth from './components/RequireAuth';
-
 import Splash from './pages/Splash';
 import Welcome from './pages/Welcome';
 import SignInWithEmail from './pages/SignInWithEmail';
@@ -20,7 +18,7 @@ const Scenes = Actions.create(
 	<Scene key='root' hideNavBar={true}>
 		<Scene
 			key='splash'
-			component={RequireAuth(Splash)}
+			component={Splash}
 			initial={true} />
 		<Scene
 			key='welcome'
