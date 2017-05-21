@@ -7,7 +7,6 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import FacebookLoginButton from '../components/FacebookLoginButton';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
@@ -60,7 +59,7 @@ export class Welcome extends React.Component {
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor={styleConstants.primary} />
-                <FacebookLoginButton />
+
                 {loader}
                 {errorMessage}
             </View>

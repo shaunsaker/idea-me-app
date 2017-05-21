@@ -1,18 +1,18 @@
 TODOS
 
-    Facebook Login
-        FB Login manager (full customisation)
-    Current signin page to be called SignInWithEmail 
-    Setup react-native-google-signin
-        Google Login (customised)
-    Guest Login
+    Integrate requireAuth into Splash page
+    Categories redux actions with comments
+    Reconfigure errors per action (ie. AUTH_ERROR, API_ERROR, STORAGE_ERROR etc)
     Welcome page / Sign in screen
         See Zomato
         Description about app
         Image underlay
         Displays sign in options as ghost buttons
-    Get current location on app load
-    Save user data on sign up
+    Material Inputs
+    Animate hide header on input focus
+    Feedback button opens webview to Google Survey
+    Handle signinwithemail state in page (store gets values on submit)
+    Password reset
     Profile Page
         And all the trimmings
         Menu
@@ -23,13 +23,17 @@ TODOS
         Ideas/Home
         Add Idea
         Profile Page
+    Facebook Login
+        FB Login manager (full customisation)
+    Setup react-native-google-signin
+        Google Login (customised)
+    Guest Login
+    Get current location on app load
+    Save user data on sign up
+
     Custom icons
     Sound when idea added
-    Reconfigure errors per action (ie. AUTH_ERROR, API_ERROR, STORAGE_ERROR etc)
-    Categories redux actions with comments
-    Integrate requireAuth into Splash page
     User auth flow is not working correctly with data
-    Password reset
     Prepopulate idea on signup
     Profile icon highlighted on signup (indicate action required, ie. complete your profile)
     Idea card

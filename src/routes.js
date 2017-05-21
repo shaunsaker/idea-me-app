@@ -9,7 +9,7 @@ import RequireAuth from './components/RequireAuth';
 
 import Splash from './pages/Splash';
 import Welcome from './pages/Welcome';
-import SignIn from './pages/SignIn';
+import SignInWithEmail from './pages/SignInWithEmail';
 import Ideas from './pages/Ideas';
 import AddIdea from './pages/AddIdea';
 import EditIdea from './pages/EditIdea';
@@ -28,8 +28,8 @@ const Scenes = Actions.create(
 			initial={false}
 			type={ActionConst.RESET} />
 		<Scene
-			key='signIn'
-			component={SignIn} />
+			key='signInWithEmail'
+			component={SignInWithEmail} />
 		<Scene
 			key='ideas'
 			component={Ideas}

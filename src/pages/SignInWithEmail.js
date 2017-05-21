@@ -12,10 +12,10 @@ import FooterButton from '../components/FooterButton';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
-import styles from '../styles/pages/SignIn';
+import styles from '../styles/pages/SignInWithEmail';
 import styleConstants from '../styles/styleConstants';
 
-export class SignIn extends React.Component {
+export class SignInWithEmail extends React.Component {
     constructor(props) {
         super(props);
 
@@ -153,4 +153,4 @@ function MapStateToProps(state) {
     });
 }
 
-export default connect(MapStateToProps)(SignIn);
+export default connect(MapStateToProps)(SignInWithEmail);
