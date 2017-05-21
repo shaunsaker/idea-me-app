@@ -212,16 +212,16 @@ export class AddIdea extends React.Component {
 
 function MapStateToProps(state) {
   return ({
-    categories: state.main.categories,
-    priorities: state.main.priorities,
-    newIdea: state.main.newIdea,
-    newIdeaTitle: state.main.newIdea.title,
-    newIdeaDescription: state.main.newIdea.description,
-    newIdeaCategory: state.main.categories[state.main.newIdea.categoryId],
-    newIdeaPriority: state.main.priorities[state.main.newIdea.priorityId],
-    errorMessage: state.main.user.errorMessage,
-    ideas: state.main.ideas,
-    uid: state.main.user.uid
+    categories: state.main.userData.categories,
+    priorities: state.main.appData.priorities,
+    newIdea: state.main.userData.newIdea,
+    newIdeaTitle: state.main.userData.newIdea.title,
+    newIdeaDescription: state.main.userData.newIdea.description,
+    newIdeaCategory: state.main.userData.categories[state.main.userData.newIdea.categoryId],
+    newIdeaPriority: state.main.appData.priorities[state.main.userData.newIdea.priorityId],
+    errorMessage: state.main.userAuth.userAuthErrorMessage,
+    ideas: state.main.userData.ideas,
+    uid: state.main.userAuth.uid
   });
 }
 

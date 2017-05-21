@@ -69,8 +69,8 @@ export class Welcome extends React.Component {
 
 function MapStateToProps(state) {
     return ({
-        errorMessage: state.main.user.errorMessage,
-        authenticated: state.main.user.authenticated,
+        errorMessage: state.main.userAuth.userAuthErrorMessage,
+        authenticated: state.main.userAuth.authenticated,
         loading: state.main.app.loading,
     });
 }

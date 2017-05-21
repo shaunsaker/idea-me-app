@@ -9,6 +9,7 @@ import initialState from './initialState';
 export default function (state = initialState, action) {
     switch (action.type) {
 
+        /* USER AUTH */
         case 'UPDATE_USER_EMAIL':
             new_state = cloneObject(state);
             new_state.user.email = action.value;
@@ -38,6 +39,7 @@ export default function (state = initialState, action) {
             new_state.user.signInRedirect = true;
             return new_state;
 
+        /* API */
         case 'API_SAVE_SUCCESS':
             new_state = cloneObject(state);
             new_state.user.apiSaveSuccess = true;
@@ -54,6 +56,7 @@ export default function (state = initialState, action) {
             new_state.user.apiLoadSuccess = true;
             return new_state;
 
+        /* APP */
         case 'SET_LOADING_TRUE':
             new_state = cloneObject(state);
             new_state.app.loading = true;
@@ -65,18 +68,48 @@ export default function (state = initialState, action) {
             new_state.user.apiSaveSuccess = false;
             return new_state;
 
+        /* SUCCESS/ERROR MESSAGES */
         case 'USER_ERROR':
-            console.log('Setting User Error')
             new_state = cloneObject(state);
-            new_state.user.errorMessage = action.message;
+            new_state.app.userErrorMessage = action.message;
             return new_state;
 
         case 'RESET_USER_ERROR':
-            console.log('Resetting user error');
             new_state = cloneObject(state);
-            new_state.user.errorMessage = null;
+            new_state.app.userErrorMessage = null;
             return new_state;
 
+        case 'API_ERROR':
+            new_state = cloneObject(state);
+            new_state.api.apiErrorMessage = action.message;
+            return new_state;
+
+        case 'RESET_API_ERROR':
+            new_state = cloneObject(state);
+            new_state.api.apiErrorMessage = null;
+            return new_state;
+
+        case 'STORAGE_ERROR':
+            new_state = cloneObject(state);
+            new_state.storage.storageErrorMessage = action.message;
+            return new_state;
+
+        case 'RESET_STORAGE_ERROR':
+            new_state = cloneObject(state);
+            new_state.storage.storageErrorMessage = null;
+            return new_state;
+
+        case 'GEOLOCATION_ERROR':
+            new_state = cloneObject(state);
+            new_state.geolocation.geolocationErrorMessage = action.message;
+            return new_state;
+
+        case 'RESET_GEOLOCATION_ERROR':
+            new_state = cloneObject(state);
+            new_state.geolocation.geolocationErrorMessage = null;
+            return new_state;
+
+        /* USER DATA */
         case 'UPDATE_USER_IDEAS':
             new_state = cloneObject(state);
             new_state.ideas = action.ideas;

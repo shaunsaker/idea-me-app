@@ -1,8 +1,5 @@
 TODOS
 
-    Integrate requireAuth into Splash page
-    Categories redux actions with comments
-    Reconfigure errors per action (ie. AUTH_ERROR, API_ERROR, STORAGE_ERROR etc)
     Welcome page / Sign in screen
         See Zomato
         Description about app
@@ -30,7 +27,7 @@ TODOS
     Guest Login
     Get current location on app load
     Save user data on sign up
-
+    Handle all user errors
     Custom icons
     Sound when idea added
     User auth flow is not working correctly with data

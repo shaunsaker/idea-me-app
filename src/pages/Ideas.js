@@ -320,12 +320,12 @@ export class Ideas extends React.Component {
 
 function MapStateToProps(state) {
   return ({
-    categories: state.main.categories,
-    priorities: state.main.priorities,
-    ideas: state.main.ideas,
-    uid: state.main.user.uid,
-    errorMessage: state.main.user.errorMessage,
-    apiSaveSuccess: state.main.user.apiSaveSuccess,
+    categories: state.main.userData.categories,
+    priorities: state.main.appData.priorities,
+    ideas: state.main.userData.ideas,
+    uid: state.main.userAuth.uid,
+    errorMessage: state.main.userAuth.userAuthErrorMessage,
+    apiSaveSuccess: state.main.api.apiSaveSuccess,
     loading: state.main.app.loading
   });
 }

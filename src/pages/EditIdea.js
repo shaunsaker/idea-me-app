@@ -216,18 +216,18 @@ export class EditIdea extends React.Component {
 
 function MapStateToProps(state) {
     return ({
-        categories: state.main.categories,
-        priorities: state.main.priorities,
+        categories: state.main.userData.categories,
+        priorities: state.main.appData.priorities,
         initialIdeaTitle: state.routes.scene.title,
         initialIdeaDescription: state.routes.scene.description,
         initialIdeaCategory: Number(state.routes.scene.categoryId),
         initialIdeaPriority: Number(state.routes.scene.priorityId),
-        editIdeaTitle: state.main.editIdea.title,
-        editIdeaDescription: state.main.editIdea.description,
-        editIdeaCategory: state.main.editIdea.categoryId,
-        editIdeaPriority: state.main.editIdea.priorityId,
-        ideas: state.main.ideas,
-        uid: state.main.user.uid,
+        editIdeaTitle: state.main.userData.editIdea.title,
+        editIdeaDescription: state.main.userData.editIdea.description,
+        editIdeaCategory: state.main.userData.editIdea.categoryId,
+        editIdeaPriority: state.main.userData.editIdea.priorityId,
+        ideas: state.main.userData.ideas,
+        uid: state.main.userAuth.uid,
     });
 }
 

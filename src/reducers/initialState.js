@@ -1,44 +1,61 @@
 const initialState = {
-    app: {
-        loading: false
-    },
-    user: {
+    userAuth: {
         authenticated: null,
-        uid: null,
-        errorMessage: null,
         signInRedirect: null,
+        uid: null,
         email: null,
         password: null,
+        userAuthErrorMessage: null,
+    },
+    app: {
+        loading: false,
+        userErrorMessage: null,
+        userSuccessMessage: null,
+    },
+    api: {
         apiSaveSuccess: null,
         apiLoadSuccess: null,
+        apiErrorMessage: null,
     },
-    priorities: [
-        'High',
-        'Medium',
-        'Low'
-    ],
-    categories: [
+    storage: {
+        storageErrorMessage: null,
+        storageSuccess: null,
+    },
+    geolocation: {
+        geolocationErrorMessage: null,
+        geolocationSuccess: null,
+    },
+    appData: {
+        priorities: [
+            'High',
+            'Medium',
+            'Low'
+        ],
+    },
+    userData: {
+        categories: [
 
-    ],
-    ideas: [
+        ],
+        ideas: [
 
-    ],
-    newIdea: {
-        title: null,
-        description: null,
-        categoryId: null,
-        priorityId: null,
+        ],
+        newIdea: {
+            title: null,
+            description: null,
+            categoryId: null,
+            priorityId: null,
+        },
+        newCategory: {
+            value: null,
+        },
+        editIdea: {
+            title: null,
+            description: null,
+            categoryId: null,
+            priorityId: null,
+            index: null,
+        }
     },
-    newCategory: {
-        value: null,
-    },
-    editIdea: {
-        title: null,
-        description: null,
-        categoryId: null,
-        priorityId: null,
-        index: null,
-    }
 }
 
 export default initialState;

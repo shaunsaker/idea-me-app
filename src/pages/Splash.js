@@ -71,10 +71,10 @@ export class Splash extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        authenticated: state.main.user.authenticated,
-        uid: state.main.user.uid,
-        apiLoadSuccess: state.main.user.apiLoadSuccess,
-        redirectUserToSignIn: state.main.user.signInRedirect
+        authenticated: state.main.userAuth.authenticated,
+        uid: state.main.userAuth.uid,
+        apiLoadSuccess: state.main.api.apiLoadSuccess,
+        redirectUserToSignIn: state.main.userAuth.signInRedirect
     };
 }
 
