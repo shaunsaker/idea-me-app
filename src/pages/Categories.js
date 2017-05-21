@@ -14,7 +14,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
 import Input from '../components/Input';
-import FooterButton from '../components/FooterButton';
+import Button from '../components/Button';
 import DeleteModal from '../components/DeleteModal';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
@@ -169,7 +169,7 @@ export class Categories extends React.Component {
           leftIconSize={36}
           handleLeftIconPress={() => Actions.pop()} />
         {categories}
-        <FooterButton
+        <Button
           iconName='add'
           handlePress={() => Actions.addCategory()} />
         {deleteModal}

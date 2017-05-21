@@ -16,7 +16,7 @@ import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Dropdown from '../components/Dropdown';
-import FooterButton from '../components/FooterButton';
+import Button from '../components/Button';
 import Growl from '../components/Growl';
 
 export class AddIdea extends React.Component {
@@ -201,7 +201,7 @@ export class AddIdea extends React.Component {
             pushContent={true}
             height={105} />
         </View>
-        <FooterButton
+        <Button
           iconName='check'
           handlePress={this.addNewIdea} />
         {errorMessage}

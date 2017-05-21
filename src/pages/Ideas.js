@@ -17,7 +17,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
-import FooterButton from '../components/FooterButton';
+import Button from '../components/Button';
 import DeleteModal from '../components/DeleteModal';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
@@ -168,7 +168,7 @@ export class Ideas extends React.Component {
               <View></View>
           }
         </View>
-        <View style={styles.footerButtonsContainer}>
+        <View style={styles.ButtonsContainer}>
           <TouchableOpacity
             style={styles.shareIconContainer}
             onPress={() => this.shareIdea({ ...item})} >
@@ -307,7 +307,7 @@ export class Ideas extends React.Component {
             showAllOption={true} />
         </View>
         {ideas}
-        <FooterButton
+        <Button
           iconName='add'
           handlePress={() => Actions.addIdea()} />
         {deleteModal}

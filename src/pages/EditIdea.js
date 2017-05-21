@@ -16,7 +16,7 @@ import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Dropdown from '../components/Dropdown';
-import FooterButton from '../components/FooterButton';
+import Button from '../components/Button';
 
 export class EditIdea extends React.Component {
     constructor(props) {
@@ -206,7 +206,7 @@ export class EditIdea extends React.Component {
                         values={this.props.priorities}
                         pushContent={true} />
                 </View>
-                <FooterButton
+                <Button
                     iconName='check'
                     handlePress={this.updateIdea} />
             </View >

@@ -8,7 +8,6 @@ const initialState = {
         userAuthErrorMessage: null,
     },
     app: {
-        loading: false,
         userErrorMessage: null,
         userSuccessMessage: null,
     },

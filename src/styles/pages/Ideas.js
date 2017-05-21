@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: styleConstants.primary
     },
-    footerButtonsContainer: {
+    ButtonsContainer: {
         flexDirection: 'row',
     },
     shareIconContainer: {

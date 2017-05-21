@@ -1,12 +1,12 @@
 TODOS
 
     Welcome page / Sign in screen
-        See Zomato
-        Description about app
-        Image underlay
-        Displays sign in options as ghost buttons
-    Material Inputs
+        Image underlays
+    Growl has close button, handle reset error here
+    Material Input
     Animate hide header on input focus
+    Add new idea has placeholder: Give your idea a title, Give your idea a description
+        Live error handling
     Feedback button opens webview to Google Survey
     Handle signinwithemail state in page (store gets values on submit)
     Password reset

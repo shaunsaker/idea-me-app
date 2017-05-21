@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import Input from '../components/Input';
-import FooterButton from '../components/FooterButton';
+import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
@@ -133,7 +133,7 @@ export class SignInWithEmail extends React.Component {
                         <Text style={[styles.passwordText, styleConstants.robotoCondensed]}>* Password at least 6 characters long</Text>
                     </View>
                 </View>
-                <FooterButton
+                <Button
                     iconName='check'
                     handlePress={this.signIn} />
                 {loader}

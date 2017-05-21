@@ -6,6 +6,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
+import styles from '../styles/pages/Splash';
 import styleConstants from '../styles/styleConstants';
 
 import GlowLoader from '../components/GlowLoader';

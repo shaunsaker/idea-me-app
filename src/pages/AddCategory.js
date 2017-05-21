@@ -12,7 +12,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
 import Input from '../components/Input';
-import FooterButton from '../components/FooterButton';
+import Button from '../components/Button';
 import Growl from '../components/Growl';
 
 export class AddCategory extends React.Component {
@@ -135,7 +135,7 @@ export class AddCategory extends React.Component {
             handleChange={this.updateNewCategoryValue}
             autoFocus={true} />
         </View>
-        <FooterButton
+        <Button
           iconName='check'
           handlePress={this.addNewCategory} />
         {errorMessage}

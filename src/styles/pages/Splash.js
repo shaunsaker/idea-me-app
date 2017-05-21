@@ -2,10 +2,11 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
+import styleConstants from '../styleConstants'; 
 
 const window = Dimensions.get('window');
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         width: window.width,
         height: window.height,
@@ -15,3 +16,5 @@ export default styles = StyleSheet.create({
         backgroundColor: styleConstants.primary
     },
 });
+
+export default styles;
