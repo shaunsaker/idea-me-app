@@ -6,6 +6,7 @@ import {
     Dimensions,
 } from "react-native";
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
         height: 56,
         flexDirection: 'row',
         paddingHorizontal: 16,
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
         borderColor: styleConstants.white,
@@ -29,9 +30,11 @@ const styles = StyleSheet.create({
             height: 2,
             width: 0
         },
+        borderRadius: 36
     },
     icon: {
-
+        position: 'absolute',
+        left: 16
     },
     text: {
         fontSize: 18,
@@ -39,44 +42,51 @@ const styles = StyleSheet.create({
 });
 
 export default Button = (props) => {
-    const transparentStyles = props.transparent ?
-        { backgroundColor: 'transparent'}
-        :
-        null; 
+    /* 
+        The Button component has 4 style modes
+            transparent => Transparent background with white text/icon and white border
+            transparentReversed => White background with primary text/icon and white border
+            primary => Primary colour background with white text/icon and white border
+            primaryReversed => White background with primary colour text/icon and white border
+    */
 
-    const icon = props.iconName ?
+    const backgroundColor =
+        props.styleMode === 'transparent' ?
+            'transparent'
+            :
+            props.styleMode === 'transparentReversed' || props.styleMode === 'primaryReversed' ?
+                styleConstants.white
+                :
+                styleConstants.primary;
+
+    const textColor =
+        props.styleMode === 'transparent' || props.styleMode === 'primary' ?
+            styleConstants.white
+            :
+            styleConstants.primary;       
+
+    const icon = props.materialCommunityIcon ?
+        <MaterialCommunityIcon
+            name={props.iconName}
+            size={28}
+            color={textColor}
+            style={styles.icon} />
+        :
         <MaterialIcon
             name={props.iconName}
             size={28}
-            color={props.transparent ? styleConstants.white : styleConstants.primary}
-            style={styles.icon} />
-        :
-        null;
-
-    const transparentTextStyles = props.transparent ?
-        { color: styleConstants.white }
-        :
-        { color: styleConstants.primary };
-
-    const text = props.text ?
-        <Text
-            style={[styles.text, transparentTextStyles, styleConstants.robotoCondensed]}>
-            {props.text}
-        </Text>
-        :
-        null;
-
-    const buttonStyles = props.style ?
-        [styles.button, transparentStyles, props.style]
-        :
-        styles.button;
+            color={textColor}
+            style={styles.icon} />;
 
     return (
         <TouchableOpacity
-            style={buttonStyles}
+            style={[styles.button, { backgroundColor }, props.style]}
             onPress={props.handlePress} >
             {icon}
-            {text}
+            <Text
+                style={[styles.text, { color: textColor }, styleConstants.robotoCondensed]}>
+                {props.text}
+            </Text>
         </TouchableOpacity>
     );
 }

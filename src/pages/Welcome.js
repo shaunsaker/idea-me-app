@@ -90,7 +90,7 @@ export class Welcome extends React.Component {
 
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor={styleConstants.primary} />
+                <StatusBar backgroundColor={styleConstants.transPrimary} />
 
                 <View style={styles.logoContainer}>
                     <Logo />
@@ -101,44 +101,39 @@ export class Welcome extends React.Component {
                         Have great ideas and no where to store them?
                     </Text>
                     <Text style={[styles.infoTextDescription, styleConstants.robotoCondensed]}>
-                        Well you've come to the right place!
-                    </Text>
-                    <Text style={[styles.infoTextDescription, styleConstants.robotoCondensed]}>
-                        Save your ideas, add categories and assign priorities.
-                    </Text>
-                    <Text style={[styles.infoTextHighlight, styleConstants.robotoCondensed]}>
-                        Be in control of your future.
+                        You've come to the right place.
                     </Text>
                 </View>
 
                 <View style={styles.buttonGroup}>
-                    <Text style={[styles. buttonText, styleConstants.robotoCondensed]}>
-                        Continue with one of the following methods below.
-                    </Text>
                     <Button
-                        iconName='face'
+                        materialCommunityIcon
+                        iconName='facebook'
                         handlePress={this.signInUserWithFacebook} 
-                        style={styles.button} 
-                        text='Continue with Facebook' 
-                        transparent={true} />
+                        style={styles.button}                              
+                        text='Continue with Facebook'
+                        styleMode='transparentReversed' />
                     <Button
-                        iconName='face'
+                        materialCommunityIcon
+                        iconName='google'
                         handlePress={this.signInUserWithGoogle} 
                         style={styles.button} 
-                        text='Continue with Google' 
-                        transparent={true} />
+                        text='Continue with Google'
+                        styleMode='transparentReversed' />
                     <Button
-                        iconName='face'
+                        materialCommunityIcon
+                        iconName='email'
                         handlePress={this.signInUserWithEmail} 
                         style={styles.button} 
-                        text='Continue with Email' 
-                        transparent={true} />
+                        text='Continue with Email'
+                        styleMode='transparent' />
                     <Button
-                        iconName='face'
+                        materialCommunityIcon
+                        iconName='face-profile'
                         handlePress={this.signInUserAnonymously} 
                         style={styles.button} 
-                        text='Continue Anonymously' 
-                        transparent={true} />
+                        text='Continue Anonymously'
+                        styleMode='transparent' />
                 </View>
 
                 {loader}
