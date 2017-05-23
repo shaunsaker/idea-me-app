@@ -84,7 +84,8 @@ export class Welcome extends React.Component {
             null;
 
         const errorMessage = this.props.errorMessage ?
-            <Growl text={this.props.errorMessage} />
+            <Growl 
+                text={this.props.errorMessage} />  
             :
             null;
 

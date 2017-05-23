@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
         color: styleConstants.white,
     },
     buttonGroup: {
-
+        
     },
     button: {
-        marginVertical: 8
+        marginBottom: 16
     },
 });
 

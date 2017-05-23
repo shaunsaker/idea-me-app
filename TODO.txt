@@ -1,12 +1,12 @@
 TODOS
 
-    Welcome page / Sign in screen
-        Image underlays
-    Growl has close button, handle reset error here
-    Material Input
-    Animate hide header on input focus
+    Material Inputs 
+        No autofocus
+        When focussed, need to shift into centre of whatever screen is and set transparency on bg
+        Animate hide header on input focus
     Add new idea has placeholder: Give your idea a title, Give your idea a description
         Live error handling
+        Handle user errors in page state
     Feedback button opens webview to Google Survey
     Handle signinwithemail state in page (store gets values on submit)
     Password reset
