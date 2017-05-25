@@ -14,10 +14,10 @@ import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
-import styles from '../styles/pages/SignInWithEmail';
+import styles from '../styles/pages/ForgotPassword';
 import styleConstants from '../styles/styleConstants';
 
-export class SignInWithEmail extends React.Component {
+export class ForgotPassword extends React.Component {
     constructor(props) {
         super(props);
 
@@ -120,10 +120,6 @@ export class SignInWithEmail extends React.Component {
             <View style={styles.container}>
                 <Header
                     headerShadow={false}
-                    text='Forgot Password?'
-                    handleTextPress={() => Actions.forgotPassword()}
-                    textStyle={[styles.headerText, styleConstants.robotoCondensed]}
-                    textRight={true}
                     leftIconName='chevron-left'
                     leftIconSize={36}
                     leftIconColor={styleConstants.white}
@@ -132,7 +128,10 @@ export class SignInWithEmail extends React.Component {
 
                 <View style={styles.infoContainer}>
                     <Text style={[styles.infoTextTitle, styleConstants.robotoCondensed]}>
-                        Sign In
+                        Forgot your password?
+                    </Text>
+                    <Text style={[styles.infoTextDescription, styleConstants.robotoCondensed]}>
+                        Enter your email address and we'll send you a link to reset it.
                     </Text>
                 </View>
                 <View style={styles.inputContainer}>
@@ -143,20 +142,8 @@ export class SignInWithEmail extends React.Component {
                             handleChange={this.updateUserEmail}
                             keyboardType='email-address' />
                     </View>
-                    <View style={styles.inputWrapper}>
-                        <Input
-                            placeholder="PASSWORD"
-                            value={this.props.userPassword}
-                            handleChange={this.updateUserPassword}
-                            type='password' />
-                    </View>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button
-                        handlePress={() => Actions.signInOptions()}
-                        style={styles.button}
-                        text='More Options'
-                        styleMode='transparent' />
                     <Button
                         iconName='check'
                         handlePress={this.signIn}
@@ -182,4 +169,4 @@ function MapStateToProps(state) {
     });
 }
 
-export default connect(MapStateToProps)(SignInWithEmail);
+export default connect(MapStateToProps)(ForgotPassword);

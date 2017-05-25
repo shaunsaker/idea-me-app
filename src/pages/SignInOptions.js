@@ -2,21 +2,20 @@ import React from "react";
 import {
     View,
     Text,
-    TouchableOpacity,
+    StatusBar,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import Header from '../components/Header';
-import Logo from '../components/Logo';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
-import styles from '../styles/pages/Welcome';
+import styles from '../styles/pages/SignInOptions';
 import styleConstants from '../styles/styleConstants';
 
-export class Welcome extends React.Component {
+export class SignInOptions extends React.Component {
     constructor(props) {
         super(props);
 
@@ -25,6 +24,9 @@ export class Welcome extends React.Component {
         }
         
         this.signInUserWithFacebook = this.signInUserWithFacebook.bind(this);
+        this.signInUserWithGoogle = this.signInUserWithGoogle.bind(this);
+        this.signInUserWithEmail = this.signInUserWithEmail.bind(this);
+        this.signInUserAnonymously = this.signInUserAnonymously.bind(this);
     }
 
     static get propTypes() {
@@ -55,6 +57,26 @@ export class Welcome extends React.Component {
         // Do stuff
     }
 
+    signInUserWithGoogle() {
+        this.setState({
+            loading: true
+        }); 
+
+        // Do stuff
+    }
+
+    signInUserWithEmail() {
+        Actions.signInWithEmail();
+    }
+
+    signInUserAnonymously() {
+        this.setState({
+            loading: true
+        }); 
+
+        // Do stuff
+    }
+
     render() {
         const loader = this.state.loading ?
             <Loader />
@@ -71,23 +93,11 @@ export class Welcome extends React.Component {
             <View style={styles.container}>
                 <Header 
                     headerShadow={false}
-                    text='Log In'
-                    handleTextPress={() => Actions.signInWithEmail()}
-                    textStyle={[styles.headerText, styleConstants.robotoCondensed]}
-                    textRight={true}/>
-
-                <View style={styles.logoContainer}>
-                    <Logo />
-                </View>
-
-                <View style={styles.infoContainer}>
-                    <Text style={[styles.infoTextTitle, styleConstants.robotoCondensed]}>
-                        Have great ideas and no where to store them?
-                    </Text>
-                    <Text style={[styles.infoTextDescription, styleConstants.robotoCondensed]}>
-                        You've come to the right place.
-                    </Text>
-                </View>
+                    rightIconName='close'
+                    rightIconSize={28}
+                    rightIconColor={styleConstants.white}
+                    rightIconStyle={styles.headerIcon}
+                    handleRightIconPress={() => Actions.pop()}/>
 
                 <View style={styles.buttonContainer}>
                     <Button
@@ -97,11 +107,26 @@ export class Welcome extends React.Component {
                         style={styles.button}                              
                         text='Continue with Facebook'
                         styleMode='transparentReversed' />
-
                     <Button
-                        handlePress={() => Actions.signInOptions()} 
-                        style={styles.button}                              
-                        text='More Options'
+                        materialCommunityIcon
+                        iconName='google'
+                        handlePress={this.signInUserWithGoogle} 
+                        style={styles.button} 
+                        text='Continue with Google'
+                        styleMode='transparentReversed' />
+                    <Button
+                        materialCommunityIcon
+                        iconName='email'
+                        handlePress={this.signInUserWithEmail} 
+                        style={styles.button} 
+                        text='Continue with Email'
+                        styleMode='transparent' />
+                    <Button
+                        materialCommunityIcon
+                        iconName='face-profile'
+                        handlePress={this.signInUserAnonymously} 
+                        style={styles.button} 
+                        text='Continue Anonymously'
                         styleMode='transparent' />
                 </View>
 
@@ -119,4 +144,4 @@ function MapStateToProps(state) {
     });
 }
 
-export default connect(MapStateToProps)(Welcome);
+export default connect(MapStateToProps)(SignInOptions);

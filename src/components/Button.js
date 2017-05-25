@@ -65,18 +65,22 @@ export default Button = (props) => {
             :
             styleConstants.primary;       
 
-    const icon = props.materialCommunityIcon ?
-        <MaterialCommunityIcon
-            name={props.iconName}
-            size={28}
-            color={textColor}
-            style={styles.icon} />
-        :
-        <MaterialIcon
-            name={props.iconName}
-            size={28}
-            color={textColor}
-            style={styles.icon} />;
+    const icon = 
+        props.iconName ?
+            props.materialCommunityIcon ?
+                <MaterialCommunityIcon
+                    name={props.iconName}
+                    size={28}
+                    color={textColor}
+                    style={styles.icon} />
+                :
+                <MaterialIcon
+                    name={props.iconName}
+                    size={28}
+                    color={textColor}
+                    style={styles.icon} />
+            :
+            null;
 
     return (
         <TouchableOpacity

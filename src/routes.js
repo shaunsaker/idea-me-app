@@ -7,7 +7,9 @@ import {
 
 import Splash from './pages/Splash';
 import Welcome from './pages/Welcome';
+import SignInOptions from './pages/SignInOptions';
 import SignInWithEmail from './pages/SignInWithEmail';
+import ForgotPassword from './pages/ForgotPassword';
 import Ideas from './pages/Ideas';
 import AddIdea from './pages/AddIdea';
 import EditIdea from './pages/EditIdea';
@@ -26,8 +28,14 @@ const Scenes = Actions.create(
 			initial={false}
 			type={ActionConst.RESET} />
 		<Scene
+			key='signInOptions'
+			component={SignInOptions} />
+		<Scene
 			key='signInWithEmail'
 			component={SignInWithEmail} />
+		<Scene
+			key='forgotPassword'
+			component={ForgotPassword} />
 		<Scene
 			key='ideas'
 			component={Ideas}

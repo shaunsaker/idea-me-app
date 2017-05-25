@@ -10,11 +10,12 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 18,
         color: styleConstants.white,
+        marginBottom: 4
     },
-    logoContainer: {
+    headerIcon: {
+        marginLeft: -10,
     },
     infoContainer: {
-        flex: 1,
         justifyContent: 'center',
         paddingLeft: 16,
         paddingRight: 96,
@@ -22,15 +23,23 @@ const styles = StyleSheet.create({
     infoTextTitle: {
         fontSize: 32,
         color: styleConstants.white,
-        marginBottom: 8,
+        marginBottom: 8
     },
     infoTextDescription: {
         fontSize: 18,
         color: styleConstants.white,
     },
-    buttonContainer: {
+    inputContainer: {
         flex: 1,
         alignItems: 'center',
+        marginTop: 48,
+    },
+    inputWrapper: {
+        
+    },
+    buttonContainer: {
+        alignItems: 'center',
+        paddingBottom: 16
     },
     button: {
         marginTop: 16,

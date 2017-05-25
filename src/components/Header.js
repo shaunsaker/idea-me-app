@@ -52,13 +52,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		padding: 16,
-		elevation: 5,
 	},
 	textContainer: {
 		alignSelf: 'stretch',
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: 2
+		marginTop: 2,
 	},
 });
 
@@ -84,30 +83,14 @@ export default class Header extends React.Component {
 			text: React.PropTypes.string,
 			textColor: React.PropTypes.string,
 			textSize: React.PropTypes.number,
+			textRight: React.PropTypes.bool,
+			// textStyle: object or arrayt,
 			handleTextPress: React.PropTypes.func,
 
 			rightIconName: React.PropTypes.string,
 			rightIconColor: React.PropTypes.string,
 			rightIconSize: React.PropTypes.number,
 			handleRightIconPress: React.PropTypes.func,
-		}
-	}
-
-	static get defaultProps() {
-		return {
-			statusBarStyle: 'light-content',
-
-			backgroundColor: '#222222',
-
-			leftIconColor: '#ffffff',
-			leftIconSize: 36,
-
-			text: 'Aux Components',
-			textSize: 18,
-			textColor: '#ffffff',
-
-			rightIconColor: '#ffffff',
-			rightIconSize: 36,
 		}
 	}
 
@@ -151,7 +134,7 @@ export default class Header extends React.Component {
 					style={this.props.rightIconStyle} />
 			</TouchableOpacity>
 			:
-			<View style={{ width: this.props.leftIconSize }} />;
+			this.props.textRight ? null : <View style={{ width: this.props.leftIconSize }} />;
 
 		return (
 			<View style={headerShadowStyles}>

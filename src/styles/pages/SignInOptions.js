@@ -10,14 +10,16 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 18,
         color: styleConstants.white,
+        marginBottom: 4
     },
-    logoContainer: {
+    headerIcon: {
+        marginRight: -6,
     },
     infoContainer: {
         flex: 1,
         justifyContent: 'center',
-        paddingLeft: 16,
-        paddingRight: 96,
+        backgroundColor: styleConstants.primary,
+        paddingHorizontal: 16,
     },
     infoTextTitle: {
         fontSize: 32,
@@ -30,7 +32,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
+        justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 50
     },
     button: {
         marginTop: 16,
