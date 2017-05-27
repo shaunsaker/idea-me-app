@@ -12,8 +12,8 @@ import InfoBlock from '../components/InfoBlock';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import Loader from '../components/Loader';
-import Growl from '../components/Growl';
+import Loader from '../components/Loader/index';
+import Growl from '../components/Growl/index';
 
 import styles from '../styles/pages/ForgotPassword';
 import styleConstants from '../styles/styleConstants';

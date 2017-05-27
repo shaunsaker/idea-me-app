@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-	View,
 	StyleSheet,
 	Animated,
 	Easing,
 	Dimensions,
 } from 'react-native';
-import { connect } from 'react-redux';
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../../styles/styleConstants';
 
 const styles = StyleSheet.create({
 	container: {
@@ -26,7 +24,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-class LoaderComponent extends React.Component {
+export default class LoaderComponent extends React.Component {
 	constructor() {
 		super();
 
@@ -88,32 +86,3 @@ class LoaderComponent extends React.Component {
 		);
 	}
 }
-
-export class Loader extends React.Component{
-    static get propTypes() {
-      return {
-		loading: React.PropTypes.bool
-      };
-    }
-
-	render() {
-		const loader = this.props.loading ?
-			<LoaderComponent />
-			:
-			null;
-
-		return (
-			<View>	
-				{loader}
-			</View>
-		);
-	}
-};
-
-function mapStateToProps(state) {
-	return {
-		loading: state.main.app.loading
-	}
-}
-
-export default connect(mapStateToProps)(Loader);
