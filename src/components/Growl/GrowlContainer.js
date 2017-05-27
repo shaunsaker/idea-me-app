@@ -17,6 +17,7 @@ export class Growl extends React.Component {
         return {
             userErrorMessage: React.PropTypes.string,
             userAuthErrorMessage: React.PropTypes.string,
+            userAuthSuccessMessage: React.PropTypes.string,
             apiErrorMessage: React.PropTypes.string,
             geolocationErrorMessage: React.PropTypes.string,
             storageErrorMessage: React.PropTypes.string,
@@ -27,7 +28,7 @@ export class Growl extends React.Component {
     resetError() {
         
         // Reset the error depending on the type of error
-        const action = this.props.success ?
+        const action = this.props.userAuthSuccessMessage ? // If more success messages are needed, we'll need to handle this differently
             'RESET_' + this.props.errorType + '_SUCCESS'
             :
             'RESET_' + this.props.errorType + '_ERROR';
@@ -54,19 +55,35 @@ export class Growl extends React.Component {
                             this.props.storageErrorMessage ?
                                 this.props.storageErrorMessage 
                                 :
-                                null;              
+                                null;  
 
-        const growl = errorMessage ?
+        const errorGrowl = errorMessage ?
             <GrowlComponent 
                 text={errorMessage} 
-                // TODO: pass in success if applicable
                 handleReset={this.resetError} />
             :
             null;
 
+        const successMessage =  
+            this.props.userAuthSuccessMessage ?
+                this.props.userAuthSuccessMessage
+                :
+                null;
+
+        const successGrowl = successMessage ?
+            <GrowlComponent 
+                text={successMessage} 
+                success={true}
+                handleReset={this.resetError} />
+            :
+            null;
+
+        console.log(successMessage);
+
         return (
             <View>
-                {growl}
+                {errorGrowl}
+                {successGrowl}
             </View>
         );
     }
@@ -76,6 +93,7 @@ function mapStateToProps(state) {
     return {
         userErrorMessage: state.main.app.userErrorMessage,
         userAuthErrorMessage: state.main.userAuth.userAuthErrorMessage,
+        userAuthSuccessMessage: state.main.userAuth.userAuthSuccessMessage,
         apiErrorMessage: state.main.api.apiErrorMessage,
         geolocationErrorMessage: state.main.geolocation.geolocationErrorMessage ,
         storageErrorMessage: state.main.storage.storageErrorMessage,

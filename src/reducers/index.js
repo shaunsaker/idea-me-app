@@ -39,23 +39,6 @@ export default function (state = initialState, action) {
             new_state.userAuth.signInRedirect = true;
             return new_state;
 
-        /* API */
-        case 'API_SAVE_SUCCESS':
-            new_state = cloneObject(state);
-            new_state.api.apiSaveSuccess = true;
-            return new_state;
-
-        case 'API_LOAD_SUCCESS':
-            new_state = cloneObject(state);
-
-            // In case it is a new user with no data
-            if (action.data) {
-                new_state.userData.ideas = action.data.ideas;
-                new_state.userData.categories = action.data.categories;
-            }
-            new_state.api.apiLoadSuccess = true;
-            return new_state;
-
         /* APP */
         case 'SET_LOADING_TRUE':
             new_state = cloneObject(state);
@@ -73,6 +56,7 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             new_state.userAuth.userAuthErrorMessage = action.message;
             new_state.app.errorType = 'USER_AUTH';
+            new_state.app.loading = false;
             return new_state;
 
         case 'RESET_USER_AUTH_ERROR':
@@ -81,10 +65,24 @@ export default function (state = initialState, action) {
             new_state.app.errorType = null;
             return new_state;
 
+        case 'USER_AUTH_SUCCESS':
+            new_state = cloneObject(state);
+            new_state.userAuth.userAuthSuccessMessage = action.message;
+            new_state.app.errorType = 'USER_AUTH';
+            new_state.app.loading = false;
+            return new_state;
+
+        case 'RESET_USER_AUTH_SUCCESS':
+            new_state = cloneObject(state);
+            new_state.userAuth.userAuthSuccessMessage = null;
+            new_state.app.errorType = null;
+            return new_state;
+
         case 'USER_ERROR':
             new_state = cloneObject(state);
             new_state.app.userErrorMessage = action.message;
             new_state.app.errorType = 'USER';
+            new_state.app.loading = false;
             return new_state;
 
         case 'RESET_USER_ERROR':
@@ -97,6 +95,7 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             new_state.api.apiErrorMessage = action.message;
             new_state.app.errorType = 'API';
+            new_state.app.loading = false;
             return new_state;
 
         case 'RESET_API_ERROR':
@@ -105,22 +104,43 @@ export default function (state = initialState, action) {
             new_state.app.errorType = null;
             return new_state;
 
+        case 'API_SAVE_SUCCESS':
+            new_state = cloneObject(state);
+            new_state.api.apiSaveSuccess = true;
+            new_state.app.loading = false;
+            return new_state;
+
+        case 'API_LOAD_SUCCESS':
+            new_state = cloneObject(state);
+
+            // In case it is a new user with no data
+            if (action.data) {
+                new_state.userData.ideas = action.data.ideas;
+                new_state.userData.categories = action.data.categories;
+            }
+            new_state.api.apiLoadSuccess = true;
+            new_state.app.loading = false;
+            return new_state;
+
         case 'STORAGE_ERROR':
             new_state = cloneObject(state);
             new_state.storage.storageErrorMessage = action.message;
             new_state.app.errorType = 'STORAGE';
+            new_state.app.loading = false;
             return new_state;
 
         case 'RESET_STORAGE_ERROR':
             new_state = cloneObject(state);
             new_state.storage.storageErrorMessage = null;
             new_state.app.errorType = null;
+            new_state.app.loading = false;
             return new_state;
 
         case 'GEOLOCATION_ERROR':
             new_state = cloneObject(state);
             new_state.geolocation.geolocationErrorMessage = action.message;
             new_state.app.errorType = 'GEOLOCATION';
+            new_state.app.loading = false;
             return new_state;
 
         case 'RESET_GEOLOCATION_ERROR':

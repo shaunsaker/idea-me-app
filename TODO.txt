@@ -1,6 +1,5 @@
 TODOS
 
-    Separate growl and loader into GrowlChild and LoaderChild
     Handle password reset page, ie. does it pop back and load in signInScreen? Does it display loader there?
     Disable continue buttons until valid inputs
 

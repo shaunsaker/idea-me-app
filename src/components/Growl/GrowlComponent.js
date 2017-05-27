@@ -11,7 +11,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styleConstants from '../../styles/styleConstants';
 
 const styles = StyleSheet.create({
-    errorMessageContainer: {
+    messageWrapper: {
         position: 'absolute',
         left: 0,
         right: 0,
@@ -21,31 +21,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         elevation: 100,
-        height: 80,
-        paddingHorizontal: 8,
+        minHeight: 80,
+        padding: 8,
+    },
+    messageContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     messageTextContainer: {
         flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingHorizontal: 24,
     },
     messageText: {
         fontSize: 18,
         color: styleConstants.white,
-        textAlign: 'center',
     },
     iconContainer: {
-        paddingTop: 8,
-        alignSelf: 'stretch',
+        marginRight: 8,
     },
     icon: {
 
     },
     closeIconContainer: {
-        paddingTop: 8,
         alignSelf: 'stretch',
     },
     closeIcon: {
@@ -100,20 +98,22 @@ export default class GrowlComponent extends React.Component {
         const iconName = this.props.success ? 'check' : 'error-outline';                 
 
         return (
-            <Animated.View style={[styles.errorMessageContainer, { bottom: this.state.bottom }]}>
-                <View style={styles.iconContainer}>
-                    <MaterialIcon
-                        name={iconName}
-                        color={this.props.success ? styleConstants.success : styleConstants.danger}
-                        size={24}
-                        style={styles.icon} />
-                </View>
-                <View style={styles.messageTextContainer}>
-                    <Text
-                        style={[styles.messageText, styleConstants.montserratLight]}
-                        multiline={true}>
-                        {this.props.text}
-                    </Text>
+            <Animated.View style={[styles.messageWrapper, { bottom: this.state.bottom }]}>
+                <View style={styles.messageContainer}>
+                    <View style={styles.iconContainer}>
+                        <MaterialIcon
+                            name={iconName}
+                            color={this.props.success ? styleConstants.success : styleConstants.danger}
+                            size={24}
+                            style={styles.icon} />
+                    </View>
+                    <View style={styles.messageTextContainer}>
+                        <Text
+                            style={[styles.messageText, styleConstants.robotoCondensed]}
+                            multiline={true}>
+                            {this.props.text}
+                        </Text>
+                    </View>
                 </View>
                 <TouchableOpacity
                     onPress={this.hideGrowl}
