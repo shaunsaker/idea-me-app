@@ -19,6 +19,7 @@ import Logo from '../components/Logo';
 import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
 import Card from '../components/Card';
+import TabBar from '../components/TabBar';
 import DeleteModal from '../components/DeleteModal';
 import Growl from '../components/Growl';
 import Loader from '../components/Loader';
@@ -219,12 +220,14 @@ export class Ideas extends React.Component {
 
     return (
       <View style={styles.container}>
+
         <Header
           backgroundColor={styleConstants.primary}
           headerShadow={true}
           textComponent={() => <Logo />}
           textLeft={true}
           rightComponent={count} />
+
         <View style={styles.buttonContainer}>
           <Dropdown
             value={this.state.currentCategory}
@@ -233,10 +236,18 @@ export class Ideas extends React.Component {
             editItem={true}
             showAllOption={true} />
         </View>
+
         {ideas}
+
+        <TabBar 
+          currentPage='ideas'/>
+
         {deleteModal}
+
         <Growl />
+
         <Loader />
+
       </View >
     );
   }

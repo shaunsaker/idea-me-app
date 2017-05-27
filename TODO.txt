@@ -1,12 +1,12 @@
 TODOS
-    Idea card
-        Display edit, share and delete icons as dropdown
-    Ideas page
-        Needs tidying up
     Tabbar
         Ideas/Home
         Add Idea
         Profile Page
+    Header does not need to be so generic
+    Ideas page
+        Needs tidying up
+    All other pages need work
     Profile Page
         And all the trimmings
         Menu
