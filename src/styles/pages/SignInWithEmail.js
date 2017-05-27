@@ -30,12 +30,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: styleConstants.white,
     },
-    inputWrapper: {
-        flex: 1,
-    },
-    inputContainer: {
-        alignItems: 'center',
-    },
     buttonContainer: {
         alignItems: 'center',
         paddingBottom: 16,

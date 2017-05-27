@@ -4,11 +4,11 @@ import {
     TouchableOpacity,
     Text,
 } from "react-native";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import Header from '../components/Header';
+import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
@@ -135,22 +135,18 @@ export class SignInWithEmail extends React.Component {
                         Sign In
                     </Text>
                 </View>
-                <View style={styles.inputWrapper}>
-                    <KeyboardAwareScrollView
-                        contentContainerStyle={styles.inputContainer}
-                        keyboardShouldPersistTaps='always'>
-                        <Input
-                            placeholder="EMAIL ADDRESS"
-                            value={this.props.userEmail}
-                            handleChange={this.updateUserEmail}
-                            keyboardType='email-address' />
-                        <Input
-                            placeholder="PASSWORD"
-                            value={this.props.userPassword}
-                            handleChange={this.updateUserPassword}
-                            type='password' />
-                    </KeyboardAwareScrollView>
-                </View>
+                <InputContainer>
+                    <Input
+                        placeholder="EMAIL ADDRESS"
+                        value={this.props.userEmail}
+                        handleChange={this.updateUserEmail}
+                        keyboardType='email-address' />
+                    <Input
+                        placeholder="PASSWORD"
+                        value={this.props.userPassword}
+                        handleChange={this.updateUserPassword}
+                        type='password' />
+                </InputContainer>
                 <View style={styles.buttonContainer}>
                     <Button
                         iconName='check'
