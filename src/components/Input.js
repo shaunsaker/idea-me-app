@@ -7,13 +7,15 @@ import {
     StyleSheet,
     Dimensions
 } from "react-native";
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../styles/styleConstants';
 
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
-    inputContainer: {
+    inputWrapper: {
+        width: windowWidth - 32,
         marginBottom: 32
     },
     inputLabelContainer: {
@@ -28,14 +30,32 @@ const styles = StyleSheet.create({
 
     },
     input: {
-        width: windowWidth - 32,
         fontSize: 18,
         color: styleConstants.white,
         height: 50,
         paddingLeft: 0,
+        paddingRight: 32,
         borderBottomWidth: 1,
-        borderBottomColor: styleConstants.lightGrey
-    }
+        borderBottomColor: styleConstants.lightGrey,
+    },
+    clearTextButtonContainer: {
+        position: 'absolute',
+        bottom: 12,
+        right: 0,
+        height: 30,
+        justifyContent: 'center',
+    },
+    clearTextButton: {
+        backgroundColor: styleConstants.lightGrey,
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    clearTextButtonIcon: {
+
+    },
 });
 
 export default class Input extends React.Component {
@@ -69,7 +89,7 @@ export default class Input extends React.Component {
 
     render() {
         const togglePasswordButton = this.props.type === 'password' ?
-            <TouchableOpacity 
+            <TouchableOpacity
                 onPress={this.togglePassword}
                 style={styles.togglePasswordContainer}>
                 <Text style={[styles.inputLabelText, styleConstants.robotoCondensed]}>
@@ -77,10 +97,25 @@ export default class Input extends React.Component {
                 </Text>
             </TouchableOpacity>
             :
-            null;            
+            null;
+
+        const clearTextButton = this.props.value ?
+            <View style={styles.clearTextButtonContainer}>
+                <TouchableOpacity
+                    onPress={() => this.props.handleChange('')}
+                    style={styles.clearTextButton}>
+                    <MaterialIcon
+                        name='close'
+                        color={styleConstants.primary}
+                        size={18}
+                        style={styles.clearTextIcon} />
+                </TouchableOpacity>
+            </View>
+            :
+            null;
 
         return (
-            <View style={styles.inputContainer}>
+            <View style={styles.inputWrapper}>
                 <View style={styles.inputLabelContainer}>
                     <Text style={[styles.inputLabelText, styleConstants.robotoCondensed]}>
                         {this.props.placeholder}
@@ -96,6 +131,7 @@ export default class Input extends React.Component {
                     secureTextEntry={this.props.type === 'password' && this.state.hidePassword}
                     keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
                     autoFocus={this.props.autoFocus} />
+                {clearTextButton}
             </View>
         );
     }
