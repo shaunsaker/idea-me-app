@@ -4,62 +4,80 @@ import Auth from '../auth/index';
 
 export function* getUserAuth() {
 
-    const getUserAuthResponse = yield call(Auth.getUserAuth);
-    console.log('getUserAuthResponse', getUserAuthResponse);
+	const getUserAuthResponse = yield call(Auth.getUserAuth);
+	console.log('getUserAuthResponse', getUserAuthResponse);
 
-    if (getUserAuthResponse.authenticated) {
-        yield put({
-            type: 'SIGN_IN_USER',
-            uid: getUserAuthResponse.message.user.uid
-        });
-    }
-    else {
-        yield put({
-            type: 'REDIRECT_USER_TO_SIGN_IN',
-        });   
-    }
+	if (getUserAuthResponse.authenticated) {
+		yield put({
+			type: 'SIGN_IN_USER',
+			uid: getUserAuthResponse.message.user.uid,
+		});
+	}
+	else {
+		yield put({
+			type: 'REDIRECT_USER_TO_SIGN_IN',
+		});
+	}
 }
 
-export function* signInUser(action) {
+export function* signInUserWithEmail(action) {
 
-    const signUpUserResponse = yield call(Auth.signUpUser, action);
-    console.log('signUpUserResponse', signUpUserResponse);
+	const signUpUserResponse = yield call(Auth.signUpUser, action);
+	console.log('signUpUserResponse', signUpUserResponse);
 
-    if (signUpUserResponse.authenticated) {
-        const uid = signUpUserResponse.message.uid || signUpUserResponse.message.user.uid;
+	if (signUpUserResponse.authenticated) {
+		yield put({
+			type: 'SIGN_IN_USER',
+			uid: signUpUserResponse.message.user.uid,
+			userEmail: signUpUserResponse.message.user.email
+		});
+	}
 
-        yield put({
-            type: 'SIGN_IN_USER',
-            uid: uid
-        });
-    }
+	// Handle network errors, if any
+	else if (signUpUserResponse.message.errorMessage.indexOf('A network') > -1) {
+		yield put({
+			type: 'USER_AUTH_ERROR',
+			message: 'A network error has occured.'
+		});
+	}
+	else {
+		const signInUserResponse = yield call(Auth.signInUserWithEmail, action);
+		console.log('signInUserResponse', signInUserResponse);
 
-    // Handle network errors, if any
-    else if (signUpUserResponse.message.errorMessage.indexOf('A network') > -1) {
-        yield put({
-            type: 'USER_ERROR',
-            message: 'A network error has occured.'
-        });
-    }
-    else {
-        const signInUserResponse = yield call(Auth.signInUser, action);
-        console.log('signInUserResponse', signInUserResponse);
+		if (signInUserResponse.authenticated) {
+			const uid = signInUserResponse.message.uid || signInUserResponse.message.user.uid;
 
-        if (signInUserResponse.authenticated) {
-            const uid = signInUserResponse.message.uid || signInUserResponse.message.user.uid;
+			yield put({
+				type: 'SIGN_IN_USER',
+				uid: uid,
+			});
+		}
+		else {
+			yield put({
+				type: 'USER_AUTH_ERROR',
+				message: signInUserResponse.message.errorMessage
+			});
+		}
+	}
+}
 
-            yield put({
-                type: 'SIGN_IN_USER',
-                uid: uid
-            });
-        }
-        else {
-            yield put({
-                type: 'USER_ERROR',
-                message: signInUserResponse.message.message
-            });
-        }
-    }
+export function* sendPasswordResetEmail(action) {
+
+	const passwordResetResponse = yield call(Auth.sendPasswordResetEmail, action);
+	console.log('passwordResetResponse', passwordResetResponse);
+
+	if (passwordResetResponse.success) {
+		yield put({
+			type: 'USER_AUTH_SUCCESS',
+			message: 'Email sent successfully'
+		});
+	}
+	else {
+		yield put({
+			type: 'USER_AUTH_ERROR',
+			message: 'There was an error resetting your password. Please try again' // TODO: Check this
+		});
+	}
 }
 
 export function* signInUserWithFacebook(action) {
@@ -79,8 +97,54 @@ export function* signInUserWithFacebook(action) {
 	}
 	else {
 		yield put({
-			type: 'AUTH_ERROR',
+			type: 'USER_AUTH_ERROR',
 			message: signInFacebookResponse.message // TODO: Check this
+		});
+	}
+}
+
+// export function* signInUserWithGoogle(action) {
+
+// 	const signInGoogleResponse = yield call(Auth.signInUserWithGoogle, action);
+// 	console.log('signInGoogleResponse', signInGoogleResponse);
+
+// 	if (signInGoogleResponse.authenticated) {
+// 		const uid = signInGoogleResponse.message.uid || signInGoogleResponse.message.user.uid;
+
+// 		yield put({
+// 			type: 'SIGN_IN_USER',
+// 			uid: uid,
+// 			userEmail: action.userEmail,
+// 			userName: action.userName,
+// 			userPhotoUrl: action.userPhotoUrl,
+// 		});
+// 	}
+// 	else {
+// 		yield put({
+// 			type: 'USER_AUTH_ERROR',
+// 			message: signInGoogleResponse.message // TODO: Check this
+// 		});
+// 	}
+// }
+
+export function* signInUserAnonymously() {
+
+	const signInUserAnonymouslyResponse = yield call(Auth.signInUserAnonymously);
+	console.log('signInUserAnonymouslyResponse', signInUserAnonymouslyResponse);
+
+	if (signInUserAnonymouslyResponse.authenticated) {
+		const uid = signInUserAnonymouslyResponse.message.uid || signInUserAnonymouslyResponse.message.user.uid;
+
+		yield put({
+			type: 'SIGN_IN_USER',
+			uid: uid,
+			anonymous: true
+		});
+	}
+	else {
+		yield put({
+			type: 'USER_AUTH_ERROR',
+			message: signInUserAnonymouslyResponse.message // TODO: Check this
 		});
 	}
 }
@@ -97,7 +161,7 @@ export function* signOutUser() {
 	}
 	else {
 		yield put({
-			type: 'USER_ERROR',
+			type: 'USER_AUTH_ERROR',
 			message: signOutUserResponse.message // TODO: Check this
 		});
 	}

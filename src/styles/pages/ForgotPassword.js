@@ -16,9 +16,10 @@ const styles = StyleSheet.create({
         marginLeft: -10,
     },
     infoContainer: {
-        justifyContent: 'center',
-        paddingLeft: 16,
+        flex: 0.8,
         paddingRight: 96,
+        paddingLeft: 16,
+        zIndex: -1,
     },
     infoTextTitle: {
         fontSize: 32,
@@ -29,17 +30,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: styleConstants.white,
     },
-    inputContainer: {
-        flex: 1,
-        alignItems: 'center',
-        marginTop: 48,
-    },
     inputWrapper: {
-        
+        flex: 1,
+    },
+    inputContainer: {
+        alignItems: 'center',
     },
     buttonContainer: {
         alignItems: 'center',
-        paddingBottom: 16
+        paddingBottom: 16,
     },
     button: {
         marginTop: 16,

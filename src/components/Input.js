@@ -14,7 +14,7 @@ const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     inputContainer: {
-
+        marginBottom: 32
     },
     inputLabelContainer: {
         flexDirection: 'row',
@@ -60,6 +60,7 @@ export default class Input extends React.Component {
     }
 
     togglePassword() {
+        console.log('Pressed')
         this.setState({
             hidePassword: !this.state.hidePassword
         });

@@ -3,8 +3,8 @@ import {
     View,
     TouchableOpacity,
     Text,
-    StatusBar,
 } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -57,7 +57,7 @@ export class SignInWithEmail extends React.Component {
             });
 
             this.props.dispatch({
-                type: 'signInUser',
+                type: 'signInUserWithEmail',
                 email: this.props.userEmail,
                 password: this.props.userPassword
             });
@@ -135,28 +135,23 @@ export class SignInWithEmail extends React.Component {
                         Sign In
                     </Text>
                 </View>
-                <View style={styles.inputContainer}>
-                    <View style={styles.inputWrapper}>
+                <View style={styles.inputWrapper}>
+                    <KeyboardAwareScrollView
+                        contentContainerStyle={styles.inputContainer}
+                        keyboardShouldPersistTaps='always'>
                         <Input
                             placeholder="EMAIL ADDRESS"
                             value={this.props.userEmail}
                             handleChange={this.updateUserEmail}
                             keyboardType='email-address' />
-                    </View>
-                    <View style={styles.inputWrapper}>
                         <Input
                             placeholder="PASSWORD"
                             value={this.props.userPassword}
                             handleChange={this.updateUserPassword}
                             type='password' />
-                    </View>
+                    </KeyboardAwareScrollView>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button
-                        handlePress={() => Actions.signInOptions()}
-                        style={styles.button}
-                        text='More Options'
-                        styleMode='transparent' />
                     <Button
                         iconName='check'
                         handlePress={this.signIn}

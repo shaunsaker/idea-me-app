@@ -3,8 +3,8 @@ import {
     View,
     TouchableOpacity,
     Text,
-    StatusBar,
 } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -22,14 +22,12 @@ export class ForgotPassword extends React.Component {
         super(props);
 
         this.updateUserEmail = this.updateUserEmail.bind(this);
-        this.updateUserPassword = this.updateUserPassword.bind(this);
-        this.signIn = this.signIn.bind(this);
+        this.sendPasswordResetEmail = this.sendPasswordResetEmail.bind(this);
     }
 
     static get propTypes() {
         return {
             userEmail: React.PropTypes.string,
-            userPassword: React.PropTypes.string,
             errorMessage: React.PropTypes.string,
             authenticated: React.PropTypes.bool,
             loading: React.PropTypes.bool,
@@ -43,49 +41,11 @@ export class ForgotPassword extends React.Component {
         });
     }
 
-    updateUserPassword(text) {
+    sendPasswordResetEmail() {
         this.props.dispatch({
-            type: 'UPDATE_USER_PASSWORD',
-            value: text
+            type: 'sendPasswordResetEmail',
+            email: this.props.userEmail
         });
-    }
-
-    signIn() {
-        if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
-            this.props.dispatch({
-                type: 'SET_LOADING_TRUE'
-            });
-
-            this.props.dispatch({
-                type: 'signInUser',
-                email: this.props.userEmail,
-                password: this.props.userPassword
-            });
-        }
-        else if (this.props.userPassword && this.props.userPassword.length < 6) {
-            this.props.dispatch({
-                type: 'USER_ERROR',
-                message: 'Password should be at least 6 characters long'
-            });
-            setTimeout(() => {
-                this.props.dispatch({
-                    type: 'RESET_USER_ERROR'
-                });
-            }, 2500);
-        }
-        else {
-            const emptyInput = this.props.userEmail ? 'password' : 'email';
-
-            this.props.dispatch({
-                type: 'USER_ERROR',
-                message: 'You forgot to enter your ' + emptyInput
-            });
-            setTimeout(() => {
-                this.props.dispatch({
-                    type: 'RESET_USER_ERROR'
-                });
-            }, 2500);
-        }
     }
 
     componentDidUpdate() {
@@ -95,13 +55,6 @@ export class ForgotPassword extends React.Component {
                     loading: false
                 });
             }
-        }
-        else if (this.props.authenticated) {
-            this.props.dispatch({
-                type: 'SET_LOADING_FALSE'
-            });
-
-            Actions.ideas();
         }
     }
 
@@ -134,19 +87,20 @@ export class ForgotPassword extends React.Component {
                         Enter your email address and we'll send you a link to reset it.
                     </Text>
                 </View>
-                <View style={styles.inputContainer}>
-                    <View style={styles.inputWrapper}>
+                <View style={styles.inputWrapper}>
+                    <KeyboardAwareScrollView
+                        contentContainerStyle={styles.inputContainer}>
                         <Input
                             placeholder="EMAIL ADDRESS"
                             value={this.props.userEmail}
                             handleChange={this.updateUserEmail}
                             keyboardType='email-address' />
-                    </View>
+                    </KeyboardAwareScrollView>
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button
                         iconName='check'
-                        handlePress={this.signIn}
+                        handlePress={this.sendPasswordResetEmail}
                         text='Continue'
                         style={styles.button}
                         styleMode='primaryReversed' />
@@ -162,9 +116,7 @@ export class ForgotPassword extends React.Component {
 function MapStateToProps(state) {
     return ({
         userEmail: state.main.userAuth.email,
-        userPassword: state.main.userAuth.password,
         errorMessage: state.main.userAuth.userAuthErrorMessage,
-        authenticated: state.main.userAuth.authenticated,
         loading: state.main.app.loading,
     });
 }

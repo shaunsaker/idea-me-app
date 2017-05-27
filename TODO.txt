@@ -1,15 +1,14 @@
 TODOS
 
-    Material Inputs 
-        No autofocus
+    Inputs
         When focussed, need to shift into centre of whatever screen is and set transparency on bg
         Animate hide header on input focus
         Disable continue until valid inputs
-    Add new idea/category has placeholder: Give your idea a title, Give your idea a description
-        Live error handling
-        Handle user errors in page state
-    Handle signinwithemail state in page (store gets values on submit)
-    Password reset
+        Handle state/user erros within page - all pages
+    Info block component (same everywhere)
+        Title
+        Description
+    Sometimes when you close and open the app, its gets stuck on the Splash page
     Profile Page
         And all the trimmings
         Menu
@@ -20,11 +19,6 @@ TODOS
         Ideas/Home
         Add Idea
         Profile Page
-    Facebook Login
-        FB Login manager (full customisation)
-    Setup react-native-google-signin
-        Google Login (customised)
-    Guest Login
     Get current location on app load
     Save user data on sign up
     Handle all user errors
@@ -38,6 +32,10 @@ TODOS
     Feedback button opens webview to Google Survey
     Email after signup detailing what app does and howtos
     iOS click page to blur input (no hide keyboard button)
+    Verify all sign in methods
+        Anonymous should set anonymous state and should not load/save data
+        FB
+        Google
 
 FUTURE TODOS
     Integrate react-native-fbsdk on iOS
@@ -49,7 +47,7 @@ LESS IMPORTANT TODOS
         Check proptypes
         Lifecycle methods at top with other methods following order of this bindings
         All imports used
-        All bindings used
+        All bindings set and used
         All methods used
         Icons named by Icon type, ie. MaterialIcon (should be no plain Icon)
         Check reducers

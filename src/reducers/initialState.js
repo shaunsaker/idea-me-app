@@ -6,6 +6,7 @@ const initialState = {
         email: null,
         password: null,
         userAuthErrorMessage: null,
+        anonymous: null,
     },
     app: {
         userErrorMessage: null,

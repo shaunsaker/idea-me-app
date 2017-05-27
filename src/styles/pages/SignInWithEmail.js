@@ -16,26 +16,29 @@ const styles = StyleSheet.create({
         marginLeft: -10,
     },
     infoContainer: {
-        justifyContent: 'center',
-        backgroundColor: styleConstants.primary,
-        paddingHorizontal: 16,
-
+        flex: 0.4,
+        paddingRight: 96,
+        paddingLeft: 16,
+        zIndex: -1,
     },
     infoTextTitle: {
         fontSize: 32,
         color: styleConstants.white,
+        marginBottom: 8
     },
-    inputContainer: {
-        flex: 1,
-        alignItems: 'center',
-        paddingTop: 48,
+    infoTextDescription: {
+        fontSize: 18,
+        color: styleConstants.white,
     },
     inputWrapper: {
-        marginBottom: 32
+        flex: 1,
+    },
+    inputContainer: {
+        alignItems: 'center',
     },
     buttonContainer: {
         alignItems: 'center',
-        paddingBottom: 16
+        paddingBottom: 16,
     },
     button: {
         marginTop: 16,
