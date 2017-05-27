@@ -50,15 +50,27 @@ const styles = StyleSheet.create({
 		height: 56,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		alignItems: 'center',
-		padding: 16,
+		alignItems: 'stretch',
+		paddingHorizontal: 16,
 	},
 	textContainer: {
-		alignSelf: 'stretch',
 		justifyContent: 'center',
-		alignItems: 'center',
-		marginTop: 2,
 	},
+	text: {
+		fontSize: 18
+	},
+	leftIconContainer: {
+		justifyContent: 'center',
+	},
+	leftIcon: {
+		marginLeft: -12
+	},
+	rightIconContainer: {
+		justifyContent: 'center',
+	},
+	rightIcon: {
+		marginRight: -12
+	}
 });
 
 const CustomStatusBar = ({backgroundColor, ...props}) => (
@@ -74,21 +86,17 @@ export default class Header extends React.Component {
 
 			headerContainerStyle: React.PropTypes.object,
 			backgroundColor: React.PropTypes.string,
+			contentColor: React.PropTypes.string,
 
 			leftIconName: React.PropTypes.string,
-			leftIconColor: React.PropTypes.string,
 			leftIconSize: React.PropTypes.number,
 			handleLeftIconPress: React.PropTypes.func,
 
 			text: React.PropTypes.string,
-			textColor: React.PropTypes.string,
-			textSize: React.PropTypes.number,
 			textRight: React.PropTypes.bool,
-			// textStyle: object or arrayt,
 			handleTextPress: React.PropTypes.func,
 
 			rightIconName: React.PropTypes.string,
-			rightIconColor: React.PropTypes.string,
 			rightIconSize: React.PropTypes.number,
 			handleRightIconPress: React.PropTypes.func,
 		}
@@ -103,12 +111,13 @@ export default class Header extends React.Component {
 
 		const leftIcon = this.props.leftIconName ?
 			<TouchableOpacity
+				style={styles.leftIconContainer}
 				onPress={this.props.handleLeftIconPress} >
 				<Icon
 					name={this.props.leftIconName}
-					color={this.props.leftIconColor}
+					color={this.props.contentColor}
 					size={this.props.leftIconSize}
-					style={this.props.leftIconStyle} />
+					style={[styles.leftIcon, this.props.leftIconStyle]} />
 			</TouchableOpacity>
 			:
 			<View style={{ width: this.props.leftIconSize }} />;
@@ -117,21 +126,22 @@ export default class Header extends React.Component {
 			<TouchableOpacity
 				style={styles.textContainer}
 				onPress={this.props.handleTextPress} >
-				<Text style={[{ color: this.props.textColor, fontSize: this.props.textSize }, this.props.textStyle]}>{this.props.text}</Text>
+				<Text style={[{ color: this.props.contentColor }, styles.text,  this.props.textStyle]}>{this.props.text}</Text>
 			</TouchableOpacity>
 			:
 			<View style={styles.textContainer}>
-				<Text style={[{ color: this.props.textColor, fontSize: this.props.textSize }, this.props.textStyle]}>{this.props.text}</Text>
+				<Text style={[{ color: this.props.contentColor }, styles.text, this.props.textStyle]}>{this.props.text}</Text>
 			</View>;
 
 		const rightIcon = this.props.rightIconName ?
 			<TouchableOpacity
+				style={styles.rightIconContainer}
 				onPress={this.props.handleRightIconPress} >
 				<Icon
 					name={this.props.rightIconName}
-					color={this.props.rightIconColor}
+					color={this.props.contentColor}
 					size={this.props.rightIconSize}
-					style={this.props.rightIconStyle} />
+					style={[styles.rightIcon, this.props.rightIconStyle]} />
 			</TouchableOpacity>
 			:
 			this.props.textRight ? null : <View style={{ width: this.props.leftIconSize }} />;

@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
     dropdownItemText: {
         color: styleConstants.primary,
-        fontSize: 16,
+        fontSize: 18,
         textAlign: 'center',
     },
     editIcon: {

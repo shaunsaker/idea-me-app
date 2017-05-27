@@ -1,13 +1,8 @@
 TODOS
 
-    Inputs
-        When focussed, need to shift into centre of whatever screen is and set transparency on bg
-        Animate hide header on input focus
-        Disable continue until valid inputs
-        Handle state/user erros within page - all pages
-    Info block component (same everywhere)
-        Title
-        Description
+    Validate user input within pages
+        Disable continue buttons until valid inputs
+
     Sometimes when you close and open the app, its gets stuck on the Splash page
     Profile Page
         And all the trimmings

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     inputLabelText: {
         fontSize: 18,
-        color: styleConstants.white
+        color: styleConstants.lightGrey
     },
     togglePasswordContainer: {
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         height: 50,
         paddingLeft: 0,
         borderBottomWidth: 1,
-        borderBottomColor: styleConstants.grey
+        borderBottomColor: styleConstants.lightGrey
     }
 });
 

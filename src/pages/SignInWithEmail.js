@@ -52,50 +52,40 @@ export class SignInWithEmail extends React.Component {
     }
 
     signIn() {
-        if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
-            this.props.dispatch({
-                type: 'SET_LOADING_TRUE'
-            });
-
-            this.props.dispatch({
-                type: 'signInUserWithEmail',
-                email: this.props.userEmail,
-                password: this.props.userPassword
-            });
-        }
-        else if (this.props.userPassword && this.props.userPassword.length < 6) {
-            this.props.dispatch({
-                type: 'USER_ERROR',
-                message: 'Password should be at least 6 characters long'
-            });
-            setTimeout(() => {
+        if (!this.props.userErrorMessage || !this.props.userAuthErrorMessage) {
+            if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
                 this.props.dispatch({
-                    type: 'RESET_USER_ERROR'
+                    type: 'SET_LOADING_TRUE'
                 });
-            }, 2500);
-        }
-        else {
-            const emptyInput = this.props.userEmail ? 'password' : 'email';
 
-            this.props.dispatch({
-                type: 'USER_ERROR',
-                message: 'You forgot to enter your ' + emptyInput
-            });
-            setTimeout(() => {
                 this.props.dispatch({
-                    type: 'RESET_USER_ERROR'
+                    type: 'signInUserWithEmail',
+                    email: this.props.userEmail,
+                    password: this.props.userPassword
                 });
-            }, 2500);
+            }
+            else if (this.props.userPassword && this.props.userPassword.length < 6) {
+                this.props.dispatch({
+                    type: 'USER_ERROR',
+                    message: 'Password should be at least 6 characters long'
+                });
+            }
+            else {
+                const emptyInput = this.props.userEmail ? 'password' : 'email';
+
+                this.props.dispatch({
+                    type: 'USER_ERROR',
+                    message: 'You forgot to enter your ' + emptyInput
+                });
+            }
         }
     }
 
     componentDidUpdate() {
-        if (this.props.errorMessage) {
-            if (this.state.loading) {
-                this.setState({
-                    loading: false
-                });
-            }
+        if (this.props.userErrorMessage || this.props.userAuthErrorMessage) {
+            this.props.dispatch({
+                type: 'SET_LOADING_FALSE'
+            });
         }
         else if (this.props.authenticated) {
             this.props.dispatch({
@@ -107,28 +97,35 @@ export class SignInWithEmail extends React.Component {
     }
 
     render() {
+        console.log(this.props.loading, this.props.userErrorMessage, this.props.userAuthErrorMessage);
+
         const loader = this.props.loading ?
             <Loader positionStyle={{ bottom: 56 }} />
             :
             null;
 
-        const errorMessage = this.props.errorMessage ?
-            <Growl text={this.props.errorMessage} />
+        const userErrorMessage = this.props.userErrorMessage ?
+            <Growl text={this.props.userErrorMessage} />
+            :
+            null;
+
+        const userAuthErrorMessage = this.props.userAuthErrorMessage ?
+            <Growl text={this.props.userAuthErrorMessage} />
             :
             null;
 
         return (
             <View style={styles.container}>
                 <Header
+                    backgroundColor={styleConstants.primary}
+                    contentColor={styleConstants.white}
                     headerShadow={false}
                     text='Forgot Password?'
                     handleTextPress={() => Actions.forgotPassword()}
-                    textStyle={[styles.headerText, styleConstants.robotoCondensed]}
+                    textStyle={styleConstants.robotoCondensed}
                     textRight={true}
                     leftIconName='chevron-left'
                     leftIconSize={36}
-                    leftIconColor={styleConstants.white}
-                    leftIconStyle={styles.headerIcon}
                     handleLeftIconPress={() => Actions.pop()} />
 
                 <InfoBlock
@@ -146,6 +143,7 @@ export class SignInWithEmail extends React.Component {
                         handleChange={this.updateUserPassword}
                         type='password' />
                 </InputContainer>
+                
                 <View style={styles.buttonContainer}>
                     <Button
                         iconName='check'
@@ -153,10 +151,11 @@ export class SignInWithEmail extends React.Component {
                         text='Continue'
                         style={styles.button}
                         styleMode='primaryReversed' />
-
                 </View>
+
                 {loader}
-                {errorMessage}
+                {userErrorMessage}
+                {userAuthErrorMessage}
             </View>
         );
     }
@@ -166,7 +165,8 @@ function MapStateToProps(state) {
     return ({
         userEmail: state.main.userAuth.email,
         userPassword: state.main.userAuth.password,
-        errorMessage: state.main.userAuth.userAuthErrorMessage,
+        userErrorMessage: state.main.app.userErrorMessage,
+        userAuthErrorMessage: state.main.userAuth.userAuthErrorMessage,
         authenticated: state.main.userAuth.authenticated,
         loading: state.main.app.loading,
     });

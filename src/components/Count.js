@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     countText: {
-        fontSize: 16,
+        fontSize: 18,
         color: styleConstants.primary
     },
 });

@@ -12,6 +12,7 @@ const initialState = {
         userErrorMessage: null,
         userSuccessMessage: null,
         errorType: null,
+        loading: null,
     },
     api: {
         apiSaveSuccess: null,

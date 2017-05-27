@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.white,
     },
     categoryText: {
-        fontSize: 16,
+        fontSize: 18,
         color: styleConstants.primary,
     },
     iconContainer: {

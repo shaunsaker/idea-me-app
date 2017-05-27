@@ -5,12 +5,15 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import styleConstants from '../styles/styleConstants';
+
 const styles = StyleSheet.create({
     inputWrapper: {
         flex: 1,
     },
     inputContainer: {
         alignItems: 'center',
+        backgroundColor: styleConstants.primary
     },
 });
 

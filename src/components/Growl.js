@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         height: 40,
     },
     messageText: {
-        fontSize: 16,
+        fontSize: 18,
         textAlign: 'center',
         color: styleConstants.primary,
     },

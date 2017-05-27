@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
         paddingBottom: 66,
     },
     ideaTextTitle: {
-        fontSize: 28,
+        fontSize: 32,
         color: styleConstants.primary,
         marginRight: 36,
     },
     ideaTextDescription: {
-        fontSize: 16,
+        fontSize: 18,
         color: styleConstants.grey,
         paddingTop: 8
     },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         borderRadius: 32,
     },
     text: {
-        fontSize: 16,
+        fontSize: 18,
         color: styleConstants.primary
     },
     ButtonsContainer: {

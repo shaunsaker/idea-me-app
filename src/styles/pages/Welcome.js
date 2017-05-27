@@ -7,10 +7,6 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.primary,
         justifyContent: 'space-between',
     },
-    headerText: {
-        fontSize: 18,
-        color: styleConstants.white,
-    },
     logoContainer: {
         paddingBottom: 42
     },

@@ -7,14 +7,6 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.primary,
         justifyContent: 'space-between',
     },
-    headerText: {
-        fontSize: 18,
-        color: styleConstants.white,
-        marginBottom: 4
-    },
-    headerIcon: {
-        marginLeft: -10,
-    },
     infoContainer: {
         flex: 0.4,
         paddingRight: 96,
