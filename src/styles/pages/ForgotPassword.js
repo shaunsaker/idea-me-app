@@ -15,27 +15,6 @@ const styles = StyleSheet.create({
     headerIcon: {
         marginLeft: -10,
     },
-    infoContainer: {
-        flex: 0.8,
-        paddingRight: 96,
-        paddingLeft: 16,
-        zIndex: -1,
-    },
-    infoTextTitle: {
-        fontSize: 32,
-        color: styleConstants.white,
-        marginBottom: 8
-    },
-    infoTextDescription: {
-        fontSize: 18,
-        color: styleConstants.white,
-    },
-    inputWrapper: {
-        flex: 1,
-    },
-    inputContainer: {
-        alignItems: 'center',
-    },
     buttonContainer: {
         alignItems: 'center',
         paddingBottom: 16,

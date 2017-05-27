@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         color: styleConstants.white,
     },
     logoContainer: {
+        paddingBottom: 42
     },
     infoContainer: {
         flex: 1,

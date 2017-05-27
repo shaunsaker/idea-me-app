@@ -9,6 +9,7 @@ import { Actions } from 'react-native-router-flux';
 
 import Header from '../components/Header';
 import Logo from '../components/Logo';
+import InfoBlock from '../components/InfoBlock';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
@@ -80,14 +81,9 @@ export class Welcome extends React.Component {
                     <Logo />
                 </View>
 
-                <View style={styles.infoContainer}>
-                    <Text style={[styles.infoTextTitle, styleConstants.robotoCondensed]}>
-                        Have great ideas and no where to store them?
-                    </Text>
-                    <Text style={[styles.infoTextDescription, styleConstants.robotoCondensed]}>
-                        You've come to the right place.
-                    </Text>
-                </View>
+                <InfoBlock
+                    title="Have great ideas and no where to store them?"
+                    subtitle="You've come to the right place." />
 
                 <View style={styles.buttonContainer}>
                     <Button

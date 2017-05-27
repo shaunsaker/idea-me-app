@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import Header from '../components/Header';
+import InfoBlock from '../components/InfoBlock';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -79,14 +80,10 @@ export class ForgotPassword extends React.Component {
                     leftIconStyle={styles.headerIcon}
                     handleLeftIconPress={() => Actions.pop()} />
 
-                <View style={styles.infoContainer}>
-                    <Text style={[styles.infoTextTitle, styleConstants.robotoCondensed]}>
-                        Forgot your password?
-                    </Text>
-                    <Text style={[styles.infoTextDescription, styleConstants.robotoCondensed]}>
-                        Enter your email address and we'll send you a link to reset it.
-                    </Text>
-                </View>
+                <InfoBlock
+                    title="Forgot your password?"
+                    subtitle="Enter your email address and we'll send you a link to reset it."/>
+
                 <InputContainer>
                     <Input
                         placeholder="EMAIL ADDRESS"
