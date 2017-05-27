@@ -1,6 +1,6 @@
 TODOS
 
-    Disable continue buttons until valid inputs
+    Clear text button for inputs (tie into handleChangeText)
 
     Sometimes when you close and open the app, its gets stuck on the Splash page
     Profile Page

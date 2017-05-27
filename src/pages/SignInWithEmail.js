@@ -76,14 +76,6 @@ export class SignInWithEmail extends React.Component {
                 message: 'Password should be at least 6 characters long'
             });
         }
-        else {
-            const emptyInput = this.props.userEmail ? 'password' : 'email';
-
-            this.props.dispatch({
-                type: 'USER_ERROR',
-                message: 'You forgot to enter your ' + emptyInput
-            });
-        }
     }
 
     resetError() {
@@ -93,6 +85,8 @@ export class SignInWithEmail extends React.Component {
     }
 
     render() {
+        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0 && this.props.userPassword; 
+
         return (
             <View style={styles.container}>
                 <Header
@@ -128,11 +122,11 @@ export class SignInWithEmail extends React.Component {
                 <View style={styles.buttonContainer}>
                     <Button
                         iconName='check'
-                        disabled={true}
                         handlePress={this.signIn}
                         text='Continue'
                         style={styles.button}
-                        styleMode='primaryReversed' />
+                        styleMode='primaryReversed'
+                        disabled={!enableContinueButton} />
                 </View>
 
                 <Growl

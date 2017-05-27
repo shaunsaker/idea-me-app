@@ -67,6 +67,8 @@ export class ForgotPassword extends React.Component {
     }
 
     render() {
+        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0; 
+
         return (
             <View style={styles.container}>
                 <Header
@@ -96,7 +98,8 @@ export class ForgotPassword extends React.Component {
                         handlePress={this.sendPasswordResetEmail}
                         text='Continue'
                         style={styles.button}
-                        styleMode='primaryReversed' />
+                        styleMode='primaryReversed' 
+                        disabled={!enableContinueButton} />
                 </View>
 
                 <Growl
