@@ -51,6 +51,20 @@ export class Ideas extends React.Component {
     };
   }
 
+  componentWillMount() {
+    this.props.dispatch({
+        type: 'SET_LOADING_FALSE'
+    });
+  }
+
+  componentDidUpdate() {
+    if (this.props.errorMessage || this.props.apiSaveSuccess) {
+      this.props.dispatch({
+        type: 'SET_LOADING_FALSE'
+      });
+    }
+  }
+
   selectCategory(eventId) {
 
     // 100 is reserved for 'All' categories, 200 is reserved as the categories button
@@ -108,14 +122,6 @@ export class Ideas extends React.Component {
       ideas: newIdeas,
       uid: this.props.uid
     });
-  }
-
-  componentDidUpdate() {
-    if (this.props.errorMessage || this.props.apiSaveSuccess) {
-      this.props.dispatch({
-        type: 'SET_LOADING_FALSE'
-      });
-    }
   }
 
   toggleDeleteModal(title) {

@@ -4,55 +4,64 @@ import {
     Text,
     TouchableOpacity,
     Animated,
-	StyleSheet,
+    StyleSheet,
 } from "react-native";
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
-    errorMessageWrapper: {        
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     errorMessageContainer: {
         position: 'absolute',
-        left: -16,
-        right: -16,
-        backgroundColor: styleConstants.secondary, 
+        left: 0,
+        right: 0,
+        backgroundColor: styleConstants.grey,
+        borderTopWidth: 1,
+        borderTopColor: styleConstants.lightGrey,
         flexDirection: 'row',
-        alignItems: 'center',
-		padding: 8,
+        justifyContent: 'space-between',
         elevation: 100,
-        height: 40,
+        height: 80,
+        paddingHorizontal: 8,
+    },
+    messageTextContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 24,
     },
     messageText: {
         fontSize: 18,
+        color: styleConstants.white,
         textAlign: 'center',
-        color: styleConstants.primary,
+    },
+    iconContainer: {
+        paddingTop: 8,
+        alignSelf: 'stretch',
     },
     icon: {
-        marginTop: 2,
-        marginRight: 8,
+
     },
     closeIconContainer: {
-        position: 'absolute',
-        right: 0,
+        paddingTop: 8,
+        alignSelf: 'stretch',
     },
     closeIcon: {
-        padding: 8
+
     }
 });
 
-export class Growl extends React.Component {
+class GrowlComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        this.height = 40;
+        this.height = 80;
 
         this.state = {
-            bottom: new Animated.Value((this.height + 28) * -1) // TODO: this should be -this.height but a gap (26) is introduced from somewhere
+            bottom: new Animated.Value((this.height) * -1),
         }
 
         this.hideGrowl = this.hideGrowl.bind(this);
@@ -61,16 +70,16 @@ export class Growl extends React.Component {
     static get propTypes() {
         return {
             text: React.PropTypes.string.isRequired,
-			success: React.PropTypes.bool,
-            type: React.PropTypes.string,
+            success: React.PropTypes.bool,
+            handleReset: React.PropTypes.func,
         };
     }
 
-    componentDidMount() {
+    componentDidMount() {   
         Animated.timing(
             this.state.bottom,
             {
-                toValue: -28, // TODO: this should be -16 but a gap is introduced from somewhere
+                toValue: 0,
                 duration: 250,
             }
         ).start();
@@ -80,47 +89,108 @@ export class Growl extends React.Component {
         Animated.timing(
             this.state.bottom,
             {
-                toValue: (this.height + 28) * -1, // TODO: this should be -this.height but a gap (26) is introduced from somewhere
+                toValue: (this.height) * -1,
                 duration: 250,
             }
         ).start(() => {
-
-            // Reset the error depending on the type of error
-            const action = this.props.success ? 
-                'RESET_' + this.props.errorType + '_SUCCESS'
-                :
-                'RESET_' + this.props.errorType + '_ERROR'
-
-            this.props.dispatch({
-                type: action
-            });
+            this.props.handleReset();
         });
     }
 
     render() {
-		const iconName = this.props.success ? 'check' : 'error-outline';
+        const iconName = this.props.success ? 'check' : 'error-outline';                 
 
         return (
-            <View style={styles.errorMessageWrapper}>
-                <Animated.View style={[styles.errorMessageContainer, {bottom: this.state.bottom}]}>
+            <Animated.View style={[styles.errorMessageContainer, { bottom: this.state.bottom }]}>
+                <View style={styles.iconContainer}>
                     <MaterialIcon
                         name={iconName}
                         color={this.props.success ? styleConstants.success : styleConstants.danger}
-                        size={20}
+                        size={24}
                         style={styles.icon} />
-                    <Text style={[styles.messageText, styleConstants.montserratLight]}>
+                </View>
+                <View style={styles.messageTextContainer}>
+                    <Text
+                        style={[styles.messageText, styleConstants.montserratLight]}
+                        multiline={true}>
                         {this.props.text}
                     </Text>
-                    <TouchableOpacity
-                        onPress={this.hideGrowl}
-                        style={styles.closeIconContainer} >
-                        <MaterialIcon
-                            name={'close'}
-                            color={styleConstants.primary}
-                            size={24}
-                            style={styles.closeIcon} />
-                    </TouchableOpacity>
-                </Animated.View>
+                </View>
+                <TouchableOpacity
+                    onPress={this.hideGrowl}
+                    style={styles.closeIconContainer} >
+                    <MaterialIcon
+                        name={'close'}
+                        color={styleConstants.lightGrey}
+                        size={24}
+                        style={styles.closeIcon} />
+                </TouchableOpacity>
+            </Animated.View>
+        );
+    }
+}
+
+export class Growl extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.resetError = this.resetError.bind(this);
+    }
+
+    static get propTypes() {
+        return {
+            userErrorMessage: React.PropTypes.string,
+            userAuthErrorMessage: React.PropTypes.string,
+            apiErrorMessage: React.PropTypes.string,
+            geolocationErrorMessage: React.PropTypes.string,
+            storageErrorMessage: React.PropTypes.string,
+            errorType: React.PropTypes.string,  
+        };
+    }
+
+    resetError() {
+        
+        // Reset the error depending on the type of error
+        const action = this.props.success ?
+            'RESET_' + this.props.errorType + '_SUCCESS'
+            :
+            'RESET_' + this.props.errorType + '_ERROR';
+
+        this.props.dispatch({
+            type: action
+        });
+    }
+
+    render() {
+        const errorMessage = 
+            this.props.userErrorMessage ? 
+                this.props.userErrorMessage
+                :
+                this.props.userAuthErrorMessage ?
+                    this.props.userAuthErrorMessage 
+                    :
+                    this.props.apiErrorMessage ?
+                        this.props.apiErrorMessage 
+                        :
+                        this.props.geolocationErrorMessage ?
+                            this.props.geolocationErrorMessage 
+                            :
+                            this.props.storageErrorMessage ?
+                                this.props.storageErrorMessage 
+                                :
+                                null;              
+
+        const growl = errorMessage ?
+            <GrowlComponent 
+                text={errorMessage} 
+                // TODO: pass in success if applicable
+                handleReset={this.resetError} />
+            :
+            null;
+
+        return (
+            <View>
+                {growl}
             </View>
         );
     }
@@ -128,8 +198,13 @@ export class Growl extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        userErrorMessage: state.main.app.userErrorMessage,
+        userAuthErrorMessage: state.main.userAuth.userAuthErrorMessage,
+        apiErrorMessage: state.main.api.apiErrorMessage,
+        geolocationErrorMessage: state.main.geolocation.geolocationErrorMessage ,
+        storageErrorMessage: state.main.storage.storageErrorMessage,
         errorType: state.main.app.errorType
     }
 }
 
-export default connect()(Growl);
+export default connect(mapStateToProps)(Growl);

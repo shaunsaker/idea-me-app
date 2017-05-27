@@ -24,14 +24,13 @@ export class ForgotPassword extends React.Component {
 
         this.updateUserEmail = this.updateUserEmail.bind(this);
         this.sendPasswordResetEmail = this.sendPasswordResetEmail.bind(this);
+        this.resetError = this.resetError.bind(this);
     }
 
     static get propTypes() {
         return {
             userEmail: React.PropTypes.string,
-            errorMessage: React.PropTypes.string,
             authenticated: React.PropTypes.bool,
-            loading: React.PropTypes.bool,
         };
     }
 
@@ -43,33 +42,31 @@ export class ForgotPassword extends React.Component {
     }
 
     sendPasswordResetEmail() {
-        this.props.dispatch({
-            type: 'sendPasswordResetEmail',
-            email: this.props.userEmail
-        });
-    }
+        if (this.props.userEmail) {
+            this.props.dispatch({
+                type: 'SET_LOADING_TRUE'
+            });
 
-    componentDidUpdate() {
-        if (this.props.errorMessage) {
-            if (this.state.loading) {
-                this.setState({
-                    loading: false
-                });
-            }
+            this.props.dispatch({
+                type: 'sendPasswordResetEmail',
+                email: this.props.userEmail
+            });
+        }
+        else {
+            this.props.dispatch({
+                type: 'USER_ERROR',
+                message: 'You forgot to enter your email'
+            });
         }
     }
 
+    resetError() {
+        this.props.dispatch({
+            type: 'RESET_' + this.props.errorType + '_ERROR'
+        });
+    }
+
     render() {
-        const loader = this.props.loading ?
-            <Loader positionStyle={{ bottom: 56 }} />
-            :
-            null;
-
-        const errorMessage = this.props.errorMessage ?
-            <Growl text={this.props.errorMessage} />
-            :
-            null;
-
         return (
             <View style={styles.container}>
                 <Header
@@ -89,8 +86,10 @@ export class ForgotPassword extends React.Component {
                         placeholder="EMAIL ADDRESS"
                         value={this.props.userEmail}
                         handleChange={this.updateUserEmail}
+                        handleFocus={this.resetError}
                         keyboardType='email-address' />
                 </InputContainer>
+
                 <View style={styles.buttonContainer}>
                     <Button
                         iconName='check'
@@ -98,10 +97,11 @@ export class ForgotPassword extends React.Component {
                         text='Continue'
                         style={styles.button}
                         styleMode='primaryReversed' />
-
                 </View>
-                {loader}
-                {errorMessage}
+
+                <Growl
+                    handleReset={this.resetError} />
+                <Loader />
             </View>
         );
     }
@@ -110,8 +110,7 @@ export class ForgotPassword extends React.Component {
 function MapStateToProps(state) {
     return ({
         userEmail: state.main.userAuth.email,
-        errorMessage: state.main.userAuth.userAuthErrorMessage,
-        loading: state.main.app.loading,
+        errorType: state.main.app.errorType,
     });
 }
 

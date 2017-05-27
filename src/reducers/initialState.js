@@ -1,12 +1,12 @@
 const initialState = {
     userAuth: {
         authenticated: null,
+        anonymous: null,
         signInRedirect: null,
         uid: null,
         email: null,
         password: null,
         userAuthErrorMessage: null,
-        anonymous: null,
     },
     app: {
         userErrorMessage: null,

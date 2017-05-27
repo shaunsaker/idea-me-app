@@ -53,14 +53,15 @@ export default class Input extends React.Component {
         return {
             placeholder: React.PropTypes.string,
             handleChange: React.PropTypes.func,
+            handleFocus: React.PropTypes.func,
             value: React.PropTypes.string,
             type: React.PropTypes.string,
-            keyboardType: React.PropTypes.string
+            keyboardType: React.PropTypes.string,
+            autoFocus: React.PropTypes.bool,
         };
     }
 
     togglePassword() {
-        console.log('Pressed')
         this.setState({
             hidePassword: !this.state.hidePassword
         });
@@ -91,6 +92,7 @@ export default class Input extends React.Component {
                     underlineColorAndroid='transparent'
                     style={[styles.input, styleConstants.robotoCondensed]}
                     onChangeText={(text) => this.props.handleChange(text)}
+                    onFocus={this.props.handleFocus}
                     secureTextEntry={this.props.type === 'password' && this.state.hidePassword}
                     keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
                     autoFocus={this.props.autoFocus} />

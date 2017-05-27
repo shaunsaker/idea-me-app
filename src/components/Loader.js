@@ -6,6 +6,7 @@ import {
 	Easing,
 	Dimensions,
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default class Loader extends React.Component{
+class LoaderComponent extends React.Component {
 	constructor() {
 		super();
 
@@ -86,4 +87,33 @@ export default class Loader extends React.Component{
 			</Animated.View>
 		);
 	}
+}
+
+export class Loader extends React.Component{
+    static get propTypes() {
+      return {
+		loading: React.PropTypes.bool
+      };
+    }
+
+	render() {
+		const loader = this.props.loading ?
+			<LoaderComponent />
+			:
+			null;
+
+		return (
+			<View>	
+				{loader}
+			</View>
+		);
+	}
 };
+
+function mapStateToProps(state) {
+	return {
+		loading: state.main.app.loading
+	}
+}
+
+export default connect(mapStateToProps)(Loader);

@@ -25,6 +25,7 @@ export class SignInWithEmail extends React.Component {
         this.updateUserEmail = this.updateUserEmail.bind(this);
         this.updateUserPassword = this.updateUserPassword.bind(this);
         this.signIn = this.signIn.bind(this);
+        this.resetError = this.resetError.bind(this);
     }
 
     static get propTypes() {
@@ -35,6 +36,12 @@ export class SignInWithEmail extends React.Component {
             authenticated: React.PropTypes.bool,
             loading: React.PropTypes.bool,
         };
+    }
+
+    componentDidUpdate() {
+        if (this.props.authenticated) {
+            Actions.ideas();
+        }
     }
 
     updateUserEmail(text) {
@@ -52,68 +59,40 @@ export class SignInWithEmail extends React.Component {
     }
 
     signIn() {
-        if (!this.props.userErrorMessage || !this.props.userAuthErrorMessage) {
-            if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
-                this.props.dispatch({
-                    type: 'SET_LOADING_TRUE'
-                });
+        if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
+            this.props.dispatch({
+                type: 'SET_LOADING_TRUE'
+            });
 
-                this.props.dispatch({
-                    type: 'signInUserWithEmail',
-                    email: this.props.userEmail,
-                    password: this.props.userPassword
-                });
-            }
-            else if (this.props.userPassword && this.props.userPassword.length < 6) {
-                this.props.dispatch({
-                    type: 'USER_ERROR',
-                    message: 'Password should be at least 6 characters long'
-                });
-            }
-            else {
-                const emptyInput = this.props.userEmail ? 'password' : 'email';
+            this.props.dispatch({
+                type: 'signInUserWithEmail',
+                email: this.props.userEmail,
+                password: this.props.userPassword
+            });
+        }
+        else if (this.props.userPassword && this.props.userPassword.length < 6) {
+            this.props.dispatch({
+                type: 'USER_ERROR',
+                message: 'Password should be at least 6 characters long'
+            });
+        }
+        else {
+            const emptyInput = this.props.userEmail ? 'password' : 'email';
 
-                this.props.dispatch({
-                    type: 'USER_ERROR',
-                    message: 'You forgot to enter your ' + emptyInput
-                });
-            }
+            this.props.dispatch({
+                type: 'USER_ERROR',
+                message: 'You forgot to enter your ' + emptyInput
+            });
         }
     }
 
-    componentDidUpdate() {
-        if (this.props.userErrorMessage || this.props.userAuthErrorMessage) {
-            this.props.dispatch({
-                type: 'SET_LOADING_FALSE'
-            });
-        }
-        else if (this.props.authenticated) {
-            this.props.dispatch({
-                type: 'SET_LOADING_FALSE'
-            });
-
-            Actions.ideas();
-        }
+    resetError() {
+        this.props.dispatch({
+            type: 'RESET_' + this.props.errorType + '_ERROR'
+        });
     }
 
     render() {
-        console.log(this.props.loading, this.props.userErrorMessage, this.props.userAuthErrorMessage);
-
-        const loader = this.props.loading ?
-            <Loader positionStyle={{ bottom: 56 }} />
-            :
-            null;
-
-        const userErrorMessage = this.props.userErrorMessage ?
-            <Growl text={this.props.userErrorMessage} />
-            :
-            null;
-
-        const userAuthErrorMessage = this.props.userAuthErrorMessage ?
-            <Growl text={this.props.userAuthErrorMessage} />
-            :
-            null;
-
         return (
             <View style={styles.container}>
                 <Header
@@ -136,11 +115,13 @@ export class SignInWithEmail extends React.Component {
                         placeholder="EMAIL ADDRESS"
                         value={this.props.userEmail}
                         handleChange={this.updateUserEmail}
+                        handleFocus={this.resetError}
                         keyboardType='email-address' />
                     <Input
                         placeholder="PASSWORD"
                         value={this.props.userPassword}
                         handleChange={this.updateUserPassword}
+                        handleFocus={this.resetError}
                         type='password' />
                 </InputContainer>
                 
@@ -153,9 +134,9 @@ export class SignInWithEmail extends React.Component {
                         styleMode='primaryReversed' />
                 </View>
 
-                {loader}
-                {userErrorMessage}
-                {userAuthErrorMessage}
+                <Growl
+                    handleReset={this.resetError} />
+                <Loader />
             </View>
         );
     }
@@ -165,10 +146,8 @@ function MapStateToProps(state) {
     return ({
         userEmail: state.main.userAuth.email,
         userPassword: state.main.userAuth.password,
-        userErrorMessage: state.main.app.userErrorMessage,
-        userAuthErrorMessage: state.main.userAuth.userAuthErrorMessage,
         authenticated: state.main.userAuth.authenticated,
-        loading: state.main.app.loading,
+        errorType: state.main.app.errorType,
     });
 }
 
