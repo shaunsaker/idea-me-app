@@ -1,6 +1,5 @@
 TODOS
 
-    Handle password reset page, ie. does it pop back and load in signInScreen? Does it display loader there?
     Disable continue buttons until valid inputs
 
     Sometimes when you close and open the app, its gets stuck on the Splash page

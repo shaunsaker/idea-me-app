@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    View,
     Text,
     TouchableOpacity,
     StyleSheet,
@@ -32,6 +33,9 @@ const styles = StyleSheet.create({
         },
         borderRadius: 36
     },
+    disabled: {
+        opacity: 0.33
+    },
     icon: {
         position: 'absolute',
         left: 16
@@ -48,6 +52,8 @@ export default Button = (props) => {
             transparentReversed => White background with primary text/icon and white border
             primary => Primary colour background with white text/icon and white border
             primaryReversed => White background with primary colour text/icon and white border
+
+            It also takes a disabled prop which creates opacity and disables any presses
     */
 
     const backgroundColor =
@@ -82,7 +88,16 @@ export default Button = (props) => {
             :
             null;
 
-    return (
+    const button = props.disabled ?
+        <View
+            style={[styles.button, styles.disabled, { backgroundColor }, props.style]}>
+            {icon}
+            <Text
+                style={[styles.text, { color: textColor }, styleConstants.robotoCondensed]}>
+                {props.text}
+            </Text>
+        </View>  
+        :
         <TouchableOpacity
             style={[styles.button, { backgroundColor }, props.style]}
             onPress={props.handlePress} >
@@ -92,5 +107,10 @@ export default Button = (props) => {
                 {props.text}
             </Text>
         </TouchableOpacity>
+
+    return (
+        <View>
+            {button}
+        </View>
     );
 }

@@ -128,6 +128,7 @@ export class SignInWithEmail extends React.Component {
                 <View style={styles.buttonContainer}>
                     <Button
                         iconName='check'
+                        disabled={true}
                         handlePress={this.signIn}
                         text='Continue'
                         style={styles.button}
