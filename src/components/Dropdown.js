@@ -103,7 +103,7 @@ export default class Dropdown extends React.Component {
                 this.state.height,
                 {
                     toValue: itemCount * 36,
-                    duration: 500,
+                    duration: 250,
                     easing: Easing.gentle
                 }
             ).start();
@@ -117,7 +117,7 @@ export default class Dropdown extends React.Component {
                 this.state.height,
                 {
                     toValue: 0,
-                    duration: 500,
+                    duration: 250,
                     easing: Easing.gentle
                 }
             ).start();

@@ -32,7 +32,6 @@ export class Ideas extends React.Component {
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
-    this.signOut = this.signOut.bind(this);
 
     this.state = {
       currentCategory: 'All',
@@ -104,11 +103,11 @@ export class Ideas extends React.Component {
       ideas: newIdeas
     });
 
-    this.props.dispatch({
-      type: 'saveUserIdeas',
-      ideas: newIdeas,
-      uid: this.props.uid
-    });
+    // this.props.dispatch({
+    //   type: 'saveUserIdeas',
+    //   ideas: newIdeas,
+    //   uid: this.props.uid
+    // });
   }
 
   toggleDeleteModal(title) {
@@ -127,20 +126,15 @@ export class Ideas extends React.Component {
 
   renderItem = ({ item }) => {
     return (
-      <Card 
-        item={item} 
+      <Card
+        item={item}
         currentCategory={this.state.currentCategory}
-        categories={this.props.categories} 
-        priorities={this.props.priorities} />
+        categories={this.props.categories}
+        priorities={this.props.priorities}
+        handleEdit={this.editIdea}
+        handleShare={this.shareIdea}
+        handleDelete={this.toggleDeleteModal} />
     );
-  }
-
-  signOut() {
-    this.props.dispatch({
-      type: 'signOutUser'
-    });
-
-    Actions.welcome();
   }
 
   render() {

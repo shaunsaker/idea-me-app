@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import InfoBlock from './InfoBlock';
+import IdeaMenu from './IdeaMenu';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -35,21 +36,10 @@ const styles = StyleSheet.create({
             width: 0
         },
     },
-    textContainer: {
-        flex: 1,
-        paddingHorizontal: 16,
-        paddingTop: 16,
-        paddingBottom: 66,
-    },
-    ideaTextTitle: {
-        fontSize: 32,
-        color: styleConstants.primary,
-        marginRight: 36,
-    },
-    ideaTextDescription: {
-        fontSize: 18,
-        color: styleConstants.grey,
-        paddingTop: 8
+    menuContainer: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
     },
     labelsContainer: {
         flexDirection: 'row',
@@ -107,11 +97,21 @@ export default Card = (props) => {
     return (
         <View
             style={styles.cardContainer} >
+            
             <InfoBlock
                 title={props.item.title}
                 subtitle={props.item.description}
                 titleColor={styleConstants.primary}
                 subtitleColor={styleConstants.grey} />
+
+            <View style={styles.menuContainer}>
+                <IdeaMenu 
+                    idea={props.item}
+                    handleEdit={props.handleEdit}
+                    handleShare={props.handleShare}
+                    handleDelete={props.handleDelete} />
+            </View>
+            
             <View
                 style={styles.labelsContainer} >
                 {categoryLabel}

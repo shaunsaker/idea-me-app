@@ -1,17 +1,18 @@
 TODOS
-
     Idea card
         Display edit, share and delete icons as dropdown
+    Ideas page
+        Needs tidying up
+    Tabbar
+        Ideas/Home
+        Add Idea
+        Profile Page
     Profile Page
         And all the trimmings
         Menu
             About App
             Report a Bug
             Logout
-    Use Tabbar
-        Ideas/Home
-        Add Idea
-        Profile Page
     Get current location on app load
     Save user data on sign up
     Custom icons
@@ -21,6 +22,11 @@ TODOS
     Feedback button opens webview to Google Survey
     Email after signup detailing what app does and howtos
     iOS click page to blur input (no hide keyboard button)
+
+ENHANCEMENTS
+    Add images to ideas
+    Sketches
+    Voice notes
 
 FUTURE TODOS
     Integrate react-native-fbsdk on iOS
