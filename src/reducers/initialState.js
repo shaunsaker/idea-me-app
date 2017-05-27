@@ -2,7 +2,7 @@ const initialState = {
     userAuth: {
         authenticated: null,
         anonymous: null,
-        signInRedirect: null,
+        welcomeRedirect: null,
         uid: null,
         email: null,
         password: null,

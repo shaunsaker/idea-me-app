@@ -20,23 +20,23 @@ export default function (state = initialState, action) {
             new_state.userAuth.password = action.value;
             return new_state;
 
-        case 'REDIRECT_USER_TO_SIGN_IN':
+        case 'REDIRECT_USER_TO_WELCOME':
             new_state = cloneObject(state);
-            new_state.userAuth.signInRedirect = true;
+            new_state.userAuth.welcomeRedirect = true;
             return new_state;
 
         case 'SIGN_IN_USER':
             new_state = cloneObject(state);
             new_state.userAuth.authenticated = true;
             new_state.userAuth.uid = action.uid;
-            new_state.userAuth.signInRedirect = false;
+            new_state.userAuth.welcomeRedirect = false;
             return new_state;
 
         case 'SIGN_OUT_USER':
             new_state = cloneObject(state);
             new_state.userAuth.authenticated = false;
             new_state.userAuth.uid = null;
-            new_state.userAuth.signInRedirect = true;
+            new_state.userAuth.welcomeRedirect = true;
             return new_state;
 
         /* APP */

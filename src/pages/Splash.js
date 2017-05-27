@@ -17,25 +17,28 @@ export class Splash extends React.Component {
             authenticated: React.PropTypes.bool,
             uid: React.PropTypes.string,
             apiLoadSuccess: React.PropTypes.bool,
-            redirectUserToSignIn: React.PropTypes.bool
+            welcomeRedirect: React.PropTypes.bool
         };
     }
 
-    componentWillMount() {
-        if (!this.props.authenticated) {
-            this.props.dispatch({
-                type: 'getUserAuth'
-            });
+    componentDidMount() {
+        if (this.props.welcomeRedirect) {
+            Actions.welcome();
         }
-        else {
+        else if (this.props.authenticated && this.props.apiLoadSuccess) {
             Actions.ideas({ type: ActionConst.RESET });
         }
 
         // When a user is signed in and reloads app
-        if (this.props.authenticated && !this.props.apiLoadSuccess) {
+        else if (this.props.authenticated && !this.props.apiLoadSuccess) {
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid
+            });
+        }
+        else if (!this.props.authenticated) {
+            this.props.dispatch({
+                type: 'getUserAuth'
             });
         }
     }
@@ -51,10 +54,10 @@ export class Splash extends React.Component {
                 });
             }, 1500);
         }
-        else if (this.props.apiLoadSuccess) {
+        else if (this.props.authenticated && this.props.apiLoadSuccess) {
             Actions.ideas();
         }
-        else if (this.props.redirectUserToSignIn) {
+        else if (this.props.welcomeRedirect) {
             Actions.welcome();
         }
     }
@@ -75,7 +78,7 @@ function mapStateToProps(state) {
         authenticated: state.main.userAuth.authenticated,
         uid: state.main.userAuth.uid,
         apiLoadSuccess: state.main.api.apiLoadSuccess,
-        redirectUserToSignIn: state.main.userAuth.signInRedirect
+        welcomeRedirect: state.main.userAuth.welcomeRedirect
     };
 }
 
