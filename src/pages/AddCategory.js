@@ -109,7 +109,6 @@ export class AddCategory extends React.Component {
   }
 
   render() {
-    console.log('Error message', this.props.errorMessage);
     const errorMessage = this.props.errorMessage ?
       <Growl text={this.props.errorMessage} />
       :

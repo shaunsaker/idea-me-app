@@ -18,6 +18,7 @@ import Header from '../components/Header';
 import Logo from '../components/Logo';
 import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
+import Card from '../components/Card';
 import DeleteModal from '../components/DeleteModal';
 import Growl from '../components/Growl';
 import Loader from '../components/Loader';
@@ -124,63 +125,13 @@ export class Ideas extends React.Component {
     }
   }
 
-  renderItem = ({ item, index }) => {
+  renderItem = ({ item }) => {
     return (
-      <View
-        style={styles.ideaItem} >
-        <View style={styles.textContainer}>
-          <Text style={[styles.ideaTextTitle, styleConstants.ranga]}>
-            {item.title}
-          </Text>
-          <Text style={[styles.ideaTextDescription, styleConstants.robotoCondensed]}>
-            {item.description}
-          </Text>
-        </View>
-        <TouchableOpacity
-          style={styles.deleteIconContainer}
-          onPress={() => this.toggleDeleteModal(item.title)} >
-          <MaterialIcon
-            name='close'
-            color={styleConstants.grey}
-            size={24}
-            style={styles.icon} />
-        </TouchableOpacity>
-        <View
-          style={styles.labelsContainer} >
-          {
-            this.state.currentCategory === 'All' && (item.categoryId === 0 || item.categoryId) ?
-              <View style={styles.categoryChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.categories[item.categoryId]}</Text></View>
-              :
-              <View></View>
-          }
-          {
-            item.priorityId === 0 || item.priorityId ?
-              <View style={styles.priorityChip}><Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.priorities[item.priorityId] + ' Priority'}</Text></View>
-              :
-              <View></View>
-          }
-        </View>
-        <View style={styles.ButtonsContainer}>
-          <TouchableOpacity
-            style={styles.shareIconContainer}
-            onPress={() => this.shareIdea({ ...item })} >
-            <MaterialIcon
-              name='share'
-              color={styleConstants.white}
-              size={24}
-              style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.editIconContainer}
-            onPress={() => this.editIdea({ ...item })} >
-            <Icon
-              name='pencil'
-              color={styleConstants.white}
-              size={24}
-              style={styles.icon} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <Card 
+        item={item} 
+        currentCategory={this.state.currentCategory}
+        categories={this.props.categories} 
+        priorities={this.props.priorities} />
     );
   }
 
@@ -276,10 +227,11 @@ export class Ideas extends React.Component {
       <View style={styles.container}>
         <Header
           backgroundColor={styleConstants.primary}
+          headerShadow={true}
           textComponent={() => <Logo />}
           textLeft={true}
           rightComponent={count} />
-        <View style={styles.infoContainer}>
+        <View style={styles.buttonContainer}>
           <Dropdown
             value={this.state.currentCategory}
             handleSelect={this.selectCategory}

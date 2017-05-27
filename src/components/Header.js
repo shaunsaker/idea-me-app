@@ -28,19 +28,6 @@ const windowWidth = Dimensions.get('window').width;
 // Create a status bar height on iOS only
 const statusBarHeight = Platform.OS === 'ios' ? 20 : 0;
 
-const headerShadowStyles = Platform.OS === 'ios' ?
-	{
-		shadowColor: "#000000",
-		shadowOpacity: 0.6,
-		shadowRadius: 2,
-		shadowOffset: {
-			height: 1,
-			width: 0
-		},
-	}
-	:
-	{};
-
 const styles = StyleSheet.create({
 	statusBar: {
 		height: statusBarHeight
@@ -117,6 +104,20 @@ export default class Header extends React.Component {
 			:
 			null;
 
+		const headerShadowStyles = this.props.headerShadow ?
+			{
+				elevation: 5,
+				shadowColor: "#000000",
+				shadowOpacity: 0.6,
+				shadowRadius: 2,
+				shadowOffset: {
+					height: 1,
+					width: 0
+				},
+			}
+			:
+			{};
+
 		const leftIcon = this.props.leftComponent ?
 			<View style={styles.leftIconContainer}>
 				{this.props.leftComponent()}
@@ -174,10 +175,10 @@ export default class Header extends React.Component {
 					<View style={styles.rightIconComponent} />;
 
 		return (
-			<View style={headerShadowStyles}>
+			<View>
 				<CustomStatusBar
 					backgroundColor={this.props.backgroundColor} barStyle={this.props.statusBarStyle} />
-				<View style={[styles.container, { backgroundColor: this.props.backgroundColor }, this.props.headerContainerStyle]}>
+				<View style={[styles.container, { backgroundColor: this.props.backgroundColor }, headerShadowStyles, this.props.headerContainerStyle]}>
 					{leftIcon}
 					{text}
 					{rightIcon}

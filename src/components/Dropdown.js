@@ -7,6 +7,7 @@ import {
     Animated,
     StyleSheet,
     Easing,
+    Dimensions,
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -14,44 +15,17 @@ import Button from './Button';
 
 import styleConstants from '../styles/styleConstants';
 
+const window = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     dropdownContainer: {
         position: 'relative',
     },
-    dropdownButton: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: styleConstants.white,
-        borderRadius: 32,
-        borderWidth: 1,
-        borderColor: styleConstants.white,
-        elevation: 5,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
-        width: 200,
-        paddingVertical: 4,
-        marginTop: 16,
-    },
-    dropdownButtonText: {
-        color: styleConstants.primary,
-        fontSize: 24,
-        textAlign: 'center',
-        width: 200,
-    },
     dropdownItemsWrapper: {
         position: 'absolute',
-        top: 52,
-        width: 200,
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-        borderBottomLeftRadius: 32,
-        borderBottomRightRadius: 32,
+        top: 48,
+        left: 16,
+        width: window.width -64,
         elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
@@ -68,7 +42,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',        
-        backgroundColor: styleConstants.lightGrey,
+        backgroundColor: styleConstants.grey,
         paddingVertical: 6,
     },
     dropdownHeaderText: {
@@ -83,7 +57,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         paddingVertical: 6,
-        width: 200
+        width: window.width -64,
     },
     dropdownItemText: {
         color: styleConstants.primary,
@@ -210,17 +184,9 @@ export default class Dropdown extends React.Component {
         return (
             <View style={styles.dropdownContainer}>
                 <Button
-                    styleMode='transparentReversed'
+                    styleMode='primary'
                     handlePress={this.toggleExpanded}
                     text={this.props.value ? this.props.value : this.props.displayText} />
-                {/*<TouchableOpacity
-                    style={styles.dropdownButton}
-                    onPress={this.toggleExpanded} >
-                    <Text
-                        style={[styles.dropdownButtonText, styleConstants.ranga]} >
-                        {this.props.value ? this.props.value : this.props.displayText}
-                    </Text>
-                </TouchableOpacity>*/}
                 {itemList}
             </View>
         );

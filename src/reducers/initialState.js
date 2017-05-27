@@ -36,10 +36,15 @@ const initialState = {
     },
     userData: {
         categories: [
-
+            'App'
         ],
         ideas: [
-
+            {
+                title: 'Test',
+                description: 'Test some more',
+                categoryId: 0,
+                priorityId: 0,
+            }
         ],
         newIdea: {
             title: null,

@@ -32,6 +32,8 @@ export default class InputContainer extends React.Component {
         return {
             title: React.PropTypes.string.isRequired,
             subtitle: React.PropTypes.string,
+            titleColor: React.PropTypes.string,
+            subtitleColor: React.PropTypes.string,
         };
     }
         
@@ -43,10 +45,10 @@ export default class InputContainer extends React.Component {
 
         return (
             <View style={[styles.infoContainer, flexStyles]}>
-                <Text style={[styles.infoTextTitle, styleConstants.robotoCondensed]}>
+                <Text style={[styles.infoTextTitle, {color: this.props.titleColor}, styleConstants.robotoCondensed]}>
                     {this.props.title}
                 </Text>
-                <Text style={[styles.infoTextDescription, styleConstants.robotoCondensed]}>
+                <Text style={[styles.infoTextDescription, {color: this.props.subtitleColor}, styleConstants.robotoCondensed]}>
                     {this.props.subtitle}
                 </Text>
             </View>
