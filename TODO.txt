@@ -1,5 +1,7 @@
 TODOS
 
+    Idea card
+        Display edit, share and delete icons as dropdown
     Profile Page
         And all the trimmings
         Menu
@@ -12,21 +14,13 @@ TODOS
         Profile Page
     Get current location on app load
     Save user data on sign up
-    Handle all user errors
     Custom icons
     Sound when idea added
-    User auth flow is not working correctly with data
     Prepopulate idea on signup
     Profile icon highlighted on signup (indicate action required, ie. complete your profile)
-    Idea card
-        Display edit, share and delete icons as dropdown
     Feedback button opens webview to Google Survey
     Email after signup detailing what app does and howtos
     iOS click page to blur input (no hide keyboard button)
-    Verify all sign in methods
-        Anonymous should set anonymous state and should not load/save data
-        FB
-        Google
 
 FUTURE TODOS
     Integrate react-native-fbsdk on iOS

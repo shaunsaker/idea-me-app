@@ -15,12 +15,12 @@ import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
+import Logo from '../components/Logo';
 import Count from '../components/Count';
 import Dropdown from '../components/Dropdown';
-import Button from '../components/Button';
 import DeleteModal from '../components/DeleteModal';
-import Loader from '../components/Loader';
 import Growl from '../components/Growl';
+import Loader from '../components/Loader';
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -44,25 +44,11 @@ export class Ideas extends React.Component {
     return {
       categories: React.PropTypes.array,
       ideas: React.PropTypes.array,
-      uid: React.PropTypes.string.isRequired,
+      uid: React.PropTypes.string,
       errorMessage: React.PropTypes.string,
       apiSaveSuccess: React.PropTypes.bool,
       loading: React.PropTypes.bool,
     };
-  }
-
-  componentWillMount() {
-    this.props.dispatch({
-        type: 'SET_LOADING_FALSE'
-    });
-  }
-
-  componentDidUpdate() {
-    if (this.props.errorMessage || this.props.apiSaveSuccess) {
-      this.props.dispatch({
-        type: 'SET_LOADING_FALSE'
-      });
-    }
   }
 
   selectCategory(eventId) {
@@ -94,20 +80,20 @@ export class Ideas extends React.Component {
     Share.share({
       message: 'My new idea off the IdeaMe App: ' + idea.title + '. ' + description,
     }, {
-      dialogTitle: 'Share Your Idea',
-    })
-    .then( /* Do nothing */)
-    .catch((error) => console.log('Share error:', error.message));
+        dialogTitle: 'Share Your Idea',
+      })
+      .then( /* Do nothing */)
+      .catch((error) => console.log('Share error:', error.message));
   }
 
-  deleteIdea(title) { 
+  deleteIdea(title) {
     this.toggleDeleteModal();
 
     let id;
     this.props.ideas.map((value, index) => {
-        if (value.title === title) {
-            id = index;
-        }
+      if (value.title === title) {
+        id = index;
+      }
     });
     let newIdeas = this.props.ideas;
     newIdeas.splice(id, 1);
@@ -177,7 +163,7 @@ export class Ideas extends React.Component {
         <View style={styles.ButtonsContainer}>
           <TouchableOpacity
             style={styles.shareIconContainer}
-            onPress={() => this.shareIdea({ ...item})} >
+            onPress={() => this.shareIdea({ ...item })} >
             <MaterialIcon
               name='share'
               color={styleConstants.white}
@@ -186,7 +172,7 @@ export class Ideas extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.editIconContainer}
-            onPress={() => this.editIdea({ ...item})} >
+            onPress={() => this.editIdea({ ...item })} >
             <Icon
               name='pencil'
               color={styleConstants.white}
@@ -271,40 +257,29 @@ export class Ideas extends React.Component {
     }
 
     const deleteModal = this.state.showDeleteModal ?
-      <DeleteModal 
-        text={'Are you sure you want to delete ' + this.state.showDeleteModalTitle + '?'} 
-        leftIconName='check' 
+      <DeleteModal
+        text={'Are you sure you want to delete ' + this.state.showDeleteModalTitle + '?'}
+        leftIconName='check'
         handleLeftIconPress={() => this.deleteIdea(this.state.showDeleteModalTitle)}
         rightIconName='close'
         handleRightIconPress={this.toggleDeleteModal} />
       :
       <View />;
 
-    const loader = this.props.loading ?
-        <Loader positionStyle={{ bottom: 56 }} />
-        :
-        null;
-
-    const errorMessage = this.props.errorMessage ?
-        <Growl text={this.props.errorMessage} />
-        :
-        null;
+    const count = () =>
+      <Count
+        count={counter}
+        total={this.props.ideas ? this.props.ideas.length : 0}
+        unit='ideas' />;
 
     return (
       <View style={styles.container}>
-        <Header 
+        <Header
           backgroundColor={styleConstants.primary}
-          text='Idea Me'
-          textSize={28}
-          textColor={styleConstants.white}
-          textStyle={styleConstants.ranga} 
-          rightIconName='info'
-          handleRightIconPress={this.signOut}/>
+          textComponent={() => <Logo />}
+          textLeft={true}
+          rightComponent={count} />
         <View style={styles.infoContainer}>
-          <Count
-            count={counter}
-            total={this.props.ideas ? this.props.ideas.length : 0}
-            unit='ideas' />
           <Dropdown
             value={this.state.currentCategory}
             handleSelect={this.selectCategory}
@@ -313,12 +288,9 @@ export class Ideas extends React.Component {
             showAllOption={true} />
         </View>
         {ideas}
-        <Button
-          iconName='add'
-          handlePress={() => Actions.addIdea()} />
         {deleteModal}
-        {loader}
-        {errorMessage}
+        <Growl />
+        <Loader />
       </View >
     );
   }
@@ -330,9 +302,6 @@ function MapStateToProps(state) {
     priorities: state.main.appData.priorities,
     ideas: state.main.userData.ideas,
     uid: state.main.userAuth.uid,
-    errorMessage: state.main.userAuth.userAuthErrorMessage,
-    apiSaveSuccess: state.main.api.apiSaveSuccess,
-    loading: state.main.app.loading
   });
 }
 

@@ -6,8 +6,11 @@ import {
     FlatList,
     Animated,
     StyleSheet,
+    Easing,
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import Button from './Button';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -35,6 +38,12 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         marginTop: 16,
     },
+    dropdownButtonText: {
+        color: styleConstants.primary,
+        fontSize: 24,
+        textAlign: 'center',
+        width: 200,
+    },
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 52,
@@ -55,36 +64,32 @@ const styles = StyleSheet.create({
         maxHeight: 200,
         zIndex: 1
     },
+    dropdownHeader: {        
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',        
+        backgroundColor: styleConstants.lightGrey,
+        paddingVertical: 6,
+    },
+    dropdownHeaderText: {
+        color: styleConstants.white,
+        fontSize: 18,
+        textAlign: 'center',
+    },
+    dropdownHeaderIcon: {
+        marginRight: 12,
+    },
     dropdownItem: {        
         flexDirection: 'row',
         justifyContent: 'center',
         paddingVertical: 6,
         width: 200
     },
-    dropdownItemAdd: {        
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',        
-        borderBottomWidth: 1,
-        borderStyle: 'solid',
-        borderColor: styleConstants.primary,
-        backgroundColor: styleConstants.grey,
-        paddingVertical: 6,
-    },
-    dropdownButtonText: {
-        color: styleConstants.primary,
-        fontSize: 24,
-        textAlign: 'center',
-        width: 200,
-    },
     dropdownItemText: {
         color: styleConstants.primary,
         fontSize: 18,
         textAlign: 'center',
     },
-    editIcon: {
-        marginRight: 12,
-    }
 });
 
 export default class Dropdown extends React.Component {
@@ -123,7 +128,9 @@ export default class Dropdown extends React.Component {
             Animated.timing(
                 this.state.height,
                 {
-                    toValue: itemCount * 36
+                    toValue: itemCount * 36,
+                    duration: 500,
+                    easing: Easing.gentle
                 }
             ).start();
         }
@@ -135,7 +142,9 @@ export default class Dropdown extends React.Component {
             Animated.timing(
                 this.state.height,
                 {
-                    toValue: 0
+                    toValue: 0,
+                    duration: 500,
+                    easing: Easing.gentle
                 }
             ).start();
         }
@@ -166,11 +175,11 @@ export default class Dropdown extends React.Component {
 
         const header = 
             <TouchableOpacity
-                style={styles.dropdownItemAdd}
+                style={styles.dropdownHeader}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(200) }} >
-                <Icon name='pencil' size={18} color={styleConstants.white} style={styles.editIcon} />
+                <Icon name='pencil' size={18} color={styleConstants.white} style={styles.dropdownHeaderIcon} />
                 <Text
-                    style={[styles.dropdownItemText, {color:styleConstants.white}, styleConstants.robotoCondensed]}>
+                    style={[styles.dropdownHeaderText, styleConstants.robotoCondensed]}>
                     Edit Categories
                 </Text>
             </TouchableOpacity>;
@@ -200,14 +209,18 @@ export default class Dropdown extends React.Component {
 
         return (
             <View style={styles.dropdownContainer}>
-                <TouchableOpacity
+                <Button
+                    styleMode='transparentReversed'
+                    handlePress={this.toggleExpanded}
+                    text={this.props.value ? this.props.value : this.props.displayText} />
+                {/*<TouchableOpacity
                     style={styles.dropdownButton}
                     onPress={this.toggleExpanded} >
                     <Text
                         style={[styles.dropdownButtonText, styleConstants.ranga]} >
                         {this.props.value ? this.props.value : this.props.displayText}
                     </Text>
-                </TouchableOpacity>
+                </TouchableOpacity>*/}
                 {itemList}
             </View>
         );

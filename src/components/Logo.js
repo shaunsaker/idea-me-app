@@ -31,7 +31,7 @@ export default Logo = (props) => {
             <OctIcon
                 name='light-bulb'
                 color={styleConstants.secondary}
-                size={28} 
+                size={24} 
                 style={styles.icon} />
             <Text style={[styles.text, styleConstants.ranga]}>
                 IdeaMe
