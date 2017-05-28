@@ -1,6 +1,6 @@
 TODOS
-    Test Growl and Loader on Splash page
-    Animate IdeaMenu
+    Categories
+        Combine categories and ideas store action and saving data
     All other pages need work
     Profile Page
         And all the trimmings

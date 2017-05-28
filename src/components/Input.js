@@ -11,6 +11,8 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../styles/styleConstants';
 
+import DeleteButton from './DeleteButton';
+
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
@@ -44,17 +46,6 @@ const styles = StyleSheet.create({
         right: 0,
         height: 30,
         justifyContent: 'center',
-    },
-    clearTextButton: {
-        backgroundColor: styleConstants.lightGrey,
-        width: 20,
-        height: 20,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    clearTextButtonIcon: {
-
     },
 });
 
@@ -101,15 +92,8 @@ export default class Input extends React.Component {
 
         const clearTextButton = this.props.value ?
             <View style={styles.clearTextButtonContainer}>
-                <TouchableOpacity
-                    onPress={() => this.props.handleChange('')}
-                    style={styles.clearTextButton}>
-                    <MaterialIcon
-                        name='close'
-                        color={styleConstants.primary}
-                        size={18}
-                        style={styles.clearTextIcon} />
-                </TouchableOpacity>
+                <DeleteButton 
+                    handlePress={() => this.props.handleChange('')}/>
             </View>
             :
             null;

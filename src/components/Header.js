@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
 	textContainer: {
 		flex: 1,
 		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	text: {
 		fontSize: 18,
@@ -146,7 +147,7 @@ export default class Header extends React.Component {
 				this.props.textRight ? 
 					null 
 					: 
-					<View style={styles.rightIconComponent} />;
+					<View style={styles.rightIconContainer} />;
 
 		return (
 			<View>

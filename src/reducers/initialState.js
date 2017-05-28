@@ -37,7 +37,7 @@ const initialState = {
     },
     userData: {
         categories: [
-            'App'
+            'App', 'Test', 'Test2', 'Test3', 'Test4', 'App1', 'Test5', 'Test6', 'Test37', 'Test48', 
         ],
         ideas: [
             {

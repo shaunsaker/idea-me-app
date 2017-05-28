@@ -13,8 +13,8 @@ import styles from '../styles/pages/Categories';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
-import Input from '../components/Input';
 import Button from '../components/Button';
+import DeleteButton from '../components/DeleteButton';
 import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
@@ -24,6 +24,7 @@ export class Categories extends React.Component {
     super(props);
 
     this.deleteCategory = this.deleteCategory.bind(this);
+    this.saveUserData = this.saveUserData.bind(this);
     this.toggleActionModal = this.toggleActionModal.bind(this);
     this.renderItem = this.renderItem.bind(this);
 
@@ -37,10 +38,9 @@ export class Categories extends React.Component {
   static get propTypes() {
     return {
       categories: React.PropTypes.array.isRequired,
+      ideas: React.PropTypes.array.isRequired,
       uid: React.PropTypes.string,
-      errorMessage: React.PropTypes.string,
       apiSaveSuccess: React.PropTypes.bool,
-      loading: React.PropTypes.bool,
     };
   }
 
@@ -55,12 +55,12 @@ export class Categories extends React.Component {
     let newIdeas = this.props.ideas;
 
     newIdeas.map((value) => {
-        if (value.categoryId === index) {
-            value.categoryId = null;
-        }
-        else if (value.categoryId > index) {
-            value.categoryId--;
-        }
+      if (value.categoryId === index) {
+        value.categoryId = null;
+      }
+      else if (value.categoryId > index) {
+        value.categoryId--;
+      }
     });
 
     this.props.dispatch({
@@ -73,15 +73,19 @@ export class Categories extends React.Component {
       ideas: newIdeas
     });
 
+    this.saveUserData();
+  }
+  
+  saveUserData() {
     this.props.dispatch({
       type: 'saveUserCategories',
-      categories: newCategories,
+      categories: this.props.categories,
       uid: this.props.uid
     });
 
     this.props.dispatch({
       type: 'saveUserIdeas',
-      ideas: newIdeas,
+      ideas: this.props.ideas,
       uid: this.props.uid
     });
   }
@@ -116,13 +120,10 @@ export class Categories extends React.Component {
         <View style={styles.categoryTextContainer}>
           <Text style={[styles.categoryText, styleConstants.robotoCondensed]}>{item}</Text>
         </View>
-        <TouchableOpacity style={styles.iconContainer}
-          onPress={() => this.toggleActionModal(index, item)} >
-          <Icon
-            name='close'
-            size={24}
-            color={styleConstants.white} />
-        </TouchableOpacity>
+        <View style={styles.deleteButtonContainer}>
+          <DeleteButton
+            handlePress={() => this.toggleActionModal(index, item)} />
+        </View>
       </View>
     );
   }
@@ -132,49 +133,46 @@ export class Categories extends React.Component {
       <FlatList
         keyExtractor={item => 'category' + item}
         data={this.props.categories}
-        renderItem={this.renderItem} 
+        renderItem={this.renderItem}
+        style={styles.categoriesWrapper}
         contentContainerStyle={styles.categoriesContainer} />;
 
-    const ActionModal = this.state.showActionModal ?
+    const actionModal = this.state.showActionModal ?
       <ActionModal
         text={'Are you sure you want to delete ' + this.state.actionModalTitle + '?'}
-        leftIconName='check'
         handleLeftIconPress={() => this.deleteCategory(this.state.actionModalIndex)}
-        rightIconName='close'
         handleRightIconPress={this.toggleActionModal} />
       :
       <View />;
 
-    const loader = this.props.loading ?
-        <Loader positionStyle={{ bottom: 56}} />
-        :
-        null;
-
-    const errorMessage = this.props.errorMessage ?
-        <Growl text={this.props.errorMessage} />
-        :
-        null;
-
     return (
       <View
         style={styles.container}>
+
         <Header
-          backgroundColor={styleConstants.primary}
           text='Categories'
           textSize={28}
-          textColor={styleConstants.white}
-          textStyle={styleConstants.ranga}
+          textStyle={styleConstants.robotoCondensed}
           leftIconName='chevron-left'
-          leftIconColor={styleConstants.white}
           leftIconSize={36}
           handleLeftIconPress={() => Actions.pop()} />
+
         {categories}
-        <Button
-          iconName='add'
-          handlePress={() => Actions.addCategory()} />
-        {ActionModal}
-        {loader}
-        {errorMessage}
+
+        <View style={styles.buttonContainer}>
+          <Button
+            iconName='add'
+            text='Add Category'
+            styleMode='primary'
+            handlePress={() => Actions.addCategory()} />
+        </View>
+
+        {actionModal}
+
+        <Growl />
+
+        <Loader />
+
       </View >
     );
   }
@@ -185,9 +183,7 @@ function mapStateToProps(state) {
     categories: state.main.userData.categories,
     ideas: state.main.userData.ideas,
     uid: state.main.userAuth.uid,
-    errorMessage: state.main.userAuth.userAuthErrorMessage,
     apiSaveSuccess: state.main.api.apiSaveSuccess,
-    loading: state.main.app.loading,
   });
 }
 

@@ -1,28 +1,34 @@
-import { StyleSheet } from 'react-native';
-import styleConstants from '../styleConstants'; 
+import { 
+    StyleSheet,
+    Dimensions,
+} from 'react-native';
+import styleConstants from '../styleConstants';
+
+const windowWidth = Dimensions.get('window').width; 
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,        
-        justifyContent: 'center',
         alignItems: 'center',
-        position: 'relative',
-        backgroundColor: styleConstants.white,
+        backgroundColor: styleConstants.lightGrey,
+    },
+    categoriesWrapper: {
+        flex: 1,
+        paddingVertical: 16,
+        marginBottom: 16,
     },
     categoriesContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingBottom: 56
+        paddingBottom: 16,
     },
     categoryItem: {   
-        width: 280,     
+        width: windowWidth - 32,     
+        height: 56,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'relative',
         marginBottom: 8,
         paddingHorizontal: 16,
-        paddingVertical: 8,
         flexWrap: 'wrap',
         borderRadius: 32,
         borderWidth: 1,
@@ -51,7 +57,10 @@ const styles = StyleSheet.create({
             height: 2,
             width: 0
         },
-    }
+    },
+    buttonContainer: {
+        paddingBottom: 16
+    },
 });
 
 export default styles;
