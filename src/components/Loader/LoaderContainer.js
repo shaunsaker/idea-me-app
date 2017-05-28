@@ -15,7 +15,8 @@ export class LoaderContainer extends React.Component{
 
 	render() {
 		const loader = this.props.loading ?
-			<LoaderComponent />
+			<LoaderComponent 
+				positionStyle={this.props.positionStyle} />
 			:
 			null;
 

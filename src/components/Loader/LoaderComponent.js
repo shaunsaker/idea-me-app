@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
 		left: -100,
 		width: 100,
 		height: 5,
+		backgroundColor: styleConstants.secondary,
 	}
 });
 
@@ -38,14 +39,9 @@ export default class LoaderComponent extends React.Component {
 
     static get propTypes() {
       return {
-		color: React.PropTypes.string,
 		positionStyle: React.PropTypes.object,
       };
     }
-
-	static defaultProps = {
-		color: styleConstants.secondary,
-	}
 
 	componentDidMount() {
 		this.animateOpacity();
@@ -81,7 +77,7 @@ export default class LoaderComponent extends React.Component {
 	render() {
 		return (
 			<Animated.View style={[styles.container, this.props.positionStyle, {opacity: this.opacity}]}>
-				<Animated.View style={[styles.loader, {left: this.position}, {backgroundColor: this.props.color}]} />
+				<Animated.View style={[styles.loader, {left: this.position}]} />
 			</Animated.View>
 		);
 	}

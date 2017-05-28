@@ -200,7 +200,7 @@ export class Ideas extends React.Component {
 
         <Growl />
 
-        <Loader />
+        <Loader positionStyle={{bottom: 50}}/>
 
       </View >
     );
