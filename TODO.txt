@@ -1,5 +1,4 @@
 TODOS
-    Test Growl and Loader on Ideas page
     Test Growl and Loader on Splash page
     Animate IdeaMenu
     All other pages need work

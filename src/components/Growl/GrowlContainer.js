@@ -1,10 +1,19 @@
 import React from "react";
 import {
     View,
+    StyleSheet,
 } from "react-native";
 import { connect } from 'react-redux';
 
 import GrowlComponent from './GrowlComponent';
+
+const styles = StyleSheet.create({
+    container: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+    }
+});
 
 export class Growl extends React.Component {
     constructor(props) {
@@ -100,7 +109,7 @@ export class Growl extends React.Component {
         console.log(successMessage);
 
         return (
-            <View>
+            <View style={styles.container}>
                 {errorGrowl}
                 {successGrowl}
             </View>

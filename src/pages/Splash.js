@@ -10,6 +10,7 @@ import styles from '../styles/pages/Splash';
 import styleConstants from '../styles/styleConstants';
 
 import GlowLoader from '../components/GlowLoader';
+import Growl from '../components/Growl';
 
 export class Splash extends React.Component {
     static get propTypes() {
@@ -68,6 +69,7 @@ export class Splash extends React.Component {
                 <StatusBar backgroundColor={styleConstants.transPrimary} />
                 <GlowLoader
                     size={64} />
+                <Growl />
             </View>
         );
     }

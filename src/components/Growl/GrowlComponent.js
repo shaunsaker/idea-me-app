@@ -5,16 +5,18 @@ import {
     TouchableOpacity,
     Animated,
     StyleSheet,
+    Dimensions,
 } from "react-native";
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../../styles/styleConstants';
 
+const windowWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     messageWrapper: {
         position: 'absolute',
-        left: 0,
-        right: 0,
+        width: windowWidth, 
         backgroundColor: styleConstants.grey,
         borderTopWidth: 1,
         borderTopColor: styleConstants.lightGrey,

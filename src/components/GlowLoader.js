@@ -13,7 +13,7 @@ import styleConstants from '../styles/styleConstants';
 const styles = StyleSheet.create({
     container: {
         paddingLeft: 13,
-        marginTop: -36
+        marginTop: -36,
     },
 });
 
