@@ -212,6 +212,19 @@ export default function (state = initialState, action) {
             new_state.userData.editIdea.id = action.id;
             return new_state;
 
+        case 'DELETE_IDEA':
+            new_state = cloneObject(state);
+            let id;
+            let newIdeas = new_state.userData.ideas;
+            newIdeas.map((value, index) => {
+                if (value.title === action.title) {
+                    id = index;
+                }
+            });
+            newIdeas.splice(id, 1);
+            new_state.userData.ideas = newIdeas;
+            return new_state;
+
         case 'UPDATE_NEW_CATEGORY_VALUE':
             new_state = cloneObject(state);
             new_state.userData.newCategory.value = action.value;

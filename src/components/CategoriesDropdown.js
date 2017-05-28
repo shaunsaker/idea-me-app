@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class Dropdown extends React.Component {
+export default class CategoriesDropdown extends React.Component {
     constructor(props) {
         super(props);
 
@@ -82,10 +82,11 @@ export default class Dropdown extends React.Component {
     static get propTypes() {
         return {
             displayText: React.PropTypes.string,
-            value: React.PropTypes.string,
-            handleSelect: React.PropTypes.func.isRequired,
+            currentValue: React.PropTypes.string,
             values: React.PropTypes.array.isRequired,
+            handleSelect: React.PropTypes.func.isRequired,
             editItem: React.PropTypes.bool,
+            showAllOption: React.PropTypes.bool,
             pushContent: React.PropTypes.bool
         };
     }
@@ -102,7 +103,7 @@ export default class Dropdown extends React.Component {
             Animated.timing(
                 this.state.height,
                 {
-                    toValue: itemCount * 36,
+                    toValue: itemCount * 36, // 36 is the height of each item
                     duration: 250,
                     easing: Easing.gentle
                 }
@@ -186,7 +187,7 @@ export default class Dropdown extends React.Component {
                 <Button
                     styleMode='primary'
                     handlePress={this.toggleExpanded}
-                    text={this.props.value ? this.props.value : this.props.displayText} />
+                    text={this.props.currentValue ? this.props.currentValue : this.props.displayText} />
                 {itemList}
             </View>
         );

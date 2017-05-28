@@ -27,10 +27,10 @@ export class LoaderContainer extends React.Component{
 	}
 };
 
-function mapStateToProps(state) {
+function MapStateToProps(state) {
 	return {
 		loading: state.main.app.loading
 	}
 }
 
-export default connect(mapStateToProps)(LoaderContainer);
+export default connect(MapStateToProps)(LoaderContainer);

@@ -73,7 +73,7 @@ export class Splash extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function MapStateToProps(state) {
     return {
         authenticated: state.main.userAuth.authenticated,
         uid: state.main.userAuth.uid,
@@ -82,4 +82,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Splash);
+export default connect(MapStateToProps)(Splash);

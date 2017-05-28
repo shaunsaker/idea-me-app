@@ -89,7 +89,7 @@ export class Growl extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function MapStateToProps(state) {
     return {
         userErrorMessage: state.main.app.userErrorMessage,
         userAuthErrorMessage: state.main.userAuth.userAuthErrorMessage,
@@ -101,4 +101,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Growl);
+export default connect(MapStateToProps)(Growl);

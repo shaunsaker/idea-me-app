@@ -11,16 +11,18 @@ import { connect } from "react-redux";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
+import utilities from '../utilities';
+
 import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
 import Logo from '../components/Logo';
 import Count from '../components/Count';
-import Dropdown from '../components/Dropdown';
+import CategoriesDropdown from '../components/CategoriesDropdown';
 import Card from '../components/Card';
 import TabBar from '../components/TabBar';
-import DeleteModal from '../components/DeleteModal';
+import ActionModal from '../components/ActionModal';
 import Growl from '../components/Growl';
 import Loader from '../components/Loader';
 
@@ -32,12 +34,12 @@ export class Ideas extends React.Component {
     this.editIdea = this.editIdea.bind(this);
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
-    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.toggleActionModal = this.toggleActionModal.bind(this);
 
     this.state = {
       currentCategory: 'All',
-      showDeleteModal: false,
-      showDeleteModalTitle: null,
+      showActionModal: false,
+      actionModalTitle: null,
     }
   }
 
@@ -46,29 +48,28 @@ export class Ideas extends React.Component {
       categories: React.PropTypes.array,
       ideas: React.PropTypes.array,
       uid: React.PropTypes.string,
-      errorMessage: React.PropTypes.string,
       apiSaveSuccess: React.PropTypes.bool,
-      loading: React.PropTypes.bool,
     };
   }
 
   selectCategory(eventId) {
 
-    // 100 is reserved for 'All' categories, 200 is reserved as the categories button
-    if (eventId !== 200) {
-      if (eventId !== 100) {
-        this.setState({
-          currentCategory: this.props.categories[eventId]
-        });
-      }
-      else {
-        this.setState({
-          currentCategory: 'All'
-        });
-      }
+    if (eventId === 200) {
+
+      // Edit Categories
+      Actions.categories();
+    }
+    else if (eventId === 100) {
+
+      // All Categories
+      this.setState({
+        currentCategory: 'All'
+      });
     }
     else {
-      Actions.categories();
+      this.setState({
+        currentCategory: this.props.categories[eventId]
+      });
     }
   }
 
@@ -78,30 +79,22 @@ export class Ideas extends React.Component {
 
   shareIdea(idea) {
     const description = idea.description ? idea.description : '';
+    
     Share.share({
       message: 'My new idea off the IdeaMe App: ' + idea.title + '. ' + description,
     }, {
         dialogTitle: 'Share Your Idea',
       })
-      .then( /* Do nothing */)
+      .then( /* Do nothing. It's obvious to the user that his message was shared. */)
       .catch((error) => console.log('Share error:', error.message));
   }
 
   deleteIdea(title) {
-    this.toggleDeleteModal();
-
-    let id;
-    this.props.ideas.map((value, index) => {
-      if (value.title === title) {
-        id = index;
-      }
-    });
-    let newIdeas = this.props.ideas;
-    newIdeas.splice(id, 1);
+    this.toggleActionModal();
 
     this.props.dispatch({
-      type: 'UPDATE_USER_IDEAS',
-      ideas: newIdeas
+      type: 'DELETE_IDEA',
+      title
     });
 
     // this.props.dispatch({
@@ -111,16 +104,16 @@ export class Ideas extends React.Component {
     // });
   }
 
-  toggleDeleteModal(title) {
+  toggleActionModal(title) {
     if (title) {
       this.setState({
-        showDeleteModal: !this.state.showDeleteModal,
-        showDeleteModalTitle: title,
+        showActionModal: !this.state.showActionModal,
+        actionModalTitle: title,
       });
     }
     else {
       this.setState({
-        showDeleteModal: !this.state.showDeleteModal,
+        showActionModal: !this.state.showActionModal,
       });
     }
   }
@@ -134,63 +127,19 @@ export class Ideas extends React.Component {
         priorities={this.props.priorities}
         handleEdit={this.editIdea}
         handleShare={this.shareIdea}
-        handleDelete={this.toggleDeleteModal} />
+        handleDelete={this.toggleActionModal} />
     );
   }
 
   render() {
     let counter = 0;
-    let ideas = <View style={{ flex: 1 }}></View>;
+    let ideas = <View style={{ flex: 1 }}></View>; // empty state
 
     if (this.props.ideas) {
+      const currentCategoryIdeas = utilities.sortIdeas(this.props.ideas, this.props.categories, this.state.currentCategory);
 
-      // Prioritise our ideas in order of variables below
-      let noPriority = [];
-      let highPriority = [];
-      let mediumPriority = [];
-      let lowPriority = [];
-      let allIdeas = [];
-
-      this.props.ideas.map((value) => {
-        if (value.priorityId === 0) {
-          highPriority.push(value);
-        }
-        else if (value.priorityId === 1) {
-          mediumPriority.push(value);
-        }
-        else if (value.priorityId === 2) {
-          lowPriority.push(value);
-        }
-        else {
-          noPriority.push(value);
-        }
-      });
-
-      noPriority.map((value) => {
-        allIdeas.push(value);
-      });
-
-      highPriority.map((value) => {
-        allIdeas.push(value);
-      });
-
-      mediumPriority.map((value) => {
-        allIdeas.push(value);
-      });
-
-      lowPriority.map((value) => {
-        allIdeas.push(value);
-      });
-
-      // First filter all ideas to return the ideas that match this.state.category (and increment counter)
-      let currentCategoryIdeas = [];
-
-      allIdeas.map((value, index) => {
-        if (this.state.currentCategory === 'All' || this.props.categories[value.categoryId] === this.state.currentCategory) {
-          counter++;
-          currentCategoryIdeas.push(value);
-        }
-      });
+      // Need this for the Count component
+      counter = currentCategoryIdeas.length;
 
       ideas =
         <FlatList
@@ -202,15 +151,15 @@ export class Ideas extends React.Component {
           pagingEnabled={true} />
     }
 
-    const deleteModal = this.state.showDeleteModal ?
-      <DeleteModal
-        text={'Are you sure you want to delete ' + this.state.showDeleteModalTitle + '?'}
+    const actionModal = this.state.showActionModal ?
+      <ActionModal
+        text={'Are you sure you want to delete ' + this.state.actionModalTitle + '?'}
         leftIconName='check'
-        handleLeftIconPress={() => this.deleteIdea(this.state.showDeleteModalTitle)}
+        handleLeftIconPress={() => this.deleteIdea(this.state.actionModalTitle)}
         rightIconName='close'
-        handleRightIconPress={this.toggleDeleteModal} />
+        handleRightIconPress={this.toggleActionModal} />
       :
-      <View />;
+      null;
 
     const count = () =>
       <Count
@@ -228,20 +177,21 @@ export class Ideas extends React.Component {
           rightComponent={count} />
 
         <View style={styles.buttonContainer}>
-          <Dropdown
-            value={this.state.currentCategory}
-            handleSelect={this.selectCategory}
+          <CategoriesDropdown
+            currentValue={this.state.currentCategory}
             values={this.props.categories}
+            handleSelect={this.selectCategory}
             editItem={true}
-            showAllOption={true} />
+            showAllOption={true}
+            pushContent={false} />
         </View>
 
         {ideas}
 
-        <TabBar 
-          currentPage='ideas'/>
+        <TabBar
+          currentPage='ideas' />
 
-        {deleteModal}
+        {actionModal}
 
         <Growl />
 

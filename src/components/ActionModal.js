@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class DeleteModal extends React.Component {
+export default class ActionModal extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -66,11 +66,7 @@ export default class DeleteModal extends React.Component {
     static get propTypes() {
         return {
             text: React.PropTypes.string,
-
-            leftIconName: React.PropTypes.string,
             handleLeftIconPress: React.PropTypes.func,
-
-            rightIconName: React.PropTypes.string,
             handleRightIconPress: React.PropTypes.func,
         };
     }
@@ -87,7 +83,7 @@ export default class DeleteModal extends React.Component {
                             style={styles.iconContainer}
                             onPress={this.props.handleLeftIconPress} >
                             <MaterialIcon
-                                name={this.props.leftIconName}
+                                name='check'
                                 color={styleConstants.danger}
                                 size={28}
                                 style={styles.icon} />
@@ -96,7 +92,7 @@ export default class DeleteModal extends React.Component {
                             style={styles.iconContainer}
                             onPress={this.props.handleRightIconPress} >
                             <MaterialIcon
-                                name={this.props.rightIconName}
+                                name='close'
                                 color={styleConstants.primary}
                                 size={28}
                                 style={styles.icon} />

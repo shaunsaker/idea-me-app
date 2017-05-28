@@ -15,7 +15,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
-import Dropdown from '../components/Dropdown';
+import CategoriesDropdown from '../components/CategoriesDropdown';
 import Button from '../components/Button';
 
 export class EditIdea extends React.Component {
@@ -192,14 +192,14 @@ export class EditIdea extends React.Component {
                             handleChange={this.updateEditIdeaDescription} />
                         {deleteIcon}
                     </View>
-                    <Dropdown
+                    <CategoriesDropdown
                         displayText='Select a Category'
                         value={this.props.editIdeaCategory !== null ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
                         handleSelect={this.selectCategory}
                         values={this.props.categories}
                         editItem={true}
                         pushContent={true} />
-                    <Dropdown
+                    <CategoriesDropdown
                         displayText='Select a Priority'
                         value={this.props.editIdeaPriority !== null ? this.props.priorities[this.props.editIdeaPriority] : this.props.priorities[this.props.initialIdeaPriority]}
                         handleSelect={this.selectPriority}

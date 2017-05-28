@@ -15,7 +15,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import DeleteModal from '../components/DeleteModal';
+import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
@@ -24,13 +24,13 @@ export class Categories extends React.Component {
     super(props);
 
     this.deleteCategory = this.deleteCategory.bind(this);
-    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.toggleActionModal = this.toggleActionModal.bind(this);
     this.renderItem = this.renderItem.bind(this);
 
     this.state = {
-      showDeleteModal: false,
-      showDeleteModalTitle: null,
-      showDeleteModalIndex: null,
+      showActionModal: false,
+      actionModalTitle: null,
+      actionModalIndex: null,
     }
   }
 
@@ -45,7 +45,7 @@ export class Categories extends React.Component {
   }
 
   deleteCategory(index) {
-    this.toggleDeleteModal();
+    this.toggleActionModal();
 
     let newCategories = this.props.categories;
     newCategories.splice(index, 1);
@@ -94,17 +94,17 @@ export class Categories extends React.Component {
     }
   }
 
-  toggleDeleteModal(index, title) {
+  toggleActionModal(index, title) {
     if ((index || index === 0) && title) {
       this.setState({
-        showDeleteModal: !this.state.showDeleteModal,
-        showDeleteModalTitle: title,
-        showDeleteModalIndex: index
+        showActionModal: !this.state.showActionModal,
+        actionModalTitle: title,
+        actionModalIndex: index
       });
     }
     else {
       this.setState({
-        showDeleteModal: !this.state.showDeleteModal,
+        showActionModal: !this.state.showActionModal,
       });
     }
   }
@@ -117,7 +117,7 @@ export class Categories extends React.Component {
           <Text style={[styles.categoryText, styleConstants.robotoCondensed]}>{item}</Text>
         </View>
         <TouchableOpacity style={styles.iconContainer}
-          onPress={() => this.toggleDeleteModal(index, item)} >
+          onPress={() => this.toggleActionModal(index, item)} >
           <Icon
             name='close'
             size={24}
@@ -135,13 +135,13 @@ export class Categories extends React.Component {
         renderItem={this.renderItem} 
         contentContainerStyle={styles.categoriesContainer} />;
 
-    const deleteModal = this.state.showDeleteModal ?
-      <DeleteModal
-        text={'Are you sure you want to delete ' + this.state.showDeleteModalTitle + '?'}
+    const ActionModal = this.state.showActionModal ?
+      <ActionModal
+        text={'Are you sure you want to delete ' + this.state.actionModalTitle + '?'}
         leftIconName='check'
-        handleLeftIconPress={() => this.deleteCategory(this.state.showDeleteModalIndex)}
+        handleLeftIconPress={() => this.deleteCategory(this.state.actionModalIndex)}
         rightIconName='close'
-        handleRightIconPress={this.toggleDeleteModal} />
+        handleRightIconPress={this.toggleActionModal} />
       :
       <View />;
 
@@ -172,7 +172,7 @@ export class Categories extends React.Component {
         <Button
           iconName='add'
           handlePress={() => Actions.addCategory()} />
-        {deleteModal}
+        {ActionModal}
         {loader}
         {errorMessage}
       </View >

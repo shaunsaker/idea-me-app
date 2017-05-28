@@ -2,6 +2,7 @@ TODOS
     Ideas page
         Handle main logic in store/reducers
         Category state should be in store
+    Animate IdeaMenu
     All other pages need work
     Profile Page
         And all the trimmings

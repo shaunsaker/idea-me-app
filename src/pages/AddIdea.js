@@ -15,7 +15,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
-import Dropdown from '../components/Dropdown';
+import CategoriesDropdown from '../components/CategoriesDropdown';
 import Button from '../components/Button';
 import Growl from '../components/Growl';
 
@@ -186,14 +186,14 @@ export class AddIdea extends React.Component {
               handleChange={this.updateNewIdeaDescription} />
             {deleteIcon}
           </View>
-          <Dropdown
+          <CategoriesDropdown
             displayText='Select a Category'
             value={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
             handleSelect={this.selectCategory}
             values={this.props.categories}
             editItem={true}
             pushContent={true} />
-          <Dropdown
+          <CategoriesDropdown
             displayText='Select a Priority'
             value={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
             handleSelect={this.selectPriority}
