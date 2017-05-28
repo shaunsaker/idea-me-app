@@ -13,7 +13,7 @@ styleConstants.secondary = '#fdd835';
 styleConstants.danger = '#d32f2f';
 styleConstants.success = '#00ff00';
 styleConstants.white = '#f4f7fd';
-styleConstants.lightGrey = '#b3b3cb'; 
+styleConstants.lightGrey = '#b0b3cf'; 
 styleConstants.grey = '#808092';
 
 export default styleConstants;

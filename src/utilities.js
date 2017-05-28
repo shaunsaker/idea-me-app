@@ -56,4 +56,16 @@ utilities.sortIdeas = function (ideas, categories, currentCategory) {
     return currentCategoryIdeas;
 }
 
+utilities.isCategoryAlreadyPresent = function(newCategory, categories) {
+
+    // Check if this category exists already
+    categories.map((value) => {
+      if (value === newCategory) {
+        categoryPresent = true;
+      }
+    });
+
+    return categoryPresent;
+}
+
 export default utilities;

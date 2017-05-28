@@ -1,7 +1,8 @@
 TODOS
+    All other pages need work
+    Can input and input container be combined?
     Categories
         Combine categories and ideas store action and saving data
-    All other pages need work
     Profile Page
         And all the trimmings
         Menu

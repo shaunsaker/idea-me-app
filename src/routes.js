@@ -49,10 +49,11 @@ const Scenes = Actions.create(
 		<Scene
 			key='categories'
 			component={Categories} 
-						initial={true} />
+						initial={false} />
 		<Scene
 			key='addCategory'
-			component={AddCategory} />
+			component={AddCategory}
+			initial={true} />
 	</Scene>
 )
 

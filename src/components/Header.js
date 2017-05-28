@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-end'
 	},
 	rightIcon: {
-		marginRight: -12
+		marginRight: -6
 	}
 });
 

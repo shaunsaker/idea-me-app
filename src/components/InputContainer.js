@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         alignItems: 'center',
-        backgroundColor: styleConstants.primary
     },
 });
 

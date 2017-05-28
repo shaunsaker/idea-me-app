@@ -11,6 +11,7 @@ import styles from '../styles/pages/AddCategory';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
+import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Growl from '../components/Growl';
@@ -32,14 +33,6 @@ export class AddCategory extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.errorMessage) {
-      this.props.dispatch({
-        type: 'RESET_USER_ERROR'
-      });
-    }
-  }
-
   updateNewCategoryValue(text) {
     this.props.dispatch({
       type: 'UPDATE_NEW_CATEGORY_VALUE',
@@ -48,96 +41,74 @@ export class AddCategory extends React.Component {
   }
 
   addNewCategory() {
-    if (this.props.newCategoryValue) {
-      let categories = this.props.categories;
-      const newCategory = utilities.firstCharToUppercase(this.props.newCategoryValue.trim());
-      let categoryPresent = false;
+    let categories = this.props.categories;
+    const newCategory = utilities.firstCharToUppercase(this.props.newCategoryValue.trim());
+    const categoryPresent = utilities.isCategoryAlreadyPresent(newCategory, categories);
 
-      // Check if this category exists already
-      categories.map((value) => {
-        if (value === newCategory) {
-          categoryPresent = true;
-        }
-      });
-
-      if (!categoryPresent) {
-        if (categories) {
-          categories.push(newCategory);
-        }
-        else {
-          categories = [this.props.newCategoryValue.trim()];
-        }
-
-        this.props.dispatch({
-          type: 'UPDATE_USER_CATEGORIES',
-          categories
-        });
-
-        this.props.dispatch({
-          type: 'saveUserCategories',
-          categories,
-          uid: this.props.uid
-        });
-
-        Actions.pop();
+    if (!categoryPresent) {
+      if (categories) {
+        categories.push(newCategory);
       }
       else {
-        this.props.dispatch({
-          type: 'USER_ERROR',
-          message: 'This category already exists'
-        });
-
-        setTimeout(() => {
-          this.props.dispatch({
-            type: 'RESET_USER_ERROR'
-          });
-        }, 2500);
+        categories = [newCategory];
       }
+
+      this.props.dispatch({
+        type: 'UPDATE_USER_CATEGORIES',
+        categories
+      });
+
+      this.props.dispatch({
+        type: 'saveUserCategories',
+        categories,
+        uid: this.props.uid
+      });
+
+      Actions.pop();
     }
     else {
       this.props.dispatch({
         type: 'USER_ERROR',
-        message: 'You forgot to enter a category'
+        message: 'This category already exists'
       });
-
-      setTimeout(() => {
-        this.props.dispatch({
-          type: 'RESET_USER_ERROR'
-        });
-      }, 2500);
     }
   }
 
   render() {
-    const errorMessage = this.props.errorMessage ?
-      <Growl text={this.props.errorMessage} />
-      :
-      null;
+    const enableContinueButton = this.props.newCategoryValue;
 
     return (
       <View
         style={styles.container}>
+
         <Header
-          backgroundColor={styleConstants.primary}
           text='Add a Category'
-          textSize={28}
-          textColor={styleConstants.white}
-          textStyle={styleConstants.ranga}
+          headerShadow={false}
           rightIconName='close'
-          rightIconColor={styleConstants.white}
           rightIconSize={28}
           handleRightIconPress={() => Actions.pop()} />
-        <View style={styles.inputArea}>
-          <Input
-            placeholder="Enter new category..."
-            value={this.props.newCategoryValue}
-            handleChange={this.updateNewCategoryValue}
-            autoFocus={true} />
+
+        <View style={styles.inputContainer}>
+          <InputContainer>
+            <Input
+              placeholder="CATEGORY NAME"
+              value={this.props.newCategoryValue}
+              handleChange={this.updateNewCategoryValue}
+              autoFocus={true} />
+          </InputContainer>
         </View>
-        <Button
-          iconName='check'
-          handlePress={this.addNewCategory} />
-        {errorMessage}
+
+        <View style={styles.buttonContainer}>
+          <Button
+            iconName='check'
+            text='Continue'
+            styleMode='primaryReversed'
+            handlePress={this.addNewCategory}
+            disabled={!enableContinueButton} />
+        </View>
+
+        <Growl />
+
       </View >
     );
   }
@@ -146,7 +117,6 @@ export class AddCategory extends React.Component {
 function mapStateToProps(state) {
   return ({
     newCategoryValue: state.main.userData.newCategory.value,
-    errorMessage: state.main.userAuth.userAuthErrorMessage,
     categories: state.main.userData.categories,
     uid: state.main.userAuth.uid,
   });

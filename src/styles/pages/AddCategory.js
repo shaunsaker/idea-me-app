@@ -7,13 +7,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'relative',
-        backgroundColor: styleConstants.white
+        backgroundColor: styleConstants.primary
     },
-    inputArea: {     
-        flex: 1,   
-        alignItems: 'center',
-        marginTop: 16
-    }
+    inputContainer: {     
+        flex: 1,
+        paddingTop: 16,
+    },
+    buttonContainer: {
+        marginBottom: 16
+    },
 });
 
 export default styles;
