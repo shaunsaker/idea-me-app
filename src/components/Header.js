@@ -108,17 +108,22 @@ export default class Header extends React.Component {
 					:
 					<View style={styles.leftIconContainer} />;
 
+		const textRightStyles = this.props.textRight ?
+			{ alignItems: 'flex-end'}
+			:
+			null;
+
 		const text = this.props.textComponent ?
 			this.props.textComponent()
 			:
 			this.props.handleTextPress ?
 				<TouchableOpacity
-					style={styles.textContainer}
+					style={[styles.textContainer, textRightStyles]}
 					onPress={this.props.handleTextPress} >
 					<Text style={[styles.text, styleConstants.robotoCondensed, this.props.textStyle]}>{this.props.text}</Text>
 				</TouchableOpacity>
 				:
-				<View style={styles.textContainer}>
+				<View style={[styles.textContainer, textRightStyles]}>
 					<Text style={[styles.text, styleConstants.robotoCondensed, this.props.textStyle]}>{this.props.text}</Text>
 				</View>;
 
