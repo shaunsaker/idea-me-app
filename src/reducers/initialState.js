@@ -11,13 +11,14 @@ const initialState = {
     app: {
         userErrorMessage: null,
         userSuccessMessage: null,
-        errorType: null,
+        errorType: 'API',
+        retryAction: 'saveUserIdeas',
         loading: null,
     },
     api: {
         apiSaveSuccess: null,
         apiLoadSuccess: null,
-        apiErrorMessage: null,
+        apiErrorMessage: 'Failed to save your data',
     },
     storage: {
         storageErrorMessage: null,

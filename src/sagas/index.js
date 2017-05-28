@@ -8,9 +8,9 @@ import { signInUserWithFacebook } from './auth';
 // import { signInUserWithGoogle } from './auth';
 import { signInUserAnonymously } from './auth';
 import { signOutUser } from './auth';
-import { saveUserIdeas } from './data';
-import { saveUserCategories } from './data';
-import { loadUserData } from './data';
+import { saveUserIdeas } from './api';
+import { saveUserCategories } from './api';
+import { loadUserData } from './api';
 
 export function* sagas() {
     yield [

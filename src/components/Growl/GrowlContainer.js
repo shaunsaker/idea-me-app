@@ -11,6 +11,7 @@ export class Growl extends React.Component {
         super(props);
 
         this.resetError = this.resetError.bind(this);
+        this.retryAction = this.retryAction.bind(this);
     }
 
     static get propTypes() {
@@ -21,7 +22,13 @@ export class Growl extends React.Component {
             apiErrorMessage: React.PropTypes.string,
             geolocationErrorMessage: React.PropTypes.string,
             storageErrorMessage: React.PropTypes.string,
+
             errorType: React.PropTypes.string,  
+            retryAction: React.PropTypes.string,
+
+            ideas: React.PropTypes.array,
+            categories: React.PropTypes.array,
+            uid: React.PropTypes.string,
         };
     }
 
@@ -36,6 +43,17 @@ export class Growl extends React.Component {
         this.props.dispatch({
             type: action
         });
+    }
+
+    retryAction() {
+        this.resetError();
+
+        // this.props.dispatch({
+        //     type: this.props.retryAction,
+        //     ideas: this.props.ideas, // not sure which we'll need so let's just attach all of them
+        //     categories: this.props.categories,
+        //     uid: this.props.uid,
+        // });
     }
 
     render() {
@@ -60,7 +78,8 @@ export class Growl extends React.Component {
         const errorGrowl = errorMessage ?
             <GrowlComponent 
                 text={errorMessage} 
-                handleReset={this.resetError} />
+                handleReset={this.resetError}
+                handleRetryAction={this.props.retryAction ? this.retryAction : null} />
             :
             null;
 
@@ -97,7 +116,13 @@ function mapStateToProps(state) {
         apiErrorMessage: state.main.api.apiErrorMessage,
         geolocationErrorMessage: state.main.geolocation.geolocationErrorMessage ,
         storageErrorMessage: state.main.storage.storageErrorMessage,
-        errorType: state.main.app.errorType
+
+        errorType: state.main.app.errorType,
+        retryAction: state.main.app.retryAction,
+
+        ideas: state.main.userData.ideas,
+        categories: state.main.userData.categories,
+        uid: state.main.userAuth.uid,
     }
 }
 

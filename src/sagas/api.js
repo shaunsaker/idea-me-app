@@ -1,10 +1,10 @@
 import { call, put } from 'redux-saga/effects';
 
-import ApiData from '../api/index';
+import Data from '../api/index';
 
 export function* saveUserIdeas(action) {
 
-    const saveUserIdeasResponse = yield call(ApiData.saveUserIdeas, action);
+    const saveUserIdeasResponse = yield call(Data.saveUserIdeas, action);
     console.log('saveUserIdeasResponse', saveUserIdeasResponse);
 
     if (saveUserIdeasResponse) {
@@ -15,7 +15,8 @@ export function* saveUserIdeas(action) {
         }
         else {
             yield put({
-                type: 'USER_ERROR',
+                type: 'API_ERROR',
+                retryAction: 'saveUserIdeas',
                 message: saveUserIdeasResponse.message // TODO: Check this
             });
         }
@@ -24,7 +25,7 @@ export function* saveUserIdeas(action) {
 
 export function* saveUserCategories(action) {
 
-    const saveUserCategoriesResponse = yield call(ApiData.saveUserCategories, action);
+    const saveUserCategoriesResponse = yield call(Data.saveUserCategories, action);
     console.log('saveUserCategoriesResponse', saveUserCategoriesResponse);
 
     if (saveUserCategoriesResponse) {
@@ -35,7 +36,8 @@ export function* saveUserCategories(action) {
         }
         else {
             yield put({
-                type: 'USER_ERROR',
+                type: 'API_ERROR',
+                retryAction: 'saveUserCategories',
                 message: saveUserCategoriesResponse.message // TODO: Check this
             });
         }
@@ -44,7 +46,7 @@ export function* saveUserCategories(action) {
 
 export function* loadUserData(action) {
 
-    const loadUserDataResponse = yield call(ApiData.loadUserData, action);
+    const loadUserDataResponse = yield call(Data.loadUserData, action);
     console.log('loadUserDataResponse', loadUserDataResponse);
 
     if (loadUserDataResponse) {
@@ -90,7 +92,7 @@ export function* loadUserData(action) {
         }
         else {
             yield put({
-                type: 'USER_ERROR',
+                type: 'API_ERROR',
                 message: loadUserDataResponse.message
             });
         }

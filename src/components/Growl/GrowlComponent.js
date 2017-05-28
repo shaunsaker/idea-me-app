@@ -32,10 +32,23 @@ const styles = StyleSheet.create({
     },
     messageTextContainer: {
         flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginRight: 8,
     },
     messageText: {
+        flex: 1,
         fontSize: 18,
         color: styleConstants.white,
+    },
+    retryButton: {
+        flex: 0.25,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+    },
+    retryButtonText: {
+        fontSize: 18,
+        color: styleConstants.secondary,
     },
     iconContainer: {
         marginRight: 8,
@@ -95,7 +108,19 @@ export default class GrowlComponent extends React.Component {
     }
 
     render() {
-        const iconName = this.props.success ? 'check' : 'error-outline';                 
+        const iconName = this.props.success ? 'check' : 'error-outline';   
+
+        const retryButton = this.props.handleRetryAction ?
+            <TouchableOpacity
+                onPress={this.props.handleRetryAction}
+                style={styles.retryButton}>
+                <Text
+                    style={[styles.retryButtonText, styleConstants.robotoCondensed]}>
+                    RETRY
+                </Text>  
+            </TouchableOpacity>
+            :
+            null;
 
         return (
             <Animated.View style={[styles.messageWrapper, { bottom: this.state.bottom }]}>
@@ -113,6 +138,7 @@ export default class GrowlComponent extends React.Component {
                             multiline={true}>
                             {this.props.text}
                         </Text>
+                        {retryButton}
                     </View>
                 </View>
                 <TouchableOpacity

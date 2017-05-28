@@ -95,6 +95,7 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             new_state.api.apiErrorMessage = action.message;
             new_state.app.errorType = 'API';
+            new_state.app.retryAction = action.retryAction;
             new_state.app.loading = false;
             return new_state;
 

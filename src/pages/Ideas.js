@@ -34,6 +34,7 @@ export class Ideas extends React.Component {
     this.editIdea = this.editIdea.bind(this);
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
+    this.saveIdeas = this.saveIdeas.bind(this);
     this.toggleActionModal = this.toggleActionModal.bind(this);
 
     this.state = {
@@ -97,9 +98,13 @@ export class Ideas extends React.Component {
       title
     });
 
+    this.saveIdeas();
+  }
+
+  saveIdeas() {
     // this.props.dispatch({
     //   type: 'saveUserIdeas',
-    //   ideas: newIdeas,
+    //   ideas: this.props.ideas,
     //   uid: this.props.uid
     // });
   }
