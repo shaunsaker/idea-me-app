@@ -1,7 +1,6 @@
 TODOS
-    Ideas page
-        Handle main logic in store/reducers
-        Category state should be in store
+    Test Growl and Loader on Ideas page
+    Test Growl and Loader on Splash page
     Animate IdeaMenu
     All other pages need work
     Profile Page

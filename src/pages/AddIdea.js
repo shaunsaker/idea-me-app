@@ -210,7 +210,7 @@ export class AddIdea extends React.Component {
   }
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
@@ -225,4 +225,4 @@ function MapStateToProps(state) {
   });
 }
 
-export default connect(MapStateToProps)(AddIdea);
+export default connect(mapStateToProps)(AddIdea);

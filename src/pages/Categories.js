@@ -180,7 +180,7 @@ export class Categories extends React.Component {
   }
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
     ideas: state.main.userData.ideas,
@@ -191,4 +191,4 @@ function MapStateToProps(state) {
   });
 }
 
-export default connect(MapStateToProps)(Categories);
+export default connect(mapStateToProps)(Categories);

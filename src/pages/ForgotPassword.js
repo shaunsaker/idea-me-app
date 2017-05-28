@@ -110,11 +110,11 @@ export class ForgotPassword extends React.Component {
     }
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
     return ({
         userEmail: state.main.userAuth.email,
         errorType: state.main.app.errorType,
     });
 }
 
-export default connect(MapStateToProps)(ForgotPassword);
+export default connect(mapStateToProps)(ForgotPassword);

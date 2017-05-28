@@ -136,11 +136,11 @@ export class SignInOptions extends React.Component {
     }
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
     return ({
         errorMessage: state.main.userAuth.userAuthErrorMessage,
         authenticated: state.main.userAuth.authenticated,
     });
 }
 
-export default connect(MapStateToProps)(SignInOptions);
+export default connect(mapStateToProps)(SignInOptions);

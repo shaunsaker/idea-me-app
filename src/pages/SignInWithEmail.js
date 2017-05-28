@@ -134,7 +134,7 @@ export class SignInWithEmail extends React.Component {
     }
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
     return ({
         userEmail: state.main.userAuth.email,
         userPassword: state.main.userAuth.password,
@@ -143,4 +143,4 @@ function MapStateToProps(state) {
     });
 }
 
-export default connect(MapStateToProps)(SignInWithEmail);
+export default connect(mapStateToProps)(SignInWithEmail);

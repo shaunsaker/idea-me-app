@@ -143,7 +143,7 @@ export class AddCategory extends React.Component {
   }
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
   return ({
     newCategoryValue: state.main.userData.newCategory.value,
     errorMessage: state.main.userAuth.userAuthErrorMessage,
@@ -152,4 +152,4 @@ function MapStateToProps(state) {
   });
 }
 
-export default connect(MapStateToProps)(AddCategory);
+export default connect(mapStateToProps)(AddCategory);
