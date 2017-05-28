@@ -90,12 +90,9 @@ export class SignInWithEmail extends React.Component {
         return (
             <View style={styles.container}>
                 <Header
-                    backgroundColor={styleConstants.primary}
-                    contentColor={styleConstants.white}
                     headerShadow={false}
                     text='Forgot Password?'
                     handleTextPress={() => Actions.forgotPassword()}
-                    textStyle={styleConstants.robotoCondensed}
                     textRight={true}
                     leftIconName='chevron-left'
                     leftIconSize={36}

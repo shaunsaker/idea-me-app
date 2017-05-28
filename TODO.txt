@@ -1,11 +1,7 @@
 TODOS
-    Tabbar
-        Ideas/Home
-        Add Idea
-        Profile Page
-    Header does not need to be so generic
     Ideas page
-        Needs tidying up
+        Handle main logic in store/reducers
+        Category state should be in store
     All other pages need work
     Profile Page
         And all the trimmings

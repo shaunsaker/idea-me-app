@@ -71,12 +71,9 @@ export class Welcome extends React.Component {
         return (
             <View style={styles.container}>
                 <Header 
-                    backgroundColor={styleConstants.primary} 
-                    contentColor={styleConstants.white}
                     headerShadow={false}
                     text='Log In'
                     handleTextPress={() => Actions.signInWithEmail()}
-                    textStyle={styleConstants.robotoCondensed}
                     textRight={true}/>
 
                 <View style={styles.logoContainer}>

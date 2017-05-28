@@ -95,7 +95,6 @@ export class SignInOptions extends React.Component {
                     headerShadow={false}
                     rightIconName='close'
                     rightIconSize={28}
-                    rightIconColor={styleConstants.white}
                     rightIconStyle={styles.headerIcon}
                     handleRightIconPress={() => Actions.pop()}/>
 

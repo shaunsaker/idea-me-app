@@ -222,7 +222,6 @@ export class Ideas extends React.Component {
       <View style={styles.container}>
 
         <Header
-          backgroundColor={styleConstants.primary}
           headerShadow={true}
           textComponent={() => <Logo />}
           textLeft={true}
