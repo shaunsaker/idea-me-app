@@ -82,7 +82,9 @@ export class Welcome extends React.Component {
 
                 <InfoBlock
                     title="Have great ideas and no where to store them?"
-                    subtitle="You've come to the right place." />
+                    subtitle="You've come to the right place." 
+                    titleColor={styleConstants.white} 
+                    subtitleColor={styleConstants.white} />
 
                 <View style={styles.buttonContainer}>
                     <Button

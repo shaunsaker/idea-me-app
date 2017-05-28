@@ -99,7 +99,8 @@ export class SignInWithEmail extends React.Component {
                     handleLeftIconPress={() => Actions.pop()} />
 
                 <InfoBlock
-                    title='Sign In'/>
+                    title='Sign In'
+                    titleColor={styleConstants.white} />
 
                 <InputContainer>
                     <Input

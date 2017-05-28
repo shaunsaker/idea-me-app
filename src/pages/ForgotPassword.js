@@ -81,7 +81,9 @@ export class ForgotPassword extends React.Component {
 
                 <InfoBlock
                     title="Forgot your password?"
-                    subtitle="Enter your email address and we'll send you a link to reset it."/>
+                    subtitle="Enter your email address and we'll send you a link to reset it."
+                    titleColor={styleConstants.white} 
+                    subtitleColor={styleConstants.white} />
 
                 <InputContainer>
                     <Input
