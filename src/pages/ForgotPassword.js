@@ -44,7 +44,7 @@ export class ForgotPassword extends React.Component {
     sendPasswordResetEmail() {
         if (this.props.userEmail) {
             this.props.dispatch({
-                type: 'SET_LOADING_TRUE'
+                type: 'TOGGLE_LOADING'
             });
 
             this.props.dispatch({

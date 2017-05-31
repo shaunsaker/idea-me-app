@@ -1,5 +1,4 @@
 TODOS
-    SET_LOADING_TRUE/FALSE => TOGGLE_LOADING
     welcomeRedirect => redirectToWelcomePage
     apiLoad/SaveSuccess => apiSuccess
     Check growl and loader imports and use

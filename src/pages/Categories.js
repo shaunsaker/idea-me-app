@@ -93,7 +93,7 @@ export class Categories extends React.Component {
   componentDidUpdate() {
     if (this.props.errorMessage || this.props.apiSaveSuccess) {
       this.props.dispatch({
-        type: 'SET_LOADING_FALSE'
+        type: 'TOGGLE_LOADING'
       });
     }
   }

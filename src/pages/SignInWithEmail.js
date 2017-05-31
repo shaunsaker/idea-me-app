@@ -61,7 +61,7 @@ export class SignInWithEmail extends React.Component {
     signIn() {
         if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
             this.props.dispatch({
-                type: 'SET_LOADING_TRUE'
+                type: 'TOGGLE_LOADING'
             });
 
             this.props.dispatch({

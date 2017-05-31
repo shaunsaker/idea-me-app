@@ -41,15 +41,9 @@ export default function (state = initialState, action) {
             return new_state;
 
         /* APP */
-        case 'SET_LOADING_TRUE':
+        case 'TOGGLE_LOADING':
             new_state = cloneObject(state);
-            new_state.app.loading = true;
-            return new_state;
-
-        case 'SET_LOADING_FALSE':
-            new_state = cloneObject(state);
-            new_state.app.loading = false;
-            new_state.api.apiSaveSuccess = false;
+            new_state.app.loading = !new_state.app.loading;
             return new_state;
 
         /* SUCCESS/ERROR MESSAGES */

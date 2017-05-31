@@ -38,7 +38,7 @@ export class Welcome extends React.Component {
 
     signInUserWithFacebook() {
         this.props.dispatch({
-            type: 'SET_LOADING_TRUE'
+            type: 'TOGGLE_LOADING'
         });
 
         // Do stuff
