@@ -1,8 +1,7 @@
 TODOS
+    userAuth (initial state) => auth
     Check growl and loader imports and use
     Welcome page still has loading as internal state
-    USER_AUTH => AUTH
-    userAuth (initial state) => auth
     Separate user block in initial state (contains user info - email, password etc)
     Reset error on signInwithemail and forgot password is specifically for user errors (no need to check errorTYpe)
     All other pages need work

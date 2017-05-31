@@ -47,27 +47,27 @@ export default function (state = initialState, action) {
             return new_state;
 
         /* SUCCESS/ERROR MESSAGES */
-        case 'USER_AUTH_ERROR':
+        case 'AUTH_ERROR':
             new_state = cloneObject(state);
             new_state.userAuth.userAuthErrorMessage = action.message;
-            new_state.app.errorType = 'USER_AUTH';
+            new_state.app.errorType = 'AUTH';
             new_state.app.loading = false;
             return new_state;
 
-        case 'RESET_USER_AUTH_ERROR':
+        case 'RESET_AUTH_ERROR':
             new_state = cloneObject(state);
             new_state.userAuth.userAuthErrorMessage = null;
             new_state.app.errorType = null;
             return new_state;
 
-        case 'USER_AUTH_SUCCESS':
+        case 'AUTH_SUCCESS':
             new_state = cloneObject(state);
             new_state.userAuth.userAuthSuccessMessage = action.message;
-            new_state.app.errorType = 'USER_AUTH';
+            new_state.app.errorType = 'AUTH';
             new_state.app.loading = false;
             return new_state;
 
-        case 'RESET_USER_AUTH_SUCCESS':
+        case 'RESET_AUTH_SUCCESS':
             new_state = cloneObject(state);
             new_state.userAuth.userAuthSuccessMessage = null;
             new_state.app.errorType = null;

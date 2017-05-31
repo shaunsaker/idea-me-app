@@ -36,7 +36,7 @@ export function* signInUserWithEmail(action) {
 	// Handle network errors, if any
 	else if (signUpUserResponse.message.errorMessage.indexOf('A network') > -1) {
 		yield put({
-			type: 'USER_AUTH_ERROR',
+			type: 'AUTH_ERROR',
 			message: 'A network error has occured.'
 		});
 	}
@@ -54,7 +54,7 @@ export function* signInUserWithEmail(action) {
 		}
 		else {
 			yield put({
-				type: 'USER_AUTH_ERROR',
+				type: 'AUTH_ERROR',
 				message: signInUserResponse.message.errorMessage
 			});
 		}
@@ -68,13 +68,13 @@ export function* sendPasswordResetEmail(action) {
 
 	if (passwordResetResponse.success) {
 		yield put({
-			type: 'USER_AUTH_SUCCESS',
+			type: 'AUTH_SUCCESS',
 			message: 'Email sent successfully'
 		});
 	}
 	else {
 		yield put({
-			type: 'USER_AUTH_ERROR',
+			type: 'AUTH_ERROR',
 			message: 'There was an error resetting your password. Please try again' // TODO: Check this
 		});
 	}
@@ -97,7 +97,7 @@ export function* signInUserWithFacebook(action) {
 	}
 	else {
 		yield put({
-			type: 'USER_AUTH_ERROR',
+			type: 'AUTH_ERROR',
 			message: signInFacebookResponse.message // TODO: Check this
 		});
 	}
@@ -121,7 +121,7 @@ export function* signInUserWithFacebook(action) {
 // 	}
 // 	else {
 // 		yield put({
-// 			type: 'USER_AUTH_ERROR',
+// 			type: 'AUTH_ERROR',
 // 			message: signInGoogleResponse.message // TODO: Check this
 // 		});
 // 	}
@@ -143,7 +143,7 @@ export function* signInUserAnonymously() {
 	}
 	else {
 		yield put({
-			type: 'USER_AUTH_ERROR',
+			type: 'AUTH_ERROR',
 			message: signInUserAnonymouslyResponse.message // TODO: Check this
 		});
 	}
@@ -161,7 +161,7 @@ export function* signOutUser() {
 	}
 	else {
 		yield put({
-			type: 'USER_AUTH_ERROR',
+			type: 'AUTH_ERROR',
 			message: signOutUserResponse.message // TODO: Check this
 		});
 	}
