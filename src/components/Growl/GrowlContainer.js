@@ -26,8 +26,8 @@ export class Growl extends React.Component {
     static get propTypes() {
         return {
             userErrorMessage: React.PropTypes.string,
-            userAuthErrorMessage: React.PropTypes.string,
-            userAuthSuccessMessage: React.PropTypes.string,
+            authErrorMessage: React.PropTypes.string,
+            authSuccessMessage: React.PropTypes.string,
             apiErrorMessage: React.PropTypes.string,
             geolocationErrorMessage: React.PropTypes.string,
             storageErrorMessage: React.PropTypes.string,
@@ -44,7 +44,7 @@ export class Growl extends React.Component {
     resetError() {
         
         // Reset the error depending on the type of error
-        const action = this.props.userAuthSuccessMessage ? // If more success messages are needed, we'll need to handle this differently
+        const action = this.props.authSuccessMessage ? // If more success messages are needed, we'll need to handle this differently
             'RESET_' + this.props.errorType + '_SUCCESS'
             :
             'RESET_' + this.props.errorType + '_ERROR';
@@ -70,8 +70,8 @@ export class Growl extends React.Component {
             this.props.userErrorMessage ? 
                 this.props.userErrorMessage
                 :
-                this.props.userAuthErrorMessage ?
-                    this.props.userAuthErrorMessage 
+                this.props.authErrorMessage ?
+                    this.props.authErrorMessage 
                     :
                     this.props.apiErrorMessage ?
                         this.props.apiErrorMessage 
@@ -93,8 +93,8 @@ export class Growl extends React.Component {
             null;
 
         const successMessage =  
-            this.props.userAuthSuccessMessage ?
-                this.props.userAuthSuccessMessage
+            this.props.authSuccessMessage ?
+                this.props.authSuccessMessage
                 :
                 null;
 
@@ -120,8 +120,8 @@ export class Growl extends React.Component {
 function mapStateToProps(state) {
     return {
         userErrorMessage: state.main.app.userErrorMessage,
-        userAuthErrorMessage: state.main.userAuth.userAuthErrorMessage,
-        userAuthSuccessMessage: state.main.userAuth.userAuthSuccessMessage,
+        authErrorMessage: state.main.auth.authErrorMessage,
+        authSuccessMessage: state.main.auth.authSuccessMessage,
         apiErrorMessage: state.main.api.apiErrorMessage,
         geolocationErrorMessage: state.main.geolocation.geolocationErrorMessage ,
         storageErrorMessage: state.main.storage.storageErrorMessage,
@@ -131,7 +131,7 @@ function mapStateToProps(state) {
 
         ideas: state.main.userData.ideas,
         categories: state.main.userData.categories,
-        uid: state.main.userAuth.uid,
+        uid: state.main.user.uid,
     }
 }
 

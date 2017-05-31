@@ -1,5 +1,4 @@
 TODOS
-    userAuth (initial state) => auth
     Check growl and loader imports and use
     Welcome page still has loading as internal state
     Separate user block in initial state (contains user info - email, password etc)

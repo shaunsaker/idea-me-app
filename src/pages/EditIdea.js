@@ -227,7 +227,7 @@ function mapStateToProps(state) {
         editIdeaCategory: state.main.userData.editIdea.categoryId,
         editIdeaPriority: state.main.userData.editIdea.priorityId,
         ideas: state.main.userData.ideas,
-        uid: state.main.userAuth.uid,
+        uid: state.main.user.uid,
     });
 }
 

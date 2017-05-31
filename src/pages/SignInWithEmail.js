@@ -137,9 +137,9 @@ export class SignInWithEmail extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        userEmail: state.main.userAuth.email,
-        userPassword: state.main.userAuth.password,
-        authenticated: state.main.userAuth.authenticated,
+        userEmail: state.main.user.email,
+        userPassword: state.main.user.password,
+        authenticated: state.main.auth.authenticated,
         errorType: state.main.app.errorType,
     });
 }

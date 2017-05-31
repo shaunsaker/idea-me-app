@@ -182,7 +182,7 @@ function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
     ideas: state.main.userData.ideas,
-    uid: state.main.userAuth.uid,
+    uid: state.main.user.uid,
     apiSuccess: state.main.api.apiSuccess,
   });
 }

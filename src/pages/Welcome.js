@@ -91,7 +91,7 @@ export class Welcome extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        authenticated: state.main.userAuth.authenticated,
+        authenticated: state.main.auth.authenticated,
     });
 }
 

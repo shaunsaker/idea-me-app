@@ -118,7 +118,7 @@ function mapStateToProps(state) {
   return ({
     newCategoryValue: state.main.userData.newCategory.value,
     categories: state.main.userData.categories,
-    uid: state.main.userAuth.uid,
+    uid: state.main.user.uid,
   });
 }
 

@@ -12,32 +12,32 @@ export default function (state = initialState, action) {
         /* USER AUTH */
         case 'UPDATE_USER_EMAIL':
             new_state = cloneObject(state);
-            new_state.userAuth.email = action.value;
+            new_state.user.email = action.value;
             return new_state;
 
         case 'UPDATE_USER_PASSWORD':
             new_state = cloneObject(state);
-            new_state.userAuth.password = action.value;
+            new_state.user.password = action.value;
             return new_state;
 
         case 'REDIRECT_USER_TO_WELCOME':
             new_state = cloneObject(state);
-            new_state.userAuth.redirectToWelcomePage = true;
+            new_state.auth.redirectToWelcomePage = true;
             return new_state;
 
         case 'SIGN_IN_USER':
             new_state = cloneObject(state);
-            new_state.userAuth.authenticated = true;
-            new_state.userAuth.uid = action.uid;
-            new_state.userAuth.redirectToWelcomePage = false;
+            new_state.auth.authenticated = true;
+            new_state.user.uid = action.uid;
+            new_state.auth.redirectToWelcomePage = false;
             new_state.app.loading = false;
             return new_state;
 
         case 'SIGN_OUT_USER':
             new_state = cloneObject(state);
-            new_state.userAuth.authenticated = false;
-            new_state.userAuth.uid = null;
-            new_state.userAuth.redirectToWelcomePage = true;
+            new_state.auth.authenticated = false;
+            new_state.user.uid = null;
+            new_state.auth.redirectToWelcomePage = true;
             return new_state;
 
         /* APP */
@@ -49,27 +49,27 @@ export default function (state = initialState, action) {
         /* SUCCESS/ERROR MESSAGES */
         case 'AUTH_ERROR':
             new_state = cloneObject(state);
-            new_state.userAuth.userAuthErrorMessage = action.message;
+            new_state.auth.authErrorMessage = action.message;
             new_state.app.errorType = 'AUTH';
             new_state.app.loading = false;
             return new_state;
 
         case 'RESET_AUTH_ERROR':
             new_state = cloneObject(state);
-            new_state.userAuth.userAuthErrorMessage = null;
+            new_state.auth.authErrorMessage = null;
             new_state.app.errorType = null;
             return new_state;
 
         case 'AUTH_SUCCESS':
             new_state = cloneObject(state);
-            new_state.userAuth.userAuthSuccessMessage = action.message;
+            new_state.auth.authSuccessMessage = action.message;
             new_state.app.errorType = 'AUTH';
             new_state.app.loading = false;
             return new_state;
 
         case 'RESET_AUTH_SUCCESS':
             new_state = cloneObject(state);
-            new_state.userAuth.userAuthSuccessMessage = null;
+            new_state.auth.authSuccessMessage = null;
             new_state.app.errorType = null;
             return new_state;
 

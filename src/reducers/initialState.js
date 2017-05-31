@@ -1,12 +1,9 @@
 const initialState = {
-    userAuth: {
+    auth: {
         authenticated: null,
         anonymous: null,
         redirectToWelcomePage: null,
-        uid: null,
-        email: null,
-        password: null,
-        userAuthErrorMessage: null,
+        authErrorMessage: null,
     },
     app: {
         userErrorMessage: null,
@@ -16,7 +13,6 @@ const initialState = {
         loading: null,
     },
     api: {
-        apiSuccess: null,
         apiSuccess: null,
         apiErrorMessage: null,
     },
@@ -34,6 +30,11 @@ const initialState = {
             'Medium',
             'Low'
         ],
+    },
+    user: {
+        uid: null,
+        email: null,
+        password: null,
     },
     userData: {
         categories: [

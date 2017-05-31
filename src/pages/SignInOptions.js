@@ -117,8 +117,8 @@ export class SignInOptions extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        errorMessage: state.main.userAuth.userAuthErrorMessage,
-        authenticated: state.main.userAuth.authenticated,
+        errorMessage: state.main.auth.authErrorMessage,
+        authenticated: state.main.auth.authenticated,
     });
 }
 

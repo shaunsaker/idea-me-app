@@ -210,7 +210,7 @@ function mapStateToProps(state) {
     newIdeaCategory: state.main.userData.categories[state.main.userData.newIdea.categoryId],
     newIdeaPriority: state.main.appData.priorities[state.main.userData.newIdea.priorityId],
     ideas: state.main.userData.ideas,
-    uid: state.main.userAuth.uid
+    uid: state.main.user.uid
   });
 }
 
