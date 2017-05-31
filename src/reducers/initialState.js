@@ -16,8 +16,8 @@ const initialState = {
         loading: null,
     },
     api: {
-        apiSaveSuccess: null,
-        apiLoadSuccess: null,
+        apiSuccess: null,
+        apiSuccess: null,
         apiErrorMessage: null,
     },
     storage: {

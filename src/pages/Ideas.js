@@ -49,7 +49,7 @@ export class Ideas extends React.Component {
       categories: React.PropTypes.array,
       ideas: React.PropTypes.array,
       uid: React.PropTypes.string,
-      apiSaveSuccess: React.PropTypes.bool,
+      apiSuccess: React.PropTypes.bool,
     };
   }
 

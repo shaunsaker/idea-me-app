@@ -102,7 +102,7 @@ export default function (state = initialState, action) {
 
         case 'API_SAVE_SUCCESS':
             new_state = cloneObject(state);
-            new_state.api.apiSaveSuccess = true;
+            new_state.api.apiSuccess = true;
             new_state.app.loading = false;
             return new_state;
 
@@ -114,7 +114,7 @@ export default function (state = initialState, action) {
                 new_state.userData.ideas = action.data.ideas;
                 new_state.userData.categories = action.data.categories;
             }
-            new_state.api.apiLoadSuccess = true;
+            new_state.api.apiSuccess = true;
             new_state.app.loading = false;
             return new_state;
 

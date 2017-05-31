@@ -40,7 +40,7 @@ export class Categories extends React.Component {
       categories: React.PropTypes.array.isRequired,
       ideas: React.PropTypes.array.isRequired,
       uid: React.PropTypes.string,
-      apiSaveSuccess: React.PropTypes.bool,
+      apiSuccess: React.PropTypes.bool,
     };
   }
 
@@ -91,7 +91,7 @@ export class Categories extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.errorMessage || this.props.apiSaveSuccess) {
+    if (this.props.errorMessage || this.props.apiSuccess) {
       this.props.dispatch({
         type: 'TOGGLE_LOADING'
       });
@@ -183,7 +183,7 @@ function mapStateToProps(state) {
     categories: state.main.userData.categories,
     ideas: state.main.userData.ideas,
     uid: state.main.userAuth.uid,
-    apiSaveSuccess: state.main.api.apiSaveSuccess,
+    apiSuccess: state.main.api.apiSuccess,
   });
 }
 

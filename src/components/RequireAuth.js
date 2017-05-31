@@ -22,7 +22,7 @@ export default function (WrappedComponent) {
         });
       }
 
-      if (this.props.authenticated && !this.props.apiLoadSuccess) {
+      if (this.props.authenticated && !this.props.apiSuccess) {
         this.props.dispatch({
           type: 'loadUserData'
         });
@@ -30,7 +30,7 @@ export default function (WrappedComponent) {
     }
 
     componentDidUpdate() {
-      if (this.props.authenticated && !this.props.apiLoadSuccess) {
+      if (this.props.authenticated && !this.props.apiSuccess) {
         this.props.dispatch({
           type: 'loadUserData'
         });
@@ -41,7 +41,7 @@ export default function (WrappedComponent) {
     } 
 
     render() {
-      const wrapper = this.props.authenticated && this.props.apiLoadSuccess ? 
+      const wrapper = this.props.authenticated && this.props.apiSuccess ? 
         <WrappedComponent {...this.props} />
         :
         <div style={styles.container}>
@@ -55,7 +55,7 @@ export default function (WrappedComponent) {
   function mapStateToProps(state) {
     return { 
       authenticated: state.main.user.authenticated,
-      apiLoadSuccess: state.main.user.apiLoadSuccess,
+      apiSuccess: state.main.user.apiSuccess,
       redirectUserToSignIn: state.main.user.signInRedirect
     };
   }

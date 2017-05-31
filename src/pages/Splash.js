@@ -17,7 +17,7 @@ export class Splash extends React.Component {
         return {
             authenticated: React.PropTypes.bool,
             uid: React.PropTypes.string,
-            apiLoadSuccess: React.PropTypes.bool,
+            apiSuccess: React.PropTypes.bool,
             redirectToWelcomePage: React.PropTypes.bool
         };
     }
@@ -26,12 +26,12 @@ export class Splash extends React.Component {
         if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
-        else if (this.props.authenticated && this.props.apiLoadSuccess) {
+        else if (this.props.authenticated && this.props.apiSuccess) {
             Actions.ideas({ type: ActionConst.RESET });
         }
 
         // When a user is signed in and reloads app
-        else if (this.props.authenticated && !this.props.apiLoadSuccess) {
+        else if (this.props.authenticated && !this.props.apiSuccess) {
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid
@@ -47,7 +47,7 @@ export class Splash extends React.Component {
     componentDidUpdate() {
 
         // When a user signs in
-        if (this.props.authenticated && !this.props.apiLoadSuccess) {
+        if (this.props.authenticated && !this.props.apiSuccess) {
             setTimeout(() => {
                 this.props.dispatch({
                     type: 'loadUserData',
@@ -55,7 +55,7 @@ export class Splash extends React.Component {
                 });
             }, 1500);
         }
-        else if (this.props.authenticated && this.props.apiLoadSuccess) {
+        else if (this.props.authenticated && this.props.apiSuccess) {
             Actions.ideas();
         }
         else if (this.props.redirectToWelcomePage) {
@@ -79,7 +79,7 @@ function mapStateToProps(state) {
     return {
         authenticated: state.main.userAuth.authenticated,
         uid: state.main.userAuth.uid,
-        apiLoadSuccess: state.main.api.apiLoadSuccess,
+        apiSuccess: state.main.api.apiSuccess,
         redirectToWelcomePage: state.main.userAuth.redirectToWelcomePage
     };
 }
