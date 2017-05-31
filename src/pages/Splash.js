@@ -1,14 +1,13 @@
 import React from 'react';
 import {
-    View,
     StatusBar,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
-import styles from '../styles/pages/Splash';
 import styleConstants from '../styles/styleConstants';
 
+import Page from '../components/Page';
 import GlowLoader from '../components/GlowLoader';
 import Growl from '../components/Growl';
 
@@ -23,54 +22,57 @@ export class Splash extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.redirectToWelcomePage) {
-            Actions.welcome();
-        }
-        else if (this.props.authenticated && this.props.apiSuccess) {
-            Actions.ideas({ type: ActionConst.RESET });
-        }
+        // if (this.props.redirectToWelcomePage) {
+        //     Actions.welcome();
+        // }
+        // else if (this.props.authenticated && this.props.apiSuccess) {
+        //     Actions.ideas({ type: ActionConst.RESET });
+        // }
 
-        // When a user is signed in and reloads app
-        else if (this.props.authenticated && !this.props.apiSuccess) {
-            this.props.dispatch({
-                type: 'loadUserData',
-                uid: this.props.uid
-            });
-        }
-        else if (!this.props.authenticated) {
-            this.props.dispatch({
-                type: 'getUserAuth'
-            });
-        }
+        // // When a user is signed in and reloads app
+        // else if (this.props.authenticated && !this.props.apiSuccess) {
+        //     this.props.dispatch({
+        //         type: 'loadUserData',
+        //         uid: this.props.uid
+        //     });
+        // }
+        // else if (!this.props.authenticated) {
+        //     this.props.dispatch({
+        //         type: 'getUserAuth'
+        //     });
+        // }
     }
 
     componentDidUpdate() {
 
-        // When a user signs in
-        if (this.props.authenticated && !this.props.apiSuccess) {
-            setTimeout(() => {
-                this.props.dispatch({
-                    type: 'loadUserData',
-                    uid: this.props.uid
-                });
-            }, 1500);
-        }
-        else if (this.props.authenticated && this.props.apiSuccess) {
-            Actions.ideas();
-        }
-        else if (this.props.redirectToWelcomePage) {
-            Actions.welcome();
-        }
+        // // When a user signs in
+        // if (this.props.authenticated && !this.props.apiSuccess) {
+        //     setTimeout(() => {
+        //         this.props.dispatch({
+        //             type: 'loadUserData',
+        //             uid: this.props.uid
+        //         });
+        //     }, 1500);
+        // }
+        // else if (this.props.authenticated && this.props.apiSuccess) {
+        //     Actions.ideas();
+        // }
+        // else if (this.props.redirectToWelcomePage) {
+        //     Actions.welcome();
+        // }
     }
 
     render() {
         return (
-            <View style={styles.container}>
+            <Page 
+                backgroundColor={styleConstants.primary}
+                justifyContent='center'
+                removeBottomPadding >
                 <StatusBar backgroundColor={styleConstants.transPrimary} />
                 <GlowLoader
                     size={64} />
                 <Growl />
-            </View>
+            </Page>
         );
     }
 }

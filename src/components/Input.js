@@ -17,7 +17,8 @@ const windowWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     inputWrapper: {
         width: windowWidth - 32,
-        marginBottom: 32
+        marginVertical: 16,
+        alignSelf: 'center',
     },
     inputLabelContainer: {
         flexDirection: 'row',

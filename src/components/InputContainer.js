@@ -1,32 +1,26 @@
 import React from "react";
 import {
     View,
-    StyleSheet,
 } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import styleConstants from '../styles/styleConstants';
+export default InputContainer = (props) => {
+    const verticalCenterStyles = props.alignCenter ? 
+        {
+            flex: 1,
+            justifyContent: 'center',
+        }
+        :
+        null;
 
-const styles = StyleSheet.create({
-    inputWrapper: {
-        flex: 1,
-    },
-    inputContainer: {
-        alignItems: 'center',
-    },
-});
+    return (
+        <View style={[{flex: 1, alignSelf: 'stretch'}, verticalCenterStyles]}>
+            <KeyboardAwareScrollView
+                contentContainerStyle={[verticalCenterStyles]}
+                keyboardShouldPersistTaps='always'>
+                {props.children}
+            </KeyboardAwareScrollView>
 
-export default class InputContainer extends React.Component {
-    render() {
-        return (
-            <View style={styles.inputWrapper}>
-                <KeyboardAwareScrollView
-                    contentContainerStyle={styles.inputContainer}
-                    keyboardShouldPersistTaps='always'>
-                    {this.props.children}
-                </KeyboardAwareScrollView>
-
-            </View>
-        );
-    }
+        </View>
+    );
 }

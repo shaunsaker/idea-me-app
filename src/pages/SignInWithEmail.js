@@ -1,21 +1,16 @@
 import React from "react";
-import {
-    View,
-    TouchableOpacity,
-    Text,
-} from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import Page from '../components/Page';
 import Header from '../components/Header';
-import InfoBlock from '../components/InfoBlock';
 import InputContainer from '../components/InputContainer';
+import InfoBlock from '../components/InfoBlock';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
-import styles from '../styles/pages/SignInWithEmail';
 import styleConstants from '../styles/styleConstants';
 
 export class SignInWithEmail extends React.Component {
@@ -88,7 +83,9 @@ export class SignInWithEmail extends React.Component {
         const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0 && this.props.userPassword; 
 
         return (
-            <View style={styles.container}>
+            <Page
+                backgroundColor={styleConstants.primary}>
+
                 <Header
                     headerShadow={false}
                     text='Forgot Password?'
@@ -98,11 +95,11 @@ export class SignInWithEmail extends React.Component {
                     leftIconSize={36}
                     handleLeftIconPress={() => Actions.pop()} />
 
-                <InfoBlock
-                    title='Sign In'
-                    titleColor={styleConstants.white} />
-
                 <InputContainer>
+                    <InfoBlock
+                        title='Sign In'
+                        titleColor={styleConstants.white} />
+
                     <Input
                         placeholder="EMAIL ADDRESS"
                         value={this.props.userEmail}
@@ -117,20 +114,19 @@ export class SignInWithEmail extends React.Component {
                         type='password' />
                 </InputContainer>
                 
-                <View style={styles.buttonContainer}>
-                    <Button
-                        iconName='check'
-                        handlePress={this.signIn}
-                        text='Continue'
-                        style={styles.button}
-                        styleMode='primaryReversed'
-                        disabled={!enableContinueButton} />
-                </View>
+                <Button
+                    iconName='check'
+                    handlePress={this.signIn}
+                    text='Continue'
+                    styleMode='primaryReversed'
+                    disabled={!enableContinueButton} />
 
                 <Growl
                     handleReset={this.resetError} />
+
                 <Loader />
-            </View>
+
+            </Page>
         );
     }
 }

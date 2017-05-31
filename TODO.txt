@@ -1,8 +1,9 @@
 TODOS
-    Check growl and loader imports and use
-    All inputs contained by inputContainer component
     Input has styleModes for white bg too
+    Keyboard aware scrollview as page component with other page props
+        Remove inputContainer component
     Welcome page still has loading as internal state
+    Don't use styleSheet where you don't need it, ie. if you are only applying one style
     Separate user block in initial state (contains user info - email, password etc)
     Reset error on signInwithemail and forgot password is specifically for user errors (no need to check errorTYpe)
     All other pages need work

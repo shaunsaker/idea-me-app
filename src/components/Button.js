@@ -31,7 +31,9 @@ const styles = StyleSheet.create({
             height: 2,
             width: 0
         },
-        borderRadius: 36
+        borderRadius: 36,
+        marginTop: 16,
+        alignSelf: 'center',
     },
     disabled: {
         opacity: 0.33

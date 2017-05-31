@@ -13,6 +13,7 @@ import styles from '../styles/pages/EditIdea';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
+import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import CategoriesDropdown from '../components/CategoriesDropdown';

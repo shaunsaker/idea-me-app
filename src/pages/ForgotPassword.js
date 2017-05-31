@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import Page from '../components/Page';
 import Header from '../components/Header';
 import InfoBlock from '../components/InfoBlock';
 import InputContainer from '../components/InputContainer';
@@ -15,7 +16,6 @@ import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
-import styles from '../styles/pages/ForgotPassword';
 import styleConstants from '../styles/styleConstants';
 
 export class ForgotPassword extends React.Component {
@@ -70,20 +70,22 @@ export class ForgotPassword extends React.Component {
         const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0; 
 
         return (
-            <View style={styles.container}>
+            <Page
+                backgroundColor={styleConstants.primary}>
+
                 <Header
                     headerShadow={false}
                     leftIconName='chevron-left'
                     leftIconSize={36}
                     handleLeftIconPress={() => Actions.pop()} />
 
-                <InfoBlock
-                    title="Forgot your password?"
-                    subtitle="Enter your email address and we'll send you a link to reset it."
-                    titleColor={styleConstants.white} 
-                    subtitleColor={styleConstants.white} />
-
                 <InputContainer>
+                    <InfoBlock
+                        title="Forgot your password?"
+                        subtitle="Enter your email address and we'll send you a link to reset it."
+                        titleColor={styleConstants.white} 
+                        subtitleColor={styleConstants.white} />
+
                     <Input
                         placeholder="EMAIL ADDRESS"
                         value={this.props.userEmail}
@@ -92,21 +94,18 @@ export class ForgotPassword extends React.Component {
                         keyboardType='email-address' />
                 </InputContainer>
 
-                <View style={styles.buttonContainer}>
-                    <Button
-                        iconName='check'
-                        handlePress={this.sendPasswordResetEmail}
-                        text='Continue'
-                        style={styles.button}
-                        styleMode='primaryReversed' 
-                        disabled={!enableContinueButton} />
-                </View>
+                <Button
+                    iconName='check'
+                    handlePress={this.sendPasswordResetEmail}
+                    text='Continue'
+                    styleMode='primaryReversed' 
+                    disabled={!enableContinueButton} />
 
                 <Growl />
 
                 <Loader />
                 
-            </View>
+            </Page>
         );
     }
 }

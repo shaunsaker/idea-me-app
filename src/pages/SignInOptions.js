@@ -1,18 +1,16 @@
 import React from "react";
 import {
     View,
-    Text,
-    StatusBar,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import Page from '../components/Page';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
-import styles from '../styles/pages/SignInOptions';
 import styleConstants from '../styles/styleConstants';
 
 export class SignInOptions extends React.Component {
@@ -67,41 +65,39 @@ export class SignInOptions extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Page
+                backgroundColor={styleConstants.primary}
+                fauxFooter={true} >
+
                 <Header 
                     headerShadow={false}
                     rightIconName='close'
                     rightIconSize={28}
-                    rightIconStyle={styles.headerIcon}
                     handleRightIconPress={() => Actions.pop()}/>
 
-                <View style={styles.buttonContainer}>
+                <View>
                     <Button
                         materialCommunityIcon
                         iconName='facebook'
-                        handlePress={this.signInUserWithFacebook} 
-                        style={styles.button}                              
+                        handlePress={this.signInUserWithFacebook}                         
                         text='Continue with Facebook'
                         styleMode='transparentReversed' />
                     <Button
                         materialCommunityIcon
                         iconName='google'
                         handlePress={this.signInUserWithGoogle} 
-                        style={styles.button} 
                         text='Continue with Google'
                         styleMode='transparentReversed' />
                     <Button
                         materialCommunityIcon
                         iconName='email'
                         handlePress={this.signInUserWithEmail} 
-                        style={styles.button} 
                         text='Continue with Email'
                         styleMode='transparent' />
                     <Button
                         materialCommunityIcon
                         iconName='face-profile'
                         handlePress={this.signInUserAnonymously} 
-                        style={styles.button} 
                         text='Continue Anonymously'
                         styleMode='transparent' />
                 </View>
@@ -110,7 +106,7 @@ export class SignInOptions extends React.Component {
 
 				<Loader />
                 
-            </View>
+            </Page>
         );
     }
 }

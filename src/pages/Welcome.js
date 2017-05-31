@@ -1,12 +1,11 @@
 import React from "react";
 import {
-    View,
-    Text,
-    TouchableOpacity,
+    View
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import Page from '../components/Page';
 import Header from '../components/Header';
 import Logo from '../components/Logo';
 import InfoBlock from '../components/InfoBlock';
@@ -14,7 +13,6 @@ import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
 
-import styles from '../styles/pages/Welcome';
 import styleConstants from '../styles/styleConstants';
 
 export class Welcome extends React.Component {
@@ -46,7 +44,9 @@ export class Welcome extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Page 
+                backgroundColor={styleConstants.primary}
+                fauxFooter={true}>
                 
                 <Header 
                     headerShadow={false}
@@ -54,9 +54,7 @@ export class Welcome extends React.Component {
                     handleTextPress={() => Actions.signInWithEmail()}
                     textRight={true}/>
 
-                <View style={styles.logoContainer}>
-                    <Logo />
-                </View>
+                <Logo />
 
                 <InfoBlock
                     title="Have great ideas and no where to store them?"
@@ -64,18 +62,15 @@ export class Welcome extends React.Component {
                     titleColor={styleConstants.white} 
                     subtitleColor={styleConstants.white} />
 
-                <View style={styles.buttonContainer}>
+                <View>
                     <Button
                         materialCommunityIcon
                         iconName='facebook'
-                        handlePress={this.signInUserWithFacebook} 
-                        style={styles.button}                              
+                        handlePress={this.signInUserWithFacebook}                             
                         text='Continue with Facebook'
                         styleMode='transparentReversed' />
-
                     <Button
-                        handlePress={() => Actions.signInOptions()} 
-                        style={styles.button}                              
+                        handlePress={() => Actions.signInOptions()}                           
                         text='More Options'
                         styleMode='transparent' />
                 </View>
@@ -84,7 +79,7 @@ export class Welcome extends React.Component {
 
                 <Loader />
 
-            </View>
+            </Page>
         );
     }
 }

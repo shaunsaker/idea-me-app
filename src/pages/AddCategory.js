@@ -10,6 +10,7 @@ import utilities from '../utilities';
 import styles from '../styles/pages/AddCategory';
 import styleConstants from '../styles/styleConstants';
 
+import Page from '../components/Page';
 import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
@@ -78,8 +79,8 @@ export class AddCategory extends React.Component {
     const enableContinueButton = this.props.newCategoryValue;
 
     return (
-      <View
-        style={styles.container}>
+      <Page
+        backgroundColor={styleConstants.primary}>
 
         <Header
           text='Add a Category'
@@ -88,28 +89,25 @@ export class AddCategory extends React.Component {
           rightIconSize={28}
           handleRightIconPress={() => Actions.pop()} />
 
-        <View style={styles.inputContainer}>
-          <InputContainer>
-            <Input
-              placeholder="CATEGORY NAME"
-              value={this.props.newCategoryValue}
-              handleChange={this.updateNewCategoryValue}
-              autoFocus={true} />
-          </InputContainer>
-        </View>
+        <InputContainer
+          alignCenter={true} >
+          <Input
+            placeholder="CATEGORY NAME"
+            value={this.props.newCategoryValue}
+            handleChange={this.updateNewCategoryValue}
+            autoFocus={true} />
+        </InputContainer>
 
-        <View style={styles.buttonContainer}>
-          <Button
-            iconName='check'
-            text='Continue'
-            styleMode='primaryReversed'
-            handlePress={this.addNewCategory}
-            disabled={!enableContinueButton} />
-        </View>
+        <Button
+          iconName='check'
+          text='Continue'
+          styleMode='primaryReversed'
+          handlePress={this.addNewCategory}
+          disabled={!enableContinueButton} />
 
         <Growl />
 
-      </View >
+      </Page >
     );
   }
 }

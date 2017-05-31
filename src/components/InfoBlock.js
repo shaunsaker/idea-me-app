@@ -38,13 +38,8 @@ export default class InputContainer extends React.Component {
     }
         
     render() {
-        const flexStyles = this.props.subtitle ?
-            { flex: 0.8}
-            :
-            { flex: 0.4};
-
         return (
-            <View style={[styles.infoContainer, flexStyles]}>
+            <View style={styles.infoContainer}>
                 <Text style={[styles.infoTextTitle, {color: this.props.titleColor}, styleConstants.robotoCondensed]}>
                     {this.props.title}
                 </Text>
