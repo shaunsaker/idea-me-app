@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import LoaderComponent from './LoaderComponent';
 
-export class LoaderContainer extends React.Component{
+export class Loader extends React.Component{
     static get propTypes() {
       return {
 		loading: React.PropTypes.bool
@@ -34,4 +34,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(LoaderContainer);
+export default connect(mapStateToProps)(Loader);

@@ -1,5 +1,7 @@
 TODOS
     Check growl and loader imports and use
+    All inputs contained by inputContainer component
+    Input has styleModes for white bg too
     Welcome page still has loading as internal state
     Separate user block in initial state (contains user info - email, password etc)
     Reset error on signInwithemail and forgot password is specifically for user errors (no need to check errorTYpe)

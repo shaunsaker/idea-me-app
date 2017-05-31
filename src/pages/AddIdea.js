@@ -45,12 +45,6 @@ export class AddIdea extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'RESET_USER_ERROR'
-    });
-  }
-
   updateNewIdeaTitle(text) {
     this.props.dispatch({
       type: 'UPDATE_NEW_IDEA_TITLE',
@@ -131,12 +125,6 @@ export class AddIdea extends React.Component {
       });
 
       Actions.pop();
-    }
-    else {
-      this.props.dispatch({
-        type: 'USER_ERROR',
-        message: 'You forgot to enter your idea'
-      });
     }
   }
 

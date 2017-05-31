@@ -11,8 +11,8 @@ import Header from '../components/Header';
 import Logo from '../components/Logo';
 import InfoBlock from '../components/InfoBlock';
 import Button from '../components/Button';
-import Loader from '../components/Loader/index';
-import Growl from '../components/Growl/index';
+import Loader from '../components/Loader';
+import Growl from '../components/Growl';
 
 import styles from '../styles/pages/Welcome';
 import styleConstants from '../styles/styleConstants';
