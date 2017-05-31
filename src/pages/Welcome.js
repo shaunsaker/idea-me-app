@@ -11,8 +11,8 @@ import Header from '../components/Header';
 import Logo from '../components/Logo';
 import InfoBlock from '../components/InfoBlock';
 import Button from '../components/Button';
-import Loader from '../components/Loader';
-import Growl from '../components/Growl';
+import Loader from '../components/Loader/index';
+import Growl from '../components/Growl/index';
 
 import styles from '../styles/pages/Welcome';
 import styleConstants from '../styles/styleConstants';
@@ -20,56 +20,34 @@ import styleConstants from '../styles/styleConstants';
 export class Welcome extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            loading: false
-        }
         
         this.signInUserWithFacebook = this.signInUserWithFacebook.bind(this);
     }
 
     static get propTypes() {
         return {
-            errorMessage: React.PropTypes.string,
             authenticated: React.PropTypes.bool,
         };
     }
 
     componentDidUpdate() {
-        if (this.props.errorMessage) {
-            if (this.state.loading) {
-                this.setState({
-                    loading: false
-                });
-            }
-        }
-        else if (this.props.authenticated) {
+        if (this.props.authenticated) {
             Actions.ideas();
         }
     }
 
     signInUserWithFacebook() {
-        this.setState({
-            loading: true
-        }); 
+        this.props.dispatch({
+            type: 'SET_LOADING_TRUE'
+        });
 
         // Do stuff
     }
 
     render() {
-        const loader = this.state.loading ?
-            <Loader />
-            :
-            null;
-
-        const errorMessage = this.props.errorMessage ?
-            <Growl 
-                text={this.props.errorMessage} />  
-            :
-            null;
-
         return (
             <View style={styles.container}>
+                
                 <Header 
                     headerShadow={false}
                     text='Log In'
@@ -102,8 +80,10 @@ export class Welcome extends React.Component {
                         styleMode='transparent' />
                 </View>
 
-                {loader}
-                {errorMessage}
+                <Growl />
+
+                <Loader />
+
             </View>
         );
     }
@@ -111,7 +91,6 @@ export class Welcome extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        errorMessage: state.main.userAuth.userAuthErrorMessage,
         authenticated: state.main.userAuth.authenticated,
     });
 }

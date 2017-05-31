@@ -9,8 +9,8 @@ import { Actions } from 'react-native-router-flux';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
-import Loader from '../components/Loader';
-import Growl from '../components/Growl';
+import Loader from '../components/Loader/index';
+import Growl from '../components/Growl/index';
 
 import styles from '../styles/pages/SignInOptions';
 import styleConstants from '../styles/styleConstants';
@@ -18,10 +18,6 @@ import styleConstants from '../styles/styleConstants';
 export class SignInOptions extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            loading: false
-        }
         
         this.signInUserWithFacebook = this.signInUserWithFacebook.bind(this);
         this.signInUserWithGoogle = this.signInUserWithGoogle.bind(this);
@@ -31,36 +27,28 @@ export class SignInOptions extends React.Component {
 
     static get propTypes() {
         return {
-            errorMessage: React.PropTypes.string,
             authenticated: React.PropTypes.bool,
         };
     }
 
     componentDidUpdate() {
-        if (this.props.errorMessage) {
-            if (this.state.loading) {
-                this.setState({
-                    loading: false
-                });
-            }
-        }
-        else if (this.props.authenticated) {
+        if (this.props.authenticated) {
             Actions.ideas();
         }
     }
 
     signInUserWithFacebook() {
-        this.setState({
-            loading: true
-        }); 
+        this.props.dispatch({
+            type: 'SET_LOADING_TRUE'
+        });
 
         // Do stuff
     }
 
     signInUserWithGoogle() {
-        this.setState({
-            loading: true
-        }); 
+        this.props.dispatch({
+            type: 'SET_LOADING_TRUE'
+        });
 
         // Do stuff
     }
@@ -70,25 +58,14 @@ export class SignInOptions extends React.Component {
     }
 
     signInUserAnonymously() {
-        this.setState({
-            loading: true
-        }); 
+        this.props.dispatch({
+            type: 'SET_LOADING_TRUE'
+        });
 
         // Do stuff
     }
 
     render() {
-        const loader = this.state.loading ?
-            <Loader />
-            :
-            null;
-
-        const errorMessage = this.props.errorMessage ?
-            <Growl 
-                text={this.props.errorMessage} />  
-            :
-            null;
-
         return (
             <View style={styles.container}>
                 <Header 
@@ -129,8 +106,10 @@ export class SignInOptions extends React.Component {
                         styleMode='transparent' />
                 </View>
 
-                {loader}
-                {errorMessage}
+				<Growl />
+
+				<Loader />
+                
             </View>
         );
     }

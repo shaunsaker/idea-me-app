@@ -1,6 +1,18 @@
 TODOS
+    SET_LOADING_TRUE/FALSE => TOGGLE_LOADING
+    welcomeRedirect => redirectToWelcomePage
+    apiLoad/SaveSuccess => apiSuccess
+    Check growl and loader imports and use
+    Welcome page still has loading as internal state
+    USER_AUTH => AUTH
+    userAuth (initial state) => auth
+    Separate user block in initial state (contains user info - email, password etc)
+    Reset error on signInwithemail and forgot password is specifically for user errors (no need to check errorTYpe)
     All other pages need work
+    Text area component
+        Needs delete icon and styling
     Can input and input container be combined?
+    Should we update store after api calls? Currently updating before but if there is an error, there will be inconsistencies
     Categories
         Combine categories and ideas store action and saving data
     Profile Page
@@ -21,8 +33,8 @@ TODOS
 
 ENHANCEMENTS
     Add images to ideas
-    Sketches
-    Voice notes
+        + Sketches
+        + Voice notes
 
 FUTURE TODOS
     Integrate react-native-fbsdk on iOS

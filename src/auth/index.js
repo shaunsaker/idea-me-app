@@ -76,7 +76,7 @@ export default class Auth {
     static signInUserWithFacebook(action) {
         return new Promise(resolve => {
 
-            LoginManager.logInWithReadPermissions(['public_profile']).then(
+            LoginManager.logInWithReadPermissions(['public_profile, email_address']).then(
                 (result) => {
                     if (result.isCancelled) {
                         response.authenticated = false;

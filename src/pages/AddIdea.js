@@ -13,6 +13,7 @@ import styles from '../styles/pages/AddIdea';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
+import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import CategoriesDropdown from '../components/CategoriesDropdown';
@@ -39,7 +40,6 @@ export class AddIdea extends React.Component {
       newIdeaDescription: React.PropTypes.string,
       newIdeaCategory: React.PropTypes.string,
       newIdeaPriority: React.PropTypes.string,
-      errorMessage: React.PropTypes.string,
       ideas: React.PropTypes.array,
       uid: React.PropTypes.string,
     }
@@ -141,51 +141,34 @@ export class AddIdea extends React.Component {
   }
 
   render() {
-    const deleteIcon = this.props.newIdeaDescription && this.props.newIdeaDescription.length ?
-      <View style={styles.deleteContainer}>
-        <TouchableOpacity
-          style={styles.delete}
-          onPress={() => this.updateNewIdeaDescription('')}>
-          <MaterialIcon
-            name='close'
-            color={styleConstants.grey}
-            size={18} />
-        </TouchableOpacity>
-      </View>
-      :
-      null;
-
-    const errorMessage = this.props.errorMessage ?
-      <Growl text={this.props.errorMessage} />
-      :
-      null;
+    const enableContinueButton = true; //TODO
 
     return (
       <View
         style={styles.container}>
+
         <Header
-          backgroundColor={styleConstants.primary}
           text='Add an Idea'
-          textSize={28}
-          textColor={styleConstants.white}
-          textStyle={styleConstants.ranga}
+          headerShadow={false}
           rightIconName='close'
-          rightIconColor={styleConstants.white}
           rightIconSize={28}
           handleRightIconPress={() => Actions.pop()} />
-        <View style={styles.inputArea}>
-          <Input
-            placeholder="What's the big idea?"
-            value={this.props.newIdeaTitle}
-            handleChange={this.updateNewIdeaTitle}
-            autoFocus={true} />
-          <View style={styles.textAreaContainer}>
+
+        <View style={styles.inputContainer}>
+          <InputContainer>
+            <Input
+              placeholder="What's the big idea?"
+              value={this.props.newIdeaTitle}
+              handleChange={this.updateNewIdeaTitle}
+              autoFocus={true} />
             <TextArea
               placeholder="Enter your description here..."
               value={this.props.newIdeaDescription}
               handleChange={this.updateNewIdeaDescription} />
-            {deleteIcon}
-          </View>
+          </InputContainer>
+        </View>
+
+        <View style={styles.dropdownsContainer}>
           <CategoriesDropdown
             displayText='Select a Category'
             value={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
@@ -198,13 +181,20 @@ export class AddIdea extends React.Component {
             value={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
             handleSelect={this.selectPriority}
             values={this.props.priorities}
-            pushContent={true}
-            height={105} />
+            pushContent={true} />
         </View>
-        <Button
-          iconName='check'
-          handlePress={this.addNewIdea} />
-        {errorMessage}
+
+        <View style={styles.buttonContainer}>
+          <Button
+            iconName='check'
+            text='Continue'
+            styleMode='primaryReversed'
+            handlePress={this.addNewIdea}
+            disabled={!enableContinueButton} />
+        </View>
+
+        <Growl />
+
       </View >
     );
   }
@@ -219,7 +209,6 @@ function mapStateToProps(state) {
     newIdeaDescription: state.main.userData.newIdea.description,
     newIdeaCategory: state.main.userData.categories[state.main.userData.newIdea.categoryId],
     newIdeaPriority: state.main.appData.priorities[state.main.userData.newIdea.priorityId],
-    errorMessage: state.main.userAuth.userAuthErrorMessage,
     ideas: state.main.userData.ideas,
     uid: state.main.userAuth.uid
   });

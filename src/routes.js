@@ -42,18 +42,19 @@ const Scenes = Actions.create(
 			initial={false} />
 		<Scene
 			key='addIdea'
-			component={AddIdea} />
+			component={AddIdea}
+			initial={true} />
 		<Scene
 			key='editIdea'
 			component={EditIdea} />
 		<Scene
 			key='categories'
 			component={Categories} 
-						initial={false} />
+			initial={false} />
 		<Scene
 			key='addCategory'
 			component={AddCategory}
-			initial={true} />
+			initial={false} />
 	</Scene>
 )
 

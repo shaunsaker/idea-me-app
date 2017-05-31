@@ -30,6 +30,7 @@ export default function (state = initialState, action) {
             new_state.userAuth.authenticated = true;
             new_state.userAuth.uid = action.uid;
             new_state.userAuth.welcomeRedirect = false;
+            new_state.app.loading = false;
             return new_state;
 
         case 'SIGN_OUT_USER':
