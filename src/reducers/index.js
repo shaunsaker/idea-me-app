@@ -22,14 +22,14 @@ export default function (state = initialState, action) {
 
         case 'REDIRECT_USER_TO_WELCOME':
             new_state = cloneObject(state);
-            new_state.userAuth.welcomeRedirect = true;
+            new_state.userAuth.redirectToWelcomePage = true;
             return new_state;
 
         case 'SIGN_IN_USER':
             new_state = cloneObject(state);
             new_state.userAuth.authenticated = true;
             new_state.userAuth.uid = action.uid;
-            new_state.userAuth.welcomeRedirect = false;
+            new_state.userAuth.redirectToWelcomePage = false;
             new_state.app.loading = false;
             return new_state;
 
@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             new_state.userAuth.authenticated = false;
             new_state.userAuth.uid = null;
-            new_state.userAuth.welcomeRedirect = true;
+            new_state.userAuth.redirectToWelcomePage = true;
             return new_state;
 
         /* APP */

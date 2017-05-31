@@ -18,12 +18,12 @@ export class Splash extends React.Component {
             authenticated: React.PropTypes.bool,
             uid: React.PropTypes.string,
             apiLoadSuccess: React.PropTypes.bool,
-            welcomeRedirect: React.PropTypes.bool
+            redirectToWelcomePage: React.PropTypes.bool
         };
     }
 
     componentDidMount() {
-        if (this.props.welcomeRedirect) {
+        if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
         else if (this.props.authenticated && this.props.apiLoadSuccess) {
@@ -58,7 +58,7 @@ export class Splash extends React.Component {
         else if (this.props.authenticated && this.props.apiLoadSuccess) {
             Actions.ideas();
         }
-        else if (this.props.welcomeRedirect) {
+        else if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
     }
@@ -80,7 +80,7 @@ function mapStateToProps(state) {
         authenticated: state.main.userAuth.authenticated,
         uid: state.main.userAuth.uid,
         apiLoadSuccess: state.main.api.apiLoadSuccess,
-        welcomeRedirect: state.main.userAuth.welcomeRedirect
+        redirectToWelcomePage: state.main.userAuth.redirectToWelcomePage
     };
 }
 

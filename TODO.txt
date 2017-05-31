@@ -1,5 +1,4 @@
 TODOS
-    welcomeRedirect => redirectToWelcomePage
     apiLoad/SaveSuccess => apiSuccess
     Check growl and loader imports and use
     Welcome page still has loading as internal state
