@@ -10,7 +10,7 @@ const initialState = {
         userSuccessMessage: null,
         errorType: null,
         retryAction: null,
-        loading: null,
+        loading: false, // needs to be false on initial app load
     },
     api: {
         apiSuccess: null,

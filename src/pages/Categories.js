@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/pages/Categories';
 import styleConstants from '../styles/styleConstants';
 
+import Page from '../components/Page';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import DeleteButton from '../components/DeleteButton';
@@ -75,7 +76,7 @@ export class Categories extends React.Component {
 
     this.saveUserData();
   }
-  
+
   saveUserData() {
     this.props.dispatch({
       type: 'saveUserCategories',
@@ -146,8 +147,8 @@ export class Categories extends React.Component {
       <View />;
 
     return (
-      <View
-        style={styles.container}>
+      <Page
+        backgroundColor={styleConstants.lightGrey} >
 
         <Header
           text='Categories'
@@ -159,13 +160,11 @@ export class Categories extends React.Component {
 
         {categories}
 
-        <View style={styles.buttonContainer}>
-          <Button
-            iconName='add'
-            text='Add Category'
-            styleMode='primary'
-            handlePress={() => Actions.addCategory()} />
-        </View>
+        <Button
+          iconName='add'
+          text='Add Category'
+          styleMode='primary'
+          handlePress={() => Actions.addCategory()} />
 
         {actionModal}
 
@@ -173,7 +172,7 @@ export class Categories extends React.Component {
 
         <Loader />
 
-      </View >
+      </Page >
     );
   }
 }

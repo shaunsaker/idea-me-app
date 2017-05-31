@@ -21,12 +21,12 @@ const Scenes = Actions.create(
 		<Scene
 			key='splash'
 			component={Splash}
-			initial={false} />
+			initial={true} />
 		<Scene
 			key='welcome'
 			component={Welcome}
 			type={ActionConst.RESET}
-			initial={true} />
+			initial={false} />
 		<Scene
 			key='signInOptions'
 			component={SignInOptions}
@@ -50,7 +50,8 @@ const Scenes = Actions.create(
 			initial={false} />
 		<Scene
 			key='editIdea'
-			component={EditIdea} />
+			component={EditIdea}
+			initial={false} />
 		<Scene
 			key='categories'
 			component={Categories} 

@@ -1,19 +1,14 @@
 import React from "react";
-import {
-  View,
-  TouchableOpacity,
-} from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 import utilities from '../utilities';
 
-import styles from '../styles/pages/AddIdea';
 import styleConstants from '../styles/styleConstants';
 
-import Header from '../components/Header';
+import Page from '../components/Page';
 import InputContainer from '../components/InputContainer';
+import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import CategoriesDropdown from '../components/CategoriesDropdown';
@@ -132,8 +127,8 @@ export class AddIdea extends React.Component {
     const enableContinueButton = true; //TODO
 
     return (
-      <View
-        style={styles.container}>
+      <Page
+        backgroundColor={styleConstants.primary}>
 
         <Header
           text='Add an Idea'
@@ -142,21 +137,16 @@ export class AddIdea extends React.Component {
           rightIconSize={28}
           handleRightIconPress={() => Actions.pop()} />
 
-        <View style={styles.inputContainer}>
-          <InputContainer>
-            <Input
-              placeholder="What's the big idea?"
-              value={this.props.newIdeaTitle}
-              handleChange={this.updateNewIdeaTitle}
-              autoFocus={true} />
-            <TextArea
-              placeholder="Enter your description here..."
-              value={this.props.newIdeaDescription}
-              handleChange={this.updateNewIdeaDescription} />
-          </InputContainer>
-        </View>
-
-        <View style={styles.dropdownsContainer}>
+        <InputContainer>
+          <Input
+            placeholder="WHAT'S THE BIG IDEA?"
+            value={this.props.newIdeaTitle}
+            handleChange={this.updateNewIdeaTitle}
+            autoFocus={true} />
+          <TextArea
+            placeholder="ENTER YOUR DESCRIPTION HERE"
+            value={this.props.newIdeaDescription}
+            handleChange={this.updateNewIdeaDescription} />
           <CategoriesDropdown
             displayText='Select a Category'
             value={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
@@ -170,20 +160,18 @@ export class AddIdea extends React.Component {
             handleSelect={this.selectPriority}
             values={this.props.priorities}
             pushContent={true} />
-        </View>
+        </InputContainer>
 
-        <View style={styles.buttonContainer}>
-          <Button
-            iconName='check'
-            text='Continue'
-            styleMode='primaryReversed'
-            handlePress={this.addNewIdea}
-            disabled={!enableContinueButton} />
-        </View>
+        <Button
+          iconName='check'
+          text='Continue'
+          styleMode='primaryReversed'
+          handlePress={this.addNewIdea}
+          disabled={!enableContinueButton} />
 
         <Growl />
 
-      </View >
+      </Page >
     );
   }
 }

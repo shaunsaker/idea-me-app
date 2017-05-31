@@ -1,8 +1,6 @@
 import React from "react";
 import {
   View,
-  Text,
-  TouchableOpacity,
   FlatList,
   Share,
 } from "react-native";
@@ -13,9 +11,9 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import utilities from '../utilities';
 
-import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
+import Page from '../components/Page';
 import Header from '../components/Header';
 import Logo from '../components/Logo';
 import Count from '../components/Count';
@@ -151,7 +149,6 @@ export class Ideas extends React.Component {
           keyExtractor={item => 'idea' + item.title}
           data={currentCategoryIdeas}
           renderItem={this.renderItem}
-          style={styles.ideasContainer}
           horizontal={true}
           pagingEnabled={true} />
     }
@@ -173,7 +170,9 @@ export class Ideas extends React.Component {
         unit='ideas' />;
 
     return (
-      <View style={styles.container}>
+      <Page
+        backgroundColor={styleConstants.lightGrey}
+        removeBottomPadding={true}>
 
         <Header
           headerShadow={true}
@@ -181,15 +180,13 @@ export class Ideas extends React.Component {
           textLeft={true}
           rightComponent={count} />
 
-        <View style={styles.buttonContainer}>
-          <CategoriesDropdown
-            currentValue={this.state.currentCategory}
-            values={this.props.categories}
-            handleSelect={this.selectCategory}
-            editItem={true}
-            showAllOption={true}
-            pushContent={false} />
-        </View>
+        <CategoriesDropdown
+          currentValue={this.state.currentCategory}
+          values={this.props.categories}
+          handleSelect={this.selectCategory}
+          editItem={true}
+          showAllOption={true}
+          pushContent={false} />
 
         {ideas}
 
@@ -202,7 +199,7 @@ export class Ideas extends React.Component {
 
         <Loader positionStyle={{bottom: 50}}/>
 
-      </View >
+      </Page >
     );
   }
 }

@@ -1,4 +1,5 @@
 TODOS
+    Cant see loader on Splash
     Input has styleModes for white bg too
     Keyboard aware scrollview as page component with other page props
         Remove inputContainer component

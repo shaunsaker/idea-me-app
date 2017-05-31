@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     infoContainer: {
         paddingRight: 96,
         paddingLeft: 16,
+        paddingBottom: 16,
     },
     infoTextTitle: {
         fontSize: 32,

@@ -1,17 +1,12 @@
 import React from "react";
-import {
-    View,
-    TouchableOpacity,
-} from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 import utilities from '../utilities';
 
-import styles from '../styles/pages/EditIdea';
 import styleConstants from '../styles/styleConstants';
 
+import Page from '../components/Page';
 import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
@@ -155,44 +150,30 @@ export class EditIdea extends React.Component {
     }
 
     render() {
-        const deleteIcon = this.props.editIdeaDescription && this.props.editIdeaDescription.length ?
-            <View style={styles.deleteContainer}>
-                <TouchableOpacity
-                    style={styles.delete}
-                    onPress={() => this.updateEditIdeaDescription('')}>
-                    <MaterialIcon
-                        name='close'
-                        color={styleConstants.grey}
-                        size={18} />
-                </TouchableOpacity>
-            </View>
-            :
-            null;
+        const enableContinueButton = true; //TODO
 
         return (
-            <View
-                style={styles.container}>
+            <Page
+                backgroundColor={styleConstants.primary}>
+
                 <Header
-                    backgroundColor={styleConstants.primary}
                     text='Edit Idea'
-                    textSize={28}
-                    textColor={styleConstants.white}
-                    textStyle={styleConstants.ranga}
+                    headerShadow={false}
                     rightIconName='close'
-                    rightIconColor={styleConstants.white}
                     rightIconSize={28}
                     handleRightIconPress={() => Actions.pop()} />
-                <View style={styles.inputArea}>
+
+                <InputContainer>
                     <Input
+                        placeholder="WHAT'S THE BIG IDEA?"
                         value={this.props.editIdeaTitle ? this.props.editIdeaTitle : this.props.initialIdeaTitle}
-                        handleChange={this.updateEditIdeaTitle} />
-                    <View style={styles.textAreaContainer}>
-                        <TextArea
-                            value={this.props.editIdeaDescription !== null ? this.props.editIdeaDescription : this.props.initialIdeaDescription}
-                            placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...'}
-                            handleChange={this.updateEditIdeaDescription} />
-                        {deleteIcon}
-                    </View>
+                        handleChange={this.updateEditIdeaTitle}
+                        autoFocus={true} />
+                    <TextArea
+                        value={this.props.editIdeaDescription !== null ? this.props.editIdeaDescription : this.props.initialIdeaDescription}
+                        placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...'}
+                        handleChange={this.updateEditIdeaDescription} />
+
                     <CategoriesDropdown
                         displayText='Select a Category'
                         value={this.props.editIdeaCategory !== null ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
@@ -206,11 +187,16 @@ export class EditIdea extends React.Component {
                         handleSelect={this.selectPriority}
                         values={this.props.priorities}
                         pushContent={true} />
-                </View>
+                </InputContainer>
+
                 <Button
                     iconName='check'
-                    handlePress={this.updateIdea} />
-            </View >
+                    text='Continue'
+                    styleMode='primaryReversed'
+                    handlePress={this.updateIdea}
+                    disabled={!enableContinueButton} />
+
+            </Page >
         );
     }
 }

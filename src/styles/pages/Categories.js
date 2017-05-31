@@ -7,11 +7,6 @@ import styleConstants from '../styleConstants';
 const windowWidth = Dimensions.get('window').width; 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,        
-        alignItems: 'center',
-        backgroundColor: styleConstants.lightGrey,
-    },
     categoriesWrapper: {
         flex: 1,
         paddingVertical: 16,
@@ -57,9 +52,6 @@ const styles = StyleSheet.create({
             height: 2,
             width: 0
         },
-    },
-    buttonContainer: {
-        paddingBottom: 16
     },
 });
 

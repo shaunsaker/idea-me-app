@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  View,
-} from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
 import utilities from '../utilities';
 
-import styles from '../styles/pages/AddCategory';
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';

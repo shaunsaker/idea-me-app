@@ -26,10 +26,14 @@ const styles = StyleSheet.create({
     },
     inputLabelText: {
         fontSize: 18,
-        color: styleConstants.lightGrey
+        color: styleConstants.secondary
     },
     togglePasswordContainer: {
 
+    },
+    togglePasswordText: {
+        fontSize: 18,
+        color: styleConstants.white
     },
     input: {
         fontSize: 18,
@@ -83,7 +87,7 @@ export default class Input extends React.Component {
             <TouchableOpacity
                 onPress={this.togglePassword}
                 style={styles.togglePasswordContainer}>
-                <Text style={[styles.inputLabelText, styleConstants.robotoCondensed]}>
+                <Text style={[styles.togglePasswordText, styleConstants.robotoCondensed]}>
                     {this.state.hidePassword ? 'Show' : 'Hide'}
                 </Text>
             </TouchableOpacity>
