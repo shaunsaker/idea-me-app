@@ -1,8 +1,6 @@
 TODOS
 
 PAGES
-    Splash
-        Get current location on app load
     Welcome
         Welcome page still has loading as internal state
     SignInWithEmail

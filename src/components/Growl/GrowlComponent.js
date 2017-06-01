@@ -71,7 +71,7 @@ export default class GrowlComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        this.height = 80;
+        this.height = 81;
 
         this.state = {
             bottom: new Animated.Value((this.height) * -1),
