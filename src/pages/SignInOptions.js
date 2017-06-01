@@ -40,15 +40,19 @@ export class SignInOptions extends React.Component {
             type: 'TOGGLE_LOADING'
         });
 
-        // Do stuff
+        this.props.dispatch({
+            type: 'signInUserWithFacebook'
+        });
     }
 
     signInUserWithGoogle() {
         this.props.dispatch({
             type: 'TOGGLE_LOADING'
         });
-
-        // Do stuff
+        
+        // this.props.dispatch({
+        //     type: 'signInUserWithGoogle'
+        // });
     }
 
     signInUserWithEmail() {
@@ -60,14 +64,16 @@ export class SignInOptions extends React.Component {
             type: 'TOGGLE_LOADING'
         });
 
-        // Do stuff
+        this.props.dispatch({
+            type: 'signInUserAnonymously'
+        });
     }
 
     render() {
         return (
             <Page
                 backgroundColor={styleConstants.primary}
-                fauxFooter={true} >
+                fauxFooter={true}>
 
                 <Header 
                     headerShadow={false}
@@ -105,6 +111,8 @@ export class SignInOptions extends React.Component {
 				<Growl />
 
 				<Loader />
+
+                <View />
                 
             </Page>
         );
@@ -113,7 +121,6 @@ export class SignInOptions extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        errorMessage: state.main.auth.authErrorMessage,
         authenticated: state.main.auth.authenticated,
     });
 }

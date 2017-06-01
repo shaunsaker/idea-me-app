@@ -75,7 +75,7 @@ export function* sendPasswordResetEmail(action) {
 	else {
 		yield put({
 			type: 'AUTH_ERROR',
-			message: 'There was an error resetting your password. Please try again' // TODO: Check this
+			message: 'There was an error resetting your password. Please try again'
 		});
 	}
 }
@@ -122,7 +122,7 @@ export function* signInUserWithFacebook(action) {
 // 	else {
 // 		yield put({
 // 			type: 'AUTH_ERROR',
-// 			message: signInGoogleResponse.message // TODO: Check this
+// 			message: signInGoogleResponse.message.errorMessage
 // 		});
 // 	}
 // }
@@ -144,7 +144,7 @@ export function* signInUserAnonymously() {
 	else {
 		yield put({
 			type: 'AUTH_ERROR',
-			message: signInUserAnonymouslyResponse.message // TODO: Check this
+			message: signInUserAnonymouslyResponse.message.errorMessage
 		});
 	}
 }
@@ -162,7 +162,7 @@ export function* signOutUser() {
 	else {
 		yield put({
 			type: 'AUTH_ERROR',
-			message: signOutUserResponse.message // TODO: Check this
+			message: signOutUserResponse.message.errorMessage
 		});
 	}
 }

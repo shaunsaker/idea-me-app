@@ -6,7 +6,7 @@ import { getUserAuth } from './auth';
 import { signInUserWithEmail } from './auth';
 import { sendPasswordResetEmail } from './auth';
 import { signInUserWithFacebook } from './auth';
-// import { signInUserWithGoogle } from './auth';
+import { signInUserWithGoogle } from './auth';
 import { signInUserAnonymously } from './auth';
 import { signOutUser } from './auth';
 

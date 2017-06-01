@@ -6,6 +6,8 @@ PAGES
     SignInWithEmail
     ForgotPassword
     SignInOptions
+        Facebook login not working
+        Google signin not setup
     Ideas
         Categories dropdown styling
         Share and delete idea not working + Styling
@@ -17,6 +19,7 @@ PAGES
         Combine categories and ideas store action and saving data
     Add Category
 
+    Link inputs to errorType to reset password ?
     Don't use styleSheet where you don't need it, ie. if you are only applying one style)
     Should we update store after api calls? Currently updating before but if there is an error, there will be inconsistencies
     Profile Page

@@ -17,12 +17,15 @@ export default Page = (props) => {
         {
             backgroundColor: props.backgroundColor ? props.backgroundColor : '#ffffff',
             justifyContent: props.justifyContent ? props.justifyContent : 'space-between',
-            paddingBottom: props.fauxFooter ? 50 : props.removeBottomPadding ? 0 : 16,
+            paddingBottom: props.removeBottomPadding ? 0 : props.fauxFooter ? 0 : 16,
         }
+
+    const fauxFooter = props.fauxFooter ? <View style={{height: 50}} /> : null;
 
     return (
         <View style={[styles.container, pageStyles]} >
             {props.children}
+            {fauxFooter}
         </View>
     );
 }

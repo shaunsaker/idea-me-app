@@ -25,7 +25,7 @@ export class ForgotPassword extends React.Component {
     static get propTypes() {
         return {
             userEmail: React.PropTypes.string,
-            authenticated: React.PropTypes.bool,
+            errorType: React.PropTypes.string,
         };
     }
 
