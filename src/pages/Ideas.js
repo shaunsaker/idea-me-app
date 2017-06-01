@@ -171,7 +171,7 @@ export class Ideas extends React.Component {
 
     return (
       <Page
-        backgroundColor={styleConstants.lightGrey}
+        backgroundColor={styleConstants.primary}
         removeBottomPadding={true}>
 
         <Header

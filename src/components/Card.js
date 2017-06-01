@@ -20,11 +20,9 @@ const styles = StyleSheet.create({
         width: window.width - 32,
         flex: 1,
         backgroundColor: styleConstants.white,
-        borderRadius: 16,
         borderWidth: 1,
         borderColor: styleConstants.white,
         margin: 16,
-        marginTop: 8,
         paddingVertical: 16,
         paddingHorizontal: 8,
         elevation: 5,
@@ -42,9 +40,11 @@ const styles = StyleSheet.create({
         right: 0,
     },
     labelsContainer: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
         margin: 8,
+        alignItems: 'flex-end',
     },
     categoryLabel: {
         flex: 1,

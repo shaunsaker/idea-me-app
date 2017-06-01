@@ -148,7 +148,7 @@ export class Categories extends React.Component {
 
     return (
       <Page
-        backgroundColor={styleConstants.lightGrey} >
+        backgroundColor={styleConstants.primary} >
 
         <Header
           text='Categories'
@@ -162,7 +162,7 @@ export class Categories extends React.Component {
 
         <Button
           iconName='add'
-          text='Add Category'
+          text='Add New Category'
           styleMode='primary'
           handlePress={() => Actions.addCategory()} />
 

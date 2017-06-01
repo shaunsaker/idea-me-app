@@ -185,7 +185,7 @@ export default class CategoriesDropdown extends React.Component {
         return (
             <View style={styles.dropdownContainer}>
                 <Button
-                    styleMode='primary'
+                    styleMode='transparent'
                     handlePress={this.toggleExpanded}
                     text={this.props.currentValue ? this.props.currentValue : this.props.displayText} />
                 {itemList}

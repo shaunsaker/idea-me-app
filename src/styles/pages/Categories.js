@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     categoriesWrapper: {
         flex: 1,
         paddingVertical: 16,
-        marginBottom: 16,
     },
     categoriesContainer: {
         paddingBottom: 16,
