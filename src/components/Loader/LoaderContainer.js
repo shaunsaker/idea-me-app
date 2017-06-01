@@ -21,7 +21,7 @@ export class Loader extends React.Component{
 			null;
 
 		return (
-			<View>	
+			<View style={{position: 'absolute', bottom: 0, left: 0, right: 0, height: 5}}>	
 				{loader}
 			</View>
 		);

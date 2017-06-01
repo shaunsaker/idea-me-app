@@ -39,7 +39,9 @@ export class Welcome extends React.Component {
             type: 'TOGGLE_LOADING'
         });
 
-        // Do stuff
+        this.props.dispatch({
+            type: 'signInUserWithFacebook'
+        });
     }
 
     render() {

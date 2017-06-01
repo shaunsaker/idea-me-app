@@ -2,9 +2,8 @@ TODOS
 
 PAGES
     Welcome
-        Welcome page still has loading as internal state
+        Facebook login not working
     SignInWithEmail
-        Reset error on signInwithemail and forgot password is specifically for user errors (no need to check errorTYpe
     ForgotPassword
     SignInOptions
     Ideas
