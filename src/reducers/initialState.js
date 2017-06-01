@@ -6,8 +6,8 @@ const initialState = {
         authErrorMessage: null,
     },
     app: {
-        userErrorMessage: null,
         userSuccessMessage: null,
+        userErrorMessage: null,
         errorType: null,
         retryAction: null,
         loading: false, // needs to be false on initial app load
@@ -17,12 +17,13 @@ const initialState = {
         apiErrorMessage: null,
     },
     storage: {
-        storageErrorMessage: null,
         storageSuccess: null,
+        storageErrorMessage: null,
     },
     geolocation: {
-        geolocationErrorMessage: null,
+		currentLocation: null,
         geolocationSuccess: null,
+        geolocationErrorMessage: null,
     },
     appData: {
         priorities: [

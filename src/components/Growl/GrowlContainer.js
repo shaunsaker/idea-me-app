@@ -105,9 +105,7 @@ export class Growl extends React.Component {
                 handleReset={this.resetError} />
             :
             null;
-
-        console.log(successMessage);
-
+            
         return (
             <View style={styles.container}>
                 {errorGrowl}

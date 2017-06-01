@@ -9,7 +9,7 @@ import initialState from './initialState';
 export default function (state = initialState, action) {
     switch (action.type) {
 
-        /* USER AUTH */
+        /* AUTH */
         case 'UPDATE_USER_EMAIL':
             new_state = cloneObject(state);
             new_state.user.email = action.value;
@@ -39,6 +39,16 @@ export default function (state = initialState, action) {
             new_state.user.uid = null;
             new_state.auth.redirectToWelcomePage = true;
             return new_state;
+        
+		/*
+			GEOLOCATION
+		*/
+		case 'SET_CURRENT_LOCATION':
+			new_state = cloneObject(state);
+			new_state.geolocation.currentLocation = action.userLocation;
+			new_state.geolocation.geolocationSuccess = true;
+			new_state.app.loading = false; // for profile page
+			return new_state;
 
         /* APP */
         case 'TOGGLE_LOADING':

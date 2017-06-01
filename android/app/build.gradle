@@ -83,7 +83,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion "25.0.0"
 
     defaultConfig {
@@ -126,9 +126,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-geocoder')
     compile project(':react-native-fbsdk')
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile project(':react-native-firestack')
     compile project(':react-native-vector-icons')
     compile(project(':react-native-firestack')){ exclude group: 'com.google.android.gms' }
     compile fileTree(dir: "libs", include: ["*.jar"])

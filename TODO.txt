@@ -37,6 +37,7 @@ PAGES
     Email after signup detailing what app does and howtos
     iOS click page to blur input (no hide keyboard button)
     Test all errors
+    Add analytics
 
 ENHANCEMENTS
     Add images to ideas

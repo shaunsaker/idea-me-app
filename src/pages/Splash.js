@@ -15,8 +15,11 @@ export class Splash extends React.Component {
     static get propTypes() {
         return {
             authenticated: React.PropTypes.bool,
-            uid: React.PropTypes.string,
+			geolocationSuccess: React.PropTypes.bool,
+            geolocationErrorMessage: React.PropTypes.string,
             apiSuccess: React.PropTypes.bool,
+
+            uid: React.PropTypes.string,
             redirectToWelcomePage: React.PropTypes.bool
         };
     }
@@ -25,16 +28,12 @@ export class Splash extends React.Component {
         if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
-        else if (this.props.authenticated && this.props.apiSuccess) {
-            Actions.ideas({ type: ActionConst.RESET });
+        else if (this.props.authenticated && this.props.geolocationSuccess && this.props.apiSuccess) {
+            Actions.ideas();
         }
 
         // When a user is signed in and reloads app
         else if (this.props.authenticated && !this.props.apiSuccess) {
-            this.props.dispatch({
-                type: 'TOGGLE_LOADING'
-            });
-
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid
@@ -42,32 +41,38 @@ export class Splash extends React.Component {
         }
         else if (!this.props.authenticated) {
             this.props.dispatch({
-                type: 'TOGGLE_LOADING'
-            });
-
-            this.props.dispatch({
                 type: 'getUserAuth'
             });
+
+			// Get the user's current location
+			if (!this.props.geolocationSuccess) {
+				this.props.dispatch({
+					type: 'getUserLocation'
+				});
+			}
         }
     }
 
     componentDidUpdate() {
 
-        // When a user signs in
-        if (this.props.authenticated && !this.props.apiSuccess) {
-            setTimeout(() => {
-                this.props.dispatch({
-                    type: 'loadUserData',
-                    uid: this.props.uid
-                });
-            }, 1500);
-        }
-        else if (this.props.authenticated && this.props.apiSuccess) {
-            Actions.ideas();
-        }
-        else if (this.props.redirectToWelcomePage) {
-            Actions.welcome();
-        }
+		// Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
+			// Wait for geolocationSuccess before doing so
+		if ((this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.redirectToWelcomePage) {
+			Actions.welcome();
+		}
+
+		// If we're authenticated and we have location and have not yet loaded data, load/save data to db
+		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && !this.props.apiSuccess) {
+			this.props.dispatch({
+				type: 'loadUserData',
+                uid: this.props.uid,
+			});
+		}
+
+		// If we're authenticated, we have geolocation and we have the userData, redirect to the home page
+		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.apiSuccess) {
+			Actions.ideas(); 
+		}
     }
 
     render() {
@@ -76,10 +81,14 @@ export class Splash extends React.Component {
                 backgroundColor={styleConstants.primary}
                 justifyContent='center'
                 removeBottomPadding >
+
                 <StatusBar backgroundColor={styleConstants.transPrimary} />
+
                 <GlowLoader
                     size={64} />
+
                 <Growl />
+
             </Page>
         );
     }
@@ -88,8 +97,11 @@ export class Splash extends React.Component {
 function mapStateToProps(state) {
     return {
         authenticated: state.main.auth.authenticated,
-        uid: state.main.user.uid,
         apiSuccess: state.main.api.apiSuccess,
+        geolocationSuccess: state.main.geolocation.geolocationSuccess,
+        geolocationErrorMessage: state.main.geolocation.geolocationErrorMessage,
+
+        uid: state.main.user.uid,
         redirectToWelcomePage: state.main.auth.redirectToWelcomePage
     };
 }
