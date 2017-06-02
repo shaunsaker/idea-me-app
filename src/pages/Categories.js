@@ -26,13 +26,13 @@ export class Categories extends React.Component {
 
     this.deleteCategory = this.deleteCategory.bind(this);
     this.saveUserData = this.saveUserData.bind(this);
-    this.toggleActionModal = this.toggleActionModal.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.renderItem = this.renderItem.bind(this);
 
     this.state = {
-      showActionModal: false,
-      actionModalTitle: null,
-      actionModalIndex: null,
+      showModal: false,
+      modalTitle: null,
+      modalIndex: null,
     }
   }
 
@@ -46,7 +46,7 @@ export class Categories extends React.Component {
   }
 
   deleteCategory(index) {
-    this.toggleActionModal();
+    this.toggleModal();
 
     let newCategories = this.props.categories;
     newCategories.splice(index, 1);
@@ -102,14 +102,14 @@ export class Categories extends React.Component {
   toggleActionModal(index, title) {
     if ((index || index === 0) && title) {
       this.setState({
-        showActionModal: !this.state.showActionModal,
-        actionModalTitle: title,
-        actionModalIndex: index
+        showModal: !this.state.showModal,
+        modalTitle: title,
+        modalIndex: index
       });
     }
     else {
       this.setState({
-        showActionModal: !this.state.showActionModal,
+        showModal: !this.state.showModal,
       });
     }
   }
@@ -123,7 +123,7 @@ export class Categories extends React.Component {
         </View>
         <View style={styles.deleteButtonContainer}>
           <DeleteButton
-            handlePress={() => this.toggleActionModal(index, item)} />
+            handlePress={() => this.toggleModal(index, item)} />
         </View>
       </View>
     );
@@ -138,11 +138,11 @@ export class Categories extends React.Component {
         style={styles.categoriesWrapper}
         contentContainerStyle={styles.categoriesContainer} />;
 
-    const actionModal = this.state.showActionModal ?
+    const modal = this.state.showModal ?
       <ActionModal
-        text={'Are you sure you want to delete ' + this.state.actionModalTitle + '?'}
-        handleLeftIconPress={() => this.deleteCategory(this.state.actionModalIndex)}
-        handleRightIconPress={this.toggleActionModal} />
+        title={'Are you sure you want to delete ' + this.state.modalTitle + '?'}
+        handleLeftIconPress={() => this.deleteCategory(this.state.modalIndex)}
+        handleRightIconPress={this.toggleModal} />
       :
       <View />;
 
@@ -166,7 +166,7 @@ export class Categories extends React.Component {
           styleMode='primary'
           handlePress={() => Actions.addCategory()} />
 
-        {actionModal}
+        {modal}
 
         <Growl />
 

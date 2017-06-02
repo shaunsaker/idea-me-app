@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
+import ActionModal from '../components/ActionModal';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -21,6 +22,11 @@ export class SignInOptions extends React.Component {
         this.signInUserWithGoogle = this.signInUserWithGoogle.bind(this);
         this.signInUserWithEmail = this.signInUserWithEmail.bind(this);
         this.signInUserAnonymously = this.signInUserAnonymously.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+
+        this.state = {
+            showModal:false
+        }
     }
 
     static get propTypes() {
@@ -60,6 +66,8 @@ export class SignInOptions extends React.Component {
     }
 
     signInUserAnonymously() {
+        this.toggleModal();
+
         this.props.dispatch({
             type: 'TOGGLE_LOADING'
         });
@@ -69,7 +77,22 @@ export class SignInOptions extends React.Component {
         });
     }
 
+    toggleModal() {
+        this.setState({
+            showModal: !this.state.showModal
+        });
+    }
+
     render() {
+        const modal = this.state.showModal ?
+            <ActionModal 
+                title="Are you sure you want to continue anonymously?"
+                subtitle="You won't be able to save any of your ideas."
+                handleLeftIconPress={this.signInUserAnonymously}
+                handleRightIconPress={this.toggleModal} />
+            :
+            null;
+
         return (
             <Page
                 backgroundColor={styleConstants.primary}
@@ -103,10 +126,12 @@ export class SignInOptions extends React.Component {
                     <Button
                         materialCommunityIcon
                         iconName='face-profile'
-                        handlePress={this.signInUserAnonymously} 
+                        handlePress={this.toggleModal} 
                         text='Continue Anonymously'
                         styleMode='transparent' />
                 </View>
+
+                {modal}
 
 				<Growl />
 

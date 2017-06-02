@@ -10,13 +10,18 @@ PAGES
         Google signin not setup
     Ideas
         Categories dropdown styling
-        Share and delete idea not working + Styling
+            Right aligned edit text
+            Only show applicable categories?
+        Share and delete idea not working + Styling        
     Add Idea
         Input should offer textArea functionality (ie. height increases)
         CategoryDropdown and PriorityDropdowns should be separate?
+        Validation
     Edit Idea
+        Validation
     Categories
         Combine categories and ideas store action and saving data
+        No border radius
     Add Category
 
     Link inputs to errorType to reset password ?
@@ -24,6 +29,7 @@ PAGES
     Should we update store after api calls? Currently updating before but if there is an error, there will be inconsistencies
     Profile Page
         And all the trimmings
+        Card
         Menu
             About App
             Report a Bug
@@ -38,17 +44,8 @@ PAGES
     iOS click page to blur input (no hide keyboard button)
     Test all errors
     Add analytics
-
-ENHANCEMENTS
-    Add images to ideas
-        + Sketches
-        + Voice notes
-
-FUTURE TODOS
     Integrate react-native-fbsdk on iOS
     Integrate react-native-google-signin on iOS
-
-LESS IMPORTANT TODOS
     Optimise code
         Remove unnecessary
         Check proptypes
@@ -62,3 +59,17 @@ LESS IMPORTANT TODOS
     iOS testing
     Various Android zIndex issues to be fixed in RN 0.45.0
     While the glow loader is loading it will be cool to be able to tap it and make it grow
+
+SAVED FOR LATER
+    
+
+ENHANCEMENTS
+    Ideas
+        Add notes to ideas
+        + Sketches
+        + Voice notes
+        + Speech to Text
+    Settings
+        List view ideas in home page as option
+    Bypass loadUserData initially
+    First time use Tooltips showing what to do next

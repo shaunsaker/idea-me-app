@@ -33,12 +33,12 @@ export class Ideas extends React.Component {
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
     this.saveIdeas = this.saveIdeas.bind(this);
-    this.toggleActionModal = this.toggleActionModal.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
 
     this.state = {
       currentCategory: 'All',
-      showActionModal: false,
-      actionModalTitle: null,
+      showModal: false,
+      modalTitle: null,
     }
   }
 
@@ -89,7 +89,7 @@ export class Ideas extends React.Component {
   }
 
   deleteIdea(title) {
-    this.toggleActionModal();
+    this.toggleModal();
 
     this.props.dispatch({
       type: 'DELETE_IDEA',
@@ -110,13 +110,13 @@ export class Ideas extends React.Component {
   toggleActionModal(title) {
     if (title) {
       this.setState({
-        showActionModal: !this.state.showActionModal,
-        actionModalTitle: title,
+        showModal: !this.state.showModal,
+        modalTitle: title,
       });
     }
     else {
       this.setState({
-        showActionModal: !this.state.showActionModal,
+        showModal: !this.state.showModal,
       });
     }
   }
@@ -130,7 +130,7 @@ export class Ideas extends React.Component {
         priorities={this.props.priorities}
         handleEdit={this.editIdea}
         handleShare={this.shareIdea}
-        handleDelete={this.toggleActionModal} />
+        handleDelete={this.toggleModal} />
     );
   }
 
@@ -153,13 +153,11 @@ export class Ideas extends React.Component {
           pagingEnabled={true} />
     }
 
-    const actionModal = this.state.showActionModal ?
+    const modal = this.state.showModal ?
       <ActionModal
-        text={'Are you sure you want to delete ' + this.state.actionModalTitle + '?'}
-        leftIconName='check'
-        handleLeftIconPress={() => this.deleteIdea(this.state.actionModalTitle)}
-        rightIconName='close'
-        handleRightIconPress={this.toggleActionModal} />
+        title={'Are you sure you want to delete ' + this.state.modalTitle + '?'}
+        handleLeftIconPress={() => this.deleteIdea(this.state.modalTitle)}
+        handleRightIconPress={this.toggleModal} />
       :
       null;
 
@@ -193,7 +191,7 @@ export class Ideas extends React.Component {
         <TabBar
           currentPage='ideas' />
 
-        {actionModal}
+        {modal}
 
         <Growl />
 

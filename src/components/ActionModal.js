@@ -34,15 +34,21 @@ const styles = StyleSheet.create({
     modal: {
         width: window.width - 32,
         backgroundColor: styleConstants.white,
-        borderRadius: 16
     },
     textContainer: {
-        padding: 16,
+        paddingTop: 16,
+        paddingBottom: 8,
     },
-    text: {
+    titleText: {
         fontSize: 18,
         color: styleConstants.primary,
         textAlign: 'center',
+    },
+    subtitleText: {
+        fontSize: 16,
+        color: styleConstants.grey,
+        textAlign: 'center',
+        marginTop: 8,
     },
     buttonsContainer: {
         flexDirection: 'row',
@@ -65,18 +71,25 @@ export default class ActionModal extends React.Component {
 
     static get propTypes() {
         return {
-            text: React.PropTypes.string,
+            title: React.PropTypes.string.isRequired,
+            subtitle: React.PropTypes.string,
             handleLeftIconPress: React.PropTypes.func,
             handleRightIconPress: React.PropTypes.func,
         };
     }
 
     render() {
+        const subtitle = this.props.subtitle ?
+            <Text style={[styles.subtitleText, styleConstants.robotoCondensed]}>{this.props.subtitle}</Text>
+            :
+            null;
+
         return (
             <View style={styles.container}>
                 <View style={styles.modal}>
                     <View style={styles.textContainer}>
-                        <Text style={[styles.text, styleConstants.robotoCondensed]}>{this.props.text}</Text>
+                        <Text style={[styles.titleText, styleConstants.robotoCondensed]}>{this.props.title}</Text>
+                        {subtitle}
                     </View>
                     <View style={styles.buttonsContainer}>
                         <TouchableOpacity
