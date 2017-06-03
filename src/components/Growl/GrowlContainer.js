@@ -129,7 +129,7 @@ function mapStateToProps(state) {
 
         ideas: state.main.userData.ideas,
         categories: state.main.userData.categories,
-        uid: state.main.user.uid,
+        uid: state.main.auth.uid,
     }
 }
 

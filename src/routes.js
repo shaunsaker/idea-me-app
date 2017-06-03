@@ -15,17 +15,18 @@ import AddIdea from './pages/AddIdea';
 import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
 import AddCategory from './pages/AddCategory';
+import Profile from './pages/Profile';
 
 const Scenes = Actions.create(
 	<Scene key='root' hideNavBar={true}>
 		<Scene
 			key='splash'
 			component={Splash}
-			initial={true} />
+			initial={false} />
 		<Scene
 			key='welcome'
 			component={Welcome}
-			type={ActionConst.RESET}
+			type={ActionConst.REPLACE}
 			initial={false} />
 		<Scene
 			key='signInOptions'
@@ -60,6 +61,11 @@ const Scenes = Actions.create(
 			key='addCategory'
 			component={AddCategory}
 			initial={false} />
+		<Scene
+			key='profile'
+			component={Profile}
+			initial={true}
+			type={ActionConst.REPLACE} />
 	</Scene>
 )
 

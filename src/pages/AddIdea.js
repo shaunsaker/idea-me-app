@@ -153,7 +153,7 @@ function mapStateToProps(state) {
     ideas: state.main.userData.ideas,
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
-    uid: state.main.user.uid
+    uid: state.main.auth.uid
   });
 }
 

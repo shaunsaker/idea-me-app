@@ -4,6 +4,9 @@ const initialState = {
         anonymous: null,
         redirectToWelcomePage: null,
         authErrorMessage: null,
+
+        uid: null,
+        password: null,
     },
     app: {
         userSuccessMessage: null,
@@ -33,12 +36,13 @@ const initialState = {
             'Low'
         ],
     },
-    user: {
-        uid: null,
-        email: null,
-        password: null,
-    },
     userData: {
+        profile: {
+            userName: null,
+            email: null,
+            location: null,
+            photoUrl: null,
+        },
         categories: [
             'App', 'Test', 'Test2', 'Test3', 'Test4', 'App1', 'Test5', 'Test6', 'Test37', 'Test48', 
         ],

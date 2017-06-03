@@ -12,12 +12,12 @@ export default function (state = initialState, action) {
         /* AUTH */
         case 'UPDATE_USER_EMAIL':
             new_state = cloneObject(state);
-            new_state.user.email = action.value;
+            new_state.userData.profile.email = action.value;
             return new_state;
 
         case 'UPDATE_USER_PASSWORD':
             new_state = cloneObject(state);
-            new_state.user.password = action.value;
+            new_state.auth.password = action.value;
             return new_state;
 
         case 'REDIRECT_USER_TO_WELCOME':
@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
         case 'SIGN_IN_USER':
             new_state = cloneObject(state);
             new_state.auth.authenticated = true;
-            new_state.user.uid = action.uid;
+            new_state.auth.uid = action.uid;
             new_state.auth.redirectToWelcomePage = false;
             new_state.app.loading = false;
             return new_state;
@@ -36,7 +36,7 @@ export default function (state = initialState, action) {
         case 'SIGN_OUT_USER':
             new_state = cloneObject(state);
             new_state.auth.authenticated = false;
-            new_state.user.uid = null;
+            new_state.auth.uid = null;
             new_state.auth.redirectToWelcomePage = true;
             return new_state;
         

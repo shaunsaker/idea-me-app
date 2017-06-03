@@ -53,7 +53,7 @@ export default class TabBar extends React.Component {
                         style={styles.icon} />
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    onPress={() => null} // TODO: Add profile page
+                    onPress={() => Actions.profile()} 
                     style={styles.iconContainer}>
                     <Icon
                         name='face'

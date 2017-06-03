@@ -209,7 +209,7 @@ function mapStateToProps(state) {
     ideas: state.main.userData.ideas,
     currentCategory: state.main.appData.currentCategory,
     categories: state.main.userData.categories,
-    uid: state.main.user.uid,
+    uid: state.main.auth.uid,
   });
 }
 

@@ -17,19 +17,19 @@ export class ForgotPassword extends React.Component {
     constructor(props) {
         super(props);
 
-        this.updateUserEmail = this.updateUserEmail.bind(this);
+        this.updateemail = this.updateemail.bind(this);
         this.sendPasswordResetEmail = this.sendPasswordResetEmail.bind(this);
         this.resetError = this.resetError.bind(this);
     }
 
     static get propTypes() {
         return {
-            userEmail: React.PropTypes.string,
+            email: React.PropTypes.string,
             errorType: React.PropTypes.string,
         };
     }
 
-    updateUserEmail(text) {
+    updateemail(text) {
         this.props.dispatch({
             type: 'UPDATE_USER_EMAIL',
             value: text
@@ -37,14 +37,14 @@ export class ForgotPassword extends React.Component {
     }
 
     sendPasswordResetEmail() {
-        if (this.props.userEmail) {
+        if (this.props.email) {
             this.props.dispatch({
                 type: 'TOGGLE_LOADING'
             });
 
             this.props.dispatch({
                 type: 'sendPasswordResetEmail',
-                email: this.props.userEmail
+                email: this.props.email
             });
         }
         else {
@@ -62,7 +62,7 @@ export class ForgotPassword extends React.Component {
     }
 
     render() {
-        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0; 
+        const enableContinueButton = this.props.email && this.props.email.indexOf('@') > 0; 
 
         return (
             <Page
@@ -81,8 +81,8 @@ export class ForgotPassword extends React.Component {
 
                     <Input
                         placeholder="EMAIL ADDRESS"
-                        value={this.props.userEmail}
-                        handleChange={this.updateUserEmail}
+                        value={this.props.email}
+                        handleChange={this.updateemail}
                         handleFocus={this.resetError}
                         keyboardType='email-address' />
                 </InputContainer>
@@ -105,7 +105,7 @@ export class ForgotPassword extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        userEmail: state.main.user.email,
+        email: state.main.userData.profile.email,
         errorType: state.main.app.errorType,
     });
 }

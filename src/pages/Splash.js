@@ -101,7 +101,7 @@ function mapStateToProps(state) {
         geolocationSuccess: state.main.geolocation.geolocationSuccess,
         geolocationErrorMessage: state.main.geolocation.geolocationErrorMessage,
 
-        uid: state.main.user.uid,
+        uid: state.main.auth.uid,
         redirectToWelcomePage: state.main.auth.redirectToWelcomePage
     };
 }

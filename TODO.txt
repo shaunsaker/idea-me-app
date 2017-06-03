@@ -18,15 +18,12 @@ PAGES
         Save categories on delete
     Add Category
         Save categories on continue
-
-    Link inputs to errorType to reset password ?
-    Don't use styleSheet where you don't need it, ie. if you are only applying one style)
     Profile Page
-        And all the trimmings
         Card
         Menu
             About App
-            Report a Bug
+            Settings
+            Feedback
             Logout
     Save user data on sign up
     SAVE ALL DATA, THEN UPDATE THE STORE
@@ -64,5 +61,5 @@ ENHANCEMENTS
         + Speech to Text
     Settings
         List view ideas in home page as option
-    Bypass loadUserData initially
+    Bypass loadUserData initially?
     First time use Tooltips showing what to do next

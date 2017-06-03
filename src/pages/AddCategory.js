@@ -99,7 +99,7 @@ export class AddCategory extends React.Component {
 function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
-    uid: state.main.user.uid,
+    uid: state.main.auth.uid,
   });
 }
 
