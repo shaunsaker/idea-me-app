@@ -26,11 +26,28 @@ const initialState = {
         geolocationErrorMessage: null,
     },
     appData: {
+        currentCategory: 'All',
         priorities: [
             'High',
             'Medium',
             'Low'
         ],
+        newCategory: {
+            value: null,
+        },
+        newIdea: {
+            title: null,
+            description: null,
+            categoryId: null,
+            priorityId: null,
+        },
+        editIdea: {
+            title: null,
+            description: null,
+            categoryId: null,
+            priorityId: null,
+            index: null,
+        },
     },
     user: {
         uid: null,
@@ -49,22 +66,6 @@ const initialState = {
                 priorityId: 0,
             }
         ],
-        newIdea: {
-            title: null,
-            description: null,
-            categoryId: null,
-            priorityId: null,
-        },
-        newCategory: {
-            value: null,
-        },
-        editIdea: {
-            title: null,
-            description: null,
-            categoryId: null,
-            priorityId: null,
-            index: null,
-        }
     },
 }
 

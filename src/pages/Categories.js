@@ -99,7 +99,7 @@ export class Categories extends React.Component {
     }
   }
 
-  toggleActionModal(index, title) {
+  toggleModal(index, title) {
     if ((index || index === 0) && title) {
       this.setState({
         showModal: !this.state.showModal,

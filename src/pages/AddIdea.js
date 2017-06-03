@@ -180,11 +180,11 @@ function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
-    newIdea: state.main.userData.newIdea,
-    newIdeaTitle: state.main.userData.newIdea.title,
-    newIdeaDescription: state.main.userData.newIdea.description,
-    newIdeaCategory: state.main.userData.categories[state.main.userData.newIdea.categoryId],
-    newIdeaPriority: state.main.appData.priorities[state.main.userData.newIdea.priorityId],
+    newIdea: state.main.appData.newIdea,
+    newIdeaTitle: state.main.appData.newIdea.title,
+    newIdeaDescription: state.main.appData.newIdea.description,
+    newIdeaCategory: state.main.userData.categories[state.main.appData.newIdea.categoryId],
+    newIdeaPriority: state.main.appData.priorities[state.main.appData.newIdea.priorityId],
     ideas: state.main.userData.ideas,
     uid: state.main.user.uid
   });

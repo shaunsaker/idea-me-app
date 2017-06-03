@@ -156,66 +156,71 @@ export default function (state = initialState, action) {
             return new_state;
 
         /* USER DATA */
+        case 'SELECT_CATEGORY':
+            new_state = cloneObject(state);
+            new_state.appData.currentCategory = action.value;
+            return new_state;
+
         case 'UPDATE_USER_IDEAS':
             new_state = cloneObject(state);
             new_state.userData.ideas = action.ideas;
-            new_state.userData.newIdea.title = null;
-            new_state.userData.newIdea.description = null;
-            new_state.userData.newIdea.categoryId = null;
-            new_state.userData.newIdea.priorityId = null;
+            new_state.appData.newIdea.title = null;
+            new_state.appData.newIdea.description = null;
+            new_state.appData.newIdea.categoryId = null;
+            new_state.appData.newIdea.priorityId = null;
             new_state.app.loading = true;
             return new_state;
 
         case 'UPDATE_USER_CATEGORIES':
             new_state = cloneObject(state);
             new_state.userData.categories = action.categories;
-            new_state.userData.newCategory.value = null;
+            new_state.appData.newCategory.value = null;
             new_state.app.loading = true;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_TITLE':
             new_state = cloneObject(state);
-            new_state.userData.newIdea.title = action.value;
+            new_state.appData.newIdea.title = action.value;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_DESCRIPTION':
             new_state = cloneObject(state);
-            new_state.userData.newIdea.description = action.value;
+            new_state.appData.newIdea.description = action.value;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_CATEGORY':
             new_state = cloneObject(state);
-            new_state.userData.newIdea.categoryId = action.value;
+            new_state.appData.newIdea.categoryId = action.value;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_PRIORITY':
             new_state = cloneObject(state);
-            new_state.userData.newIdea.priorityId = action.value;
+            new_state.appData.newIdea.priorityId = action.value;
             return new_state;
 
         case 'UPDATE_EDIT_IDEA_TITLE':
             new_state = cloneObject(state);
-            new_state.userData.editIdea.title = action.value;
+            new_state.appData.editIdea.title = action.value;
             return new_state;
 
         case 'UPDATE_EDIT_IDEA_DESCRIPTION':
             new_state = cloneObject(state);
-            new_state.userData.editIdea.description = action.value;
+            new_state.appData.editIdea.description = action.value;
             return new_state;
 
         case 'UPDATE_EDIT_IDEA_CATEGORY':
             new_state = cloneObject(state);
-            new_state.userData.editIdea.categoryId = action.value;
+            new_state.appData.editIdea.categoryId = action.value;
             return new_state;
 
         case 'UPDATE_EDIT_IDEA_PRIORITY':
             new_state = cloneObject(state);
-            new_state.userData.editIdea.priorityId = action.value;
+            new_state.appData.editIdea.priorityId = action.value;
             return new_state;
 
         case 'SET_EDIT_IDEA_ID':
             new_state = cloneObject(state);
-            new_state.userData.editIdea.id = action.id;
+            new_state.appData.editIdea.id = action.id;
             return new_state;
 
         case 'DELETE_IDEA':
@@ -233,13 +238,13 @@ export default function (state = initialState, action) {
 
         case 'UPDATE_NEW_CATEGORY_VALUE':
             new_state = cloneObject(state);
-            new_state.userData.newCategory.value = action.value;
+            new_state.appData.newCategory.value = action.value;
             return new_state;
 
         case 'ADD_NEW_CATEGORY':
             new_state = cloneObject(state);
             new_state.userData.categories.push(utilities.firstCharToUppercase(new_state.newCategory.value.trim()));
-            new_state.userData.newCategory = {
+            new_state.appData.newCategory = {
                 value: null,
             }
             return new_state;

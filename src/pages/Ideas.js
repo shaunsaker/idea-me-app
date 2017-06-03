@@ -36,7 +36,6 @@ export class Ideas extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
 
     this.state = {
-      currentCategory: 'All',
       showModal: false,
       modalTitle: null,
     }
@@ -44,10 +43,11 @@ export class Ideas extends React.Component {
 
   static get propTypes() {
     return {
+      currentCategory: React.PropTypes.string,
+      priorities: React.PropTypes.array,
       categories: React.PropTypes.array,
       ideas: React.PropTypes.array,
       uid: React.PropTypes.string,
-      apiSuccess: React.PropTypes.bool,
     };
   }
 
@@ -61,13 +61,15 @@ export class Ideas extends React.Component {
     else if (eventId === 100) {
 
       // All Categories
-      this.setState({
-        currentCategory: 'All'
+      this.props.dispatch({
+        type: 'SELECT_CATEGORY',
+        value: 'All'
       });
     }
     else {
-      this.setState({
-        currentCategory: this.props.categories[eventId]
+      this.props.dispatch({
+        type: 'SELECT_CATEGORY',
+        value: this.props.categories[eventId]
       });
     }
   }
@@ -107,7 +109,7 @@ export class Ideas extends React.Component {
     // });
   }
 
-  toggleActionModal(title) {
+  toggleModal(title) {
     if (title) {
       this.setState({
         showModal: !this.state.showModal,
@@ -125,7 +127,7 @@ export class Ideas extends React.Component {
     return (
       <Card
         item={item}
-        currentCategory={this.state.currentCategory}
+        currentCategory={this.props.currentCategory}
         categories={this.props.categories}
         priorities={this.props.priorities}
         handleEdit={this.editIdea}
@@ -139,7 +141,7 @@ export class Ideas extends React.Component {
     let ideas = <View style={{ flex: 1 }}></View>; // empty state
 
     if (this.props.ideas) {
-      const currentCategoryIdeas = utilities.sortIdeas(this.props.ideas, this.props.categories, this.state.currentCategory);
+      const currentCategoryIdeas = utilities.sortIdeas(this.props.ideas, this.props.categories, this.props.currentCategory);
 
       // Need this for the Count component
       counter = currentCategoryIdeas.length;
@@ -179,7 +181,7 @@ export class Ideas extends React.Component {
           rightComponent={count} />
 
         <CategoriesDropdown
-          currentValue={this.state.currentCategory}
+          currentValue={this.props.currentCategory}
           values={this.props.categories}
           handleSelect={this.selectCategory}
           editItem={true}
@@ -204,9 +206,10 @@ export class Ideas extends React.Component {
 
 function mapStateToProps(state) {
   return ({
-    categories: state.main.userData.categories,
+    currentCategory: state.main.appData.currentCategory,
     priorities: state.main.appData.priorities,
     ideas: state.main.userData.ideas,
+    categories: state.main.userData.categories,
     uid: state.main.user.uid,
   });
 }

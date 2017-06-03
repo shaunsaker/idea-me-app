@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
     dropdownItemsWrapper: {
         position: 'absolute',
-        top: 48,
+        top: 64,
         left: 16,
         width: window.width -64,
         elevation: 5,
@@ -36,31 +36,51 @@ const styles = StyleSheet.create({
         },
         backgroundColor: styleConstants.white,
         maxHeight: 200,
-        zIndex: 1
+        zIndex: 1,
+        marginBottom: -16 // remove ghost margin
     },
     dropdownHeader: {        
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',        
-        backgroundColor: styleConstants.grey,
-        paddingVertical: 6,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        backgroundColor: styleConstants.primary,
+        borderWidth: 1,
+        borderColor: styleConstants.white,
+    },
+    dropdownHeaderIcon: {
+        marginRight: 12,
+        color: styleConstants.white,
     },
     dropdownHeaderText: {
         color: styleConstants.white,
         fontSize: 18,
         textAlign: 'center',
     },
-    dropdownHeaderIcon: {
-        marginRight: 12,
-    },
     dropdownItem: {        
         flexDirection: 'row',
         justifyContent: 'center',
-        paddingVertical: 6,
+        paddingVertical: 8,
         width: window.width -64,
     },
     dropdownItemText: {
         color: styleConstants.primary,
+        fontSize: 18,
+        textAlign: 'center',
+    },
+    dropdownFooter: {        
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',        
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        backgroundColor: styleConstants.primary,
+        borderWidth: 1,
+        borderColor: styleConstants.white,
+    },
+    dropdownFooterText: {
+        color: styleConstants.white,
         fontSize: 18,
         textAlign: 'center',
     },
@@ -104,7 +124,7 @@ export default class CategoriesDropdown extends React.Component {
                 this.state.height,
                 {
                     toValue: itemCount * 36, // 36 is the height of each item
-                    duration: 250,
+                    duration: 500,
                     easing: Easing.gentle
                 }
             ).start();
@@ -118,7 +138,7 @@ export default class CategoriesDropdown extends React.Component {
                 this.state.height,
                 {
                     toValue: 0,
-                    duration: 250,
+                    duration: 500,
                     easing: Easing.gentle
                 }
             ).start();
@@ -161,10 +181,10 @@ export default class CategoriesDropdown extends React.Component {
 
         const footer = 
             <TouchableOpacity
-                style={styles.dropdownItem}
+                style={styles.dropdownFooter}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
                 <Text
-                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                    style={[styles.dropdownFooterText, styleConstants.robotoCondensed]}>
                     All
                 </Text>
             </TouchableOpacity>;
