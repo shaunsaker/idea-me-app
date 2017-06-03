@@ -64,55 +64,40 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class ActionModal extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+export default ActionModal = (props) => {
+    const subtitle = props.subtitle ?
+        <Text style={[styles.subtitleText, styleConstants.robotoCondensed]}>{props.subtitle}</Text>
+        :
+        null;
 
-    static get propTypes() {
-        return {
-            title: React.PropTypes.string.isRequired,
-            subtitle: React.PropTypes.string,
-            handleLeftIconPress: React.PropTypes.func,
-            handleRightIconPress: React.PropTypes.func,
-        };
-    }
-
-    render() {
-        const subtitle = this.props.subtitle ?
-            <Text style={[styles.subtitleText, styleConstants.robotoCondensed]}>{this.props.subtitle}</Text>
-            :
-            null;
-
-        return (
-            <View style={styles.container}>
-                <View style={styles.modal}>
-                    <View style={styles.textContainer}>
-                        <Text style={[styles.titleText, styleConstants.robotoCondensed]}>{this.props.title}</Text>
-                        {subtitle}
-                    </View>
-                    <View style={styles.buttonsContainer}>
-                        <TouchableOpacity
-                            style={styles.iconContainer}
-                            onPress={this.props.handleLeftIconPress} >
-                            <MaterialIcon
-                                name='check'
-                                color={styleConstants.danger}
-                                size={28}
-                                style={styles.icon} />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.iconContainer}
-                            onPress={this.props.handleRightIconPress} >
-                            <MaterialIcon
-                                name='close'
-                                color={styleConstants.primary}
-                                size={28}
-                                style={styles.icon} />
-                        </TouchableOpacity>
-                    </View>
+    return (
+        <View style={styles.container}>
+            <View style={styles.modal}>
+                <View style={styles.textContainer}>
+                    <Text style={[styles.titleText, styleConstants.robotoCondensed]}>{props.title}</Text>
+                    {subtitle}
+                </View>
+                <View style={styles.buttonsContainer}>
+                    <TouchableOpacity
+                        style={styles.iconContainer}
+                        onPress={props.handleLeftIconPress} >
+                        <MaterialIcon
+                            name='check'
+                            color={styleConstants.danger}
+                            size={28}
+                            style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.iconContainer}
+                        onPress={props.handleRightIconPress} >
+                        <MaterialIcon
+                            name='close'
+                            color={styleConstants.primary}
+                            size={28}
+                            style={styles.icon} />
+                    </TouchableOpacity>
                 </View>
             </View>
-        );
-    }
+        </View>
+    );
 }
