@@ -1,7 +1,8 @@
 const utilities = {};
 
 utilities.firstCharToUppercase = function (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    const trimmedString = string.trim();
+    return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);
 };
 
 utilities.sortIdeas = function (ideas, currentCategory) {
@@ -72,6 +73,37 @@ utilities.isCategoryAlreadyPresent = function(newCategory, categories) {
     });
 
     return categoryPresent;
+}
+
+utilities.createNewIdea = function(newIdeaTitle, newIdeaDescription, newIdeaCategory, newIdeaPriority) {
+    const title = utilities.firstCharToUppercase(newIdeaTitle);
+    let description;
+
+    if (newIdeaDescription) {
+      description = utilities.firstCharToUppercase(newIdeaDescription);
+    }
+
+    return {
+        title,
+        description,
+        category: newIdeaCategory,
+        priority: newIdeaPriority
+    }
+}
+
+utilities.addNewIdea = function(newIdea, ideas) {
+    let newIdeas = ideas;
+
+    if (newIdeas) {
+      newIdeas.unshift(newIdea);
+    }
+
+    // If this is the user's first idea, create a new array containing the idea
+    else {
+      newIdeas = [newIdea];
+    }
+
+    return newIdeas;    
 }
 
 export default utilities;

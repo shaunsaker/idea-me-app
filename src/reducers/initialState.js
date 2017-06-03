@@ -35,12 +35,6 @@ const initialState = {
         newCategory: {
             value: null,
         },
-        newIdea: {
-            title: null,
-            description: null,
-            category: null,
-            priority: null,
-        },
         editIdea: {
             title: null,
             description: null,

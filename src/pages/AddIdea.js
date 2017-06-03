@@ -1,12 +1,8 @@
 import React from "react";
-import {
-  View
-} from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
 import utilities from '../utilities';
-
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
@@ -22,6 +18,13 @@ export class AddIdea extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      newIdeaTitle: null,
+      newIdeaDescription: null,
+      newIdeaCategory: null,
+      newIdeaPriority: null,
+    }
+
     this.updateNewIdeaTitle = this.updateNewIdeaTitle.bind(this);
     this.updateNewIdeaDescription = this.updateNewIdeaDescription.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
@@ -34,26 +37,19 @@ export class AddIdea extends React.Component {
       ideas: React.PropTypes.array,
       categories: React.PropTypes.array.isRequired,
       priorities: React.PropTypes.array.isRequired,
-      newIdea: React.PropTypes.object,
-      newIdeaTitle: React.PropTypes.string,
-      newIdeaDescription: React.PropTypes.string,
-      newIdeaCategory: React.PropTypes.string,
-      newIdeaPriority: React.PropTypes.string,
       uid: React.PropTypes.string,
     }
   }
 
-  updateNewIdeaTitle(text) {
-    this.props.dispatch({
-      type: 'UPDATE_NEW_IDEA_TITLE',
-      value: text
+  updateNewIdeaTitle(value) {
+    this.setState({
+      newIdeaTitle: value
     });
   }
 
-  updateNewIdeaDescription(text) {
-    this.props.dispatch({
-      type: 'UPDATE_NEW_IDEA_DESCRIPTION',
-      value: text
+  updateNewIdeaDescription(value) {
+    this.setState({
+      newIdeaDescription: value
     });
   }
 
@@ -63,47 +59,21 @@ export class AddIdea extends React.Component {
       Actions.categories();
     }
     else {
-      this.props.dispatch({
-        type: 'UPDATE_NEW_IDEA_CATEGORY',
-        value,
+      this.setState({
+        newIdeaCategory: value
       });
     }
   }
 
   selectPriority(value) {
-    this.props.dispatch({
-      type: 'UPDATE_NEW_IDEA_PRIORITY',
-      value: value,
+    this.setState({
+      newIdeaPriority: value
     });
   }
 
   addNewIdea() {
-    let ideas = this.props.ideas;
-    let newIdeaTitle = this.props.newIdeaTitle;
-    let newIdeaDescription = this.props.newIdeaDescription;
-
-    newIdeaTitle = utilities.firstCharToUppercase(newIdeaTitle.trim());
-
-    if (newIdeaDescription) {
-      newIdeaDescription = utilities.firstCharToUppercase(newIdeaDescription.trim());
-    }
-
-    if (ideas) {
-      ideas.unshift({
-        title: newIdeaTitle,
-        description: newIdeaDescription,
-        category: this.props.newIdeaCategory,
-        priority: this.props.newIdeaPriority
-      });
-    }
-    else {
-      ideas = [{
-        title: newIdeaTitle,
-        description: newIdeaDescription,
-        category: this.props.newIdeaCategory,
-        priority: this.props.newIdeaPriority
-      }];
-    }
+    const newIdea = utilities.createNewIdea(this.state.newIdeaTitle, this.state.newIdeaDescription, this.state.newIdeaCategory, this.state.newIdeaPriority);
+    const ideas = utilities.addNewIdea(newIdea, this.props.ideas);
 
     this.props.dispatch({
       type: 'UPDATE_USER_IDEAS',
@@ -120,7 +90,7 @@ export class AddIdea extends React.Component {
   }
 
   render() {
-    const enableContinueButton = true; //TODO
+    const enableContinueButton = this.state.newIdeaTitle;
 
     return (
       <Page
@@ -136,23 +106,23 @@ export class AddIdea extends React.Component {
         <InputContainer>
           <Input
             placeholder="WHAT'S THE BIG IDEA?"
-            value={this.props.newIdeaTitle}
+            value={this.state.newIdeaTitle}
             handleChange={this.updateNewIdeaTitle} />
           <Input
             placeholder="ENTER YOUR DESCRIPTION HERE"
-            value={this.props.newIdeaDescription}
+            value={this.state.newIdeaDescription}
             handleChange={this.updateNewIdeaDescription}
             multiline={true} />
           <DropdownButton
             displayText='Select a Category'
-            currentValue={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
+            currentValue={this.state.newIdeaCategory}
             values={this.props.categories}
             handleSelect={this.selectCategory}
             headerValue='Edit Categories'
             pushContent={true} />
           <DropdownButton
             displayText='Select a Priority'
-            currentValue={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
+            currentValue={this.state.newIdeaPriority}
             values={this.props.priorities}
             handleSelect={this.selectPriority}
             pushContent={true} />
@@ -177,11 +147,6 @@ function mapStateToProps(state) {
     ideas: state.main.userData.ideas,
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
-    newIdea: state.main.appData.newIdea,
-    newIdeaTitle: state.main.appData.newIdea.title,
-    newIdeaDescription: state.main.appData.newIdea.description,
-    newIdeaCategory: state.main.appData.newIdea.category,
-    newIdeaPriority: state.main.appData.newIdea.priority,
     uid: state.main.user.uid
   });
 }

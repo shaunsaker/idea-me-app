@@ -11,10 +11,7 @@ PAGES
     Ideas
         Save ideas on delete
     Add Idea
-        Input should offer textArea functionality (ie. height increases)   
-        Temp values as page state     
-        Validation
-        Idea title should not already be present
+        Save ideas on continue
     Edit Idea
         Temp values as page state
         Validation

@@ -164,10 +164,6 @@ export default function (state = initialState, action) {
         case 'UPDATE_USER_IDEAS':
             new_state = cloneObject(state);
             new_state.userData.ideas = action.ideas;
-            new_state.appData.newIdea.title = null;
-            new_state.appData.newIdea.description = null;
-            new_state.appData.newIdea.category = null;
-            new_state.appData.newIdea.priority = null;
             new_state.app.loading = true;
             return new_state;
 
