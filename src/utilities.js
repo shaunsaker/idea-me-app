@@ -152,7 +152,7 @@ utilities.isCategoryPresent = function (newCategory, categories) {
 
 utilities.addCategory = function(category, categories) {
     let newCategories = categories;
-    const newCategory = utilities.firstCharToUppercase(category.trim());
+    const newCategory = utilities.firstCharToUppercase(category);
 
     if (newCategories) {
         const categoryPresent = utilities.isCategoryPresent(newCategory, categories);

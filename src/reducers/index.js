@@ -186,11 +186,6 @@ export default function (state = initialState, action) {
             new_state.userData.ideas = newIdeas;
             return new_state;
 
-        case 'ADD_NEW_CATEGORY':
-            new_state = cloneObject(state);
-            new_state.userData.categories.push(utilities.firstCharToUppercase(new_state.newCategory.value.trim()));
-            return new_state;
-
         case 'DELETE_CATEGORY':
             new_state = cloneObject(state);
             new_state.userData.categories.splice(action.index, 1);

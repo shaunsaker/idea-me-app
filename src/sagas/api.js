@@ -51,44 +51,53 @@ export function* loadUserData(action) {
 
     if (loadUserDataResponse) {
         if (loadUserDataResponse.success) {
-
-            // Firebase is returning objects instead of arrays (?!) so we may need to pre-process this data
-            const preProcessed = loadUserDataResponse.message;
-            let processed = {
+            const preProcessedData = loadUserDataResponse.message;
+            let processedData = {
                 ideas: [],
                 categories: []
             };
 
-            if (preProcessed.categories) {
-                if (typeof(preProcessed.categories === 'object')) {
-                    for (let prop in preProcessed.categories) {
-                        if (preProcessed.categories.hasOwnProperty(prop)) {
-                            processed.categories.push(preProcessed.categories[prop]);
+            // Firebase is returning objects instead of arrays (?!) so we need to pre-process this data
+            if (preProcessedData) {
+                if (preProcessedData.categories) {
+                    if (typeof(preProcessedData.categories === 'object')) {
+                        for (let prop in preProcessedData.categories) {
+                            if (preProcessedData.categories.hasOwnProperty(prop)) {
+                                processedData.categories.push(preProcessedData.categories[prop]);
+                            }
                         }
+                    }   
+                    else {
+                        processedData.categories.push(preProcessedData.categories)
                     }
-                }   
-                else {
-                    processed.categories.push(preProcessed.categories)
                 }
+
+                if (preProcessedData.ideas) {
+                    if (typeof(preProcessedData.ideas === 'object')) {
+                        for (let prop in preProcessedData.ideas) {
+                            if (preProcessedData.ideas.hasOwnProperty(prop)) {
+                                processedData.ideas.push(preProcessedData.ideas[prop]);
+                            }
+                        }
+                    }   
+                    else {
+                        processedData.ideas.push(preProcessedData.ideas)
+                    }
+                }           
+
+                yield put({
+                    type: 'API_LOAD_SUCCESS',
+                    data: processedData
+                });
             }
 
-            if (preProcessed.ideas) {
-                if (typeof(preProcessed.ideas === 'object')) {
-                    for (let prop in preProcessed.ideas) {
-                        if (preProcessed.ideas.hasOwnProperty(prop)) {
-                            processed.ideas.push(preProcessed.ideas[prop]);
-                        }
-                    }
-                }   
-                else {
-                    processed.ideas.push(preProcessed.ideas)
-                }
+            // Else the user has no data, so just send an empty object
+            else {
+                yield put({
+                    type: 'API_LOAD_SUCCESS',
+                    data: processedData
+                });
             }
-
-            yield put({
-                type: 'API_LOAD_SUCCESS',
-                data: processed
-            });
         }
         else {
             yield put({

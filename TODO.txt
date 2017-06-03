@@ -19,8 +19,6 @@ PAGES
     Add Category
         Save categories on continue
 
-    VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
-    SAVE ALL DATA, THEN UPDATE THE STORE
     Link inputs to errorType to reset password ?
     Don't use styleSheet where you don't need it, ie. if you are only applying one style)
     Profile Page
@@ -31,6 +29,7 @@ PAGES
             Report a Bug
             Logout
     Save user data on sign up
+    SAVE ALL DATA, THEN UPDATE THE STORE
     Custom icons
     Sound when idea added
     Prepopulate idea on signup
