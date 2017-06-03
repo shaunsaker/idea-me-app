@@ -186,8 +186,7 @@ export class Ideas extends React.Component {
           values={this.props.categories}
           handleSelect={this.selectCategory}
           headerValue='Edit Categories'
-          footerValue='All Categories'
-          pushContent={false} />
+          footerValue='All Categories' />
 
         {ideas}
 

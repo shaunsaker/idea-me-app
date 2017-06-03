@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 64,
         left: 16,
-        width: window.width -64,
+        width: window.width - 64,
         elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
@@ -35,9 +35,8 @@ const styles = StyleSheet.create({
             width: 0
         },
         backgroundColor: styleConstants.white,
-        maxHeight: 200,
         zIndex: 1,
-        marginBottom: -16 // remove ghost margin
+        marginTop: 16,
     },
     dropdownHeader: {        
         flexDirection: 'row',
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         paddingVertical: 8,
-        width: window.width -64,
+        width: window.width - 64,        
     },
     dropdownItemText: {
         color: styleConstants.primary,
@@ -95,6 +94,9 @@ export default class DropdownButton extends React.Component {
             height: new Animated.Value(0)
         }
 
+        this.maxHeight = 200;
+        this.itemHeight = 42;
+
         this.toggleExpanded = this.toggleExpanded.bind(this);
         this.renderItem = this.renderItem.bind(this);
     }
@@ -113,10 +115,10 @@ export default class DropdownButton extends React.Component {
 
     toggleExpanded() {
 
-        // We need to check how many items we have so that we can render a perfect height (up to 200)
+        // We need to check how many items we have so that we can render a perfect height
         const itemCount = (this.props.headerValue ? 1 : 0) + (this.props.footerValue ? 1 : 0) + this.props.values.length;
-        let dropdownHeight = itemCount * 36;
-        dropdownHeight = dropdownHeight < 200 ? dropdownHeight : 200; // if we ever need to indicate that the view is scrollable, this is a good flag to use
+        const dropdownInnerHeight = itemCount * this.itemHeight;
+        const dropdownOuterHeight = dropdownInnerHeight < this.maxHeight ? dropdownInnerHeight : this.maxHeight;
 
         // Check if the dropdown is open/closed
         if (!this.state.isExpanded) {
@@ -127,7 +129,7 @@ export default class DropdownButton extends React.Component {
             Animated.timing(
                 this.state.height,
                 {
-                    toValue: itemCount * 36, // 36 is the height of each item
+                    toValue: dropdownInnerHeight, 
                     duration: 500,
                     easing: Easing.gentle
                 }
@@ -167,10 +169,12 @@ export default class DropdownButton extends React.Component {
             {
                 position: 'relative',
                 top: 8,
-                marginTop: 0
+                marginTop: 0,
             }
             :
-            { marginTop: 16 };
+            {
+                maxHeight: this.maxHeight   
+            };
 
         const header = 
             <TouchableOpacity

@@ -1,4 +1,7 @@
 import React from "react";
+import {
+  View
+} from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
@@ -134,10 +137,9 @@ export class AddIdea extends React.Component {
           <Input
             placeholder="WHAT'S THE BIG IDEA?"
             value={this.props.newIdeaTitle}
-            handleChange={this.updateNewIdeaTitle}
-            autoFocus={true} />
-          <TextArea
-            placeholder="ENTER YOUR DESCRIPTION HERE"
+            handleChange={this.updateNewIdeaTitle} />
+          <Input
+            placeholder="ENTER YOUR DESCRIPTION HERE?"
             value={this.props.newIdeaDescription}
             handleChange={this.updateNewIdeaDescription} />
           <DropdownButton
