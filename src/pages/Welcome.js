@@ -51,10 +51,10 @@ export class Welcome extends React.Component {
                 fauxFooter={true}>
                 
                 <Header 
-                    headerShadow={false}
                     text='Log In'
                     handleTextPress={() => Actions.signInWithEmail()}
-                    textRight={true}/>
+                    textRight={true}
+                    headerShadow={false} />
 
                 <Logo />
 

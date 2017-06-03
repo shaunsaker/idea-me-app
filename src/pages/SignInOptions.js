@@ -99,10 +99,10 @@ export class SignInOptions extends React.Component {
                 fauxFooter={true}>
 
                 <Header 
-                    headerShadow={false}
                     rightIconName='close'
                     rightIconSize={28}
-                    handleRightIconPress={() => Actions.pop()}/>
+                    handleRightIconPress={() => Actions.pop()}
+                    headerShadow={false} />
 
                 <View>
                     <Button

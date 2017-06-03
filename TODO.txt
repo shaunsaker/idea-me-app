@@ -15,12 +15,12 @@ PAGES
     Edit Idea
         Save ideas on continue
     Categories
-        Modal
-        Combine categories and ideas store action and saving data
-        Refactor into component - CategoriesList
+        Save categories on delete
     Add Category
         Temp values as page state
 
+    DONT PASS THE UID TO EACH PAGE, RATHER GET IT FROM FB
+    GIVE HEADER A BACK PROP TO AUTO SET CHEV_LEFT ICON AND ACTIONS>POP
     VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
     SAVE ALL DATA, THEN UPDATE THE STORE
     Link inputs to errorType to reset password ?

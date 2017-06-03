@@ -150,4 +150,17 @@ utilities.isCategoryAlreadyPresent = function (newCategory, categories) {
     return categoryPresent;
 }
 
+utilities.deleteCategory = function(title, categories) {
+    let newCategories = categories;
+
+    for (let i = 0; i < categories.length; i++) {
+        if (categories[i] === title) {
+            newCategories.splice(i, 1);
+            break;
+        }
+    }
+
+    return newCategories;
+}
+
 export default utilities;

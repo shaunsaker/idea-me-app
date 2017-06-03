@@ -69,10 +69,10 @@ export class ForgotPassword extends React.Component {
                 backgroundColor={styleConstants.primary}>
 
                 <Header
-                    headerShadow={false}
                     leftIconName='chevron-left'
                     leftIconSize={36}
-                    handleLeftIconPress={() => Actions.pop()} />
+                    handleLeftIconPress={() => Actions.pop()}
+                    headerShadow={false} />
 
                 <InputContainer>
                     <InfoBlock

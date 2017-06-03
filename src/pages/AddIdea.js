@@ -105,10 +105,10 @@ export class AddIdea extends React.Component {
 
         <Header
           text='Add an Idea'
-          headerShadow={false}
           rightIconName='close'
           rightIconSize={28}
-          handleRightIconPress={() => Actions.pop()} />
+          handleRightIconPress={() => Actions.pop()}
+          headerShadow />
 
         <InputContainer>
           <Input

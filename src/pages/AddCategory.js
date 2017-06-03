@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
 import utilities from '../utilities';
-
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
@@ -79,18 +78,17 @@ export class AddCategory extends React.Component {
 
         <Header
           text='Add a Category'
-          headerShadow={false}
           rightIconName='close'
           rightIconSize={28}
-          handleRightIconPress={() => Actions.pop()} />
+          handleRightIconPress={() => Actions.pop()}
+          headerShadow />
 
         <InputContainer
           alignCenter={true} >
           <Input
             placeholder="CATEGORY NAME"
             value={this.props.newCategoryValue}
-            handleChange={this.updateNewCategoryValue}
-            autoFocus={true} />
+            handleChange={this.updateNewCategoryValue} />
         </InputContainer>
 
         <Button

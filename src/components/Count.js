@@ -19,29 +19,15 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class Count extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    static get propTypes() {
-        return {
-            count: React.PropTypes.number.isRequired,
-            total: React.PropTypes.number.isRequired,
-            unit: React.PropTypes.string.isRequired,
-        };
-    }
-
-    render() {
-        return (
-            <View style={styles.countContainer}>
-                <Text style={[styles.countText, styleConstants.robotoCondensed]}>
-                    {this.props.count}
-                    <Text style={styles.separator}> of </Text>
-                    {this.props.total}
-                    <Text style={styles.unit}>{' ' + this.props.unit}</Text>
-                </Text>
-            </View>
-        );
-    }
+export default Count = (props) => {
+    return (
+        <View style={styles.countContainer}>
+            <Text style={[styles.countText, styleConstants.robotoCondensed]}>
+                {props.count}
+                <Text style={styles.separator}> of </Text>
+                {props.total}
+                <Text style={styles.unit}>{' ' + props.unit}</Text>
+            </Text>
+        </View>
+    );
 }

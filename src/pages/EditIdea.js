@@ -116,10 +116,10 @@ export class EditIdea extends React.Component {
 
                 <Header
                     text='Edit Idea'
-                    headerShadow={false}
                     rightIconName='close'
                     rightIconSize={28}
-                    handleRightIconPress={() => Actions.pop()} />
+                    handleRightIconPress={() => Actions.pop()}
+                    headerShadow />
 
                 <InputContainer>
                     <Input

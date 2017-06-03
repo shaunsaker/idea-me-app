@@ -175,10 +175,10 @@ export class Ideas extends React.Component {
         removeBottomPadding={true}>
 
         <Header
-          headerShadow={true}
           textComponent={() => <Logo />}
           textLeft={true}
-          rightComponent={count} />
+          rightComponent={count} 
+          headerShadow />
 
         <DropdownButton
           displayText={null}

@@ -87,13 +87,13 @@ export class SignInWithEmail extends React.Component {
                 backgroundColor={styleConstants.primary}>
 
                 <Header
-                    headerShadow={false}
                     text='Forgot Password?'
                     handleTextPress={() => Actions.forgotPassword()}
                     textRight={true}
                     leftIconName='chevron-left'
                     leftIconSize={36}
-                    handleLeftIconPress={() => Actions.pop()} />
+                    handleLeftIconPress={() => Actions.pop()} 
+                    headerShadow={false} />
 
                 <InputContainer>
                     <InfoBlock
