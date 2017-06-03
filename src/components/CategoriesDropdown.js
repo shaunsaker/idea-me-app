@@ -101,18 +101,22 @@ export default class CategoriesDropdown extends React.Component {
 
     static get propTypes() {
         return {
-            displayText: React.PropTypes.string,
+            displayText: React.PropTypes.string, // display text but don't pass value back, eg. Select a Category
             currentValue: React.PropTypes.string,
             values: React.PropTypes.array.isRequired,
             handleSelect: React.PropTypes.func.isRequired,
-            editItem: React.PropTypes.bool,
-            showAllOption: React.PropTypes.bool,
-            pushContent: React.PropTypes.bool
+            headerValue: React.PropTypes.string,
+            footerValue: React.PropTypes.string,
+            pushContent: React.PropTypes.bool, // animate push content below
         };
     }
 
     toggleExpanded() {
-        const itemCount = (this.props.editItem ? 1 : 0) + (this.props.showAllOption ? 1 : 0) + this.props.values.length;
+
+        // We need to check how many items we have so that we can render a perfect height (up to 200)
+        const itemCount = (this.props.headerValue ? 1 : 0) + (this.props.footerValue ? 1 : 0) + this.props.values.length;
+        let dropdownHeight = itemCount * 36;
+        dropdownHeight = dropdownHeight < 200 ? dropdownHeight : 200; // if we ever need to indicate that the view is scrollable, this is a good flag to use
 
         // Check if the dropdown is open/closed
         if (!this.state.isExpanded) {
@@ -175,7 +179,7 @@ export default class CategoriesDropdown extends React.Component {
                 <Icon name='pencil' size={18} color={styleConstants.white} style={styles.dropdownHeaderIcon} />
                 <Text
                     style={[styles.dropdownHeaderText, styleConstants.robotoCondensed]}>
-                    Edit Categories
+                    {this.props.headerValue}
                 </Text>
             </TouchableOpacity>;
 
@@ -185,7 +189,7 @@ export default class CategoriesDropdown extends React.Component {
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
                 <Text
                     style={[styles.dropdownFooterText, styleConstants.robotoCondensed]}>
-                    All
+                    {this.props.footerValue}
                 </Text>
             </TouchableOpacity>;
             
@@ -197,8 +201,8 @@ export default class CategoriesDropdown extends React.Component {
                         keyExtractor={item => 'dropdown' + item}
                         data={this.props.values}
                         renderItem={this.renderItem} 
-                        ListHeaderComponent={this.props.editItem ? () => header : null}
-                        ListFooterComponent={this.props.showAllOption ? () => footer : null}/>
+                        ListHeaderComponent={this.props.headerValue ? () => header : null}
+                        ListFooterComponent={this.props.footerValue ? () => footer : null}/>
                 </View>
             </Animated.View>;
 

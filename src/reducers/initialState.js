@@ -26,7 +26,7 @@ const initialState = {
         geolocationErrorMessage: null,
     },
     appData: {
-        currentCategory: 'All',
+        currentCategory: 'All Categories',
         priorities: [
             'High',
             'Medium',

@@ -44,11 +44,11 @@ utilities.sortIdeas = function (ideas, categories, currentCategory) {
         allIdeas.push(value);
     });
 
-    // First filter all ideas to return the ideas that match this.state.category (and increment counter)
+    // First filter all ideas to return the ideas that match the current category (and increment counter)
     let currentCategoryIdeas = [];
 
     allIdeas.map((value, index) => {
-        if (currentCategory === 'All' || categories[value.categoryId] === currentCategory) {
+        if (currentCategory === 'All Categories' || categories[value.categoryId] === currentCategory) {
             currentCategoryIdeas.push(value);
         }
     });

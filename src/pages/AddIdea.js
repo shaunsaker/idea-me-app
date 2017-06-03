@@ -149,16 +149,16 @@ export class AddIdea extends React.Component {
             handleChange={this.updateNewIdeaDescription} />
           <CategoriesDropdown
             displayText='Select a Category'
-            value={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
-            handleSelect={this.selectCategory}
+            currentValue={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
             values={this.props.categories}
-            editItem={true}
+            handleSelect={this.selectCategory}
+            headerValue='Edit Categories'
             pushContent={true} />
           <CategoriesDropdown
             displayText='Select a Priority'
-            value={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
-            handleSelect={this.selectPriority}
+            currentValue={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
             values={this.props.priorities}
+            handleSelect={this.selectPriority}
             pushContent={true} />
         </InputContainer>
 

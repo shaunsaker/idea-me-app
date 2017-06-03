@@ -63,7 +63,7 @@ export class Ideas extends React.Component {
       // All Categories
       this.props.dispatch({
         type: 'SELECT_CATEGORY',
-        value: 'All'
+        value: 'All Categories'
       });
     }
     else {
@@ -138,7 +138,7 @@ export class Ideas extends React.Component {
 
   render() {
     let counter = 0;
-    let ideas = <View style={{ flex: 1 }}></View>; // empty state
+    let ideas = <View style={{ flex: 1 }}></View>; // TODO: empty state
 
     if (this.props.ideas) {
       const currentCategoryIdeas = utilities.sortIdeas(this.props.ideas, this.props.categories, this.props.currentCategory);
@@ -181,11 +181,12 @@ export class Ideas extends React.Component {
           rightComponent={count} />
 
         <CategoriesDropdown
+          displayText={null}
           currentValue={this.props.currentCategory}
           values={this.props.categories}
           handleSelect={this.selectCategory}
-          editItem={true}
-          showAllOption={true}
+          headerValue='Edit Categories'
+          footerValue='All Categories'
           pushContent={false} />
 
         {ideas}
