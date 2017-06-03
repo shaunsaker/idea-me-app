@@ -76,23 +76,22 @@ const styles = StyleSheet.create({
 });
 
 export default Card = (props) => {
-    const categoryLabel = props.currentCategory === 'All' && (props.item.categoryId === 0 || props.item.categoryId) ?
+    const categoryLabelText = props.item.category ? props.item.category : 'Uncategorised';
+    const priorityLabelText = props.item.priority ? props.item.priority + ' Priority': 'Unprioritised';
+    
+    const categoryLabel = 
         <View style={styles.categoryLabel}>
             <Text style={[styles.categoryLabelText, styleConstants.robotoCondensed]}>
-                {props.categories[props.item.categoryId]}
+                {categoryLabelText}
             </Text>
-        </View>
-        :
-        null;
+        </View>;
 
-    const priorityLabel = props.item.priorityId === 0 || props.item.priorityId ?
+    const priorityLabel =
         <View style={styles.priorityLabel}>
             <Text style={[styles.priorityLabelText, styleConstants.robotoCondensed]}>
-                {props.priorities[props.item.priorityId] + ' Priority'}
+                {priorityLabelText}
             </Text>
-        </View>
-        :
-        null;
+        </View>;
 
     return (
         <View

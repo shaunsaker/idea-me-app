@@ -4,7 +4,7 @@ utilities.firstCharToUppercase = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-utilities.sortIdeas = function (ideas, categories, currentCategory) {
+utilities.sortIdeas = function (ideas, currentCategory) {
 
     // Prioritise our ideas in order of variables below
     let noPriority = [];
@@ -14,13 +14,13 @@ utilities.sortIdeas = function (ideas, categories, currentCategory) {
     let allIdeas = [];
 
     ideas.map((value) => {
-        if (value.priorityId === 0) {
+        if (value.priority === 'High') {
             highPriority.push(value);
         }
-        else if (value.priorityId === 1) {
+        else if (value.priority === 'Medium') {
             mediumPriority.push(value);
         }
-        else if (value.priorityId === 2) {
+        else if (value.priority === 'Low') {
             lowPriority.push(value);
         }
         else {
@@ -47,16 +47,22 @@ utilities.sortIdeas = function (ideas, categories, currentCategory) {
     // First filter all ideas to return the ideas that match the current category (and increment counter)
     let currentCategoryIdeas = [];
 
-    allIdeas.map((value, index) => {
-        if (currentCategory === 'All Categories' || categories[value.categoryId] === currentCategory) {
-            currentCategoryIdeas.push(value);
-        }
-    });
+    if (currentCategory === 'All Categories') {
+        currentCategoryIdeas = allIdeas;
+    }
+    else {
+        allIdeas.map((value, index) => {
+            if (value.category === currentCategory) {
+                currentCategoryIdeas.push(value);
+            }
+        });
+    }
 
     return currentCategoryIdeas;
 }
 
 utilities.isCategoryAlreadyPresent = function(newCategory, categories) {
+    let categoryPresent = false;
 
     // Check if this category exists already
     categories.map((value) => {

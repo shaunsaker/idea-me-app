@@ -28,6 +28,7 @@ export class AddIdea extends React.Component {
 
   static get propTypes() {
     return {
+      ideas: React.PropTypes.array,
       categories: React.PropTypes.array.isRequired,
       priorities: React.PropTypes.array.isRequired,
       newIdea: React.PropTypes.object,
@@ -35,7 +36,6 @@ export class AddIdea extends React.Component {
       newIdeaDescription: React.PropTypes.string,
       newIdeaCategory: React.PropTypes.string,
       newIdeaPriority: React.PropTypes.string,
-      ideas: React.PropTypes.array,
       uid: React.PropTypes.string,
     }
   }
@@ -54,73 +54,66 @@ export class AddIdea extends React.Component {
     });
   }
 
-  selectCategory(eventId) {
+  selectCategory(value) {
 
-    // 100 is reserved for blank categories, 200 is reserved as the categories button
-    if (eventId !== 200) {
-      if (eventId !== 100) {
-        this.props.dispatch({
-          type: 'UPDATE_NEW_IDEA_CATEGORY',
-          value: eventId,
-        });
-      }
+    if (value === 'Edit Categories') {
+      Actions.categories();
     }
     else {
-      Actions.categories();
+      this.props.dispatch({
+        type: 'UPDATE_NEW_IDEA_CATEGORY',
+        value,
+      });
     }
   }
 
-  selectPriority(eventId) {
-
-    // 100 is reserved for blank priority
-    if (eventId !== 100) {
-      this.props.dispatch({
-        type: 'UPDATE_NEW_IDEA_PRIORITY',
-        value: eventId,
-      });
-    }
+  selectPriority(value) {
+    this.props.dispatch({
+      type: 'UPDATE_NEW_IDEA_PRIORITY',
+      value: value,
+    });
   }
 
   addNewIdea() {
-    if (this.props.newIdeaTitle) {
-      let ideas = this.props.ideas;
-      let newIdeaTitle = this.props.newIdeaTitle;
-      let newIdeaDescription = this.props.newIdeaDescription;
+    let ideas = this.props.ideas;
+    let newIdeaTitle = this.props.newIdeaTitle;
+    let newIdeaDescription = this.props.newIdeaDescription;
 
-      if (ideas) {
-        newIdeaTitle = utilities.firstCharToUppercase(newIdeaTitle.trim());
-        if (newIdeaDescription) {
-          newIdeaDescription = utilities.firstCharToUppercase(newIdeaDescription.trim());
-        }
-        ideas.unshift({
-          title: newIdeaTitle,
-          description: newIdeaDescription,
-          categoryId: this.props.newIdeaCategory,
-          priorityId: this.props.newIdeaPriority
-        });
-      }
-      else {
-        ideas = [{
-          title: newIdeaTitle,
-          description: newIdeaDescription,
-          categoryId: this.props.newIdeaCategory,
-          priorityId: this.props.newIdeaPriority
-        }];
-      }
+    newIdeaTitle = utilities.firstCharToUppercase(newIdeaTitle.trim());
 
-      this.props.dispatch({
-        type: 'UPDATE_USER_IDEAS',
-        ideas
-      });
-
-      this.props.dispatch({
-        type: 'saveUserIdeas',
-        ideas,
-        uid: this.props.uid
-      });
-
-      Actions.pop();
+    if (newIdeaDescription) {
+      newIdeaDescription = utilities.firstCharToUppercase(newIdeaDescription.trim());
     }
+
+    if (ideas) {
+      ideas.unshift({
+        title: newIdeaTitle,
+        description: newIdeaDescription,
+        category: this.props.newIdeaCategory,
+        priority: this.props.newIdeaPriority
+      });
+    }
+    else {
+      ideas = [{
+        title: newIdeaTitle,
+        description: newIdeaDescription,
+        category: this.props.newIdeaCategory,
+        priority: this.props.newIdeaPriority
+      }];
+    }
+
+    this.props.dispatch({
+      type: 'UPDATE_USER_IDEAS',
+      ideas
+    });
+
+    // this.props.dispatch({
+    //   type: 'saveUserIdeas',
+    //   ideas,
+    //   uid: this.props.uid
+    // });
+
+    Actions.pop();
   }
 
   render() {
@@ -178,14 +171,14 @@ export class AddIdea extends React.Component {
 
 function mapStateToProps(state) {
   return ({
+    ideas: state.main.userData.ideas,
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
     newIdea: state.main.appData.newIdea,
     newIdeaTitle: state.main.appData.newIdea.title,
     newIdeaDescription: state.main.appData.newIdea.description,
-    newIdeaCategory: state.main.userData.categories[state.main.appData.newIdea.categoryId],
-    newIdeaPriority: state.main.appData.priorities[state.main.appData.newIdea.priorityId],
-    ideas: state.main.userData.ideas,
+    newIdeaCategory: state.main.appData.newIdea.category,
+    newIdeaPriority: state.main.appData.newIdea.priority,
     uid: state.main.user.uid
   });
 }

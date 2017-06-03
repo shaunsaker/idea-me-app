@@ -28,70 +28,24 @@ export class EditIdea extends React.Component {
 
     static get propTypes() {
         return {
-            categories: React.PropTypes.array.isRequired,
-            priorities: React.PropTypes.array.isRequired,
-            initialIdeaTitle: React.PropTypes.string.isRequired,
+            categories: React.PropTypes.array,
+            priorities: React.PropTypes.array,
+            initialIdeaTitle: React.PropTypes.string,
             initialIdeaDescription: React.PropTypes.string,
-            initialIdeaCategory: React.PropTypes.number.isRequired,
-            initialIdeaPriority: React.PropTypes.number.isRequired,
-            editIdeaTitle: React.PropTypes.number,
+            initialIdeaCategory: React.PropTypes.string,
+            initialIdeaPriority: React.PropTypes.string,
             editIdeaTitle: React.PropTypes.string,
             editIdeaDescription: React.PropTypes.string,
-            editIdeaCategory: React.PropTypes.number,
-            editIdeaPriority: React.PropTypes.number,
+            editIdeaCategory: React.PropTypes.string,
+            editIdeaPriority: React.PropTypes.string,
         };
-    }
-
-    updateEditIdeaTitle(text) {
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_TITLE',
-            value: text,
-        });
-    }
-
-    updateEditIdeaDescription(text) {
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_DESCRIPTION',
-            value: text,
-        });
-    }
-
-    navigateCategories() {
-        Actions.categories();
-    }
-
-    selectCategory(eventId) {
-
-        // 100 is reserved for blank categories, 200 is reserved as the categories button
-        if (eventId !== 200) {
-            if (eventId !== 100) {
-                this.props.dispatch({
-                    type: 'UPDATE_EDIT_IDEA_CATEGORY',
-                    value: eventId
-                });
-            }
-        }
-        else {
-            this.navigateCategories();
-        }
-    }
-
-    selectPriority(eventId) {
-
-        // 100 is reserved for blank priority
-        if (eventId !== 100) {
-            this.props.dispatch({
-                type: 'UPDATE_EDIT_IDEA_PRIORITY',
-                value: eventId,
-            });
-        }
     }
 
     componentDidMount() {
 
         // Initial Setup
         this.setState({
-            currentCategory: this.props.categories[this.props.initialIdeaCategory]
+            currentCategory: this.props.initialIdeaCategory
         });
 
         this.props.dispatch({
@@ -120,6 +74,44 @@ export class EditIdea extends React.Component {
         });
     }
 
+    updateEditIdeaTitle(text) {
+        this.props.dispatch({
+            type: 'UPDATE_EDIT_IDEA_TITLE',
+            value: text,
+        });
+    }
+
+    updateEditIdeaDescription(text) {
+        this.props.dispatch({
+            type: 'UPDATE_EDIT_IDEA_DESCRIPTION',
+            value: text,
+        });
+    }
+
+    navigateCategories() {
+        Actions.categories();
+    }
+
+    selectCategory(value) {
+
+        if (value === 'Edit Categories') {
+            Actions.categories();
+        }
+        else {
+            this.props.dispatch({
+                type: 'UPDATE_EDIT_IDEA_CATEGORY',
+                value,
+            });
+        }
+    }
+
+    selectPriority(value) {
+        this.props.dispatch({
+            type: 'UPDATE_EDIT_IDEA_PRIORITY',
+            value: value,
+        });
+    }
+
     updateIdea() {
         let ideas = this.props.ideas;
 
@@ -129,8 +121,8 @@ export class EditIdea extends React.Component {
                 if (ideas[i].description) {
                     ideas[i].description = utilities.firstCharToUppercase(this.props.editIdeaDescription.trim());
                 }
-                ideas[i].categoryId = this.props.editIdeaCategory;
-                ideas[i].priorityId = this.props.editIdeaPriority;
+                ideas[i].category = this.props.editIdeaCategory;
+                ideas[i].priority = this.props.editIdeaPriority;
                 break;
             }
         }
@@ -140,11 +132,11 @@ export class EditIdea extends React.Component {
             ideas
         });
 
-        this.props.dispatch({
-            type: 'saveUserIdeas',
-            ideas,
-            uid: this.props.uid
-        });
+        // this.props.dispatch({
+        //     type: 'saveUserIdeas',
+        //     ideas,
+        //     uid: this.props.uid
+        // });
 
         Actions.pop();
     }
@@ -176,14 +168,14 @@ export class EditIdea extends React.Component {
 
                     <CategoriesDropdown
                         displayText='Select a Category'
-                        currentValue={this.props.editIdeaCategory !== null ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
+                        currentValue={this.props.editIdeaCategory ? this.props.editIdeaCategory : this.props.initialIdeaCategory}
                         values={this.props.categories}
                         handleSelect={this.selectCategory}
                         headerValue='Edit Categories'
                         pushContent={true} />
                     <CategoriesDropdown
                         displayText='Select a Priority'
-                        currentValue={this.props.editIdeaPriority !== null ? this.props.priorities[this.props.editIdeaPriority] : this.props.priorities[this.props.initialIdeaPriority]}
+                        currentValue={this.props.editIdeaPriority ? this.props.editIdeaPriority : this.props.initialIdeaPriority}
                         values={this.props.priorities}
                         handleSelect={this.selectPriority}
                         pushContent={true} />
@@ -207,12 +199,12 @@ function mapStateToProps(state) {
         priorities: state.main.appData.priorities,
         initialIdeaTitle: state.routes.scene.title,
         initialIdeaDescription: state.routes.scene.description,
-        initialIdeaCategory: Number(state.routes.scene.categoryId),
-        initialIdeaPriority: Number(state.routes.scene.priorityId),
+        initialIdeaCategory: state.routes.scene.category,
+        initialIdeaPriority: state.routes.scene.priority,
         editIdeaTitle: state.main.appData.editIdea.title,
         editIdeaDescription: state.main.appData.editIdea.description,
-        editIdeaCategory: state.main.appData.editIdea.categoryId,
-        editIdeaPriority: state.main.appData.editIdea.priorityId,
+        editIdeaCategory: state.main.appData.editIdea.category,
+        editIdeaPriority: state.main.appData.editIdea.priority,
         ideas: state.main.userData.ideas,
         uid: state.main.user.uid,
     });

@@ -51,52 +51,26 @@ export class Categories extends React.Component {
     let newCategories = this.props.categories;
     newCategories.splice(index, 1);
 
-    // set all matching categoryIds to null
-    // all categoryIds above index should be decreased by 1
-    let newIdeas = this.props.ideas;
-
-    newIdeas.map((value) => {
-      if (value.categoryId === index) {
-        value.categoryId = null;
-      }
-      else if (value.categoryId > index) {
-        value.categoryId--;
-      }
-    });
-
     this.props.dispatch({
       type: 'UPDATE_USER_CATEGORIES',
       categories: newCategories
-    });
-
-    this.props.dispatch({
-      type: 'UPDATE_USER_IDEAS',
-      ideas: newIdeas
     });
 
     this.saveUserData();
   }
 
   saveUserData() {
-    this.props.dispatch({
-      type: 'saveUserCategories',
-      categories: this.props.categories,
-      uid: this.props.uid
-    });
+    // this.props.dispatch({
+    //   type: 'saveUserCategories',
+    //   categories: this.props.categories,
+    //   uid: this.props.uid
+    // });
 
-    this.props.dispatch({
-      type: 'saveUserIdeas',
-      ideas: this.props.ideas,
-      uid: this.props.uid
-    });
-  }
-
-  componentDidUpdate() {
-    if (this.props.errorMessage || this.props.apiSuccess) {
-      this.props.dispatch({
-        type: 'TOGGLE_LOADING'
-      });
-    }
+    // this.props.dispatch({
+    //   type: 'saveUserIdeas',
+    //   ideas: this.props.ideas,
+    //   uid: this.props.uid
+    // });
   }
 
   toggleModal(index, title) {

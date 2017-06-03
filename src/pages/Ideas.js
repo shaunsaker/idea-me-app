@@ -43,33 +43,22 @@ export class Ideas extends React.Component {
 
   static get propTypes() {
     return {
-      currentCategory: React.PropTypes.string,
-      priorities: React.PropTypes.array,
-      categories: React.PropTypes.array,
       ideas: React.PropTypes.array,
+      currentCategory: React.PropTypes.string,
+      categories: React.PropTypes.array,
       uid: React.PropTypes.string,
     };
   }
 
-  selectCategory(eventId) {
+  selectCategory(value) {
 
-    if (eventId === 200) {
-
-      // Edit Categories
+    if (value === 'Edit Categories') {
       Actions.categories();
-    }
-    else if (eventId === 100) {
-
-      // All Categories
-      this.props.dispatch({
-        type: 'SELECT_CATEGORY',
-        value: 'All Categories'
-      });
     }
     else {
       this.props.dispatch({
         type: 'SELECT_CATEGORY',
-        value: this.props.categories[eventId]
+        value,
       });
     }
   }
@@ -80,7 +69,7 @@ export class Ideas extends React.Component {
 
   shareIdea(idea) {
     const description = idea.description ? idea.description : '';
-    
+
     Share.share({
       message: 'My new idea off the IdeaMe App: ' + idea.title + '. ' + description,
     }, {
@@ -128,8 +117,6 @@ export class Ideas extends React.Component {
       <Card
         item={item}
         currentCategory={this.props.currentCategory}
-        categories={this.props.categories}
-        priorities={this.props.priorities}
         handleEdit={this.editIdea}
         handleShare={this.shareIdea}
         handleDelete={this.toggleModal} />
@@ -141,7 +128,7 @@ export class Ideas extends React.Component {
     let ideas = <View style={{ flex: 1 }}></View>; // TODO: empty state
 
     if (this.props.ideas) {
-      const currentCategoryIdeas = utilities.sortIdeas(this.props.ideas, this.props.categories, this.props.currentCategory);
+      const currentCategoryIdeas = utilities.sortIdeas(this.props.ideas, this.props.currentCategory);
 
       // Need this for the Count component
       counter = currentCategoryIdeas.length;
@@ -198,7 +185,7 @@ export class Ideas extends React.Component {
 
         <Growl />
 
-        <Loader positionStyle={{bottom: 50}}/>
+        <Loader positionStyle={{ bottom: 50 }} />
 
       </Page >
     );
@@ -207,9 +194,8 @@ export class Ideas extends React.Component {
 
 function mapStateToProps(state) {
   return ({
-    currentCategory: state.main.appData.currentCategory,
-    priorities: state.main.appData.priorities,
     ideas: state.main.userData.ideas,
+    currentCategory: state.main.appData.currentCategory,
     categories: state.main.userData.categories,
     uid: state.main.user.uid,
   });

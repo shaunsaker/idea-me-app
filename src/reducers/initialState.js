@@ -38,14 +38,14 @@ const initialState = {
         newIdea: {
             title: null,
             description: null,
-            categoryId: null,
-            priorityId: null,
+            category: null,
+            priority: null,
         },
         editIdea: {
             title: null,
             description: null,
-            categoryId: null,
-            priorityId: null,
+            category: null,
+            priority: null,
             index: null,
         },
     },
@@ -62,8 +62,8 @@ const initialState = {
             {
                 title: 'Test',
                 description: 'Test some more',
-                categoryId: 0,
-                priorityId: 0,
+                category: 'App',
+                priority: 'High',
             }
         ],
     },

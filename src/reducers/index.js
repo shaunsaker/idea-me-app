@@ -166,8 +166,8 @@ export default function (state = initialState, action) {
             new_state.userData.ideas = action.ideas;
             new_state.appData.newIdea.title = null;
             new_state.appData.newIdea.description = null;
-            new_state.appData.newIdea.categoryId = null;
-            new_state.appData.newIdea.priorityId = null;
+            new_state.appData.newIdea.category = null;
+            new_state.appData.newIdea.priority = null;
             new_state.app.loading = true;
             return new_state;
 
@@ -190,12 +190,12 @@ export default function (state = initialState, action) {
 
         case 'UPDATE_NEW_IDEA_CATEGORY':
             new_state = cloneObject(state);
-            new_state.appData.newIdea.categoryId = action.value;
+            new_state.appData.newIdea.category = action.value;
             return new_state;
 
         case 'UPDATE_NEW_IDEA_PRIORITY':
             new_state = cloneObject(state);
-            new_state.appData.newIdea.priorityId = action.value;
+            new_state.appData.newIdea.priority = action.value;
             return new_state;
 
         case 'UPDATE_EDIT_IDEA_TITLE':
@@ -210,12 +210,12 @@ export default function (state = initialState, action) {
 
         case 'UPDATE_EDIT_IDEA_CATEGORY':
             new_state = cloneObject(state);
-            new_state.appData.editIdea.categoryId = action.value;
+            new_state.appData.editIdea.category = action.value;
             return new_state;
 
         case 'UPDATE_EDIT_IDEA_PRIORITY':
             new_state = cloneObject(state);
-            new_state.appData.editIdea.priorityId = action.value;
+            new_state.appData.editIdea.priority = action.value;
             return new_state;
 
         case 'SET_EDIT_IDEA_ID':
@@ -253,16 +253,16 @@ export default function (state = initialState, action) {
             new_state = cloneObject(state);
             new_state.userData.categories.splice(action.index, 1);
 
-            // update ideas categoryIds
-            // set all matching categoryIds to null
-            // all categoryIds above index should be decreased by 1
+            // update ideas categorys
+            // set all matching categorys to null
+            // all categorys above index should be decreased by 1
             const ideas = new_state.userData.ideas;
             ideas.map((value, index) => {
-                if (value.categoryId === action.index) {
-                    value.categoryId = null;
+                if (value.category === action.index) {
+                    value.category = null;
                 }
-                else if (value.categoryId > action.index) {
-                    value.categoryId--;
+                else if (value.category > action.index) {
+                    value.category--;
                 }
             });
             return new_state;

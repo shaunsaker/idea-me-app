@@ -149,11 +149,11 @@ export default class CategoriesDropdown extends React.Component {
         }
     }
 
-    renderItem({ item, index }) {
+    renderItem({ item }) {
         return (
             <TouchableOpacity
                 style={styles.dropdownItem}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(index) }} >
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(item) }} >
                 <Text
                     style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
                     {item}
@@ -175,7 +175,7 @@ export default class CategoriesDropdown extends React.Component {
         const header = 
             <TouchableOpacity
                 style={styles.dropdownHeader}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(200) }} >
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }} >
                 <Icon name='pencil' size={18} color={styleConstants.white} style={styles.dropdownHeaderIcon} />
                 <Text
                     style={[styles.dropdownHeaderText, styleConstants.robotoCondensed]}>
@@ -186,7 +186,7 @@ export default class CategoriesDropdown extends React.Component {
         const footer = 
             <TouchableOpacity
                 style={styles.dropdownFooter}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(100) }} >
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.footerValue) }} >
                 <Text
                     style={[styles.dropdownFooterText, styleConstants.robotoCondensed]}>
                     {this.props.footerValue}

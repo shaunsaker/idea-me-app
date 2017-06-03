@@ -10,10 +10,19 @@ PAGES
         Google signin not setup
     Ideas
         CategoryDropdown => Dropdown and onPress passes back Value (no index - better for reuse)
-        Share and delete idea not working + Styling  
-        Update new/edit ideas can all be page state
-        Handle modal properly (title?)      
+        Share and delete idea not working + Styling   
         Empty state
+        IdeaMenu => Menu (reusable)
+
+HANDLE MODALS PROPERLY
+    Ideas
+    Categories
+TEMP VALUES CAN ALL BE PAGE STATE
+    Add/Edit Ideas
+    Add Category
+SAVE ALL DATA, THEN UPDATE THE STORE
+VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
+
     Add Idea
         Input should offer textArea functionality (ie. height increases        
         Validation

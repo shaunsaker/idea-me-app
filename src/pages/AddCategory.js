@@ -24,7 +24,6 @@ export class AddCategory extends React.Component {
   static get propTypes() {
     return {
       newCategoryValue: React.PropTypes.string,
-      errorMessage: React.PropTypes.string,
       categories: React.PropTypes.array,
       uid: React.PropTypes.string,
     };
@@ -55,11 +54,11 @@ export class AddCategory extends React.Component {
         categories
       });
 
-      this.props.dispatch({
-        type: 'saveUserCategories',
-        categories,
-        uid: this.props.uid
-      });
+      // this.props.dispatch({
+      //   type: 'saveUserCategories',
+      //   categories,
+      //   uid: this.props.uid
+      // });
 
       Actions.pop();
     }
