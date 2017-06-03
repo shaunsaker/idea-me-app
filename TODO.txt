@@ -11,8 +11,8 @@ PAGES
     Ideas
         Save ideas on delete
     Add Idea
-        Temp values as page state
-        Input should offer textArea functionality (ie. height increases        
+        Input should offer textArea functionality (ie. height increases)   
+        Temp values as page state     
         Validation
         Idea title should not already be present
     Edit Idea

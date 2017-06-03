@@ -139,9 +139,10 @@ export class AddIdea extends React.Component {
             value={this.props.newIdeaTitle}
             handleChange={this.updateNewIdeaTitle} />
           <Input
-            placeholder="ENTER YOUR DESCRIPTION HERE?"
+            placeholder="ENTER YOUR DESCRIPTION HERE"
             value={this.props.newIdeaDescription}
-            handleChange={this.updateNewIdeaDescription} />
+            handleChange={this.updateNewIdeaDescription}
+            multiline={true} />
           <DropdownButton
             displayText='Select a Category'
             currentValue={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}

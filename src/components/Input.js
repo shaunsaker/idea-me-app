@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     input: {
         fontSize: 18,
         color: styleConstants.white,
-        height: 50,
         paddingLeft: 0,
         paddingRight: 32,
         borderBottomWidth: 1,
@@ -57,11 +56,15 @@ export default class Input extends React.Component {
     constructor(props) {
         super(props);
 
+        this.minimumInputHeight = 45.5;
+
         this.state = {
-            hidePassword: true
+            hidePassword: true,
+            inputHeight: this.minimumInputHeight,
         }
 
         this.togglePassword = this.togglePassword.bind(this);
+        this.adjustInputHeight = this.adjustInputHeight.bind(this);
     }
 
     static get propTypes() {
@@ -73,6 +76,7 @@ export default class Input extends React.Component {
             type: React.PropTypes.string,
             keyboardType: React.PropTypes.string,
             autoFocus: React.PropTypes.bool,
+            multiline: React.PropTypes.bool,
         };
     }
 
@@ -80,6 +84,23 @@ export default class Input extends React.Component {
         this.setState({
             hidePassword: !this.state.hidePassword
         });
+    }
+
+    adjustInputHeight(event) {
+        const newInputHeight = event.nativeEvent.contentSize.height;
+
+        if (newInputHeight > this.minimumInputHeight) {
+            this.setState({
+                inputHeight: newInputHeight
+            });
+        }
+
+        // If an input was cleared
+        else if (this.minimumInputHeight > newInputHeight) {
+            this.setState({
+                inputHeight: this.minimumInputHeight
+            });
+        }
     }
 
     render() {
@@ -113,12 +134,14 @@ export default class Input extends React.Component {
                 <TextInput
                     value={this.props.value ? this.props.value : ''}
                     underlineColorAndroid='transparent'
-                    style={[styles.input, styleConstants.robotoCondensed]}
+                    style={[{height: this.state.inputHeight}, styles.input, styleConstants.robotoCondensed]}
                     onChangeText={(text) => this.props.handleChange(text)}
                     onFocus={this.props.handleFocus}
                     secureTextEntry={this.props.type === 'password' && this.state.hidePassword}
                     keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
-                    autoFocus={this.props.autoFocus} />
+                    autoFocus={this.props.autoFocus} 
+                    multiline={this.props.multiline}
+                    onChange={this.props.multiline ? (event) => this.adjustInputHeight(event) : null /*NOTE: this does not work with onContentSizeChange */} />
                 {clearTextButton}
             </View>
         );
