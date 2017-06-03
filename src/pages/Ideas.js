@@ -15,7 +15,7 @@ import Header from '../components/Header';
 import Logo from '../components/Logo';
 import Count from '../components/Count';
 import DropdownButton from '../components/DropdownButton';
-import Card from '../components/Card';
+import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
 import ActionModal from '../components/ActionModal';
 import Growl from '../components/Growl';
@@ -129,7 +129,7 @@ export class Ideas extends React.Component {
 
   renderItem = ({ item }) => {
     return (
-      <Card
+      <IdeaCard
         idea={item}
         currentCategory={this.props.currentCategory}
         handleSelect={this.selectMenuItem} />

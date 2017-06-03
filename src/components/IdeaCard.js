@@ -2,7 +2,6 @@ import React from 'react';
 import {
     View,
     Text,
-    TouchableOpacity,
     StyleSheet,
     Dimensions,
 } from "react-native";
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Card = (props) => {
+export default IdeaCard = (props) => {
     const categoryLabelText = props.idea.category ? props.idea.category : 'Uncategorised';
     const priorityLabelText = props.idea.priority ? props.idea.priority + ' Priority': 'Unprioritised';
     

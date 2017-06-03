@@ -9,7 +9,7 @@ import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
     infoContainer: {
-        paddingRight: 96,
+        paddingRight: 92,
         paddingLeft: 16,
         paddingBottom: 16,
     },

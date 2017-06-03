@@ -25,6 +25,7 @@ PAGES
             Settings
             Feedback
             Logout
+    Icons take styles from styleSheet
     Save user data on sign up
     SAVE ALL DATA, THEN UPDATE THE STORE
     Custom icons

@@ -10,7 +10,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
-import Card from '../components/Card';
+import ProfileCard from '../components/ProfileCard';
 import TabBar from '../components/TabBar';
 import ActionModal from '../components/ActionModal';
 import Growl from '../components/Growl';
@@ -71,6 +71,13 @@ export class Profile extends React.Component {
                     textRight={true}
                     headerShadow />
 
+                <ProfileCard
+                    userName={this.props.userName}
+                    photoUrl={this.props.photoUrl}
+                    email={this.props.email}
+                    location={this.props.location}
+                    numberOfIdeas={this.props.ideas && this.props.ideas.length || 0} />
+
                 <TabBar
                     currentPage='profile' />
 
@@ -88,6 +95,11 @@ export class Profile extends React.Component {
 function mapStateToProps(state) {
     return ({
         uid: state.main.auth.uid,
+        userName: state.main.userData.profile.userName,
+        email: state.main.userData.profile.email,
+        location: state.main.userData.profile.location,
+        photoUrl: state.main.userData.profile.photoUrl,
+        ideas: state.main.userData.ideas,
     });
 }
 
