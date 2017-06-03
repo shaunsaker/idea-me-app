@@ -6,10 +6,9 @@ import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
-import InputContainer from '../components/InputContainer';
 import Header from '../components/Header';
+import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
-import TextArea from '../components/TextArea';
 import DropdownButton from '../components/DropdownButton';
 import Button from '../components/Button';
 import Growl from '../components/Growl';
@@ -73,20 +72,28 @@ export class AddIdea extends React.Component {
 
   addNewIdea() {
     const newIdea = utilities.createNewIdea(this.state.newIdeaTitle, this.state.newIdeaDescription, this.state.newIdeaCategory, this.state.newIdeaPriority);
-    const ideas = utilities.addNewIdea(newIdea, this.props.ideas);
+    const ideas = utilities.addNewIdea(newIdea, this.props.ideas); // will return null if idea with this title already exists
 
-    this.props.dispatch({
-      type: 'UPDATE_USER_IDEAS',
-      ideas
-    });
+    if (ideas) {
+        this.props.dispatch({
+            type: 'UPDATE_USER_IDEAS',
+            ideas
+        });
 
-    // this.props.dispatch({
-    //   type: 'saveUserIdeas',
-    //   ideas,
-    //   uid: this.props.uid
-    // });
+        // this.props.dispatch({
+        //     type: 'saveUserIdeas',
+        //     ideas,
+        //     uid: this.props.uid
+        // });
 
-    Actions.pop();
+        Actions.pop();
+    }
+    else {
+        this.props.dispatch({
+            type: 'USER_ERROR',
+            message: 'An idea with this title already exists'
+        });
+    }
   }
 
   render() {
@@ -113,6 +120,7 @@ export class AddIdea extends React.Component {
             value={this.state.newIdeaDescription}
             handleChange={this.updateNewIdeaDescription}
             multiline={true} />
+            
           <DropdownButton
             displayText='Select a Category'
             currentValue={this.state.newIdeaCategory}

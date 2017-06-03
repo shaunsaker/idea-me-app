@@ -3,24 +3,29 @@ import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
 import utilities from '../utilities';
-
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
-import TextArea from '../components/TextArea';
 import DropdownButton from '../components/DropdownButton';
 import Button from '../components/Button';
+import Growl from '../components/Growl';
 
 export class EditIdea extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            editIdeaTitle: null,
+            editIdeaDescription: null,
+            editIdeaCategory: null,
+            editIdeaPriority: null,
+        }
+
         this.updateEditIdeaTitle = this.updateEditIdeaTitle.bind(this);
         this.updateEditIdeaDescription = this.updateEditIdeaDescription.bind(this);
-        this.navigateCategories = this.navigateCategories.bind(this);
         this.selectCategory = this.selectCategory.bind(this);
         this.selectPriority = this.selectPriority.bind(this);
         this.updateIdea = this.updateIdea.bind(this);
@@ -28,68 +33,33 @@ export class EditIdea extends React.Component {
 
     static get propTypes() {
         return {
-            categories: React.PropTypes.array,
-            priorities: React.PropTypes.array,
             initialIdeaTitle: React.PropTypes.string,
             initialIdeaDescription: React.PropTypes.string,
             initialIdeaCategory: React.PropTypes.string,
             initialIdeaPriority: React.PropTypes.string,
-            editIdeaTitle: React.PropTypes.string,
-            editIdeaDescription: React.PropTypes.string,
-            editIdeaCategory: React.PropTypes.string,
-            editIdeaPriority: React.PropTypes.string,
+            categories: React.PropTypes.array,
+            priorities: React.PropTypes.array,
+            uid: React.PropTypes.string,
         };
     }
 
     componentDidMount() {
+        this.updateEditIdeaTitle(this.props.initialIdeaTitle);
+        this.props.initialIdeaDescription && this.updateEditIdeaDescription(this.props.initialIdeaDescription);
+        this.props.initialIdeaCategory && this.selectCategory(this.props.initialIdeaCategory);
+        this.props.initialIdeaPriority && this.selectPriority(this.props.initialIdeaPriority);
+    }
 
-        // Initial Setup
+    updateEditIdeaTitle(value) {
         this.setState({
-            currentCategory: this.props.initialIdeaCategory
-        });
-
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_TITLE',
-            value: this.props.initialIdeaTitle,
-        });
-
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_DESCRIPTION',
-            value: this.props.initialIdeaDescription,
-        });
-
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_CATEGORY',
-            value: this.props.initialIdeaCategory
-        });
-
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_PRIORITY',
-            value: this.props.initialIdeaPriority
-        });
-
-        this.props.dispatch({
-            type: 'SET_EDIT_IDEA_ID',
-            id: this.props.initialIdeaTitle
+            editIdeaTitle: value
         });
     }
 
-    updateEditIdeaTitle(text) {
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_TITLE',
-            value: text,
+    updateEditIdeaDescription(value) {
+        this.setState({
+            editIdeaDescription: value
         });
-    }
-
-    updateEditIdeaDescription(text) {
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_DESCRIPTION',
-            value: text,
-        });
-    }
-
-    navigateCategories() {
-        Actions.categories();
     }
 
     selectCategory(value) {
@@ -98,51 +68,47 @@ export class EditIdea extends React.Component {
             Actions.categories();
         }
         else {
-            this.props.dispatch({
-                type: 'UPDATE_EDIT_IDEA_CATEGORY',
-                value,
+            this.setState({
+                editIdeaCategory: value
             });
         }
     }
 
     selectPriority(value) {
-        this.props.dispatch({
-            type: 'UPDATE_EDIT_IDEA_PRIORITY',
-            value: value,
+        this.setState({
+            editIdeaPriority: value
         });
     }
 
     updateIdea() {
-        let ideas = this.props.ideas;
+        const editedIdea = utilities.createNewIdea(this.state.editIdeaTitle, this.state.editIdeaDescription, this.state.editIdeaCategory, this.state.editIdeaPriority);
+        const ideas = utilities.editIdea(editedIdea, this.props.ideas, this.props.initialIdeaTitle); // will return null if idea with this title already exists
 
-        for (let i = 0; i < ideas.length; i++) {
-            if (ideas[i].title === this.props.initialIdeaTitle) {
-                ideas[i].title = utilities.firstCharToUppercase(this.props.editIdeaTitle.trim());
-                if (ideas[i].description) {
-                    ideas[i].description = utilities.firstCharToUppercase(this.props.editIdeaDescription.trim());
-                }
-                ideas[i].category = this.props.editIdeaCategory;
-                ideas[i].priority = this.props.editIdeaPriority;
-                break;
-            }
+        if (ideas) {
+            this.props.dispatch({
+                type: 'UPDATE_USER_IDEAS',
+                ideas
+            });
+
+            // this.props.dispatch({
+            //     type: 'saveUserIdeas',
+            //     ideas,
+            //     uid: this.props.uid
+            // });
+
+            Actions.pop();
+        }
+        else {
+            this.props.dispatch({
+                type: 'USER_ERROR',
+                message: 'An idea with this title already exists'
+            });
         }
 
-        this.props.dispatch({
-            type: 'UPDATE_USER_IDEAS',
-            ideas
-        });
-
-        // this.props.dispatch({
-        //     type: 'saveUserIdeas',
-        //     ideas,
-        //     uid: this.props.uid
-        // });
-
-        Actions.pop();
     }
 
     render() {
-        const enableContinueButton = true; //TODO
+        const enableContinueButton = this.state.editIdeaTitle;
 
         return (
             <Page
@@ -158,24 +124,24 @@ export class EditIdea extends React.Component {
                 <InputContainer>
                     <Input
                         placeholder="WHAT'S THE BIG IDEA?"
-                        value={this.props.editIdeaTitle ? this.props.editIdeaTitle : this.props.initialIdeaTitle}
-                        handleChange={this.updateEditIdeaTitle}
-                        autoFocus={true} />
-                    <TextArea
-                        value={this.props.editIdeaDescription !== null ? this.props.editIdeaDescription : this.props.initialIdeaDescription}
-                        placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...'}
-                        handleChange={this.updateEditIdeaDescription} />
+                        value={this.state.editIdeaTitle}
+                        handleChange={this.updateEditIdeaTitle} />
+                    <Input
+                        placeholder='ENTER YOUR DESCRIPTION HERE'
+                        value={this.state.editIdeaDescription}
+                        handleChange={this.updateEditIdeaDescription} 
+                        multiline={true} />
 
                     <DropdownButton
                         displayText='Select a Category'
-                        currentValue={this.props.editIdeaCategory ? this.props.editIdeaCategory : this.props.initialIdeaCategory}
+                        currentValue={this.state.editIdeaCategory}
                         values={this.props.categories}
                         handleSelect={this.selectCategory}
                         headerValue='Edit Categories'
                         pushContent={true} />
                     <DropdownButton
                         displayText='Select a Priority'
-                        currentValue={this.props.editIdeaPriority ? this.props.editIdeaPriority : this.props.initialIdeaPriority}
+                        currentValue={this.state.editIdeaPriority}
                         values={this.props.priorities}
                         handleSelect={this.selectPriority}
                         pushContent={true} />
@@ -188,6 +154,8 @@ export class EditIdea extends React.Component {
                     handlePress={this.updateIdea}
                     disabled={!enableContinueButton} />
 
+                <Growl />
+
             </Page >
         );
     }
@@ -195,16 +163,12 @@ export class EditIdea extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        categories: state.main.userData.categories,
-        priorities: state.main.appData.priorities,
         initialIdeaTitle: state.routes.scene.title,
         initialIdeaDescription: state.routes.scene.description,
         initialIdeaCategory: state.routes.scene.category,
         initialIdeaPriority: state.routes.scene.priority,
-        editIdeaTitle: state.main.appData.editIdea.title,
-        editIdeaDescription: state.main.appData.editIdea.description,
-        editIdeaCategory: state.main.appData.editIdea.category,
-        editIdeaPriority: state.main.appData.editIdea.priority,
+        categories: state.main.userData.categories,
+        priorities: state.main.appData.priorities,
         ideas: state.main.userData.ideas,
         uid: state.main.user.uid,
     });

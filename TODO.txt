@@ -13,9 +13,7 @@ PAGES
     Add Idea
         Save ideas on continue
     Edit Idea
-        Temp values as page state
-        Validation
-        Idea title should not already be present
+        Save ideas on continue
     Categories
         Modal
         Combine categories and ideas store action and saving data

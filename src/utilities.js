@@ -62,25 +62,12 @@ utilities.sortIdeas = function (ideas, currentCategory) {
     return currentCategoryIdeas;
 }
 
-utilities.isCategoryAlreadyPresent = function(newCategory, categories) {
-    let categoryPresent = false;
-
-    // Check if this category exists already
-    categories.map((value) => {
-      if (value === newCategory) {
-        categoryPresent = true;
-      }
-    });
-
-    return categoryPresent;
-}
-
-utilities.createNewIdea = function(newIdeaTitle, newIdeaDescription, newIdeaCategory, newIdeaPriority) {
+utilities.createNewIdea = function (newIdeaTitle, newIdeaDescription, newIdeaCategory, newIdeaPriority) {
     const title = utilities.firstCharToUppercase(newIdeaTitle);
     let description;
 
     if (newIdeaDescription) {
-      description = utilities.firstCharToUppercase(newIdeaDescription);
+        description = utilities.firstCharToUppercase(newIdeaDescription);
     }
 
     return {
@@ -91,19 +78,76 @@ utilities.createNewIdea = function(newIdeaTitle, newIdeaDescription, newIdeaCate
     }
 }
 
-utilities.addNewIdea = function(newIdea, ideas) {
+utilities.isIdeaTitlePresent = function (newIdeaTitle, ideas) {
+    let ideaTitlePresent = false;
+
+    for (let i = 0; i < ideas.length; i++) {
+
+        if (ideas[i].title === newIdeaTitle) {
+            ideaTitlePresent = true;
+            break;
+        }
+    }
+
+    return ideaTitlePresent;
+}
+
+utilities.addNewIdea = function (newIdea, ideas) {
     let newIdeas = ideas;
 
     if (newIdeas) {
-      newIdeas.unshift(newIdea);
+        const ideaTitlePresent = utilities.isIdeaTitlePresent(newIdea.title, ideas);
+
+        if (ideaTitlePresent) {
+            newIdeas = null;
+        }
+        else {
+            newIdeas.unshift(newIdea);
+        }
     }
 
     // If this is the user's first idea, create a new array containing the idea
     else {
-      newIdeas = [newIdea];
+        newIdeas = [newIdea];
     }
 
-    return newIdeas;    
+    return newIdeas;
+}
+
+utilities.editIdea = function (editedIdea, ideas, ideaTitle) {
+    let newIdeas = ideas;
+
+    for (let i = 0; i < newIdeas.length; i++) {
+
+        if (newIdeas[i].title === ideaTitle) {
+            const ideaTitlePresent = utilities.isIdeaTitlePresent(editedIdea.title, ideas);
+
+            if (ideaTitlePresent) {
+                newIdeas = null;
+            }
+            else {
+                newIdeas[i] = editedIdea;
+            }
+
+            break;
+        }
+    }
+
+    return newIdeas;
+}
+
+utilities.isCategoryAlreadyPresent = function (newCategory, categories) {
+    let categoryPresent = false;
+
+    for (let i = 0; i < categories.length; i++) {
+
+        if (categories[i] === newCategory) {
+            categoryPresent = true;
+            break;
+        }
+    }
+
+    return categoryPresent;
 }
 
 export default utilities;

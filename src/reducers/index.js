@@ -174,51 +174,6 @@ export default function (state = initialState, action) {
             new_state.app.loading = true;
             return new_state;
 
-        case 'UPDATE_NEW_IDEA_TITLE':
-            new_state = cloneObject(state);
-            new_state.appData.newIdea.title = action.value;
-            return new_state;
-
-        case 'UPDATE_NEW_IDEA_DESCRIPTION':
-            new_state = cloneObject(state);
-            new_state.appData.newIdea.description = action.value;
-            return new_state;
-
-        case 'UPDATE_NEW_IDEA_CATEGORY':
-            new_state = cloneObject(state);
-            new_state.appData.newIdea.category = action.value;
-            return new_state;
-
-        case 'UPDATE_NEW_IDEA_PRIORITY':
-            new_state = cloneObject(state);
-            new_state.appData.newIdea.priority = action.value;
-            return new_state;
-
-        case 'UPDATE_EDIT_IDEA_TITLE':
-            new_state = cloneObject(state);
-            new_state.appData.editIdea.title = action.value;
-            return new_state;
-
-        case 'UPDATE_EDIT_IDEA_DESCRIPTION':
-            new_state = cloneObject(state);
-            new_state.appData.editIdea.description = action.value;
-            return new_state;
-
-        case 'UPDATE_EDIT_IDEA_CATEGORY':
-            new_state = cloneObject(state);
-            new_state.appData.editIdea.category = action.value;
-            return new_state;
-
-        case 'UPDATE_EDIT_IDEA_PRIORITY':
-            new_state = cloneObject(state);
-            new_state.appData.editIdea.priority = action.value;
-            return new_state;
-
-        case 'SET_EDIT_IDEA_ID':
-            new_state = cloneObject(state);
-            new_state.appData.editIdea.id = action.id;
-            return new_state;
-
         case 'DELETE_IDEA':
             new_state = cloneObject(state);
             let id;
