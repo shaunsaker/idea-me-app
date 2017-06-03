@@ -11,7 +11,7 @@ import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
 	container: {
-		height: 50,
+		height: 56,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',

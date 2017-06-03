@@ -16,6 +16,7 @@ import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
 import AddCategory from './pages/AddCategory';
 import Profile from './pages/Profile';
+import EditProfile from './pages/EditProfile';
 
 const Scenes = Actions.create(
 	<Scene key='root' hideNavBar={true}>
@@ -66,6 +67,10 @@ const Scenes = Actions.create(
 			component={Profile}
 			initial={true}
 			type={ActionConst.REPLACE} />
+		<Scene
+			key='editProfile'
+			component={EditProfile}
+			initial={false} />
 	</Scene>
 )
 

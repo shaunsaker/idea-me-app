@@ -19,12 +19,15 @@ PAGES
     Add Category
         Save categories on continue
     Profile Page
-        Card
-        Menu
-            About App
-            Settings
-            Feedback
-            Logout
+        Menu component should be in header but overlay issues (to be fixed in RN 0.45)
+    Edit Profile Page
+        Image Picker
+        Image Resizer
+        Prettify userName on save
+        Save on continue
+    Edit Location Page
+        All
+
     Icons take styles from styleSheet
     Save user data on sign up
     SAVE ALL DATA, THEN UPDATE THE STORE

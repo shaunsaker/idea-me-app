@@ -12,19 +12,19 @@ import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
     menuContainer: {
-        position: 'relative'
+
     },
     menuIconContainer: {
-        padding: 16,
+
     },
     menuIcon: {
-        left: 8
+        left: 10,
     },
     menuItemsWrapper: {
         position: 'absolute',
-        top: 52,
-        right: 16,
-        width: 88,
+        top: 36,
+        right: 0,
+        width: 150,
         backgroundColor: styleConstants.white,
         elevation: 5,
         shadowColor: "#000000",
@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
             width: 0
         },
     },
+	menuItemsContainer: {
+
+	},
     menuItemContainer: {
         justifyContent: 'flex-end',
     },
@@ -90,7 +93,8 @@ export default class Menu extends React.Component {
                 keyExtractor={item => 'menu' + item}
                 data={this.props.values}
                 renderItem={this.renderItem}
-                style={styles.menuItemsWrapper} />
+                style={styles.menuItemsWrapper}
+                contentContainerStyle={styles.menuItemsContainer} />
             :
             null;
         
@@ -103,7 +107,7 @@ export default class Menu extends React.Component {
                     <Icon
                         name='more-vert'
                         size={28}
-                        color={styleConstants.primary}
+                        color={this.props.color ? this.props.color : styleConstants.primary}
                         style={styles.menuIcon} />
                 </TouchableOpacity>
 

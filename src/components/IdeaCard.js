@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     },
     menuContainer: {
         position: 'absolute',
-        top: 0,
-        right: 0,
+        top: 16,
+        right: 16,
     },
     labelsContainer: {
         flex: 1,

@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     View,
+    TouchableOpacity,
     Image,
     Text,
     StyleSheet,
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.white,
         borderWidth: 1,
         borderColor: styleConstants.white,
-        margin: 16,
+        marginHorizontal: 16,
         paddingVertical: 16,
         paddingHorizontal: 8,
         elevation: 5,
@@ -43,6 +44,18 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 37.5,
+    },
+    editImageContainer: {
+        width: 75,
+        height: 75,
+        borderRadius: 37.5,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: styleConstants.transPrimary,
+    },
+    editImageIcon: {
+        fontSize: 36,
+        color: styleConstants.white,
     },
     emailContainer: {
         flexDirection: 'row',
@@ -87,6 +100,19 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileCard = (props) => {
+    const profilePhoto = props.photoUrl ?
+        <Image
+            source={{uri: props.photoUrl}}
+            style={styles.profileImage} />
+        :
+        <TouchableOpacity
+            onPress={props.handleEditImagePress}
+            style={styles.editImageContainer}>
+            <Icon
+                name='photo-camera'
+                style={styles.editImageIcon} />
+        </TouchableOpacity>;
+
     const ideasLabel = props.numberOfIdeas ?
         <View style={styles.ideasLabel}>
             <OctIcon name='light-bulb' style={styles.ideasIcon} />
@@ -107,9 +133,7 @@ export default ProfileCard = (props) => {
 
             <View
                 style={styles.profileImageContainer}>
-                <Image
-                    source={{uri: props.photoUrl}}
-                    style={styles.profileImage} />
+                {profilePhoto}
             </View>
 
             <View style={styles.emailContainer}>

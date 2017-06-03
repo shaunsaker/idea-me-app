@@ -9,7 +9,7 @@ import {
     Easing,
     Dimensions,
 } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Button from './Button';
 
@@ -180,7 +180,7 @@ export default class DropdownButton extends React.Component {
             <TouchableOpacity
                 style={styles.dropdownHeader}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }} >
-                <Icon name='pencil' size={18} color={styleConstants.white} style={styles.dropdownHeaderIcon} />
+                <Icon name='mode-edit' size={18} color={styleConstants.white} style={styles.dropdownHeaderIcon} />
                 <Text
                     style={[styles.dropdownHeaderText, styleConstants.robotoCondensed]}>
                     {this.props.headerValue}

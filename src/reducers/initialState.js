@@ -38,8 +38,8 @@ const initialState = {
     },
     userData: {
         profile: {
-            userName: 'Shaun Saker',
-            email: 'sakershaun@gmail.com',
+            userName: 'Astrid Saker',
+            email: 'astridbradley24@gmail.com',
             location: 'Somerset West, South Africa',
             photoUrl: 'https://firebasestorage.googleapis.com/v0/b/components-66ff5.appspot.com/o/photos%2FET4q9PXVrePF7ubimwoexT7JOx72?alt=media&token=d5db2aca-ba08-4f74-840f-5e4e80fc97a8',
         },

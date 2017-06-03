@@ -20,7 +20,7 @@ export default Page = (props) => {
             paddingBottom: props.removeBottomPadding ? 0 : props.fauxFooter ? 0 : 16,
         }
 
-    const fauxFooter = props.fauxFooter ? <View style={{height: 50}} /> : null;
+    const fauxFooter = props.fauxFooter ? <View style={{height: 56}} /> : null;
 
     return (
         <View style={[styles.container, pageStyles]} >

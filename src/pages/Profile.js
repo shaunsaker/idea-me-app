@@ -1,20 +1,19 @@
 import React from "react";
 import {
-    View,
+    View
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 
-import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
+import Menu from '../components/Menu';
 import ProfileCard from '../components/ProfileCard';
+import Button from '../components/Button';
 import TabBar from '../components/TabBar';
 import ActionModal from '../components/ActionModal';
-import Growl from '../components/Growl';
-import Loader from '../components/Loader';
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -32,6 +31,11 @@ export class Profile extends React.Component {
     static get propTypes() {
         return {
             uid: React.PropTypes.string,
+            userName: React.PropTypes.string,
+            email: React.PropTypes.string,
+            location: React.PropTypes.string,
+            photoUrl: React.PropTypes.string,
+            numberOfIdeas: React.PropTypes.number, 
         };
     }
 
@@ -52,6 +56,12 @@ export class Profile extends React.Component {
     }
 
     render() {
+        /*const menu = () => 
+            <Menu 
+                values={['About App', 'Settings', 'Give us Feedback', 'Log Out']}
+                handleSelect={(type) => props.selectMenuItem(type)} 
+                color={styleConstants.white} />;*/
+
         const modal = this.state.showModal ?
             <ActionModal
                 title={'Are you sure you want to log out?'}
@@ -66,26 +76,29 @@ export class Profile extends React.Component {
                 removeBottomPadding={true}>
 
                 <Header
-                    text='Edit Profile'
-                    handleTextPress={() => Actions.editProfile()}
-                    textRight={true}
+                    text='Profile'
                     headerShadow />
 
-                <ProfileCard
-                    userName={this.props.userName}
-                    photoUrl={this.props.photoUrl}
-                    email={this.props.email}
-                    location={this.props.location}
-                    numberOfIdeas={this.props.ideas && this.props.ideas.length || 0} />
+                <View>
+                    <ProfileCard
+                        userName={this.props.userName}
+                        photoUrl={this.props.photoUrl}
+                        email={this.props.email}
+                        location={this.props.location}
+                        numberOfIdeas={this.props.numberOfIdeas}
+                        handleEditImagePress={() => Actions.editProfile()} />
+
+                    <Button
+                        iconName='mode-edit'
+                        text='Edit Profile'
+                        styleMode='transparent'
+                        handlePress={() => Actions.editProfile()} />
+                </View>
 
                 <TabBar
                     currentPage='profile' />
 
                 {modal}
-
-                <Growl />
-
-                <Loader positionStyle={{ bottom: 50 }} />
 
             </Page >
         );
@@ -99,7 +112,7 @@ function mapStateToProps(state) {
         email: state.main.userData.profile.email,
         location: state.main.userData.profile.location,
         photoUrl: state.main.userData.profile.photoUrl,
-        ideas: state.main.userData.ideas,
+        numberOfIdeas: state.main.userData.ideas && state.main.userData.ideas.length,
     });
 }
 
