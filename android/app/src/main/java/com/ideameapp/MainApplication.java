@@ -15,6 +15,7 @@ import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.imagepicker.ImagePickerPackage;
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +42,8 @@ public class MainApplication extends Application implements ReactApplication {
           new FirestackPackage(),
           new FBSDKPackage(mCallbackManager),
           new RNGeocoderPackage(),
-          new ImagePickerPackage()
+          new ImagePickerPackage(),
+          new ImageResizerPackage()
       );
     }
   };

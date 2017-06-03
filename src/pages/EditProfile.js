@@ -129,13 +129,11 @@ export class Profile extends React.Component {
 
                 ImageEditor.cropImage(resizedImageUri, cropOptions,
                     (uri) => {
-                        console.log(uri);
-
-                        // this.props.dispatch({
-                        //     type: 'uploadUserPhoto',
-                        //     uid: this.props.uid,
-                        //     path: uri
-                        // });
+                        this.props.dispatch({
+                            type: 'uploadUserPhoto',
+                            uid: this.props.uid,
+                            path: uri
+                        });
                     },
                     (error) => {
                         this.props.dispatch({
