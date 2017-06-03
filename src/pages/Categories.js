@@ -67,7 +67,7 @@ export class Categories extends React.Component {
         handleLeftIconPress={() => this.deleteCategory(this.state.modalTitle)}
         handleRightIconPress={this.toggleModal} />
       :
-      <View />;
+      null;
 
     return (
       <Page

@@ -14,6 +14,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
+import com.imagepicker.ImagePickerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new FirestackPackage(),
           new FBSDKPackage(mCallbackManager),
-          new RNGeocoderPackage()
+          new RNGeocoderPackage(),
+          new ImagePickerPackage()
       );
     }
   };

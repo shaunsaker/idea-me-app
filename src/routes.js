@@ -65,12 +65,12 @@ const Scenes = Actions.create(
 		<Scene
 			key='profile'
 			component={Profile}
-			initial={true}
+			initial={false}
 			type={ActionConst.REPLACE} />
 		<Scene
 			key='editProfile'
 			component={EditProfile}
-			initial={false} />
+			initial={true} />
 	</Scene>
 )
 
