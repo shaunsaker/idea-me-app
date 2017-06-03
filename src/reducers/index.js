@@ -156,6 +156,18 @@ export default function (state = initialState, action) {
             return new_state;
 
         /* USER DATA */
+		case 'SET_USER_LOCATION':
+			new_state = cloneObject(state);
+			new_state.user.location = action.location;
+			return new_state;
+
+		case 'SET_USER_PHOTO':
+			new_state = cloneObject(state);
+			new_state.user.photoUrl = action.photoUrl;
+			new_state.api.apiSuccess = true;
+            new_state.app.loading = false;
+			return new_state;   
+
         case 'SELECT_CATEGORY':
             new_state = cloneObject(state);
             new_state.appData.currentCategory = action.value;

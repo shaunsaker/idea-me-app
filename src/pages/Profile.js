@@ -1,6 +1,8 @@
 import React from "react";
 import {
-    View
+    View,
+    Text,
+    TouchableOpacity,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -53,6 +55,8 @@ export class Profile extends React.Component {
         this.props.dispatch({
             type: 'signOutUser'
         });
+
+        Actions.welcome();
     }
 
     render() {
@@ -78,6 +82,11 @@ export class Profile extends React.Component {
                 <Header
                     text='Profile'
                     headerShadow />
+
+                <TouchableOpacity
+                    onPress={this.signOutUser}>
+                    <Text>Sign Out</Text>
+                </TouchableOpacity>
 
                 <View>
                     <ProfileCard

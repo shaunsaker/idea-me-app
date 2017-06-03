@@ -17,9 +17,16 @@ import { getUserLocation } from './geolocation';
 import { saveUserIdeas } from './api';
 import { saveUserCategories } from './api';
 import { loadUserData } from './api';
+import { saveUserLocation } from './api';
+import { saveUserPhoto } from './api';
+
+// Storage
+import { uploadUserPhoto } from './storage';
 
 export function* sagas() {
     yield [
+
+        // Auth
         fork(takeLatest, 'getUserAuth', getUserAuth),
         fork(takeLatest, 'signInUserWithEmail', signInUserWithEmail),
         fork(takeLatest, 'sendPasswordResetEmail', sendPasswordResetEmail),
@@ -28,10 +35,17 @@ export function* sagas() {
         fork(takeLatest, 'signInUserAnonymously', signInUserAnonymously),
         fork(takeLatest, 'signOutUser', signOutUser),
 
+        // Geolocation
         fork(takeLatest, 'getUserLocation', getUserLocation),
 
+        // Api
         fork(takeLatest, 'saveUserIdeas', saveUserIdeas),
         fork(takeLatest, 'saveUserCategories', saveUserCategories),
-        fork(takeLatest, 'loadUserData', loadUserData)
+        fork(takeLatest, 'loadUserData', loadUserData),        
+		fork(takeLatest, 'saveUserLocation', saveUserLocation),
+		fork(takeLatest, 'saveUserPhoto', saveUserPhoto),
+
+        // Storage
+		fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),
     ];
 }

@@ -21,8 +21,7 @@ PAGES
     Profile Page
         Menu component should be in header but overlay issues (to be fixed in RN 0.45)
     Edit Profile Page
-        Image Picker
-        Image Resizer
+        Saving photo to db not working (permission denied)
         Prettify userName on save
         Save on continue
     Edit Location Page

@@ -5,7 +5,7 @@ const response = {
     message: null,
 }
 
-export default class Data {
+export default class Api {
     static saveUserIdeas(action) {
         let uid = action.uid;
 
@@ -71,6 +71,43 @@ export default class Data {
                 resolve(response);
             }, (error) => {
                 response.message = error.message;
+                resolve(response);
+            });
+        });
+    }
+
+    static saveUserLocation(action) {
+        return new Promise(resolve => {
+            firestack.database.ref('users/' + action.uid).update({ 
+				location: action.location,
+            })
+            .then(() => {
+                response.success = true;
+                response.message = null;
+                resolve(response);
+            })
+            .catch(error => {
+				response.success = false;
+                response.message = error.message;
+                resolve(response);
+            });
+        });
+    }
+
+    static saveUserPhoto(action) {
+        return new Promise(resolve => {
+            firestack.database.ref('users/' + action.uid).update({ 
+				photoUrl: action.photoUrl,
+            })
+            .then(() => {
+                response.success = true;
+                response.message = action.photoUrl;
+                resolve(response);
+            })
+            .catch(error => {
+                console.log(error);
+				response.success = false;
+                response.message = 'Failed';
                 resolve(response);
             });
         });

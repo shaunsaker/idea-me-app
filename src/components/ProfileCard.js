@@ -116,7 +116,7 @@ export default ProfileCard = (props) => {
     const ideasLabel = props.numberOfIdeas ?
         <View style={styles.ideasLabel}>
             <OctIcon name='light-bulb' style={styles.ideasIcon} />
-            <Text style={[styles.labelText, styleConstants.robotoCondensed]}>{props.numberOfIdeas} excellent idea{props.numberOfIdeas > 1 ? s : ''}</Text>
+            <Text style={[styles.labelText, styleConstants.robotoCondensed]}>{props.numberOfIdeas} excellent idea{props.numberOfIdeas > 1 ? 's' : ''}</Text>
         </View>
         :
         null;

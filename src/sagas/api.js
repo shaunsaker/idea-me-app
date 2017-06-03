@@ -1,10 +1,10 @@
 import { call, put } from 'redux-saga/effects';
 
-import Data from '../api/index';
+import Api from '../api/index';
 
 export function* saveUserIdeas(action) {
 
-    const saveUserIdeasResponse = yield call(Data.saveUserIdeas, action);
+    const saveUserIdeasResponse = yield call(Api.saveUserIdeas, action);
     console.log('saveUserIdeasResponse', saveUserIdeasResponse);
 
     if (saveUserIdeasResponse) {
@@ -25,7 +25,7 @@ export function* saveUserIdeas(action) {
 
 export function* saveUserCategories(action) {
 
-    const saveUserCategoriesResponse = yield call(Data.saveUserCategories, action);
+    const saveUserCategoriesResponse = yield call(Api.saveUserCategories, action);
     console.log('saveUserCategoriesResponse', saveUserCategoriesResponse);
 
     if (saveUserCategoriesResponse) {
@@ -46,7 +46,7 @@ export function* saveUserCategories(action) {
 
 export function* loadUserData(action) {
 
-    const loadUserDataResponse = yield call(Data.loadUserData, action);
+    const loadUserDataResponse = yield call(Api.loadUserData, action);
     console.log('loadUserDataResponse', loadUserDataResponse);
 
     if (loadUserDataResponse) {
@@ -106,4 +106,40 @@ export function* loadUserData(action) {
             });
         }
     }
+}
+
+export function* saveUserLocation(action) {
+	const saveUserLocationResponse = yield call(Api.saveUserLocation, action);
+	console.log('saveUserLocationResponse', saveUserLocationResponse);
+
+	if (saveUserLocationResponse.success) {
+		yield put({
+			type: 'SET_USER_LOCATION',
+			location: action.userLocation,
+		});
+	}
+	else {
+		yield put({
+			type: 'API_ERROR',
+			message: 'There was an error saving your location. Please try again'
+		});
+	}
+}										
+
+export function* saveUserPhoto(action) {
+	const saveUserPhotoResponse = yield call(Api.saveUserPhoto, action);
+	console.log('saveUserPhotoResponse', saveUserPhotoResponse);
+
+	if (saveUserPhotoResponse.success) {
+		yield put({
+			type: 'SET_USER_PHOTO',
+			photoUrl: saveUserPhotoResponse.message,
+		});
+	}
+	else {
+		yield put({
+			type: 'API_ERROR',
+			message: 'There was an error saving your photo. Please try again'
+		});
+	}
 }
