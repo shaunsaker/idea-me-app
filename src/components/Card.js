@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
 });
 
 export default Card = (props) => {
-    const categoryLabelText = props.item.category ? props.item.category : 'Uncategorised';
-    const priorityLabelText = props.item.priority ? props.item.priority + ' Priority': 'Unprioritised';
+    const categoryLabelText = props.idea.category ? props.idea.category : 'Uncategorised';
+    const priorityLabelText = props.idea.priority ? props.idea.priority + ' Priority': 'Unprioritised';
     
     const categoryLabel = 
         <View style={styles.categoryLabel}>
@@ -98,15 +98,15 @@ export default Card = (props) => {
             style={styles.cardContainer} >
             
             <InfoBlock
-                title={props.item.title}
-                subtitle={props.item.description}
+                title={props.idea.title}
+                subtitle={props.idea.description}
                 titleColor={styleConstants.primary}
                 subtitleColor={styleConstants.grey} />
 
             <View style={styles.menuContainer}>
                 <Menu 
                     values={['Edit', 'Share', 'Delete']}
-                    handleSelect={(type) => props.handleSelect(type, props.item)} />
+                    handleSelect={(type) => props.handleSelect(type, props.idea)} />
             </View>
             
             <View

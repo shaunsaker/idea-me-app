@@ -9,29 +9,25 @@ PAGES
         Facebook login not working
         Google signin not setup
     Ideas
-        Menu => Menu (reusable)
-
-HANDLE MODALS PROPERLY
-    Ideas
-    Categories
-TEMP VALUES CAN ALL BE PAGE STATE
-    Add/Edit Ideas
-    Add Category
-SAVE ALL DATA, THEN UPDATE THE STORE
-VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
-
+        Save ideas on delete
     Add Idea
+        Temp values as page state
         Input should offer textArea functionality (ie. height increases        
         Validation
         Idea title should not already be present
     Edit Idea
+        Temp values as page state
         Validation
         Idea title should not already be present
     Categories
+        Modal
         Combine categories and ideas store action and saving data
         Refactor into component - CategoriesList
     Add Category
+        Temp values as page state
 
+    VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
+    SAVE ALL DATA, THEN UPDATE THE STORE
     Link inputs to errorType to reset password ?
     Don't use styleSheet where you don't need it, ie. if you are only applying one style)
     Should we update store after api calls? Currently updating before but if there is an error, there will be inconsistencies

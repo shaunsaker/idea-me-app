@@ -6,11 +6,8 @@ import {
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import Icon from 'react-native-vector-icons/FontAwesome';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import utilities from '../utilities';
-
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
@@ -71,7 +68,7 @@ export class Ideas extends React.Component {
       this.shareIdea(idea);
     }
     else {
-      this.deleteIdea(idea);
+      this.toggleModal(idea);
     }
   }
 
@@ -82,9 +79,11 @@ export class Ideas extends React.Component {
   shareIdea(idea) {
     const description = idea.description ? idea.description : '';
 
-    Share.share({
-      message: 'My new idea off the IdeaMe App: ' + idea.title + '. ' + description,
-    }, {
+    Share.share(
+      {
+        message: 'My new idea off the IdeaMe App: ' + idea.title + '. ' + description,
+      },
+      {
         dialogTitle: 'Share Your Idea',
       })
       .then( /* Do nothing. It's obvious to the user that his message was shared. */)
@@ -102,15 +101,12 @@ export class Ideas extends React.Component {
     this.saveIdeas();
   }
 
-  saveIdeas() {
-    // TODO    
-  }
+  toggleModal(idea) {
 
-  toggleModal(title) {
-    if (title) {
+    if (idea) {
       this.setState({
         showModal: !this.state.showModal,
-        modalTitle: title,
+        modalTitle: idea.title,
       });
     }
     else {
@@ -120,10 +116,21 @@ export class Ideas extends React.Component {
     }
   }
 
+  saveIdeas() {
+    // this.props.dispatch({
+    //   type: 'TOGGLE_LOADING'
+    // });
+
+    // this.props.dispatch({
+    //   type: 'saveUserIdeas',
+    //   uid: this.props.uid,
+    // });
+  }
+
   renderItem = ({ item }) => {
     return (
       <Card
-        item={item}
+        idea={item}
         currentCategory={this.props.currentCategory}
         handleSelect={this.selectMenuItem} />
     );
