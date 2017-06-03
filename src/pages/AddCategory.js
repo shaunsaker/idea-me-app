@@ -16,41 +16,34 @@ export class AddCategory extends React.Component {
   constructor(props) {
     super(props);
 
-    this.updateNewCategoryValue = this.updateNewCategoryValue.bind(this);
+    this.state = {
+      newCategory: null,
+    }
+
+    this.updateNewCategory = this.updateNewCategory.bind(this);
     this.addNewCategory = this.addNewCategory.bind(this);
   }
 
   static get propTypes() {
     return {
-      newCategoryValue: React.PropTypes.string,
       categories: React.PropTypes.array,
       uid: React.PropTypes.string,
     };
   }
 
-  updateNewCategoryValue(text) {
-    this.props.dispatch({
-      type: 'UPDATE_NEW_CATEGORY_VALUE',
-      value: text
+  updateNewCategory(value) {
+    this.setState({
+      newCategory: value
     });
   }
 
   addNewCategory() {
-    let categories = this.props.categories;
-    const newCategory = utilities.firstCharToUppercase(this.props.newCategoryValue.trim());
-    const categoryPresent = utilities.isCategoryAlreadyPresent(newCategory, categories);
+    const newCategories = utilities.addCategory(this.state.newCategory, this.props.categories);
 
-    if (!categoryPresent) {
-      if (categories) {
-        categories.push(newCategory);
-      }
-      else {
-        categories = [newCategory];
-      }
-
+    if (newCategories) {
       this.props.dispatch({
         type: 'UPDATE_USER_CATEGORIES',
-        categories
+        categories: newCategories,
       });
 
       // this.props.dispatch({
@@ -70,7 +63,7 @@ export class AddCategory extends React.Component {
   }
 
   render() {
-    const enableContinueButton = this.props.newCategoryValue;
+    const enableContinueButton = this.state.newCategory;
 
     return (
       <Page
@@ -83,12 +76,12 @@ export class AddCategory extends React.Component {
           handleRightIconPress={() => Actions.pop()}
           headerShadow />
 
-        <InputContainer
-          alignCenter={true} >
+        <InputContainer>
           <Input
             placeholder="CATEGORY NAME"
-            value={this.props.newCategoryValue}
-            handleChange={this.updateNewCategoryValue} />
+            value={this.state.newCategory}
+            handleChange={this.updateNewCategory}
+            autoFocus={true} />
         </InputContainer>
 
         <Button
@@ -107,7 +100,6 @@ export class AddCategory extends React.Component {
 
 function mapStateToProps(state) {
   return ({
-    newCategoryValue: state.main.appData.newCategory.value,
     categories: state.main.userData.categories,
     uid: state.main.user.uid,
   });

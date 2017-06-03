@@ -170,7 +170,6 @@ export default function (state = initialState, action) {
         case 'UPDATE_USER_CATEGORIES':
             new_state = cloneObject(state);
             new_state.userData.categories = action.categories;
-            new_state.appData.newCategory.value = null;
             new_state.app.loading = true;
             return new_state;
 
@@ -187,17 +186,9 @@ export default function (state = initialState, action) {
             new_state.userData.ideas = newIdeas;
             return new_state;
 
-        case 'UPDATE_NEW_CATEGORY_VALUE':
-            new_state = cloneObject(state);
-            new_state.appData.newCategory.value = action.value;
-            return new_state;
-
         case 'ADD_NEW_CATEGORY':
             new_state = cloneObject(state);
             new_state.userData.categories.push(utilities.firstCharToUppercase(new_state.newCategory.value.trim()));
-            new_state.appData.newCategory = {
-                value: null,
-            }
             return new_state;
 
         case 'DELETE_CATEGORY':

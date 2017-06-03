@@ -32,9 +32,6 @@ const initialState = {
             'Medium',
             'Low'
         ],
-        newCategory: {
-            value: null,
-        },
     },
     user: {
         uid: null,

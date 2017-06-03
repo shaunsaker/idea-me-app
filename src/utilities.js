@@ -136,7 +136,7 @@ utilities.editIdea = function (editedIdea, ideas, ideaTitle) {
     return newIdeas;
 }
 
-utilities.isCategoryAlreadyPresent = function (newCategory, categories) {
+utilities.isCategoryPresent = function (newCategory, categories) {
     let categoryPresent = false;
 
     for (let i = 0; i < categories.length; i++) {
@@ -148,6 +148,29 @@ utilities.isCategoryAlreadyPresent = function (newCategory, categories) {
     }
 
     return categoryPresent;
+}
+
+utilities.addCategory = function(category, categories) {
+    let newCategories = categories;
+    const newCategory = utilities.firstCharToUppercase(category.trim());
+
+    if (newCategories) {
+        const categoryPresent = utilities.isCategoryPresent(newCategory, categories);
+
+        if (categoryPresent) {
+            newCategories = null;
+        }
+        else {
+            newCategories.unshift(newCategory);
+        }
+    }
+
+    // If this is the user's first category, create a new array containing the category
+    else {
+        newCategories = [newCategory];
+    }
+
+    return newCategories;
 }
 
 utilities.deleteCategory = function(title, categories) {

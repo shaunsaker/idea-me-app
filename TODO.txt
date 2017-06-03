@@ -17,15 +17,13 @@ PAGES
     Categories
         Save categories on delete
     Add Category
-        Temp values as page state
+        Save categories on continue
 
-    DONT PASS THE UID TO EACH PAGE, RATHER GET IT FROM FB
     GIVE HEADER A BACK PROP TO AUTO SET CHEV_LEFT ICON AND ACTIONS>POP
     VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
     SAVE ALL DATA, THEN UPDATE THE STORE
     Link inputs to errorType to reset password ?
     Don't use styleSheet where you don't need it, ie. if you are only applying one style)
-    Should we update store after api calls? Currently updating before but if there is an error, there will be inconsistencies
     Profile Page
         And all the trimmings
         Card
