@@ -9,9 +9,6 @@ PAGES
         Facebook login not working
         Google signin not setup
     Ideas
-        CategoryDropdown => Dropdown and onPress passes back Value (no index - better for reuse)
-        Share and delete idea not working + Styling   
-        Empty state
         IdeaMenu => Menu (reusable)
 
 HANDLE MODALS PROPERLY
@@ -70,9 +67,7 @@ VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
     iOS testing
     Various Android zIndex issues to be fixed in RN 0.45.0
     While the glow loader is loading it will be cool to be able to tap it and make it grow
-
-SAVED FOR LATER
-    
+    Empty state
 
 ENHANCEMENTS
     Ideas

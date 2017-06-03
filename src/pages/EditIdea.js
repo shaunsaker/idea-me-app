@@ -11,7 +11,7 @@ import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
-import CategoriesDropdown from '../components/CategoriesDropdown';
+import DropdownButton from '../components/DropdownButton';
 import Button from '../components/Button';
 
 export class EditIdea extends React.Component {
@@ -166,14 +166,14 @@ export class EditIdea extends React.Component {
                         placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...'}
                         handleChange={this.updateEditIdeaDescription} />
 
-                    <CategoriesDropdown
+                    <DropdownButton
                         displayText='Select a Category'
                         currentValue={this.props.editIdeaCategory ? this.props.editIdeaCategory : this.props.initialIdeaCategory}
                         values={this.props.categories}
                         handleSelect={this.selectCategory}
                         headerValue='Edit Categories'
                         pushContent={true} />
-                    <CategoriesDropdown
+                    <DropdownButton
                         displayText='Select a Priority'
                         currentValue={this.props.editIdeaPriority ? this.props.editIdeaPriority : this.props.initialIdeaPriority}
                         values={this.props.priorities}

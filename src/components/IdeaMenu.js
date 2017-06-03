@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 52,
         right: 16,
-        width: 120,
+        width: 88,
         backgroundColor: styleConstants.white,
         elevation: 5,
         shadowColor: "#000000",

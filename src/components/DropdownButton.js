@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class CategoriesDropdown extends React.Component {
+export default class DropdownButton extends React.Component {
     constructor(props) {
         super(props);
 

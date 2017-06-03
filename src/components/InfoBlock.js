@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     infoTextTitle: {
         fontSize: 32,
         color: styleConstants.white,
-        marginBottom: 8
+        marginBottom: 8,
     },
     infoTextDescription: {
         fontSize: 18,

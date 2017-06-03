@@ -17,7 +17,7 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import Logo from '../components/Logo';
 import Count from '../components/Count';
-import CategoriesDropdown from '../components/CategoriesDropdown';
+import DropdownButton from '../components/DropdownButton';
 import Card from '../components/Card';
 import TabBar from '../components/TabBar';
 import ActionModal from '../components/ActionModal';
@@ -167,7 +167,7 @@ export class Ideas extends React.Component {
           textLeft={true}
           rightComponent={count} />
 
-        <CategoriesDropdown
+        <DropdownButton
           displayText={null}
           currentValue={this.props.currentCategory}
           values={this.props.categories}

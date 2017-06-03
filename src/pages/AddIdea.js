@@ -11,7 +11,7 @@ import InputContainer from '../components/InputContainer';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
-import CategoriesDropdown from '../components/CategoriesDropdown';
+import DropdownButton from '../components/DropdownButton';
 import Button from '../components/Button';
 import Growl from '../components/Growl';
 
@@ -140,14 +140,14 @@ export class AddIdea extends React.Component {
             placeholder="ENTER YOUR DESCRIPTION HERE"
             value={this.props.newIdeaDescription}
             handleChange={this.updateNewIdeaDescription} />
-          <CategoriesDropdown
+          <DropdownButton
             displayText='Select a Category'
             currentValue={this.props.newIdeaCategory ? this.props.newIdeaCategory : null}
             values={this.props.categories}
             handleSelect={this.selectCategory}
             headerValue='Edit Categories'
             pushContent={true} />
-          <CategoriesDropdown
+          <DropdownButton
             displayText='Select a Priority'
             currentValue={this.props.newIdeaPriority ? this.props.newIdeaPriority : null}
             values={this.props.priorities}
