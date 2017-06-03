@@ -19,7 +19,6 @@ PAGES
     Add Category
         Save categories on continue
 
-    GIVE HEADER A BACK PROP TO AUTO SET CHEV_LEFT ICON AND ACTIONS>POP
     VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
     SAVE ALL DATA, THEN UPDATE THE STORE
     Link inputs to errorType to reset password ?

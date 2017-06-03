@@ -105,9 +105,7 @@ export class AddIdea extends React.Component {
 
         <Header
           text='Add an Idea'
-          rightIconName='close'
-          rightIconSize={28}
-          handleRightIconPress={() => Actions.pop()}
+          closeButton
           headerShadow />
 
         <InputContainer>

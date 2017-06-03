@@ -53,8 +53,7 @@ export class Welcome extends React.Component {
                 <Header 
                     text='Log In'
                     handleTextPress={() => Actions.signInWithEmail()}
-                    textRight={true}
-                    headerShadow={false} />
+                    textRight={true} />
 
                 <Logo />
 

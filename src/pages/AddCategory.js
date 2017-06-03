@@ -71,9 +71,7 @@ export class AddCategory extends React.Component {
 
         <Header
           text='Add a Category'
-          rightIconName='close'
-          rightIconSize={28}
-          handleRightIconPress={() => Actions.pop()}
+          closeButton
           headerShadow />
 
         <InputContainer>

@@ -8,6 +8,7 @@ import {
 	Dimensions,
 	Platform
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../styles/styleConstants';
@@ -54,22 +55,14 @@ export default class Header extends React.Component {
 	static get propTypes() {
 		return {
 			headerContainerStyle: React.PropTypes.object,
-
-			leftIconName: React.PropTypes.string,
 			leftComponent: React.PropTypes.func,
-			leftIconSize: React.PropTypes.number,
-			handleLeftIconPress: React.PropTypes.func,
-
 			textComponent: React.PropTypes.func,
 			text: React.PropTypes.string,
 			textLeft: React.PropTypes.bool,
 			textRight: React.PropTypes.bool,
 			handleTextPress: React.PropTypes.func,
-
 			rightComponent: React.PropTypes.func,
-			rightIconName: React.PropTypes.string,
-			rightIconSize: React.PropTypes.number,
-			handleRightIconPress: React.PropTypes.func,
+			headerShadow: React.PropTypes.bool,
 		}
 	}
 
@@ -93,15 +86,15 @@ export default class Header extends React.Component {
 				{this.props.leftComponent()}
 			</View>
 			:
-			this.props.leftIconName ?
+			this.props.backButton ?
 				<TouchableOpacity
 					style={styles.leftIconContainer}
-					onPress={this.props.handleLeftIconPress} >
+					onPress={() => Actions.pop()} >
 					<Icon
-						name={this.props.leftIconName}
+						name='chevron-left'
 						color={styleConstants.white}
-						size={this.props.leftIconSize}
-						style={[styles.leftIcon, this.props.leftIconStyle]} />
+						size={36}
+						style={styles.leftIcon} />
 				</TouchableOpacity>
 				:
 				this.props.textLeft ?
@@ -133,15 +126,15 @@ export default class Header extends React.Component {
 				{this.props.rightComponent()}
 			</View>
 			:
-			this.props.rightIconName ?
+			this.props.closeButton ?
 				<TouchableOpacity
 					style={styles.rightIconContainer}
-					onPress={this.props.handleRightIconPress} >
+					onPress={() => Actions.pop()} >
 					<Icon
-						name={this.props.rightIconName}
+						name='close'
 						color={styleConstants.white}
-						size={this.props.rightIconSize}
-						style={[styles.rightIcon, this.props.rightIconStyle]} />
+						size={28}
+						style={styles.rightIcon} />
 				</TouchableOpacity>
 				:
 				this.props.textRight ? 

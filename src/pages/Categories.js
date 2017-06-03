@@ -77,9 +77,7 @@ export class Categories extends React.Component {
           text='Categories'
           textSize={28}
           textStyle={styleConstants.robotoCondensed}
-          leftIconName='chevron-left'
-          leftIconSize={36}
-          handleLeftIconPress={() => Actions.pop()}
+          backButton
           headerShadow />
 
         <CategoriesList

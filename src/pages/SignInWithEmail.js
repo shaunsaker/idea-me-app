@@ -90,10 +90,7 @@ export class SignInWithEmail extends React.Component {
                     text='Forgot Password?'
                     handleTextPress={() => Actions.forgotPassword()}
                     textRight={true}
-                    leftIconName='chevron-left'
-                    leftIconSize={36}
-                    handleLeftIconPress={() => Actions.pop()} 
-                    headerShadow={false} />
+                    backButton />
 
                 <InputContainer>
                     <InfoBlock
