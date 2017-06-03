@@ -29,10 +29,10 @@ export class Ideas extends React.Component {
     super(props);
 
     this.selectCategory = this.selectCategory.bind(this);
+    this.selectMenuItem = this.selectMenuItem.bind(this);
     this.editIdea = this.editIdea.bind(this);
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
-    this.saveIdeas = this.saveIdeas.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
 
     this.state = {
@@ -63,6 +63,18 @@ export class Ideas extends React.Component {
     }
   }
 
+  selectMenuItem(type, idea) {
+    if (type === 'Edit') {
+      this.editIdea(idea);
+    }
+    else if (type === 'Share') {
+      this.shareIdea(idea);
+    }
+    else {
+      this.deleteIdea(idea);
+    }
+  }
+
   editIdea(idea) {
     Actions.editIdea(idea);
   }
@@ -79,23 +91,19 @@ export class Ideas extends React.Component {
       .catch((error) => console.log('Share error:', error.message));
   }
 
-  deleteIdea(title) {
+  deleteIdea(idea) {
     this.toggleModal();
 
     this.props.dispatch({
       type: 'DELETE_IDEA',
-      title
+      idea
     });
 
     this.saveIdeas();
   }
 
   saveIdeas() {
-    // this.props.dispatch({
-    //   type: 'saveUserIdeas',
-    //   ideas: this.props.ideas,
-    //   uid: this.props.uid
-    // });
+    // TODO    
   }
 
   toggleModal(title) {
@@ -117,9 +125,7 @@ export class Ideas extends React.Component {
       <Card
         item={item}
         currentCategory={this.props.currentCategory}
-        handleEdit={this.editIdea}
-        handleShare={this.shareIdea}
-        handleDelete={this.toggleModal} />
+        handleSelect={this.selectMenuItem} />
     );
   }
 

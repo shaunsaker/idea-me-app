@@ -1,6 +1,7 @@
 import React from "react";
 import {
 	View,
+    FlatList,
 	Text,
 	TouchableOpacity,
 	StyleSheet,
@@ -45,11 +46,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class IdeaMenu extends React.Component {
+export default class Menu extends React.Component {
     constructor(props) {
         super(props);
 
         this.toggleMenu = this.toggleMenu.bind(this);
+        this.renderItem = this.renderItem.bind(this);
 
         this.state = {
             showMenu: false
@@ -58,7 +60,8 @@ export default class IdeaMenu extends React.Component {
 
 	static get propTypes() {
 		return {
-            idea: React.PropTypes.object,
+            values: React.PropTypes.array.isRequired,
+            handleSelect: React.PropTypes.func.isRequired,
 		}
 	}
 
@@ -68,41 +71,32 @@ export default class IdeaMenu extends React.Component {
         });
     }
 
-	render() {
-        const menuFooter = null;
+    renderItem({ item }) {
+        return (
+            <TouchableOpacity
+                style={styles.menuItemContainer}
+                onPress={() => { this.toggleMenu(); this.props.handleSelect(item) }} >
+                <Text
+                    style={[styles.menuItemText, styleConstants.robotoCondensed]}>
+                    {item}
+                </Text>
+            </TouchableOpacity>
+        )
+    }
 
+	render() {
         const menu = this.state.showMenu ?
-            <View style={styles.menuItemsWrapper}>
-                <TouchableOpacity
-                    style={styles.menuItemContainer}
-                    onPress={() => {this.toggleMenu(); this.props.handleEdit(this.props.idea)}} >
-                    <Text
-                        style={[styles.menuItemText, styleConstants.robotoCondensed]}>
-                        Edit
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.menuItemContainer}
-                    onPress={() => {this.toggleMenu(); this.props.handleShare(this.props.idea)}} >
-                    <Text
-                        style={[styles.menuItemText, styleConstants.robotoCondensed]}>
-                        Share
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.menuItemContainer}
-                    onPress={() => {this.toggleMenu(); this.props.handleDelete(this.props.idea.title)}} >
-                    <Text
-                        style={[styles.menuItemText, styleConstants.robotoCondensed]}>
-                        Delete
-                    </Text>
-                </TouchableOpacity>
-            </View>
+            <FlatList
+                keyExtractor={item => 'menu' + item}
+                data={this.props.values}
+                renderItem={this.renderItem}
+                style={styles.menuItemsWrapper} />
             :
             null;
         
 		return (
 			<View style={styles.menuContainer}>
+
                 <TouchableOpacity 
                     onPress={this.toggleMenu}
                     style={styles.menuIconContainer}>
@@ -112,7 +106,9 @@ export default class IdeaMenu extends React.Component {
                         color={styleConstants.primary}
                         style={styles.menuIcon} />
                 </TouchableOpacity>
+
                 {menu}
+
 			</View>
 		);
 	}

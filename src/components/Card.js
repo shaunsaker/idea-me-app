@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import InfoBlock from './InfoBlock';
-import IdeaMenu from './IdeaMenu';
+import Menu from './Menu';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -104,11 +104,9 @@ export default Card = (props) => {
                 subtitleColor={styleConstants.grey} />
 
             <View style={styles.menuContainer}>
-                <IdeaMenu 
-                    idea={props.item}
-                    handleEdit={props.handleEdit}
-                    handleShare={props.handleShare}
-                    handleDelete={props.handleDelete} />
+                <Menu 
+                    values={['Edit', 'Share', 'Delete']}
+                    handleSelect={(type) => props.handleSelect(type, props.item)} />
             </View>
             
             <View

@@ -9,7 +9,7 @@ PAGES
         Facebook login not working
         Google signin not setup
     Ideas
-        IdeaMenu => Menu (reusable)
+        Menu => Menu (reusable)
 
 HANDLE MODALS PROPERLY
     Ideas
@@ -29,7 +29,7 @@ VALUES SHOULD BE TRIMMED IN THE FIRSTCHARTOUPPERCASE FUNCTION
         Idea title should not already be present
     Categories
         Combine categories and ideas store action and saving data
-        No border radius
+        Refactor into component - CategoriesList
     Add Category
 
     Link inputs to errorType to reset password ?

@@ -228,7 +228,7 @@ export default function (state = initialState, action) {
             let id;
             let newIdeas = new_state.userData.ideas;
             newIdeas.map((value, index) => {
-                if (value.title === action.title) {
+                if (value.title === action.idea.title) {
                     id = index;
                 }
             });
