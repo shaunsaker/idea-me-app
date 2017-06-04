@@ -12,12 +12,12 @@ export default function (state = initialState, action) {
         /* AUTH */
         case 'UPDATE_USER_EMAIL':
             new_state = cloneObject(state);
-            new_state.userData.profile.email = action.value;
+            new_state.userData.profile.userEmail = action.value;
             return new_state;
 
         case 'UPDATE_USER_PASSWORD':
             new_state = cloneObject(state);
-            new_state.auth.password = action.value;
+            new_state.auth.userPassword = action.value;
             return new_state;
 
         case 'REDIRECT_USER_TO_WELCOME':
@@ -45,7 +45,7 @@ export default function (state = initialState, action) {
 		*/
 		case 'SET_CURRENT_LOCATION':
 			new_state = cloneObject(state);
-			new_state.geolocation.currentLocation = action.userLocation;
+			new_state.geolocation.currentLocation = action.currentLocation;
 			new_state.geolocation.geolocationSuccess = true;
 			new_state.app.loading = false; // for profile page
 			return new_state;
@@ -158,12 +158,12 @@ export default function (state = initialState, action) {
         /* USER DATA */
 		case 'SET_USER_LOCATION':
 			new_state = cloneObject(state);
-			new_state.user.location = action.location;
+			new_state.userData.profile.userLocation = action.userLocation;
 			return new_state;
 
 		case 'SET_USER_PHOTO':
 			new_state = cloneObject(state);
-			new_state.user.photoUrl = action.photoUrl;
+			new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
 			new_state.api.apiSuccess = true;
             new_state.app.loading = false;
 			return new_state;   

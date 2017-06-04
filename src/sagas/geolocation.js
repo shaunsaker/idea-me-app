@@ -14,7 +14,7 @@ export function* getUserLocation(action) {
 		if (userSuburbResponse.success) {
 			yield put({
 				type: 'SET_CURRENT_LOCATION',
-				userLocation: userSuburbResponse.message,
+				currentLocation: userSuburbResponse.message,
 			});
 		}
 		else {
@@ -22,6 +22,9 @@ export function* getUserLocation(action) {
 
 			// Display more informative error message
 			if (userSuburbResponse.message === 'Service not Available') {
+				message = 'Geolocation service not available';
+			}
+			else if (userSuburbResponse.message === 'Timed out waiting for response from server') {
 				message = 'Geolocation service not available';
 			}
 			else {

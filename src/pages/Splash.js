@@ -33,7 +33,7 @@ export class Splash extends React.Component {
         }
 
         // When a user is signed in and reloads app
-        else if (this.props.authenticated && !this.props.apiSuccess) {
+        else if (this.props.authenticated && this.props.geolocationSuccess && !this.props.apiSuccess) {
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid

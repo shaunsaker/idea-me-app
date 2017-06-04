@@ -29,7 +29,7 @@ export function* signInUserWithEmail(action) {
 		yield put({
 			type: 'SIGN_IN_USER',
 			uid: signUpUserResponse.message.user.uid,
-			email: signUpUserResponse.message.user.email
+			userEmail: signUpUserResponse.message.user.email
 		});
 	}
 
@@ -90,9 +90,9 @@ export function* signInUserWithFacebook(action) {
 		yield put({
 			type: 'SIGN_IN_USER',
 			uid: uid,
-			email: signInFacebookResponse.message.user.email,
 			userName: signInFacebookResponse.message.user.displayName,
-			photoUrl: signInFacebookResponse.message.user.photoUrl,
+			userEmail: signInFacebookResponse.message.user.email,
+			userPhotoUrl: signInFacebookResponse.message.user.photoUrl,
 		});
 	}
 	else {
@@ -114,9 +114,9 @@ export function* signInUserWithFacebook(action) {
 // 		yield put({
 // 			type: 'SIGN_IN_USER',
 // 			uid: uid,
-// 			email: signInGoogleResponse.message.user.email, // check this
 // 			userName: signInGoogleResponse.message.user.userName, // check this
-// 			photoUrl: signInGoogleResponse.message.user.photoUrl, // check this
+// 			userEmail: signInGoogleResponse.message.user.email, // check this
+// 			userPhotoUrl: signInGoogleResponse.message.user.photoUrl, // check this
 // 		});
 // 	}
 // 	else {

@@ -17,7 +17,7 @@ export class SignInWithEmail extends React.Component {
     constructor(props) {
         super(props);
 
-        this.updateemail = this.updateemail.bind(this);
+        this.updateUserEmail = this.updateUserEmail.bind(this);
         this.updateUserPassword = this.updateUserPassword.bind(this);
         this.signIn = this.signIn.bind(this);
         this.resetError = this.resetError.bind(this);
@@ -25,7 +25,7 @@ export class SignInWithEmail extends React.Component {
 
     static get propTypes() {
         return {
-            email: React.PropTypes.string,
+            userEmail: React.PropTypes.string,
             userPassword: React.PropTypes.string,
             errorMessage: React.PropTypes.string,
             authenticated: React.PropTypes.bool,
@@ -39,7 +39,7 @@ export class SignInWithEmail extends React.Component {
         }
     }
 
-    updateemail(text) {
+    updateUserEmail(text) {
         this.props.dispatch({
             type: 'UPDATE_USER_EMAIL',
             value: text
@@ -54,15 +54,15 @@ export class SignInWithEmail extends React.Component {
     }
 
     signIn() {
-        if (this.props.email && (this.props.userPassword && this.props.userPassword.length >= 6)) {
+        if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
             this.props.dispatch({
                 type: 'TOGGLE_LOADING'
             });
 
             this.props.dispatch({
                 type: 'signInUserWithEmail',
-                email: this.props.email,
-                password: this.props.userPassword
+                userEmail: this.props.userEmail,
+                userPassword: this.props.userPassword
             });
         }
         else if (this.props.userPassword && this.props.userPassword.length < 6) {
@@ -80,7 +80,7 @@ export class SignInWithEmail extends React.Component {
     }
 
     render() {
-        const enableContinueButton = this.props.email && this.props.email.indexOf('@') > 0 && this.props.userPassword; 
+        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0 && this.props.userPassword; 
 
         return (
             <Page
@@ -99,8 +99,8 @@ export class SignInWithEmail extends React.Component {
 
                     <Input
                         placeholder="EMAIL ADDRESS"
-                        value={this.props.email}
-                        handleChange={this.updateemail}
+                        value={this.props.userEmail}
+                        handleChange={this.updateUserEmail}
                         handleFocus={this.resetError}
                         keyboardType='email-address' />
                     <Input
@@ -130,8 +130,8 @@ export class SignInWithEmail extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        email: state.main.userData.profile.email,
-        userPassword: state.main.auth.password,
+        userEmail: state.main.userData.profile.userEmail,
+        userPassword: state.main.auth.userPassword,
         authenticated: state.main.auth.authenticated,
         errorType: state.main.app.errorType,
     });

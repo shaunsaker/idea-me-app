@@ -27,7 +27,7 @@ export default class Auth {
 
     static signUpUser(action) {
         return new Promise(resolve => {
-            firestack.auth.createUserWithEmail(action.email, action.password)
+            firestack.auth.createUserWithEmail(action.userEmail, action.userPassword)
                 .then((user) => {
                     response.authenticated = true;
                     response.message = user;
@@ -43,7 +43,7 @@ export default class Auth {
 
     static signInUserWithEmail(action) {
         return new Promise(resolve => {
-            firestack.auth.signInWithEmail(action.email, action.password)
+            firestack.auth.signInWithEmail(action.userEmail, action.userPassword)
                 .then((user) => {
                     response.authenticated = true;
                     response.message = user;
@@ -59,7 +59,7 @@ export default class Auth {
 
     static sendPasswordResetEmail(action) {
         return new Promise(resolve => {
-            firestack.auth.sendPasswordResetWithEmail(action.email)
+            firestack.auth.sendPasswordResetWithEmail(action.userEmail)
                 .then(() => {
                     response.success = true;
                     response.message = null;

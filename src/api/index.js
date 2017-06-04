@@ -15,7 +15,7 @@ export default class Api {
         }
 
         return new Promise(resolve => {
-            firestack.database.ref(uid).update({ // PLEASE NOTE: use database as method and not as instance, ie. not database()
+            firestack.database.ref('users/' + uid).update({ // PLEASE NOTE: use database as method and not as instance, ie. not database()
                 ideas: action.ideas
             })
             .then(() => {
@@ -39,7 +39,7 @@ export default class Api {
         }
 
         return new Promise(resolve => {
-            firestack.database.ref(uid).update({ // PLEASE NOTE: use database as method and not as instance, ie. not database()
+            firestack.database.ref('users/' + uid).update({ // PLEASE NOTE: use database as method and not as instance, ie. not database()
                 categories: action.categories
             })
             .then(() => {
@@ -65,7 +65,7 @@ export default class Api {
         let userData;
 
         return new Promise(resolve => { 
-            firestack.database.ref(uid).on('value', snapshot => {
+            firestack.database.ref('users/' + uid).on('value', snapshot => {
                 response.success = true;
                 response.message = snapshot.val();
                 resolve(response);
@@ -77,13 +77,20 @@ export default class Api {
     }
 
     static saveUserLocation(action) {
+        let uid = action.uid;
+
+        // If we did not receive the uid via props, get the uid from firestack
+        if (!uid) {
+            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
+        }
+
         return new Promise(resolve => {
-            firestack.database.ref('users/' + action.uid).update({ 
-				location: action.location,
+            firestack.database.ref('users/' + uid + '/profile').update({ 
+				userLocation: action.userLocation,
             })
             .then(() => {
                 response.success = true;
-                response.message = null;
+                response.message = action.userLocation;
                 resolve(response);
             })
             .catch(error => {
@@ -95,13 +102,20 @@ export default class Api {
     }
 
     static saveUserPhoto(action) {
+        let uid = action.uid;
+
+        // If we did not receive the uid via props, get the uid from firestack
+        if (!uid) {
+            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
+        }
+
         return new Promise(resolve => {
-            firestack.database.ref('users/' + action.uid).update({ 
-				photoUrl: action.photoUrl,
+            firestack.database.ref('users/' + uid + '/profile').update({ 
+				userPhotoUrl: action.userPhotoUrl,
             })
             .then(() => {
                 response.success = true;
-                response.message = action.photoUrl;
+                response.message = action.userPhotoUrl;
                 resolve(response);
             })
             .catch(error => {

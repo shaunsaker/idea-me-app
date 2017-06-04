@@ -34,9 +34,9 @@ export class Profile extends React.Component {
         return {
             uid: React.PropTypes.string,
             userName: React.PropTypes.string,
-            email: React.PropTypes.string,
-            location: React.PropTypes.string,
-            photoUrl: React.PropTypes.string,
+            userEmail: React.PropTypes.string,
+            userLocation: React.PropTypes.string,
+            userPhotoUrl: React.PropTypes.string,
             numberOfIdeas: React.PropTypes.number, 
         };
     }
@@ -91,9 +91,9 @@ export class Profile extends React.Component {
                 <View>
                     <ProfileCard
                         userName={this.props.userName}
-                        photoUrl={this.props.photoUrl}
-                        email={this.props.email}
-                        location={this.props.location}
+                        userPhotoUrl={this.props.userPhotoUrl}
+                        userEmail={this.props.userEmail}
+                        userLocation={this.props.userLocation}
                         numberOfIdeas={this.props.numberOfIdeas}
                         handleEditImagePress={() => Actions.editProfile()} />
 
@@ -118,9 +118,9 @@ function mapStateToProps(state) {
     return ({
         uid: state.main.auth.uid,
         userName: state.main.userData.profile.userName,
-        email: state.main.userData.profile.email,
-        location: state.main.userData.profile.location,
-        photoUrl: state.main.userData.profile.photoUrl,
+        userEmail: state.main.userData.profile.userEmail,
+        userLocation: state.main.userData.profile.userLocation,
+        userPhotoUrl: state.main.userData.profile.userPhotoUrl,
         numberOfIdeas: state.main.userData.ideas && state.main.userData.ideas.length,
     });
 }

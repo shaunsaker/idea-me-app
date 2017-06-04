@@ -10,7 +10,7 @@ export function* uploadUserPhoto(action) {
 		yield put({
 			type: 'saveUserPhoto',
 			uid: uploadUserPhotoResponse.message.uid,
-			photoUrl: uploadUserPhotoResponse.message.photoUrl
+			userPhotoUrl: uploadUserPhotoResponse.message.photoUrl
 		});
 	}
 	else {

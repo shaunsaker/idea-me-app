@@ -26,7 +26,7 @@ export class Profile extends React.Component {
 
         this.state = {
             editUserName: null,
-            editEmail: null,
+            editUserEmail: null,
             showModal: false,}
 
         this.imagePickerOptions = {
@@ -42,7 +42,7 @@ export class Profile extends React.Component {
         this.choosePhoto = this.choosePhoto.bind(this);
         this.handleImage = this.handleImage.bind(this);
         this.updateEditUserName = this.updateEditUserName.bind(this);
-        this.updateEditEmail = this.updateEditEmail.bind(this);
+        this.updateEditUserEmail = this.updateEditUserEmail.bind(this);
         this.updateUserDetails = this.updateUserDetails.bind(this);
     }
 
@@ -50,15 +50,15 @@ export class Profile extends React.Component {
         return {
             uid: React.PropTypes.string,
             userName: React.PropTypes.string,
-            email: React.PropTypes.string,
-            location: React.PropTypes.string,
-            photoUrl: React.PropTypes.string,
+            userEmail: React.PropTypes.string,
+            userLocation: React.PropTypes.string,
+            userPhotoUrl: React.PropTypes.string,
         };
     }
 
     componentDidMount() {
         this.updateEditUserName(this.props.userName);
-        this.updateEditEmail(this.props.email);
+        this.updateEditUserEmail(this.props.userEmail);
     }
 
     toggleModal() {
@@ -156,9 +156,9 @@ export class Profile extends React.Component {
         });
     }
 
-    updateEditEmail(value) {
+    updateEditUserEmail(value) {
         this.setState({
-            editEmail: value
+            editUserEmail: value
         });
     }
 
@@ -175,7 +175,7 @@ export class Profile extends React.Component {
             :
             null;
 
-        const enableContinueButton = this.state.editEmail && this.state.editUserName;
+        const enableContinueButton = this.state.editUserEmail && this.state.editUserName;
 
         return (
             <Page
@@ -188,7 +188,7 @@ export class Profile extends React.Component {
 
                 <InputContainer>
                     <EditableImage
-                        uri={this.props.photoUrl}
+                        uri={this.props.userPhotoUrl}
                         handlePress={this.toggleModal} />
 
                     <Input
@@ -198,12 +198,12 @@ export class Profile extends React.Component {
 
                     <Input
                         placeholder="EMAIL ADDRESS"
-                        value={this.state.editEmail}
-                        handleChange={this.updateEditEmail} />
+                        value={this.state.editUserEmail}
+                        handleChange={this.updateEditUserEmail} />
 
                     <Button
                         iconName='location-on'
-                        text={this.props.location}
+                        text={this.props.userLocation}
                         styleMode='transparent'
                         handlePress={() => Actions.editLocation()} />
                 </InputContainer>
@@ -230,9 +230,9 @@ function mapStateToProps(state) {
     return ({
         uid: state.main.auth.uid,
         userName: state.main.userData.profile.userName,
-        email: state.main.userData.profile.email,
-        location: state.main.userData.profile.location,
-        photoUrl: state.main.userData.profile.photoUrl,
+        userEmail: state.main.userData.profile.userEmail,
+        userLocation: state.main.userData.profile.userLocation,
+        userPhotoUrl: state.main.userData.profile.userPhotoUrl,
     });
 }
 

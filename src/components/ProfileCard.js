@@ -100,9 +100,9 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileCard = (props) => {
-    const profilePhoto = props.photoUrl ?
+    const profilePhoto = props.userPhotoUrl ?
         <Image
-            source={{uri: props.photoUrl}}
+            source={{uri: props.userPhotoUrl}}
             style={styles.profileImage} />
         :
         <TouchableOpacity
@@ -127,7 +127,7 @@ export default ProfileCard = (props) => {
             
             <InfoBlock
                 title={props.userName}
-                subtitle={props.location}
+                subtitle={props.userLocation}
                 titleColor={styleConstants.primary}
                 subtitleColor={styleConstants.grey} />
 
@@ -138,7 +138,7 @@ export default ProfileCard = (props) => {
 
             <View style={styles.emailContainer}>
                 <Icon name='email' style={styles.emailIcon} />
-                <Text style={[styles.emailText, styleConstants.robotoCondensed]}>{props.email}</Text>
+                <Text style={[styles.emailText, styleConstants.robotoCondensed]}>{props.userEmail}</Text>
             </View>
 
             <View style={styles.labelsContainer}>

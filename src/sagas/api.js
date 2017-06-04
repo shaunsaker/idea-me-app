@@ -115,7 +115,7 @@ export function* saveUserLocation(action) {
 	if (saveUserLocationResponse.success) {
 		yield put({
 			type: 'SET_USER_LOCATION',
-			location: action.userLocation,
+			userLocation: action.userLocation,
 		});
 	}
 	else {
@@ -133,7 +133,7 @@ export function* saveUserPhoto(action) {
 	if (saveUserPhotoResponse.success) {
 		yield put({
 			type: 'SET_USER_PHOTO',
-			photoUrl: saveUserPhotoResponse.message,
+			userPhotoUrl: saveUserPhotoResponse.message,
 		});
 	}
 	else {

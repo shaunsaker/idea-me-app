@@ -23,10 +23,12 @@ PAGES
     Edit Profile Page
         Saving photo to db not working (permission denied)
         Prettify userName on save
-        Save on continue
+        Save userName, email and location on continue
     Edit Location Page
         All
 
+    Don't display geo errors on app load (only when user sets location)
+    Make reducers as pure as possible (should only be updating the store)
     Icons take styles from styleSheet
     Save user data on sign up
     SAVE ALL DATA, THEN UPDATE THE STORE
