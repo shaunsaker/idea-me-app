@@ -26,7 +26,7 @@ const initialState = {
     geolocation: {
         currentLocation: null,
         geolocationSuccess: null,
-        geolocationErrorMessage: null,
+        geolocationError: null,
     },
     appData: {
         currentCategory: 'All Categories',

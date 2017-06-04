@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: styleConstants.lightGrey,
     },
+    currentLocationButtonDisabled: {
+        opacity: 0.33,
+    },
     currentLocationTextContainer: {
 
     },
@@ -45,7 +48,19 @@ const styles = StyleSheet.create({
 });
 
 export default ItemListHeader = (props) => {
-    return (
+    const header = props.hasError ?
+        <View
+            style={[styles.currentLocationButton, styles.currentLocationButtonDisabled]}>
+            <View style={styles.currentLocationButtonTextContainer}>
+                <Text style={[styles.currentLocationTitleText, styleConstants.robotoCondensed]}>Use your Current Location</Text>
+                <Text style={[styles.currentLocationSubtitleText, styleConstants.robotoCondensed]}>{props.currentLocation}</Text>
+            </View>
+            <View
+                style={styles.currentLocationIconContainer}>
+                <Icon name='gps-fixed' style={styles.currentLocationIcon} />
+            </View>
+        </View>
+        :
         <TouchableOpacity
             onPress={() => props.handlePress(props.currentLocation)}
             style={styles.currentLocationButton}>
@@ -57,6 +72,7 @@ export default ItemListHeader = (props) => {
                 style={styles.currentLocationIconContainer}>
                 <Icon name='gps-fixed' style={styles.currentLocationIcon} />
             </View>
-        </TouchableOpacity>
-    )
+        </TouchableOpacity>;
+
+    return header;
 }

@@ -26,9 +26,8 @@ PAGES
     Edit Location Page
         Save user location
 
-    Update suburbs or use a geo-service
-    Don't display geo errors on app load (only when user sets location)
     Make reducers as pure as possible (should only be updating the store)
+    Growl retry action
     Icons take styles from styleSheet
     Save user data on sign up
     SAVE ALL DATA, THEN UPDATE THE STORE
@@ -57,6 +56,7 @@ PAGES
     Various Android zIndex issues to be fixed in RN 0.45.0
     While the glow loader is loading it will be cool to be able to tap it and make it grow
     Empty state
+    Update suburbs or use a geo-service
 
 ENHANCEMENTS
     Ideas

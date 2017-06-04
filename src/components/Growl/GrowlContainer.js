@@ -29,7 +29,6 @@ export class Growl extends React.Component {
             authErrorMessage: React.PropTypes.string,
             authSuccessMessage: React.PropTypes.string,
             apiErrorMessage: React.PropTypes.string,
-            geolocationErrorMessage: React.PropTypes.string,
             storageErrorMessage: React.PropTypes.string,
 
             errorType: React.PropTypes.string,  
@@ -76,13 +75,10 @@ export class Growl extends React.Component {
                     this.props.apiErrorMessage ?
                         this.props.apiErrorMessage 
                         :
-                        this.props.geolocationErrorMessage ?
-                            this.props.geolocationErrorMessage 
+                        this.props.storageErrorMessage ?
+                            this.props.storageErrorMessage 
                             :
-                            this.props.storageErrorMessage ?
-                                this.props.storageErrorMessage 
-                                :
-                                null;  
+                            null;  
 
         const errorGrowl = errorMessage ?
             <GrowlComponent 
@@ -121,7 +117,6 @@ function mapStateToProps(state) {
         authErrorMessage: state.main.auth.authErrorMessage,
         authSuccessMessage: state.main.auth.authSuccessMessage,
         apiErrorMessage: state.main.api.apiErrorMessage,
-        geolocationErrorMessage: state.main.geolocation.geolocationErrorMessage ,
         storageErrorMessage: state.main.storage.storageErrorMessage,
 
         errorType: state.main.app.errorType,

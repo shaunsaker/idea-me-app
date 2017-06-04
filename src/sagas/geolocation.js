@@ -18,29 +18,16 @@ export function* getUserLocation(action) {
 			});
 		}
 		else {
-			let message;
-
-			// Display more informative error message
-			if (userSuburbResponse.message === 'Service not Available') {
-				message = 'Geolocation service not available';
-			}
-			else if (userSuburbResponse.message === 'Timed out waiting for response from server') {
-				message = 'Geolocation service not available';
-			}
-			else {
-				message = userSuburbResponse.message;
-			}
-
 			yield put({
 				type: 'GEOLOCATION_ERROR',
-				message: message,
+				message: 'Geolocation Services not Available',
 			});
 		}
 	}
 	else {
 		yield put({
 			type: 'GEOLOCATION_ERROR',
-			message: userCoordinatesResponse.message,
+			message: 'Geolocation Services not Available',
 		});
 	}
 }
