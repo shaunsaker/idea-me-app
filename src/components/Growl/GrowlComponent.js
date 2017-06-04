@@ -7,7 +7,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../../styles/icons/index';
 
 import styleConstants from '../../styles/styleConstants';
 
@@ -144,7 +144,7 @@ export default class GrowlComponent extends React.Component {
                     onPress={this.hideGrowl}
                     style={styles.closeIconContainer} >
                     <Icon
-                        name={'close'}
+                        name='close'
                         style={styles.icon} />
                 </TouchableOpacity>
             </Animated.View>

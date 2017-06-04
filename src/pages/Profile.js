@@ -6,6 +6,7 @@ import {
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
+import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 

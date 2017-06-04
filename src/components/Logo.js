@@ -4,7 +4,7 @@ import {
     View,
     StyleSheet,
 } from "react-native";
-import OctIcon from 'react-native-vector-icons/Octicons';
+import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -30,7 +30,7 @@ export default Logo = (props) => {
     return (
         <View
             style={styles.container} >
-            <OctIcon
+            <Icon
                 name='light-bulb'
                 style={styles.icon} />
             <Text style={[styles.text, styleConstants.ranga]}>

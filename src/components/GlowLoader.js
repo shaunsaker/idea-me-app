@@ -6,7 +6,7 @@ import {
     Easing,
     StyleSheet,
 } from "react-native";
-import Icon from 'react-native-vector-icons/Octicons';
+import Icon from '../styles/icons/index';;
 
 import styleConstants from '../styles/styleConstants';
 

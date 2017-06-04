@@ -6,7 +6,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -57,7 +57,7 @@ export default ItemListHeader = (props) => {
             </View>
             <View
                 style={styles.currentLocationIconContainer}>
-                <Icon name='gps-fixed' style={styles.currentLocationIcon} />
+                <Icon name='gps-disabled' style={styles.currentLocationIcon} />
             </View>
         </View>
         :

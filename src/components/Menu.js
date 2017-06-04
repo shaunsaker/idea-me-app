@@ -6,7 +6,7 @@ import {
 	TouchableOpacity,
 	StyleSheet,
 } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
 
     },
     menuIcon: {
-        left: 10,
-        fontSize: 28,
+        left: 8,
+        fontSize: 24,
     },
     menuItemsWrapper: {
         position: 'absolute',

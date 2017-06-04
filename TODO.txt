@@ -26,7 +26,7 @@ PAGES
     Edit Location Page
         Save user location
 
-    Custom icons
+    Material Inputs
     Save user data on sign up
     SAVE ALL DATA, THEN UPDATE THE STORE
     Sound when idea added

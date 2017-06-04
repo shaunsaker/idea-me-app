@@ -5,7 +5,7 @@ import {
 	StyleSheet,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'stretch'
 	},
 	icon: {
-        fontSize: 28,
+        fontSize: 24,
 	}
 });
 

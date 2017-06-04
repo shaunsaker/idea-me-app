@@ -6,8 +6,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         left: 16,
-        fontSize: 28,
+        fontSize: 18,
     },
     text: {
         fontSize: 18,
@@ -76,14 +75,9 @@ export default Button = (props) => {
 
     const icon = 
         props.iconName ?
-            props.materialCommunityIcon ?
-                <MaterialCommunityIcon
-                    name={props.iconName}
-                    style={[styles.icon, {color: textColor}]} />
-                :
-                <MaterialIcon
-                    name={props.iconName}
-                    style={[styles.icon, {color: textColor}]} />
+            <Icon
+                name={props.iconName}
+                style={[styles.icon, {color: textColor}]} />
             :
             null;
 

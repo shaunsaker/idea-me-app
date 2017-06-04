@@ -10,7 +10,7 @@ import {
 	Platform
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../styles/icons/index';
 
 import DeleteButton from './DeleteButton';
 
@@ -42,8 +42,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	leftIcon: {
-		marginLeft: -12,
-		fontSize: 36,
+		fontSize: 18,
 		color: styleConstants.white,
 	},
 	rightIconContainer: {
@@ -52,8 +51,7 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-end'
 	},
 	rightIcon: {
-		marginRight: -6,
-		fontSize: 28,
+		fontSize: 18,
 		color: styleConstants.white,
 	},
 	inputContainer: {

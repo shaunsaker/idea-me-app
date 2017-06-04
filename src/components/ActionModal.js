@@ -6,7 +6,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -91,7 +91,7 @@ export default ActionModal = (props) => {
                         onPress={props.handleRightIconPress} >
                         <Icon
                             name='close'
-                            style={styles.icon} />
+                            style={[styles.icon, {fontSize: 14}]} />
                     </TouchableOpacity>
                 </View>
             </View>

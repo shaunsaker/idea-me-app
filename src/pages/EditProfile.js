@@ -204,7 +204,7 @@ export class Profile extends React.Component {
                         handleChange={this.updateEditUserEmail} />
 
                     <Button
-                        iconName='location-on'
+                        iconName='edit-location'
                         text={this.props.userLocation}
                         styleMode='transparent'
                         handlePress={() => Actions.editLocation()} />

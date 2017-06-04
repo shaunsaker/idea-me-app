@@ -9,7 +9,7 @@ import {
     Easing,
     Dimensions,
 } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../styles/icons/index';
 
 import Button from './Button';
 

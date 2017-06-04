@@ -7,8 +7,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import OctIcon from 'react-native-vector-icons/Octicons';
+import Icon from '../styles/icons/index';
 
 import InfoBlock from './InfoBlock';
 
@@ -115,7 +114,7 @@ export default ProfileCard = (props) => {
 
     const ideasLabel = props.numberOfIdeas ?
         <View style={styles.ideasLabel}>
-            <OctIcon name='light-bulb' style={styles.ideasIcon} />
+            <Icon name='light-bulb' style={styles.ideasIcon} />
             <Text style={[styles.labelText, styleConstants.robotoCondensed]}>{props.numberOfIdeas} excellent idea{props.numberOfIdeas > 1 ? 's' : ''}</Text>
         </View>
         :

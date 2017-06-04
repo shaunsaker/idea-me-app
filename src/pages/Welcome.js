@@ -64,7 +64,6 @@ export class Welcome extends React.Component {
 
                 <View>
                     <Button
-                        materialCommunityIcon
                         iconName='facebook'
                         handlePress={this.signInUserWithFacebook}                             
                         text='Continue with Facebook'
