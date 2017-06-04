@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
     icon: {
         marginRight: 4,
         marginBottom: 2,
+        fontSize: 24,
+        color: styleConstants.secondary,
     },
     text: {
         fontSize: 32,
@@ -30,8 +32,6 @@ export default Logo = (props) => {
             style={styles.container} >
             <OctIcon
                 name='light-bulb'
-                color={styleConstants.secondary}
-                size={24} 
                 style={styles.icon} />
             <Text style={[styles.text, styleConstants.ranga]}>
                 IdeaMe

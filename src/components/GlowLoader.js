@@ -6,7 +6,7 @@ import {
     Easing,
     StyleSheet,
 } from "react-native";
-import Octicon from 'react-native-vector-icons/Octicons';
+import Icon from 'react-native-vector-icons/Octicons';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -61,7 +61,7 @@ export default class GlowLoader extends React.Component {
         return (
             <Animated.View style={[styles.container, {transform: [{scale: animatedSize}]}]}>
                 <Animated.Text style={{ color: animatedColor }}>
-                    <Octicon
+                    <Icon
                         name='light-bulb'
                         size={this.props.size ? this.props.size : 32} />
                 </Animated.Text>

@@ -4,7 +4,7 @@ import {
     TouchableOpacity,
     StyleSheet,
 } from "react-native";
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     deleteIcon: {
-
+        fontSize: 18,
+        color: styleConstants.primary
     },
 });
 
@@ -28,10 +29,8 @@ export default DeleteButton = (props) => {
                 <TouchableOpacity
                     onPress={props.handlePress}
                     style={styles.deleteButton}>
-                    <MaterialIcon
+                    <Icon
                         name='close'
-                        color={styleConstants.primary}
-                        size={18}
                         style={styles.deleteIcon} />
                 </TouchableOpacity>
             </View>

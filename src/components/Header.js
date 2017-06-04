@@ -42,7 +42,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	leftIcon: {
-		marginLeft: -12
+		marginLeft: -12,
+		fontSize: 36,
+		color: styleConstants.white,
 	},
 	rightIconContainer: {
 		flex: 1,
@@ -50,7 +52,9 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-end'
 	},
 	rightIcon: {
-		marginRight: -6
+		marginRight: -6,
+		fontSize: 28,
+		color: styleConstants.white,
 	},
 	inputContainer: {
 		flex: 1,
@@ -116,8 +120,6 @@ export default class Header extends React.Component {
 					onPress={() => Actions.pop()} >
 					<Icon
 						name='chevron-left'
-						color={styleConstants.white}
-						size={36}
 						style={styles.leftIcon} />
 				</TouchableOpacity>
 				:
@@ -159,8 +161,6 @@ export default class Header extends React.Component {
 					onPress={() => Actions.pop()} >
 					<Icon
 						name='close'
-						color={styleConstants.white}
-						size={28}
 						style={styles.rightIcon} />
 				</TouchableOpacity>
 				:

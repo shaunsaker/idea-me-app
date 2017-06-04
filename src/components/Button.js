@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         position: 'absolute',
-        left: 16
+        left: 16,
+        fontSize: 28,
     },
     text: {
         fontSize: 18,
@@ -78,15 +79,11 @@ export default Button = (props) => {
             props.materialCommunityIcon ?
                 <MaterialCommunityIcon
                     name={props.iconName}
-                    size={28}
-                    color={textColor}
-                    style={styles.icon} />
+                    style={[styles.icon, {color: textColor}]} />
                 :
                 <MaterialIcon
                     name={props.iconName}
-                    size={28}
-                    color={textColor}
-                    style={styles.icon} />
+                    style={[styles.icon, {color: textColor}]} />
             :
             null;
 

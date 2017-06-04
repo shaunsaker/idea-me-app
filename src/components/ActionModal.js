@@ -6,7 +6,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -60,8 +60,9 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
     },
     icon: {
-
-    }
+        fontSize: 18,
+        color: styleConstants.primary,
+    },
 });
 
 export default ActionModal = (props) => {
@@ -81,19 +82,15 @@ export default ActionModal = (props) => {
                     <TouchableOpacity
                         style={styles.iconContainer}
                         onPress={props.handleLeftIconPress} >
-                        <MaterialIcon
+                        <Icon
                             name='check'
-                            color={styleConstants.danger}
-                            size={28}
-                            style={styles.icon} />
+                            style={[styles.icon, {color: styleConstants.danger}]} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.iconContainer}
                         onPress={props.handleRightIconPress} >
-                        <MaterialIcon
+                        <Icon
                             name='close'
-                            color={styleConstants.primary}
-                            size={28}
                             style={styles.icon} />
                     </TouchableOpacity>
                 </View>

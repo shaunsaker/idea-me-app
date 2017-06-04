@@ -7,7 +7,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../../styles/styleConstants';
 
@@ -57,14 +57,12 @@ const styles = StyleSheet.create({
         marginTop: 2
     },
     icon: {
-
+        fontSize: 24,
+        color: styleConstants.lightGrey,
     },
     closeIconContainer: {
         alignSelf: 'stretch',
     },
-    closeIcon: {
-
-    }
 });
 
 export default class GrowlComponent extends React.Component {
@@ -129,11 +127,9 @@ export default class GrowlComponent extends React.Component {
             <Animated.View style={[styles.messageWrapper, { bottom: this.state.bottom }]}>
                 <View style={styles.messageContainer}>
                     <View style={styles.iconContainer}>
-                        <MaterialIcon
+                        <Icon
                             name={iconName}
-                            color={this.props.success ? styleConstants.success : styleConstants.danger}
-                            size={24}
-                            style={styles.icon} />
+                            style={[styles.icon, {color: this.props.success ? styleConstants.success : styleConstants.danger}]} />
                     </View>
                     <View style={styles.messageTextContainer}>
                         <Text
@@ -147,11 +143,9 @@ export default class GrowlComponent extends React.Component {
                 <TouchableOpacity
                     onPress={this.hideGrowl}
                     style={styles.closeIconContainer} >
-                    <MaterialIcon
+                    <Icon
                         name={'close'}
-                        color={styleConstants.lightGrey}
-                        size={24}
-                        style={styles.closeIcon} />
+                        style={styles.icon} />
                 </TouchableOpacity>
             </Animated.View>
         );

@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     dropdownHeaderIcon: {
         marginRight: 12,
         color: styleConstants.white,
+        fontSize: 18,
     },
     dropdownHeaderText: {
         color: styleConstants.white,
@@ -180,7 +181,7 @@ export default class DropdownButton extends React.Component {
             <TouchableOpacity
                 style={styles.dropdownHeader}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }} >
-                <Icon name='mode-edit' size={18} color={styleConstants.white} style={styles.dropdownHeaderIcon} />
+                <Icon name='mode-edit' style={styles.dropdownHeaderIcon} />
                 <Text
                     style={[styles.dropdownHeaderText, styleConstants.robotoCondensed]}>
                     {this.props.headerValue}

@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     },
     menuIcon: {
         left: 10,
+        fontSize: 28,
     },
     menuItemsWrapper: {
         position: 'absolute',
@@ -106,9 +107,7 @@ export default class Menu extends React.Component {
                     style={styles.menuIconContainer}>
                     <Icon
                         name='more-vert'
-                        size={28}
-                        color={this.props.color ? this.props.color : styleConstants.primary}
-                        style={styles.menuIcon} />
+                        style={[styles.menuIcon, {color: this.props.color ? this.props.color : styleConstants.primary}]} />
                 </TouchableOpacity>
 
                 {menu}

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'stretch'
 	},
 	icon: {
-
+        fontSize: 28,
 	}
 });
 
@@ -39,27 +39,21 @@ export default class TabBar extends React.Component {
                     style={styles.iconContainer}>
                     <Icon
                         name='home'
-                        size={28}
-                        color={this.props.currentPage === 'ideas' ? styleConstants.secondary : styleConstants.white}
-                        style={styles.icon} />
+                        style={[styles.icon, {color: this.props.currentPage === 'ideas' ? styleConstants.secondary : styleConstants.white}]} />
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={() => Actions.addIdea()}
                     style={styles.iconContainer}>
                     <Icon
                         name='add'
-                        size={28}
-                        color={this.props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white}
-                        style={styles.icon} />
+                        style={[styles.icon, {color: this.props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white}]} />
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={() => Actions.profile()} 
                     style={styles.iconContainer}>
                     <Icon
                         name='face'
-                        size={28}
-                        color={this.props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white}
-                        style={styles.icon} />
+                        style={[styles.icon, {color: this.props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white}]} />
                 </TouchableOpacity>
 			</View>
 		);
