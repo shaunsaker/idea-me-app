@@ -37,7 +37,7 @@ const Scenes = Actions.create(
 		<Scene
 			key='signInWithEmail'
 			component={SignInWithEmail}
-			initial={false} />
+			initial={true} />
 		<Scene
 			key='forgotPassword'
 			component={ForgotPassword}
@@ -46,7 +46,7 @@ const Scenes = Actions.create(
 			key='ideas'
 			component={Ideas}
 			type={ActionConst.REPLACE}
-			initial={true} />
+			initial={false} />
 		<Scene
 			key='addIdea'
 			component={AddIdea}
