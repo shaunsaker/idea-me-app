@@ -5,6 +5,18 @@ utilities.firstCharToUppercase = function (string) {
     return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);
 };
 
+utilities.prettifyUserName = function (userName) {
+    const userNameArray = userName.split(" ");
+    let prettyUserNameArray = [];
+
+    userNameArray.map((value) => {
+        prettyUserNameArray.push(utilities.firstCharToUppercase(value));
+    });
+
+    const prettyUserName = prettyUserNameArray.join(" ");
+    return prettyUserName;
+}
+
 utilities.sortIdeas = function (ideas, currentCategory) {
 
     // Prioritise our ideas in order of variables below

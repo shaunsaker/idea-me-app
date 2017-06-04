@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import ImagePicker from 'react-native-image-picker';
 import ImageResizer from 'react-native-image-resizer';
 
+import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
@@ -163,7 +164,9 @@ export class Profile extends React.Component {
     }
 
     updateUserDetails() {
+        const prettyUserName = utilities.prettifyUserName(this.state.editUserName);
 
+        // Save to DB
     }
 
     render() {

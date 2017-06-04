@@ -22,7 +22,6 @@ PAGES
         Menu component should be in header but overlay issues (to be fixed in RN 0.45)
     Edit Profile Page
         Saving photo to db not working (permission denied)
-        Prettify userName on save
         Save userName, email and location on continue
     Edit Location Page
         All
