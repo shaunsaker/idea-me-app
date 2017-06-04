@@ -100,8 +100,7 @@ export class AddIdea extends React.Component {
     const enableContinueButton = this.state.newIdeaTitle;
 
     return (
-      <Page
-        backgroundColor={styleConstants.primary}>
+      <Page>
 
         <Header
           text='Add an Idea'
@@ -117,7 +116,7 @@ export class AddIdea extends React.Component {
             placeholder="ENTER YOUR DESCRIPTION HERE"
             value={this.state.newIdeaDescription}
             handleChange={this.updateNewIdeaDescription}
-            multiline={true} />
+            multiline/>
             
           <DropdownButton
             displayText='Select a Category'
@@ -125,13 +124,13 @@ export class AddIdea extends React.Component {
             values={this.props.categories}
             handleSelect={this.selectCategory}
             headerValue='Edit Categories'
-            pushContent={true} />
+            pushContent />
           <DropdownButton
             displayText='Select a Priority'
             currentValue={this.state.newIdeaPriority}
             values={this.props.priorities}
             handleSelect={this.selectPriority}
-            pushContent={true} />
+            pushContent />
         </InputContainer>
 
         <Button

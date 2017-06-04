@@ -78,7 +78,6 @@ export class Splash extends React.Component {
     render() {
         return (
             <Page 
-                backgroundColor={styleConstants.primary}
                 justifyContent='center'
                 removeBottomPadding >
 

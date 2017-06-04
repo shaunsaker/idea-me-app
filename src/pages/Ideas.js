@@ -151,8 +151,8 @@ export class Ideas extends React.Component {
           keyExtractor={item => 'idea' + item.title}
           data={currentCategoryIdeas}
           renderItem={this.renderItem}
-          horizontal={true}
-          pagingEnabled={true} />
+          horizontal
+          pagingEnabled />
     }
 
     const modal = this.state.showModal ?
@@ -171,12 +171,11 @@ export class Ideas extends React.Component {
 
     return (
       <Page
-        backgroundColor={styleConstants.primary}
-        removeBottomPadding={true}>
+        removeBottomPadding >
 
         <Header
           textComponent={() => <Logo />}
-          textLeft={true}
+          textLeft 
           rightComponent={count} 
           headerShadow />
 

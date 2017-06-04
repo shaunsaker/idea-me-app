@@ -76,8 +76,7 @@ export class Profile extends React.Component {
 
         return (
             <Page
-                backgroundColor={styleConstants.primary}
-                removeBottomPadding={true}>
+                removeBottomPadding>
 
                 <Header
                     text='Profile'

@@ -4,6 +4,8 @@ import {
     StyleSheet,
 } from "react-native";
 
+import styleConstants from '../styles/styleConstants';
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
 export default Page = (props) => {
     const pageStyles = 
         {
-            backgroundColor: props.backgroundColor ? props.backgroundColor : '#ffffff',
+            backgroundColor: styleConstants.primary,
             justifyContent: props.justifyContent ? props.justifyContent : 'space-between',
             paddingBottom: props.removeBottomPadding ? 0 : props.fauxFooter ? 0 : 16,
         }

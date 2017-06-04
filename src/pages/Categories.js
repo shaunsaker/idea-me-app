@@ -70,8 +70,7 @@ export class Categories extends React.Component {
       null;
 
     return (
-      <Page
-        backgroundColor={styleConstants.primary} >
+      <Page>
 
         <Header
           text='Categories'

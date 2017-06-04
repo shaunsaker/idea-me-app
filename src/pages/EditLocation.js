@@ -64,8 +64,7 @@ export class EditLocation extends React.Component {
         const enableContinueButton = this.state.editUserLocation;
 
         return (
-            <Page
-                backgroundColor={styleConstants.primary}>
+            <Page>
 
                 <Header
                     backButton

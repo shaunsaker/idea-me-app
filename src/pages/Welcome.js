@@ -47,13 +47,12 @@ export class Welcome extends React.Component {
     render() {
         return (
             <Page 
-                backgroundColor={styleConstants.primary}
-                fauxFooter={true}>
+                fauxFooter>
                 
                 <Header 
                     text='Log In'
                     handleTextPress={() => Actions.signInWithEmail()}
-                    textRight={true} />
+                    textRight />
 
                 <Logo />
 

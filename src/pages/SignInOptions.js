@@ -95,8 +95,7 @@ export class SignInOptions extends React.Component {
 
         return (
             <Page
-                backgroundColor={styleConstants.primary}
-                fauxFooter={true}>
+                fauxFooter>
 
                 <Header 
                     closeButton />

@@ -83,13 +83,12 @@ export class SignInWithEmail extends React.Component {
         const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0 && this.props.userPassword; 
 
         return (
-            <Page
-                backgroundColor={styleConstants.primary}>
+            <Page>
 
                 <Header
                     text='Forgot Password?'
                     handleTextPress={() => Actions.forgotPassword()}
-                    textRight={true}
+                    textRight
                     backButton />
 
                 <InputContainer>

@@ -101,7 +101,7 @@ export class Growl extends React.Component {
         const successGrowl = successMessage ?
             <GrowlComponent 
                 text={successMessage} 
-                success={true}
+                success
                 handleReset={this.resetError} />
             :
             null;

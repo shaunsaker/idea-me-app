@@ -111,8 +111,7 @@ export class EditIdea extends React.Component {
         const enableContinueButton = this.state.editIdeaTitle;
 
         return (
-            <Page
-                backgroundColor={styleConstants.primary}>
+            <Page>
 
                 <Header
                     text='Edit Idea'
@@ -128,7 +127,7 @@ export class EditIdea extends React.Component {
                         placeholder='ENTER YOUR DESCRIPTION HERE'
                         value={this.state.editIdeaDescription}
                         handleChange={this.updateEditIdeaDescription} 
-                        multiline={true} />
+                        multiline />
 
                     <DropdownButton
                         displayText='Select a Category'
@@ -136,13 +135,13 @@ export class EditIdea extends React.Component {
                         values={this.props.categories}
                         handleSelect={this.selectCategory}
                         headerValue='Edit Categories'
-                        pushContent={true} />
+                        pushContent />
                     <DropdownButton
                         displayText='Select a Priority'
                         currentValue={this.state.editIdeaPriority}
                         values={this.props.priorities}
                         handleSelect={this.selectPriority}
-                        pushContent={true} />
+                        pushContent />
                 </InputContainer>
 
                 <Button

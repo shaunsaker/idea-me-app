@@ -20,7 +20,7 @@ import EditProfile from './pages/EditProfile';
 import EditLocation from './pages/EditLocation';
 
 const Scenes = Actions.create(
-	<Scene key='root' hideNavBar={true}>
+	<Scene key='root' hideNavBar>
 		<Scene
 			key='splash'
 			component={Splash}

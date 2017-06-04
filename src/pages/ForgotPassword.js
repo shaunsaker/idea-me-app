@@ -65,8 +65,7 @@ export class ForgotPassword extends React.Component {
         const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0; 
 
         return (
-            <Page
-                backgroundColor={styleConstants.primary}>
+            <Page>
 
                 <Header
                     backButton

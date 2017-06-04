@@ -66,8 +66,7 @@ export class AddCategory extends React.Component {
     const enableContinueButton = this.state.newCategory;
 
     return (
-      <Page
-        backgroundColor={styleConstants.primary}>
+      <Page>
 
         <Header
           text='Add a Category'
@@ -79,7 +78,7 @@ export class AddCategory extends React.Component {
             placeholder="CATEGORY NAME"
             value={this.state.newCategory}
             handleChange={this.updateNewCategory}
-            autoFocus={true} />
+            autoFocus />
         </InputContainer>
 
         <Button

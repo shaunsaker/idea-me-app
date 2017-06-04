@@ -138,7 +138,7 @@ export default class GrowlComponent extends React.Component {
                     <View style={styles.messageTextContainer}>
                         <Text
                             style={[styles.messageText, styleConstants.robotoCondensed]}
-                            multiline={true}>
+                            multiline>
                             {this.props.text}
                         </Text>
                         {retryButton}

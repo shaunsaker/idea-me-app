@@ -181,8 +181,7 @@ export class Profile extends React.Component {
         const enableContinueButton = this.state.editUserEmail && this.state.editUserName;
 
         return (
-            <Page
-                backgroundColor={styleConstants.primary} >
+            <Page>
 
                 <Header
                     text='Edit Profile'
