@@ -3,6 +3,7 @@ import {
 	View,
 	Text,
 	TouchableOpacity,
+	TextInput,
 	StatusBar,
 	StyleSheet,
 	Dimensions,
@@ -10,6 +11,8 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import DeleteButton from './DeleteButton';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -48,7 +51,24 @@ const styles = StyleSheet.create({
 	},
 	rightIcon: {
 		marginRight: -6
-	}
+	},
+	inputContainer: {
+		flex: 1,
+		justifyContent: 'center',
+	},
+	input: {
+        fontSize: 18,
+        color: styleConstants.white,
+        paddingLeft: 16,
+        paddingRight: 32,
+	},
+    clearTextButtonContainer: {
+        position: 'absolute',
+        bottom: 12,
+        right: 0,
+        height: 30,
+        justifyContent: 'center',
+    },
 });
 
 export default class Header extends React.Component {
@@ -62,6 +82,10 @@ export default class Header extends React.Component {
 			textRight: React.PropTypes.bool,
 			handleTextPress: React.PropTypes.func,
 			rightComponent: React.PropTypes.func,
+			showInput: React.PropTypes.bool,
+			inputValue: React.PropTypes.string,
+			inputPlaceholderText: React.PropTypes.string,
+			handleChangeText: React.PropTypes.func,
 			headerShadow: React.PropTypes.bool,
 		}
 	}
@@ -88,7 +112,7 @@ export default class Header extends React.Component {
 			:
 			this.props.backButton ?
 				<TouchableOpacity
-					style={styles.leftIconContainer}
+					style={this.props.showInput ? {justifyContent: 'center'} : styles.leftIconContainer}
 					onPress={() => Actions.pop()} >
 					<Icon
 						name='chevron-left'
@@ -117,9 +141,12 @@ export default class Header extends React.Component {
 					<Text style={[styles.text, styleConstants.robotoCondensed, this.props.textStyle]}>{this.props.text}</Text>
 				</TouchableOpacity>
 				:
-				<View style={[styles.textContainer, textRightStyles]}>
-					<Text style={[styles.text, styleConstants.robotoCondensed, this.props.textStyle]}>{this.props.text}</Text>
-				</View>;
+				this.props.showInput ?
+					null
+					:
+					<View style={[styles.textContainer, textRightStyles]}>
+						<Text style={[styles.text, styleConstants.robotoCondensed, this.props.textStyle]}>{this.props.text}</Text>
+					</View>;
 
 		const rightIcon = this.props.rightComponent ?
 			<View style={styles.rightIconContainer}>
@@ -137,10 +164,32 @@ export default class Header extends React.Component {
 						style={styles.rightIcon} />
 				</TouchableOpacity>
 				:
-				this.props.textRight ? 
+				(this.props.textRight || this.props.showInput) ? 
 					null 
 					: 
 					<View style={styles.rightIconContainer} />;
+
+		const clearTextButton = this.props.inputValue ?
+			<View style={styles.clearTextButtonContainer}>
+				<DeleteButton 
+					handlePress={() => this.props.handleChangeText('')}/>
+			</View>
+			:
+			null;
+
+		const input = this.props.showInput ?
+			<View style={styles.inputContainer}>
+				<TextInput
+					value={this.props.inputValue}
+					placeholder={this.props.inputPlaceholderText}
+					placeholderTextColor={styleConstants.lightGrey}
+					onChangeText={(text) => this.props.handleChangeText(text)}
+					underlineColorAndroid='transparent'
+					style={[styles.input, styleConstants.robotoCondensed]}/>
+				{clearTextButton}
+			</View>
+			:
+			null;
 
 		return (
 			<View>
@@ -149,6 +198,7 @@ export default class Header extends React.Component {
 					{leftIcon}
 					{text}
 					{rightIcon}
+					{input}
 				</View>
 			</View>
 		);

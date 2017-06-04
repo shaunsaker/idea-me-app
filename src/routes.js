@@ -17,6 +17,7 @@ import Categories from './pages/Categories';
 import AddCategory from './pages/AddCategory';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
+import EditLocation from './pages/EditLocation';
 
 const Scenes = Actions.create(
 	<Scene key='root' hideNavBar={true}>
@@ -28,7 +29,7 @@ const Scenes = Actions.create(
 			key='welcome'
 			component={Welcome}
 			type={ActionConst.REPLACE}
-			initial={true} />
+			initial={false} />
 		<Scene
 			key='signInOptions'
 			component={SignInOptions}
@@ -65,11 +66,15 @@ const Scenes = Actions.create(
 		<Scene
 			key='profile'
 			component={Profile}
-			initial={false}
+			initial={true}
 			type={ActionConst.REPLACE} />
 		<Scene
 			key='editProfile'
 			component={EditProfile}
+			initial={false} />
+		<Scene
+			key='editLocation'
+			component={EditLocation}
 			initial={false} />
 	</Scene>
 )

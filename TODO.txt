@@ -24,8 +24,11 @@ PAGES
         Saving photo to db not working (permission denied)
         Save userName, email and location on continue
     Edit Location Page
-        All
+        Current Location button
+        Save user location
 
+    Page component can get bg color as default
+    Update suburbs or use a geo-service
     Don't display geo errors on app load (only when user sets location)
     Make reducers as pure as possible (should only be updating the store)
     Icons take styles from styleSheet

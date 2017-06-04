@@ -10,7 +10,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
-import CategoriesList from '../components/CategoriesList';
+import ItemList from '../components/ItemList';
 import Button from '../components/Button';
 import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
@@ -80,9 +80,10 @@ export class Categories extends React.Component {
           backButton
           headerShadow />
 
-        <CategoriesList
-          categories={this.props.categories}
-          handleDelete={this.toggleModal} />
+        <ItemList
+          items={this.props.categories}
+          deleteIcon
+          handleIconPress={this.toggleModal} />
 
         <Button
           iconName='add'
