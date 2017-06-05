@@ -3,6 +3,7 @@ import {
     View,
     Text,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     TextInput,
     StyleSheet,
     Dimensions
@@ -25,8 +26,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     inputLabelText: {
-        fontSize: 18,
-        color: styleConstants.secondary
+        fontSize: 16,
     },
     togglePasswordContainer: {
 
@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
         paddingLeft: 0,
         paddingRight: 32,
         borderBottomWidth: 1,
-        borderBottomColor: styleConstants.lightGrey,
     },
     clearTextButtonContainer: {
         position: 'absolute',
-        bottom: 12,
+        bottom: 0,
         right: 0,
-        height: 30,
+        height: 45.5,
+        paddingLeft: 8,
         justifyContent: 'center',
     },
 });
@@ -57,13 +57,22 @@ export default class Input extends React.Component {
         super(props);
 
         this.minimumInputHeight = 45.5;
+        this.inputLabelColourFocussed = styleConstants.secondary;
+        this.inputLabelColourBlurred = styleConstants.lightGrey;
+        this.inputBorderColourFocussed = styleConstants.white;
+        this.inputBorderColourBlurred = styleConstants.lightGrey;
 
         this.state = {
             hidePassword: true,
             inputHeight: this.minimumInputHeight,
+            labelColour: this.inputLabelColourBlurred,
+            borderColour: this.inputBorderColourBlurred,
         }
 
+        this.focusInput = this.focusInput.bind(this);
+        this.blurInput = this.blurInput.bind(this);
         this.togglePassword = this.togglePassword.bind(this);
+        this.clearInputText = this.clearInputText.bind(this);
         this.adjustInputHeight = this.adjustInputHeight.bind(this);
     }
 
@@ -78,6 +87,27 @@ export default class Input extends React.Component {
             autoFocus: React.PropTypes.bool,
             multiline: React.PropTypes.bool,
         };
+    }
+
+    focusInput() {
+        this.setState({
+            labelColour: this.inputLabelColourFocussed,
+            borderColour: this.inputBorderColourFocussed,
+        });
+
+        this.props.handleFocus;
+    }
+
+    blurInput() {
+        this.setState({
+            labelColour: this.inputLabelColourBlurred,
+            borderColour: this.inputBorderColourBlurred,
+        });
+    }
+
+    clearInputText() {
+        this.refs.input.focus();
+        this.props.handleChange('');
     }
 
     togglePassword() {
@@ -118,32 +148,46 @@ export default class Input extends React.Component {
         const clearTextButton = this.props.value ?
             <View style={styles.clearTextButtonContainer}>
                 <DeleteButton 
-                    handlePress={() => this.props.handleChange('')}/>
+                    handlePress={this.clearInputText}/>
             </View>
             :
             null;
 
+        const inputLabelStyles = {
+            color: this.state.labelColour,
+        }
+
+        const inputStyles = {
+            height: this.state.inputHeight,
+            borderBottomColor: this.state.borderColour,
+        }
+
         return (
-            <View style={styles.inputWrapper}>
-                <View style={styles.inputLabelContainer}>
-                    <Text style={[styles.inputLabelText, styleConstants.robotoCondensed]}>
-                        {this.props.placeholder}
-                    </Text>
-                    {togglePasswordButton}
+            <TouchableWithoutFeedback
+                onPress={() => this.refs.input.focus()} >
+                <View style={styles.inputWrapper}>
+                    <View style={styles.inputLabelContainer}>
+                        <Text style={[styles.inputLabelText, inputLabelStyles, styleConstants.robotoCondensed]}>
+                            {this.props.placeholder}
+                        </Text>
+                        {togglePasswordButton}
+                    </View>
+                    <TextInput
+                        ref='input'
+                        value={this.props.value ? this.props.value : ''}
+                        underlineColorAndroid='transparent'
+                        style={[styles.input, inputStyles, styleConstants.robotoCondensed]}
+                        onChangeText={(text) => this.props.handleChange(text)}
+                        onFocus={this.focusInput}
+                        onBlur={this.blurInput}
+                        secureTextEntry={this.props.type === 'password' && this.state.hidePassword}
+                        keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
+                        autoFocus={this.props.autoFocus} 
+                        multiline={this.props.multiline}
+                        onChange={this.props.multiline ? (event) => this.adjustInputHeight(event) : null /*NOTE: this does not work with onContentSizeChange */} />
+                    {clearTextButton}
                 </View>
-                <TextInput
-                    value={this.props.value ? this.props.value : ''}
-                    underlineColorAndroid='transparent'
-                    style={[{height: this.state.inputHeight}, styles.input, styleConstants.robotoCondensed]}
-                    onChangeText={(text) => this.props.handleChange(text)}
-                    onFocus={this.props.handleFocus}
-                    secureTextEntry={this.props.type === 'password' && this.state.hidePassword}
-                    keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
-                    autoFocus={this.props.autoFocus} 
-                    multiline={this.props.multiline}
-                    onChange={this.props.multiline ? (event) => this.adjustInputHeight(event) : null /*NOTE: this does not work with onContentSizeChange */} />
-                {clearTextButton}
-            </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
