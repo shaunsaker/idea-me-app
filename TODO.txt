@@ -32,10 +32,8 @@ PAGES
     Settings
         All
 
-    Input labels aren't floating on mount    
     Announcement page for when I need to make some sort of announcement
         Based on api prop
-    Keyboard should be dismissed when input is blurred
     Why do I need to sign up text button
         Opens modal with explanation
     Random quotes on Splash page and no animation of logo
