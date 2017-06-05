@@ -38,8 +38,6 @@ PAGES
         Opens modal with explanation
     Random quotes on Splash page and no animation of logo
     Replace ternary null statements with && operators
-    Lower clearX icon
-    Animate show/hide text from right when password input focussed
     On logo mount, animate lightbulb colour
     On Splash load, animate lightbulb colour
     Remove bin and share icons

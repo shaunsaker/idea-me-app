@@ -6,7 +6,8 @@ import {
     TouchableWithoutFeedback,
     TextInput,
     StyleSheet,
-    Dimensions
+    Dimensions,
+    Animated,
 } from "react-native";
 
 import styleConstants from '../styles/styleConstants';
@@ -28,13 +29,6 @@ const styles = StyleSheet.create({
     inputLabelText: {
         fontSize: 16,
     },
-    togglePasswordContainer: {
-
-    },
-    togglePasswordText: {
-        fontSize: 18,
-        color: styleConstants.white
-    },
     input: {
         fontSize: 18,
         color: styleConstants.white,
@@ -42,6 +36,7 @@ const styles = StyleSheet.create({
         paddingRight: 32,
         borderBottomWidth: 1,
     },
+
     clearTextButtonContainer: {
         position: 'absolute',
         bottom: 0,
@@ -50,7 +45,53 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
         justifyContent: 'center',
     },
+
+    togglePasswordContainer: {
+
+    },
+    togglePasswordText: {
+        fontSize: 18,
+        color: styleConstants.white
+    },
 });
+
+class TogglePasswordButton extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            rightPosition: new Animated.Value(-40) // start hidden
+        }
+    }
+
+    componentDidMount() {
+        Animated.timing(
+            this.state.rightPosition,
+            {
+                toValue: 0,
+                duration: 250
+            }
+        ).start();
+    }
+
+    render() {
+        const animatedStyles = {
+            right: this.state.rightPosition,
+        }
+
+        return (
+            <Animated.View style={animatedStyles}>
+                <TouchableOpacity
+                    onPress={this.props.handlePress}
+                    style={styles.togglePasswordContainer}>
+                    <Text style={[styles.togglePasswordText, styleConstants.robotoCondensed]}>
+                        {this.props.hidePassword ? 'Show' : 'Hide'}
+                    </Text>
+                </TouchableOpacity>
+            </Animated.View>
+        )
+    }
+}
 
 export default class Input extends React.Component {
     constructor(props) {
@@ -63,6 +104,7 @@ export default class Input extends React.Component {
         this.inputBorderColourBlurred = styleConstants.lightGrey;
 
         this.state = {
+            showTogglePasswordButton: false,
             hidePassword: true,
             inputHeight: this.minimumInputHeight,
             labelColour: this.inputLabelColourBlurred,
@@ -93,6 +135,7 @@ export default class Input extends React.Component {
         this.setState({
             labelColour: this.inputLabelColourFocussed,
             borderColour: this.inputBorderColourFocussed,
+            showTogglePasswordButton: true,
         });
 
         this.props.handleFocus;
@@ -102,6 +145,7 @@ export default class Input extends React.Component {
         this.setState({
             labelColour: this.inputLabelColourBlurred,
             borderColour: this.inputBorderColourBlurred,
+            showTogglePasswordButton: false,
         });
     }
 
@@ -134,16 +178,10 @@ export default class Input extends React.Component {
     }
 
     render() {
-        const togglePasswordButton = this.props.type === 'password' ?
-            <TouchableOpacity
-                onPress={this.togglePassword}
-                style={styles.togglePasswordContainer}>
-                <Text style={[styles.togglePasswordText, styleConstants.robotoCondensed]}>
-                    {this.state.hidePassword ? 'Show' : 'Hide'}
-                </Text>
-            </TouchableOpacity>
-            :
-            null;
+        const togglePasswordButton = this.props.type === 'password' && this.state.showTogglePasswordButton &&
+            <TogglePasswordButton
+                hidePassword={this.state.hidePassword}
+                handlePress={this.togglePassword} />;
 
         const clearTextButton = this.props.value ?
             <View style={styles.clearTextButtonContainer}>
