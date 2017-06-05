@@ -1,10 +1,12 @@
 import React from 'react';
 import {
     View,
+    TouchableOpacity,
     Text,
     StyleSheet,
     Dimensions,
 } from "react-native";
+import Icon from '../styles/icons/index';
 
 import InfoBlock from './InfoBlock';
 import Menu from './Menu';
@@ -34,10 +36,17 @@ const styles = StyleSheet.create({
             width: 0
         },
     },
-    menuContainer: {
+    menuIconContainer: {
         position: 'absolute',
-        top: 16,
-        right: 16,
+        top: 0,
+        right: 0,
+        width: 42,
+        height: 42,
+        justifyContent: 'flex-end',
+    },
+    menuIcon: {
+        fontSize: 18,
+        color: styleConstants.primary,
     },
     labelsContainer: {
         flex: 1,
@@ -47,46 +56,61 @@ const styles = StyleSheet.create({
     },
 });
 
-export default IdeaCard = (props) => {
-    const categoryLabelText = props.idea.category ? props.idea.category : 'Uncategorised';
-    const priorityLabelText = props.idea.priority ? props.idea.priority + ' Priority' : 'Unprioritised';
+export default class IdeaCard extends React.Component {
+    constructor(props) {
+        super(props);
 
-    return (
-        <View
-            style={styles.cardContainer} >
+        this.toggleMenu = this.toggleMenu.bind(this);
 
-            <InfoBlock
-                title={props.idea.title}
-                subtitle={props.idea.description}
-                titleColor={styleConstants.primary}
-                subtitleColor={styleConstants.grey} />
+        this.state = {
+            showMenu: false,
+        }
+    }
 
-            <View style={styles.menuContainer}>
-                <Menu
-                    values={[
-                        {
-                            value: 'Edit',
-                            iconName: 'mode-edit'
-                        }, {
-                            value: 'Share',
-                            iconName: 'share'
-                        }, {
-                            value: 'Delete',
-                            iconName: 'delete'
-                        }
-                    ]}
-                    handleSelect={(type) => props.handleSelect(type, props.idea)} />
-            </View>
+    toggleMenu() {
+        this.setState({
+            showMenu: !this.state.showMenu,
+        });
+    }
 
+    render() {
+        const menu = this.state.showMenu &&
+            <Menu
+                values={['Edit', 'Share', 'Delete']}
+                handleSelect={(type) => this.props.handleSelect(type, this.props.idea)} />;
+
+        const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
+        const priorityLabelText = this.props.idea.priority ? this.props.idea.priority + ' Priority' : 'Unprioritised';
+
+        return (
             <View
-                style={styles.labelsContainer} >
-                <Label
-                    iconName='group'
-                    labelText={categoryLabelText} />
-                <Label
-                    iconName='sort'
-                    labelText={priorityLabelText} />
+                style={styles.cardContainer} >
+
+                <TouchableOpacity 
+                    onPress={this.toggleMenu}
+                    style={styles.menuIconContainer}>
+                    <Icon name='more-vert' style={styles.menuIcon} />
+                </TouchableOpacity>
+
+                <InfoBlock
+                    title={this.props.idea.title}
+                    subtitle={this.props.idea.description}
+                    titleColor={styleConstants.primary}
+                    subtitleColor={styleConstants.grey} />
+
+                <View
+                    style={styles.labelsContainer} >
+                    <Label
+                        iconName='group'
+                        labelText={categoryLabelText} />
+                    <Label
+                        iconName='sort'
+                        labelText={priorityLabelText} />
+                </View>
+
+                {menu}
+
             </View>
-        </View>
-    )
+        )
+    }
 }

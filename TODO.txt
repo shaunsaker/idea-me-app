@@ -19,12 +19,18 @@ PAGES
     Add Category
         Save categories on continue
     Profile Page
-        Menu component should be in header but overlay issues (to be fixed in RN 0.45)
+        Menu Actions
+        Feedback survey in browser
     Edit Profile Page
         Saving photo to db not working (permission denied)
         Save userName, email and location on continue
     Edit Location Page
         Save user location
+
+    About App
+        All
+    Settings
+        All
 
     Input labels aren't floating on mount    
     Announcement page for when I need to make some sort of announcement
@@ -36,6 +42,9 @@ PAGES
     Replace ternary null statements with && operators
     Lower clearX icon
     Animate show/hide text from right when password input focussed
+    On logo mount, animate lightbulb colour
+    On Splash load, animate lightbulb colour
+    Remove bin and share icons
     
     
     Prepopulate idea on signup

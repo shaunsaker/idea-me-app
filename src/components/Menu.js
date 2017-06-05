@@ -6,28 +6,17 @@ import {
 	TouchableOpacity,
 	StyleSheet,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
-    menuContainer: {
-
-    },
-    menuIconContainer: {
-
-    },
-    menuIcon: {
-        left: 8,
-        fontSize: 24,
-    },
     menuItemsWrapper: {
         position: 'absolute',
-        top: 36,
-        right: 0,
-        width: 150,
+        top: 66,
+        right: 16,
+        width: 160,
         backgroundColor: styleConstants.white,
-        elevation: 5,
+        elevation: 10,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
         shadowRadius: 2,
@@ -40,21 +29,16 @@ const styles = StyleSheet.create({
 
 	},
     menuItemContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        justifyContent: 'center',
         padding: 8,
-    },
-    menuItemIcon: {
-        fontSize: 18,
-        color: styleConstants.primary,
     },
     menuItemText: {
         fontSize: 18,
         color: styleConstants.primary,
+        textAlign: 'right',
     },
     separator: {
-        width: 150 - 16,
+        width: 160 - 16,
         alignSelf: 'center',
         height: 1,
         backgroundColor: styleConstants.lightGrey,
@@ -65,12 +49,7 @@ export default class Menu extends React.Component {
     constructor(props) {
         super(props);
 
-        this.toggleMenu = this.toggleMenu.bind(this);
         this.renderItem = this.renderItem.bind(this);
-
-        this.state = {
-            showMenu: false
-        }
     }
 
 	static get propTypes() {
@@ -80,52 +59,28 @@ export default class Menu extends React.Component {
 		}
 	}
 
-    toggleMenu() {
-        this.setState({
-            showMenu: !this.state.showMenu
-        });
-    }
-
     renderItem({ item }) {
         return (
             <TouchableOpacity
                 style={styles.menuItemContainer}
-                onPress={() => { this.toggleMenu(); this.props.handleSelect(item.value) }} >
-                <Icon name={item.iconName} style={styles.menuItemIcon} />
+                onPress={() => { this.toggleMenu(); this.props.handleSelect(item) }} >
                 <Text
                     style={[styles.menuItemText, styleConstants.robotoCondensed]}>
-                    {item.value}
+                    {item}
                 </Text>
             </TouchableOpacity>
         )
     }
 
-	render() {
-        const menu = this.state.showMenu ?
+	render() {      
+		return (
             <FlatList
-                keyExtractor={item => 'menu' + item.value}
+                keyExtractor={item => 'menu' + item}
                 data={this.props.values}
                 renderItem={this.renderItem}
                 style={styles.menuItemsWrapper}
                 contentContainerStyle={styles.menuItemsContainer}
                 ItemSeparatorComponent={() => <View style={styles.separator} />} />
-            :
-            null;
-        
-		return (
-			<View style={styles.menuContainer}>
-
-                <TouchableOpacity 
-                    onPress={this.toggleMenu}
-                    style={styles.menuIconContainer}>
-                    <Icon
-                        name='more-vert'
-                        style={[styles.menuIcon, {color: this.props.color ? this.props.color : styleConstants.primary}]} />
-                </TouchableOpacity>
-
-                {menu}
-
-			</View>
 		);
 	}
 }
