@@ -26,7 +26,6 @@ PAGES
     Edit Location Page
         Save user location
 
-    Menu component with icons
     Input labels aren't floating on mount    
     Announcement page for when I need to make some sort of announcement
         Based on api prop

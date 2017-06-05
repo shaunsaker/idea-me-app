@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
 
 export default IdeaCard = (props) => {
     const categoryLabelText = props.idea.category ? props.idea.category : 'Uncategorised';
-    const priorityLabelText = props.idea.priority ? props.idea.priority + ' Priority': 'Unprioritised';
+    const priorityLabelText = props.idea.priority ? props.idea.priority + ' Priority' : 'Unprioritised';
 
     return (
         <View
             style={styles.cardContainer} >
-            
+
             <InfoBlock
                 title={props.idea.title}
                 subtitle={props.idea.description}
@@ -62,11 +62,22 @@ export default IdeaCard = (props) => {
                 subtitleColor={styleConstants.grey} />
 
             <View style={styles.menuContainer}>
-                <Menu 
-                    values={['Edit', 'Share', 'Delete']}
+                <Menu
+                    values={[
+                        {
+                            value: 'Edit',
+                            iconName: 'mode-edit'
+                        }, {
+                            value: 'Share',
+                            iconName: 'share'
+                        }, {
+                            value: 'Delete',
+                            iconName: 'delete'
+                        }
+                    ]}
                     handleSelect={(type) => props.handleSelect(type, props.idea)} />
             </View>
-            
+
             <View
                 style={styles.labelsContainer} >
                 <Label

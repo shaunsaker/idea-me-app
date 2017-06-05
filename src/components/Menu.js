@@ -40,14 +40,25 @@ const styles = StyleSheet.create({
 
 	},
     menuItemContainer: {
-        justifyContent: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 8,
+    },
+    menuItemIcon: {
+        fontSize: 18,
+        color: styleConstants.primary,
     },
     menuItemText: {
         fontSize: 18,
         color: styleConstants.primary,
-        textAlign: 'right',
-        padding: 8,
     },
+    separator: {
+        width: 150 - 16,
+        alignSelf: 'center',
+        height: 1,
+        backgroundColor: styleConstants.lightGrey,
+    }
 });
 
 export default class Menu extends React.Component {
@@ -79,10 +90,11 @@ export default class Menu extends React.Component {
         return (
             <TouchableOpacity
                 style={styles.menuItemContainer}
-                onPress={() => { this.toggleMenu(); this.props.handleSelect(item) }} >
+                onPress={() => { this.toggleMenu(); this.props.handleSelect(item.value) }} >
+                <Icon name={item.iconName} style={styles.menuItemIcon} />
                 <Text
                     style={[styles.menuItemText, styleConstants.robotoCondensed]}>
-                    {item}
+                    {item.value}
                 </Text>
             </TouchableOpacity>
         )
@@ -91,11 +103,12 @@ export default class Menu extends React.Component {
 	render() {
         const menu = this.state.showMenu ?
             <FlatList
-                keyExtractor={item => 'menu' + item}
+                keyExtractor={item => 'menu' + item.value}
                 data={this.props.values}
                 renderItem={this.renderItem}
                 style={styles.menuItemsWrapper}
-                contentContainerStyle={styles.menuItemsContainer} />
+                contentContainerStyle={styles.menuItemsContainer}
+                ItemSeparatorComponent={() => <View style={styles.separator} />} />
             :
             null;
         
