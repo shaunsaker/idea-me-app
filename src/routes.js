@@ -46,7 +46,7 @@ const Scenes = Actions.create(
 			key='ideas'
 			component={Ideas}
 			type={ActionConst.REPLACE}
-			initial={false} />
+			initial={true} />
 		<Scene
 			key='addIdea'
 			component={AddIdea}
