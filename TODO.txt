@@ -1,6 +1,8 @@
 TODOS
 
 PAGES
+    Splash
+        Get quotes
     Welcome
         Facebook login not working
     SignInWithEmail
@@ -32,17 +34,9 @@ PAGES
     Settings
         All
 
-    Announcement page for when I need to make some sort of announcement
-        Based on api prop
-    Why do I need to sign up text button
-        Opens modal with explanation
-    Random quotes on Splash page and no animation of logo
-    Replace ternary null statements with && operators
     On logo mount, animate lightbulb colour
-    On Splash load, animate lightbulb colour
     Remove bin and share icons
-    
-    
+        
     Prepopulate idea on signup
     Profile icon highlighted on signup (indicate action required, ie. complete your profile)
     Feedback button opens webview to Google Survey
@@ -77,7 +71,9 @@ PAGES
     Add analytics
     Various Android zIndex issues to be fixed in RN 0.45.0
         Workaround by not using zIndex
-            Dropdowns as separate page components
+    Announcement page for when I need to make some sort of announcement
+        FIRST THINK OF TYPES OF ANNOUNCEMENTS
+        Based on api prop
 
 IOS
     iOS click page to blur input (no hide keyboard button)

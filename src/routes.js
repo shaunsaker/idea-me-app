@@ -24,7 +24,7 @@ const Scenes = Actions.create(
 		<Scene
 			key='splash'
 			component={Splash}
-			initial={false} />
+			initial={true} />
 		<Scene
 			key='welcome'
 			component={Welcome}
@@ -37,7 +37,7 @@ const Scenes = Actions.create(
 		<Scene
 			key='signInWithEmail'
 			component={SignInWithEmail}
-			initial={true} />
+			initial={false} />
 		<Scene
 			key='forgotPassword'
 			component={ForgotPassword}
