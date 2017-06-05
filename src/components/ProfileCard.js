@@ -10,6 +10,7 @@ import {
 import Icon from '../styles/icons/index';
 
 import InfoBlock from './InfoBlock';
+import Label from './Label';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -74,27 +75,8 @@ const styles = StyleSheet.create({
     labelsContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        margin: 8,
+        marginTop: 16,
         alignItems: 'flex-end',
-    },
-    ideasLabel: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: styleConstants.primary,
-        borderRadius: 32,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        marginHorizontal: 4,
-    },
-    ideasIcon: {
-        fontSize: 18,
-        color: styleConstants.secondary,
-        marginRight: 4,
-    },
-    labelText: {
-        fontSize: 18,
-        color: styleConstants.white
     },
 });
 
@@ -113,10 +95,9 @@ export default ProfileCard = (props) => {
         </TouchableOpacity>;
 
     const ideasLabel = props.numberOfIdeas ?
-        <View style={styles.ideasLabel}>
-            <Icon name='light-bulb' style={styles.ideasIcon} />
-            <Text style={[styles.labelText, styleConstants.robotoCondensed]}>{props.numberOfIdeas} excellent idea{props.numberOfIdeas > 1 ? 's' : ''}</Text>
-        </View>
+        <Label
+            iconName='light-bulb'
+            labelText={props.numberOfIdeas + ' excellent idea' + (props.numberOfIdeas > 1 ? 's' : '')} />
         :
         null;
     

@@ -8,6 +8,7 @@ import {
 
 import InfoBlock from './InfoBlock';
 import Menu from './Menu';
+import Label from './Label';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -41,56 +42,14 @@ const styles = StyleSheet.create({
     labelsContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        margin: 8,
+        justifyContent: 'flex-end',
         alignItems: 'flex-end',
-    },
-    categoryLabel: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: styleConstants.primary,
-        borderRadius: 32,
-        padding: 8,
-        marginHorizontal: 4,
-    },
-    categoryLabelText: {
-        fontSize: 18,
-        color: styleConstants.white
-    },
-    priorityLabel: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: styleConstants.primary,
-        borderRadius: 32,
-        padding: 8,
-        marginHorizontal: 4,
-    },
-    priorityLabelText: {
-        fontSize: 18,
-        color: styleConstants.primary
     },
 });
 
 export default IdeaCard = (props) => {
     const categoryLabelText = props.idea.category ? props.idea.category : 'Uncategorised';
     const priorityLabelText = props.idea.priority ? props.idea.priority + ' Priority': 'Unprioritised';
-    
-    const categoryLabel = 
-        <View style={styles.categoryLabel}>
-            <Text style={[styles.categoryLabelText, styleConstants.robotoCondensed]}>
-                {categoryLabelText}
-            </Text>
-        </View>;
-
-    const priorityLabel =
-        <View style={styles.priorityLabel}>
-            <Text style={[styles.priorityLabelText, styleConstants.robotoCondensed]}>
-                {priorityLabelText}
-            </Text>
-        </View>;
 
     return (
         <View
@@ -110,8 +69,12 @@ export default IdeaCard = (props) => {
             
             <View
                 style={styles.labelsContainer} >
-                {categoryLabel}
-                {priorityLabel}
+                <Label
+                    iconName='group'
+                    labelText={categoryLabelText} />
+                <Label
+                    iconName='sort'
+                    labelText={priorityLabelText} />
             </View>
         </View>
     )

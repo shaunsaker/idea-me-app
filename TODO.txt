@@ -26,18 +26,25 @@ PAGES
     Edit Location Page
         Save user location
 
-    Save user data on sign up
-    SAVE ALL DATA, THEN UPDATE THE STORE
-    Sound when idea added
+    Menu component with icons
+    Input labels aren't floating on mount    
+    Announcement page for when I need to make some sort of announcement
+        Based on api prop
+    Keyboard should be dismissed when input is blurred
+    Why do I need to sign up text button
+        Opens modal with explanation
+    Random quotes on Splash page and no animation of logo
+    Replace ternary null statements with && operators
+    Lower clearX icon
+    Animate show/hide text from right when password input focussed
+    
+    
     Prepopulate idea on signup
     Profile icon highlighted on signup (indicate action required, ie. complete your profile)
     Feedback button opens webview to Google Survey
-    Email after signup detailing what app does and howtos
-    iOS click page to blur input (no hide keyboard button)
+        Browser component
+    Growl retry action 
     Test all errors
-    Add analytics
-    Integrate react-native-fbsdk on iOS
-    Integrate react-native-google-signin on iOS
     Optimise code
         Remove unnecessary
         Check proptypes
@@ -48,20 +55,28 @@ PAGES
         Icons named by Icon type, ie. MaterialIcon (should be no plain Icon)
         Check reducers
         User errors should contain resets
-    iOS testing
-    Various Android zIndex issues to be fixed in RN 0.45.0
-    While the glow loader is loading it will be cool to be able to tap it and make it grow
     Empty state
     Update suburbs or use a geo-service
-    Growl retry action
-
-ENHANCEMENTS
+    Save user data on sign up
+    SAVE ALL DATA, THEN UPDATE THE STORE
+    Sound when idea added
     Ideas
-        Add notes to ideas
+        Add notes to ideas (direct button on card)
         + Sketches
         + Voice notes
-        + Speech to Text
+        + Convert Voice Note to Text
     Settings
         List view ideas in home page as option
     Bypass loadUserData initially?
     First time use Tooltips showing what to do next
+    Email after signup detailing what app does and howtos
+    Add analytics
+    Various Android zIndex issues to be fixed in RN 0.45.0
+        Workaround by not using zIndex
+            Dropdowns as separate page components
+
+IOS
+    iOS click page to blur input (no hide keyboard button)
+    Integrate react-native-fbsdk on iOS
+    Integrate react-native-google-signin on iOS
+    iOS testing

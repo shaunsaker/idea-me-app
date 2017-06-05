@@ -19,6 +19,10 @@ const glyphMap = {
   "photo-camera": 81,
   "anonymous": 82,
   "error-outline": 83,
+  "group": 84,
+  "delete": 85,
+  "share": 86,
+  "sort": 87,
 };
 
 let Icon = createIconSet(glyphMap, 'IdeaMeAppIcons', 'IdeaMe-App.ttf');
