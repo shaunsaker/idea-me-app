@@ -13,7 +13,7 @@ const initialState = {
         userErrorMessage: null,
         errorType: null,
         retryAction: null,
-        loading: true, // needs to be false on initial app load
+        loading: false, // TODO: needs to be true on initial app load
     },
     api: {
         apiSuccess: null,

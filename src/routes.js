@@ -24,7 +24,7 @@ const Scenes = Actions.create(
 		<Scene
 			key='splash'
 			component={Splash}
-			initial={true} />
+			initial={false} />
 		<Scene
 			key='welcome'
 			component={Welcome}
@@ -46,7 +46,7 @@ const Scenes = Actions.create(
 			key='ideas'
 			component={Ideas}
 			type={ActionConst.REPLACE}
-			initial={false} />
+			initial={true} />
 		<Scene
 			key='addIdea'
 			component={AddIdea}

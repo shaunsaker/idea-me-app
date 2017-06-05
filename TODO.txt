@@ -34,9 +34,7 @@ PAGES
     Settings
         All
 
-    On logo mount, animate lightbulb colour
-    Remove bin and share icons
-        
+    Remove bin and share icons        
     Prepopulate idea on signup
     Profile icon highlighted on signup (indicate action required, ie. complete your profile)
     Feedback button opens webview to Google Survey
