@@ -5,15 +5,29 @@ import {
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
+import Icon from '../styles/icons/index';
 
+import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
-import GlowLoader from '../components/GlowLoader';
 import InfoBlock from '../components/InfoBlock';
 import Growl from '../components/Growl';
 
 export class Splash extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.getQuote = this.getQuote.bind(this);
+
+        this.state = {
+            quote: {
+                title: null,
+                author: null,
+            }
+        }
+    }
+
     static get propTypes() {
         return {
             authenticated: React.PropTypes.bool,
@@ -42,56 +56,70 @@ export class Splash extends React.Component {
             });
         }
         else if (!this.props.authenticated) {
-            this.props.dispatch({
-                type: 'getUserAuth'
-            });
+            this.getQuote();
 
-			// Get the user's current location
-			if (!this.props.geolocationSuccess) {
-				this.props.dispatch({
-					type: 'getUserLocation'
-				});
-			}
+            // this.props.dispatch({
+            //     type: 'getUserAuth'
+            // });
+
+			// // Get the user's current location
+			// if (!this.props.geolocationSuccess) {
+			// 	this.props.dispatch({
+			// 		type: 'getUserLocation'
+			// 	});
+			// }
         }
     }
 
     componentDidUpdate() {
 
-		// Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
-			// Wait for geolocationSuccess before doing so
-		if ((this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.redirectToWelcomePage) {
-			Actions.welcome();
-		}
+		// // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
+		// 	// Wait for geolocationSuccess before doing so
+		// if ((this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.redirectToWelcomePage) {
+		// 	Actions.welcome();
+		// }
 
-		// If we're authenticated and we have location and have not yet loaded data, load/save data to db
-		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && !this.props.apiSuccess) {
-			this.props.dispatch({
-				type: 'loadUserData',
-                uid: this.props.uid,
-			});
-		}
+		// // If we're authenticated and we have location and have not yet loaded data, load/save data to db
+		// else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && !this.props.apiSuccess) {
+		// 	this.props.dispatch({
+		// 		type: 'loadUserData',
+        //         uid: this.props.uid,
+		// 	});
+		// }
 
-		// If we're authenticated, we have geolocation and we have the userData, redirect to the home page
-		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.apiSuccess) {
-			Actions.home(); 
-		}
+		// // If we're authenticated, we have geolocation and we have the userData, redirect to the home page
+		// else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.apiSuccess) {
+		// 	Actions.home(); 
+		// }
+    }
+
+    getQuote() {
+        const randomQuote = utilities.getRandomItem(this.props.quotes);
+
+        this.setState({
+            quote: randomQuote
+        }); 
     }
 
     render() {
         return (
             <Page 
                 justifyContent='center'
-                removeBottomPadding >
+                fauxFooter >
 
                 <StatusBar backgroundColor={styleConstants.transPrimary} />
 
-                <GlowLoader />
+                <Icon
+                    name='light-bulb'
+                    color={styleConstants.lightGrey}
+                    size={64} />
 
                 <View style={{position: 'absolute', bottom: 0}}>
                     <InfoBlock
-                        title='The key to success is the key'
+                        fullWidth
+                        title={this.state.quote.title}
                         titleColor={styleConstants.white}
-                        subtitle='Shaun Saker'
+                        subtitle={this.state.quote.author}
                         subtitleColor={styleConstants.lightGrey} />
                 </View>
 
@@ -104,6 +132,8 @@ export class Splash extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        quotes: state.main.appData.quotes,
+
         authenticated: state.main.auth.authenticated,
         apiSuccess: state.main.api.apiSuccess,
         geolocationSuccess: state.main.geolocation.geolocationSuccess,

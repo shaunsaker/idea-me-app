@@ -1,5 +1,11 @@
 const utilities = {};
 
+utilities.getRandomItem = function(array) {
+    const randomNumber = Math.round(Math.random() * array.length);
+    const randomItem = array[randomNumber];
+    return randomItem;
+};
+
 utilities.firstCharToUppercase = function (string) {
     const trimmedString = string.trim();
     return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);

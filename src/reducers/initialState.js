@@ -1,3 +1,6 @@
+import quotes from '../resources/quotes';
+import suburbs from '../resources/suburbs';
+
 const initialState = {
     auth: {
         authenticated: null,
@@ -29,32 +32,14 @@ const initialState = {
         geolocationError: null,
     },
     appData: {
+        quotes,
         currentCategory: 'All Categories',
         priorities: [
             'High',
             'Medium',
             'Low'
         ],
-        suburbs: [
-            "Athlone",
-            "Claremont",
-            "Sea Point",
-            "Tokai",
-            "Observatory",
-            "Fish Hoek",
-            "Tableview",
-            "Kirstenhof",
-            "Meadowridge",
-            "Constantia",
-            "Hout Bay",
-            "Noordhoek",
-            "Capri",
-            "Bellville",
-            "Mowbray",
-            "Woodstock",
-            "Newlands",
-            "Rosebank"
-        ],
+        suburbs,
     },
     userData: {
         profile: {

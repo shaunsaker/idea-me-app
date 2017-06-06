@@ -1,10 +1,13 @@
 TODOS
 
-Input borders not showing on focus
+GENERAL
+    Load quotes from api/Push update functionality
+    Load suburbs from api/Use a geo service
 
 PAGES
     Splash
         Get quotes
+        Randomise quotes
     Welcome
         Facebook login not working
     SignInWithEmail

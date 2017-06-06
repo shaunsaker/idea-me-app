@@ -9,7 +9,7 @@ import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
     infoContainer: {
-        paddingRight: 92,
+        paddingRight: 72,
         paddingLeft: 16,
         paddingBottom: 16,
     },
@@ -25,8 +25,13 @@ const styles = StyleSheet.create({
 });
 
 export default InputContainer = (props) => {
+    const fullWidthStyles = props.fullWidth &&
+    {
+        paddingRight: 16,
+    }
+
     return (
-        <View style={styles.infoContainer}>
+        <View style={[styles.infoContainer, fullWidthStyles]}>
             <Text style={[styles.infoTextTitle, {color: props.titleColor}, styleConstants.primaryFont]}>
                 {props.title}
             </Text>
