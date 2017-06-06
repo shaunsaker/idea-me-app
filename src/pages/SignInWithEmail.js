@@ -27,7 +27,6 @@ export class SignInWithEmail extends React.Component {
         return {
             userEmail: React.PropTypes.string,
             userPassword: React.PropTypes.string,
-            errorMessage: React.PropTypes.string,
             authenticated: React.PropTypes.bool,
             loading: React.PropTypes.bool,
         };

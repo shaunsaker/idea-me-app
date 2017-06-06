@@ -8,9 +8,9 @@ import { Actions } from 'react-native-router-flux';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
 import Growl from '../components/Growl';
-import ActionModal from '../components/ActionModal';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -32,13 +32,28 @@ export class SignInOptions extends React.Component {
     static get propTypes() {
         return {
             authenticated: React.PropTypes.bool,
+			apiSuccess: React.PropTypes.bool,
         };
     }
 
     componentDidUpdate() {
-        if (this.props.authenticated) {
-            Actions.ideas();
-        }
+		// If we're authenticated and we have not yet loaded data, load/save data to db
+		if (this.props.authenticated && !this.props.apiSuccess) {
+			this.props.dispatch({
+				type: 'loadUser',
+				user: {
+					uid: this.props.uid,
+					userEmail: this.props.userEmail,
+					userName: this.props.userName,
+					userPhotoUrl: this.props.userPhotoUrl,
+					userLocation: this.props.currentLocation, // In case the user does not have a saved location and we dont have user data in the db
+				}
+			});
+		}
+
+		if (this.props.authenticated && this.props.apiSuccess) {
+			Actions.ideas();
+		}
     }
 
     signInUserWithFacebook() {
@@ -128,8 +143,6 @@ export class SignInOptions extends React.Component {
 				<Growl />
 
 				<Loader />
-
-                <View />
                 
             </Page>
         );
@@ -139,6 +152,7 @@ export class SignInOptions extends React.Component {
 function mapStateToProps(state) {
     return ({
         authenticated: state.main.auth.authenticated,
+		apiSuccess: state.main.api.apiSuccess,
     });
 }
 

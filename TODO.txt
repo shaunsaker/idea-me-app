@@ -1,5 +1,7 @@
 TODOS
 
+Rename ideas page to home
+
 PAGES
     Welcome
         Facebook login not working
