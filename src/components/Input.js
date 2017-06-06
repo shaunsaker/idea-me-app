@@ -8,6 +8,7 @@ import {
     StyleSheet,
     Dimensions,
     Animated,
+    Platform,
 } from "react-native";
 
 import styleConstants from '../styles/styleConstants';
@@ -21,7 +22,6 @@ const styles = StyleSheet.create({
         width: windowWidth - 32,
         marginVertical: 16,
         alignSelf: 'center',
-		borderBottomWidth: 1,
     },
     inputLabelContainer: {
         flexDirection: 'row',
@@ -191,13 +191,23 @@ export default class Input extends React.Component {
             :
             null;
 
-		const inputContainerStyles = {
-			borderBottomColor: this.state.borderColour,
-		}
-
         const inputLabelStyles = {
             color: this.state.labelColour,
-        }
+        } 
+
+        // Fix for ios
+		const inputContainerStyles = Platform.OS === 'ios' && 
+            {
+                borderBottomWidth: 1,
+                borderBottomColor: this.state.borderColour,
+            };
+
+        // Fix for Android 
+        const androidInputStyles = Platform.OS === 'android' &&
+            {
+                borderBottomWidth: 1,
+                borderBottomColor: this.state.borderColour,
+            };    
 
         const inputStyles = {
             height: this.state.inputHeight,
@@ -217,7 +227,7 @@ export default class Input extends React.Component {
                         ref='input'
                         value={this.props.value ? this.props.value : ''}
                         underlineColorAndroid='transparent'
-                        style={[styles.input, inputStyles, styleConstants.primaryFont]}
+                        style={[styles.input, androidInputStyles, inputStyles, styleConstants.primaryFont]}
                         onChangeText={(text) => this.props.handleChange(text)}
                         onFocus={this.focusInput}
                         onBlur={this.blurInput}
