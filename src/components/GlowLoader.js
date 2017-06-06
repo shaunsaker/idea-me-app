@@ -63,7 +63,7 @@ export default class GlowLoader extends React.Component {
                 <Animated.Text style={{ color: animatedColor }}>
                     <Icon
                         name='light-bulb'
-                        size={this.props.size ? this.props.size : 32} />
+                        size={64} />
                 </Animated.Text>
             </Animated.View>
         );

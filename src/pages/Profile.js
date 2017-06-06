@@ -2,7 +2,6 @@ import React from "react";
 import {
     View,
     Text,
-    TouchableOpacity,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -22,12 +21,15 @@ export class Profile extends React.Component {
     constructor(props) {
         super(props);
 
+
+        this.toggleMenu = this.toggleMenu.bind(this);
         this.selectMenuItem = this.selectMenuItem.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
         this.signOutUser = this.signOutUser.bind(this);
+        this.toggleActionModal = this.toggleActionModal.bind(this);
 
         this.state = {
-            showModal: false,
+            showMenu: false,
+            showActionModal: false,
         }
     }
 
@@ -42,14 +44,16 @@ export class Profile extends React.Component {
         };
     }
 
-    selectMenuItem(type) {
-
+    toggleMenu() {
+        this.setState({
+            showMenu: !this.state.showMenu,
+        });
     }
 
-    toggleModal(idea) {
-        this.setState({
-            showModal: !this.state.showModal,
-        });
+    selectMenuItem(type) {
+        if (type === 'Log Out') {
+            this.signOutUser();
+        }
     }
 
     signOutUser() {
@@ -60,20 +64,23 @@ export class Profile extends React.Component {
         Actions.welcome();
     }
 
+    toggleActionModal(idea) {
+        this.setState({
+            showActionModal: !this.state.showActionModal,
+        });
+    }
+
     render() {
-        /*const menu = () => 
+        const menu = this.state.showMenu && 
             <Menu 
                 values={['About App', 'Settings', 'Give us Feedback', 'Log Out']}
-                handleSelect={(type) => props.selectMenuItem(type)} 
-                color={styleConstants.white} />;*/
+                handleSelect={(type) => props.selectMenuItem(type)} />;
 
-        const modal = this.state.showModal ?
+        const actionModal = this.state.showActionModal &&
             <ActionModal
                 title={'Are you sure you want to log out?'}
                 handleLeftIconPress={() => this.signOutUser()}
-                handleRightIconPress={this.toggleModal} />
-            :
-            null;
+                handleRightIconPress={this.toggleActionModal} />;
 
         return (
             <Page
@@ -81,12 +88,9 @@ export class Profile extends React.Component {
 
                 <Header
                     text='Profile'
-                    headerShadow />
-
-                <TouchableOpacity
-                    onPress={this.signOutUser}>
-                    <Text>Sign Out</Text>
-                </TouchableOpacity>
+                    headerShadow
+                    rightIconName='more-vert'
+                    handleRightIconPress={this.toggleMenu} />
 
                 <View>
                     <ProfileCard
@@ -107,7 +111,9 @@ export class Profile extends React.Component {
                 <TabBar
                     currentPage='profile' />
 
-                {modal}
+                {menu}
+
+                {actionModal}
 
             </Page >
         );

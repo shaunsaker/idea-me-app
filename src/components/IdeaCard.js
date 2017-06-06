@@ -1,13 +1,16 @@
 import React from 'react';
 import {
     View,
+    TouchableOpacity,
     Text,
     StyleSheet,
     Dimensions,
 } from "react-native";
+import Icon from '../styles/icons/index';
 
 import InfoBlock from './InfoBlock';
 import Menu from './Menu';
+import Label from './Label';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -33,86 +36,81 @@ const styles = StyleSheet.create({
             width: 0
         },
     },
-    menuContainer: {
+    menuIconContainer: {
         position: 'absolute',
-        top: 16,
-        right: 16,
+        top: 0,
+        right: 0,
+        width: 42,
+        height: 42,
+        justifyContent: 'flex-end',
+    },
+    menuIcon: {
+        fontSize: 18,
+        color: styleConstants.primary,
     },
     labelsContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        margin: 8,
+        justifyContent: 'flex-end',
         alignItems: 'flex-end',
-    },
-    categoryLabel: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: styleConstants.primary,
-        borderRadius: 32,
-        padding: 8,
-        marginHorizontal: 4,
-    },
-    categoryLabelText: {
-        fontSize: 18,
-        color: styleConstants.white
-    },
-    priorityLabel: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: styleConstants.primary,
-        borderRadius: 32,
-        padding: 8,
-        marginHorizontal: 4,
-    },
-    priorityLabelText: {
-        fontSize: 18,
-        color: styleConstants.primary
     },
 });
 
-export default IdeaCard = (props) => {
-    const categoryLabelText = props.idea.category ? props.idea.category : 'Uncategorised';
-    const priorityLabelText = props.idea.priority ? props.idea.priority + ' Priority': 'Unprioritised';
-    
-    const categoryLabel = 
-        <View style={styles.categoryLabel}>
-            <Text style={[styles.categoryLabelText, styleConstants.robotoCondensed]}>
-                {categoryLabelText}
-            </Text>
-        </View>;
+export default class IdeaCard extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const priorityLabel =
-        <View style={styles.priorityLabel}>
-            <Text style={[styles.priorityLabelText, styleConstants.robotoCondensed]}>
-                {priorityLabelText}
-            </Text>
-        </View>;
+        this.toggleMenu = this.toggleMenu.bind(this);
 
-    return (
-        <View
-            style={styles.cardContainer} >
-            
-            <InfoBlock
-                title={props.idea.title}
-                subtitle={props.idea.description}
-                titleColor={styleConstants.primary}
-                subtitleColor={styleConstants.grey} />
+        this.state = {
+            showMenu: false,
+        }
+    }
 
-            <View style={styles.menuContainer}>
-                <Menu 
-                    values={['Edit', 'Share', 'Delete']}
-                    handleSelect={(type) => props.handleSelect(type, props.idea)} />
-            </View>
-            
+    toggleMenu() {
+        this.setState({
+            showMenu: !this.state.showMenu,
+        });
+    }
+
+    render() {
+        const menu = this.state.showMenu &&
+            <Menu
+                values={['Edit', 'Share', 'Delete']}
+                handleSelect={(type) => this.props.handleSelect(type, this.props.idea)} />;
+
+        const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
+        const priorityLabelText = this.props.idea.priority ? this.props.idea.priority + ' Priority' : 'Unprioritised';
+
+        return (
             <View
-                style={styles.labelsContainer} >
-                {categoryLabel}
-                {priorityLabel}
+                style={styles.cardContainer} >
+
+                <TouchableOpacity 
+                    onPress={this.toggleMenu}
+                    style={styles.menuIconContainer}>
+                    <Icon name='more-vert' style={styles.menuIcon} />
+                </TouchableOpacity>
+
+                <InfoBlock
+                    title={this.props.idea.title}
+                    subtitle={this.props.idea.description}
+                    titleColor={styleConstants.primary}
+                    subtitleColor={styleConstants.grey} />
+
+                <View
+                    style={styles.labelsContainer} >
+                    <Label
+                        iconName='group'
+                        labelText={categoryLabelText} />
+                    <Label
+                        iconName='sort'
+                        labelText={priorityLabelText} />
+                </View>
+
+                {menu}
+
             </View>
-        </View>
-    )
+        )
+    }
 }

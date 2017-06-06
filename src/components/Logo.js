@@ -3,6 +3,7 @@ import {
     Text,
     View,
     StyleSheet,
+    Animated,
 } from "react-native";
 import Icon from '../styles/icons/index';
 
@@ -14,11 +15,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    icon: {
-        marginRight: 4,
+    iconContainer: {
         marginBottom: 2,
+        marginRight: 4,
+    },
+    icon: {
         fontSize: 24,
-        color: styleConstants.secondary,
     },
     text: {
         fontSize: 32,
@@ -26,16 +28,43 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Logo = (props) => {
-    return (
-        <View
-            style={styles.container} >
-            <Icon
-                name='light-bulb'
-                style={styles.icon} />
-            <Text style={[styles.text, styleConstants.ranga]}>
-                IdeaMe
-            </Text>
-        </View>
-    );
+export default class Logo extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            animatedValue: new Animated.Value(0)
+        }
+    }
+
+    componentDidMount() {
+        Animated.timing(
+            this.state.animatedValue,
+            {
+                toValue: 1,
+                duration: 1000
+            }
+        ).start();
+    }
+
+    render() {
+        const animatedColor = this.state.animatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: [styleConstants.lightGrey, styleConstants.secondary]
+        });
+
+        return (
+            <View
+                style={styles.container} >
+                <Animated.Text style={[styles.iconContainer, {color: animatedColor}]}>
+                    <Icon
+                        name='light-bulb'
+                        style={styles.icon} />
+                </Animated.Text>
+                <Text style={[styles.text, styleConstants.ranga]}>
+                    IdeaMe
+                </Text>
+            </View>
+        );
+    }
 }

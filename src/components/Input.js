@@ -25,16 +25,9 @@ const styles = StyleSheet.create({
     inputLabelContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },  
+    },
     inputLabelText: {
-        fontSize: 18,
-    },
-    togglePasswordContainer: {
-
-    },
-    togglePasswordText: {
         fontSize: 16,
-        color: styleConstants.white
     },
     input: {
         fontSize: 18,
@@ -43,43 +36,85 @@ const styles = StyleSheet.create({
         paddingRight: 32,
         borderBottomWidth: 1,
     },
+
     clearTextButtonContainer: {
         position: 'absolute',
-        bottom: 12,
+        bottom: 0,
         right: 0,
-        height: 30,
+        height: 45.5,
+        paddingLeft: 8,
         justifyContent: 'center',
     },
+
+    togglePasswordContainer: {
+
+    },
+    togglePasswordText: {
+        fontSize: 18,
+        color: styleConstants.white
+    },
 });
+
+class TogglePasswordButton extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            rightPosition: new Animated.Value(-40) // start hidden
+        }
+    }
+
+    componentDidMount() {
+        Animated.timing(
+            this.state.rightPosition,
+            {
+                toValue: 0,
+                duration: 250
+            }
+        ).start();
+    }
+
+    render() {
+        const animatedStyles = {
+            right: this.state.rightPosition,
+        }
+
+        return (
+            <Animated.View style={animatedStyles}>
+                <TouchableOpacity
+                    onPress={this.props.handlePress}
+                    style={styles.togglePasswordContainer}>
+                    <Text style={[styles.togglePasswordText, styleConstants.robotoCondensed]}>
+                        {this.props.hidePassword ? 'Show' : 'Hide'}
+                    </Text>
+                </TouchableOpacity>
+            </Animated.View>
+        )
+    }
+}
 
 export default class Input extends React.Component {
     constructor(props) {
         super(props);
 
         this.minimumInputHeight = 45.5;
-		this.labelUpTopValue = 0;
-		this.labelDownTopValue = 32;
-		this.labelUpFontSize = 16;
-		this.labelDownFontSize = 18;
-		this.labelUpColor = styleConstants.secondary;
-		this.labelDownColor = styleConstants.lightGrey;
-        this.labelUpBorderColor = styleConstants.white;
-        this.labelDownBorderColor = styleConstants.lightGrey
+        this.inputLabelColourFocussed = styleConstants.secondary;
+        this.inputLabelColourBlurred = styleConstants.lightGrey;
+        this.inputBorderColourFocussed = styleConstants.white;
+        this.inputBorderColourBlurred = styleConstants.lightGrey;
 
         this.state = {
+            showTogglePasswordButton: false,
             hidePassword: true,
             inputHeight: this.minimumInputHeight,
-			labelTop: new Animated.Value(this.labelDownTopValue),
-			labelFontSize: new Animated.Value(this.labelDownFontSize),
-			labelColor: this.labelDownColor,
-            borderColor: this.labelDownBorderColor,
+            labelColour: this.inputLabelColourBlurred,
+            borderColour: this.inputBorderColourBlurred,
         }
 
-		this.focusInput = this.focusInput.bind(this);
-		this.blurInput = this.blurInput.bind(this);
-		this.floatLabel = this.floatLabel.bind(this);
-		this.sinkLabel = this.sinkLabel.bind(this);
+        this.focusInput = this.focusInput.bind(this);
+        this.blurInput = this.blurInput.bind(this);
         this.togglePassword = this.togglePassword.bind(this);
+        this.clearInputText = this.clearInputText.bind(this);
         this.adjustInputHeight = this.adjustInputHeight.bind(this);
     }
 
@@ -96,65 +131,27 @@ export default class Input extends React.Component {
         };
     }
 
-	componentDidMount() {
-		if (this.props.value && this.props.value.length > 0) {
-			this.setState({
-				labelTop: new Animated.Value(this.labelUpTopValue),
-				labelFontSize: new Animated.Value(this.labelUpFontSize),
-				labelColor: this.labelUpColor,
-                borderColor: this.labelUpBorderColor
-			});
-		}
-	}
-
     focusInput() {
-		this.floatLabel();
+        this.setState({
+            labelColour: this.inputLabelColourFocussed,
+            borderColour: this.inputBorderColourFocussed,
+            showTogglePasswordButton: true,
+        });
 
-		this.props.handleFocus(this.props.focusRef);
+        this.props.handleFocus;
     }
 
     blurInput() {
-		this.sinkLabel();
+        this.setState({
+            labelColour: this.inputLabelColourBlurred,
+            borderColour: this.inputBorderColourBlurred,
+            showTogglePasswordButton: false,
+        });
     }
 
-    floatLabel() {
-		if (!this.props.value || this.props.value.length === 0) {
-			Animated.parallel([
-				Animated.timing(this.state.labelTop, {
-					toValue: this.labelUpTopValue,
-					duration: 250
-				}),
-				Animated.timing(this.state.labelFontSize, {
-					toValue: this.labelUpFontSize,
-					duration: 250
-				})
-			]).start();
-
-			this.setState({ 
-                labelColor: this.labelUpColor,
-                borderColor: this.labelUpBorderColor, 
-            });
-		}
-    }
-
-    sinkLabel() {
-		if (!this.props.value || this.props.value.length === 0) {
-			Animated.parallel([
-				Animated.timing(this.state.labelTop, {
-					toValue: this.labelDownTopValue,
-					duration: 250
-				}),
-				Animated.timing(this.state.labelFontSize, {
-					toValue: this.labelDownFontSize,
-					duration: 250
-				})
-			]).start();
-
-			this.setState({ 
-                labelColor: this.labelDownColor,
-                borderColor: this.labelDownBorderColor,  
-            });
-		}
+    clearInputText() {
+        this.refs.input.focus();
+        this.props.handleChange('');
     }
 
     togglePassword() {
@@ -181,68 +178,52 @@ export default class Input extends React.Component {
     }
 
     render() {
-        const togglePasswordButton = (this.props.type === 'password' && this.state.labelColor === this.labelUpColor /* this is just a flag to indicate that the label is at top position */) ?
-            <TouchableOpacity
-                onPress={this.togglePassword}
-                style={styles.togglePasswordContainer}>
-                <Text style={[styles.togglePasswordText, styleConstants.robotoCondensed]}>
-                    {this.state.hidePassword ? 'Show' : 'Hide'}
-                </Text>
-            </TouchableOpacity>
-            :
-            null;
+        const togglePasswordButton = this.props.type === 'password' && this.state.showTogglePasswordButton &&
+            <TogglePasswordButton
+                hidePassword={this.state.hidePassword}
+                handlePress={this.togglePassword} />;
 
         const clearTextButton = this.props.value ?
             <View style={styles.clearTextButtonContainer}>
-                <DeleteButton
-                    handlePress={() => this.props.handleChange('')} />
+                <DeleteButton 
+                    handlePress={this.clearInputText}/>
             </View>
             :
             null;
 
-        const inputLabelStyles = 
-        {
-            fontSize: this.state.labelFontSize,
-            top: this.state.labelTop,
-            color: this.state.labelColor,
+        const inputLabelStyles = {
+            color: this.state.labelColour,
         }
 
-        const inputStyles = 
-        {
+        const inputStyles = {
             height: this.state.inputHeight,
-            borderBottomColor: this.state.borderColor,
+            borderBottomColor: this.state.borderColour,
         }
 
         return (
             <TouchableWithoutFeedback
-                onPress={() => this.refs.input.focus()}>
+                onPress={() => this.refs.input.focus()} >
                 <View style={styles.inputWrapper}>
-
                     <View style={styles.inputLabelContainer}>
-                        <Animated.Text 
-                            style={[styles.inputLabelText, inputLabelStyles, styleConstants.robotoCondensed]} >
+                        <Text style={[styles.inputLabelText, inputLabelStyles, styleConstants.robotoCondensed]}>
                             {this.props.placeholder}
-                        </Animated.Text>
-                        
+                        </Text>
                         {togglePasswordButton}
                     </View>
-
                     <TextInput
                         ref='input'
                         value={this.props.value ? this.props.value : ''}
                         underlineColorAndroid='transparent'
-                        style={[styles.input, inputStyles,  styleConstants.robotoCondensed]}
+                        style={[styles.input, inputStyles, styleConstants.robotoCondensed]}
                         onChangeText={(text) => this.props.handleChange(text)}
                         onFocus={this.focusInput}
                         onBlur={this.blurInput}
                         secureTextEntry={this.props.type === 'password' && this.state.hidePassword}
                         keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
-                        autoFocus={this.props.autoFocus}
+                        autoFocus={this.props.autoFocus} 
                         multiline={this.props.multiline}
                         onChange={this.props.multiline ? (event) => this.adjustInputHeight(event) : null /*NOTE: this does not work with onContentSizeChange */} />
-
                     {clearTextButton}
-
                 </View>
             </TouchableWithoutFeedback>
         );

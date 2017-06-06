@@ -153,19 +153,28 @@ export default class Header extends React.Component {
 				{this.props.rightComponent()}
 			</View>
 			:
-			this.props.closeButton ?
+			this.props.rightIconName ?
 				<TouchableOpacity
 					style={styles.rightIconContainer}
-					onPress={() => Actions.pop()} >
+					onPress={this.props.handleRightIconPress} >
 					<Icon
-						name='close'
+						name={this.props.rightIconName}
 						style={styles.rightIcon} />
 				</TouchableOpacity>
 				:
-				(this.props.textRight || this.props.showInput) ? 
-					null 
-					: 
-					<View style={styles.rightIconContainer} />;
+				this.props.closeButton ?
+					<TouchableOpacity
+						style={styles.rightIconContainer}
+						onPress={() => Actions.pop()} >
+						<Icon
+							name='close'
+							style={styles.rightIcon} />
+					</TouchableOpacity>
+					:
+					(this.props.textRight || this.props.showInput) ? 
+						null 
+						: 
+						<View style={styles.rightIconContainer} />;
 
 		const clearTextButton = this.props.inputValue ?
 			<View style={styles.clearTextButtonContainer}>

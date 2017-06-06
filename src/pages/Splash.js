@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     StatusBar,
+    View,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
@@ -9,6 +10,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import GlowLoader from '../components/GlowLoader';
+import InfoBlock from '../components/InfoBlock';
 import Growl from '../components/Growl';
 
 export class Splash extends React.Component {
@@ -83,8 +85,15 @@ export class Splash extends React.Component {
 
                 <StatusBar backgroundColor={styleConstants.transPrimary} />
 
-                <GlowLoader
-                    size={64} />
+                <GlowLoader />
+
+                <View style={{position: 'absolute', bottom: 0}}>
+                    <InfoBlock
+                        title='The key to success is the key'
+                        titleColor={styleConstants.white}
+                        subtitle='Shaun Saker'
+                        subtitleColor={styleConstants.lightGrey} />
+                </View>
 
                 <Growl />
 
