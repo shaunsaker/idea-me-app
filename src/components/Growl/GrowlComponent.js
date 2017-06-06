@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     messageText: {
         flex: 1,
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.white,
     },
     retryButton: {
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     retryButtonText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.secondary,
     },
     iconContainer: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         marginTop: 2
     },
     icon: {
-        fontSize: 24,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.lightGrey,
     },
     closeIconContainer: {
@@ -116,7 +116,7 @@ export default class GrowlComponent extends React.Component {
                 onPress={this.props.handleRetryAction}
                 style={styles.retryButton}>
                 <Text
-                    style={[styles.retryButtonText, styleConstants.robotoCondensed]}>
+                    style={[styles.retryButtonText, styleConstants.primaryFont]}>
                     RETRY
                 </Text>  
             </TouchableOpacity>
@@ -133,7 +133,7 @@ export default class GrowlComponent extends React.Component {
                     </View>
                     <View style={styles.messageTextContainer}>
                         <Text
-                            style={[styles.messageText, styleConstants.robotoCondensed]}
+                            style={[styles.messageText, styleConstants.primaryFont]}
                             multiline>
                             {this.props.text}
                         </Text>

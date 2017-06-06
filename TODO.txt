@@ -1,7 +1,5 @@
 TODOS
 
-Primary/Secondary Fonts
-Font sizes in styleConstants
 Input borders not showing on focus
 
 PAGES

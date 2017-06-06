@@ -63,13 +63,13 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     emailIcon: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
         marginRight: 8,
         marginTop: 2,
     },  
     emailText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
     },
     labelsContainer: {
@@ -118,7 +118,7 @@ export default ProfileCard = (props) => {
 
             <View style={styles.emailContainer}>
                 <Icon name='email' style={styles.emailIcon} />
-                <Text style={[styles.emailText, styleConstants.robotoCondensed]}>{props.userEmail}</Text>
+                <Text style={[styles.emailText, styleConstants.primaryFont]}>{props.userEmail}</Text>
             </View>
 
             <View style={styles.labelsContainer}>

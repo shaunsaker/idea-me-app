@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 4,
     },
     labelIcon: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
         marginRight: 8,
     },
     labelText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
     },
 });
@@ -36,7 +36,7 @@ export default Label = (props) => {
     return (
         <View style={styles.label}>
             <Icon name={props.iconName} style={styles.labelIcon} />
-            <Text style={[styles.labelText, styleConstants.robotoCondensed]}>
+            <Text style={[styles.labelText, styleConstants.primaryFont]}>
                 {props.labelText}
             </Text>
         </View>

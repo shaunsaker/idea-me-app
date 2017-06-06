@@ -1,12 +1,22 @@
 const styleConstants = {};
 
-styleConstants.ranga = {
-    fontFamily: 'Ranga-Regular'
-}
-styleConstants.robotoCondensed = {
+/* FONT FAMILIES */
+
+styleConstants.primaryFont = {
     fontFamily: 'RobotoCondensed-Regular'
 }
-// #39313c
+styleConstants.secondaryFont = {
+    fontFamily: 'Ranga-Regular'
+}
+
+/* FONT SIZES */
+
+styleConstants.largeFont = 32;
+styleConstants.regularFont = 18;
+styleConstants.smallFont = 16;
+
+/* COLOURS */ 
+
 styleConstants.primary = '#393140';
 styleConstants.transPrimary = 'rgba(57, 49, 64, 0.75)'
 styleConstants.secondary = '#fdd835';

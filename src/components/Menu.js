@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         padding: 8,
     },
     menuItemText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
         textAlign: 'right',
     },
@@ -67,7 +67,7 @@ export default class Menu extends React.Component {
                 style={styles.menuItemContainer}
                 onPress={() => { this.toggleMenu(); this.props.handleSelect(item) }} >
                 <Text
-                    style={[styles.menuItemText, styleConstants.robotoCondensed]}>
+                    style={[styles.menuItemText, styleConstants.primaryFont]}>
                     {item}
                 </Text>
             </TouchableOpacity>

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     countText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.white
     },
 });
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 export default Count = (props) => {
     return (
         <View style={styles.countContainer}>
-            <Text style={[styles.countText, styleConstants.robotoCondensed]}>
+            <Text style={[styles.countText, styleConstants.primaryFont]}>
                 {props.count}
                 <Text style={styles.separator}> of </Text>
                 {props.total}

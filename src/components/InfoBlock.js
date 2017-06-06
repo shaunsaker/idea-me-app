@@ -14,12 +14,12 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
     },
     infoTextTitle: {
-        fontSize: 32,
+        fontSize: styleConstants.largeFont,
         color: styleConstants.white,
         marginBottom: 8,
     },
     infoTextDescription: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.white,
     },
 });
@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
 export default InputContainer = (props) => {
     return (
         <View style={styles.infoContainer}>
-            <Text style={[styles.infoTextTitle, {color: props.titleColor}, styleConstants.robotoCondensed]}>
+            <Text style={[styles.infoTextTitle, {color: props.titleColor}, styleConstants.primaryFont]}>
                 {props.title}
             </Text>
-            <Text style={[styles.infoTextDescription, {color: props.subtitleColor}, styleConstants.robotoCondensed]}>
+            <Text style={[styles.infoTextDescription, {color: props.subtitleColor}, styleConstants.primaryFont]}>
                 {props.subtitle}
             </Text>
         </View>

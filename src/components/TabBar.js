@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
 		alignSelf: 'stretch',
 	},
 	icon: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
 	},
 	text: {
-		fontSize: 16,
+		fontSize: styleConstants.smallFont,
 		marginTop: 2,
 	}
 });
@@ -45,7 +45,7 @@ export default class TabBar extends React.Component {
                     <Icon
                         name='home'
                         style={[styles.icon, {color: this.props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white}]} />
-					<Text style={[styles.text, {color: this.props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white}, styleConstants.robotoCondensed]}>Home</Text>
+					<Text style={[styles.text, {color: this.props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white}, styleConstants.primaryFont]}>Home</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={() => Actions.addIdea()}
@@ -53,7 +53,7 @@ export default class TabBar extends React.Component {
                     <Icon
                         name='add'
                         style={[styles.icon, {color: this.props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white}]} />
-					<Text style={[styles.text, {color: this.props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white}, styleConstants.robotoCondensed]}>Add Idea</Text>
+					<Text style={[styles.text, {color: this.props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white}, styleConstants.primaryFont]}>Add Idea</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={() => Actions.profile()} 
@@ -61,7 +61,7 @@ export default class TabBar extends React.Component {
                     <Icon
                         name='face'
                         style={[styles.icon, {color: this.props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white}]} />
-					<Text style={[styles.text, {color: this.props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white}, styleConstants.robotoCondensed]}>Profile</Text>
+					<Text style={[styles.text, {color: this.props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white}, styleConstants.primaryFont]}>Profile</Text>
                 </TouchableOpacity>
 			</View>
 		);

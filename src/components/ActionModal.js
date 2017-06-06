@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
     },
     titleText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
         textAlign: 'center',
     },
     subtitleText: {
-        fontSize: 16,
+        fontSize: styleConstants.smallFont,
         color: styleConstants.grey,
         textAlign: 'center',
         marginTop: 8,
@@ -60,14 +60,14 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
     },
     icon: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
     },
 });
 
 export default ActionModal = (props) => {
     const subtitle = props.subtitle ?
-        <Text style={[styles.subtitleText, styleConstants.robotoCondensed]}>{props.subtitle}</Text>
+        <Text style={[styles.subtitleText, styleConstants.primaryFont]}>{props.subtitle}</Text>
         :
         null;
 
@@ -75,7 +75,7 @@ export default ActionModal = (props) => {
         <View style={styles.container}>
             <View style={styles.modal}>
                 <View style={styles.textContainer}>
-                    <Text style={[styles.titleText, styleConstants.robotoCondensed]}>{props.title}</Text>
+                    <Text style={[styles.titleText, styleConstants.primaryFont]}>{props.title}</Text>
                     {subtitle}
                 </View>
                 <View style={styles.buttonsContainer}>

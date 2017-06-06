@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
     dropdownHeaderIcon: {
         marginRight: 12,
         color: styleConstants.white,
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
     },
     dropdownHeaderText: {
         color: styleConstants.white,
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         textAlign: 'center',
     },
     dropdownItem: {        
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     dropdownItemText: {
         color: styleConstants.primary,
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         textAlign: 'center',
     },
     dropdownFooter: {        
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     },
     dropdownFooterText: {
         color: styleConstants.white,
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         textAlign: 'center',
     },
 });
@@ -158,7 +158,7 @@ export default class DropdownButton extends React.Component {
                 style={styles.dropdownItem}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(item) }} >
                 <Text
-                    style={[styles.dropdownItemText, styleConstants.robotoCondensed]}>
+                    style={[styles.dropdownItemText, styleConstants.primaryFont]}>
                     {item}
                 </Text>
             </TouchableOpacity>
@@ -183,7 +183,7 @@ export default class DropdownButton extends React.Component {
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }} >
                 <Icon name='mode-edit' style={styles.dropdownHeaderIcon} />
                 <Text
-                    style={[styles.dropdownHeaderText, styleConstants.robotoCondensed]}>
+                    style={[styles.dropdownHeaderText, styleConstants.primaryFont]}>
                     {this.props.headerValue}
                 </Text>
             </TouchableOpacity>;
@@ -193,7 +193,7 @@ export default class DropdownButton extends React.Component {
                 style={styles.dropdownFooter}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.footerValue) }} >
                 <Text
-                    style={[styles.dropdownFooterText, styleConstants.robotoCondensed]}>
+                    style={[styles.dropdownFooterText, styleConstants.primaryFont]}>
                     {this.props.footerValue}
                 </Text>
             </TouchableOpacity>;

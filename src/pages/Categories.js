@@ -75,7 +75,7 @@ export class Categories extends React.Component {
         <Header
           text='Categories'
           textSize={28}
-          textStyle={styleConstants.robotoCondensed}
+          textStyle={styleConstants.primaryFont}
           backButton
           headerShadow />
 

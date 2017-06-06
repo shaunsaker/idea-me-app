@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
 
     },
     currentLocationTitleText: {
-        fontSize: 16,
+        fontSize: styleConstants.smallFont,
         color: styleConstants.secondary,
     },
     currentLocationSubtitleText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.white,
     },
     currentLocationIconContainer: {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     currentLocationIcon: {
-        fontSize: 24,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.white,
     },
 });
@@ -52,8 +52,8 @@ export default ItemListHeader = (props) => {
         <View
             style={[styles.currentLocationButton, styles.currentLocationButtonDisabled]}>
             <View style={styles.currentLocationButtonTextContainer}>
-                <Text style={[styles.currentLocationTitleText, styleConstants.robotoCondensed]}>Use your Current Location</Text>
-                <Text style={[styles.currentLocationSubtitleText, styleConstants.robotoCondensed]}>{props.currentLocation}</Text>
+                <Text style={[styles.currentLocationTitleText, styleConstants.primaryFont]}>Use your Current Location</Text>
+                <Text style={[styles.currentLocationSubtitleText, styleConstants.primaryFont]}>{props.currentLocation}</Text>
             </View>
             <View
                 style={styles.currentLocationIconContainer}>
@@ -65,8 +65,8 @@ export default ItemListHeader = (props) => {
             onPress={() => props.handlePress(props.currentLocation)}
             style={styles.currentLocationButton}>
             <View style={styles.currentLocationButtonTextContainer}>
-                <Text style={[styles.currentLocationTitleText, styleConstants.robotoCondensed]}>Use your Current Location</Text>
-                <Text style={[styles.currentLocationSubtitleText, styleConstants.robotoCondensed]}>{props.currentLocation}</Text>
+                <Text style={[styles.currentLocationTitleText, styleConstants.primaryFont]}>Use your Current Location</Text>
+                <Text style={[styles.currentLocationSubtitleText, styleConstants.primaryFont]}>{props.currentLocation}</Text>
             </View>
             <View
                 style={styles.currentLocationIconContainer}>

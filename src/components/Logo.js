@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
         marginRight: 4,
     },
     icon: {
-        fontSize: 24,
+        fontSize: styleConstants.regularFont,
     },
     text: {
-        fontSize: 32,
+        fontSize: styleConstants.largeFont,
         color: styleConstants.white,
     }
 });
@@ -61,7 +61,7 @@ export default class Logo extends React.Component {
                         name='light-bulb'
                         style={styles.icon} />
                 </Animated.Text>
-                <Text style={[styles.text, styleConstants.ranga]}>
+                <Text style={[styles.text, styleConstants.secondaryFont]}>
                     IdeaMe
                 </Text>
             </View>

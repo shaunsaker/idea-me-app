@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	text: {
-		fontSize: 18,
+		fontSize: styleConstants.regularFont,
 		color: styleConstants.white,
 	},
 	leftIconContainer: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	leftIcon: {
-		fontSize: 18,
+		fontSize: styleConstants.regularFont,
 		color: styleConstants.white,
 	},
 	rightIconContainer: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-end',
 	},
 	rightIcon: {
-		fontSize: 18,
+		fontSize: styleConstants.regularFont,
 		color: styleConstants.white,
 	},
 	inputContainer: {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	input: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.white,
         paddingLeft: 16,
         paddingRight: 32,
@@ -144,14 +144,14 @@ export default class Header extends React.Component {
 				<TouchableOpacity
 					style={[styles.textContainer, textRightStyles]}
 					onPress={this.props.handleTextPress} >
-					<Text style={[styles.text, styleConstants.robotoCondensed, this.props.textStyle]}>{this.props.text}</Text>
+					<Text style={[styles.text, styleConstants.primaryFont, this.props.textStyle]}>{this.props.text}</Text>
 				</TouchableOpacity>
 				:
 				this.props.showInput ?
 					null
 					:
 					<View style={[styles.textContainer, textRightStyles]}>
-						<Text style={[styles.text, styleConstants.robotoCondensed, this.props.textStyle]}>{this.props.text}</Text>
+						<Text style={[styles.text, styleConstants.primaryFont, this.props.textStyle]}>{this.props.text}</Text>
 					</View>;
 
 		const rightIcon = this.props.rightComponent ?
@@ -198,7 +198,7 @@ export default class Header extends React.Component {
 					placeholderTextColor={styleConstants.lightGrey}
 					onChangeText={(text) => this.props.handleChangeText(text)}
 					underlineColorAndroid='transparent'
-					style={[styles.input, styleConstants.robotoCondensed]}/>
+					style={[styles.input, styleConstants.primaryFont]}/>
 				{clearTextButton}
 			</View>
 			:

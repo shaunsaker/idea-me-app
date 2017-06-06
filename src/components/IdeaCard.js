@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     menuIcon: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
     },
     labelsContainer: {

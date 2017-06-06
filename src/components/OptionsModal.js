@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         borderColor: styleConstants.lightGrey,
     },
     modalButtonText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
         textAlign: 'center',
     },
@@ -80,12 +80,12 @@ export default OptionsModal = (props) => {
                     <TouchableOpacity
                         onPress={() => props.handleSelect(props.options[0])}
                         style={styles.modalButton} >
-                        <Text style={[styles.modalButtonText, styleConstants.robotoCondensed]}>{props.options[0]}</Text>
+                        <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{props.options[0]}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => props.handleSelect(props.options[1])}
                         style={styles.modalButton} >
-                        <Text style={[styles.modalButtonText, styleConstants.robotoCondensed]}>{props.options[1]}</Text>
+                        <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{props.options[1]}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
     },
     listItemText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
     },
     listItemIconContainer: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     listItemIcon: {
-        fontSize: 24,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
     },
 });
@@ -88,7 +88,7 @@ export default class ItemList extends React.Component {
                 onPress={() => this.props.handleItemPress(item)}
                 style={styles.listItem}>
                 <View style={styles.listItemTextContainer}>
-                    <Text style={[styles.listItemText, styleConstants.robotoCondensed]}>{item}</Text>
+                    <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item}</Text>
                 </View>
                 {icon}
             </TouchableOpacity>
@@ -96,7 +96,7 @@ export default class ItemList extends React.Component {
             <View
                 style={styles.listItem}>
                 <View style={styles.listItemTextContainer}>
-                    <Text style={[styles.listItemText, styleConstants.robotoCondensed]}>{item}</Text>
+                    <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item}</Text>
                 </View>
                 {icon}
             </View>

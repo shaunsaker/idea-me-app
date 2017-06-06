@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     inputLabelText: {
-        fontSize: 16,
+        fontSize: styleConstants.smallFont,
     },
     input: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.white,
         paddingLeft: 0,
         paddingRight: 32,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 
     },
     togglePasswordText: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
         color: styleConstants.white
     },
 });
@@ -84,7 +84,7 @@ class TogglePasswordButton extends React.Component {
                 <TouchableOpacity
                     onPress={this.props.handlePress}
                     style={styles.togglePasswordContainer}>
-                    <Text style={[styles.togglePasswordText, styleConstants.robotoCondensed]}>
+                    <Text style={[styles.togglePasswordText, styleConstants.primaryFont]}>
                         {this.props.hidePassword ? 'Show' : 'Hide'}
                     </Text>
                 </TouchableOpacity>
@@ -208,7 +208,7 @@ export default class Input extends React.Component {
                 onPress={() => this.refs.input.focus()} >
                 <View style={[styles.inputWrapper, inputContainerStyles]}>
                     <View style={styles.inputLabelContainer}>
-                        <Text style={[styles.inputLabelText, inputLabelStyles, styleConstants.robotoCondensed]}>
+                        <Text style={[styles.inputLabelText, inputLabelStyles, styleConstants.primaryFont]}>
                             {this.props.placeholder}
                         </Text>
                         {togglePasswordButton}
@@ -217,7 +217,7 @@ export default class Input extends React.Component {
                         ref='input'
                         value={this.props.value ? this.props.value : ''}
                         underlineColorAndroid='transparent'
-                        style={[styles.input, inputStyles, styleConstants.robotoCondensed]}
+                        style={[styles.input, inputStyles, styleConstants.primaryFont]}
                         onChangeText={(text) => this.props.handleChange(text)}
                         onFocus={this.focusInput}
                         onBlur={this.blurInput}

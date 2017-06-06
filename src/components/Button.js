@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         left: 16,
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
     },
     text: {
-        fontSize: 18,
+        fontSize: styleConstants.regularFont,
     }
 });
 
@@ -86,7 +86,7 @@ export default Button = (props) => {
             style={[styles.button, styles.disabled, { backgroundColor }, props.style]}>
             {icon}
             <Text
-                style={[styles.text, { color: textColor }, styleConstants.robotoCondensed]}>
+                style={[styles.text, { color: textColor }, styleConstants.primaryFont]}>
                 {props.text}
             </Text>
         </View>  
@@ -96,7 +96,7 @@ export default Button = (props) => {
             onPress={props.handlePress} >
             {icon}
             <Text
-                style={[styles.text, { color: textColor }, styleConstants.robotoCondensed]}>
+                style={[styles.text, { color: textColor }, styleConstants.primaryFont]}>
                 {props.text}
             </Text>
         </TouchableOpacity>
