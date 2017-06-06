@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
         width: windowWidth - 32,
         marginVertical: 16,
         alignSelf: 'center',
+		borderBottomWidth: 1,
     },
     inputLabelContainer: {
         flexDirection: 'row',
@@ -34,7 +35,6 @@ const styles = StyleSheet.create({
         color: styleConstants.white,
         paddingLeft: 0,
         paddingRight: 32,
-        borderBottomWidth: 1,
     },
 
     clearTextButtonContainer: {
@@ -191,19 +191,22 @@ export default class Input extends React.Component {
             :
             null;
 
+		const inputContainerStyles = {
+			borderBottomColor: this.state.borderColour,
+		}
+
         const inputLabelStyles = {
             color: this.state.labelColour,
         }
 
         const inputStyles = {
             height: this.state.inputHeight,
-            borderBottomColor: this.state.borderColour,
         }
 
         return (
             <TouchableWithoutFeedback
                 onPress={() => this.refs.input.focus()} >
-                <View style={styles.inputWrapper}>
+                <View style={[styles.inputWrapper, inputContainerStyles]}>
                     <View style={styles.inputLabelContainer}>
                         <Text style={[styles.inputLabelText, inputLabelStyles, styleConstants.robotoCondensed]}>
                             {this.props.placeholder}

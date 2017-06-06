@@ -1,6 +1,8 @@
 TODOS
 
 Rename ideas page to home
+Primary/Secondary Fonts
+Font sizes in styleConstants
 
 PAGES
     Splash

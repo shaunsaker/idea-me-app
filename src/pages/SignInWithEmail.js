@@ -33,9 +33,24 @@ export class SignInWithEmail extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.props.authenticated) {
-            Actions.ideas();
-        }
+
+		// If we're authenticated and we have not yet loaded data, load/save data to db
+		if (this.props.authenticated && !this.props.apiSuccess) {
+			this.props.dispatch({
+				type: 'loadUser',
+				user: {
+					uid: this.props.uid,
+					userEmail: this.props.userEmail,
+					userName: this.props.userName,
+					userPhotoUrl: this.props.userPhotoUrl,
+					userLocation: this.props.currentLocation, // In case the user does not have a saved location and we dont have user data in the db
+				}
+			});
+		}
+
+		if (this.props.authenticated && this.props.apiSuccess) {
+			Actions.ideas();
+		}
     }
 
     updateUserEmail(text) {

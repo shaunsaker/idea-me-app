@@ -18,6 +18,12 @@ import styleConstants from '../styles/styleConstants';
 
 const windowWidth = Dimensions.get('window').width;
 
+const iosStyles = Platform.OS === 'ios' &&
+	{
+		paddingTop: 20,
+		height: 76,
+	};
+
 const styles = StyleSheet.create({
 	container: {
 		width: windowWidth,
@@ -29,7 +35,7 @@ const styles = StyleSheet.create({
 		backgroundColor: styleConstants.primary,
 	},
 	textContainer: {
-		flex: 1,
+		flex: 3, // make the text container 3 times as big as the icon containers
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
@@ -48,7 +54,7 @@ const styles = StyleSheet.create({
 	rightIconContainer: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'flex-end'
+		alignItems: 'flex-end',
 	},
 	rightIcon: {
 		fontSize: 18,
@@ -200,8 +206,10 @@ export default class Header extends React.Component {
 
 		return (
 			<View>
-				<StatusBar backgroundColor={styleConstants.transPrimary} />
-				<View style={[styles.container, headerShadowStyles]}>
+				<StatusBar 
+					backgroundColor={styleConstants.transPrimary} 
+					barStyle='light-content' />
+				<View style={[styles.container, headerShadowStyles, iosStyles]}>
 					{leftIcon}
 					{text}
 					{rightIcon}

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 export default Page = (props) => {
     const pageStyles = 
         {
-            backgroundColor: styleConstants.primary,
+            backgroundColor: props.backgroundColor ? props.backgroundColor : styleConstants.primary,
             justifyContent: props.justifyContent ? props.justifyContent : 'space-between',
             paddingBottom: props.removeBottomPadding ? 0 : props.fauxFooter ? 0 : 16,
         }
