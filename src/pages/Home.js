@@ -21,7 +21,7 @@ import ActionModal from '../components/ActionModal';
 import Growl from '../components/Growl';
 import Loader from '../components/Loader';
 
-export class Ideas extends React.Component {
+export class Home extends React.Component {
   constructor(props) {
     super(props);
 
@@ -190,7 +190,7 @@ export class Ideas extends React.Component {
         {ideas}
 
         <TabBar
-          currentPage='ideas' />
+          currentPage='home' />
 
         {modal}
 
@@ -212,4 +212,4 @@ function mapStateToProps(state) {
   });
 }
 
-export default connect(mapStateToProps)(Ideas);
+export default connect(mapStateToProps)(Home);

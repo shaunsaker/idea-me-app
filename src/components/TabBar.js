@@ -40,12 +40,12 @@ export default class TabBar extends React.Component {
 		return (
 			<View style={styles.container}>
                 <TouchableOpacity 
-                    onPress={() => Actions.ideas()}
+                    onPress={() => Actions.home()}
                     style={styles.tabContainer}>
                     <Icon
                         name='home'
-                        style={[styles.icon, {color: this.props.currentPage === 'ideas' ? styleConstants.secondary : styleConstants.white}]} />
-					<Text style={[styles.text, {color: this.props.currentPage === 'ideas' ? styleConstants.secondary : styleConstants.white}, styleConstants.robotoCondensed]}>Home</Text>
+                        style={[styles.icon, {color: this.props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white}]} />
+					<Text style={[styles.text, {color: this.props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white}, styleConstants.robotoCondensed]}>Home</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={() => Actions.addIdea()}

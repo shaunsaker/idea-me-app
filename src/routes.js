@@ -10,7 +10,7 @@ import Welcome from './pages/Welcome';
 import SignInOptions from './pages/SignInOptions';
 import SignInWithEmail from './pages/SignInWithEmail';
 import ForgotPassword from './pages/ForgotPassword';
-import Ideas from './pages/Ideas';
+import Home from './pages/Home';
 import AddIdea from './pages/AddIdea';
 import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
@@ -43,8 +43,8 @@ const Scenes = Actions.create(
 			component={ForgotPassword}
 			initial={false} />
 		<Scene
-			key='ideas'
-			component={Ideas}
+			key='home'
+			component={Home}
 			type={ActionConst.REPLACE}
 			initial={true} />
 		<Scene

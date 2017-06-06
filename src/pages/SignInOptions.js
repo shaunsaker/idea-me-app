@@ -52,7 +52,7 @@ export class SignInOptions extends React.Component {
 		}
 
 		if (this.props.authenticated && this.props.apiSuccess) {
-			Actions.ideas();
+			Actions.home();
 		}
     }
 

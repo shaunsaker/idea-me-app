@@ -31,7 +31,7 @@ export class Splash extends React.Component {
             Actions.welcome();
         }
         else if (this.props.authenticated && this.props.geolocationSuccess && this.props.apiSuccess) {
-            Actions.ideas();
+            Actions.home();
         }
 
         // When a user is signed in and reloads app
@@ -73,7 +73,7 @@ export class Splash extends React.Component {
 
 		// If we're authenticated, we have geolocation and we have the userData, redirect to the home page
 		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.apiSuccess) {
-			Actions.ideas(); 
+			Actions.home(); 
 		}
     }
 

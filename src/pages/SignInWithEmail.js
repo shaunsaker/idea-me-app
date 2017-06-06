@@ -49,7 +49,7 @@ export class SignInWithEmail extends React.Component {
 		}
 
 		if (this.props.authenticated && this.props.apiSuccess) {
-			Actions.ideas();
+			Actions.home();
 		}
     }
 
