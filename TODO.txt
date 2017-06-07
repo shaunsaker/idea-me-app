@@ -1,13 +1,13 @@
 TODOS
 
 GENERAL
-	Api => cloudData (we're going to have localData in the future)
-    Storage => storageData
-	Use config file for all config related stuff, eg. Google App Id
-		Dev option loads seedData into initialState
-    Growl retry action     
-    Load quotes from api/Push update functionality
-    Load suburbs from api/Use a geo service
+    Reducers => utilities 
+    SignUpUser => SignUpUserWithEmail
+    Growl retry actions   
+    Browser and Menu actions in Profile Page
+    iconFont 24  
+    Check Growl and Loader declarations
+    Filter suburbs in utilities
 
 PAGES
     Splash
@@ -29,8 +29,6 @@ PAGES
     Add Category
         Save categories on continue
     Profile Page
-        Menu Actions
-        Feedback survey in browser
     Edit Profile Page
         Saving photo to db not working (permission denied)
         Save userName, email and location on continue
@@ -40,13 +38,13 @@ PAGES
     About App
         All
     Settings
-        All
+        All   
+    Load quotes from api/Push update functionality
+    Load suburbs from api/Use a geo service
 
     Remove bin and share icons        
     Prepopulate idea on signup
     Profile icon highlighted on signup (indicate action required, ie. complete your profile)
-    Feedback button opens webview to Google Survey
-        Browser component
     Test all errors
     Optimise code
         Remove unnecessary
@@ -81,7 +79,5 @@ PAGES
         Based on api prop
 
 IOS
-    iOS click page to blur input (no hide keyboard button)
     Integrate react-native-fbsdk on iOS
     Integrate react-native-google-signin on iOS
-    iOS testing

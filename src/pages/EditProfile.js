@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import ImagePicker from 'react-native-image-picker';
 import ImageResizer from 'react-native-image-resizer';
 
+import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
 
@@ -29,13 +30,6 @@ export class Profile extends React.Component {
             editUserName: null,
             editUserEmail: null,
             showModal: false,}
-
-        this.imagePickerOptions = {
-            mediaType: 'photo',
-            noData: true, // greatly improves performance
-        };
-
-        this.maxImageSize = 100;
 
         this.toggleModal = this.toggleModal.bind(this);
         this.selectModalOption = this.selectModalOption.bind(this);
@@ -80,7 +74,7 @@ export class Profile extends React.Component {
     takePhoto() {        
         this.toggleModal();
 
-        ImagePicker.launchCamera(this.imagePickerOptions, (response) => {
+        ImagePicker.launchCamera(config.images.imagePickerOptions, (response) => {
             if (!response.didCancel) {
                 this.handleImage(response);
             }
@@ -90,7 +84,7 @@ export class Profile extends React.Component {
     choosePhoto() {
         this.toggleModal();
 
-        ImagePicker.launchImageLibrary(this.imagePickerOptions, (response) => {
+        ImagePicker.launchImageLibrary(config.images.imagePickerOptions, (response) => {
             if (!response.didCancel) {
                 this.handleImage(response);
             }
@@ -106,14 +100,13 @@ export class Profile extends React.Component {
 
         const imageResizerOptions = [
             response.path, // path to image
-            portrait ? this.maxImageSize : this.maxImageSize * 2, // maxWidth
-            portrait ? this.maxImageSize * 2 : this.maxImageSize, // maxHeight
-            'JPEG', // compressFormat
-            100, // quality
+            portrait ? config.images.maxImageWidth : config.images.maxImageWidth * 2, // maxWidth
+            portrait ? config.images.maxImageWidth * 2 : config.images.maxImageWidth, // maxHeight
+            ...config.images.imageResizerOptions,
         ];
 
-        const offsetX = portrait ? 0 : (this.maxImageSize / 2 * response.width / response.height) - this.maxImageSize / 2;
-        const offsetY = portrait ? (this.maxImageSize / 2 * response.height / response.width) - this.maxImageSize / 2 : 0;
+        const offsetX = portrait ? 0 : (config.images.maxImageWidth / 2 * response.width / response.height) - config.images.maxImageWidth / 2;
+        const offsetY = portrait ? (config.images.maxImageWidth / 2 * response.height / response.width) - config.images.maxImageWidth / 2 : 0;
 
         ImageResizer.createResizedImage(...imageResizerOptions)
             .then((resizedImageUri) => {
@@ -123,8 +116,8 @@ export class Profile extends React.Component {
                         y: offsetY
                     },
                     size: {
-                        width: this.maxImageSize,
-                        height: this.maxImageSize
+                        width: config.images.maxImageWidth,
+                        height: config.images.maxImageWidth
                     }
                 };
 

@@ -11,6 +11,7 @@ import {
     Platform,
 } from "react-native";
 
+import config from '../config';
 import styleConstants from '../styles/styleConstants';
 
 import DeleteButton from './DeleteButton';
@@ -69,7 +70,8 @@ class TogglePasswordButton extends React.Component {
             this.state.rightPosition,
             {
                 toValue: 0,
-                duration: 250
+                duration: config.animation.duration.short,
+                easing: config.animation.easing,
             }
         ).start();
     }

@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import Icon from '../styles/icons/index';
 
-import DeleteButton from '../components/DeleteButton';
-
 import styleConstants from '../styles/styleConstants';
+
+import DeleteButton from '../components/DeleteButton';
 
 const windowWidth = Dimensions.get('window').width;
 

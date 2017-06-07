@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import Icon from '../styles/icons/index';
 
+import config from '../config';
 import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
@@ -42,7 +43,8 @@ export default class Logo extends React.Component {
             this.state.animatedValue,
             {
                 toValue: 1,
-                duration: 1000
+                duration: config.animation.duration.long,
+                easing: config.animation.easing,
             }
         ).start();
     }

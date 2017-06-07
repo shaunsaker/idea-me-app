@@ -6,14 +6,14 @@ import {
     FlatList,
     Animated,
     StyleSheet,
-    Easing,
     Dimensions,
 } from "react-native";
 import Icon from '../styles/icons/index';
 
-import Button from './Button';
-
+import config from '../config';
 import styleConstants from '../styles/styleConstants';
+
+import Button from './Button';
 
 const window = Dimensions.get('window');
 
@@ -131,8 +131,8 @@ export default class DropdownButton extends React.Component {
                 this.state.height,
                 {
                     toValue: dropdownInnerHeight, 
-                    duration: 500,
-                    easing: Easing.gentle
+                    duration: config.animation.duration.short,
+                    easing: config.animation.easing,
                 }
             ).start();
         }
@@ -145,8 +145,8 @@ export default class DropdownButton extends React.Component {
                 this.state.height,
                 {
                     toValue: 0,
-                    duration: 500,
-                    easing: Easing.gentle
+                    duration: config.animation.duration.short,
+                    easing: config.animation.easing,
                 }
             ).start();
         }

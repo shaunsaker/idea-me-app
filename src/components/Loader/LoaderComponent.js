@@ -6,6 +6,7 @@ import {
 	Dimensions,
 } from 'react-native';
 
+import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
 
 const styles = StyleSheet.create({
@@ -54,7 +55,7 @@ export default class LoaderComponent extends React.Component {
 			{
 				toValue: 1,
 				duration: 2000,
-				easing: Easing.gentle
+				easing: config.animation.easing,
 			}
 		).start();
 	}
@@ -67,7 +68,7 @@ export default class LoaderComponent extends React.Component {
 			{
 				toValue: this.windowWidth,
 				duration: 2000,
-				easing: Easing.gentle
+				easing: config.animation.easing,
 			}
 		).start(() => {
 			this.animateRight()

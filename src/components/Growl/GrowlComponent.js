@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Icon from '../../styles/icons/index';
 
+import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
 
 const windowWidth = Dimensions.get('window').width;
@@ -91,7 +92,8 @@ export default class GrowlComponent extends React.Component {
             this.state.bottom,
             {
                 toValue: 0,
-                duration: 250,
+                duration: config.animation.duration.short,
+                easing: config.animation.easing,
             }
         ).start();
     }
@@ -101,7 +103,8 @@ export default class GrowlComponent extends React.Component {
             this.state.bottom,
             {
                 toValue: (this.height) * -1,
-                duration: 250,
+                duration: config.animation.duration.short,
+                easing: config.animation.easing,
             }
         ).start(() => {
             this.props.handleReset();
