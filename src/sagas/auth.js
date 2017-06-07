@@ -11,11 +11,12 @@ export function* getUserAuth() {
 		yield put({
 			type: 'SIGN_IN_USER',
 			uid: getUserAuthResponse.message.user.uid,
+			// TODO: how to check if user is anonymous? Check the response
 		});
 	}
 	else {
 		yield put({
-			type: 'REDIRECT_USER_TO_WELCOME',
+			type: 'REDIRECT_USER_TO_SIGN_IN',
 		});
 	}
 }
@@ -29,7 +30,8 @@ export function* signInUserWithEmail(action) {
 		yield put({
 			type: 'SIGN_IN_USER',
 			uid: signUpUserWithEmailResponse.message.user.uid,
-			userEmail: signUpUserWithEmailResponse.message.user.email
+			userEmail: signUpUserWithEmailResponse.message.user.email,
+			anonymous: false
 		});
 	}
 
@@ -37,25 +39,46 @@ export function* signInUserWithEmail(action) {
 	else if (signUpUserWithEmailResponse.message.errorMessage.indexOf('A network') > -1) {
 		yield put({
 			type: 'AUTH_ERROR',
-			message: 'A network error has occured.'
+			message: 'A network error has occured.',
+			retryAction: {
+				type: 'signInUserWithEmail',
+				data: {
+					email: action.email,
+					password: action.password,
+				},
+			},	
 		});
 	}
 	else {
-		const signInUserResponse = yield call(Auth.signInUserWithEmail, action);
-		console.log('signInUserResponse', signInUserResponse);
+		let emailInUse = false;
 
-		if (signInUserResponse.authenticated) {
-			const uid = signInUserResponse.message.uid || signInUserResponse.message.user.uid;
+		if (signUpUserWithEmailResponse.message.errorCode && signUpUserWithEmailResponse.message.errorCode === 'ERROR_EMAIL_ALREADY_IN_USE') {
+			emailInUse = true;
+		}
+
+		const signInUserWithEmailResponse = yield call(Auth.signInUserWithEmail, action);
+		console.log('signInUserWithEmailResponse', signInUserWithEmailResponse);
+
+		if (signInUserWithEmailResponse.authenticated) {
+			const uid = signInUserWithEmailResponse.message.uid || signInUserWithEmailResponse.message.user.uid;
 
 			yield put({
 				type: 'SIGN_IN_USER',
 				uid: uid,
+				anonymous: false,
 			});
 		}
 		else {
 			yield put({
 				type: 'AUTH_ERROR',
-				message: signInUserResponse.message.errorMessage
+				message: emailInUse ? 'This email address is already in use' : signInUserWithEmailResponse.message.errorMessage,
+				retryAction: {
+					type: 'signInUserWithEmail',
+					data: {
+						email: action.email,
+						password: action.password,
+					},
+				},	
 			});
 		}
 	}
@@ -68,21 +91,27 @@ export function* sendPasswordResetEmail(action) {
 
 	if (passwordResetResponse.success) {
 		yield put({
-			type: 'AUTH_SUCCESS',
+			type: 'USER_SUCCESS',
 			message: 'Email sent successfully'
 		});
 	}
 	else {
 		yield put({
 			type: 'AUTH_ERROR',
-			message: 'There was an error resetting your password. Please try again'
+			message: passwordResetResponse.message,
+			retryAction: {
+				type: 'signInUserWithEmail',
+				data: {
+					email: action.email,
+				},
+			},	
 		});
 	}
 }
 
-export function* signInUserWithFacebook(action) {
+export function* signInUserWithFacebook() {
 
-	const signInFacebookResponse = yield call(Auth.signInUserWithFacebook, action);
+	const signInFacebookResponse = yield call(Auth.signInUserWithFacebook);
 	console.log('signInFacebookResponse', signInFacebookResponse);
 
 	if (signInFacebookResponse.authenticated) {
@@ -90,42 +119,50 @@ export function* signInUserWithFacebook(action) {
 		yield put({
 			type: 'SIGN_IN_USER',
 			uid: uid,
-			userName: signInFacebookResponse.message.user.displayName,
 			userEmail: signInFacebookResponse.message.user.email,
+			userName: signInFacebookResponse.message.user.displayName,
 			userPhotoUrl: signInFacebookResponse.message.user.photoUrl,
+			anonymous: false
 		});
 	}
 	else {
 		yield put({
 			type: 'AUTH_ERROR',
-			message: signInFacebookResponse.message // TODO: Check this
+			message: 'We were unable to connect to Facebook.',
+			retryAction: {
+				type: 'signInUserWithFacebook',
+			}
 		});
 	}
 }
 
-// export function* signInUserWithGoogle(action) {
+export function* signInUserWithGoogle() {
 
-// 	const signInGoogleResponse = yield call(Auth.signInUserWithGoogle, action);
-// 	console.log('signInGoogleResponse', signInGoogleResponse);
+	const signInGoogleResponse = yield call(Auth.signInUserWithGoogle);
+	console.log('signInGoogleResponse', signInGoogleResponse);
 
-// 	if (signInGoogleResponse.authenticated) {
-// 		const uid = signInGoogleResponse.message.uid || signInGoogleResponse.message.user.uid;
+	if (signInGoogleResponse.authenticated) {
+		const uid =  signInGoogleResponse.message.user.uid; 
 
-// 		yield put({
-// 			type: 'SIGN_IN_USER',
-// 			uid: uid,
-// 			userName: signInGoogleResponse.message.user.userName, // check this
-// 			userEmail: signInGoogleResponse.message.user.email, // check this
-// 			userPhotoUrl: signInGoogleResponse.message.user.photoUrl, // check this
-// 		});
-// 	}
-// 	else {
-// 		yield put({
-// 			type: 'AUTH_ERROR',
-// 			message: signInGoogleResponse.message.errorMessage
-// 		});
-// 	}
-// }
+		yield put({
+			type: 'SIGN_IN_USER',
+			uid: uid,
+			userEmail: '', // TODO: Get these from the response
+			userName: '',
+			userPhotoUrl: '',
+			anonymous: false
+		});
+	}
+	else {
+		yield put({
+			type: 'AUTH_ERROR',
+			message: signInGoogleResponse.message,
+			retryAction: {
+				type: 'signInUserWithGoogle',
+			}
+		});
+	}
+}
 
 export function* signInUserAnonymously() {
 
@@ -133,7 +170,7 @@ export function* signInUserAnonymously() {
 	console.log('signInUserAnonymouslyResponse', signInUserAnonymouslyResponse);
 
 	if (signInUserAnonymouslyResponse.authenticated) {
-		const uid = signInUserAnonymouslyResponse.message.uid || signInUserAnonymouslyResponse.message.user.uid;
+		const uid = signInUserAnonymouslyResponse.message.uid || signInUserAnonymouslyResponse.message.user.uid; // TODO: check this
 
 		yield put({
 			type: 'SIGN_IN_USER',
@@ -144,7 +181,10 @@ export function* signInUserAnonymously() {
 	else {
 		yield put({
 			type: 'AUTH_ERROR',
-			message: signInUserAnonymouslyResponse.message.errorMessage
+			message: signInUserAnonymouslyResponse.message,
+			retryAction: {
+				type: 'signInUserAnonymously',
+			}
 		});
 	}
 }
@@ -162,7 +202,10 @@ export function* signOutUser() {
 	else {
 		yield put({
 			type: 'AUTH_ERROR',
-			message: signOutUserResponse.message.errorMessage
+			message: signOutUserResponse.message,
+			retryAction: {
+				type: 'signOutUser',
+			}
 		});
 	}
 }

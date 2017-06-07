@@ -16,7 +16,14 @@ export function* uploadUserPhoto(action) {
 	else {
 		yield put({
 			type: 'CLOUD_STORAGE_ERROR',
-			message: 'There was an error saving your profile photo. Please try again'
+			message: 'There was an error saving your profile photo.',
+			retryAction: {
+				type: 'uploadUserPhoto',
+				data: {
+					uid: action.uid,
+					path: action.path,
+				},
+			},
 		});
 	}
 }

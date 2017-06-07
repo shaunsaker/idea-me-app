@@ -10,14 +10,20 @@ export function* saveUserIdeas(action) {
     if (saveUserIdeasResponse) {
         if (saveUserIdeasResponse.success) {
             yield put({
-                type: 'CLOUD_DATA_SAVE_SUCCESS',
+                type: 'CLOUD_DATA_SUCCESS',
             });
         }
         else {
             yield put({
                 type: 'CLOUD_DATA_ERROR',
-                retryAction: 'saveUserIdeas',
-                message: saveUserIdeasResponse.message // TODO: Check this
+                message: saveUserIdeasResponse.message, 
+                retryAction: {
+                    type: 'saveUserIdeas',
+                    data: {
+                        uid: action.uid,
+                        ideas: action.ideas,
+                    },
+                },
             });
         }
     }
@@ -31,14 +37,20 @@ export function* saveUserCategories(action) {
     if (saveUserCategoriesResponse) {
         if (saveUserCategoriesResponse.success) {
             yield put({
-                type: 'CLOUD_DATA_SAVE_SUCCESS',
+                type: 'CLOUD_DATA_SUCCESS',
             });
         }
         else {
             yield put({
                 type: 'CLOUD_DATA_ERROR',
-                retryAction: 'saveUserCategories',
-                message: saveUserCategoriesResponse.message // TODO: Check this
+                message: saveUserCategoriesResponse.message,
+                retryAction: {
+                    type: 'saveUserCategories',
+                    data: {
+                        uid: action.uid,
+                        categories: action.categories,
+                    },
+                },
             });
         }
     }
@@ -86,7 +98,7 @@ export function* loadUserData(action) {
                 }           
 
                 yield put({
-                    type: 'CLOUD_DATA_LOAD_SUCCESS',
+                    type: 'CLOUD_DATA_SUCCESS',
                     data: processedData
                 });
             }
@@ -94,7 +106,7 @@ export function* loadUserData(action) {
             // Else the user has no data, so just send an empty object
             else {
                 yield put({
-                    type: 'CLOUD_DATA_LOAD_SUCCESS',
+                    type: 'CLOUD_DATA_SUCCESS',
                     data: processedData
                 });
             }
@@ -102,7 +114,13 @@ export function* loadUserData(action) {
         else {
             yield put({
                 type: 'CLOUD_DATA_ERROR',
-                message: loadUserDataResponse.message
+                message: loadUserDataResponse.message,
+                retryAction: {
+                    type: 'loadUserData',
+                    data: {
+                        uid: action.uid,
+                    },
+                },           
             });
         }
     }
@@ -121,7 +139,14 @@ export function* saveUserLocation(action) {
 	else {
 		yield put({
 			type: 'CLOUD_DATA_ERROR',
-			message: 'There was an error saving your location. Please try again'
+			message: 'There was an error saving your location.',
+			retryAction: {
+				type: 'saveUserLocation',
+				data: {
+					uid: action.uid,
+                    userLocation: action.userLocation,
+				},
+			},
 		});
 	}
 }										
@@ -139,7 +164,14 @@ export function* saveUserPhoto(action) {
 	else {
 		yield put({
 			type: 'CLOUD_DATA_ERROR',
-			message: 'There was an error saving your photo. Please try again'
+			message: 'There was an error saving your photo.',
+			retryAction: {
+				type: 'saveUserPhoto',
+				data: {
+					uid: action.uid,
+                    userPhotoUrl: action.userPhotoUrl,
+				},
+			},
 		});
 	}
 }

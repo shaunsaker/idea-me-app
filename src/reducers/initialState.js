@@ -16,7 +16,10 @@ const initialState = {
         loading: false, // TODO: needs to be true on initial app load
 
         errorType: null,
-        retryAction: null,
+		retryAction: {
+			type: null,
+			data: null,
+		},
 
         userSuccessMessage: null,
         userErrorMessage: null,

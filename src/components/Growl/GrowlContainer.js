@@ -25,6 +25,7 @@ export class Growl extends React.Component {
 
     static get propTypes() {
         return {
+            userSuccessMessage: React.PropTypes.string,
             userErrorMessage: React.PropTypes.string,
             authErrorMessage: React.PropTypes.string,
             authSuccessMessage: React.PropTypes.string,
@@ -32,18 +33,14 @@ export class Growl extends React.Component {
             cloudStorageErrorMessage: React.PropTypes.string,
 
             errorType: React.PropTypes.string,  
-            retryAction: React.PropTypes.string,
-
-            ideas: React.PropTypes.array,
-            categories: React.PropTypes.array,
-            uid: React.PropTypes.string,
+            retryAction: React.PropTypes.object,
         };
     }
 
     resetError() {
         
         // Reset the error depending on the type of error
-        const action = this.props.authSuccessMessage ? // If more success messages are needed, we'll need to handle this differently
+        const action = (this.props.userSuccessMessage || this.props.authSuccessMessage) ?
             'RESET_' + this.props.errorType + '_SUCCESS'
             :
             'RESET_' + this.props.errorType + '_ERROR';
@@ -54,14 +51,18 @@ export class Growl extends React.Component {
     }
 
     retryAction() {
+        this.props.dispatch({
+            type: 'TOGGLE_LOADING'
+        });
+
         this.resetError();
 
-        // this.props.dispatch({
-        //     type: this.props.retryAction,
-        //     ideas: this.props.ideas, // not sure which we'll need so let's just attach all of them
-        //     categories: this.props.categories,
-        //     uid: this.props.uid,
-        // });
+        const retryActionData = this.props.retryAction.data && this.props.retryAction.data;
+
+        this.props.dispatch({
+            type: this.props.retryAction.type,
+            ...retryActionData,
+        });
     }
 
     render() {
@@ -84,15 +85,18 @@ export class Growl extends React.Component {
             <GrowlComponent 
                 text={errorMessage} 
                 handleReset={this.resetError}
-                handleRetryAction={this.props.retryAction ? this.retryAction : null} />
+                handleRetryAction={this.props.retryAction.type ? this.retryAction : null} />
             :
             null;
 
         const successMessage =  
-            this.props.authSuccessMessage ?
-                this.props.authSuccessMessage
+            this.props.userSuccessMessage ?
+                this.props.userSuccessMessage
                 :
-                null;
+                this.props.authSuccessMessage ?
+                    this.props.authSuccessMessage
+                    :
+                    null;
 
         const successGrowl = successMessage ?
             <GrowlComponent 
@@ -113,18 +117,15 @@ export class Growl extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        userSuccessMessage: state.main.app.userSuccessMessage,
         userErrorMessage: state.main.app.userErrorMessage,
         authErrorMessage: state.main.auth.authErrorMessage,
         authSuccessMessage: state.main.auth.authSuccessMessage,
         cloudDataErrorMessage: state.main.cloudData.cloudDataErrorMessage,
-        cloudStorageErrorMessage: state.main.cloudStorage.cloudStorageErrorMessage,
+        cloudStorageErrorMessage: state.main.cloudStorage.cloudcloudStorageErrorMessage,
 
         errorType: state.main.app.errorType,
         retryAction: state.main.app.retryAction,
-
-        ideas: state.main.userData.ideas,
-        categories: state.main.userData.categories,
-        uid: state.main.auth.uid,
     }
 }
 

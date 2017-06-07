@@ -1,11 +1,12 @@
 TODOS
 
 GENERAL
-    Growl retry actions   
     Browser and Menu actions in Profile Page
     iconFont 24  
     Check Growl and Loader declarations
     Filter suburbs in utilities
+    Save User/Load User
+    Move cloudData loadUserData logic into utilities
 
 PAGES
     Splash

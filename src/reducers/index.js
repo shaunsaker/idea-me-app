@@ -57,90 +57,44 @@ export default function (state = initialState, action) {
             new_state.app.loading = !new_state.app.loading;
             return new_state;
 
-        /* SUCCESS/ERROR MESSAGES */
-        case 'AUTH_ERROR':
-            new_state = cloneObject(state);
-            new_state.auth.authErrorMessage = action.message;
-            new_state.app.errorType = 'AUTH';
-            new_state.app.loading = false;
-            return new_state;
-
-        case 'RESET_AUTH_ERROR':
-            new_state = cloneObject(state);
-            new_state.auth.authErrorMessage = null;
-            new_state.app.errorType = null;
-            return new_state;
-
+		/*
+			SUCCESS/ERROR MESSAGES
+		*/
         case 'AUTH_SUCCESS':
             new_state = cloneObject(state);
             new_state.auth.authSuccessMessage = action.message;
-            new_state.app.errorType = 'AUTH';
-            new_state.app.loading = false;
+			new_state.app.loading = false;
+			new_state.app.errorType = 'AUTH';
             return new_state;
 
         case 'RESET_AUTH_SUCCESS':
             new_state = cloneObject(state);
             new_state.auth.authSuccessMessage = null;
-            new_state.app.errorType = null;
+			new_state.app.errorType = null;
             return new_state;
 
-        case 'USER_ERROR':
+        case 'AUTH_ERROR':
             new_state = cloneObject(state);
-            new_state.app.userErrorMessage = action.message;
-            new_state.app.errorType = 'USER';
-            new_state.app.loading = false;
+            new_state.auth.authErrorMessage = action.message;
+			new_state.app.loading = false;
+			new_state.app.errorType = 'AUTH';
+
+			if (action.retryAction && action.retryAction.type) new_state.app.retryAction.type = action.retryAction.type;
+
+			if (action.retryAction && action.retryAction.data) {
+				new_state.app.retryAction.data = {
+					...action.retryAction.data
+				}
+			}
+
             return new_state;
 
-        case 'RESET_USER_ERROR':
+        case 'RESET_AUTH_ERROR':
             new_state = cloneObject(state);
-            new_state.app.userErrorMessage = null;
-            new_state.app.errorType = null;
-            return new_state;
-
-        case 'CLOUD_DATA_ERROR':
-            new_state = cloneObject(state);
-            new_state.cloudData.cloudDataErrorMessage = action.message;
-            new_state.app.errorType = 'CLOUD_DATA';
-            new_state.app.retryAction = action.retryAction;
-            new_state.app.loading = false;
-            return new_state;
-
-        case 'RESET_CLOUD_DATA_ERROR':
-            new_state = cloneObject(state);
-            new_state.cloudData.cloudDataErrorMessage = null;
-            new_state.app.errorType = null;
-            return new_state;
-
-        case 'CLOUD_DATA_SAVE_SUCCESS':
-            new_state = cloneObject(state);
-            new_state.cloudData.cloudDataSuccess = true;
-            new_state.app.loading = false;
-            return new_state;
-
-        case 'CLOUD_DATA_LOAD_SUCCESS':
-            new_state = cloneObject(state);
-
-            // In case it is a new user with no data
-            if (action.data) {
-                new_state.userData.ideas = action.data.ideas;
-                new_state.userData.categories = action.data.categories;
-            }
-            new_state.cloudData.cloudDataSuccess = true;
-            new_state.app.loading = false;
-            return new_state;
-
-        case 'CLOUD_STORAGE_ERROR':
-            new_state = cloneObject(state);
-            new_state.cloudStorage.cloudStorageErrorMessage = action.message;
-            new_state.app.errorType = 'CLOUD_STORAGE';
-            new_state.app.loading = false;
-            return new_state;
-
-        case 'RESET_CLOUD_STORAGE_ERROR':
-            new_state = cloneObject(state);
-            new_state.cloudStorage.cloudStorageErrorMessage = null;
-            new_state.app.errorType = null;
-            new_state.app.loading = false;
+            new_state.auth.authErrorMessage = null;
+			new_state.app.errorType = null;
+			new_state.app.retryAction.type = null;
+			new_state.app.retryAction.data = null;
             return new_state;
 
         case 'GEOLOCATION_ERROR':
@@ -153,8 +107,87 @@ export default function (state = initialState, action) {
 
         case 'RESET_GEOLOCATION_ERROR':
             new_state = cloneObject(state);
-            new_state.geolocation.geolocationError = false;
-            new_state.app.errorType = null;
+            new_state.geolocation.geolocationError = null;
+			new_state.app.errorType = null;
+            return new_state;
+
+        case 'CLOUD_DATA_ERROR':
+            new_state = cloneObject(state);
+            new_state.cloudData.cloudDataErrorMessage = action.message;
+			new_state.app.loading = false;
+			new_state.app.errorType = 'CLOUD_DATA';
+
+			if (action.retryAction && action.retryAction.type) new_state.app.retryAction.type = action.retryAction.type;
+			if (action.retryAction && action.retryAction.data) {
+				new_state.app.retryAction.data = {
+					...action.retryAction.data,
+				}
+			}
+            return new_state;
+
+        case 'RESET_CLOUD_DATA_ERROR':
+            new_state = cloneObject(state);
+            new_state.cloudData.cloudDataErrorMessage = null;
+			new_state.app.errorType = null;
+			new_state.app.retryAction.type = null;
+			new_state.app.retryAction.data = null;
+            return new_state;
+
+        case 'CLOUD_STORAGE_ERROR':
+            new_state = cloneObject(state);
+            new_state.cloudStorage.cloudcloudStorageErrorMessage = action.message;
+			new_state.app.loading = false;
+			new_state.app.errorType = 'CLOUD_STORAGE';
+			
+			if (action.retryAction && action.retryAction.type) new_state.app.retryAction.type = action.retryAction.type;
+			if (action.retryAction && action.retryAction.data) {
+				new_state.app.retryAction.data = {
+					...action.retryAction.data,
+				}
+			}
+            return new_state;
+
+        case 'RESET_CLOUD_STORAGE_ERROR':
+            new_state = cloneObject(state);
+            new_state.cloudStorage.cloudcloudStorageErrorMessage = null;
+			new_state.app.errorType = null;
+			new_state.app.retryAction.type = null;
+			new_state.app.retryAction.data = null;
+            return new_state;
+
+        case 'USER_SUCCESS':
+            new_state = cloneObject(state);
+            new_state.app.userSuccessMessage = action.message;
+			new_state.app.loading = false;
+			new_state.app.errorType = 'USER';
+            return new_state;
+
+        case 'RESET_USER_SUCCESS':
+            new_state = cloneObject(state);
+            new_state.app.userSuccessMessage = null;
+			new_state.app.errorType = null;
+            return new_state;
+
+        case 'USER_ERROR':
+            new_state = cloneObject(state);
+            new_state.app.userErrorMessage = action.message;
+			new_state.app.loading = false;
+			new_state.app.errorType = 'USER';
+
+			if (action.retryAction && action.retryAction.type) new_state.app.retryAction.type = action.retryAction.type;
+			if (action.retryAction && action.retryAction.data) {
+				new_state.app.retryAction.data = {
+					...action.retryAction.data,
+				}
+			}
+            return new_state;
+
+        case 'RESET_USER_ERROR':
+            new_state = cloneObject(state);
+            new_state.app.userErrorMessage = null;
+			new_state.app.errorType = null;
+			new_state.app.retryAction.type = null;
+			new_state.app.retryAction.data = null;
             return new_state;
 
         /* USER DATA */
