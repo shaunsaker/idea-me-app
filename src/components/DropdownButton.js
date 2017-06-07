@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 64,
-        left: 16,
+        left: 32,
         width: window.width - 64,
         elevation: 5,
         shadowColor: "#000000",
@@ -198,7 +198,7 @@ export default class DropdownButton extends React.Component {
                 </Text>
             </TouchableOpacity>;
             
-        const itemList =
+        const itemList = this.props.values ?
             <Animated.View
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
                 <View style={styles.dropdownItemsContainer}>
@@ -209,13 +209,15 @@ export default class DropdownButton extends React.Component {
                         ListHeaderComponent={this.props.headerValue ? () => header : null}
                         ListFooterComponent={this.props.footerValue ? () => footer : null}/>
                 </View>
-            </Animated.View>;
+            </Animated.View>
+            :
+            null;
 
         return (
             <View style={styles.dropdownContainer}>
                 <Button
                     styleMode='transparent'
-                    handlePress={this.toggleExpanded}
+                    handlePress={this.props.values && this.toggleExpanded}
                     text={this.props.currentValue ? this.props.currentValue : this.props.displayText} />
                 {itemList}
             </View>

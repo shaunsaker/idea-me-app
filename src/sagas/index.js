@@ -16,10 +16,6 @@ import { getUserLocation } from './geolocation';
 // Cloud Data
 import { loadUserData } from './cloudData';
 import { saveUserData } from './cloudData';
-import { saveUserIdeas } from './cloudData';
-import { saveUserCategories } from './cloudData';
-import { saveUserLocation } from './cloudData';
-import { saveUserPhoto } from './cloudData';
 
 // Cloud Storage
 import { uploadUserPhoto } from './cloudStorage';
@@ -42,10 +38,6 @@ export function* sagas() {
         // Cloud Data
         fork(takeLatest, 'loadUserData', loadUserData),    
         fork(takeLatest, 'saveUserData', saveUserData),    
-        fork(takeLatest, 'saveUserIdeas', saveUserIdeas),
-        fork(takeLatest, 'saveUserCategories', saveUserCategories),    
-		fork(takeLatest, 'saveUserLocation', saveUserLocation),
-		fork(takeLatest, 'saveUserPhoto', saveUserPhoto),
 
         // Cloud Storage
 		fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),

@@ -2,12 +2,15 @@ TODOS
 
 GENERAL
     Save User/Load User (rework this flow)
+        FB saves arrays as objects so we need to parse these
+
+        Save ideas
+        Save categories
+        Save new profile photo
         Reset cloudDataSuccess after use
         Always pass uid in
         Empty State
-        FB is returning objects instead of arrays - Find out why.
-        Always saveUserData in one go (ie. no saveUserLocation etc.)
-            Can always write a function to check the differences between old and new data and just send the new data up to the cloud to lower bandwidth usage
+        Use nodes to save specific data, ie. 'profile' will save to the profile node of the user's db
     Test if any of the Splash did mount cases actually are true
     Splash quotes may not be working as expected TEST
     Facebook/Google Sign In

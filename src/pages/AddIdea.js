@@ -12,6 +12,7 @@ import Input from '../components/Input';
 import DropdownButton from '../components/DropdownButton';
 import Button from '../components/Button';
 import Growl from '../components/Growl';
+import Loader from '../components/Loader';
 
 export class AddIdea extends React.Component {
   constructor(props) {
@@ -34,9 +35,20 @@ export class AddIdea extends React.Component {
   static get propTypes() {
     return {
       ideas: React.PropTypes.array,
-      categories: React.PropTypes.array.isRequired,
+      categories: React.PropTypes.array,
       priorities: React.PropTypes.array.isRequired,
       uid: React.PropTypes.string,
+      cloudDataSuccess: React.PropTypes.bool,
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.cloudDataSuccess) {
+      this.props.dispatch({
+        type: 'TOGGLE_CLOUD_DATA_SUCCESS'
+      });
+
+      Actions.pop();
     }
   }
 
@@ -74,25 +86,23 @@ export class AddIdea extends React.Component {
     const newIdea = utilities.createNewIdea(this.state.newIdeaTitle, this.state.newIdeaDescription, this.state.newIdeaCategory, this.state.newIdeaPriority);
     const ideas = utilities.addNewIdea(newIdea, this.props.ideas); // will return null if idea with this title already exists
 
+    console.log(ideas);
+
     if (ideas) {
-        this.props.dispatch({
-            type: 'UPDATE_USER_IDEAS',
-            ideas
-        });
-
-        // this.props.dispatch({
-        //     type: 'saveUserIdeas',
-        //     ideas,
-        //     uid: this.props.uid
-        // });
-
-        Actions.pop();
+      this.props.dispatch({
+        type: 'saveUserData',
+        node: 'ideas',
+        uid: this.props.uid,
+        userData: {
+          ...ideas
+        }
+      });
     }
     else {
-        this.props.dispatch({
-            type: 'USER_ERROR',
-            message: 'An idea with this title already exists'
-        });
+      this.props.dispatch({
+        type: 'USER_ERROR',
+        message: 'An idea with this title already exists'
+      });
     }
   }
 
@@ -116,8 +126,8 @@ export class AddIdea extends React.Component {
             placeholder="ENTER YOUR DESCRIPTION HERE"
             value={this.state.newIdeaDescription}
             handleChange={this.updateNewIdeaDescription}
-            multiline/>
-            
+            multiline />
+
           <DropdownButton
             displayText='Select a Category'
             currentValue={this.state.newIdeaCategory}
@@ -142,6 +152,8 @@ export class AddIdea extends React.Component {
 
         <Growl />
 
+        <Loader />
+
       </Page >
     );
   }
@@ -152,7 +164,8 @@ function mapStateToProps(state) {
     ideas: state.main.userData.ideas,
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
-    uid: state.main.auth.uid
+    uid: state.main.auth.uid,
+    cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
   });
 }
 
