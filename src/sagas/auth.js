@@ -16,7 +16,7 @@ export function* getUserAuth() {
 	}
 	else {
 		yield put({
-			type: 'REDIRECT_USER_TO_SIGN_IN',
+			type: 'REDIRECT_USER_TO_WELCOME_PAGE',
 		});
 	}
 }

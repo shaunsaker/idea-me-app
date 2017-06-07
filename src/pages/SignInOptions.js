@@ -52,6 +52,10 @@ export class SignInOptions extends React.Component {
 		}
 
 		if (this.props.authenticated && this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'RESET_CLOUD_DATA_SUCCESS'
+            }); 
+
 			Actions.home();
 		}
     }

@@ -1,9 +1,19 @@
 TODOS
 
 GENERAL
-    Save User/Load User
-    Sort out icons
-    FB is returning objects instead of arrays - Find out why.
+    Save User/Load User (rework this flow)
+        Reset cloudDataSuccess after use
+        Always pass uid in
+        Empty State
+        FB is returning objects instead of arrays - Find out why.
+        Always saveUserData in one go (ie. no saveUserLocation etc.)
+            Can always write a function to check the differences between old and new data and just send the new data up to the cloud to lower bandwidth usage
+    Test if any of the Splash did mount cases actually are true
+    Splash quotes may not be working as expected TEST
+    Facebook/Google Sign In
+    Custom icon pack (use icoMoon exclusively)
+    Logo icon size too small
+    All other icons size too big (try 22)
 
 PAGES
     Splash
@@ -77,3 +87,7 @@ PAGES
 IOS
     Integrate react-native-fbsdk on iOS
     Integrate react-native-google-signin on iOS
+
+FINALITIES
+    Renaming
+    LAUNCH!

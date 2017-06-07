@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
             new_state.auth.userPassword = action.value;
             return new_state;
 
-        case 'REDIRECT_USER_TO_WELCOME':
+        case 'REDIRECT_USER_TO_WELCOME_PAGE':
             new_state = cloneObject(state);
             new_state.auth.redirectToWelcomePage = true;
             return new_state;
@@ -29,7 +29,6 @@ export default function (state = initialState, action) {
             new_state.auth.authenticated = true;
             new_state.auth.uid = action.uid;
             new_state.auth.redirectToWelcomePage = false;
-            new_state.app.loading = false;
             return new_state;
 
         case 'SIGN_OUT_USER':
@@ -131,6 +130,11 @@ export default function (state = initialState, action) {
 			new_state.app.retryAction.data = null;
             return new_state;
 
+        case 'RESET_CLOUD_DATA_SUCCESS':
+            new_state = cloneObject(state);
+            new_state.cloudData.cloudDataSuccess = null;
+            return new_state;
+
         case 'CLOUD_STORAGE_ERROR':
             new_state = cloneObject(state);
             new_state.cloudStorage.cloudcloudStorageErrorMessage = action.message;
@@ -189,6 +193,20 @@ export default function (state = initialState, action) {
             return new_state;
 
         /* USER DATA */
+        case 'UPDATE_USER_DATA':
+			new_state = cloneObject(state);
+            
+            if (action.node) {
+                new_state.userData[action.node] = action.userData;
+            }
+            else {
+			    new_state.userData = action.userData;    
+            }
+
+            new_state.cloudData.cloudDataSuccess = true;
+            new_state.app.loading = false;
+			return new_state;
+
 		case 'SET_USER_LOCATION':
 			new_state = cloneObject(state);
 			new_state.userData.profile.userLocation = action.userLocation;

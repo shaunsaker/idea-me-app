@@ -173,11 +173,11 @@ export class Profile extends React.Component {
 function mapStateToProps(state) {
     return ({
         uid: state.main.auth.uid,
-        userName: state.main.userData.profile.userName,
-        userEmail: state.main.userData.profile.userEmail,
-        userLocation: state.main.userData.profile.userLocation,
+        userName: state.main.userData.profile.userName || 'Not Set',
+        userEmail: state.main.userData.profile.userEmail || 'Not Set',
+        userLocation: state.main.userData.profile.userLocation || 'Not Set',
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
-        numberOfIdeas: state.main.userData.ideas.length,
+        numberOfIdeas: state.main.userData.ideas && state.main.userData.ideas.length,
     });
 }
 

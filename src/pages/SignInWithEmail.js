@@ -20,15 +20,17 @@ export class SignInWithEmail extends React.Component {
         this.updateUserEmail = this.updateUserEmail.bind(this);
         this.updateUserPassword = this.updateUserPassword.bind(this);
         this.signIn = this.signIn.bind(this);
-        this.resetError = this.resetError.bind(this);
     }
 
     static get propTypes() {
         return {
+            uid: React.PropTypes.string,
             userEmail: React.PropTypes.string,
             userPassword: React.PropTypes.string,
             authenticated: React.PropTypes.bool,
-            loading: React.PropTypes.bool,
+            cloudDataSuccess: React.PropTypes.bool,
+            geolocationSuccess: React.PropTypes.bool,
+            currentLocation: React.PropTypes.string,
         };
     }
 
@@ -37,18 +39,23 @@ export class SignInWithEmail extends React.Component {
 		// If we're authenticated and we have not yet loaded data, load/save data to db
 		if (this.props.authenticated && !this.props.cloudDataSuccess) {
 			this.props.dispatch({
-				type: 'loadUser',
-				user: {
-					uid: this.props.uid,
-					userEmail: this.props.userEmail,
-					userName: this.props.userName,
-					userPhotoUrl: this.props.userPhotoUrl,
-					userLocation: this.props.currentLocation, // In case the user does not have a saved location and we dont have user data in the db
+				type: 'loadUserData',
+                uid: this.props.uid,
+
+                // Add these for the ride in case we have a new user
+                node: 'profile',
+				userData: {
+                    userEmail: this.props.userEmail,
+                    userLocation: this.props.currentLocation,
 				}
 			});
 		}
 
 		if (this.props.authenticated && this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'RESET_CLOUD_DATA_SUCCESS'
+            });
+
 			Actions.home();
 		}
     }
@@ -85,12 +92,6 @@ export class SignInWithEmail extends React.Component {
                 message: 'Password should be at least 6 characters long'
             });
         }
-    }
-
-    resetError() {
-        this.props.dispatch({
-            type: 'RESET_' + this.props.errorType + '_ERROR'
-        });
     }
 
     render() {
@@ -131,8 +132,7 @@ export class SignInWithEmail extends React.Component {
                     styleMode='primaryReversed'
                     disabled={!enableContinueButton} />
 
-                <Growl
-                    handleReset={this.resetError} />
+                <Growl />
 
                 <Loader />
 
@@ -143,10 +143,12 @@ export class SignInWithEmail extends React.Component {
 
 function mapStateToProps(state) {
     return ({
+        uid: state.main.auth.uid,
         userEmail: state.main.userData.profile.userEmail,
         userPassword: state.main.auth.userPassword,
         authenticated: state.main.auth.authenticated,
-        errorType: state.main.app.errorType,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+        currentLocation: state.main.geolocation.currentLocation,
     });
 }
 

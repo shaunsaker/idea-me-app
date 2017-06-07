@@ -106,8 +106,8 @@ export default class DropdownButton extends React.Component {
         return {
             displayText: React.PropTypes.string, // display text but don't pass value back, eg. Select a Category
             currentValue: React.PropTypes.string,
-            values: React.PropTypes.array.isRequired,
-            handleSelect: React.PropTypes.func.isRequired,
+            values: React.PropTypes.array,
+            handleSelect: React.PropTypes.func,
             headerValue: React.PropTypes.string,
             footerValue: React.PropTypes.string,
             pushContent: React.PropTypes.bool, // animate push content below

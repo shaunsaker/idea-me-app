@@ -6,13 +6,45 @@ const response = {
 }
 
 export default class CloudData {
-    static saveUserIdeas(action) {
-        let uid = action.uid;
+    static loadUserData(action) {
+        console.log('Attempting to loadUserData', action)
+        return new Promise(resolve => { 
+            firestack.database.ref('users/' + action.uid).on('value', snapshot => {
+                response.success = true;
+                response.message = snapshot.val();
+                resolve(response);
+            }, (error) => {
+                response.success = false;
+                response.message = error.message;
+                resolve(response);
+            });
+        });
+    }
 
-        // If we did not receive the uid via props, get the uid from firestack
-        if (!uid) {
-            uid = firestack.auth.getCurrentUser().user.uid; // BUG: This does not work after first time sign in
-        }
+    static saveUserData(action) {
+
+        // Allows us to pass in 'profile' and only update that node
+        const nodeRef = action.node || '';
+
+        return new Promise(resolve => {
+            firestack.database.ref('users/' + action.uid + '/' + nodeRef).update({ 
+                ...action.userData,
+            })
+            .then(() => {
+                response.success = true;
+                response.message = null;
+                resolve(response);
+            })
+            .catch(error => {
+                response.success = false;
+                response.message = error.message;
+                resolve(response);
+            });
+        });
+    }
+
+    static saveUserIdeas(action) {
+        const uid = firestack.auth.getCurrentUser().user.uid;
 
         return new Promise(resolve => {
             firestack.database.ref('users/' + uid).update({ // PLEASE NOTE: use database as method and not as instance, ie. not database()
@@ -24,6 +56,7 @@ export default class CloudData {
                 resolve(response);
             })
             .catch(error => {
+                response.success = false;
                 response.message = error.message;
                 resolve(response);
             });
@@ -31,12 +64,7 @@ export default class CloudData {
     }
 
     static saveUserCategories(action) {
-        let uid = action.uid;
-
-        // If we did not receive the uid via props, get the uid from firestack
-        if (!uid) {
-            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
-        }
+        const uid = firestack.auth.getCurrentUser().user.uid;
 
         return new Promise(resolve => {
             firestack.database.ref('users/' + uid).update({ // PLEASE NOTE: use database as method and not as instance, ie. not database()
@@ -48,28 +76,7 @@ export default class CloudData {
                 resolve(response);
             })
             .catch(error => {
-                response.message = error.message;
-                resolve(response);
-            });
-        });
-    }
-
-    static loadUserData(action) {
-        let uid = action.uid;
-
-        // If we did not receive the uid via props, get the uid from firestack
-        if (!uid) {
-            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
-        }
-        
-        let userData;
-
-        return new Promise(resolve => { 
-            firestack.database.ref('users/' + uid).on('value', snapshot => {
-                response.success = true;
-                response.message = snapshot.val();
-                resolve(response);
-            }, (error) => {
+                response.success = false;
                 response.message = error.message;
                 resolve(response);
             });
@@ -77,12 +84,7 @@ export default class CloudData {
     }
 
     static saveUserLocation(action) {
-        let uid = action.uid;
-
-        // If we did not receive the uid via props, get the uid from firestack
-        if (!uid) {
-            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
-        }
+        const uid = firestack.auth.getCurrentUser().user.uid;
 
         return new Promise(resolve => {
             firestack.database.ref('users/' + uid + '/profile').update({ 
@@ -102,12 +104,7 @@ export default class CloudData {
     }
 
     static saveUserPhoto(action) {
-        let uid = action.uid;
-
-        // If we did not receive the uid via props, get the uid from firestack
-        if (!uid) {
-            uid = firestack.auth.getCurrentUser().user.uid; // TODO: Check this
-        }
+        const uid = firestack.auth.getCurrentUser().user.uid;
 
         return new Promise(resolve => {
             firestack.database.ref('users/' + uid + '/profile').update({ 
@@ -119,7 +116,6 @@ export default class CloudData {
                 resolve(response);
             })
             .catch(error => {
-                console.log(error);
 				response.success = false;
                 response.message = 'Failed';
                 resolve(response);

@@ -48,12 +48,23 @@ export class Profile extends React.Component {
             userEmail: React.PropTypes.string,
             userLocation: React.PropTypes.string,
             userPhotoUrl: React.PropTypes.string,
+            cloudDataSuccess: React.PropTypes.bool,
         };
     }
 
     componentDidMount() {
         this.updateEditUserName(this.props.userName);
         this.updateEditUserEmail(this.props.userEmail);
+    }
+
+    componentDidUpdate() {
+        if (this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'TOGGLE_CLOUD_DATA_SUCCESS'
+            }); 
+
+            Actions.pop();
+        }
     }
 
     toggleModal() {
@@ -157,9 +168,23 @@ export class Profile extends React.Component {
     }
 
     updateUserDetails() {
+        this.props.dispatch({
+            type: 'TOGGLE_LOADING'
+        }); 
+
         const prettyUserName = utilities.prettifyUserName(this.state.editUserName);
 
-        // Save to DB
+        this.props.dispatch({
+            type: 'saveUserData',
+            node: 'profile',
+            uid: this.props.uid,
+            userData: {
+                userName: prettyUserName,
+                userEmail: this.props.userEmail,
+                userLocation: this.props.userLocation,
+                userPhotoUrl: this.props.userPhotoUrl,
+            }
+        });
     }
 
     render() {
@@ -228,6 +253,7 @@ function mapStateToProps(state) {
         userEmail: state.main.userData.profile.userEmail,
         userLocation: state.main.userData.profile.userLocation,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
     });
 }
 
