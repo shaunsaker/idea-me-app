@@ -16,7 +16,7 @@ export function* saveUserIdeas(action) {
         else {
             yield put({
                 type: 'CLOUD_DATA_ERROR',
-                message: saveUserIdeasResponse.message, 
+                message: saveUserIdeasResponse.message,
                 retryAction: {
                     type: 'saveUserIdeas',
                     data: {
@@ -63,83 +63,82 @@ export function* loadUserData(action) {
 
     if (loadUserDataResponse) {
         if (loadUserDataResponse.success) {
-                const processedData = utilities.objectToArray(loadUserDataResponse.message);
+            const processedData = utilities.objectToArray(loadUserDataResponse.message);
 
-                yield put({
-                    type: 'CLOUD_DATA_SUCCESS',
-                    data: processedData
-                });
-            }
-
-            // Else the user has no data, so just send an empty object
-            else {
-                yield put({
-                    type: 'CLOUD_DATA_SUCCESS',
-                    data: processedData
-                });
-            }
-        }
-        else {
             yield put({
-                type: 'CLOUD_DATA_ERROR',
-                message: loadUserDataResponse.message,
-                retryAction: {
-                    type: 'loadUserData',
-                    data: {
-                        uid: action.uid,
-                    },
-                },           
+                type: 'CLOUD_DATA_SUCCESS',
+                data: processedData
             });
         }
+
+        // Else the user has no data, so just send an empty object
+        else {
+            yield put({
+                type: 'CLOUD_DATA_SUCCESS',
+                data: processedData
+            });
+        }
+    }
+    else {
+        yield put({
+            type: 'CLOUD_DATA_ERROR',
+            message: loadUserDataResponse.message,
+            retryAction: {
+                type: 'loadUserData',
+                data: {
+                    uid: action.uid,
+                },
+            },
+        });
     }
 }
 
 export function* saveUserLocation(action) {
-	const saveUserLocationResponse = yield call(CloudData.saveUserLocation, action);
-	console.log('saveUserLocationResponse', saveUserLocationResponse);
+    const saveUserLocationResponse = yield call(CloudData.saveUserLocation, action);
+    console.log('saveUserLocationResponse', saveUserLocationResponse);
 
-	if (saveUserLocationResponse.success) {
-		yield put({
-			type: 'SET_USER_LOCATION',
-			userLocation: action.userLocation,
-		});
-	}
-	else {
-		yield put({
-			type: 'CLOUD_DATA_ERROR',
-			message: 'There was an error saving your location.',
-			retryAction: {
-				type: 'saveUserLocation',
-				data: {
-					uid: action.uid,
+    if (saveUserLocationResponse.success) {
+        yield put({
+            type: 'SET_USER_LOCATION',
+            userLocation: action.userLocation,
+        });
+    }
+    else {
+        yield put({
+            type: 'CLOUD_DATA_ERROR',
+            message: 'There was an error saving your location.',
+            retryAction: {
+                type: 'saveUserLocation',
+                data: {
+                    uid: action.uid,
                     userLocation: action.userLocation,
-				},
-			},
-		});
-	}
-}										
+                },
+            },
+        });
+    }
+}
 
 export function* saveUserPhoto(action) {
-	const saveUserPhotoResponse = yield call(CloudData.saveUserPhoto, action);
-	console.log('saveUserPhotoResponse', saveUserPhotoResponse);
+    const saveUserPhotoResponse = yield call(CloudData.saveUserPhoto, action);
+    console.log('saveUserPhotoResponse', saveUserPhotoResponse);
 
-	if (saveUserPhotoResponse.success) {
-		yield put({
-			type: 'SET_USER_PHOTO',
-			userPhotoUrl: saveUserPhotoResponse.message,
-		});
-	}
-	else {
-		yield put({
-			type: 'CLOUD_DATA_ERROR',
-			message: 'There was an error saving your photo.',
-			retryAction: {
-				type: 'saveUserPhoto',
-				data: {
-					uid: action.uid,
+    if (saveUserPhotoResponse.success) {
+        yield put({
+            type: 'SET_USER_PHOTO',
+            userPhotoUrl: saveUserPhotoResponse.message,
+        });
+    }
+    else {
+        yield put({
+            type: 'CLOUD_DATA_ERROR',
+            message: 'There was an error saving your photo.',
+            retryAction: {
+                type: 'saveUserPhoto',
+                data: {
+                    uid: action.uid,
                     userPhotoUrl: action.userPhotoUrl,
-				},
-			},
-		});
-	}
+                },
+            },
+        });
+    }
 }

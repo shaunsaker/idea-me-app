@@ -2,6 +2,8 @@ import firestack from '../firestack';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 // import { GoogleSignin } from 'react-native-google-signin'; // TODO: Add this when ready
 
+import config from '../config';
+
 const response = {
     authenticated: null,
     message: null,
@@ -118,8 +120,7 @@ export default class Auth {
     //         GoogleSignin.hasPlayServices({ autoResolve: true })
     //             .then(() => {
     //                 GoogleSignin.configure({
-    //                     webClientId: '158445764285-o30htc722gonf4qs7bg5ir59vteo5tnj.apps.googleusercontent.com',
-    //                     offlineAccess: false
+    //                      ...config.googleSignIn,
     //                 })
     //                     .then(() => {
     //                         GoogleSignin.signIn()
