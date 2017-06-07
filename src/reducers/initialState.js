@@ -3,20 +3,23 @@ import suburbs from '../resources/suburbs';
 
 const initialState = {
     auth: {
+        uid: null,
         authenticated: null,
+        userPassword: null,        
         anonymous: null,
         redirectToWelcomePage: null,
-        authErrorMessage: null,
 
-        uid: null,
-        userPassword: null,
+		authSuccessMessage: null, // for password reset feedback
+        authErrorMessage: null,
     },
     app: {
-        userSuccessMessage: null,
-        userErrorMessage: null,
+        loading: false, // TODO: needs to be true on initial app load
+
         errorType: null,
         retryAction: null,
-        loading: false, // TODO: needs to be true on initial app load
+
+        userSuccessMessage: null,
+        userErrorMessage: null,
     },
     api: {
         apiSuccess: null,

@@ -32,7 +32,7 @@ export class Splash extends React.Component {
         return {
             authenticated: React.PropTypes.bool,
 			geolocationSuccess: React.PropTypes.bool,
-            geolocationErrorMessage: React.PropTypes.string,
+            geolocationError: React.PropTypes.string,
             apiSuccess: React.PropTypes.bool,
 
             uid: React.PropTypes.string,
@@ -44,12 +44,12 @@ export class Splash extends React.Component {
         if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
-        else if (this.props.authenticated && this.props.geolocationSuccess && this.props.apiSuccess) {
+        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.apiSuccess) {
             Actions.home();
         }
 
         // When a user is signed in and reloads app
-        else if (this.props.authenticated && this.props.geolocationSuccess && !this.props.apiSuccess) {
+        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.apiSuccess) {
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid
@@ -58,39 +58,39 @@ export class Splash extends React.Component {
         else if (!this.props.authenticated) {
             this.getQuote();
 
-            // this.props.dispatch({
-            //     type: 'getUserAuth'
-            // });
+            this.props.dispatch({
+                type: 'getUserAuth'
+            });
 
-			// // Get the user's current location
-			// if (!this.props.geolocationSuccess) {
-			// 	this.props.dispatch({
-			// 		type: 'getUserLocation'
-			// 	});
-			// }
+			// Get the user's current location
+			if (!this.props.geolocationSuccess) {
+				this.props.dispatch({
+					type: 'getUserLocation'
+				});
+			}
         }
     }
 
     componentDidUpdate() {
 
-		// // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
-		// 	// Wait for geolocationSuccess before doing so
-		// if ((this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.redirectToWelcomePage) {
-		// 	Actions.welcome();
-		// }
+		// Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
+			// Wait for geolocationSuccess before doing so
+		if ((this.props.geolocationSuccess || this.props.geolocationError) && this.props.redirectToWelcomePage) {
+			Actions.welcome();
+		}
 
-		// // If we're authenticated and we have location and have not yet loaded data, load/save data to db
-		// else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && !this.props.apiSuccess) {
-		// 	this.props.dispatch({
-		// 		type: 'loadUserData',
-        //         uid: this.props.uid,
-		// 	});
-		// }
+		// If we're authenticated and we have location and have not yet loaded data, load/save data to db
+		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.apiSuccess) {
+			this.props.dispatch({
+				type: 'loadUserData',
+                uid: this.props.uid,
+			});
+		}
 
-		// // If we're authenticated, we have geolocation and we have the userData, redirect to the home page
-		// else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationErrorMessage) && this.props.apiSuccess) {
-		// 	Actions.home(); 
-		// }
+		// If we're authenticated, we have geolocation and we have the userData, redirect to the home page
+		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.apiSuccess) {
+			Actions.home(); 
+		}
     }
 
     getQuote() {
@@ -137,7 +137,7 @@ function mapStateToProps(state) {
         authenticated: state.main.auth.authenticated,
         apiSuccess: state.main.api.apiSuccess,
         geolocationSuccess: state.main.geolocation.geolocationSuccess,
-        geolocationErrorMessage: state.main.geolocation.geolocationErrorMessage,
+        geolocationError: state.main.geolocation.geolocationError,
 
         uid: state.main.auth.uid,
         redirectToWelcomePage: state.main.auth.redirectToWelcomePage

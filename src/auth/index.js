@@ -1,6 +1,6 @@
 import firestack from '../firestack';
-// import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin'; // TODO: Add this when ready
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
+// import { GoogleSignin } from 'react-native-google-signin'; // TODO: Add this when ready
 
 const response = {
     authenticated: null,

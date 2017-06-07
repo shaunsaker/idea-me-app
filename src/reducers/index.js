@@ -146,14 +146,14 @@ export default function (state = initialState, action) {
         case 'GEOLOCATION_ERROR':
             new_state = cloneObject(state);
             new_state.geolocation.currentLocation = action.message;
-            new_state.geolocation.geoLocationError = true;
+            new_state.geolocation.geolocationError = true;
             new_state.app.errorType = 'GEOLOCATION';
             new_state.app.loading = false;
             return new_state;
 
         case 'RESET_GEOLOCATION_ERROR':
             new_state = cloneObject(state);
-            new_state.geolocation.geoLocationError = false;
+            new_state.geolocation.geolocationError = false;
             new_state.app.errorType = null;
             return new_state;
 

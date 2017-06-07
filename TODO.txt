@@ -1,13 +1,17 @@
 TODOS
 
 GENERAL
+    npm outdated
+	Api => cloudData (we're going to have localData in the future)
+    Storage => storageData
+	Use config file for all config related stuff, eg. Google App Id
+		Dev option loads seedData into initialState
+    Growl retry action     
     Load quotes from api/Push update functionality
     Load suburbs from api/Use a geo service
 
 PAGES
     Splash
-        Get quotes
-        Randomise quotes
     Welcome
         Facebook login not working
     SignInWithEmail
@@ -44,7 +48,6 @@ PAGES
     Profile icon highlighted on signup (indicate action required, ie. complete your profile)
     Feedback button opens webview to Google Survey
         Browser component
-    Growl retry action 
     Test all errors
     Optimise code
         Remove unnecessary

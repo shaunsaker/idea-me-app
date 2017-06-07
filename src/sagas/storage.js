@@ -15,7 +15,7 @@ export function* uploadUserPhoto(action) {
 	}
 	else {
 		yield put({
-			type: 'USER_ERROR',
+			type: 'STORAGE_ERROR',
 			message: 'There was an error saving your profile photo. Please try again'
 		});
 	}
