@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     currentLocationIcon: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
         color: styleConstants.white,
     },
 });

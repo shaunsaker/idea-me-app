@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	leftIcon: {
-		fontSize: styleConstants.regularFont,
+		fontSize: styleConstants.iconFont,
 		color: styleConstants.white,
 	},
 	rightIconContainer: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-end',
 	},
 	rightIcon: {
-		fontSize: styleConstants.regularFont,
+		fontSize: styleConstants.iconFont,
 		color: styleConstants.white,
 	},
 	inputContainer: {

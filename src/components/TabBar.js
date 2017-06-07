@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'stretch',
 	},
 	icon: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
 	},
 	text: {
 		fontSize: styleConstants.smallFont,

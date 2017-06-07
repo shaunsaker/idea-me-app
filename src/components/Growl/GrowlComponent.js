@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         marginTop: 2
     },
     icon: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
         color: styleConstants.lightGrey,
     },
     closeIconContainer: {

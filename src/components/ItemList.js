@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     listItemIcon: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
         color: styleConstants.primary,
     },
 });

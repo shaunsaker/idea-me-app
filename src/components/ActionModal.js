@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
     },
     icon: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
         color: styleConstants.primary,
     },
 });
@@ -91,7 +91,7 @@ export default ActionModal = (props) => {
                         onPress={props.handleRightIconPress} >
                         <Icon
                             name='close'
-                            style={[styles.icon, {fontSize: 14}]} />
+                            style={styles.icon} />
                     </TouchableOpacity>
                 </View>
             </View>

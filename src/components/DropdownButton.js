@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     dropdownHeaderIcon: {
         marginRight: 12,
         color: styleConstants.white,
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
     },
     dropdownHeaderText: {
         color: styleConstants.white,

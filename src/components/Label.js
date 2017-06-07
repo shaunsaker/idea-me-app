@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 4,
     },
     labelIcon: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
         color: styleConstants.primary,
         marginRight: 8,
     },

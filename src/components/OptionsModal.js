@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         
     },
     closeIcon: {
-        fontSize: 28,
+        fontSize: styleConstants.iconFont,
         color: styleConstants.white,
     },
 });

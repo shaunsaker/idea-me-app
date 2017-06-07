@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 		backgroundColor: styleConstants.transPrimary,
     },
     editImageIcon: {
-        fontSize: 36,
+        fontSize: styleConstants.largeFont,
         color: styleConstants.white,
     },
     emailContainer: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     emailIcon: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
         color: styleConstants.primary,
         marginRight: 8,
         marginTop: 2,

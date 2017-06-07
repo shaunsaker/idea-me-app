@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         borderColor: styleConstants.white,
     },
     editImageIcon: {
-        fontSize: 36,
+        fontSize: styleConstants.largeFont,
         color: styleConstants.white,
     },
 });

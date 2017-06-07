@@ -14,6 +14,7 @@ styleConstants.secondaryFont = {
 styleConstants.largeFont = 32;
 styleConstants.regularFont = 18;
 styleConstants.smallFont = 16;
+styleConstants.iconFont = 24;
 
 /* COLOURS */ 
 
