@@ -5,7 +5,7 @@ const response = {
     message: null,
 }
 
-export default class Api {
+export default class CloudData {
     static saveUserIdeas(action) {
         let uid = action.uid;
 

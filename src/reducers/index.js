@@ -97,27 +97,27 @@ export default function (state = initialState, action) {
             new_state.app.errorType = null;
             return new_state;
 
-        case 'API_ERROR':
+        case 'CLOUD_DATA_ERROR':
             new_state = cloneObject(state);
-            new_state.api.apiErrorMessage = action.message;
-            new_state.app.errorType = 'API';
+            new_state.cloudData.cloudDataErrorMessage = action.message;
+            new_state.app.errorType = 'CLOUD_DATA';
             new_state.app.retryAction = action.retryAction;
             new_state.app.loading = false;
             return new_state;
 
-        case 'RESET_API_ERROR':
+        case 'RESET_CLOUD_DATA_ERROR':
             new_state = cloneObject(state);
-            new_state.api.apiErrorMessage = null;
+            new_state.cloudData.cloudDataErrorMessage = null;
             new_state.app.errorType = null;
             return new_state;
 
-        case 'API_SAVE_SUCCESS':
+        case 'CLOUD_DATA_SAVE_SUCCESS':
             new_state = cloneObject(state);
-            new_state.api.apiSuccess = true;
+            new_state.cloudData.cloudDataSuccess = true;
             new_state.app.loading = false;
             return new_state;
 
-        case 'API_LOAD_SUCCESS':
+        case 'CLOUD_DATA_LOAD_SUCCESS':
             new_state = cloneObject(state);
 
             // In case it is a new user with no data
@@ -125,20 +125,20 @@ export default function (state = initialState, action) {
                 new_state.userData.ideas = action.data.ideas;
                 new_state.userData.categories = action.data.categories;
             }
-            new_state.api.apiSuccess = true;
+            new_state.cloudData.cloudDataSuccess = true;
             new_state.app.loading = false;
             return new_state;
 
-        case 'STORAGE_ERROR':
+        case 'CLOUD_STORAGE_ERROR':
             new_state = cloneObject(state);
-            new_state.storage.storageErrorMessage = action.message;
-            new_state.app.errorType = 'STORAGE';
+            new_state.cloudStorage.cloudStorageErrorMessage = action.message;
+            new_state.app.errorType = 'CLOUD_STORAGE';
             new_state.app.loading = false;
             return new_state;
 
-        case 'RESET_STORAGE_ERROR':
+        case 'RESET_CLOUD_STORAGE_ERROR':
             new_state = cloneObject(state);
-            new_state.storage.storageErrorMessage = null;
+            new_state.cloudStorage.cloudStorageErrorMessage = null;
             new_state.app.errorType = null;
             new_state.app.loading = false;
             return new_state;
@@ -166,7 +166,7 @@ export default function (state = initialState, action) {
 		case 'SET_USER_PHOTO':
 			new_state = cloneObject(state);
 			new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
-			new_state.api.apiSuccess = true;
+			new_state.cloudData.cloudDataSuccess = true;
             new_state.app.loading = false;
 			return new_state;   
 

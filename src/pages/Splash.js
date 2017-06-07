@@ -33,7 +33,7 @@ export class Splash extends React.Component {
             authenticated: React.PropTypes.bool,
 			geolocationSuccess: React.PropTypes.bool,
             geolocationError: React.PropTypes.string,
-            apiSuccess: React.PropTypes.bool,
+            cloudDataSuccess: React.PropTypes.bool,
 
             uid: React.PropTypes.string,
             redirectToWelcomePage: React.PropTypes.bool
@@ -44,12 +44,12 @@ export class Splash extends React.Component {
         if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
-        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.apiSuccess) {
+        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.cloudDataSuccess) {
             Actions.home();
         }
 
         // When a user is signed in and reloads app
-        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.apiSuccess) {
+        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid
@@ -80,7 +80,7 @@ export class Splash extends React.Component {
 		}
 
 		// If we're authenticated and we have location and have not yet loaded data, load/save data to db
-		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.apiSuccess) {
+		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
 			this.props.dispatch({
 				type: 'loadUserData',
                 uid: this.props.uid,
@@ -88,7 +88,7 @@ export class Splash extends React.Component {
 		}
 
 		// If we're authenticated, we have geolocation and we have the userData, redirect to the home page
-		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.apiSuccess) {
+		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.cloudDataSuccess) {
 			Actions.home(); 
 		}
     }
@@ -135,7 +135,7 @@ function mapStateToProps(state) {
         quotes: state.main.appData.quotes,
 
         authenticated: state.main.auth.authenticated,
-        apiSuccess: state.main.api.apiSuccess,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         geolocationSuccess: state.main.geolocation.geolocationSuccess,
         geolocationError: state.main.geolocation.geolocationError,
 

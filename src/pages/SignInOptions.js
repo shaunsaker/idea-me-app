@@ -32,13 +32,13 @@ export class SignInOptions extends React.Component {
     static get propTypes() {
         return {
             authenticated: React.PropTypes.bool,
-			apiSuccess: React.PropTypes.bool,
+			cloudDataSuccess: React.PropTypes.bool,
         };
     }
 
     componentDidUpdate() {
 		// If we're authenticated and we have not yet loaded data, load/save data to db
-		if (this.props.authenticated && !this.props.apiSuccess) {
+		if (this.props.authenticated && !this.props.cloudDataSuccess) {
 			this.props.dispatch({
 				type: 'loadUser',
 				user: {
@@ -51,7 +51,7 @@ export class SignInOptions extends React.Component {
 			});
 		}
 
-		if (this.props.authenticated && this.props.apiSuccess) {
+		if (this.props.authenticated && this.props.cloudDataSuccess) {
 			Actions.home();
 		}
     }
@@ -152,7 +152,7 @@ export class SignInOptions extends React.Component {
 function mapStateToProps(state) {
     return ({
         authenticated: state.main.auth.authenticated,
-		apiSuccess: state.main.api.apiSuccess,
+		cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
     });
 }
 

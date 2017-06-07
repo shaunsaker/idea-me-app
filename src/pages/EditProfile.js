@@ -138,14 +138,14 @@ export class Profile extends React.Component {
                     },
                     (error) => {
                         this.props.dispatch({
-                            type: 'STORAGE_ERROR',
+                            type: 'CLOUD_STORAGE_ERROR',
                             message: error.message
                         });
                     });
             })
             .catch((error) => {
                 this.props.dispatch({
-                    type: 'STORAGE_ERROR',
+                    type: 'CLOUD_STORAGE_ERROR',
                     message: error.message
                 });
             });

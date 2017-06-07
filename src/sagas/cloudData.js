@@ -1,21 +1,21 @@
 import { call, put } from 'redux-saga/effects';
 
-import Api from '../api/index';
+import CloudData from '../cloudData/index';
 
 export function* saveUserIdeas(action) {
 
-    const saveUserIdeasResponse = yield call(Api.saveUserIdeas, action);
+    const saveUserIdeasResponse = yield call(CloudData.saveUserIdeas, action);
     console.log('saveUserIdeasResponse', saveUserIdeasResponse);
 
     if (saveUserIdeasResponse) {
         if (saveUserIdeasResponse.success) {
             yield put({
-                type: 'API_SAVE_SUCCESS',
+                type: 'CLOUD_DATA_SAVE_SUCCESS',
             });
         }
         else {
             yield put({
-                type: 'API_ERROR',
+                type: 'CLOUD_DATA_ERROR',
                 retryAction: 'saveUserIdeas',
                 message: saveUserIdeasResponse.message // TODO: Check this
             });
@@ -25,18 +25,18 @@ export function* saveUserIdeas(action) {
 
 export function* saveUserCategories(action) {
 
-    const saveUserCategoriesResponse = yield call(Api.saveUserCategories, action);
+    const saveUserCategoriesResponse = yield call(CloudData.saveUserCategories, action);
     console.log('saveUserCategoriesResponse', saveUserCategoriesResponse);
 
     if (saveUserCategoriesResponse) {
         if (saveUserCategoriesResponse.success) {
             yield put({
-                type: 'API_SAVE_SUCCESS',
+                type: 'CLOUD_DATA_SAVE_SUCCESS',
             });
         }
         else {
             yield put({
-                type: 'API_ERROR',
+                type: 'CLOUD_DATA_ERROR',
                 retryAction: 'saveUserCategories',
                 message: saveUserCategoriesResponse.message // TODO: Check this
             });
@@ -46,7 +46,7 @@ export function* saveUserCategories(action) {
 
 export function* loadUserData(action) {
 
-    const loadUserDataResponse = yield call(Api.loadUserData, action);
+    const loadUserDataResponse = yield call(CloudData.loadUserData, action);
     console.log('loadUserDataResponse', loadUserDataResponse);
 
     if (loadUserDataResponse) {
@@ -86,7 +86,7 @@ export function* loadUserData(action) {
                 }           
 
                 yield put({
-                    type: 'API_LOAD_SUCCESS',
+                    type: 'CLOUD_DATA_LOAD_SUCCESS',
                     data: processedData
                 });
             }
@@ -94,14 +94,14 @@ export function* loadUserData(action) {
             // Else the user has no data, so just send an empty object
             else {
                 yield put({
-                    type: 'API_LOAD_SUCCESS',
+                    type: 'CLOUD_DATA_LOAD_SUCCESS',
                     data: processedData
                 });
             }
         }
         else {
             yield put({
-                type: 'API_ERROR',
+                type: 'CLOUD_DATA_ERROR',
                 message: loadUserDataResponse.message
             });
         }
@@ -109,7 +109,7 @@ export function* loadUserData(action) {
 }
 
 export function* saveUserLocation(action) {
-	const saveUserLocationResponse = yield call(Api.saveUserLocation, action);
+	const saveUserLocationResponse = yield call(CloudData.saveUserLocation, action);
 	console.log('saveUserLocationResponse', saveUserLocationResponse);
 
 	if (saveUserLocationResponse.success) {
@@ -120,14 +120,14 @@ export function* saveUserLocation(action) {
 	}
 	else {
 		yield put({
-			type: 'API_ERROR',
+			type: 'CLOUD_DATA_ERROR',
 			message: 'There was an error saving your location. Please try again'
 		});
 	}
 }										
 
 export function* saveUserPhoto(action) {
-	const saveUserPhotoResponse = yield call(Api.saveUserPhoto, action);
+	const saveUserPhotoResponse = yield call(CloudData.saveUserPhoto, action);
 	console.log('saveUserPhotoResponse', saveUserPhotoResponse);
 
 	if (saveUserPhotoResponse.success) {
@@ -138,7 +138,7 @@ export function* saveUserPhoto(action) {
 	}
 	else {
 		yield put({
-			type: 'API_ERROR',
+			type: 'CLOUD_DATA_ERROR',
 			message: 'There was an error saving your photo. Please try again'
 		});
 	}

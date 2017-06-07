@@ -1,9 +1,9 @@
 import { call, put } from 'redux-saga/effects';
 
-import Storage from '../storage/index';
+import CloudStorage from '../cloudStorage/index';
  
 export function* uploadUserPhoto(action) {
-	const uploadUserPhotoResponse = yield call(Storage.uploadUserPhoto, action);
+	const uploadUserPhotoResponse = yield call(CloudStorage.uploadUserPhoto, action);
 	console.log('uploadUserPhotoResponse', uploadUserPhotoResponse);
 
 	if (uploadUserPhotoResponse.success) {
@@ -15,7 +15,7 @@ export function* uploadUserPhoto(action) {
 	}
 	else {
 		yield put({
-			type: 'STORAGE_ERROR',
+			type: 'CLOUD_STORAGE_ERROR',
 			message: 'There was an error saving your profile photo. Please try again'
 		});
 	}

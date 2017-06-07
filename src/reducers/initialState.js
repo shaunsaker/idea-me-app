@@ -21,13 +21,13 @@ const initialState = {
         userSuccessMessage: null,
         userErrorMessage: null,
     },
-    api: {
-        apiSuccess: null,
-        apiErrorMessage: null,
+    cloudData: {
+        cloudDataSuccess: null,
+        cloudDataErrorMessage: null,
     },
-    storage: {
-        storageSuccess: null,
-        storageErrorMessage: null,
+    cloudStorage: {
+        cloudStorageSuccess: null,
+        cloudStorageErrorMessage: null,
     },
     geolocation: {
         currentLocation: null,

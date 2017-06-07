@@ -1,7 +1,6 @@
 TODOS
 
 GENERAL
-    npm outdated
 	Api => cloudData (we're going to have localData in the future)
     Storage => storageData
 	Use config file for all config related stuff, eg. Google App Id

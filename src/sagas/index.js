@@ -13,15 +13,15 @@ import { signOutUser } from './auth';
 // Geolocation
 import { getUserLocation } from './geolocation';
 
-// Api
-import { saveUserIdeas } from './api';
-import { saveUserCategories } from './api';
-import { loadUserData } from './api';
-import { saveUserLocation } from './api';
-import { saveUserPhoto } from './api';
+// Cloud Data
+import { saveUserIdeas } from './cloudData';
+import { saveUserCategories } from './cloudData';
+import { loadUserData } from './cloudData';
+import { saveUserLocation } from './cloudData';
+import { saveUserPhoto } from './cloudData';
 
-// Storage
-import { uploadUserPhoto } from './storage';
+// Cloud Storage
+import { uploadUserPhoto } from './cloudStorage';
 
 export function* sagas() {
     yield [
@@ -38,14 +38,14 @@ export function* sagas() {
         // Geolocation
         fork(takeLatest, 'getUserLocation', getUserLocation),
 
-        // Api
+        // Cloud Data
         fork(takeLatest, 'saveUserIdeas', saveUserIdeas),
         fork(takeLatest, 'saveUserCategories', saveUserCategories),
         fork(takeLatest, 'loadUserData', loadUserData),        
 		fork(takeLatest, 'saveUserLocation', saveUserLocation),
 		fork(takeLatest, 'saveUserPhoto', saveUserPhoto),
 
-        // Storage
+        // Cloud Storage
 		fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),
     ];
 }

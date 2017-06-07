@@ -35,7 +35,7 @@ export class SignInWithEmail extends React.Component {
     componentDidUpdate() {
 
 		// If we're authenticated and we have not yet loaded data, load/save data to db
-		if (this.props.authenticated && !this.props.apiSuccess) {
+		if (this.props.authenticated && !this.props.cloudDataSuccess) {
 			this.props.dispatch({
 				type: 'loadUser',
 				user: {
@@ -48,7 +48,7 @@ export class SignInWithEmail extends React.Component {
 			});
 		}
 
-		if (this.props.authenticated && this.props.apiSuccess) {
+		if (this.props.authenticated && this.props.cloudDataSuccess) {
 			Actions.home();
 		}
     }

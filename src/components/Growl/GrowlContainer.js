@@ -28,8 +28,8 @@ export class Growl extends React.Component {
             userErrorMessage: React.PropTypes.string,
             authErrorMessage: React.PropTypes.string,
             authSuccessMessage: React.PropTypes.string,
-            apiErrorMessage: React.PropTypes.string,
-            storageErrorMessage: React.PropTypes.string,
+            cloudDataErrorMessage: React.PropTypes.string,
+            cloudStorageErrorMessage: React.PropTypes.string,
 
             errorType: React.PropTypes.string,  
             retryAction: React.PropTypes.string,
@@ -72,11 +72,11 @@ export class Growl extends React.Component {
                 this.props.authErrorMessage ?
                     this.props.authErrorMessage 
                     :
-                    this.props.apiErrorMessage ?
-                        this.props.apiErrorMessage 
+                    this.props.cloudDataErrorMessage ?
+                        this.props.cloudDataErrorMessage 
                         :
-                        this.props.storageErrorMessage ?
-                            this.props.storageErrorMessage 
+                        this.props.cloudStorageErrorMessage ?
+                            this.props.cloudStorageErrorMessage 
                             :
                             null;  
 
@@ -116,8 +116,8 @@ function mapStateToProps(state) {
         userErrorMessage: state.main.app.userErrorMessage,
         authErrorMessage: state.main.auth.authErrorMessage,
         authSuccessMessage: state.main.auth.authSuccessMessage,
-        apiErrorMessage: state.main.api.apiErrorMessage,
-        storageErrorMessage: state.main.storage.storageErrorMessage,
+        cloudDataErrorMessage: state.main.cloudData.cloudDataErrorMessage,
+        cloudStorageErrorMessage: state.main.cloudStorage.cloudStorageErrorMessage,
 
         errorType: state.main.app.errorType,
         retryAction: state.main.app.retryAction,

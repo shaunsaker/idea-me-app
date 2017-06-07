@@ -22,7 +22,7 @@ export default function (WrappedComponent) {
         });
       }
 
-      if (this.props.authenticated && !this.props.apiSuccess) {
+      if (this.props.authenticated && !this.props.cloudDataSuccess) {
         this.props.dispatch({
           type: 'loadUserData'
         });
@@ -30,7 +30,7 @@ export default function (WrappedComponent) {
     }
 
     componentDidUpdate() {
-      if (this.props.authenticated && !this.props.apiSuccess) {
+      if (this.props.authenticated && !this.props.cloudDataSuccess) {
         this.props.dispatch({
           type: 'loadUserData'
         });
@@ -41,7 +41,7 @@ export default function (WrappedComponent) {
     } 
 
     render() {
-      const wrapper = this.props.authenticated && this.props.apiSuccess ? 
+      const wrapper = this.props.authenticated && this.props.cloudDataSuccess ? 
         <WrappedComponent {...this.props} />
         :
         <div style={styles.container}>
@@ -55,7 +55,7 @@ export default function (WrappedComponent) {
   function mapStateToProps(state) {
     return { 
       authenticated: state.main.user.authenticated,
-      apiSuccess: state.main.user.apiSuccess,
+      cloudDataSuccess: state.main.user.cloudDataSuccess,
       redirectUserToSignIn: state.main.user.signInRedirect
     };
   }
