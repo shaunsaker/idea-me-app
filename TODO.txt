@@ -1,7 +1,6 @@
 TODOS
 
 GENERAL
-    SignUpUser => SignUpUserWithEmail
     Growl retry actions   
     Browser and Menu actions in Profile Page
     iconFont 24  

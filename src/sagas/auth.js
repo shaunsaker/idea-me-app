@@ -22,19 +22,19 @@ export function* getUserAuth() {
 
 export function* signInUserWithEmail(action) {
 
-	const signUpUserResponse = yield call(Auth.signUpUser, action);
-	console.log('signUpUserResponse', signUpUserResponse);
+	const signUpUserWithEmailResponse = yield call(Auth.signUpUserWithEmail, action);
+	console.log('signUpUserWithEmailResponse', signUpUserWithEmailResponse);
 
-	if (signUpUserResponse.authenticated) {
+	if (signUpUserWithEmailResponse.authenticated) {
 		yield put({
 			type: 'SIGN_IN_USER',
-			uid: signUpUserResponse.message.user.uid,
-			userEmail: signUpUserResponse.message.user.email
+			uid: signUpUserWithEmailResponse.message.user.uid,
+			userEmail: signUpUserWithEmailResponse.message.user.email
 		});
 	}
 
 	// Handle network errors, if any
-	else if (signUpUserResponse.message.errorMessage.indexOf('A network') > -1) {
+	else if (signUpUserWithEmailResponse.message.errorMessage.indexOf('A network') > -1) {
 		yield put({
 			type: 'AUTH_ERROR',
 			message: 'A network error has occured.'

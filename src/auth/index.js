@@ -25,7 +25,7 @@ export default class Auth {
         });
     }
 
-    static signUpUser(action) {
+    static signUpUserWithEmail(action) {
         return new Promise(resolve => {
             firestack.auth.createUserWithEmail(action.userEmail, action.userPassword)
                 .then((user) => {
