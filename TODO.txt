@@ -1,7 +1,6 @@
 TODOS
 
 GENERAL
-    Reducers => utilities 
     SignUpUser => SignUpUserWithEmail
     Growl retry actions   
     Browser and Menu actions in Profile Page

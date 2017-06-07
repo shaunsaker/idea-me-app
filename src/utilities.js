@@ -1,17 +1,17 @@
 const utilities = {};
 
-utilities.getRandomItem = function(array) {
+utilities.getRandomItemFromArray = (array) => {
     const randomNumber = Math.round(Math.random() * array.length);
     const randomItem = array[randomNumber];
     return randomItem;
 };
 
-utilities.firstCharToUppercase = function (string) {
+utilities.firstCharToUppercase = (string) => {
     const trimmedString = string.trim();
     return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);
 };
 
-utilities.prettifyUserName = function (userName) {
+utilities.prettifyUserName = (userName) => {
     const userNameArray = userName.split(" ");
     let prettyUserNameArray = [];
 
@@ -23,7 +23,7 @@ utilities.prettifyUserName = function (userName) {
     return prettyUserName;
 }
 
-utilities.sortIdeas = function (ideas, currentCategory) {
+utilities.sortIdeas = (ideas, currentCategory) => {
 
     // Prioritise our ideas in order of variables below
     let noPriority = [];
@@ -80,7 +80,7 @@ utilities.sortIdeas = function (ideas, currentCategory) {
     return currentCategoryIdeas;
 }
 
-utilities.createNewIdea = function (newIdeaTitle, newIdeaDescription, newIdeaCategory, newIdeaPriority) {
+utilities.createNewIdea = (newIdeaTitle, newIdeaDescription, newIdeaCategory, newIdeaPriority) => {
     const title = utilities.firstCharToUppercase(newIdeaTitle);
     let description;
 
@@ -96,7 +96,7 @@ utilities.createNewIdea = function (newIdeaTitle, newIdeaDescription, newIdeaCat
     }
 }
 
-utilities.isIdeaTitlePresent = function (newIdeaTitle, ideas) {
+utilities.isIdeaTitlePresent = (newIdeaTitle, ideas) => {
     let ideaTitlePresent = false;
 
     for (let i = 0; i < ideas.length; i++) {
@@ -110,7 +110,7 @@ utilities.isIdeaTitlePresent = function (newIdeaTitle, ideas) {
     return ideaTitlePresent;
 }
 
-utilities.addNewIdea = function (newIdea, ideas) {
+utilities.addNewIdea = (newIdea, ideas) => {
     let newIdeas = ideas;
 
     if (newIdeas) {
@@ -132,7 +132,7 @@ utilities.addNewIdea = function (newIdea, ideas) {
     return newIdeas;
 }
 
-utilities.editIdea = function (editedIdea, ideas, ideaTitle) {
+utilities.editIdea = (editedIdea, ideas, ideaTitle) => {
     let newIdeas = ideas;
 
     for (let i = 0; i < newIdeas.length; i++) {
@@ -154,7 +154,22 @@ utilities.editIdea = function (editedIdea, ideas, ideaTitle) {
     return newIdeas;
 }
 
-utilities.isCategoryPresent = function (newCategory, categories) {
+utilities.deleteIdea = (idea, ideas) => {
+    let index;
+    let newIdeas = ideas;
+        
+    for (let i = 0; i < ideas.length; i++) {
+        if (ideas[i].title === idea.title) {
+            index = i;
+            break;
+        }
+    } 
+
+    newIdeas.splice(index, 1);
+    return newIdeas;
+}
+
+utilities.isCategoryPresent = (newCategory, categories) => {
     let categoryPresent = false;
 
     for (let i = 0; i < categories.length; i++) {
@@ -168,7 +183,7 @@ utilities.isCategoryPresent = function (newCategory, categories) {
     return categoryPresent;
 }
 
-utilities.addCategory = function(category, categories) {
+utilities.addCategory = (category, categories) => {
     let newCategories = categories;
     const newCategory = utilities.firstCharToUppercase(category);
 
@@ -191,7 +206,7 @@ utilities.addCategory = function(category, categories) {
     return newCategories;
 }
 
-utilities.deleteCategory = function(title, categories) {
+utilities.deleteCategory = (title, categories) => {
     let newCategories = categories;
 
     for (let i = 0; i < categories.length; i++) {

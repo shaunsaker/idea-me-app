@@ -189,33 +189,7 @@ export default function (state = initialState, action) {
 
         case 'DELETE_IDEA':
             new_state = cloneObject(state);
-            let id;
-            let newIdeas = new_state.userData.ideas;
-            newIdeas.map((value, index) => {
-                if (value.title === action.idea.title) {
-                    id = index;
-                }
-            });
-            newIdeas.splice(id, 1);
-            new_state.userData.ideas = newIdeas;
-            return new_state;
-
-        case 'DELETE_CATEGORY':
-            new_state = cloneObject(state);
-            new_state.userData.categories.splice(action.index, 1);
-
-            // update ideas categorys
-            // set all matching categorys to null
-            // all categorys above index should be decreased by 1
-            const ideas = new_state.userData.ideas;
-            ideas.map((value, index) => {
-                if (value.category === action.index) {
-                    value.category = null;
-                }
-                else if (value.category > action.index) {
-                    value.category--;
-                }
-            });
+            new_state.userData.ideas = utilities.deleteIdea(action.idea, new_state.userData.ideas);
             return new_state;
 
         default:

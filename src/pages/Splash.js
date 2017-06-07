@@ -94,7 +94,7 @@ export class Splash extends React.Component {
     }
 
     getQuote() {
-        const randomQuote = utilities.getRandomItem(this.props.quotes);
+        const randomQuote = utilities.getRandomItemFromArray(this.props.quotes);
 
         this.setState({
             quote: randomQuote
