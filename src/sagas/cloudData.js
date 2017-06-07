@@ -63,39 +63,7 @@ export function* loadUserData(action) {
 
     if (loadUserDataResponse) {
         if (loadUserDataResponse.success) {
-            const preProcessedData = loadUserDataResponse.message;
-            let processedData = {
-                ideas: [],
-                categories: []
-            };
-
-            // Firebase is returning objects instead of arrays (?!) so we need to pre-process this data
-            if (preProcessedData) {
-                if (preProcessedData.categories) {
-                    if (typeof(preProcessedData.categories === 'object')) {
-                        for (let prop in preProcessedData.categories) {
-                            if (preProcessedData.categories.hasOwnProperty(prop)) {
-                                processedData.categories.push(preProcessedData.categories[prop]);
-                            }
-                        }
-                    }   
-                    else {
-                        processedData.categories.push(preProcessedData.categories)
-                    }
-                }
-
-                if (preProcessedData.ideas) {
-                    if (typeof(preProcessedData.ideas === 'object')) {
-                        for (let prop in preProcessedData.ideas) {
-                            if (preProcessedData.ideas.hasOwnProperty(prop)) {
-                                processedData.ideas.push(preProcessedData.ideas[prop]);
-                            }
-                        }
-                    }   
-                    else {
-                        processedData.ideas.push(preProcessedData.ideas)
-                    }
-                }           
+                const processedData = utilities.objectToArray(loadUserDataResponse.message);
 
                 yield put({
                     type: 'CLOUD_DATA_SUCCESS',

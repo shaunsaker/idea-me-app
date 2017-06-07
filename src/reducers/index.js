@@ -4,7 +4,6 @@ let cloneObject = function (obj) {
 
 import utilities from '../utilities';
 import initialState from './initialState';
-import suburbs from '../resources/suburbs';
 
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -48,7 +47,6 @@ export default function (state = initialState, action) {
 			new_state.geolocation.currentLocation = action.currentLocation;
 			new_state.geolocation.geolocationSuccess = true;
 			new_state.app.loading = false; // for profile page
-            new_state.appData.suburbs = suburbs; // used for location search
 			return new_state;
 
         /* APP */

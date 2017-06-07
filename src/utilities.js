@@ -1,5 +1,15 @@
 const utilities = {};
 
+utilities.filterArrayByValue = (value, array) => {
+    const pattern = new RegExp(value.toLowerCase(), 'g');
+
+    const filteredArray = array.filter((item) => {
+        return item.toLowerCase().match(pattern);
+    });
+
+    return filteredArray;
+}
+
 utilities.getRandomItemFromArray = (array) => {
     const randomNumber = Math.round(Math.random() * array.length);
     const randomItem = array[randomNumber];
@@ -218,5 +228,44 @@ utilities.deleteCategory = (title, categories) => {
 
     return newCategories;
 }
+
+utilities.objectToArray = (preProcessedData) => {
+    let processedData = {
+        ideas: [],
+        categories: []
+    };
+
+    // Firebase is returning objects instead of arrays (?!) so we need to pre-process this data
+    if (preProcessedData) {
+        if (preProcessedData.categories) {
+            if (typeof(preProcessedData.categories === 'object')) {
+                for (let prop in preProcessedData.categories) {
+                    if (preProcessedData.categories.hasOwnProperty(prop)) {
+                        processedData.categories.push(preProcessedData.categories[prop]);
+                    }
+                }
+            }   
+            else {
+                processedData.categories.push(preProcessedData.categories)
+            }
+        }
+
+        if (preProcessedData.ideas) {
+            if (typeof(preProcessedData.ideas === 'object')) {
+                for (let prop in preProcessedData.ideas) {
+                    if (preProcessedData.ideas.hasOwnProperty(prop)) {
+                        processedData.ideas.push(preProcessedData.ideas[prop]);
+                    }
+                }
+            }   
+            else {
+                processedData.ideas.push(preProcessedData.ideas)
+            }
+        }   
+    }
+    
+    return processedData;
+}
+
 
 export default utilities;

@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import utilities from '../utilities';
+import styleConstants from '../styles/styleConstants';
+
 import Page from '../components/Page';
 import Header from '../components/Header';
 import ItemListHeader from '../components/ItemListHeader';
 import ItemList from '../components/ItemList';
-
-import styleConstants from '../styles/styleConstants';
 
 export class EditLocation extends React.Component {
     constructor(props) {
@@ -37,11 +38,7 @@ export class EditLocation extends React.Component {
     }
 
     updateEditUserLocation(text) {
-        const pattern = new RegExp(text.toLowerCase(), 'g');
-
-        const suburbSuggestions = this.props.suburbs.filter((value) => {
-            return value.toLowerCase().match(pattern);
-        });
+        const suburbSuggestions = utilities.filterArrayByValue(text, this.props.suburbs);
 
         this.setState({
             suburbs: suburbSuggestions,

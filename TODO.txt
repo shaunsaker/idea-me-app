@@ -1,11 +1,9 @@
 TODOS
 
 GENERAL
-    iconFont 24  
-    Check Growl and Loader declarations
-    Filter suburbs in utilities
-    Move cloudData loadUserData logic into utilities
     Save User/Load User
+    Sort out icons
+    FB is returning objects instead of arrays - Find out why.
 
 PAGES
     Splash
