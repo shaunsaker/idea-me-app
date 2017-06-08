@@ -13,6 +13,7 @@ const initialState = {
         authErrorMessage: null,
     },
     app: {
+		firstTimeUser: null,
         loading: true, // needs to be true on initial app load
 
         errorType: null,

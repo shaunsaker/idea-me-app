@@ -25,7 +25,12 @@ export class Welcome extends React.Component {
     static get propTypes() {
         return {
             authenticated: React.PropTypes.bool,
-			cloudDataSuccess: React.PropTypes.bool,
+            cloudDataSuccess: React.PropTypes.bool,
+            uid: React.PropTypes.string,
+            userEmail: React.PropTypes.string,
+			userName: React.PropTypes.string,
+			userPhotoUrl: React.PropTypes.string,
+            currentLocation: React.PropTypes.string,
         };
     }
 
@@ -35,17 +40,24 @@ export class Welcome extends React.Component {
 		if (this.props.authenticated && !this.props.cloudDataSuccess) {
 			this.props.dispatch({
 				type: 'loadUser',
-				user: {
-					uid: this.props.uid,
-					userEmail: this.props.userEmail,
+				uid: this.props.uid,
+
+                // Add these for the ride in case we have a new user
+                node: 'profile',
+				userData: {
+                    userEmail: this.props.userEmail,
 					userName: this.props.userName,
 					userPhotoUrl: this.props.userPhotoUrl,
-					userLocation: this.props.currentLocation, // In case the user does not have a saved location and we dont have user data in the db
-				}
+                    userLocation: this.props.currentLocation,
+				},
 			});
 		}
 
 		if (this.props.authenticated && this.props.cloudDataSuccess) {
+			this.props.dispatch({
+				type: 'RESET_CLOUD_DATA_SUCCESS'
+			});
+
 			Actions.home();
 		}
     }
@@ -101,8 +113,13 @@ export class Welcome extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        authenticated: state.main.auth.authenticated,
+		authenticated: state.main.auth.authenticated,
 		cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+		uid: state.main.auth.uid,
+		userEmail: state.main.userData.profile.userEmail,
+		userName: state.main.userData.profile.userName,
+		userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+		currentLocation: state.main.geolocation.currentLocation,
     });
 }
 

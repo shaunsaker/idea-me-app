@@ -1,5 +1,19 @@
 const utilities = {};
 
+utilities.cloneObject = (object) => {
+	return JSON.parse(JSON.stringify(object));
+}
+
+utilities.objectToArray = (object) => {
+	let array = [];
+
+	for (objectKey in object) {
+		array.push(object[objectKey]);
+	}
+
+	return array;
+}
+
 utilities.filterArrayByValue = (value, array) => {
     const pattern = new RegExp(value.toLowerCase(), 'g');
 

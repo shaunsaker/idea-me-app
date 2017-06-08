@@ -60,7 +60,7 @@ export class Profile extends React.Component {
     componentDidUpdate() {
         if (this.props.cloudDataSuccess) {
             this.props.dispatch({
-                type: 'TOGGLE_CLOUD_DATA_SUCCESS'
+                type: 'RESET_CLOUD_DATA_SUCCESS'
             }); 
 
             Actions.pop();
@@ -180,7 +180,7 @@ export class Profile extends React.Component {
             uid: this.props.uid,
             userData: {
                 userName: prettyUserName,
-                userEmail: this.props.userEmail,
+                userEmail: this.state.editUserEmail,
                 userLocation: this.props.userLocation,
                 userPhotoUrl: this.props.userPhotoUrl,
             }

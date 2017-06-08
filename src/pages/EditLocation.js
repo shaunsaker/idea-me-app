@@ -74,7 +74,7 @@ export class EditLocation extends React.Component {
 
                 <ItemListHeader
                     currentLocation={this.props.currentLocation}
-                    hasError={this.props.currentLocationError}
+                    hasError={this.props.geolocationError}
                     handlePress={this.setUserLocation} />
 
                 <ItemList
@@ -91,7 +91,7 @@ function mapStateToProps(state) {
     return ({
         userLocation: state.main.userData.profile.userLocation,
         currentLocation: state.main.geolocation.currentLocation,
-        currentLocationError: state.main.geolocation.geolocationError,
+        geolocationError: state.main.geolocation.geolocationError,
         suburbs: state.main.appData.suburbs,
     });
 }

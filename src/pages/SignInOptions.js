@@ -1,6 +1,8 @@
 import React from "react";
 import {
     View,
+    Text,
+    StatusBar,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -22,62 +24,71 @@ export class SignInOptions extends React.Component {
         this.signInUserWithGoogle = this.signInUserWithGoogle.bind(this);
         this.signInUserWithEmail = this.signInUserWithEmail.bind(this);
         this.signInUserAnonymously = this.signInUserAnonymously.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
+		this.toggleModal = this.toggleModal.bind(this);
 
         this.state = {
-            showModal:false
+            showModal: false,
         }
     }
 
     static get propTypes() {
         return {
             authenticated: React.PropTypes.bool,
-			cloudDataSuccess: React.PropTypes.bool,
+            cloudDataSuccess: React.PropTypes.bool,
+            uid: React.PropTypes.string,
+            userEmail: React.PropTypes.string,
+			userName: React.PropTypes.string,
+			userPhotoUrl: React.PropTypes.string,
+            currentLocation: React.PropTypes.string,
         };
     }
 
     componentDidUpdate() {
+
 		// If we're authenticated and we have not yet loaded data, load/save data to db
 		if (this.props.authenticated && !this.props.cloudDataSuccess) {
 			this.props.dispatch({
 				type: 'loadUser',
-				user: {
-					uid: this.props.uid,
-					userEmail: this.props.userEmail,
+				uid: this.props.uid,
+
+                // Add these for the ride in case we have a new user
+                node: 'profile',
+				userData: {
+                    userEmail: this.props.userEmail,
 					userName: this.props.userName,
 					userPhotoUrl: this.props.userPhotoUrl,
-					userLocation: this.props.currentLocation, // In case the user does not have a saved location and we dont have user data in the db
-				}
+                    userLocation: this.props.currentLocation,
+				},
 			});
 		}
 
 		if (this.props.authenticated && this.props.cloudDataSuccess) {
-            this.props.dispatch({
-                type: 'RESET_CLOUD_DATA_SUCCESS'
-            }); 
+			this.props.dispatch({
+				type: 'RESET_CLOUD_STORAGE_SUCCESS'
+			});
 
 			Actions.home();
 		}
     }
 
     signInUserWithFacebook() {
-        this.props.dispatch({
-            type: 'TOGGLE_LOADING'
-        });
+		this.props.dispatch({
+			type: 'TOGGLE_LOADING'
+		});
 
-        this.props.dispatch({
-            type: 'signInUserWithFacebook'
-        });
+		this.props.dispatch({
+			type: 'signInUserWithFacebook'
+		});
     }
 
     signInUserWithGoogle() {
-        this.props.dispatch({
-            type: 'TOGGLE_LOADING'
-        });
-        
-        // this.props.dispatch({
-        //     type: 'signInUserWithGoogle'
-        // });
+		this.props.dispatch({
+			type: 'TOGGLE_LOADING'
+		});
+
+		this.props.dispatch({
+			type: 'signInUserWithGoogle'
+		});
     }
 
     signInUserWithEmail() {
@@ -85,15 +96,13 @@ export class SignInOptions extends React.Component {
     }
 
     signInUserAnonymously() {
-        this.toggleModal();
+		this.props.dispatch({
+			type: 'TOGGLE_LOADING'
+		});
 
-        this.props.dispatch({
-            type: 'TOGGLE_LOADING'
-        });
-
-        this.props.dispatch({
-            type: 'signInUserAnonymously'
-        });
+		this.props.dispatch({
+			type: 'signInUserAnonymously'
+		});
     }
 
     toggleModal() {
@@ -106,7 +115,7 @@ export class SignInOptions extends React.Component {
         const modal = this.state.showModal ?
             <ActionModal 
                 title="Are you sure you want to continue anonymously?"
-                subtitle="You won't be able to save any of your ideas."
+                subtitle="You won't be able to save any of your data."
                 handleLeftIconPress={this.signInUserAnonymously}
                 handleRightIconPress={this.toggleModal} />
             :
@@ -136,17 +145,17 @@ export class SignInOptions extends React.Component {
                         text='Continue with Email'
                         styleMode='transparent' />
                     <Button
-                        iconName='anonymous'
+                        iconName='person'
                         handlePress={this.toggleModal} 
                         text='Continue Anonymously'
                         styleMode='transparent' />
                 </View>
 
-                {modal}
-
 				<Growl />
 
 				<Loader />
+
+				{modal}
                 
             </Page>
         );
@@ -155,8 +164,13 @@ export class SignInOptions extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        authenticated: state.main.auth.authenticated,
+		authenticated: state.main.auth.authenticated,
 		cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+		uid: state.main.auth.uid,
+		userEmail: state.main.userData.profile.userEmail,
+		userName: state.main.userData.profile.userName,
+		userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+		currentLocation: state.main.geolocation.currentLocation,
     });
 }
 

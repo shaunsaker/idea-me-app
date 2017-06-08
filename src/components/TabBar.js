@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderTopWidth: 1,
 		borderTopColor: styleConstants.lightGrey,
-        backgroundColor: styleConstants.primary,
+		backgroundColor: styleConstants.primary,
 	},
 	tabContainer: {
 		flex: 1,
@@ -26,44 +26,65 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		alignSelf: 'stretch',
 	},
+	iconContainer: {
+		paddingHorizontal: 16,
+	},
 	icon: {
-        fontSize: styleConstants.iconFont,
+		fontSize: styleConstants.iconFont,
 	},
 	text: {
 		fontSize: styleConstants.smallFont,
 		marginTop: 2,
-	}
+	},
+	highlightContainer: {
+		position: 'absolute',
+		top: 0,
+		right: 0,
+		bottom: 0,
+		left: 0,
+		alignItems: 'flex-end',
+	},
+	highlight: {
+		width: 10,
+		height: 10,
+		borderRadius: 5,
+		backgroundColor: styleConstants.secondary,
+	},
 });
 
-export default class TabBar extends React.Component {
-	render() {
-		return (
-			<View style={styles.container}>
-                <TouchableOpacity 
-                    onPress={() => Actions.home()}
-                    style={styles.tabContainer}>
-                    <Icon
-                        name='home'
-                        style={[styles.icon, {color: this.props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white}]} />
-					<Text style={[styles.text, {color: this.props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white}, styleConstants.primaryFont]}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    onPress={() => Actions.addIdea()}
-                    style={styles.tabContainer}>
-                    <Icon
-                        name='add'
-                        style={[styles.icon, {color: this.props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white}]} />
-					<Text style={[styles.text, {color: this.props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white}, styleConstants.primaryFont]}>Add Idea</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    onPress={() => Actions.profile()} 
-                    style={styles.tabContainer}>
-                    <Icon
-                        name='face'
-                        style={[styles.icon, {color: this.props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white}]} />
-					<Text style={[styles.text, {color: this.props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white}, styleConstants.primaryFont]}>Profile</Text>
-                </TouchableOpacity>
-			</View>
-		);
-	}
+export default TabBar = (props) => {
+	const highlightProfileTab = props.firstTimeUser ?
+		<View style={styles.highlightContainer}>
+			<View style={styles.highlight} />
+		</View>
+		:
+		null;
+
+	return (
+		<View style={styles.container}>
+			<TouchableOpacity
+				onPress={() => Actions.home()}
+				style={styles.tabContainer}>
+				<View style={styles.iconContainer}>
+					<Icon
+						name='home'
+						style={[styles.icon, { color: props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white }]} />
+				</View>
+				<Text style={[styles.text, { color: props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white }, styleConstants.secondaryFont]}>Home</Text>
+			</TouchableOpacity>
+
+			<TouchableOpacity
+				onPress={() => Actions.profile()}
+				style={styles.tabContainer}>
+				<View style={styles.iconContainer}>
+					<Icon
+						name='face'
+						style={[styles.icon, { color: props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white }]} />
+
+					{highlightProfileTab}
+				</View>
+				<Text style={[styles.text, { color: props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white }, styleConstants.secondaryFont]}>Profile</Text>
+			</TouchableOpacity>
+		</View>
+	);
 };

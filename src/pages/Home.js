@@ -189,8 +189,9 @@ export class Home extends React.Component {
 
         {ideas}
 
-        <TabBar
-          currentPage='home' />
+		<TabBar 
+			currentPage='home'
+			firstTimeUser={this.props.firstTimeUser} />
 
         {modal}
 
@@ -209,6 +210,7 @@ function mapStateToProps(state) {
     currentCategory: state.main.appData.currentCategory,
     categories: state.main.userData.categories,
     uid: state.main.auth.uid,
+	firstTimeUser: state.main.app.firstTimeUser,
   });
 }
 

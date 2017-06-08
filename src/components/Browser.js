@@ -71,7 +71,9 @@ export default class Dropdown extends React.Component {
 
 	static get propTypes() {
 		return {
-			uri: React.PropTypes.string
+			uri: React.PropTypes.string,
+			handleCopySuccess: React.PropTypes.func,
+			handleClose: React.PropTypes.func,
 		};
 	}
 
@@ -146,7 +148,7 @@ export default class Dropdown extends React.Component {
 					leftIconName='close'
 					handleLeftIconPress={this.props.handleClose}
 					text={prettyUrl}
-					rightIconName='home'
+					rightIconName='menu'
 					handleRightIconPress={this.toggleActionSheet} />
 
 				<WebView

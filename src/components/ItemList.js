@@ -11,6 +11,7 @@ import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
 
+import ItemListHeader from '../components/ItemListHeader';
 import DeleteButton from '../components/DeleteButton';
 
 const windowWidth = Dimensions.get('window').width;
@@ -78,17 +79,20 @@ export default class ItemList extends React.Component {
                     <Icon name={this.props.iconName} style={styles.listItemIcon} />
                 </TouchableOpacity>
                 :
-                <View
-                    style={styles.listItemIconContainer}>
-                    <Icon name={this.props.iconName} style={styles.listItemIcon} />
-                </View>;
+				this.props.iconName ? 						
+					<View
+						style={styles.listItemIconContainer}>
+						<Icon name={this.props.iconName} style={styles.listItemIcon} />
+					</View>
+					:
+					null;
 
         const listItem = this.props.handleItemPress ?
             <TouchableOpacity
                 onPress={() => this.props.handleItemPress(item)}
                 style={styles.listItem}>
                 <View style={styles.listItemTextContainer}>
-                    <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item}</Text>
+                    <Text style={[styles.listItemText, styleConstants.secondaryFont]}>{item}</Text>
                 </View>
                 {icon}
             </TouchableOpacity>
@@ -96,7 +100,7 @@ export default class ItemList extends React.Component {
             <View
                 style={styles.listItem}>
                 <View style={styles.listItemTextContainer}>
-                    <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item}</Text>
+                    <Text style={[styles.listItemText, styleConstants.secondaryFont]}>{item}</Text>
                 </View>
                 {icon}
             </View>
@@ -105,13 +109,23 @@ export default class ItemList extends React.Component {
     }
 
     render() {
+		const header = this.props.headerTitle ? 
+			<ItemListHeader
+				title={this.props.headerTitle}
+				subtitle={this.props.headerSubtitle}
+				handlePress={this.props.handleHeaderPress}
+				iconName={this.props.headerIconName} />
+			:
+			<View />;
+
         return (
             <FlatList
                 keyExtractor={item => 'list' + item}
                 data={this.props.items}
                 renderItem={this.renderItem}
-                style={styles.listWrapper}
-                contentContainerStyle={styles.listContainer} />
+                style={this.props.noFlex ? null : styles.listWrapper}
+                contentContainerStyle={styles.listContainer}
+				ListHeaderComponent={() => header} />
         );
     }
 }

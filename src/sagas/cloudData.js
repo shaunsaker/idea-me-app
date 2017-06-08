@@ -20,7 +20,9 @@ export function* loadUserData(action) {
             yield put({
                 type: 'saveUserData',
                 uid: action.uid,
+				node: 'profile',
                 userData: action.userData,
+				firstTimeUser: true, // flag for first time users
             });
         }
 
@@ -51,6 +53,7 @@ export function* saveUserData(action) {
                 type: 'UPDATE_USER_DATA',
                 node: action.node,
                 userData: action.userData,
+				firstTimeUser: action.firstTimeUser,
             });
         }
 

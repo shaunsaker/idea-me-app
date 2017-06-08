@@ -44,9 +44,6 @@ export class Splash extends React.Component {
         if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
-        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.cloudDataSuccess) {
-            Actions.home();
-        }
 
         // When a user is signed in and reloads app
         else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
@@ -63,7 +60,7 @@ export class Splash extends React.Component {
             });
 
 			// Get the user's current location
-			if (!this.props.geolocationSuccess) {
+			if (!this.props.geolocationSuccess || !this.props.geolocationError) {
 				this.props.dispatch({
 					type: 'getUserLocation'
 				});
