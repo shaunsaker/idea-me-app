@@ -47,8 +47,6 @@ export class EditLocation extends React.Component {
     }
 
     setUserLocation(value) {
-        // Save here?
-
         this.props.dispatch({
             type: 'SET_USER_LOCATION',
             userLocation: value,
@@ -73,14 +71,16 @@ export class EditLocation extends React.Component {
                     headerShadow />
 
                 <ItemListHeader
-                    currentLocation={this.props.currentLocation}
-                    hasError={this.props.currentLocationError}
-                    handlePress={this.setUserLocation} />
+                    title='Use Your Current Location'
+                    subtitle={this.props.currentLocation}
+                    hasError={this.props.geolocationError}
+                    handlePress={this.setUserLocation}
+                    iconName='gps-accurate' />
 
                 <ItemList
                     items={this.state.suburbs}
                     handleItemPress={this.setUserLocation}
-                    iconName='gps-not-fixed' />
+                    iconName='gps-not-accurate' />
 
             </Page>
         );
@@ -91,7 +91,7 @@ function mapStateToProps(state) {
     return ({
         userLocation: state.main.userData.profile.userLocation,
         currentLocation: state.main.geolocation.currentLocation,
-        currentLocationError: state.main.geolocation.geolocationError,
+        geolocationError: state.main.geolocation.geolocationError,
         suburbs: state.main.appData.suburbs,
     });
 }

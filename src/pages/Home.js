@@ -196,7 +196,7 @@ export class Home extends React.Component {
 
         <Growl />
 
-        <Loader positionStyle={{ bottom: 56 }} />
+        <Loader />
 
       </Page >
     );

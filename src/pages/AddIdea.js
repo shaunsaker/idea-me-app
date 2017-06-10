@@ -152,7 +152,8 @@ export class AddIdea extends React.Component {
 
         <Growl />
 
-        <Loader />
+        <Loader
+          position='bottom' />
 
       </Page >
     );

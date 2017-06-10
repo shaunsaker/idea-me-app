@@ -134,7 +134,8 @@ export class SignInWithEmail extends React.Component {
 
                 <Growl />
 
-                <Loader />
+                <Loader
+                    position='bottom' />
 
             </Page>
         );

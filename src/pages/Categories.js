@@ -13,8 +13,8 @@ import Header from '../components/Header';
 import ItemList from '../components/ItemList';
 import Button from '../components/Button';
 import ActionModal from '../components/ActionModal';
-import Loader from '../components/Loader';
 import Growl from '../components/Growl';
+import Loader from '../components/Loader';
 
 export class Categories extends React.Component {
   constructor(props) {
@@ -94,7 +94,8 @@ export class Categories extends React.Component {
 
         <Growl />
 
-        <Loader />
+        <Loader
+          position='bottom' />
 
       </Page >
     );

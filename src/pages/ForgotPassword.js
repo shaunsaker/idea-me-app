@@ -95,7 +95,8 @@ export class ForgotPassword extends React.Component {
 
                 <Growl />
 
-                <Loader />
+                <Loader 
+                    position='bottom'/>
                 
             </Page>
         );

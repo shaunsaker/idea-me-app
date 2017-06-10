@@ -92,7 +92,8 @@ export class Welcome extends React.Component {
 
                 <Growl />
 
-                <Loader />
+                <Loader 
+                    position='bottom'/>
 
             </Page>
         );

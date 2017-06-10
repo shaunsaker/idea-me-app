@@ -13,7 +13,7 @@ import styleConstants from '../styles/styleConstants';
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
-    currentLocationButton: {
+    header: {
         width: windowWidth,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -23,56 +23,85 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: styleConstants.lightGrey,
     },
-    currentLocationButtonDisabled: {
+    headerDisabled: {
         opacity: 0.33,
     },
-    currentLocationTextContainer: {
+    headerTextContainer: {
 
     },
-    currentLocationTitleText: {
+    headerTitleText: {
         fontSize: styleConstants.smallFont,
         color: styleConstants.secondary,
     },
-    currentLocationSubtitleText: {
+    headerSubtitleText: {
         fontSize: styleConstants.regularFont,
         color: styleConstants.white,
     },
-    currentLocationIconContainer: {
+    headerIconContainer: {
         justifyContent: 'center',
         alignItems: 'center',
     },
-    currentLocationIcon: {
+    headerIcon: {
         fontSize: styleConstants.iconFont,
         color: styleConstants.white,
     },
 });
 
 export default ItemListHeader = (props) => {
+	const icon = props.iconName ?
+		<View
+			style={styles.headerIconContainer}>
+			<Icon name={props.iconName} style={styles.headerIcon} />
+		</View>
+		:
+		null;
+
+	const subtitle = props.subtitle ?
+		<Text style={[styles.headerSubtitleText, styleConstants.secondaryFont]}>{props.subtitle}</Text>
+		:
+		null;
+
     const header = props.hasError ?
         <View
-            style={[styles.currentLocationButton, styles.currentLocationButtonDisabled]}>
-            <View style={styles.currentLocationButtonTextContainer}>
-                <Text style={[styles.currentLocationTitleText, styleConstants.primaryFont]}>Use your Current Location</Text>
-                <Text style={[styles.currentLocationSubtitleText, styleConstants.primaryFont]}>{props.currentLocation}</Text>
+            style={[styles.header, styles.headerDisabled]}>
+            <View style={styles.headerTextContainer}>
+                <Text style={[styles.headerTitleText, styleConstants.secondaryFont]}>{props.title}</Text>
+
+                {subtitle}
+
             </View>
-            <View
-                style={styles.currentLocationIconContainer}>
-                <Icon name='gps-disabled' style={styles.currentLocationIcon} />
-            </View>
+
+            {icon}
+
         </View>
-        :
-        <TouchableOpacity
-            onPress={() => props.handlePress(props.currentLocation)}
-            style={styles.currentLocationButton}>
-            <View style={styles.currentLocationButtonTextContainer}>
-                <Text style={[styles.currentLocationTitleText, styleConstants.primaryFont]}>Use your Current Location</Text>
-                <Text style={[styles.currentLocationSubtitleText, styleConstants.primaryFont]}>{props.currentLocation}</Text>
-            </View>
+        :    
+        props.handlePress ?
+            <TouchableOpacity
+                onPress={() => props.handlePress(props.header)}
+                style={styles.header}>
+                <View style={styles.headerTextContainer}>
+                    <Text style={[styles.headerTitleText, styleConstants.secondaryFont]}>{props.title}</Text>
+
+                    {subtitle}
+
+                </View>
+
+                {icon}
+
+            </TouchableOpacity>
+            :
             <View
-                style={styles.currentLocationIconContainer}>
-                <Icon name='gps-fixed' style={styles.currentLocationIcon} />
+                style={styles.header}>
+                <View style={styles.headerTextContainer}>
+                    <Text style={[styles.headerTitleText, styleConstants.secondaryFont]}>{props.title}</Text>
+
+                    {subtitle}
+
+                </View>
+
+                {icon}
+
             </View>
-        </TouchableOpacity>;
 
     return header;
 }

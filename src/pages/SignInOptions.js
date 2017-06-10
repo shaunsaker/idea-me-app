@@ -146,7 +146,8 @@ export class SignInOptions extends React.Component {
 
 				<Growl />
 
-				<Loader />
+				<Loader
+                    position='bottom' />
                 
             </Page>
         );

@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     },
     dropdownItemsWrapper: {
         position: 'absolute',
-        top: 64,
-        left: 32,
+        top: 76,
+        left: 16,
         width: window.width - 64,
         elevation: 5,
         shadowColor: "#000000",
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
         },
         backgroundColor: styleConstants.white,
         zIndex: 1,
-        marginTop: 16,
     },
     dropdownHeader: {        
         flexDirection: 'row',
@@ -95,8 +94,8 @@ export default class DropdownButton extends React.Component {
             height: new Animated.Value(0)
         }
 
-        this.maxHeight = 200;
-        this.itemHeight = 42;
+        this.maxHeight = 216;
+        this.itemHeight = 44;
 
         this.toggleExpanded = this.toggleExpanded.bind(this);
         this.renderItem = this.renderItem.bind(this);
@@ -106,11 +105,13 @@ export default class DropdownButton extends React.Component {
         return {
             displayText: React.PropTypes.string, // display text but don't pass value back, eg. Select a Category
             currentValue: React.PropTypes.string,
-            values: React.PropTypes.array,
-            handleSelect: React.PropTypes.func,
+            values: React.PropTypes.array.isRequired,
+            handleSelect: React.PropTypes.func.isRequired,
             headerValue: React.PropTypes.string,
             footerValue: React.PropTypes.string,
             pushContent: React.PropTypes.bool, // animate push content below
+            buttonStyleMode: React.PropTypes.string,
+            headerIconName: React.PropTypes.string,
         };
     }
 
@@ -181,7 +182,7 @@ export default class DropdownButton extends React.Component {
             <TouchableOpacity
                 style={styles.dropdownHeader}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }} >
-                <Icon name='mode-edit' style={styles.dropdownHeaderIcon} />
+                <Icon name={this.props.headerIconName} style={styles.dropdownHeaderIcon} />
                 <Text
                     style={[styles.dropdownHeaderText, styleConstants.primaryFont]}>
                     {this.props.headerValue}
@@ -198,7 +199,7 @@ export default class DropdownButton extends React.Component {
                 </Text>
             </TouchableOpacity>;
             
-        const itemList = this.props.values ?
+        const itemList =
             <Animated.View
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
                 <View style={styles.dropdownItemsContainer}>
@@ -209,15 +210,13 @@ export default class DropdownButton extends React.Component {
                         ListHeaderComponent={this.props.headerValue ? () => header : null}
                         ListFooterComponent={this.props.footerValue ? () => footer : null}/>
                 </View>
-            </Animated.View>
-            :
-            null;
+            </Animated.View>;
 
         return (
             <View style={styles.dropdownContainer}>
                 <Button
-                    styleMode='transparent'
-                    handlePress={this.props.values && this.toggleExpanded}
+                    styleMode={this.props.buttonStyleMode || 'primary'}
+                    handlePress={this.toggleExpanded}
                     text={this.props.currentValue ? this.props.currentValue : this.props.displayText} />
                 {itemList}
             </View>

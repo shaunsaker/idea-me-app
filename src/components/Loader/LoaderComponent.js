@@ -2,7 +2,6 @@ import React from 'react';
 import {
 	StyleSheet,
 	Animated,
-	Easing,
 	Dimensions,
 } from 'react-native';
 
@@ -11,19 +10,10 @@ import styleConstants from '../../styles/styleConstants';
 
 const styles = StyleSheet.create({
 	container: {
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
-		right: 0,
-		height: 5,
-	},
-	loader: {
-		position: 'absolute',
-		left: -100,
 		width: 100,
 		height: 5,
 		backgroundColor: styleConstants.secondary,
-	}
+	},
 });
 
 export default class LoaderComponent extends React.Component {
@@ -38,12 +28,6 @@ export default class LoaderComponent extends React.Component {
 		this.animateRight = this.animateRight.bind(this);	
 	}
 
-    static get propTypes() {
-      return {
-		positionStyle: React.PropTypes.object,
-      };
-    }
-
 	componentDidMount() {
 		this.animateOpacity();
 		this.animateRight();
@@ -55,7 +39,7 @@ export default class LoaderComponent extends React.Component {
 			{
 				toValue: 1,
 				duration: 2000,
-				easing: config.animation.easing,
+				easing: config.animation.easing
 			}
 		).start();
 	}
@@ -68,7 +52,7 @@ export default class LoaderComponent extends React.Component {
 			{
 				toValue: this.windowWidth,
 				duration: 2000,
-				easing: config.animation.easing,
+				easing: config.animation.easing
 			}
 		).start(() => {
 			this.animateRight()
@@ -76,10 +60,13 @@ export default class LoaderComponent extends React.Component {
 	}
 
 	render() {
+		const animatedStyles = {
+			opacity: this.opacity,
+			left: this.position,
+		}
+
 		return (
-			<Animated.View style={[styles.container, this.props.positionStyle, {opacity: this.opacity}]}>
-				<Animated.View style={[styles.loader, {left: this.position}]} />
-			</Animated.View>
+			<Animated.View style={[styles.container, animatedStyles]} />
 		);
 	}
 }

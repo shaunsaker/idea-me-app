@@ -239,7 +239,8 @@ export class Profile extends React.Component {
 
                 <Growl />
 
-                <Loader />
+                <Loader
+                    position='bottom' />
 
             </Page >
         );
