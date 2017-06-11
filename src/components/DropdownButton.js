@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 76,
-        left: 16,
+        left: 32,
         width: window.width - 64,
         elevation: 5,
         shadowColor: "#000000",
@@ -112,6 +112,7 @@ export default class DropdownButton extends React.Component {
             pushContent: React.PropTypes.bool, // animate push content below
             buttonStyleMode: React.PropTypes.string,
             headerIconName: React.PropTypes.string,
+            footerIconName: React.PropTypes.string,
         };
     }
 
@@ -178,21 +179,32 @@ export default class DropdownButton extends React.Component {
                 maxHeight: this.maxHeight   
             };
 
+        const headerIcon = this.props.headerIconName ?
+            <Icon name={this.props.headerIconName} style={styles.dropdownHeaderIcon} />
+            :
+            null;
+
         const header = 
             <TouchableOpacity
                 style={styles.dropdownHeader}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }} >
-                <Icon name={this.props.headerIconName} style={styles.dropdownHeaderIcon} />
+                {headerIcon}
                 <Text
                     style={[styles.dropdownHeaderText, styleConstants.primaryFont]}>
                     {this.props.headerValue}
                 </Text>
             </TouchableOpacity>;
 
+        const footerIcon = this.props.footerIconName ? 
+            <Icon name={this.props.footerIconName} style={styles.dropdownHeaderIcon} />
+            :
+            null;
+
         const footer = 
             <TouchableOpacity
                 style={styles.dropdownFooter}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.footerValue) }} >
+                {footerIcon}
                 <Text
                     style={[styles.dropdownFooterText, styleConstants.primaryFont]}>
                     {this.props.footerValue}
