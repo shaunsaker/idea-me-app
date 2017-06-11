@@ -16,7 +16,7 @@ const quotes = [
         author: 'Ayn Rand, The Fountainhead'
     },
     {
-        title: 'A man my die, nations may rise and fill, but an idea lives on.',
+        title: 'A man my die, nations may rise and fall, but an idea lives on.',
         author: 'John F. Kennedy'
     },
     {
@@ -32,7 +32,7 @@ const quotes = [
         author: 'Robin Williams'
     },
     {
-        title: 'No army can withstand the strength of an idea whose time has come',
+        title: 'No army can withstand the strength of an idea whose time has come.',
         author: 'Victor Hugo'
     },
     {
