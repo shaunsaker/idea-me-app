@@ -49,10 +49,10 @@ const styles = StyleSheet.create({
         color: styleConstants.primary,
     },
     labelsContainer: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
+        flexWrap: 'wrap',
     },
 });
 
@@ -92,11 +92,13 @@ export default class IdeaCard extends React.Component {
                     <Icon name='more-vert' style={styles.menuIcon} />
                 </TouchableOpacity>
 
-                <InfoBlock
-                    title={this.props.idea.title}
-                    subtitle={this.props.idea.description}
-                    titleColor={styleConstants.primary}
-                    subtitleColor={styleConstants.grey} />
+                <View style={{flex: 1}}>
+                    <InfoBlock
+                        title={this.props.idea.title}
+                        subtitle={this.props.idea.description}
+                        titleColor={styleConstants.primary}
+                        subtitleColor={styleConstants.grey} />
+                </View>
 
                 <View
                     style={styles.labelsContainer} >

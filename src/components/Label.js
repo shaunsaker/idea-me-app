@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 16,
         marginHorizontal: 4,
+        marginTop: 8,
     },
     labelIcon: {
         fontSize: styleConstants.iconFont,
