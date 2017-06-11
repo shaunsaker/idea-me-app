@@ -172,7 +172,7 @@ export class Profile extends React.Component {
             type: 'TOGGLE_LOADING'
         }); 
 
-        const prettyUserName = utilities.prettifyUserName(this.state.editUserName);
+        const prettyUserName = utilities.prettifyString(this.state.editUserName);
 
         this.props.dispatch({
             type: 'saveUserData',

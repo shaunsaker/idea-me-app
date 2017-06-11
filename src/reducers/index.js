@@ -33,9 +33,9 @@ export default function (state = initialState, action) {
 
         case 'SIGN_OUT_USER':
             new_state = cloneObject(state);
-            new_state.auth.authenticated = false;
-            new_state.auth.uid = null;
+            new_state = initialState;
             new_state.auth.redirectToWelcomePage = true;
+
             return new_state;
         
 		/*

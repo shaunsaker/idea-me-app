@@ -12,6 +12,7 @@ import Input from '../components/Input';
 import DropdownButton from '../components/DropdownButton';
 import Button from '../components/Button';
 import Growl from '../components/Growl';
+import Loader from '../components/Loader';
 
 export class EditIdea extends React.Component {
     constructor(props) {
@@ -37,9 +38,11 @@ export class EditIdea extends React.Component {
             initialIdeaDescription: React.PropTypes.string,
             initialIdeaCategory: React.PropTypes.string,
             initialIdeaPriority: React.PropTypes.string,
-            categories: React.PropTypes.array,
-            priorities: React.PropTypes.array,
+            ideas: React.PropTypes.object,
+            categories: React.PropTypes.object,
+            priorities: React.PropTypes.object,
             uid: React.PropTypes.string,
+            cloudDataSuccess: React.PropTypes.bool,
         };
     }
 
@@ -48,6 +51,16 @@ export class EditIdea extends React.Component {
         this.props.initialIdeaDescription && this.updateEditIdeaDescription(this.props.initialIdeaDescription);
         this.props.initialIdeaCategory && this.selectCategory(this.props.initialIdeaCategory);
         this.props.initialIdeaPriority && this.selectPriority(this.props.initialIdeaPriority);
+    }
+
+    componentDidUpdate() {
+        if (this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'RESET_CLOUD_DATA_SUCCESS',
+            });
+
+            Actions.pop();
+        }
     }
 
     updateEditIdeaTitle(value) {
@@ -81,22 +94,33 @@ export class EditIdea extends React.Component {
     }
 
     updateIdea() {
-        const editedIdea = utilities.createNewIdea(this.state.editIdeaTitle, this.state.editIdeaDescription, this.state.editIdeaCategory, this.state.editIdeaPriority);
-        const ideas = utilities.editIdea(editedIdea, this.props.ideas, this.props.initialIdeaTitle); // will return null if idea with this title already exists
+        const editedIdea = {
+            title: utilities.firstCharToUppercase(this.state.editIdeaTitle),
+            description: this.state.editIdeaDescription && utilities.firstCharToUppercase(this.state.editIdeaDescription),
+            category: this.state.editIdeaCategory,
+            priority: this.state.editIdeaPriority,
+            uid: this.props.initialIdeaUID,
+        };
 
-        if (ideas) {
+        let isIdeaTitlePresent;
+        const remainingIdeas = utilities.deleteObjectFromObjectArray(this.props.initialIdeaUID, this.props.ideas);
+
+        // check if the new idea title is already present (but exclude our current idea)
+        isIdeaTitlePresent = utilities.isKeyValuePairPresentInObjectArray({ title: editedIdea.title }, remainingIdeas);
+
+        if (!isIdeaTitlePresent) {
             this.props.dispatch({
-                type: 'UPDATE_USER_IDEAS',
-                ideas
+                type: 'TOGGLE_LOADING'
             });
 
-            // this.props.dispatch({
-            //     type: 'saveUserIdeas',
-            //     ideas,
-            //     uid: this.props.uid
-            // });
+            const newIdeas = utilities.updateObjectInObjectArray(this.props.initialIdeaUID, editedIdea, this.props.ideas);
 
-            Actions.pop();
+            this.props.dispatch({
+              type: 'saveUserData',
+              node: 'ideas',
+              uid: this.props.uid,
+              userData: newIdeas,
+            });
         }
         else {
             this.props.dispatch({
@@ -109,6 +133,8 @@ export class EditIdea extends React.Component {
 
     render() {
         const enableContinueButton = this.state.editIdeaTitle;
+        const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
+        const priorities = utilities.convertObjectArrayToArrayOfObjects(this.props.priorities)
 
         return (
             <Page>
@@ -126,20 +152,21 @@ export class EditIdea extends React.Component {
                     <Input
                         placeholder='ENTER YOUR DESCRIPTION HERE'
                         value={this.state.editIdeaDescription}
-                        handleChange={this.updateEditIdeaDescription} 
+                        handleChange={this.updateEditIdeaDescription}
                         multiline />
 
                     <DropdownButton
                         displayText='Select a Category'
                         currentValue={this.state.editIdeaCategory}
-                        values={this.props.categories}
+                        values={categories}
                         handleSelect={this.selectCategory}
+                        headerIconName='mode-edit'
                         headerValue='Edit Categories'
                         pushContent />
                     <DropdownButton
                         displayText='Select a Priority'
                         currentValue={this.state.editIdeaPriority}
-                        values={this.props.priorities}
+                        values={priorities}
                         handleSelect={this.selectPriority}
                         pushContent />
                 </InputContainer>
@@ -153,6 +180,9 @@ export class EditIdea extends React.Component {
 
                 <Growl />
 
+                <Loader
+                    position='bottom' />
+
             </Page >
         );
     }
@@ -160,14 +190,16 @@ export class EditIdea extends React.Component {
 
 function mapStateToProps(state) {
     return ({
+        initialIdeaUID: state.routes.scene.uid,
         initialIdeaTitle: state.routes.scene.title,
         initialIdeaDescription: state.routes.scene.description,
         initialIdeaCategory: state.routes.scene.category,
         initialIdeaPriority: state.routes.scene.priority,
+        ideas: state.main.userData.ideas,
         categories: state.main.userData.categories,
         priorities: state.main.appData.priorities,
-        ideas: state.main.userData.ideas,
         uid: state.main.auth.uid,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
     });
 }
 

@@ -1,5 +1,35 @@
 const utilities = {};
 
+/* STRINGS */
+
+utilities.firstCharToUppercase = (string) => {
+    const trimmedString = string.trim();
+    return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);
+};
+
+// Takes a string and converts each word's first character to uppercase
+utilities.prettifyString = (string) => {
+    const stringArray = string.split(" ");
+    let prettyStringArray = [];
+
+    stringArray.map((value) => {
+
+        // Don't add blank characters
+        if (value) {
+            prettyStringArray.push(utilities.firstCharToUppercase(value));
+        }
+    });
+
+    const prettyString = prettyStringArray.join(" ");
+    return prettyString;
+}
+
+utilities.createUID = () => {
+    return Date.now().toString();
+}
+
+/* ARRAYS */
+
 utilities.filterArrayByValue = (value, array) => {
     const pattern = new RegExp(value.toLowerCase(), 'g');
 
@@ -16,217 +46,127 @@ utilities.getRandomItemFromArray = (array) => {
     return randomItem;
 };
 
-utilities.firstCharToUppercase = (string) => {
-    const trimmedString = string.trim();
-    return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);
-};
+/* OBJECTS */
 
-utilities.prettifyUserName = (userName) => {
-    const userNameArray = userName.split(" ");
-    let prettyUserNameArray = [];
+// Takes an object array and returns a normal array without the keys
+utilities.convertObjectArrayToArrayOfObjects = (objectArray) => {
+    let array = [];
 
-    userNameArray.map((value) => {
-        prettyUserNameArray.push(utilities.firstCharToUppercase(value));
-    });
+    for (key in objectArray) {
+        array.push(objectArray[key]);
+    }
 
-    const prettyUserName = prettyUserNameArray.join(" ");
-    return prettyUserName;
+    return array;
 }
 
-utilities.sortIdeas = (ideas, currentCategory) => {
+// Takes a key value pair and checks to see if that key value pair is present in an object array
+utilities.isKeyValuePairPresentInObjectArray = (keyValuePair, objectArray) => {
+    let targetKey;
+    let targetValue;
 
-    // Prioritise our ideas in order of variables below
-    let noPriority = [];
-    let highPriority = [];
-    let mediumPriority = [];
-    let lowPriority = [];
-    let allIdeas = [];
-
-    ideas.map((value) => {
-        if (value.priority === 'High') {
-            highPriority.push(value);
-        }
-        else if (value.priority === 'Medium') {
-            mediumPriority.push(value);
-        }
-        else if (value.priority === 'Low') {
-            lowPriority.push(value);
-        }
-        else {
-            noPriority.push(value);
-        }
-    });
-
-    noPriority.map((value) => {
-        allIdeas.push(value);
-    });
-
-    highPriority.map((value) => {
-        allIdeas.push(value);
-    });
-
-    mediumPriority.map((value) => {
-        allIdeas.push(value);
-    });
-
-    lowPriority.map((value) => {
-        allIdeas.push(value);
-    });
-
-    // First filter all ideas to return the ideas that match the current category (and increment counter)
-    let currentCategoryIdeas = [];
-
-    if (currentCategory === 'All Categories') {
-        currentCategoryIdeas = allIdeas;
+    for (key in keyValuePair) {
+        targetKey = key;
+        targetValue = keyValuePair[targetKey];
     }
+
+    let isKeyValuePairPresent;
+
+    for (key in objectArray) {
+        if (objectArray[key][targetKey] === targetValue) {
+            isKeyValuePairPresent = true;
+        }
+    }
+
+    return isKeyValuePairPresent;
+}
+
+// Takes a new object, creates a unique id and pushes it to an object array
+utilities.pushObjectToObjectArray = (object, objectArray) => {
+    let newObject = {};
+    let newObjectArray;
+
+    const uid = object.uid;
+    newObject[uid] = object;
+
+    if (objectArray) {
+        newObjectArray = {...objectArray, ...newObject};
+    }
+
+    // If the object array was empty/null
     else {
-        allIdeas.map((value, index) => {
-            if (value.category === currentCategory) {
-                currentCategoryIdeas.push(value);
+        newObjectArray = newObject;
+    }
+
+    return newObjectArray;
+}
+
+// Removes an object from an object array that matches the uid/key, value or key value pair (if present)
+utilities.deleteObjectFromObjectArray = (uid, objectArray) => {
+    let newObjectArray = {};
+
+    for (key in objectArray) {
+        if (key !== uid) {
+            newObjectArray[key] = objectArray[key];
+        }
+    }
+
+    return newObjectArray;
+}
+
+// Updates an object array's object at a given uid
+utilities.updateObjectInObjectArray = (uid, newObject, objectArray) => {
+    let newObjectArray = objectArray;
+
+    newObjectArray[uid] = newObject;
+
+    return newObjectArray;
+}
+
+// Returns a new object array filtered by a key value pair
+utilities.filterObjectArrayByKeyValuePair = (keyValuePair, objectArray) => {
+    let targetKey;
+    let targetValue;
+    let newObjectArray = {};
+
+    for (key in keyValuePair) {
+        targetKey = key;
+        targetValue = keyValuePair[targetKey];
+    }
+
+    for (key in objectArray) {
+        if (objectArray[key][targetKey] === targetValue) {
+            newObjectArray[key] = objectArray[key];
+        }
+    }
+
+    return newObjectArray;
+}
+
+// Sorts an object array on key name and array of values where the first value in the array will be at the top of the object array
+utilities.sortObjectArrayByKeyAndValues = (objectArray, targetKey, values) => {
+    let newObjectArray = {};
+
+    for (let i = 0; i < values.length; i++) {
+        for (key in objectArray) {
+            for (subKey in objectArray[key]) {
+                if (subKey === targetKey && objectArray[key][targetKey] === values[i]) {
+                    newObjectArray[key] = objectArray[key];
+                }
             }
-        });
-    }
-
-    return currentCategoryIdeas;
-}
-
-utilities.createNewIdea = (newIdeaTitle, newIdeaDescription, newIdeaCategory, newIdeaPriority) => {
-    const title = utilities.firstCharToUppercase(newIdeaTitle);
-    let description;
-
-    if (newIdeaDescription) {
-        description = utilities.firstCharToUppercase(newIdeaDescription);
-    }
-
-    return {
-        title,
-        description,
-        category: newIdeaCategory,
-        priority: newIdeaPriority
-    }
-}
-
-utilities.isIdeaTitlePresent = (newIdeaTitle, ideas) => {
-    let ideaTitlePresent = false;
-
-    for (let i = 0; i < ideas.length; i++) {
-
-        if (ideas[i].title === newIdeaTitle) {
-            ideaTitlePresent = true;
-            break;
         }
     }
 
-    return ideaTitlePresent;
+    return newObjectArray;
 }
 
-utilities.addNewIdea = (newIdea, ideas) => {
-    let newIdeas = ideas;
+utilities.getLengthOfObject = (object) => {
+    let counter = 0;
 
-    if (newIdeas) {
-        const ideaTitlePresent = utilities.isIdeaTitlePresent(newIdea.title, ideas);
-
-        if (ideaTitlePresent) {
-            newIdeas = null;
-        }
-        else {
-            newIdeas.unshift(newIdea);
-        }
+    for (key in object) {
+        counter++;
     }
 
-    // If this is the user's first idea, create a new array containing the idea
-    else {
-        newIdeas = [newIdea];
-    }
-
-    return newIdeas;
-}
-
-utilities.editIdea = (editedIdea, ideas, ideaTitle) => {
-    let newIdeas = ideas;
-
-    for (let i = 0; i < newIdeas.length; i++) {
-
-        if (newIdeas[i].title === ideaTitle) {
-            const ideaTitlePresent = utilities.isIdeaTitlePresent(editedIdea.title, ideas);
-
-            if (ideaTitlePresent) {
-                newIdeas = null;
-            }
-            else {
-                newIdeas[i] = editedIdea;
-            }
-
-            break;
-        }
-    }
-
-    return newIdeas;
-}
-
-utilities.deleteIdea = (idea, ideas) => {
-    let index;
-    let newIdeas = ideas;
-        
-    for (let i = 0; i < ideas.length; i++) {
-        if (ideas[i].title === idea.title) {
-            index = i;
-            break;
-        }
-    } 
-
-    newIdeas.splice(index, 1);
-    return newIdeas;
-}
-
-utilities.isCategoryPresent = (newCategory, categories) => {
-    let categoryPresent = false;
-
-    for (let i = 0; i < categories.length; i++) {
-
-        if (categories[i] === newCategory) {
-            categoryPresent = true;
-            break;
-        }
-    }
-
-    return categoryPresent;
-}
-
-utilities.addCategory = (category, categories) => {
-    let newCategories = categories;
-    const newCategory = utilities.firstCharToUppercase(category);
-
-    if (newCategories) {
-        const categoryPresent = utilities.isCategoryPresent(newCategory, categories);
-
-        if (categoryPresent) {
-            newCategories = null;
-        }
-        else {
-            newCategories.unshift(newCategory);
-        }
-    }
-
-    // If this is the user's first category, create a new array containing the category
-    else {
-        newCategories = [newCategory];
-    }
-
-    return newCategories;
-}
-
-utilities.deleteCategory = (title, categories) => {
-    let newCategories = categories;
-
-    for (let i = 0; i < categories.length; i++) {
-        if (categories[i] === title) {
-            newCategories.splice(i, 1);
-            break;
-        }
-    }
-
-    return newCategories;
-}
+    return counter;
+};  
 
 export default utilities;

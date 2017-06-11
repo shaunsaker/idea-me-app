@@ -34,9 +34,9 @@ export class AddIdea extends React.Component {
 
   static get propTypes() {
     return {
-      ideas: React.PropTypes.array,
-      categories: React.PropTypes.array,
-      priorities: React.PropTypes.array.isRequired,
+      ideas: React.PropTypes.object,
+      categories: React.PropTypes.object,
+      priorities: React.PropTypes.object,
       uid: React.PropTypes.string,
       cloudDataSuccess: React.PropTypes.bool,
     }
@@ -45,7 +45,7 @@ export class AddIdea extends React.Component {
   componentDidUpdate() {
     if (this.props.cloudDataSuccess) {
       this.props.dispatch({
-        type: 'TOGGLE_CLOUD_DATA_SUCCESS'
+        type: 'RESET_CLOUD_DATA_SUCCESS'
       });
 
       Actions.pop();
@@ -83,19 +83,35 @@ export class AddIdea extends React.Component {
   }
 
   addNewIdea() {
-    const newIdea = utilities.createNewIdea(this.state.newIdeaTitle, this.state.newIdeaDescription, this.state.newIdeaCategory, this.state.newIdeaPriority);
-    const ideas = utilities.addNewIdea(newIdea, this.props.ideas); // will return null if idea with this title already exists
+    const newIdea = {
+      title: utilities.firstCharToUppercase(this.state.newIdeaTitle),
+      description: this.state.newIdeaDescription && utilities.firstCharToUppercase(this.state.newIdeaDescription),
+      category: this.state.newIdeaCategory,
+      priority: this.state.newIdeaPriority,
+      uid: utilities.createUID(),
+    };
 
-    console.log(ideas);
+    let isIdeaTitlePresent;
 
-    if (ideas) {
+    // if we have ideas
+    if (this.props.ideas) {
+
+      // check if the idea title is already present
+      isIdeaTitlePresent = utilities.isKeyValuePairPresentInObjectArray({ title: newIdea.title }, this.props.ideas);
+    }
+
+    if (!isIdeaTitlePresent) {
+      this.props.dispatch({
+        type: 'TOGGLE_LOADING'
+      });      
+
+      const newIdeas = utilities.pushObjectToObjectArray(newIdea, this.props.ideas);
+
       this.props.dispatch({
         type: 'saveUserData',
         node: 'ideas',
         uid: this.props.uid,
-        userData: {
-          ...ideas
-        }
+        userData: newIdeas,
       });
     }
     else {
@@ -108,6 +124,8 @@ export class AddIdea extends React.Component {
 
   render() {
     const enableContinueButton = this.state.newIdeaTitle;
+    const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
+    const priorities = utilities.convertObjectArrayToArrayOfObjects(this.props.priorities);
 
     return (
       <Page>
@@ -131,14 +149,15 @@ export class AddIdea extends React.Component {
           <DropdownButton
             displayText='Select a Category'
             currentValue={this.state.newIdeaCategory}
-            values={this.props.categories}
+            values={categories}
             handleSelect={this.selectCategory}
+            headerIconName='mode-edit'
             headerValue='Edit Categories'
             pushContent />
           <DropdownButton
             displayText='Select a Priority'
             currentValue={this.state.newIdeaPriority}
-            values={this.props.priorities}
+            values={priorities}
             handleSelect={this.selectPriority}
             pushContent />
         </InputContainer>

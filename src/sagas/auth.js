@@ -3,7 +3,6 @@ import { call, put } from 'redux-saga/effects';
 import Auth from '../auth/index';
 
 export function* getUserAuth() {
-
 	const getUserAuthResponse = yield call(Auth.getUserAuth);
 	console.log('getUserAuthResponse', getUserAuthResponse);
 

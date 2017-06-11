@@ -158,10 +158,10 @@ export default class DropdownButton extends React.Component {
         return (
             <TouchableOpacity
                 style={styles.dropdownItem}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(item) }} >
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(item.title) }} >
                 <Text
                     style={[styles.dropdownItemText, styleConstants.primaryFont]}>
-                    {item}
+                    {item.title}
                 </Text>
             </TouchableOpacity>
         );
@@ -216,7 +216,7 @@ export default class DropdownButton extends React.Component {
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
                 <View style={styles.dropdownItemsContainer}>
                     <FlatList
-                        keyExtractor={item => 'dropdown' + item}
+                        keyExtractor={item => 'dropdown' + item.title}
                         data={this.props.values}
                         renderItem={this.renderItem} 
                         ListHeaderComponent={this.props.headerValue ? () => header : null}

@@ -18,14 +18,7 @@ export class Splash extends React.Component {
     constructor(props) {
         super(props);
 
-        this.getQuote = this.getQuote.bind(this);
-
-        this.state = {
-            quote: {
-                title: null,
-                author: null,
-            }
-        }
+        this.quote = utilities.getRandomItemFromArray(this.props.quotes);
     }
 
     static get propTypes() {
@@ -56,8 +49,6 @@ export class Splash extends React.Component {
             });
         }
         else if (!this.props.authenticated) {
-            this.getQuote();
-
             this.props.dispatch({
                 type: 'getUserAuth'
             });
@@ -75,12 +66,12 @@ export class Splash extends React.Component {
 
 		// Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
 			// Wait for geolocationSuccess before doing so
-		if (this.state.quote.title && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.redirectToWelcomePage) {
+		if ((this.props.geolocationSuccess || this.props.geolocationError) && this.props.redirectToWelcomePage) {
 			Actions.welcome();
 		}
 
 		// If we're authenticated and we have location and have not yet loaded data, load/save data to db
-		else if (this.state.quote.title && this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
+		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
 			this.props.dispatch({
 				type: 'loadUserData',
                 uid: this.props.uid,
@@ -88,21 +79,13 @@ export class Splash extends React.Component {
 		}
 
 		// If we're authenticated, we have geolocation and we have the userData, redirect to the home page
-		else if (this.state.quote.title && this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.cloudDataSuccess) {
+		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_CLOUD_DATA_SUCCESS'
             }); 
 
 			Actions.home(); 
 		}
-    }
-
-    getQuote() {
-        const randomQuote = utilities.getRandomItemFromArray(this.props.quotes);
-
-        this.setState({
-            quote: randomQuote
-        }); 
     }
 
     render() {
@@ -121,9 +104,9 @@ export class Splash extends React.Component {
                 <View style={{position: 'absolute', bottom: 0}}>
                     <InfoBlock
                         fullWidth
-                        title={this.state.quote.title}
+                        title={this.quote.title}
                         titleColor={styleConstants.white}
-                        subtitle={this.state.quote.author}
+                        subtitle={this.quote.author}
                         subtitleColor={styleConstants.lightGrey} />
                 </View>
 
@@ -139,9 +122,9 @@ function mapStateToProps(state) {
         quotes: state.main.appData.quotes,
 
         authenticated: state.main.auth.authenticated,
-        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         geolocationSuccess: state.main.geolocation.geolocationSuccess,
         geolocationError: state.main.geolocation.geolocationError,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         redirectToWelcomePage: state.main.auth.redirectToWelcomePage,
         uid: state.main.auth.uid,
     };

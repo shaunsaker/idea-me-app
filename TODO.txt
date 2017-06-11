@@ -1,28 +1,16 @@
 TODOS
 
 GENERAL
-    INTERNET    Edit Location was refactored (itemList has header?)
-
-    Save User/Load User (rework this flow)
-        DONT USE ARRAYS
-        Reset cloudDataSuccess after use
-        Always pass uid in
-        Empty State
-        Use nodes to save specific data, ie. 'profile' will save to the profile node of the user's db
-
-    Splash quotes may not be working as expected TEST
     Facebook/Google Sign In
     Custom icon pack (use icoMoon exclusively)
-    Logo icon size too small
-
+        Icon sizes not right
     Second header for home page (or maybe tie into Header?)
         Search icon expands into search bar
         Categories menu
-
     Animators as component wrappers
     StatusBar should be light grey
-    Grab a quote in componentWillMount
-
+    Priority dropdown in AddIdea should scroll page to bottom
+    Inputs should show that the input was valid
     UI for notes
 
 PAGES

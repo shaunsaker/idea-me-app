@@ -65,7 +65,7 @@ export default class Menu extends React.Component {
         return (
             <TouchableOpacity
                 style={styles.menuItemContainer}
-                onPress={() => { this.toggleMenu(); this.props.handleSelect(item) }} >
+                onPress={() => this.props.handleSelect(item) } >
                 <Text
                     style={[styles.menuItemText, styleConstants.primaryFont]}>
                     {item}

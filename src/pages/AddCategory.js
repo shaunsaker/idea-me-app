@@ -11,6 +11,7 @@ import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Growl from '../components/Growl';
+import Loader from '../components/Loader';
 
 export class AddCategory extends React.Component {
   constructor(props) {
@@ -26,9 +27,20 @@ export class AddCategory extends React.Component {
 
   static get propTypes() {
     return {
-      categories: React.PropTypes.array,
+      categories: React.PropTypes.object,
       uid: React.PropTypes.string,
+      cloudDataSuccess: React.PropTypes.bool,
     };
+  }
+
+  componentDidUpdate() {
+    if (this.props.cloudDataSuccess) {
+      this.props.dispatch({
+        type: 'RESET_CLOUD_DATA_SUCCESS',
+      });
+
+      Actions.pop();
+    }
   }
 
   updateNewCategory(value) {
@@ -38,26 +50,37 @@ export class AddCategory extends React.Component {
   }
 
   addNewCategory() {
-    const newCategories = utilities.addCategory(this.state.newCategory, this.props.categories);
+    const newCategory = {
+      title: utilities.prettifyString(this.state.newCategory),
+      uid: utilities.createUID(),
+    };
+    let isCategoryPresent;
 
-    if (newCategories) {
+    // if we have categories
+    if (this.props.categories) {
+
+      // check if the category title is already present
+      isCategoryPresent = utilities.isKeyValuePairPresentInObjectArray({title: newCategory.title}, this.props.categories);
+    }
+
+    if (!isCategoryPresent) {
       this.props.dispatch({
-        type: 'UPDATE_USER_CATEGORIES',
-        categories: newCategories,
+        type: 'TOGGLE_LOADING'
       });
+      
+      const newCategories = utilities.pushObjectToObjectArray(newCategory, this.props.categories);
 
-      // this.props.dispatch({
-      //   type: 'saveUserCategories',
-      //   categories,
-      //   uid: this.props.uid
-      // });
-
-      Actions.pop();
+      this.props.dispatch({
+        type: 'saveUserData',
+        node: 'categories',
+        uid: this.props.uid,
+        userData: newCategories,
+      });
     }
     else {
       this.props.dispatch({
         type: 'USER_ERROR',
-        message: 'This category already exists'
+        message: 'A category with this name already exists'
       });
     }
   }
@@ -90,6 +113,9 @@ export class AddCategory extends React.Component {
 
         <Growl />
 
+        <Loader
+          position='bottom' />
+
       </Page >
     );
   }
@@ -99,6 +125,7 @@ function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
     uid: state.main.auth.uid,
+    cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
   });
 }
 

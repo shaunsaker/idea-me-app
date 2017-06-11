@@ -88,7 +88,7 @@ export default class ItemList extends React.Component {
                 onPress={() => this.props.handleItemPress(item)}
                 style={styles.listItem}>
                 <View style={styles.listItemTextContainer}>
-                    <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item}</Text>
+                    <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item.title}</Text>
                 </View>
                 {icon}
             </TouchableOpacity>
@@ -96,7 +96,7 @@ export default class ItemList extends React.Component {
             <View
                 style={styles.listItem}>
                 <View style={styles.listItemTextContainer}>
-                    <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item}</Text>
+                    <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item.title}</Text>
                 </View>
                 {icon}
             </View>
@@ -107,7 +107,7 @@ export default class ItemList extends React.Component {
     render() {
         return (
             <FlatList
-                keyExtractor={item => 'list' + item}
+                keyExtractor={item => 'list' + item.title}
                 data={this.props.items}
                 renderItem={this.renderItem}
                 style={styles.listWrapper}

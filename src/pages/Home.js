@@ -30,25 +30,36 @@ export class Home extends React.Component {
     this.editIdea = this.editIdea.bind(this);
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
 
     this.state = {
       showModal: false,
       modalTitle: null,
+      modalUID: null,
     }
   }
 
   static get propTypes() {
     return {
-      ideas: React.PropTypes.array,
+      ideas: React.PropTypes.object,
+      categories: React.PropTypes.object,
       currentCategory: React.PropTypes.string,
-      categories: React.PropTypes.array,
       uid: React.PropTypes.string,
+      cloudDataSuccess: React.PropTypes.bool,
     };
+  }
+  
+  componentDidUpdate() {
+    if (this.props.cloudDataSuccess) {
+      this.props.dispatch({
+        type: 'RESET_CLOUD_DATA_SUCCESS',
+      });
+
+      Actions.pop();
+    }
   }
 
   selectCategory(value) {
-
     if (value === 'Edit Categories') {
       Actions.categories();
     }
@@ -68,7 +79,7 @@ export class Home extends React.Component {
       this.shareIdea(idea);
     }
     else {
-      this.toggleModal(idea);
+      this.toggleDeleteModal(idea);
     }
   }
 
@@ -90,41 +101,38 @@ export class Home extends React.Component {
       .catch((error) => console.log('Share error:', error.message));
   }
 
-  deleteIdea(idea) {
-    this.toggleModal();
-
-    this.props.dispatch({
-      type: 'DELETE_IDEA',
-      idea
-    });
-
-    this.saveIdeas();
-  }
-
-  toggleModal(idea) {
-
-    if (idea) {
+  toggleDeleteModal(idea) {  
+    if (idea && idea.title) {
       this.setState({
-        showModal: !this.state.showModal,
+        showModal: true,
         modalTitle: idea.title,
+        modalUID: idea.uid,
       });
     }
     else {
       this.setState({
-        showModal: !this.state.showModal,
+        showModal: false,
+        modalTitle: null,
+        modalUID: null,
       });
     }
   }
 
-  saveIdeas() {
-    // this.props.dispatch({
-    //   type: 'TOGGLE_LOADING'
-    // });
+  deleteIdea(uid) {
+    this.props.dispatch({
+      type: 'TOGGLE_LOADING'
+    });
 
-    // this.props.dispatch({
-    //   type: 'saveUserIdeas',
-    //   uid: this.props.uid,
-    // });
+    this.toggleDeleteModal();
+
+    const newIdeas = utilities.deleteObjectFromObjectArray(uid, this.props.ideas);
+
+    this.props.dispatch({
+      type: 'saveUserData',
+      node: 'ideas',
+      uid: this.props.uid,
+      userData: newIdeas,
+    });
   }
 
   renderItem = ({ item }) => {
@@ -137,36 +145,47 @@ export class Home extends React.Component {
   }
 
   render() {
-    let counter = 0;
+    let currentCount = 0;
+    const totalCount = utilities.getLengthOfObject(this.props.ideas);
+
     let ideas = <View style={{ flex: 1 }}></View>; // TODO: empty state
+    let currentCategoryIdeas;
 
     if (this.props.ideas) {
-      const currentCategoryIdeas = utilities.sortIdeas(this.props.ideas, this.props.currentCategory);
+      if (this.props.currentCategory === 'All Categories') {
+        currentCategoryIdeas = this.props.ideas;
+      }
+      else {
+        currentCategoryIdeas = utilities.filterObjectArrayByKeyValuePair({ category: this.props.currentCategory }, this.props.ideas);
+      }
 
-      // Need this for the Count component
-      counter = currentCategoryIdeas.length;
+      const sortedIdeas = utilities.sortObjectArrayByKeyAndValues(currentCategoryIdeas, 'priority', ['High', 'Medium', 'Low', null]);
+      currentCount = utilities.getLengthOfObject(sortedIdeas);
+      const sortedIdeasArray = utilities.convertObjectArrayToArrayOfObjects(sortedIdeas);
 
       ideas =
         <FlatList
           keyExtractor={item => 'idea' + item.title}
-          data={currentCategoryIdeas}
+          data={sortedIdeasArray}
           renderItem={this.renderItem}
           horizontal
           pagingEnabled />
     }
 
+   const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
+
     const modal = this.state.showModal ?
       <ActionModal
         title={'Are you sure you want to delete ' + this.state.modalTitle + '?'}
-        handleLeftIconPress={() => this.deleteIdea(this.state.modalTitle)}
-        handleRightIconPress={this.toggleModal} />
+        handleLeftIconPress={() => this.deleteIdea(this.state.modalUID)}
+        handleRightIconPress={this.toggleDeleteModal} />
       :
       null;
 
     const count = () =>
       <Count
-        count={counter}
-        total={this.props.ideas ? this.props.ideas.length : 0}
+        count={currentCount}
+        total={totalCount}
         unit='ideas' />;
 
     return (
@@ -175,14 +194,14 @@ export class Home extends React.Component {
 
         <Header
           textComponent={() => <Logo />}
-          textLeft 
-          rightComponent={count} 
+          textLeft
+          rightComponent={count}
           headerShadow />
 
         <DropdownButton
           displayText={null}
           currentValue={this.props.currentCategory}
-          values={this.props.categories}
+          values={categories}
           handleSelect={this.selectCategory}
           headerValue='Edit Categories'
           footerValue='All Categories' />
@@ -206,9 +225,10 @@ export class Home extends React.Component {
 function mapStateToProps(state) {
   return ({
     ideas: state.main.userData.ideas,
-    currentCategory: state.main.appData.currentCategory,
     categories: state.main.userData.categories,
+    currentCategory: state.main.appData.currentCategory,
     uid: state.main.auth.uid,
+    cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
   });
 }
 

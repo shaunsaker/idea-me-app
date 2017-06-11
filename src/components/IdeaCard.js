@@ -77,7 +77,10 @@ export default class IdeaCard extends React.Component {
         const menu = this.state.showMenu &&
             <Menu
                 values={['Edit', 'Share', 'Delete']}
-                handleSelect={(type) => this.props.handleSelect(type, this.props.idea)} />;
+                handleSelect={(type) => {
+                    this.toggleMenu(); 
+                    this.props.handleSelect(type, this.props.idea)}
+                } />;
 
         const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
         const priorityLabelText = this.props.idea.priority ? this.props.idea.priority + ' Priority' : 'Unprioritised';

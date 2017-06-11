@@ -20,6 +20,7 @@ export function* loadUserData(action) {
             yield put({
                 type: 'saveUserData',
                 uid: action.uid,
+                node: 'profile',
                 userData: action.userData,
             });
         }

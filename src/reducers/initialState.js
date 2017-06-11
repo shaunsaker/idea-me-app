@@ -13,7 +13,7 @@ const initialState = {
         authErrorMessage: null,
     },
     app: {
-        loading: true, // needs to be true on initial app load
+        loading: false, // needs to be true on initial app load
 
         errorType: null,
 		retryAction: {
@@ -38,14 +38,23 @@ const initialState = {
         geolocationError: null,
     },
     appData: {
-        quotes,
         currentCategory: 'All Categories',
-        priorities: [
-            'High',
-            'Medium',
-            'Low'
-        ],
-        suburbs,
+        quotes, // // can be an array because we are not saving this anywhere
+        suburbs, // as above
+        priorities: {
+            '0': {
+                title: 'High',
+                uid: '0',
+            },
+            '1': {
+                title: 'Medium',
+                uid: '1',
+            },
+            '2': {
+                title: 'Low',
+                uid: '2',
+            },
+        },
     },
     userData: {
         profile: {
@@ -54,8 +63,45 @@ const initialState = {
             userLocation: null,
             userPhotoUrl: null,
         },
-        categories: [],
-        ideas: [],
+
+        // object of objects { uid: { title: 'X' ...}, ...}
+        ideas: null,
+        // ideas: {
+        //     '1497182894539': {
+        //         title: 'Test1',
+        //         description: null,
+        //         category: 'Test',
+        //         priority: 'Low',
+        //         uid: '1497182894539',
+        //     },
+        //      '1497182894540': {
+        //         title: 'Test2',
+        //         description: null,
+        //         category: null,
+        //         priority: 'High',
+        //         uid: '1497182894540',
+        //     },
+        //     '1497182894541': {
+        //         title: 'Test3',
+        //         description: null,
+        //         category: 'Test',
+        //         priority: 'Medium',
+        //         uid: '1497182894541',
+        //     },
+        // },
+
+        // object of objects { uid: { title: 'X' }, ...}
+        categories: null,
+        // categories: {
+        //     '1497182894542': {
+        //         title: 'Test',
+        //         uid: '1497182894542',
+        //     },
+        //     '1497182894543': {
+        //         title: 'App',
+        //         uid: '1497182894543',
+        //     },
+        // }, 
     },
 }
 

@@ -20,52 +20,74 @@ export class Categories extends React.Component {
   constructor(props) {
     super(props);
 
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
 
     this.state = {
       showModal: false,
       modalTitle: null,
+      modalUID: null,
     }
   }
 
   static get propTypes() {
     return {
-      categories: React.PropTypes.array.isRequired,
+      categories: React.PropTypes.object,
       uid: React.PropTypes.string,
+      cloudDataSuccess: React.PropTypes.bool,
     };
   }
 
-  toggleModal(title) {
-    this.setState({
-      showModal: !this.state.showModal,
-      modalTitle: title && title,
-    });
+  componentDidUpdate() {
+    if (this.props.cloudDataSuccess) {
+      this.props.dispatch({
+        type: 'RESET_CLOUD_DATA_SUCCESS',
+      });
+    }
   }
 
-  deleteCategory(title) {
-    this.toggleModal();
+  toggleDeleteModal(category) {
+    if (category && category.title) {
+      this.setState({
+        showModal: true,
+        modalTitle: category.title,
+        modalUID: category.uid,
+      });
+    }
+    else {
+      this.setState({
+        showModal: false,
+        modalTitle: null,
+        modalUID: null,
+      });
+    }
+  }
 
-    const newCategories = utilities.deleteCategory(title, this.props.categories);
+  deleteCategory(uid) {
+    this.toggleDeleteModal();
+
+    const newCategories = utilities.deleteObjectFromObjectArray(uid, this.props.categories);
 
     this.props.dispatch({
-      type: 'UPDATE_USER_CATEGORIES',
-      categories: newCategories
+      type: 'TOGGLE_LOADING'
     });
 
-    // this.props.dispatch({
-    //   type: 'saveUserCategories',
-    //   categories: this.props.categories,
-    //   uid: this.props.uid
-    // });
+    this.props.dispatch({
+      type: 'saveUserData',
+      node: 'categories',
+      uid: this.props.uid,
+      userData: newCategories,
+    });
   }
 
   render() {
+    const categoriesArray = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
+
     const modal = this.state.showModal ?
       <ActionModal
         title={'Are you sure you want to delete ' + this.state.modalTitle + '?'}
-        handleLeftIconPress={() => this.deleteCategory(this.state.modalTitle)}
-        handleRightIconPress={this.toggleModal} />
+        handleLeftIconPress={() => this.deleteCategory(this.state.modalUID)}
+        handleRightIconPress={this.toggleDeleteModal} />
       :
       null;
 
@@ -80,9 +102,9 @@ export class Categories extends React.Component {
           headerShadow />
 
         <ItemList
-          items={this.props.categories}
+          items={categoriesArray}
           deleteIcon
-          handleIconPress={this.toggleModal} />
+          handleIconPress={this.toggleDeleteModal} />
 
         <Button
           iconName='add'
@@ -106,6 +128,7 @@ function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
     uid: state.main.auth.uid,
+    cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
   });
 }
 
