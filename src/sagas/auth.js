@@ -10,7 +10,7 @@ export function* getUserAuth() {
 		yield put({
 			type: 'SIGN_IN_USER',
 			uid: getUserAuthResponse.message.user.uid,
-			// TODO: how to check if user is anonymous? Check the response
+			anonymous: getUserAuthResponse.message.user.anonymous,
 		});
 	}
 	else {

@@ -8,9 +8,12 @@ export function* uploadUserPhoto(action) {
 
 	if (uploadUserPhotoResponse.success) {
 		yield put({
-			type: 'saveUserPhoto',
+			type: 'saveUserData',
 			uid: uploadUserPhotoResponse.message.uid,
-			userPhotoUrl: uploadUserPhotoResponse.message.photoUrl
+			node: 'profile',
+			userData: {
+				userPhotoUrl: uploadUserPhotoResponse.message.userPhotoUrl
+			}
 		});
 	}
 	else {

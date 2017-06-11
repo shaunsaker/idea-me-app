@@ -19,7 +19,6 @@ export class ForgotPassword extends React.Component {
 
         this.updateUserEmail = this.updateUserEmail.bind(this);
         this.sendPasswordResetEmail = this.sendPasswordResetEmail.bind(this);
-        this.resetError = this.resetError.bind(this);
     }
 
     static get propTypes() {
@@ -37,28 +36,14 @@ export class ForgotPassword extends React.Component {
     }
 
     sendPasswordResetEmail() {
-        if (this.props.email) {
-            this.props.dispatch({
-                type: 'TOGGLE_LOADING'
-            });
+		this.props.dispatch({
+			type: 'TOGGLE_LOADING'
+		});
 
-            this.props.dispatch({
-                type: 'sendPasswordResetEmail',
-                email: this.props.email
-            });
-        }
-        else {
-            this.props.dispatch({
-                type: 'USER_ERROR',
-                message: 'You forgot to enter your email'
-            });
-        }
-    }
-
-    resetError() {
-        this.props.dispatch({
-            type: 'RESET_' + this.props.errorType + '_ERROR'
-        });
+		this.props.dispatch({
+			type: 'sendPasswordResetEmail',
+			email: this.props.email
+		});
     }
 
     render() {

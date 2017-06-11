@@ -24,12 +24,11 @@ export class SignInWithEmail extends React.Component {
 
     static get propTypes() {
         return {
+            authenticated: React.PropTypes.bool,
+            cloudDataSuccess: React.PropTypes.bool,
             uid: React.PropTypes.string,
             userEmail: React.PropTypes.string,
             userPassword: React.PropTypes.string,
-            authenticated: React.PropTypes.bool,
-            cloudDataSuccess: React.PropTypes.bool,
-            geolocationSuccess: React.PropTypes.bool,
             currentLocation: React.PropTypes.string,
         };
     }
@@ -144,11 +143,11 @@ export class SignInWithEmail extends React.Component {
 
 function mapStateToProps(state) {
     return ({
+        authenticated: state.main.auth.authenticated,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         uid: state.main.auth.uid,
         userEmail: state.main.userData.profile.userEmail,
         userPassword: state.main.auth.userPassword,
-        authenticated: state.main.auth.authenticated,
-        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         currentLocation: state.main.geolocation.currentLocation,
     });
 }
