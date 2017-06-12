@@ -114,6 +114,7 @@ export class EditIdea extends React.Component {
             });
 
             const newIdeas = utilities.updateObjectInObjectArray(this.props.initialIdeaUID, editedIdea, this.props.ideas);
+            console.log(newIdeas);
 
             this.props.dispatch({
               type: 'saveUserData',

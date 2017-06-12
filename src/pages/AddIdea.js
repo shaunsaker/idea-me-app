@@ -106,6 +106,7 @@ export class AddIdea extends React.Component {
       });      
 
       const newIdeas = utilities.pushObjectToObjectArray(newIdea, this.props.ideas);
+      console.log(newIdeas);
 
       this.props.dispatch({
         type: 'saveUserData',

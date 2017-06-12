@@ -70,7 +70,18 @@ export default TabBar = (props) => {
 						name='home'
 						style={[styles.icon, { color: props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white }]} />
 				</View>
-				<Text style={[styles.text, { color: props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white }, styleConstants.secondaryFont]}>Home</Text>
+				<Text style={[styles.text, { color: props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Home</Text>
+			</TouchableOpacity>
+
+			<TouchableOpacity
+				onPress={() => Actions.addIdea()}
+				style={styles.tabContainer}>
+				<View style={styles.iconContainer}>
+					<Icon
+						name='add'
+						style={[styles.icon, { color: props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white }]} />
+				</View>
+				<Text style={[styles.text, { color: props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Add Idea</Text>
 			</TouchableOpacity>
 
 			<TouchableOpacity
@@ -83,7 +94,7 @@ export default TabBar = (props) => {
 
 					{highlightProfileTab}
 				</View>
-				<Text style={[styles.text, { color: props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white }, styleConstants.secondaryFont]}>Profile</Text>
+				<Text style={[styles.text, { color: props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Profile</Text>
 			</TouchableOpacity>
 		</View>
 	);

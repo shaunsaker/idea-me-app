@@ -66,11 +66,12 @@ export class Categories extends React.Component {
   deleteCategory(uid) {
     this.toggleDeleteModal();
 
-    const newCategories = utilities.deleteObjectFromObjectArray(uid, this.props.categories);
-
     this.props.dispatch({
       type: 'TOGGLE_LOADING'
     });
+
+    const newCategories = utilities.deleteObjectFromObjectArray(uid, this.props.categories);
+    console.log(newCategories);
 
     this.props.dispatch({
       type: 'saveUserData',

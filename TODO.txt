@@ -1,6 +1,15 @@
 TODOS
 
 GENERAL
+    When a category is deleted, all ideas with that category should be modified
+    Delete does not work with firebase update
+    Input did not grow in height with multiline text
+    After save, saw remnants of the loader on the home page
+    All categories not showing null categories
+    Need some sort of success flag from offline save (it works but it's not returning success)
+
+    Move reducers cloneObject to utilities
+    Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
     Facebook/Google Sign In
     Custom icon pack (use icoMoon exclusively)
         Icon sizes not right
