@@ -203,15 +203,25 @@ utilities.filterObjectArrayByKeyValuePair = (keyValuePair, objectArray) => {
 // Sorts an object array on key name and array of values where the first value in the array will be at the top of the object array
 utilities.sortObjectArrayByKeyAndValues = (objectArray, targetKey, values) => {
     let newObjectArray = {};
+    let lastSubObjectArray = {};
 
     for (let i = 0; i < values.length; i++) {
         for (key in objectArray) {
-            for (subKey in objectArray[key]) {
-                if (subKey === targetKey && objectArray[key][targetKey] === values[i]) {
-                    newObjectArray[key] = objectArray[key];
+            if (objectArray[key].hasOwnProperty(targetKey)) {
+                for (subKey in objectArray[key]) {
+                    if (subKey === targetKey && objectArray[key][targetKey] === values[i]) {
+                        newObjectArray[key] = objectArray[key];
+                    }
                 }
             }
+            else {
+                lastSubObjectArray[key] = objectArray[key];
+            }
         }
+    }
+
+    if (lastSubObjectArray) {
+        newObjectArray = {...newObjectArray, ...lastSubObjectArray};
     }
 
     return newObjectArray;

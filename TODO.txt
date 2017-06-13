@@ -1,6 +1,7 @@
 TODOS
 
-    All categories not showing null categories
+    Sometimes dropdown press won't dropdown
+    On add/edit idea (scroll to beginning on home page)
     Deleting category pops to previous page (should not happen)
     If category deleted, selected category should change to All on Home page
     Input did not grow in height with multiline text
