@@ -8,6 +8,7 @@ TODOS
     Move reducers cloneObject to utilities
     Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
     Facebook/Google Sign In
+    Dont display anonymous log in modal
     Page removes padding on small devices
         Other responsive fixes
     On app load, if app is offline, don't display loader

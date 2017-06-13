@@ -33,6 +33,7 @@ export class Categories extends React.Component {
   static get propTypes() {
     return {
       categories: React.PropTypes.object,
+      ideas: React.PropTypes.object,
       uid: React.PropTypes.string,
       cloudDataSuccess: React.PropTypes.bool,
     };
@@ -71,13 +72,24 @@ export class Categories extends React.Component {
     });
 
     const newCategories = utilities.deleteObjectFromObjectArray(uid, this.props.categories);
+
+    const targetCategory = this.props.categories[uid].title;
+    const newIdeas = utilities.removeValueOnKeyValuePairFromObjectArray({'category': targetCategory}, this.props.ideas);
     console.log(newCategories);
+    console.log(newIdeas);
 
     this.props.dispatch({
       type: 'saveUserData',
       node: 'categories',
       uid: this.props.uid,
       userData: newCategories,
+    });
+
+    this.props.dispatch({
+      type: 'saveUserData',
+      node: 'ideas',
+      uid: this.props.uid,
+      userData: newIdeas,
     });
   }
 
@@ -128,6 +140,7 @@ export class Categories extends React.Component {
 function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
+    ideas: state.main.userData.ideas,
     uid: state.main.auth.uid,
     cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
   });

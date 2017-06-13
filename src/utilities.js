@@ -113,6 +113,30 @@ utilities.deleteObjectFromObjectArray = (uid, objectArray) => {
     return newObjectArray;
 }
 
+// Removes values of a key from an object array
+utilities.removeValueOnKeyValuePairFromObjectArray = (keyValuePair, objectArray) => {
+    let targetKey;
+    let targetValue;
+    let newObjectArray = objectArray;
+
+    for (pairKey in keyValuePair) {
+        targetKey = pairKey;
+        targetValue = keyValuePair[targetKey];
+    }
+
+    console.log(targetKey, targetValue)
+
+    for (arrayKey in newObjectArray) {
+        for (subKey in newObjectArray[arrayKey]) {
+            if (subKey === targetKey && newObjectArray[arrayKey][targetKey] === targetValue) {
+                newObjectArray[arrayKey][targetKey] = null;
+            }
+        }
+    }
+
+    return newObjectArray;
+}
+
 // Updates an object array's object at a given uid
 utilities.updateObjectInObjectArray = (uid, newObject, objectArray) => {
     let newObjectArray = objectArray;
