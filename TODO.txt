@@ -1,63 +1,32 @@
 TODOS
 
-GENERAL
     When a category is deleted, all ideas with that category should be modified
     Delete does not work with firebase update
     Input did not grow in height with multiline text
     After save, saw remnants of the loader on the home page
     All categories not showing null categories
-    Need some sort of success flag from offline save (it works but it's not returning success)
-
     Move reducers cloneObject to utilities
     Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
     Facebook/Google Sign In
+    Page removes padding on small devices
+        Other responsive fixes
+    On app load, if app is offline, don't display loader
+    Signout loading false
+    Item list header as header of item list
+        Incorrect Value
     Custom icon pack (use icoMoon exclusively)
         Icon sizes not right
+        Remove bin and share icons      
     Second header for home page (or maybe tie into Header?)
         Search icon expands into search bar
         Categories menu
+        List and Card view options (card is default)
     Animators as component wrappers
-    StatusBar should be light grey
     Priority dropdown in AddIdea should scroll page to bottom
-    Inputs should show that the input was valid
-    UI for notes
-
-PAGES
-    Splash
-    Welcome
-        Facebook login not working
-    SignInWithEmail
-    ForgotPassword
-    SignInOptions
-        Facebook login not working
-        Google signin not setup
-    Ideas
-        Save ideas on delete
-    Add Idea
-        Save ideas on continue
-    Edit Idea
-        Save ideas on continue
-    Categories
-        Save categories on delete
-    Add Category
-        Save categories on continue
-    Profile Page
-    Edit Profile Page
-        Saving photo to db not working (permission denied)
-        Save userName, email and location on continue
-    Edit Location Page
-        Save user location
-
-    About App
-        All
-    Settings
-        All   
-    Load quotes from api/Push update functionality
-    Load suburbs from api/Use a geo service
-
-    Remove bin and share icons        
-    Prepopulate idea on signup
-    Profile icon highlighted on signup (indicate action required, ie. complete your profile)
+    Inputs should show that the input was valid (label stays secondary color)
+    App Icons
+    Animate menu height
+    Random item from array should be length - 1
     Test all errors
     Optimise code
         Remove unnecessary
@@ -70,31 +39,24 @@ PAGES
         Check reducers
         User errors should contain resets
     Empty state
+        Prepopulate idea on signup
     Update suburbs or use a geo-service
-    Save user data on sign up
-    SAVE ALL DATA, THEN UPDATE THE STORE
     Sound when idea added
     Ideas
         Add notes to ideas (direct button on card)
         + Sketches
         + Voice notes
         + Convert Voice Note to Text
-    Settings
-        List view ideas in home page as option
-    Bypass loadUserData initially?
+        + Link
     First time use Tooltips showing what to do next
     Email after signup detailing what app does and howtos
     Add analytics
-    Various Android zIndex issues to be fixed in RN 0.45.0
-        Workaround by not using zIndex
     Announcement page for when I need to make some sort of announcement
         FIRST THINK OF TYPES OF ANNOUNCEMENTS
         Based on api prop
+    App renaming
 
 IOS
     Integrate react-native-fbsdk on iOS
     Integrate react-native-google-signin on iOS
-
-FINALITIES
-    Renaming
-    LAUNCH!
+    Testing!
