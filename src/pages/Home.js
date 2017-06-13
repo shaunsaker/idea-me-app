@@ -51,11 +51,16 @@ export class Home extends React.Component {
   
   componentDidUpdate() {
     if (this.props.cloudDataSuccess) {
+
       this.props.dispatch({
         type: 'RESET_CLOUD_DATA_SUCCESS',
       });
 
-      Actions.pop();
+      // Scroll to beginning
+      this.refs.ideasList.scrollToOffset({x: 0, y: 0, animated: false});
+
+      // BUG: AddIdea does not pop without this
+      Actions.pop(); 
     }
   }
 
@@ -165,6 +170,7 @@ export class Home extends React.Component {
 
       ideas =
         <FlatList
+          ref='ideasList'
           keyExtractor={item => 'idea' + item.title}
           data={sortedIdeasArray}
           renderItem={this.renderItem}

@@ -1,12 +1,12 @@
 TODOS
 
-    Sometimes dropdown press won't dropdown
-    On add/edit idea (scroll to beginning on home page)
+    AddIdea does not pop without pop in home page
     Deleting category pops to previous page (should not happen)
     If category deleted, selected category should change to All on Home page
     Input did not grow in height with multiline text
     After save, saw remnants of the loader on the home page
     Move reducers cloneObject to utilities
+    If !firstTimeUser, get suburb location on editLocation page
     Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
     Facebook/Google Sign In
     Dont display anonymous log in modal
