@@ -69,7 +69,6 @@ export class AddCategory extends React.Component {
       });
       
       const newCategories = utilities.pushObjectToObjectArray(newCategory, this.props.categories);
-      console.log(newCategories);
 
       this.props.dispatch({
         type: 'saveUserData',
