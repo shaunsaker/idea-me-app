@@ -103,7 +103,7 @@ export class EditIdea extends React.Component {
         };
 
         let isIdeaTitlePresent;
-        const remainingIdeas = utilities.deleteObjectFromObjectArray(this.props.initialIdeaUID, this.props.ideas);
+        const remainingIdeas = utilities.removeObjectFromObjectArray(this.props.initialIdeaUID, this.props.ideas);
 
         // check if the new idea title is already present (but exclude our current idea)
         isIdeaTitlePresent = utilities.isKeyValuePairPresentInObjectArray({ title: editedIdea.title }, remainingIdeas);

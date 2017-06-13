@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 
+import utilities from '../utilities';
 import CloudData from '../cloudData/index';
 
 export function* loadUserData(action) {
@@ -51,7 +52,7 @@ export function* saveUserData(action) {
             yield put({
                 type: 'UPDATE_USER_DATA',
                 node: action.node,
-                userData: action.userData,
+                userData: utilities.findNullKeysAndRemoveFromObjectArray(action.userData), // we delete data by setting key's value to null (we need to remove this data before it gets to the store)
             });
         }
 

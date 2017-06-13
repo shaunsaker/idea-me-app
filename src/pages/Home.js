@@ -125,7 +125,8 @@ export class Home extends React.Component {
 
     this.toggleDeleteModal();
 
-    const newIdeas = utilities.deleteObjectFromObjectArray(uid, this.props.ideas);
+    const newIdeas = utilities.setKeysValueToNull(uid, this.props.ideas);
+    console.log(newIdeas);
 
     this.props.dispatch({
       type: 'saveUserData',

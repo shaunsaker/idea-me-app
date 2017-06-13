@@ -196,7 +196,7 @@ export default function (state = initialState, action) {
         /* USER DATA */
         case 'UPDATE_USER_DATA':
 			new_state = cloneObject(state);
-            
+           
             if (action.node) {
                 new_state.userData[action.node] = action.userData;
             }

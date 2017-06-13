@@ -1,9 +1,10 @@
 TODOS
 
-    Delete does not work with firebase update
+    All categories not showing null categories
+    Deleting category pops to previous page (should not happen)
+    If category deleted, selected category should change to All on Home page
     Input did not grow in height with multiline text
     After save, saw remnants of the loader on the home page
-    All categories not showing null categories
     Move reducers cloneObject to utilities
     Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
     Facebook/Google Sign In

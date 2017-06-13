@@ -41,7 +41,7 @@ utilities.filterArrayByValue = (value, array) => {
 }
 
 utilities.getRandomItemFromArray = (array) => {
-    const randomNumber = Math.round(Math.random() * array.length);
+    const randomNumber = Math.round(Math.random() * (array.length - 1));
     const randomItem = array[randomNumber];
     return randomItem;
 };
@@ -101,7 +101,7 @@ utilities.pushObjectToObjectArray = (object, objectArray) => {
 }
 
 // Removes an object from an object array that matches the uid/key, value or key value pair (if present)
-utilities.deleteObjectFromObjectArray = (uid, objectArray) => {
+utilities.removeObjectFromObjectArray = (uid, objectArray) => {
     let newObjectArray = {};
 
     for (key in objectArray) {
@@ -113,24 +113,58 @@ utilities.deleteObjectFromObjectArray = (uid, objectArray) => {
     return newObjectArray;
 }
 
-// Removes values of a key from an object array
-utilities.removeValueOnKeyValuePairFromObjectArray = (keyValuePair, objectArray) => {
+// Finds a key in a single tier object array and sets its value to null
+utilities.setKeysValueToNull = (targetKey, objectArray) => {
+    let newObjectArray = objectArray;
+
+    for (key in newObjectArray) {
+        if (key === targetKey) {
+            newObjectArray[key] = null;
+        }
+    }
+
+    return newObjectArray;
+}
+
+// Finds a key value pair in a two tier object array and sets the keys value to null
+utilities.findKeyValuePairAndSetKeysValueToNull = (targetKeyValuePair, objectArray) => {
     let targetKey;
     let targetValue;
     let newObjectArray = objectArray;
 
-    for (pairKey in keyValuePair) {
+    for (pairKey in targetKeyValuePair) {
         targetKey = pairKey;
-        targetValue = keyValuePair[targetKey];
+        targetValue = targetKeyValuePair[pairKey];
     }
 
-    console.log(targetKey, targetValue)
-
-    for (arrayKey in newObjectArray) {
-        for (subKey in newObjectArray[arrayKey]) {
-            if (subKey === targetKey && newObjectArray[arrayKey][targetKey] === targetValue) {
-                newObjectArray[arrayKey][targetKey] = null;
+    for (key in newObjectArray) {
+        for (subKey in newObjectArray[key]) {
+            if (subKey === targetKey && newObjectArray[key][subKey] === targetValue) {
+                newObjectArray[key][subKey] = null;
             }
+        }
+
+    }
+
+    return newObjectArray;
+}
+
+// Finds keys with null values in a one/two tier object array and removes them
+utilities.findNullKeysAndRemoveFromObjectArray = (objectArray) => {
+    let newObjectArray = {};
+
+    for (key in objectArray) {
+        if (typeof(objectArray[key] === 'object')) { // it is not null and we can safely assume its not an array (otherwise use Array.isArray())
+            newObjectArray[key] = {};
+
+            for (subKey in objectArray[key]) {
+                if (objectArray[key][subKey] !== null) {
+                    newObjectArray[key][subKey] = objectArray[key][subKey];
+                }
+            }
+        }
+        else if (objectArray[key] !== null) {
+            newObjectArray[key] = objectArray[key];
         }
     }
 

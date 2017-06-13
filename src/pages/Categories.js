@@ -71,12 +71,9 @@ export class Categories extends React.Component {
       type: 'TOGGLE_LOADING'
     });
 
-    const newCategories = utilities.deleteObjectFromObjectArray(uid, this.props.categories);
-
     const targetCategory = this.props.categories[uid].title;
-    const newIdeas = utilities.removeValueOnKeyValuePairFromObjectArray({'category': targetCategory}, this.props.ideas);
-    console.log(newCategories);
-    console.log(newIdeas);
+    const newCategories = utilities.setKeysValueToNull(uid, this.props.categories);
+    const newIdeas = this.props.ideas && utilities.findKeyValuePairAndSetKeysValueToNull({'category': targetCategory}, this.props.ideas);
 
     this.props.dispatch({
       type: 'saveUserData',
