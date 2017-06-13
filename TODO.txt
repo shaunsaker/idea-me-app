@@ -1,6 +1,5 @@
 TODOS
 
-    When a category is deleted, all ideas with that category should be modified
     Delete does not work with firebase update
     Input did not grow in height with multiline text
     After save, saw remnants of the loader on the home page

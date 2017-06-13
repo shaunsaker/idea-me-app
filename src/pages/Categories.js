@@ -80,16 +80,13 @@ export class Categories extends React.Component {
 
     this.props.dispatch({
       type: 'saveUserData',
-      node: 'categories',
+      node: '', // no node so we can save on multiple nodes
       uid: this.props.uid,
-      userData: newCategories,
-    });
-
-    this.props.dispatch({
-      type: 'saveUserData',
-      node: 'ideas',
-      uid: this.props.uid,
-      userData: newIdeas,
+      userData: {
+        categories: newCategories,
+        ideas: newIdeas,
+        profile: this.props.profile, // have to attach this otherwise we will lose it in the store
+      },
     });
   }
 
@@ -141,6 +138,7 @@ function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
     ideas: state.main.userData.ideas,
+    profile: state.main.userData.profile,
     uid: state.main.auth.uid,
     cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
   });
