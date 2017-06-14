@@ -113,13 +113,13 @@ utilities.removeObjectFromObjectArray = (uid, objectArray) => {
     return newObjectArray;
 }
 
-// Finds a key in a single tier object array and sets its value to null
-utilities.setKeysValueToNull = (targetKey, objectArray) => {
-    let newObjectArray = objectArray;
+// Deletes an object from a single tier object array that matches a key
+utilities.deleteObjectFromObjectArray = (targetKey, objectArray) => {
+    let newObjectArray = {};
 
-    for (key in newObjectArray) {
-        if (key === targetKey) {
-            newObjectArray[key] = null;
+    for (key in objectArray) {
+        if (key !== targetKey) {
+            newObjectArray[key] = objectArray[key];
         }
     }
 
@@ -144,28 +144,6 @@ utilities.findKeyValuePairAndSetKeysValueToNull = (targetKeyValuePair, objectArr
             }
         }
 
-    }
-
-    return newObjectArray;
-}
-
-// Finds keys with null values in a one/two tier object array and removes them
-utilities.findNullKeysAndRemoveFromObjectArray = (objectArray) => {
-    let newObjectArray = {};
-
-    for (key in objectArray) {
-        if (typeof(objectArray[key] === 'object')) { // it is not null and we can safely assume its not an array (otherwise use Array.isArray())
-            newObjectArray[key] = {};
-
-            for (subKey in objectArray[key]) {
-                if (objectArray[key][subKey] !== null) {
-                    newObjectArray[key][subKey] = objectArray[key][subKey];
-                }
-            }
-        }
-        else if (objectArray[key] !== null) {
-            newObjectArray[key] = objectArray[key];
-        }
     }
 
     return newObjectArray;

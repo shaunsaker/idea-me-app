@@ -1,7 +1,11 @@
 TODOS
 
-    AddIdea does not pop without pop in home page
-    Deleting category pops to previous page (should not happen)
+    Button uses touchableNativeFeedback on Android
+        Ripple effect
+    Investigate faster list for Home page
+    Actions.pop()
+        AddIdea does not pop without pop in home page
+        Deleting category pops to previous page (should not happen)
     If category deleted, selected category should change to All on Home page
     Input did not grow in height with multiline text
     After save, saw remnants of the loader on the home page
@@ -57,6 +61,8 @@ TODOS
         FIRST THINK OF TYPES OF ANNOUNCEMENTS
         Based on api prop
     App renaming
+    Apply material styles
+        See material.io
 
 IOS
     Integrate react-native-fbsdk on iOS

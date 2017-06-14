@@ -72,18 +72,26 @@ export class Categories extends React.Component {
     });
 
     const targetCategory = this.props.categories[uid].title;
-    const newCategories = utilities.setKeysValueToNull(uid, this.props.categories);
+    const newCategories = utilities.deleteObjectFromObjectArray(uid, this.props.categories);
     const newIdeas = this.props.ideas && utilities.findKeyValuePairAndSetKeysValueToNull({'category': targetCategory}, this.props.ideas);
 
     this.props.dispatch({
-      type: 'saveUserData',
-      node: '', // no node so we can save on multiple nodes
+      type: 'deleteUserData',
+      node: 'categories/' + uid,
       uid: this.props.uid,
-      userData: {
-        categories: newCategories,
-        ideas: newIdeas,
-        profile: this.props.profile, // have to attach this otherwise we will lose it in the store
-      },
+      nextAction: [
+        {
+          type: 'UPDATE_USER_DATA',
+          node: 'categories',
+          userData: newCategories,
+        },
+        {
+          type: 'saveUserData',
+          node: 'ideas',
+          uid: this.props.uid,
+          userData: newIdeas,
+        }
+      ]
     });
   }
 

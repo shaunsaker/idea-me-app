@@ -49,11 +49,31 @@ export function* saveUserData(action) {
 
     if (saveUserDataResponse) {       
         if (saveUserDataResponse.success) {
-            yield put({
-                type: 'UPDATE_USER_DATA',
-                node: action.node,
-                userData: utilities.findNullKeysAndRemoveFromObjectArray(action.userData), // we delete data by setting key's value to null (we need to remove this data before it gets to the store)
-            });
+
+            // We use this to dispatch another action(s) that was attached from the page
+            if (action.nextAction) {
+                
+                // action.nextAction can be an array of actions so lets check for that, if true, yield those actions as an array with put methods attached
+                if (Array.isArray(action.nextAction)) {
+                    let actionsArray = [];
+
+                    for (let i = 0; i < action.nextAction.length; i++) {
+                        actionsArray.push(put(action.nextAction[i]));
+                    }
+
+                    yield actionsArray;
+                }
+                else {
+                    yield put(action.nextAction);
+                }
+            }
+            else {
+                yield put({
+                    type: 'UPDATE_USER_DATA',
+                    node: action.node,
+                    userData: action.userData,
+                });
+            }
         }
 
         // We must have an error
@@ -61,6 +81,56 @@ export function* saveUserData(action) {
             yield put({
                 type: 'CLOUD_DATA_ERROR',
                 message: saveUserDataResponse.message,
+                retryAction: {
+                    type: 'loadUserData',
+                    data: {
+                        userData: action.userData,
+                    },
+                },
+            });
+        }
+    }
+}
+
+export function* deleteUserData(action) {
+
+    const deleteUserDataResponse = yield call(CloudData.deleteUserData, action);
+    console.log('deleteUserDataResponse', deleteUserDataResponse);
+
+    if (deleteUserDataResponse) {       
+        if (deleteUserDataResponse.success) {
+
+            // We use this to dispatch another action(s) that was attached from the page
+            if (action.nextAction) {
+
+                // action.nextAction can be an array of actions so lets check for that, if true, yield those actions as an array with put methods attached
+                if (Array.isArray(action.nextAction)) {
+                    let actionsArray = [];
+
+                    for (let i = 0; i < action.nextAction.length; i++) {
+                        actionsArray.push(put(action.nextAction[i]));
+                    }
+
+                    yield actionsArray;
+                }
+                else {
+                    yield put(action.nextAction);
+                }
+            }
+            else {
+                yield put({
+                    type: 'UPDATE_USER_DATA',
+                    node: action.node,
+                    userData: action.userData,
+                });
+            }
+        }
+
+        // We must have an error
+        else {
+            yield put({
+                type: 'CLOUD_DATA_ERROR',
+                message: deleteUserDataResponse.message,
                 retryAction: {
                     type: 'loadUserData',
                     data: {

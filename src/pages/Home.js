@@ -130,7 +130,7 @@ export class Home extends React.Component {
 
     this.toggleDeleteModal();
 
-    const newIdeas = utilities.setKeysValueToNull(uid, this.props.ideas);
+    const newIdeas = utilities.deleteObjectFromObjectArray(uid, this.props.ideas);
 
     this.props.dispatch({
       type: 'saveUserData',

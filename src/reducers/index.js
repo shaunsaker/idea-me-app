@@ -225,23 +225,6 @@ export default function (state = initialState, action) {
             new_state.appData.currentCategory = action.value;
             return new_state;
 
-        case 'UPDATE_USER_IDEAS':
-            new_state = cloneObject(state);
-            new_state.userData.ideas = action.ideas;
-            new_state.app.loading = true;
-            return new_state;
-
-        case 'UPDATE_USER_CATEGORIES':
-            new_state = cloneObject(state);
-            new_state.userData.categories = action.categories;
-            new_state.app.loading = true;
-            return new_state;
-
-        case 'DELETE_IDEA':
-            new_state = cloneObject(state);
-            new_state.userData.ideas = utilities.deleteIdea(action.idea, new_state.userData.ideas);
-            return new_state;
-
         default:
             return state;
     }
