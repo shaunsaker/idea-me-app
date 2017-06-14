@@ -2,7 +2,6 @@ import React from "react";
 import {
     View,
     Text,
-    TouchableOpacity,
     Animated,
     StyleSheet,
     Dimensions,
@@ -115,14 +114,15 @@ export default class GrowlComponent extends React.Component {
         const iconName = this.props.success ? 'check' : 'error-outline';   
 
         const retryButton = this.props.handleRetryAction ?
-            <TouchableOpacity
+            <Touchable
                 onPress={this.props.handleRetryAction}
-                style={styles.retryButton}>
+                style={styles.retryButton}
+                androidRippleColor={styleConstants.white}>
                 <Text
                     style={[styles.retryButtonText, styleConstants.primaryFont]}>
                     RETRY
                 </Text>  
-            </TouchableOpacity>
+            </Touchable>
             :
             null;
 
@@ -143,13 +143,14 @@ export default class GrowlComponent extends React.Component {
                         {retryButton}
                     </View>
                 </View>
-                <TouchableOpacity
+                <Touchable
                     onPress={this.hideGrowl}
-                    style={styles.closeIconContainer} >
+                    style={styles.closeIconContainer} 
+                    androidRippleColor={styleConstants.primary}>
                     <Icon
                         name='close'
                         style={styles.icon} />
-                </TouchableOpacity>
+                </Touchable>
             </Animated.View>
         );
     }

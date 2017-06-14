@@ -2,13 +2,14 @@ import React from 'react';
 import {
 	View,
 	Text,
-	TouchableOpacity,
 	StyleSheet,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
 	container: {
@@ -62,31 +63,34 @@ export default TabBar = (props) => {
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity
+			<Touchable
 				onPress={() => Actions.home()}
-				style={styles.tabContainer}>
+				style={styles.tabContainer}
+				androidRippleColor={styleConstants.white}>
 				<View style={styles.iconContainer}>
 					<Icon
 						name='home'
 						style={[styles.icon, { color: props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white }]} />
 				</View>
 				<Text style={[styles.text, { color: props.currentPage === 'home' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Home</Text>
-			</TouchableOpacity>
+			</Touchable>
 
-			<TouchableOpacity
+			<Touchable
 				onPress={() => Actions.addIdea()}
-				style={styles.tabContainer}>
+				style={styles.tabContainer}
+				androidRippleColor={styleConstants.white}>
 				<View style={styles.iconContainer}>
 					<Icon
 						name='add'
 						style={[styles.icon, { color: props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white }]} />
 				</View>
 				<Text style={[styles.text, { color: props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Add Idea</Text>
-			</TouchableOpacity>
+			</Touchable>
 
-			<TouchableOpacity
+			<Touchable
 				onPress={() => Actions.profile()}
-				style={styles.tabContainer}>
+				style={styles.tabContainer}
+				androidRippleColor={styleConstants.white}>
 				<View style={styles.iconContainer}>
 					<Icon
 						name='face'
@@ -95,7 +99,7 @@ export default TabBar = (props) => {
 					{highlightProfileTab}
 				</View>
 				<Text style={[styles.text, { color: props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Profile</Text>
-			</TouchableOpacity>
+			</Touchable>
 		</View>
 	);
 };

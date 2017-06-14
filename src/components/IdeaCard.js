@@ -1,18 +1,18 @@
 import React from 'react';
 import {
     View,
-    TouchableOpacity,
     Text,
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
+import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 import InfoBlock from './InfoBlock';
 import Menu from './Menu';
 import Label from './Label';
-
-import styleConstants from '../styles/styleConstants';
 
 const window = Dimensions.get('window');
 
@@ -89,11 +89,13 @@ export default class IdeaCard extends React.Component {
             <View
                 style={styles.cardContainer} >
 
-                <TouchableOpacity 
+                <Touchable 
                     onPress={this.toggleMenu}
-                    style={styles.menuIconContainer}>
+                    style={styles.menuIconContainer}
+                    androidRippleColor={styleConstants.primary}
+                    androidRippleBorderless>
                     <Icon name='more-vert' style={styles.menuIcon} />
-                </TouchableOpacity>
+                </Touchable>
 
                 <View style={{flex: 1}}>
                     <InfoBlock

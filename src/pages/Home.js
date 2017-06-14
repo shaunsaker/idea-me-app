@@ -210,7 +210,8 @@ export class Home extends React.Component {
           values={categories}
           handleSelect={this.selectCategory}
           headerValue='Edit Categories'
-          footerValue='All Categories' />
+          footerValue='All Categories' 
+          buttonBackgroundColor={styleConstants.primary} />
 
         {ideas}
 

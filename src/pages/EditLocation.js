@@ -56,8 +56,6 @@ export class EditLocation extends React.Component {
     }
 
     render() {
-        const enableContinueButton = this.state.editUserLocation;
-
         return (
             <Page 
                 removeBottomPadding>

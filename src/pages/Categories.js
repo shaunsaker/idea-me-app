@@ -124,7 +124,7 @@ export class Categories extends React.Component {
         <Button
           iconName='add'
           text='Add New Category'
-          styleMode='primary'
+          backgroundColor={styleConstants.primary}
           handlePress={() => Actions.addCategory()} />
 
         {modal}

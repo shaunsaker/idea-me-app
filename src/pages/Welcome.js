@@ -95,11 +95,11 @@ export class Welcome extends React.Component {
                         iconName='facebook'
                         handlePress={this.signInUserWithFacebook}                             
                         text='Continue with Facebook'
-                        styleMode='transparentReversed' />
+                        backgroundColor={styleConstants.white} />
                     <Button
                         handlePress={() => Actions.signInOptions()}                           
                         text='More Options'
-                        styleMode='transparent' />
+                        backgroundColor='transparent' />
                 </View>
 
                 <Growl />

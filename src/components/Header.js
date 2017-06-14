@@ -2,7 +2,6 @@ import React from 'react';
 import {
 	View,
 	Text,
-	TouchableOpacity,
 	TextInput,
 	StatusBar,
 	StyleSheet,
@@ -10,11 +9,12 @@ import {
 	Platform
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+
 import Icon from '../styles/icons/index';
-
-import DeleteButton from './DeleteButton';
-
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
+import DeleteButton from './DeleteButton';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -119,13 +119,14 @@ export default class Header extends React.Component {
 			</View>
 			:
 			this.props.backButton ?
-				<TouchableOpacity
+				<Touchable
 					style={this.props.showInput ? {justifyContent: 'center'} : styles.leftIconContainer}
-					onPress={() => Actions.pop()} >
+					onPress={() => Actions.pop()}
+					androidRippleColor={styleConstants.white} >
 					<Icon
 						name='chevron-left'
 						style={styles.leftIcon} />
-				</TouchableOpacity>
+				</Touchable>
 				:
 				this.props.textLeft ?
 					null
@@ -141,11 +142,12 @@ export default class Header extends React.Component {
 			this.props.textComponent()
 			:
 			this.props.handleTextPress ?
-				<TouchableOpacity
+				<Touchable
 					style={[styles.textContainer, textRightStyles]}
-					onPress={this.props.handleTextPress} >
+					onPress={this.props.handleTextPress} 
+					androidRippleColor={styleConstants.white}>
 					<Text style={[styles.text, styleConstants.primaryFont, this.props.textStyle]}>{this.props.text}</Text>
-				</TouchableOpacity>
+				</Touchable>
 				:
 				this.props.showInput ?
 					null
@@ -160,22 +162,24 @@ export default class Header extends React.Component {
 			</View>
 			:
 			this.props.rightIconName ?
-				<TouchableOpacity
+				<Touchable
 					style={styles.rightIconContainer}
-					onPress={this.props.handleRightIconPress} >
+					onPress={this.props.handleRightIconPress}
+					androidRippleColor={styleConstants.white} >
 					<Icon
 						name={this.props.rightIconName}
 						style={styles.rightIcon} />
-				</TouchableOpacity>
+				</Touchable>
 				:
 				this.props.closeButton ?
-					<TouchableOpacity
+					<Touchable
 						style={styles.rightIconContainer}
-						onPress={() => Actions.pop()} >
+						onPress={() => Actions.pop()} 
+						androidRippleColor={styleConstants.white}>
 						<Icon
 							name='close'
 							style={styles.rightIcon} />
-					</TouchableOpacity>
+					</Touchable>
 					:
 					(this.props.textRight || this.props.showInput) ? 
 						null 

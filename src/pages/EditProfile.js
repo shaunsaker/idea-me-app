@@ -224,14 +224,14 @@ export class Profile extends React.Component {
                     <Button
                         iconName='edit-location'
                         text={this.props.userLocation}
-                        styleMode='transparent'
+                        backgroundColor='transparent'
                         handlePress={() => Actions.editLocation()} />
                 </InputContainer>
 
                 <Button
                     iconName='check'
                     text='Continue'
-                    styleMode='primaryReversed'
+                    backgroundColor={styleConstants.white}
                     handlePress={this.updateUserDetails}
                     disabled={!enableContinueButton} />
 

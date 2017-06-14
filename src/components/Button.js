@@ -2,13 +2,14 @@ import React from "react";
 import {
     View,
     Text,
-    TouchableOpacity,
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const window = Dimensions.get('window');
 
@@ -30,7 +31,6 @@ const styles = StyleSheet.create({
             height: 2,
             width: 0
         },
-        borderRadius: 36,
         marginTop: 16,
         alignSelf: 'center',
     },
@@ -48,27 +48,8 @@ const styles = StyleSheet.create({
 });
 
 export default Button = (props) => {
-    /* 
-        The Button component has 4 style modes
-            transparent => Transparent background with white text/icon and white border
-            transparentReversed => White background with primary text/icon and white border
-            primary => Primary colour background with white text/icon and white border
-            primaryReversed => White background with primary colour text/icon and white border
-
-            It also takes a disabled prop which creates opacity and disables any presses
-    */
-
-    const backgroundColor =
-        props.styleMode === 'transparent' ?
-            'transparent'
-            :
-            props.styleMode === 'transparentReversed' || props.styleMode === 'primaryReversed' ?
-                styleConstants.white
-                :
-                styleConstants.primary;
-
-    const textColor =
-        props.styleMode === 'transparent' || props.styleMode === 'primary' ?
+    const altColor =
+        props.backgroundColor === 'transparent' || props.backgroundColor === styleConstants.primary ?
             styleConstants.white
             :
             styleConstants.primary;       
@@ -77,29 +58,30 @@ export default Button = (props) => {
         props.iconName ?
             <Icon
                 name={props.iconName}
-                style={[styles.icon, {color: textColor}]} />
+                style={[styles.icon, {color: altColor}]} />
             :
             null;
 
     const button = props.disabled ?
         <View
-            style={[styles.button, styles.disabled, { backgroundColor }, props.style]}>
+            style={[styles.button, styles.disabled, { backgroundColor: props.backgroundColor }, props.style]}>
             {icon}
             <Text
-                style={[styles.text, { color: textColor }, styleConstants.primaryFont]}>
+                style={[styles.text, { color: altColor }, styleConstants.primaryFont]}>
                 {props.text}
             </Text>
         </View>  
         :
-        <TouchableOpacity
-            style={[styles.button, { backgroundColor }, props.style]}
-            onPress={props.handlePress} >
+        <Touchable
+            onPress={props.handlePress} 
+            style={[styles.button, { backgroundColor: props.backgroundColor }, props.style]}
+            androidRippleColor={altColor}>
             {icon}
             <Text
-                style={[styles.text, { color: textColor }, styleConstants.primaryFont]}>
+                style={[styles.text, { color: altColor }, styleConstants.primaryFont]}>
                 {props.text}
             </Text>
-        </TouchableOpacity>
+        </Touchable>
 
     return (
         <View>

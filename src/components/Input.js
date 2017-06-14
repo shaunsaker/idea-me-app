@@ -2,7 +2,6 @@ import React from "react";
 import {
     View,
     Text,
-    TouchableOpacity,
     TouchableWithoutFeedback,
     TextInput,
     StyleSheet,
@@ -14,6 +13,7 @@ import {
 import config from '../config';
 import styleConstants from '../styles/styleConstants';
 
+import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';
 
 const windowWidth = Dimensions.get('window').width;
@@ -83,13 +83,14 @@ class TogglePasswordButton extends React.Component {
 
         return (
             <Animated.View style={animatedStyles}>
-                <TouchableOpacity
+                <Touchable
                     onPress={this.props.handlePress}
-                    style={styles.togglePasswordContainer}>
+                    style={styles.togglePasswordContainer}
+                    androidRippleColor={styleConstants.white}>
                     <Text style={[styles.togglePasswordText, styleConstants.primaryFont]}>
                         {this.props.hidePassword ? 'Show' : 'Hide'}
                     </Text>
-                </TouchableOpacity>
+                </Touchable>
             </Animated.View>
         )
     }

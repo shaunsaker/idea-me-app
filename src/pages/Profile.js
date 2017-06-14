@@ -150,7 +150,7 @@ export class Profile extends React.Component {
                     <Button
                         iconName='mode-edit'
                         text='Edit Profile'
-                        styleMode='transparent'
+                        backgroundColor='transparent'
                         handlePress={() => Actions.editProfile()} />
                 </View>
 

@@ -1,12 +1,13 @@
 import React from "react";
 import {
     View,
-    TouchableOpacity,
     StyleSheet,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     deleteButton: {
@@ -26,13 +27,14 @@ const styles = StyleSheet.create({
 export default DeleteButton = (props) => {
         return (
             <View style={styles.deleteButtonContainer}>
-                <TouchableOpacity
+                <Touchable
                     onPress={props.handlePress}
-                    style={styles.deleteButton}>
+                    style={styles.deleteButton}
+                    androidRippleColor={styleConstants.primary}>
                     <Icon
                         name='close'
                         style={styles.deleteIcon} />
-                </TouchableOpacity>
+                </Touchable>
             </View>
         );
 }

@@ -2,13 +2,14 @@ import React from "react";
 import {
     View,
     Text,
-    TouchableOpacity,
     StyleSheet,
     Dimensions,
 } from "react-native";
 import Icon from '../styles/icons/index';
 
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const window = Dimensions.get('window');
 
@@ -79,20 +80,20 @@ export default ActionModal = (props) => {
                     {subtitle}
                 </View>
                 <View style={styles.buttonsContainer}>
-                    <TouchableOpacity
+                    <Touchable
                         style={styles.iconContainer}
                         onPress={props.handleLeftIconPress} >
                         <Icon
                             name='check'
                             style={[styles.icon, {color: styleConstants.danger}]} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
+                    </Touchable>
+                    <Touchable
                         style={styles.iconContainer}
                         onPress={props.handleRightIconPress} >
                         <Icon
                             name='close'
                             style={styles.icon} />
-                    </TouchableOpacity>
+                    </Touchable>
                 </View>
             </View>
         </View>

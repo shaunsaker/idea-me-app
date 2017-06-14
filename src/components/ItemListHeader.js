@@ -1,14 +1,15 @@
 import React from 'react';
 import {
     View,
-    TouchableOpacity,
     Text,
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -76,9 +77,10 @@ export default ItemListHeader = (props) => {
         </View>
         :    
         props.handlePress ?
-            <TouchableOpacity
+            <Touchable
                 onPress={() => props.handlePress(props.header)}
-                style={styles.header}>
+                style={styles.header}
+                androidRippleColor={styleConstants.white}>
                 <View style={styles.headerTextContainer}>
                     <Text style={[styles.headerTitleText, styleConstants.secondaryFont]}>{props.title}</Text>
 
@@ -88,7 +90,7 @@ export default ItemListHeader = (props) => {
 
                 {icon}
 
-            </TouchableOpacity>
+            </Touchable>
             :
             <View
                 style={styles.header}>

@@ -1,8 +1,6 @@
 import React from "react";
 import {
 	View,
-	TouchableOpacity,
-	Text,
 	WebView,
 	StyleSheet,
 	Animated,

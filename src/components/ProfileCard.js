@@ -1,18 +1,18 @@
 import React from 'react';
 import {
     View,
-    TouchableOpacity,
     Image,
     Text,
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
+import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 import InfoBlock from './InfoBlock';
 import Label from './Label';
-
-import styleConstants from '../styles/styleConstants';
 
 const window = Dimensions.get('window');
 
@@ -86,13 +86,14 @@ export default ProfileCard = (props) => {
             source={{uri: props.userPhotoUrl}}
             style={styles.profileImage} />
         :
-        <TouchableOpacity
+        <Touchable
             onPress={props.handleEditImagePress}
-            style={styles.editImageContainer}>
+            style={styles.editImageContainer}
+            androidRippleColor={styleConstants.white}>
             <Icon
                 name='photo-camera'
                 style={styles.editImageIcon} />
-        </TouchableOpacity>;
+        </Touchable>;
 
     const ideasLabel = props.numberOfIdeas ?
         <Label

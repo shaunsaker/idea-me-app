@@ -124,22 +124,22 @@ export class SignInOptions extends React.Component {
                         iconName='facebook'
                         handlePress={this.signInUserWithFacebook}                         
                         text='Continue with Facebook'
-                        styleMode='transparentReversed' />
+                        backgroundColor={styleConstants.white} />
                     <Button
                         iconName='google'
                         handlePress={this.signInUserWithGoogle} 
                         text='Continue with Google'
-                        styleMode='transparentReversed' />
+                        backgroundColor={styleConstants.white} />
                     <Button
                         iconName='email'
                         handlePress={this.signInUserWithEmail} 
                         text='Continue with Email'
-                        styleMode='transparent' />
+                        backgroundColor='transparent' />
                     <Button
                         iconName='anonymous'
                         handlePress={this.toggleModal} 
                         text='Continue Anonymously'
-                        styleMode='transparent' />
+                        backgroundColor='transparent' />
                 </View>
 
                 {modal}

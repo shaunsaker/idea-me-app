@@ -128,7 +128,7 @@ export class SignInWithEmail extends React.Component {
                     iconName='check'
                     handlePress={this.signIn}
                     text='Continue'
-                    styleMode='primaryReversed'
+                    backgroundColor={styleConstants.white}
                     disabled={!enableContinueButton} />
 
                 <Growl />

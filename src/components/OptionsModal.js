@@ -2,13 +2,14 @@ import React from "react";
 import {
     View,
     Text,
-    TouchableOpacity,
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const window = Dimensions.get('window');
 
@@ -68,25 +69,28 @@ export default OptionsModal = (props) => {
         <View style={styles.container}>
             <View style={styles.modalContainer}>
                 <View style={styles.closeIconContainer}>
-                    <TouchableOpacity
+                    <Touchable
                         onPress={props.handleClose}
-                        style={styles.closeIconButton} >
+                        style={styles.closeIconButton} 
+                        androidRippleColor={styleConstants.primary}>
                         <Icon
                             name='close'
                             style={styles.closeIcon} />
-                    </TouchableOpacity>        
+                    </Touchable>        
                 </View>
                 <View style={styles.modal}>
-                    <TouchableOpacity
+                    <Touchable
                         onPress={() => props.handleSelect(props.options[0])}
-                        style={styles.modalButton} >
+                        style={styles.modalButton} 
+                        androidRippleColor={styleConstants.primary}>
                         <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{props.options[0]}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
+                    </Touchable>
+                    <Touchable
                         onPress={() => props.handleSelect(props.options[1])}
-                        style={styles.modalButton} >
+                        style={styles.modalButton} 
+                        androidRippleColor={styleConstants.primary}>
                         <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{props.options[1]}</Text>
-                    </TouchableOpacity>
+                    </Touchable>
                 </View>
             </View>
         </View>

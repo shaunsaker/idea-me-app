@@ -2,15 +2,16 @@ import React from "react";
 import {
 	View,
 	Text,
-	TouchableOpacity,
 	StyleSheet,
 	Animated,
 	Dimensions,
 } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import config from '../config';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const window = Dimensions.get('window');
 
@@ -86,28 +87,32 @@ export default class ActionSheet extends React.Component {
 	render() {
 		return (
 			<Animated.View style={[styles.actionSheetContainer, { bottom: this.position }]}>
-				<TouchableOpacity
+				<Touchable
 					style={styles.button}
-					onPress={this.props.handleCopy}>
+					onPress={this.props.handleCopy}
+					androidRippleColor={styleConstants.primary}>
 					<Text style={[styles.buttonText, styleConstants.secondaryFont]}>Copy Link</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
+				</Touchable>
+				<Touchable
 					style={styles.button}
-					onPress={this.props.handleShare}>
+					onPress={this.props.handleShare}
+					androidRippleColor={styleConstants.primary}>
 					<Text style={[styles.buttonText, styleConstants.secondaryFont]}>Share Link</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
+				</Touchable>
+				<Touchable
 					style={styles.button}
-					onPress={this.props.handleLink}>
+					onPress={this.props.handleLink}
+					androidRippleColor={styleConstants.primary}>
 					<Text style={[styles.buttonText, styleConstants.secondaryFont]}>Open in Browser</Text>
-				</TouchableOpacity>
-				<TouchableOpacity 
+				</Touchable>
+				<Touchable 
 					style={styles.closeButton}
-					onPress={this.props.handleClose}>
+					onPress={this.props.handleClose}
+					androidRippleColor={styleConstants.primary}>
 					<Icon
 						name='close'
 						style={styles.icon} />
-				</TouchableOpacity>
+				</Touchable>
 			</Animated.View>
 		);
 	}

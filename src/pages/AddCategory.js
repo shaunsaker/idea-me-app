@@ -107,9 +107,9 @@ export class AddCategory extends React.Component {
         <Button
           iconName='check'
           text='Continue'
-          styleMode='primaryReversed'
           handlePress={this.addNewCategory}
-          disabled={!enableContinueButton} />
+          disabled={!enableContinueButton} 
+          backgroundColor={styleConstants.white}/>
 
         <Growl />
 

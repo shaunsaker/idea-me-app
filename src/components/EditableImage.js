@@ -3,12 +3,13 @@ import {
     View,
     Image,
     Text,
-    TouchableOpacity,
     StyleSheet,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     imageContainer: {
@@ -67,13 +68,14 @@ export default class EditableImage extends React.Component {
 
                 {image}
 
-                <TouchableOpacity
+                <Touchable
                     onPress={this.props.handlePress}
-                    style={styles.editImageContainer}>
+                    style={styles.editImageContainer}
+                    androidRippleColor={styleConstants.white}>
                     <Icon
                         name='photo-camera'
                         style={styles.editImageIcon} />
-                </TouchableOpacity>
+                </Touchable>
                 
             </View>
         );

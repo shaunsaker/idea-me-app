@@ -75,7 +75,7 @@ export class ForgotPassword extends React.Component {
                     iconName='check'
                     handlePress={this.sendPasswordResetEmail}
                     text='Continue'
-                    styleMode='primaryReversed' 
+                    backgroundColor={styleConstants.white}
                     disabled={!enableContinueButton} />
 
                 <Growl />

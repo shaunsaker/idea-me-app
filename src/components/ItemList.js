@@ -1,16 +1,16 @@
 import React from "react";
 import {
     View,
-    TouchableOpacity,
     FlatList,
     Text,
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
+import Touchable from './Touchable';
 import DeleteButton from '../components/DeleteButton';
 
 const windowWidth = Dimensions.get('window').width;
@@ -72,11 +72,12 @@ export default class ItemList extends React.Component {
                 handlePress={() => this.props.handleIconPress(item)} />
             :
             this.props.handleIconPress ?
-                <TouchableOpacity
+                <Touchable
                     onPress={() => this.props.handleIconPress(item)}
-                    style={styles.listItemIconContainer} >
+                    style={styles.listItemIconContainer}
+                    androidRippleColor={styleConstants.primary} >
                     <Icon name={this.props.iconName} style={styles.listItemIcon} />
-                </TouchableOpacity>
+                </Touchable>
                 :
                 <View
                     style={styles.listItemIconContainer}>
@@ -84,14 +85,15 @@ export default class ItemList extends React.Component {
                 </View>;
 
         const listItem = this.props.handleItemPress ?
-            <TouchableOpacity
+            <Touchable
                 onPress={() => this.props.handleItemPress(item)}
-                style={styles.listItem}>
+                style={styles.listItem}
+                androidRippleColor={styleConstants.primary} >
                 <View style={styles.listItemTextContainer}>
                     <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item.title}</Text>
                 </View>
                 {icon}
-            </TouchableOpacity>
+            </Touchable>
             :
             <View
                 style={styles.listItem}>

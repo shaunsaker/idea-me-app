@@ -162,19 +162,21 @@ export class EditIdea extends React.Component {
                         handleSelect={this.selectCategory}
                         headerIconName='mode-edit'
                         headerValue='Edit Categories'
+                        buttonBackgroundColor={styleConstants.primary}
                         pushContent />
                     <DropdownButton
                         displayText='Select a Priority'
                         currentValue={this.state.editIdeaPriority}
                         values={priorities}
                         handleSelect={this.selectPriority}
+                        buttonBackgroundColor={styleConstants.primary}
                         pushContent />
                 </InputContainer>
 
                 <Button
                     iconName='check'
                     text='Continue'
-                    styleMode='primaryReversed'
+                    backgroundColor={styleConstants.white}
                     handlePress={this.updateIdea}
                     disabled={!enableContinueButton} />
 

@@ -3,11 +3,12 @@ import {
 	View,
     FlatList,
 	Text,
-	TouchableOpacity,
 	StyleSheet,
 } from "react-native";
 
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     menuItemsWrapper: {
@@ -63,14 +64,15 @@ export default class Menu extends React.Component {
 
     renderItem({ item }) {
         return (
-            <TouchableOpacity
+            <Touchable
                 style={styles.menuItemContainer}
-                onPress={() => this.props.handleSelect(item) } >
+                onPress={() => this.props.handleSelect(item) } 
+                androidRippleColor={styleConstants.primary} >
                 <Text
                     style={[styles.menuItemText, styleConstants.primaryFont]}>
                     {item}
                 </Text>
-            </TouchableOpacity>
+            </Touchable>
         )
     }
 
