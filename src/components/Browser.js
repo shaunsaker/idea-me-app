@@ -138,6 +138,13 @@ export default class Dropdown extends React.Component {
 			:
 			<View />;
 
+		const loader = this.state.loading ?
+			<Loader
+				customLoader
+				position='clearHeader' />
+			:
+			null;
+
 		return (
 			<Animated.View style={[styles.container, { top: this.position }]}>
 
@@ -157,9 +164,7 @@ export default class Dropdown extends React.Component {
 
 				{actionSheet}
 
-				<Loader
-					customLoader
-					positionStyle={{top: 56}} />
+				{loader}
 
 				<Growl />
 

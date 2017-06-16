@@ -28,6 +28,12 @@ utilities.createUID = () => {
     return Date.now().toString();
 }
 
+utilities.prettifyUrl = (url) => {
+	const prettyUrl = url.split('//')[1].split('/')[0];
+
+	return prettyUrl;
+}
+
 /* ARRAYS */
 
 utilities.filterArrayByValue = (value, array) => {

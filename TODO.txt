@@ -1,6 +1,5 @@
 TODOS
 
-    Prettify url did not work
     Dev initial state
     Rename Growl => SnackBar
     Use EditableImage in ProfileCard    
@@ -21,7 +20,8 @@ TODOS
     On app load, if app is offline, don't display loader
     Custom icon pack (use icoMoon exclusively)
         Icon sizes not right
-        Remove bin and share icons      
+        Remove bin and share icons   
+        Browser header icons not right   
     Second header for home page (or maybe tie into Header?)
         Search icon expands into search bar
         Categories menu?
