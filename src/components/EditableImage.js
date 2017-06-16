@@ -72,7 +72,7 @@ export default class EditableImage extends React.Component {
                     onPress={this.props.handlePress}
                     style={styles.editImageContainer} >
                     <Icon
-                        name='photo-camera'
+                        name='camera'
                         style={styles.editImageIcon} />
                 </Touchable>
                 

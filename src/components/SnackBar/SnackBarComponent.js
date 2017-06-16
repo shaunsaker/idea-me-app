@@ -111,7 +111,7 @@ export default class SnackBarComponent extends React.Component {
     }
 
     render() {
-        const iconName = this.props.success ? 'check' : 'error-outline';   
+        const iconName = this.props.success ? 'check' : 'error';   
 
         const retryButton = this.props.handleRetryAction ?
             <Touchable

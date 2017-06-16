@@ -1,31 +1,29 @@
 import createIconSet from 'react-native-vector-icons/lib/create-icon-set';
 const glyphMap = {
-  "add": 65,
-  "check": 66,
-  "close": 67,
-  "edit-location": 68,
-  "face": 69,
-  "facebook": 70,
-  "google": 71,
-  "home": 72,
-  "chevron-left": 73,
-  "light-bulb": 74,
-  "gps-disabled": 75,
-  "gps-not-fixed": 76,
-  "email": 77,
-  "mode-edit": 78,
-  "more-vert": 79,
-  "gps-fixed": 80,
-  "photo-camera": 81,
-  "anonymous": 82,
-  "error-outline": 83,
-  "group": 84,
-  "delete": 85,
-  "share": 86,
-  "sort": 87,
+  "folder": 59648,
+  "menu": 59649,
+  "google": 59651,
+  "facebook": 59659,
+  "person": 59667,
+  "priority": 59668,
+  "error": 59666,
+  "lightbulb": 59650,
+  "edit": 59652,
+  "location_edit": 59653,
+  "check": 59654,
+  "anonymous": 59655,
+  "add": 59656,
+  "home": 59657,
+  "mail": 59658,
+  "location_disabled": 59660,
+  "location_inaccurate": 59661,
+  "location_accurate": 59662,
+  "camera": 59663,
+  "chevron_left": 59664,
+  "close": 59665
 };
 
-let Icon = createIconSet(glyphMap, 'IdeaMeAppIcons', 'IdeaMe-App.ttf');
+let Icon = createIconSet(glyphMap, 'IdeaMeAppIcons', 'IdeaMe-Icons.ttf');
 
 export default Icon;
 

@@ -90,7 +90,7 @@ export default TabBar = (props) => {
 				style={styles.tabContainer}>
 				<View style={styles.iconContainer}>
 					<Icon
-						name='face'
+						name='person'
 						style={[styles.icon, { color: props.currentPage === 'profile' ? styleConstants.secondary : styleConstants.white }]} />
 
 					{highlightProfileTab}

@@ -70,11 +70,11 @@ export class EditLocation extends React.Component {
                 <ItemList
                     items={this.state.suburbs}
                     handleItemPress={this.setUserLocation}
-                    iconName='gps-not-fixed'
+                    iconName='location_inaccurate'
                     headerTitle='Use Your Current Location'
                     headerValue={this.props.currentLocation}
                     headerDisabled={this.props.geolocationError}
-                    headerIconName='gps-fixed'  />
+                    headerIconName='location_accurate'  />
 
             </Page>
         );

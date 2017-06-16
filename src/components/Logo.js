@@ -60,7 +60,7 @@ export default class Logo extends React.Component {
                 style={styles.container} >
                 <Animated.Text style={[styles.iconContainer, {color: animatedColor}]}>
                     <Icon
-                        name='light-bulb'
+                        name='lightbulb'
                         style={styles.icon} />
                 </Animated.Text>
                 <Text style={[styles.text, styleConstants.secondaryFont]}>

@@ -94,7 +94,7 @@ export class Splash extends React.Component {
                 <StatusBar backgroundColor={styleConstants.transPrimary} />
 
                 <Icon
-                    name='light-bulb'
+                    name='lightbulb'
                     color={styleConstants.lightGrey}
                     size={64} />
 

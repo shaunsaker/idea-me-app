@@ -135,7 +135,7 @@ export class Profile extends React.Component {
                 <Header
                     text='Profile'
                     headerShadow
-                    rightIconName='home'
+                    rightIconName='menu'
                     handleRightIconPress={this.toggleMenu} />
 
                 <View>
@@ -148,7 +148,7 @@ export class Profile extends React.Component {
                         handleEditImagePress={() => Actions.editProfile()} />
 
                     <Button
-                        iconName='mode-edit'
+                        iconName='edit'
                         text='Edit Profile'
                         backgroundColor='transparent'
                         handlePress={() => Actions.editProfile()} />

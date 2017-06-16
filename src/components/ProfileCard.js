@@ -90,13 +90,13 @@ export default ProfileCard = (props) => {
             onPress={props.handleEditImagePress}
             style={styles.editImageContainer} >
             <Icon
-                name='photo-camera'
+                name='camera'
                 style={styles.editImageIcon} />
         </Touchable>;
 
     const ideasLabel = props.numberOfIdeas ?
         <Label
-            iconName='light-bulb'
+            iconName='lightbulb'
             labelText={props.numberOfIdeas + ' excellent idea' + (props.numberOfIdeas > 1 ? 's' : '')} />
         :
         null;
@@ -117,7 +117,7 @@ export default ProfileCard = (props) => {
             </View>
 
             <View style={styles.emailContainer}>
-                <Icon name='email' style={styles.emailIcon} />
+                <Icon name='mail' style={styles.emailIcon} />
                 <Text style={[styles.emailText, styleConstants.primaryFont]}>{props.userEmail}</Text>
             </View>
 

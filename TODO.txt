@@ -1,6 +1,5 @@
 TODOS
 
-    Use EditableImage in ProfileCard    
     Investigate faster list for Home page
     Actions.pop()
         AddIdea does not pop without pop in home page
@@ -11,15 +10,16 @@ TODOS
     Move reducers cloneObject to utilities
     If !firstTimeUser, get suburb location on editLocation page
     Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
-    Facebook/Google Sign In
     Dont display anonymous log in modal
     Page removes padding on small devices
         Other responsive fixes
     On app load, if app is offline, don't display loader
-    Custom icon pack (use icoMoon exclusively)
-        Icon sizes not right
-        Remove bin and share icons   
-        Browser header icons not right   
+    Priority dropdown in AddIdea should scroll page to bottom
+    Inputs should show that the input was valid (label stays secondary color)
+    Animate menu height
+    App Icons
+
+    Facebook/Google Sign In
     Second header for home page (or maybe tie into Header?)
         Search icon expands into search bar
         Categories menu?
@@ -27,11 +27,6 @@ TODOS
         Need to handle idea count differently
         List and Card view options (card is default)
     Animators as component wrappers
-    Priority dropdown in AddIdea should scroll page to bottom
-    Inputs should show that the input was valid (label stays secondary color)
-    App Icons
-    Animate menu height
-    Random item from array should be length - 1
     Test all errors
     Optimise code
         Remove unnecessary
@@ -66,4 +61,5 @@ TODOS
 IOS
     Integrate react-native-fbsdk on iOS
     Integrate react-native-google-signin on iOS
+    Icons
     Testing!

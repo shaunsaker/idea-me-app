@@ -131,7 +131,7 @@ export class SignInOptions extends React.Component {
                         text='Continue with Google'
                         backgroundColor={styleConstants.white} />
                     <Button
-                        iconName='email'
+                        iconName='mail'
                         handlePress={this.signInUserWithEmail} 
                         text='Continue with Email'
                         backgroundColor='transparent' />

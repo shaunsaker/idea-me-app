@@ -123,7 +123,7 @@ export default class Header extends React.Component {
 					style={this.props.showInput ? {justifyContent: 'center'} : styles.leftIconContainer}
 					onPress={() => Actions.pop()} >
 					<Icon
-						name='chevron-left'
+						name='chevron_left'
 						style={styles.leftIcon} />
 				</Touchable>
 				:

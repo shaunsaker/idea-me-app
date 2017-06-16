@@ -92,7 +92,7 @@ export default class IdeaCard extends React.Component {
                 <Touchable 
                     onPress={this.toggleMenu}
                     style={styles.menuIconContainer} >
-                    <Icon name='more-vert' style={styles.menuIcon} />
+                    <Icon name='menu' style={styles.menuIcon} />
                 </Touchable>
 
                 <View style={{flex: 1}}>
@@ -106,10 +106,10 @@ export default class IdeaCard extends React.Component {
                 <View
                     style={styles.labelsContainer} >
                     <Label
-                        iconName='group'
+                        iconName='folder'
                         labelText={categoryLabelText} />
                     <Label
-                        iconName='sort'
+                        iconName='priority'
                         labelText={priorityLabelText} />
                 </View>
 
