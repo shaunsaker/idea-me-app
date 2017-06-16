@@ -67,6 +67,21 @@ export default class IdeaCard extends React.Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (
+            nextState.showMenu !== this.state.showMenu ||
+            nextProps.idea.title !== this.props.idea.title || 
+            nextProps.idea.description !== this.props.idea.description ||
+            nextProps.idea.category !== this.props.idea.category ||
+            nextProps.idea.priority !== this.props.idea.priority
+        ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     toggleMenu() {
         this.setState({
             showMenu: !this.state.showMenu,
@@ -74,7 +89,7 @@ export default class IdeaCard extends React.Component {
     }
 
     render() {
-        const menu = this.state.showMenu &&
+       const menu = this.state.showMenu &&
             <Menu
                 values={['Edit', 'Share', 'Delete']}
                 handleSelect={(type) => {

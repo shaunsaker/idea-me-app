@@ -1,7 +1,8 @@
 TODOS
 
-    Ideas list is slow to update
-        use shouldComponentUpdate in renderItem
+    Use shouldComponentUpdate wherever possible
+        Lists especially
+    Categories as a page
     Limit category name/idea title length
     If category deleted, selected category should change to All on Home page
     Delete modals not removing transparent bg when removed from page

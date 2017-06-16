@@ -142,7 +142,6 @@ export class Home extends React.Component {
     return (
       <IdeaCard
         idea={item}
-        currentCategory={this.props.currentCategory}
         handleSelect={this.selectMenuItem} />
     );
   }
