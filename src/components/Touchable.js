@@ -9,7 +9,7 @@ import {
 import styleConstants from '../styles/styleConstants';
 
 export default Touchable = (props) => {
-    const touchable = Platform.OS === 'android' ?
+    const touchable = props.androidRipple && Platform.OS === 'android' ?
         <TouchableNativeFeedback
             onPress={props.onPress}
             background={TouchableNativeFeedback.Ripple(props.androidRippleColor, props.androidRippleBorderless)}>

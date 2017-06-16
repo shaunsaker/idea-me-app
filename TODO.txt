@@ -2,8 +2,12 @@ TODOS
 
     All touchableOpacity => touchable
         TESTING
-            IdeaCard menu positioning
-            Header icons positioning
+            Sometimes it doesn't look that great, remove these use cases
+    Item list header as header of item list
+        Incorrect Value
+    Prettify url did not work
+    Dev initial state
+    Rename Growl => SnackBar
     Use EditableImage in ProfileCard    
     Investigate faster list for Home page
     Actions.pop()
@@ -20,8 +24,6 @@ TODOS
     Page removes padding on small devices
         Other responsive fixes
     On app load, if app is offline, don't display loader
-    Item list header as header of item list
-        Incorrect Value
     Custom icon pack (use icoMoon exclusively)
         Icon sizes not right
         Remove bin and share icons      

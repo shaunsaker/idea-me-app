@@ -29,8 +29,7 @@ export default DeleteButton = (props) => {
             <View style={styles.deleteButtonContainer}>
                 <Touchable
                     onPress={props.handlePress}
-                    style={styles.deleteButton}
-                    androidRippleColor={styleConstants.primary}>
+                    style={styles.deleteButton}>
                     <Icon
                         name='close'
                         style={styles.deleteIcon} />

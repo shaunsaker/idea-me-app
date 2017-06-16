@@ -74,8 +74,7 @@ export default class ItemList extends React.Component {
             this.props.handleIconPress ?
                 <Touchable
                     onPress={() => this.props.handleIconPress(item)}
-                    style={styles.listItemIconContainer}
-                    androidRippleColor={styleConstants.primary} >
+                    style={styles.listItemIconContainer} >
                     <Icon name={this.props.iconName} style={styles.listItemIcon} />
                 </Touchable>
                 :
@@ -88,6 +87,7 @@ export default class ItemList extends React.Component {
             <Touchable
                 onPress={() => this.props.handleItemPress(item)}
                 style={styles.listItem}
+                androidRipple
                 androidRippleColor={styleConstants.primary} >
                 <View style={styles.listItemTextContainer}>
                     <Text style={[styles.listItemText, styleConstants.primaryFont]}>{item.title}</Text>

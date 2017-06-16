@@ -66,8 +66,7 @@ export default class Menu extends React.Component {
         return (
             <Touchable
                 style={styles.menuItemContainer}
-                onPress={() => this.props.handleSelect(item) } 
-                androidRippleColor={styleConstants.primary} >
+                onPress={() => this.props.handleSelect(item) } >
                 <Text
                     style={[styles.menuItemText, styleConstants.primaryFont]}>
                     {item}

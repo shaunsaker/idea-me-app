@@ -90,25 +90,29 @@ export default class ActionSheet extends React.Component {
 				<Touchable
 					style={styles.button}
 					onPress={this.props.handleCopy}
+					androidRipple
 					androidRippleColor={styleConstants.primary}>
 					<Text style={[styles.buttonText, styleConstants.secondaryFont]}>Copy Link</Text>
 				</Touchable>
 				<Touchable
 					style={styles.button}
 					onPress={this.props.handleShare}
+					androidRipple
 					androidRippleColor={styleConstants.primary}>
 					<Text style={[styles.buttonText, styleConstants.secondaryFont]}>Share Link</Text>
 				</Touchable>
 				<Touchable
 					style={styles.button}
 					onPress={this.props.handleLink}
+					androidRipple
 					androidRippleColor={styleConstants.primary}>
 					<Text style={[styles.buttonText, styleConstants.secondaryFont]}>Open in Browser</Text>
 				</Touchable>
 				<Touchable 
 					style={styles.closeButton}
 					onPress={this.props.handleClose}
-					androidRippleColor={styleConstants.primary}>
+					androidRipple
+					androidRippleColor={styleConstants.primary} >
 					<Icon
 						name='close'
 						style={styles.icon} />

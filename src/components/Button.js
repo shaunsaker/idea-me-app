@@ -75,6 +75,7 @@ export default Button = (props) => {
         <Touchable
             onPress={props.handlePress} 
             style={[styles.button, { backgroundColor: props.backgroundColor }, props.style]}
+            androidRipple
             androidRippleColor={altColor}>
             {icon}
             <Text

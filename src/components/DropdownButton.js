@@ -158,8 +158,7 @@ export default class DropdownButton extends React.Component {
         return (
             <Touchable
                 style={styles.dropdownItem}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(item.title) }} 
-                androidRippleColor={styleConstants.primary}>
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(item.title) }}>
                 <Text
                     style={[styles.dropdownItemText, styleConstants.primaryFont]}>
                     {item.title}
@@ -188,8 +187,7 @@ export default class DropdownButton extends React.Component {
         const header = 
             <Touchable
                 style={styles.dropdownHeader}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }} 
-                androidRippleColor={styleConstants.white}>
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }}>
                 {headerIcon}
                 <Text
                     style={[styles.dropdownHeaderText, styleConstants.primaryFont]}>
@@ -205,8 +203,7 @@ export default class DropdownButton extends React.Component {
         const footer = 
             <Touchable
                 style={styles.dropdownFooter}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.footerValue) }} 
-                androidRippleColor={styleConstants.white}>
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.footerValue) }}>
                 {footerIcon}
                 <Text
                     style={[styles.dropdownFooterText, styleConstants.primaryFont]}>

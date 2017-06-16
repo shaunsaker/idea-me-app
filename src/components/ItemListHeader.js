@@ -80,6 +80,7 @@ export default ItemListHeader = (props) => {
             <Touchable
                 onPress={() => props.handlePress(props.header)}
                 style={styles.header}
+                androidRipple
                 androidRippleColor={styleConstants.white}>
                 <View style={styles.headerTextContainer}>
                     <Text style={[styles.headerTitleText, styleConstants.secondaryFont]}>{props.title}</Text>

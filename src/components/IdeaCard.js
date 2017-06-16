@@ -91,9 +91,7 @@ export default class IdeaCard extends React.Component {
 
                 <Touchable 
                     onPress={this.toggleMenu}
-                    style={styles.menuIconContainer}
-                    androidRippleColor={styleConstants.primary}
-                    androidRippleBorderless>
+                    style={styles.menuIconContainer} >
                     <Icon name='more-vert' style={styles.menuIcon} />
                 </Touchable>
 

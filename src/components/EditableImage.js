@@ -70,8 +70,7 @@ export default class EditableImage extends React.Component {
 
                 <Touchable
                     onPress={this.props.handlePress}
-                    style={styles.editImageContainer}
-                    androidRippleColor={styleConstants.white}>
+                    style={styles.editImageContainer} >
                     <Icon
                         name='photo-camera'
                         style={styles.editImageIcon} />

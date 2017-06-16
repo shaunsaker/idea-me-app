@@ -121,8 +121,7 @@ export default class Header extends React.Component {
 			this.props.backButton ?
 				<Touchable
 					style={this.props.showInput ? {justifyContent: 'center'} : styles.leftIconContainer}
-					onPress={() => Actions.pop()}
-					androidRippleColor={styleConstants.white} >
+					onPress={() => Actions.pop()} >
 					<Icon
 						name='chevron-left'
 						style={styles.leftIcon} />
@@ -144,8 +143,7 @@ export default class Header extends React.Component {
 			this.props.handleTextPress ?
 				<Touchable
 					style={[styles.textContainer, textRightStyles]}
-					onPress={this.props.handleTextPress} 
-					androidRippleColor={styleConstants.white}>
+					onPress={this.props.handleTextPress} >
 					<Text style={[styles.text, styleConstants.primaryFont, this.props.textStyle]}>{this.props.text}</Text>
 				</Touchable>
 				:
@@ -164,8 +162,7 @@ export default class Header extends React.Component {
 			this.props.rightIconName ?
 				<Touchable
 					style={styles.rightIconContainer}
-					onPress={this.props.handleRightIconPress}
-					androidRippleColor={styleConstants.white} >
+					onPress={this.props.handleRightIconPress} >
 					<Icon
 						name={this.props.rightIconName}
 						style={styles.rightIcon} />
@@ -174,8 +171,7 @@ export default class Header extends React.Component {
 				this.props.closeButton ?
 					<Touchable
 						style={styles.rightIconContainer}
-						onPress={() => Actions.pop()} 
-						androidRippleColor={styleConstants.white}>
+						onPress={() => Actions.pop()} >
 						<Icon
 							name='close'
 							style={styles.rightIcon} />

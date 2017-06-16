@@ -65,8 +65,7 @@ export default TabBar = (props) => {
 		<View style={styles.container}>
 			<Touchable
 				onPress={() => Actions.home()}
-				style={styles.tabContainer}
-				androidRippleColor={styleConstants.white}>
+				style={styles.tabContainer}>
 				<View style={styles.iconContainer}>
 					<Icon
 						name='home'
@@ -77,8 +76,7 @@ export default TabBar = (props) => {
 
 			<Touchable
 				onPress={() => Actions.addIdea()}
-				style={styles.tabContainer}
-				androidRippleColor={styleConstants.white}>
+				style={styles.tabContainer}>
 				<View style={styles.iconContainer}>
 					<Icon
 						name='add'
@@ -89,8 +87,7 @@ export default TabBar = (props) => {
 
 			<Touchable
 				onPress={() => Actions.profile()}
-				style={styles.tabContainer}
-				androidRippleColor={styleConstants.white}>
+				style={styles.tabContainer}>
 				<View style={styles.iconContainer}>
 					<Icon
 						name='face'

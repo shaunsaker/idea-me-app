@@ -71,8 +71,7 @@ export default OptionsModal = (props) => {
                 <View style={styles.closeIconContainer}>
                     <Touchable
                         onPress={props.handleClose}
-                        style={styles.closeIconButton} 
-                        androidRippleColor={styleConstants.primary}>
+                        style={styles.closeIconButton} >
                         <Icon
                             name='close'
                             style={styles.closeIcon} />
@@ -82,6 +81,7 @@ export default OptionsModal = (props) => {
                     <Touchable
                         onPress={() => props.handleSelect(props.options[0])}
                         style={styles.modalButton} 
+                        androidRipple
                         androidRippleColor={styleConstants.primary}>
                         <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{props.options[0]}</Text>
                     </Touchable>

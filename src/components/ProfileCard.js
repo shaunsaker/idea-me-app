@@ -88,8 +88,7 @@ export default ProfileCard = (props) => {
         :
         <Touchable
             onPress={props.handleEditImagePress}
-            style={styles.editImageContainer}
-            androidRippleColor={styleConstants.white}>
+            style={styles.editImageContainer} >
             <Icon
                 name='photo-camera'
                 style={styles.editImageIcon} />

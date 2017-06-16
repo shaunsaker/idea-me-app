@@ -116,8 +116,7 @@ export default class GrowlComponent extends React.Component {
         const retryButton = this.props.handleRetryAction ?
             <Touchable
                 onPress={this.props.handleRetryAction}
-                style={styles.retryButton}
-                androidRippleColor={styleConstants.white}>
+                style={styles.retryButton}>
                 <Text
                     style={[styles.retryButtonText, styleConstants.primaryFont]}>
                     RETRY
@@ -145,8 +144,7 @@ export default class GrowlComponent extends React.Component {
                 </View>
                 <Touchable
                     onPress={this.hideGrowl}
-                    style={styles.closeIconContainer} 
-                    androidRippleColor={styleConstants.primary}>
+                    style={styles.closeIconContainer}>
                     <Icon
                         name='close'
                         style={styles.icon} />

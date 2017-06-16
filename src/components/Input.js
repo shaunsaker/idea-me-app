@@ -85,8 +85,7 @@ class TogglePasswordButton extends React.Component {
             <Animated.View style={animatedStyles}>
                 <Touchable
                     onPress={this.props.handlePress}
-                    style={styles.togglePasswordContainer}
-                    androidRippleColor={styleConstants.white}>
+                    style={styles.togglePasswordContainer} >
                     <Text style={[styles.togglePasswordText, styleConstants.primaryFont]}>
                         {this.props.hidePassword ? 'Show' : 'Hide'}
                     </Text>
