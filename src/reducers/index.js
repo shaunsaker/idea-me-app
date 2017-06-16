@@ -134,6 +134,7 @@ export default function (state = initialState, action) {
         case 'RESET_CLOUD_DATA_SUCCESS':
             new_state = cloneObject(state);
             new_state.cloudData.cloudDataSuccess = null;
+            new_state.app.currentAction = null;
             return new_state;
 
         case 'CLOUD_STORAGE_ERROR':
@@ -206,6 +207,7 @@ export default function (state = initialState, action) {
 
             new_state.cloudData.cloudDataSuccess = true;
             new_state.app.loading = false;
+            new_state.app.currentAction = action.currentAction;
 			return new_state;
 
 		case 'SET_USER_LOCATION':

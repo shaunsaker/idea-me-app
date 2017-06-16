@@ -72,6 +72,7 @@ export function* saveUserData(action) {
                     type: 'UPDATE_USER_DATA',
                     node: action.node,
                     userData: action.userData,
+                    currentAction: action.currentAction,
                 });
             }
         }

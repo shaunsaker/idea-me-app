@@ -30,11 +30,12 @@ export class AddCategory extends React.Component {
       categories: React.PropTypes.object,
       uid: React.PropTypes.string,
       cloudDataSuccess: React.PropTypes.bool,
+      currentAction: React.PropTypes.string,
     };
   }
 
   componentDidUpdate() {
-    if (this.props.cloudDataSuccess) {
+    if (this.props.currentAction === 'addCategory' && this.props.cloudDataSuccess) {
       this.props.dispatch({
         type: 'RESET_CLOUD_DATA_SUCCESS',
       });
@@ -75,6 +76,7 @@ export class AddCategory extends React.Component {
         node: 'categories',
         uid: this.props.uid,
         userData: newCategories,
+        currentAction: 'addCategory',
       });
     }
     else {
@@ -126,6 +128,7 @@ function mapStateToProps(state) {
     categories: state.main.userData.categories,
     uid: state.main.auth.uid,
     cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+    currentAction: state.main.app.currentAction,
   });
 }
 

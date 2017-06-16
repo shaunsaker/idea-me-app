@@ -1,10 +1,10 @@
 TODOS
 
-    Investigate faster list for Home page
-    Actions.pop()
-        AddIdea does not pop without pop in home page
-        Deleting category pops to previous page (should not happen)
+    Ideas list is slow to update
+        use shouldComponentUpdate in renderItem
+    Limit category name/idea title length
     If category deleted, selected category should change to All on Home page
+    Delete modals not removing transparent bg when removed from page
     Input did not grow in height with multiline text
     After save, saw remnants of the loader on the home page
     Move reducers cloneObject to utilities
@@ -38,13 +38,17 @@ TODOS
         Icons named by Icon type, ie. MaterialIcon (should be no plain Icon)
         Check reducers
         User errors should contain resets
+        console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
     Empty state
         Prepopulate idea on signup
     Update suburbs or use a geo-service
     Sound when idea added
     Ideas
         Add notes to ideas (direct button on card)
+        Whatsapp chat style or similar
+        + Text
         + Sketches
+        + Images
         + Voice notes
         + Convert Voice Note to Text
         + Link

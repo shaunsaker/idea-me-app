@@ -46,21 +46,18 @@ export class Home extends React.Component {
       currentCategory: React.PropTypes.string,
       uid: React.PropTypes.string,
       cloudDataSuccess: React.PropTypes.bool,
+      currentAction: React.PropTypes.string,
     };
   }
   
-  componentDidUpdate() {
-    if (this.props.cloudDataSuccess) {
-
+  componentDidUpdate() {    
+    if (this.props.currentAction === 'deleteIdea' && this.props.cloudDataSuccess) {
       this.props.dispatch({
         type: 'RESET_CLOUD_DATA_SUCCESS',
       });
 
       // Scroll to beginning
       this.refs.ideasList.scrollToOffset({x: 0, y: 0, animated: false});
-
-      // BUG: AddIdea does not pop without this
-      Actions.pop(); 
     }
   }
 
@@ -137,6 +134,7 @@ export class Home extends React.Component {
       node: 'ideas',
       uid: this.props.uid,
       userData: newIdeas,
+      currentAction: 'deleteIdea',
     });
   }
 
@@ -236,6 +234,7 @@ function mapStateToProps(state) {
     currentCategory: state.main.appData.currentCategory,
     uid: state.main.auth.uid,
     cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+    currentAction: state.main.app.currentAction,
   });
 }
 

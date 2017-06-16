@@ -39,11 +39,12 @@ export class AddIdea extends React.Component {
       priorities: React.PropTypes.object,
       uid: React.PropTypes.string,
       cloudDataSuccess: React.PropTypes.bool,
+      currentAction: React.PropTypes.string,
     }
   }
 
   componentDidUpdate() {
-    if (this.props.cloudDataSuccess) {
+    if (this.props.currentAction === 'addIdea' && this.props.cloudDataSuccess) {
       this.props.dispatch({
         type: 'RESET_CLOUD_DATA_SUCCESS'
       });
@@ -112,6 +113,7 @@ export class AddIdea extends React.Component {
         node: 'ideas',
         uid: this.props.uid,
         userData: newIdeas,
+        currentAction: 'addIdea',
       });
     }
     else {
@@ -188,6 +190,7 @@ function mapStateToProps(state) {
     priorities: state.main.appData.priorities,
     uid: state.main.auth.uid,
     cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+    currentAction: state.main.app.currentAction,
   });
 }
 

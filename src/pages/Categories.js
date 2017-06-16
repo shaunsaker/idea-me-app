@@ -36,11 +36,12 @@ export class Categories extends React.Component {
       ideas: React.PropTypes.object,
       uid: React.PropTypes.string,
       cloudDataSuccess: React.PropTypes.bool,
+      currentAction: React.PropTypes.string,
     };
   }
 
   componentDidUpdate() {
-    if (this.props.cloudDataSuccess) {
+    if (this.props.currentAction === 'deleteCategory' && this.props.cloudDataSuccess) {
       this.props.dispatch({
         type: 'RESET_CLOUD_DATA_SUCCESS',
       });
@@ -90,6 +91,7 @@ export class Categories extends React.Component {
           node: 'ideas',
           uid: this.props.uid,
           userData: newIdeas,
+          currentAction: 'deleteCategory',
         }
       ]
     });
@@ -146,6 +148,7 @@ function mapStateToProps(state) {
     profile: state.main.userData.profile,
     uid: state.main.auth.uid,
     cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+    currentAction: state.main.app.currentAction,
   });
 }
 
