@@ -18,7 +18,7 @@ import utilities from '../utilities';
 import Header from './Header';
 import ActionSheet from './ActionSheet';
 import Loader from './Loader';
-import Growl from './Growl';
+import SnackBar from './SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -166,7 +166,7 @@ export default class Dropdown extends React.Component {
 
 				{loader}
 
-				<Growl />
+				<SnackBar />
 
 			</Animated.View>
 		);

@@ -16,7 +16,7 @@ import Button from '../components/Button';
 import TabBar from '../components/TabBar';
 import Browser from '../components/Browser';
 import ActionModal from '../components/ActionModal';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -163,7 +163,7 @@ export class Profile extends React.Component {
 
                 {actionModal}
 
-                <Growl />
+                <SnackBar />
 
             </Page >
         );

@@ -11,7 +11,7 @@ import Logo from '../components/Logo';
 import InfoBlock from '../components/InfoBlock';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -102,7 +102,7 @@ export class Welcome extends React.Component {
                         backgroundColor='transparent' />
                 </View>
 
-                <Growl />
+                <SnackBar />
 
                 <Loader 
                     position='bottom'/>

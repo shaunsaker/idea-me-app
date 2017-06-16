@@ -12,7 +12,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import InfoBlock from '../components/InfoBlock';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 
 export class Splash extends React.Component {
     constructor(props) {
@@ -107,7 +107,7 @@ export class Splash extends React.Component {
                         subtitleColor={styleConstants.lightGrey} />
                 </View>
 
-                <Growl />
+                <SnackBar />
 
             </Page>
         );

@@ -19,7 +19,7 @@ import EditableImage from '../components/EditableImage';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import OptionsModal from '../components/OptionsModal';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
 export class Profile extends React.Component {
@@ -237,7 +237,7 @@ export class Profile extends React.Component {
 
                 {modal}
 
-                <Growl />
+                <SnackBar />
 
                 <Loader
                     position='bottom' />

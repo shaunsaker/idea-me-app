@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class GrowlComponent extends React.Component {
+export default class SnackBarComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -75,7 +75,7 @@ export default class GrowlComponent extends React.Component {
             bottom: new Animated.Value((this.height) * -1),
         }
 
-        this.hideGrowl = this.hideGrowl.bind(this);
+        this.hideSnackBar = this.hideSnackBar.bind(this);
     }
 
     static get propTypes() {
@@ -97,7 +97,7 @@ export default class GrowlComponent extends React.Component {
         ).start();
     }
 
-    hideGrowl() {
+    hideSnackBar() {
         Animated.timing(
             this.state.bottom,
             {
@@ -143,7 +143,7 @@ export default class GrowlComponent extends React.Component {
                     </View>
                 </View>
                 <Touchable
-                    onPress={this.hideGrowl}
+                    onPress={this.hideSnackBar}
                     style={styles.closeIconContainer}>
                     <Icon
                         name='close'

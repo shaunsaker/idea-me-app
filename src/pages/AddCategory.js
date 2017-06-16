@@ -10,7 +10,7 @@ import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
 export class AddCategory extends React.Component {
@@ -111,7 +111,7 @@ export class AddCategory extends React.Component {
           disabled={!enableContinueButton} 
           backgroundColor={styleConstants.white}/>
 
-        <Growl />
+        <SnackBar />
 
         <Loader
           position='bottom' />

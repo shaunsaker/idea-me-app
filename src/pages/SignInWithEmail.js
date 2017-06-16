@@ -9,7 +9,7 @@ import InfoBlock from '../components/InfoBlock';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -131,7 +131,7 @@ export class SignInWithEmail extends React.Component {
                     backgroundColor={styleConstants.white}
                     disabled={!enableContinueButton} />
 
-                <Growl />
+                <SnackBar />
 
                 <Loader
                     position='bottom' />

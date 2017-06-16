@@ -18,7 +18,7 @@ import DropdownButton from '../components/DropdownButton';
 import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
 import ActionModal from '../components/ActionModal';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
 export class Home extends React.Component {
@@ -220,7 +220,7 @@ export class Home extends React.Component {
 
         {modal}
 
-        <Growl />
+        <SnackBar />
 
         <Loader />
 

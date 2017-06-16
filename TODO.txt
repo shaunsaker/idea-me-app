@@ -1,7 +1,5 @@
 TODOS
 
-    Dev initial state
-    Rename Growl => SnackBar
     Use EditableImage in ProfileCard    
     Investigate faster list for Home page
     Actions.pop()

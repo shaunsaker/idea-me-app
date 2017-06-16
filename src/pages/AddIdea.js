@@ -11,7 +11,7 @@ import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import DropdownButton from '../components/DropdownButton';
 import Button from '../components/Button';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
 export class AddIdea extends React.Component {
@@ -171,7 +171,7 @@ export class AddIdea extends React.Component {
           handlePress={this.addNewIdea}
           disabled={!enableContinueButton} />
 
-        <Growl />
+        <SnackBar />
 
         <Loader
           position='bottom' />

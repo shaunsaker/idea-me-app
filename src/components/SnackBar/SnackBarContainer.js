@@ -5,7 +5,7 @@ import {
 } from "react-native";
 import { connect } from 'react-redux';
 
-import GrowlComponent from './GrowlComponent';
+import SnackBarComponent from './SnackBarComponent';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export class Growl extends React.Component {
+export class SnackBar extends React.Component {
     constructor(props) {
         super(props);
 
@@ -81,8 +81,8 @@ export class Growl extends React.Component {
                             :
                             null;  
 
-        const errorGrowl = errorMessage ?
-            <GrowlComponent 
+        const errorSnackBar = errorMessage ?
+            <SnackBarComponent 
                 text={errorMessage} 
                 handleReset={this.resetError}
                 handleRetryAction={this.props.retryAction.type ? this.retryAction : null} />
@@ -98,8 +98,8 @@ export class Growl extends React.Component {
                     :
                     null;
 
-        const successGrowl = successMessage ?
-            <GrowlComponent 
+        const successSnackBar = successMessage ?
+            <SnackBarComponent 
                 text={successMessage} 
                 success
                 handleReset={this.resetError} />
@@ -108,8 +108,8 @@ export class Growl extends React.Component {
             
         return (
             <View style={styles.container}>
-                {errorGrowl}
-                {successGrowl}
+                {errorSnackBar}
+                {successSnackBar}
             </View>
         );
     }
@@ -129,4 +129,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Growl);
+export default connect(mapStateToProps)(SnackBar);

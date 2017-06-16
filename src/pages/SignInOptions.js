@@ -10,7 +10,7 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
-import Growl from '../components/Growl';
+import SnackBar from '../components/SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -144,7 +144,7 @@ export class SignInOptions extends React.Component {
 
                 {modal}
 
-				<Growl />
+				<SnackBar />
 
 				<Loader
                     position='bottom' />
