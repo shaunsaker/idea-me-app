@@ -7,7 +7,6 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
-import ItemListHeader from '../components/ItemListHeader';
 import ItemList from '../components/ItemList';
 
 export class EditLocation extends React.Component {
@@ -49,7 +48,7 @@ export class EditLocation extends React.Component {
     setUserLocation(value) {
         this.props.dispatch({
             type: 'SET_USER_LOCATION',
-            userLocation: value,
+            userLocation: value.title,
         });
 
         Actions.pop();
@@ -68,17 +67,14 @@ export class EditLocation extends React.Component {
                     handleChangeText={this.updateEditUserLocation}
                     headerShadow />
 
-                <ItemListHeader
-                    title='Use Your Current Location'
-                    subtitle={this.props.currentLocation}
-                    hasError={this.props.geolocationError}
-                    handlePress={this.setUserLocation}
-                    iconName='gps-accurate' />
-
                 <ItemList
                     items={this.state.suburbs}
                     handleItemPress={this.setUserLocation}
-                    iconName='gps-not-accurate' />
+                    iconName='gps-not-fixed'
+                    headerTitle='Use Your Current Location'
+                    headerValue={this.props.currentLocation}
+                    headerDisabled={this.props.geolocationError}
+                    headerIconName='gps-fixed'  />
 
             </Page>
         );

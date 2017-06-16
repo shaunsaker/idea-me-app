@@ -33,14 +33,14 @@ const initialState = {
         cloudStorageErrorMessage: null,
     },
     geolocation: {
-        currentLocation: null,
+        currentLocation: 'Observatory',
         geolocationSuccess: null,
         geolocationError: null,
     },
     appData: {
         currentCategory: 'All Categories',
-        quotes, // // can be an array because we are not saving this anywhere
-        suburbs, // as above
+        quotes, // can be an array because we are not saving this anywhere
+        suburbs, 
         priorities: {
             '0': {
                 title: 'High',
@@ -60,7 +60,7 @@ const initialState = {
         profile: {
             userName: null,
             userEmail: null,
-            userLocation: null,
+            userLocation: 'Somerset West',
             userPhotoUrl: null,
         },
 

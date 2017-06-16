@@ -11,7 +11,8 @@ import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
-import DeleteButton from '../components/DeleteButton';
+import ItemListHeader from './ItemListHeader'
+import DeleteButton from './DeleteButton';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -63,6 +64,11 @@ export default class ItemList extends React.Component {
             deleteIcon: React.PropTypes.bool,
             iconName: React.PropTypes.string,
             handleIconPress: React.PropTypes.func,
+
+            headerTitle: React.PropTypes.string,
+            headerValue: React.PropTypes.string,
+            headerDisabled: React.PropTypes.bool,
+            headerIconName: React.PropTypes.string,
         };
     }
 
@@ -107,13 +113,24 @@ export default class ItemList extends React.Component {
     }
 
     render() {
+        const header = this.props.headerTitle ?
+            <ItemListHeader 
+               title={this.props.headerTitle}
+               value={this.props.headerValue}
+               disabled={this.props.headerDisabled}
+               iconName={this.props.headerIconName}
+               handlePress={this.props.handleItemPress} />
+            :
+            null;
+
         return (
             <FlatList
-                keyExtractor={item => 'list' + item.title}
+                keyExtractor={item => 'list-' + item.title}
                 data={this.props.items}
                 renderItem={this.renderItem}
                 style={styles.listWrapper}
-                contentContainerStyle={styles.listContainer} />
+                contentContainerStyle={styles.listContainer}
+                ListHeaderComponent={() => header} />
         );
     }
 }

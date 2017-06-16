@@ -57,16 +57,16 @@ export default ItemListHeader = (props) => {
 		:
 		null;
 
-	const subtitle = props.subtitle ?
-		<Text style={[styles.headerSubtitleText, styleConstants.secondaryFont]}>{props.subtitle}</Text>
+	const subtitle = props.value ?
+		<Text style={[styles.headerSubtitleText, styleConstants.primaryFont]}>{props.value}</Text>
 		:
 		null;
 
-    const header = props.hasError ?
+    const header = props.disabled ?
         <View
             style={[styles.header, styles.headerDisabled]}>
             <View style={styles.headerTextContainer}>
-                <Text style={[styles.headerTitleText, styleConstants.secondaryFont]}>{props.title}</Text>
+                <Text style={[styles.headerTitleText, styleConstants.primaryFont]}>{props.title}</Text>
 
                 {subtitle}
 
@@ -78,12 +78,12 @@ export default ItemListHeader = (props) => {
         :    
         props.handlePress ?
             <Touchable
-                onPress={() => props.handlePress(props.header)}
+                onPress={() => props.handlePress({title: props.value})}
                 style={styles.header}
                 androidRipple
                 androidRippleColor={styleConstants.white}>
                 <View style={styles.headerTextContainer}>
-                    <Text style={[styles.headerTitleText, styleConstants.secondaryFont]}>{props.title}</Text>
+                    <Text style={[styles.headerTitleText, styleConstants.primaryFont]}>{props.title}</Text>
 
                     {subtitle}
 
