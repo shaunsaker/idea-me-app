@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 76,
-        left: 32,
-        width: window.width - 64,
+        left: 16,
+        right: 16,
+        width: window.width - 32,
         elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         paddingVertical: 8,
-        width: window.width - 64,        
+        width: window.width - 32,        
     },
     dropdownItemText: {
         color: styleConstants.primary,
@@ -184,7 +185,7 @@ export default class DropdownButton extends React.Component {
             :
             null;
 
-        const header = 
+        const header = this.props.currentValue !== this.props.headerValue ?
             <Touchable
                 style={styles.dropdownHeader}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }}>
@@ -193,7 +194,9 @@ export default class DropdownButton extends React.Component {
                     style={[styles.dropdownHeaderText, styleConstants.primaryFont]}>
                     {this.props.headerValue}
                 </Text>
-            </Touchable>;
+            </Touchable>
+            :
+            null;
 
         const footerIcon = this.props.footerIconName ? 
             <Icon name={this.props.footerIconName} style={styles.dropdownHeaderIcon} />

@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
         right: 16,
         width: 164,
         backgroundColor: styleConstants.white,
-		borderWidth: 1,
-		borderColor: styleConstants.lightGrey,
         elevation: 10,
         shadowColor: "#000000",
         shadowOpacity: 0.6,

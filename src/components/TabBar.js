@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		borderTopWidth: 1,
-		borderTopColor: styleConstants.lightGrey,
 		backgroundColor: styleConstants.primary,
 	},
 	tabContainer: {
@@ -83,6 +81,17 @@ export default TabBar = (props) => {
 						style={[styles.icon, { color: props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white }]} />
 				</View>
 				<Text style={[styles.text, { color: props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Add Idea</Text>
+			</Touchable>
+
+			<Touchable
+				onPress={() => Actions.categories()}
+				style={styles.tabContainer}>
+				<View style={styles.iconContainer}>
+					<Icon
+						name='folder'
+						style={[styles.icon, { color: props.currentPage === 'categories' ? styleConstants.secondary : styleConstants.white }]} />
+				</View>
+				<Text style={[styles.text, { color: props.currentPage === 'categories' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Categories</Text>
 			</Touchable>
 
 			<Touchable

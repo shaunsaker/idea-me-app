@@ -1,8 +1,7 @@
 TODOS
 
-    Use shouldComponentUpdate wherever possible
-        Lists especially
     Categories as a page
+    Add Idea Categories not rendering all
     Limit category name/idea title length
     If category deleted, selected category should change to All on Home page
     Delete modals not removing transparent bg when removed from page
@@ -17,16 +16,18 @@ TODOS
     On app load, if app is offline, don't display loader
     Priority dropdown in AddIdea should scroll page to bottom
     Inputs should show that the input was valid (label stays secondary color)
-    Animate menu height
     App Icons
+    Profile menu get in touch email link
+    Animate menu height and opacity
+    Selecting a category should scroll list to beginning
+    Logo
 
     Facebook/Google Sign In
-    Second header for home page (or maybe tie into Header?)
-        Search icon expands into search bar
-        Categories menu?
-            Opens modal?
-        Need to handle idea count differently
-        List and Card view options (card is default)
+    Home page header feature
+        Remove logo add search bar with idea count on right
+        When keyboard is up, hide second header (would be nice to animate behind header)
+        Second header has view options (list and card) and categories icon (for dropdown)
+            On categories press, expand left with Select a Category as header and dropdown menu below
     Animators as component wrappers
     Test all errors
     Optimise code
@@ -40,6 +41,7 @@ TODOS
         Check reducers
         User errors should contain resets
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
+        Use shouldComponentUpdate where necessary
     Empty state
         Prepopulate idea on signup
     Update suburbs or use a geo-service

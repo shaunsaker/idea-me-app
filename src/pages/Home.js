@@ -193,6 +193,7 @@ export class Home extends React.Component {
 
     return (
       <Page
+        backgroundColor={styleConstants.white}
         removeBottomPadding >
 
         <Header
@@ -206,8 +207,7 @@ export class Home extends React.Component {
           currentValue={this.props.currentCategory}
           values={categories}
           handleSelect={this.selectCategory}
-          headerValue='Edit Categories'
-          footerValue='All Categories' 
+          headerValue='All Categories' 
           buttonBackgroundColor={styleConstants.primary} />
 
         {ideas}
