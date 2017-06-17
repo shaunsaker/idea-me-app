@@ -1,8 +1,8 @@
 import React from "react";
 import {
     View,
+    ScrollView,
     Text,
-    FlatList,
     Animated,
     StyleSheet,
     Dimensions,
@@ -155,11 +155,12 @@ export default class DropdownButton extends React.Component {
         }
     }
 
-    renderItem({ item }) {
+    renderItem(item) {
         return (
             <Touchable
                 style={styles.dropdownItem}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(item.title) }}>
+                onPress={() => { this.toggleExpanded(); this.props.handleSelect(item.title) }}
+                key={item.title}>
                 <Text
                     style={[styles.dropdownItemText, styleConstants.primaryFont]}>
                     {item.title}
@@ -185,7 +186,7 @@ export default class DropdownButton extends React.Component {
             :
             null;
 
-        const header = this.props.currentValue !== this.props.headerValue ?
+        const header = this.props.headerValue && this.props.currentValue !== this.props.headerValue ?
             <Touchable
                 style={styles.dropdownHeader}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.headerValue) }}>
@@ -203,7 +204,7 @@ export default class DropdownButton extends React.Component {
             :
             null;
 
-        const footer = 
+        const footer = this.props.footerValue ?
             <Touchable
                 style={styles.dropdownFooter}
                 onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.footerValue) }}>
@@ -212,19 +213,18 @@ export default class DropdownButton extends React.Component {
                     style={[styles.dropdownFooterText, styleConstants.primaryFont]}>
                     {this.props.footerValue}
                 </Text>
-            </Touchable>;
+            </Touchable>
+            :
+            null;
             
         const itemList =
             <Animated.View
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
-                <View style={styles.dropdownItemsContainer}>
-                    <FlatList
-                        keyExtractor={item => 'dropdown' + item.title}
-                        data={this.props.values}
-                        renderItem={this.renderItem} 
-                        ListHeaderComponent={this.props.headerValue ? () => header : null}
-                        ListFooterComponent={this.props.footerValue ? () => footer : null}/>
-                </View>
+                <ScrollView style={styles.dropdownItemsContainer}>
+                    {header}
+                    {this.props.values.map((item) => this.renderItem(item))}
+                    {footer}
+                </ScrollView>
             </Animated.View>;
 
         return (

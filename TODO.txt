@@ -1,7 +1,6 @@
 TODOS
 
-    Categories as a page
-    Add Idea Categories not rendering all
+    Dropdown height needs work
     Limit category name/idea title length
     If category deleted, selected category should change to All on Home page
     Delete modals not removing transparent bg when removed from page
