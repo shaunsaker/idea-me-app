@@ -109,12 +109,11 @@ export class Categories extends React.Component {
       null;
 
     return (
-      <Page>
+      <Page
+        backgroundColor={styleConstants.white}>
 
         <Header
           text='Categories'
-          textSize={28}
-          textStyle={styleConstants.primaryFont}
           backButton
           headerShadow />
 

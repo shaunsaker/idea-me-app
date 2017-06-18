@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'transparent',
+        backgroundColor: styleConstants.white,
         borderWidth: 1,
         borderColor: styleConstants.primary,
         borderRadius: 32,

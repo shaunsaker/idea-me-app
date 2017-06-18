@@ -13,7 +13,6 @@ import styleConstants from '../styles/styleConstants';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import Logo from '../components/Logo';
-import Count from '../components/Count';
 import DropdownButton from '../components/DropdownButton';
 import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
@@ -26,6 +25,7 @@ export class Home extends React.Component {
     super(props);
 
     this.selectCategory = this.selectCategory.bind(this);
+    this.scrollToBeginning = this.scrollToBeginning.bind(this);
     this.selectMenuItem = this.selectMenuItem.bind(this);
     this.editIdea = this.editIdea.bind(this);
     this.shareIdea = this.shareIdea.bind(this);
@@ -49,15 +49,14 @@ export class Home extends React.Component {
       currentAction: React.PropTypes.string,
     };
   }
-  
-  componentDidUpdate() {    
+
+  componentDidUpdate() {
     if (this.props.currentAction === 'deleteIdea' && this.props.cloudDataSuccess) {
       this.props.dispatch({
         type: 'RESET_CLOUD_DATA_SUCCESS',
       });
 
-      // Scroll to beginning
-      this.refs.ideasList.scrollToOffset({x: 0, y: 0, animated: false});
+      this.scrollToBeginning();
     }
   }
 
@@ -70,7 +69,13 @@ export class Home extends React.Component {
         type: 'SELECT_CATEGORY',
         value,
       });
+
+      this.scrollToBeginning();
     }
+  }
+
+  scrollToBeginning() {
+    this.refs.ideasList.scrollToOffset({ x: 0, y: 0, animated: false });
   }
 
   selectMenuItem(type, idea) {
@@ -103,7 +108,7 @@ export class Home extends React.Component {
       .catch((error) => console.log('Share error:', error.message));
   }
 
-  toggleDeleteModal(idea) {  
+  toggleDeleteModal(idea) {
     if (idea && idea.title) {
       this.setState({
         showModal: true,
@@ -175,7 +180,7 @@ export class Home extends React.Component {
           pagingEnabled />
     }
 
-   const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
+    const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
 
     const modal = this.state.showModal ?
       <ActionModal
@@ -185,30 +190,26 @@ export class Home extends React.Component {
       :
       null;
 
-    const count = () =>
-      <Count
-        count={currentCount}
-        total={totalCount}
-        unit='ideas' />;
-
     return (
       <Page
         backgroundColor={styleConstants.white}
         removeBottomPadding >
 
         <Header
-          textComponent={() => <Logo />}
-          textLeft
-          rightComponent={count}
-          headerShadow />
+          headerShadow
+          leftComponent={() => <Logo />}
+          rightIconName='add'
+          handleRightIconPress={() => Actions.addIdea()} />
 
         <DropdownButton
-          displayText={null}
-          currentValue={this.props.currentCategory}
+          buttonBackgroundColor={styleConstants.primary}
+          categoriesButton
           values={categories}
+          currentCategory={this.props.currentCategory}
           handleSelect={this.selectCategory}
-          headerValue='All Categories' 
-          buttonBackgroundColor={styleConstants.primary} />
+          headerValue={this.props.currentCategory !== 'All Categories' ? 'All Categories' : ''}
+          currentCount={currentCount}
+          totalCount={totalCount} />
 
         {ideas}
 

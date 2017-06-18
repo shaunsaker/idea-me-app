@@ -57,16 +57,21 @@ export class Profile extends React.Component {
     selectMenuItem(type) {
         this.toggleMenu();
 
-        if (type === 'About App') {
+        if (type === 'Edit Profile') {
+            Actions.editProfile();
+        }
+        else if (type === 'About App') {
+
             // TODO
         }
-        if (type === 'Settings') {
+        else if (type === 'Settings') {
+
             // TODO
         }
-        if (type === 'Give us Feedback') {
+        else if (type === 'Give us Feedback') {
             this.toggleBrowser();
         }
-        else if (type === 'Log Out') {
+        else {
             this.toggleActionModal();
         }
     }
@@ -110,7 +115,7 @@ export class Profile extends React.Component {
     render() {
         const menu = this.state.showMenu && 
             <Menu 
-                values={['About App', 'Settings', 'Give us Feedback', 'Log Out']}
+                values={['Edit Profile', 'About App', 'Settings', 'Give us Feedback', 'Log Out']}
                 handleSelect={(type) => this.selectMenuItem(type)} />;
 
 		const browser = this.state.showBrowser ? 
@@ -124,13 +129,14 @@ export class Profile extends React.Component {
 
         const actionModal = this.state.showActionModal &&
             <ActionModal
-                title={'Are you sure you want to log out?'}
+                title={'Are you sure you want to Log Out?'}
                 handleLeftIconPress={() => this.signOutUser()}
                 handleRightIconPress={this.toggleActionModal} />;
 
         return (
             <Page
-                removeBottomPadding>
+                removeBottomPadding
+                backgroundColor={styleConstants.white}>
 
                 <Header
                     text='Profile'
@@ -138,21 +144,13 @@ export class Profile extends React.Component {
                     rightIconName='menu'
                     handleRightIconPress={this.toggleMenu} />
 
-                <View>
-                    <ProfileCard
-                        userName={this.props.userName}
-                        userPhotoUrl={this.props.userPhotoUrl}
-                        userEmail={this.props.userEmail}
-                        userLocation={this.props.userLocation}
-                        numberOfIdeas={this.props.numberOfIdeas}
-                        handleEditImagePress={() => Actions.editProfile()} />
-
-                    <Button
-                        iconName='edit'
-                        text='Edit Profile'
-                        backgroundColor='transparent'
-                        handlePress={() => Actions.editProfile()} />
-                </View>
+                <ProfileCard
+                    userName={this.props.userName}
+                    userPhotoUrl={this.props.userPhotoUrl}
+                    userEmail={this.props.userEmail}
+                    userLocation={this.props.userLocation}
+                    numberOfIdeas={this.props.numberOfIdeas}
+                    handleEditImagePress={() => Actions.editProfile()} />
 
                 <TabBar
                     currentPage='profile' />

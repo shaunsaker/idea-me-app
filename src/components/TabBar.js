@@ -73,17 +73,6 @@ export default TabBar = (props) => {
 			</Touchable>
 
 			<Touchable
-				onPress={() => Actions.addIdea()}
-				style={styles.tabContainer}>
-				<View style={styles.iconContainer}>
-					<Icon
-						name='add'
-						style={[styles.icon, { color: props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white }]} />
-				</View>
-				<Text style={[styles.text, { color: props.currentPage === 'addIdea' ? styleConstants.secondary : styleConstants.white }, styleConstants.primaryFont]}>Add Idea</Text>
-			</Touchable>
-
-			<Touchable
 				onPress={() => Actions.categories()}
 				style={styles.tabContainer}>
 				<View style={styles.iconContainer}>

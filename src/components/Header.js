@@ -34,6 +34,15 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 		backgroundColor: styleConstants.primary,
 	},
+	leftIconContainer: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'flex-start',
+	},
+	leftIcon: {
+		fontSize: styleConstants.iconFont,
+		color: styleConstants.white,
+	},
 	textContainer: {
 		flex: 3, // make the text container 3 times as big as the icon containers
 		justifyContent: 'center',
@@ -41,15 +50,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: styleConstants.regularFont,
-		color: styleConstants.white,
-	},
-	leftIconContainer: {
-		flex: 1,
-		justifyContent: 'center',
-	},
-	leftIcon: {
-		fontSize: styleConstants.iconFont,
-		color: styleConstants.white,
+		color: styleConstants.lightGrey,
 	},
 	rightIconContainer: {
 		flex: 1,
@@ -65,24 +66,23 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	input: {
-        fontSize: styleConstants.regularFont,
-        color: styleConstants.white,
-        paddingLeft: 16,
-        paddingRight: 32,
+		fontSize: styleConstants.regularFont,
+		color: styleConstants.white,
+		paddingLeft: 16,
+		paddingRight: 32,
 	},
-    clearTextButtonContainer: {
-        position: 'absolute',
-        bottom: 12,
-        right: 0,
-        height: 30,
-        justifyContent: 'center',
-    },
+	clearTextButtonContainer: {
+		position: 'absolute',
+		bottom: 12,
+		right: 0,
+		height: 30,
+		justifyContent: 'center',
+	},
 });
 
 export default class Header extends React.Component {
 	static get propTypes() {
 		return {
-			headerContainerStyle: React.PropTypes.object,
 			leftComponent: React.PropTypes.func,
 			textComponent: React.PropTypes.func,
 			text: React.PropTypes.string,
@@ -118,22 +118,39 @@ export default class Header extends React.Component {
 				{this.props.leftComponent()}
 			</View>
 			:
-			this.props.backButton ?
+			this.props.leftIconName ?
 				<Touchable
-					style={this.props.showInput ? {justifyContent: 'center'} : styles.leftIconContainer}
-					onPress={() => Actions.pop()} >
+					style={(this.props.showInput || this.props.textLeft) ? { justifyContent: 'center' } : styles.leftIconContainer}
+					onPress={() => this.props.handleLeftIconPress} >
 					<Icon
-						name='chevron_left'
+						name={this.props.leftIconName}
 						style={styles.leftIcon} />
 				</Touchable>
 				:
-				this.props.textLeft ?
-					null
+				this.props.backButton ?
+					<Touchable
+						style={this.props.showInput ? { justifyContent: 'center' } : styles.leftIconContainer}
+						onPress={() => Actions.pop()} >
+						<Icon
+							name='chevron_left'
+							style={styles.leftIcon} />
+					</Touchable>
 					:
-					<View style={styles.leftIconContainer} />;
+					this.props.textLeft ?
+						null
+						:
+						<View style={styles.leftIconContainer} />;
+
+		const textLeftStyles = this.props.textLeft ?
+			{ 
+				alignItems: 'flex-start',
+				paddingLeft: 8,
+			}
+			:
+			null;
 
 		const textRightStyles = this.props.textRight ?
-			{ alignItems: 'flex-end'}
+			{ alignItems: 'flex-end' }
 			:
 			null;
 
@@ -142,20 +159,20 @@ export default class Header extends React.Component {
 			:
 			this.props.handleTextPress ?
 				<Touchable
-					style={[styles.textContainer, textRightStyles]}
+					style={[styles.textContainer, textLeftStyles, textRightStyles]}
 					onPress={this.props.handleTextPress} >
 					<Text style={[styles.text, styleConstants.primaryFont, this.props.textStyle]}>{this.props.text}</Text>
 				</Touchable>
 				:
-				this.props.showInput ?
+				(this.props.showInput || !this.props.text) ?
 					null
 					:
-					<View style={[styles.textContainer, textRightStyles]}>
+					<View style={[styles.textContainer, textLeftStyles, textRightStyles]}>
 						<Text style={[styles.text, styleConstants.primaryFont, this.props.textStyle]}>{this.props.text}</Text>
 					</View>;
 
 		const rightIcon = this.props.rightComponent ?
-			<View style={styles.rightIconContainer}>
+			<View style={this.props.showInput ? { justifyContent: 'center' } : styles.rightIconContainer}>
 				{this.props.rightComponent()}
 			</View>
 			:
@@ -177,15 +194,15 @@ export default class Header extends React.Component {
 							style={styles.rightIcon} />
 					</Touchable>
 					:
-					(this.props.textRight || this.props.showInput) ? 
-						null 
-						: 
+					(this.props.textRight || this.props.showInput) ?
+						null
+						:
 						<View style={styles.rightIconContainer} />;
 
 		const clearTextButton = this.props.inputValue ?
 			<View style={styles.clearTextButtonContainer}>
-				<DeleteButton 
-					handlePress={() => this.props.handleChangeText('')}/>
+				<DeleteButton
+					handlePress={() => this.props.handleChangeText('')} />
 			</View>
 			:
 			null;
@@ -198,7 +215,7 @@ export default class Header extends React.Component {
 					placeholderTextColor={styleConstants.lightGrey}
 					onChangeText={(text) => this.props.handleChangeText(text)}
 					underlineColorAndroid='transparent'
-					style={[styles.input, styleConstants.primaryFont]}/>
+					style={[styles.input, styleConstants.primaryFont]} />
 				{clearTextButton}
 			</View>
 			:
@@ -206,14 +223,14 @@ export default class Header extends React.Component {
 
 		return (
 			<View>
-				<StatusBar 
-					backgroundColor={styleConstants.transPrimary} 
+				<StatusBar
+					backgroundColor={styleConstants.transPrimary}
 					barStyle='light-content' />
 				<View style={[styles.container, headerShadowStyles, iosStyles]}>
 					{leftIcon}
 					{text}
-					{rightIcon}
 					{input}
+					{rightIcon}
 				</View>
 			</View>
 		);

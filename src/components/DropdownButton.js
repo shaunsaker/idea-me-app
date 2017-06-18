@@ -14,6 +14,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 import Button from './Button';
+import CategoriesButton from './CategoriesButton';
 
 const window = Dimensions.get('window');
 
@@ -24,8 +25,8 @@ const styles = StyleSheet.create({
     dropdownItemsWrapper: {
         position: 'absolute',
         top: 76,
-        left: 16,
-        right: 16,
+        left: 0,
+        right: 0,
         width: window.width - 32,
         elevation: 5,
         shadowColor: "#000000",
@@ -36,7 +37,6 @@ const styles = StyleSheet.create({
             width: 0
         },
         backgroundColor: styleConstants.white,
-        zIndex: 1,
     },
     dropdownHeader: {        
         flexDirection: 'row',
@@ -108,12 +108,10 @@ export default class DropdownButton extends React.Component {
             currentValue: React.PropTypes.string,
             values: React.PropTypes.array.isRequired,
             handleSelect: React.PropTypes.func.isRequired,
+            headerIconName: React.PropTypes.string,
             headerValue: React.PropTypes.string,
-            footerValue: React.PropTypes.string,
             pushContent: React.PropTypes.bool, // animate push content below
             buttonBackgroundColor: React.PropTypes.string,
-            headerIconName: React.PropTypes.string,
-            footerIconName: React.PropTypes.string,
         };
     }
 
@@ -198,24 +196,6 @@ export default class DropdownButton extends React.Component {
             </Touchable>
             :
             null;
-
-        const footerIcon = this.props.footerIconName ? 
-            <Icon name={this.props.footerIconName} style={styles.dropdownHeaderIcon} />
-            :
-            null;
-
-        const footer = this.props.footerValue ?
-            <Touchable
-                style={styles.dropdownFooter}
-                onPress={() => { this.toggleExpanded(); this.props.handleSelect(this.props.footerValue) }}>
-                {footerIcon}
-                <Text
-                    style={[styles.dropdownFooterText, styleConstants.primaryFont]}>
-                    {this.props.footerValue}
-                </Text>
-            </Touchable>
-            :
-            null;
             
         const itemList =
             <Animated.View
@@ -223,17 +203,29 @@ export default class DropdownButton extends React.Component {
                 <ScrollView style={styles.dropdownItemsContainer}>
                     {header}
                     {this.props.values.map((item) => this.renderItem(item))}
-                    {footer}
                 </ScrollView>
             </Animated.View>;
 
+        const button = this.props.categoriesButton ?
+            <CategoriesButton 
+                backgroundColor={this.props.buttonBackgroundColor}
+                handlePress={this.toggleExpanded}
+                currentCategory={this.props.currentCategory}
+                currentCount={this.props.currentCount}
+                totalCount={this.props.totalCount} />
+            :
+            <Button
+                backgroundColor={this.props.buttonBackgroundColor}
+                handlePress={this.toggleExpanded}
+                text={this.props.currentValue ? this.props.currentValue : this.props.displayText} />;
+
         return (
             <View style={styles.dropdownContainer}>
-                <Button
-                    backgroundColor={this.props.buttonBackgroundColor}
-                    handlePress={this.toggleExpanded}
-                    text={this.props.currentValue ? this.props.currentValue : this.props.displayText} />
+
+                {button}
+
                 {itemList}
+
             </View>
         );
     }

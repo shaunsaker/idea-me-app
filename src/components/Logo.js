@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
         marginRight: 4,
     },
     icon: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.iconFont,
     },
     text: {
-        fontSize: styleConstants.largeFont,
+        fontSize: 28,
         color: styleConstants.white,
     }
 });

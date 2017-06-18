@@ -1,6 +1,6 @@
 TODOS
 
-    Dropdown height needs work
+    Animate menu height
     Limit category name/idea title length
     If category deleted, selected category should change to All on Home page
     Delete modals not removing transparent bg when removed from page
@@ -17,16 +17,10 @@ TODOS
     Inputs should show that the input was valid (label stays secondary color)
     App Icons
     Profile menu get in touch email link
-    Animate menu height and opacity
     Selecting a category should scroll list to beginning
     Logo
 
     Facebook/Google Sign In
-    Home page header feature
-        Remove logo add search bar with idea count on right
-        When keyboard is up, hide second header (would be nice to animate behind header)
-        Second header has view options (list and card) and categories icon (for dropdown)
-            On categories press, expand left with Select a Category as header and dropdown menu below
     Animators as component wrappers
     Test all errors
     Optimise code

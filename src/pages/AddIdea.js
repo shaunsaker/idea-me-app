@@ -138,11 +138,13 @@ export class AddIdea extends React.Component {
           headerShadow />
 
         <InputContainer>
+
           <Input
             placeholder="WHAT'S THE BIG IDEA?"
             value={this.state.newIdeaTitle}
             handleChange={this.updateNewIdeaTitle}
             autoFocus />
+            
           <Input
             placeholder="ENTER YOUR DESCRIPTION HERE"
             value={this.state.newIdeaDescription}
@@ -158,6 +160,7 @@ export class AddIdea extends React.Component {
             headerValue='Edit Categories'
             buttonBackgroundColor={styleConstants.primary}
             pushContent />
+
           <DropdownButton
             displayText='Select a Priority'
             currentValue={this.state.newIdeaPriority}
@@ -165,6 +168,7 @@ export class AddIdea extends React.Component {
             handleSelect={this.selectPriority}
             buttonBackgroundColor={styleConstants.primary}
             pushContent />
+
         </InputContainer>
 
         <Button

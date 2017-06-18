@@ -73,7 +73,7 @@ export default class Menu extends React.Component {
         )
     }
 
-	render() {      
+	render() {   
 		return (
             <FlatList
                 keyExtractor={item => 'menu' + item}
