@@ -22,11 +22,6 @@ export class SignInOptions extends React.Component {
         this.signInUserWithGoogle = this.signInUserWithGoogle.bind(this);
         this.signInUserWithEmail = this.signInUserWithEmail.bind(this);
         this.signInUserAnonymously = this.signInUserAnonymously.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
-
-        this.state = {
-            showModal:false
-        }
     }
 
     static get propTypes() {
@@ -85,8 +80,6 @@ export class SignInOptions extends React.Component {
     }
 
     signInUserAnonymously() {
-        this.toggleModal();
-
         this.props.dispatch({
             type: 'TOGGLE_LOADING'
         });
@@ -96,22 +89,7 @@ export class SignInOptions extends React.Component {
         });
     }
 
-    toggleModal() {
-        this.setState({
-            showModal: !this.state.showModal
-        });
-    }
-
     render() {
-        const modal = this.state.showModal ?
-            <ActionModal 
-                title="Are you sure you want to continue anonymously?"
-                subtitle="You won't be able to save any of your ideas."
-                handleLeftIconPress={this.signInUserAnonymously}
-                handleRightIconPress={this.toggleModal} />
-            :
-            null;
-
         return (
             <Page
                 fauxFooter>
@@ -137,12 +115,10 @@ export class SignInOptions extends React.Component {
                         backgroundColor='transparent' />
                     <Button
                         iconName='anonymous'
-                        handlePress={this.toggleModal} 
+                        handlePress={this.signInUserAnonymously} 
                         text='Continue Anonymously'
                         backgroundColor='transparent' />
                 </View>
-
-                {modal}
 
 				<SnackBar />
 

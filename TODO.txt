@@ -1,8 +1,9 @@
 TODOS
 
-    If !firstTimeUser, get suburb location on editLocation page
-    Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
     Dont display anonymous log in modal
+    Utils   
+        Use Object.assign({}, newObject) instead of creating new objects with vars
+    If !firstTimeUser, get suburb location on editLocation page
     Page removes padding on small devices
         Other responsive fixes
     On app load, if app is offline, don't display loader
