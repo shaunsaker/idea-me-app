@@ -2,6 +2,7 @@ import React from 'react';
 import {
     StatusBar,
     View,
+    NetInfo,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
@@ -24,7 +25,7 @@ export class Splash extends React.Component {
     static get propTypes() {
         return {
             authenticated: React.PropTypes.bool,
-			geolocationSuccess: React.PropTypes.bool,
+            geolocationSuccess: React.PropTypes.bool,
             geolocationError: React.PropTypes.bool,
             cloudDataSuccess: React.PropTypes.bool,
             redirectToWelcomePage: React.PropTypes.bool,
@@ -34,6 +35,18 @@ export class Splash extends React.Component {
     }
 
     componentDidMount() {
+
+        // Check if the user is connected to a network
+        NetInfo.isConnected.fetch()
+            .then((isConnected) => {
+                if (!isConnected) {
+                    console.log('Not connected')
+                    this.props.dispatch({
+                        type: 'TOGGLE_NETWORK_STATE'
+                    });
+                }
+            });
+
         if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
@@ -50,44 +63,44 @@ export class Splash extends React.Component {
                 type: 'getUserAuth'
             });
 
-			// Get the user's current location
-			if (!this.props.geolocationSuccess || !this.props.geolocationError) {
-				this.props.dispatch({
-					type: 'getUserLocation'
-				});
-			}
+            // Get the user's current location
+            if (!this.props.geolocationSuccess || !this.props.geolocationError) {
+                this.props.dispatch({
+                    type: 'getUserLocation'
+                });
+            }
         }
     }
 
     componentDidUpdate() {
 
-		// Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
-			// Wait for geolocationSuccess before doing so
-		if ((this.props.geolocationSuccess || this.props.geolocationError) && this.props.redirectToWelcomePage) {
-			Actions.welcome();
-		}
+        // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
+        // Wait for geolocationSuccess before doing so
+        if ((this.props.geolocationSuccess || this.props.geolocationError) && this.props.redirectToWelcomePage) {
+            Actions.welcome();
+        }
 
-		// If we're authenticated and we have location and have not yet loaded data, load/save data to db
-		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
-			this.props.dispatch({
-				type: 'loadUserData',
+        // If we're authenticated and we have location and have not yet loaded data, load/save data to db
+        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'loadUserData',
                 uid: this.props.uid,
-			});
-		}
+            });
+        }
 
-		// If we're authenticated, we have geolocation and we have the userData, redirect to the home page
-		else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.cloudDataSuccess) {
+        // If we're authenticated, we have geolocation and we have the userData, redirect to the home page
+        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_CLOUD_DATA_SUCCESS'
-            }); 
+            });
 
-			Actions.home(); 
-		}
+            Actions.home();
+        }
     }
 
     render() {
         return (
-            <Page 
+            <Page
                 justifyContent='center'
                 fauxFooter >
 
@@ -98,7 +111,7 @@ export class Splash extends React.Component {
                     color={styleConstants.lightGrey}
                     size={64} />
 
-                <View style={{position: 'absolute', bottom: 0}}>
+                <View style={{ position: 'absolute', bottom: 0 }}>
                     <InfoBlock
                         fullWidth
                         title={this.quote.title}

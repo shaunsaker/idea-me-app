@@ -13,6 +13,7 @@ const initialState = {
         authErrorMessage: null,
     },
     app: {
+        hasNetwork: true, // assume this is true on app load
         loading: false, // needs to be true on initial app load
 
         errorType: null,
@@ -34,7 +35,7 @@ const initialState = {
         cloudStorageErrorMessage: null,
     },
     geolocation: {
-        currentLocation: 'Observatory',
+        currentLocation: null,
         geolocationSuccess: null,
         geolocationError: null,
     },
@@ -66,43 +67,43 @@ const initialState = {
         },
 
         // object of objects { uid: { title: 'X' ...}, ...}
-        // ideas: null,
-        ideas: {
-            '1497182894539': {
-                title: 'Test1',
-                description: null,
-                category: 'Test',
-                priority: 'Low',
-                uid: '1497182894539',
-            },
-             '1497182894540': {
-                title: 'Test2',
-                description: null,
-                category: null,
-                priority: 'High',
-                uid: '1497182894540',
-            },
-            '1497182894541': {
-                title: 'Test3',
-                description: null,
-                category: 'Test',
-                priority: 'Medium',
-                uid: '1497182894541',
-            },
-        },
+        ideas: null,
+        // ideas: {
+        //     '1497182894539': {
+        //         title: 'Test1',
+        //         description: null,
+        //         category: 'Test',
+        //         priority: 'Low',
+        //         uid: '1497182894539',
+        //     },
+        //      '1497182894540': {
+        //         title: 'Test2',
+        //         description: null,
+        //         category: null,
+        //         priority: 'High',
+        //         uid: '1497182894540',
+        //     },
+        //     '1497182894541': {
+        //         title: 'Test3',
+        //         description: null,
+        //         category: 'Test',
+        //         priority: 'Medium',
+        //         uid: '1497182894541',
+        //     },
+        // },
 
         // object of objects { uid: { title: 'X' }, ...}
-        // categories: null,
-        categories: {
-            '1497182894542': {
-                title: 'Test',
-                uid: '1497182894542',
-            },
-            '1497182894543': {
-                title: 'App',
-                uid: '1497182894543',
-            },
-        }, 
+        categories: null,
+        // categories: {
+        //     '1497182894542': {
+        //         title: 'Test',
+        //         uid: '1497182894542',
+        //     },
+        //     '1497182894543': {
+        //         title: 'App',
+        //         uid: '1497182894543',
+        //     },
+        // }, 
     },
 }
 

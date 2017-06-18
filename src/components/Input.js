@@ -219,7 +219,7 @@ export default class Input extends React.Component {
         this.setState({
             labelColour: this.props.value ? this.inputLabelColourFocussed : this.inputLabelColourBlurred,
             borderColour: this.inputBorderColourBlurred,
-            showTogglePasswordButton: false,
+            showTogglePasswordButton: this.props.value,
             showCharacterCount: this.props.value,
         });
     }

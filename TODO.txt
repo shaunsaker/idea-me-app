@@ -1,9 +1,7 @@
 TODOS
 
-    Priority dropdown in AddIdea should scroll page to bottom
-    If !firstTimeUser, get suburb location on editLocation page
-    On app load, if app is offline, don't display loader
-
+    Facebook/Google Sign In
+    Animators as component wrappers
     zIndex
         Animate menu height
         All categories button sometimes does not work after save
@@ -11,9 +9,30 @@ TODOS
         Use Object.assign({}, newObject) instead of creating new objects with vars
     Page removes padding on small devices
         Other responsive fixes
-
-    Facebook/Google Sign In
-    Animators as component wrappers
+    Update suburbs or use a geo-service
+    Sound when idea added
+    Ideas
+        Add notes to ideas (direct button on card)
+        Whatsapp chat style or similar
+        + Text
+        + Sketches
+        + Images
+        + Voice notes
+        + Convert Voice Note to Text
+        + Link
+    Empty state
+        Prepopulate idea on signup
+        Tooltips
+        Email after signup detailing what app does and howtos
+    Add analytics
+    Announcement page for when I need to make some sort of announcement
+        FIRST THINK OF TYPES OF ANNOUNCEMENTS
+        Based on api prop
+    App renaming
+    App Icons
+    Logo
+    Apply material styles
+        See material.io
     Test all errors
     Optimise code
         Remove unnecessary
@@ -27,30 +46,6 @@ TODOS
         User errors should contain resets
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
         Use shouldComponentUpdate where necessary
-    Empty state
-        Prepopulate idea on signup
-    Update suburbs or use a geo-service
-    Sound when idea added
-    Ideas
-        Add notes to ideas (direct button on card)
-        Whatsapp chat style or similar
-        + Text
-        + Sketches
-        + Images
-        + Voice notes
-        + Convert Voice Note to Text
-        + Link
-    First time use Tooltips showing what to do next
-    Email after signup detailing what app does and howtos
-    Add analytics
-    Announcement page for when I need to make some sort of announcement
-        FIRST THINK OF TYPES OF ANNOUNCEMENTS
-        Based on api prop
-    App renaming
-    App Icons
-    Logo
-    Apply material styles
-        See material.io
 
 IOS
     Integrate react-native-fbsdk on iOS

@@ -19,12 +19,14 @@ const styles = StyleSheet.create({
 export class Loader extends React.Component{
     static get propTypes() {
       return {
-		loading: React.PropTypes.bool
+		hasNetwork: React.PropTypes.bool,
+		loading: React.PropTypes.bool,
+		customLoader: React.PropTypes.bool,
       };
     }
 
 	render() {
-		const loader = (this.props.loading || this.props.customLoader) ?
+		const loader = ((this.props.hasNetwork && this.props.loading) || this.props.customLoader) ?
 			<LoaderComponent />
 			:
 			null;
@@ -54,7 +56,8 @@ export class Loader extends React.Component{
 
 function mapStateToProps(state) {
 	return {
-		loading: state.main.app.loading
+		hasNetwork: state.main.app.hasNetwork,
+		loading: state.main.app.loading,
 	}
 }
 

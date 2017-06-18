@@ -37,6 +37,7 @@ export class Categories extends React.Component {
       uid: React.PropTypes.string,
       cloudDataSuccess: React.PropTypes.bool,
       currentAction: React.PropTypes.string,
+      hasNetwork: React.PropTypes.bool,
     };
   }
 
@@ -88,6 +89,7 @@ export class Categories extends React.Component {
           uid: this.props.uid,
           userData: newIdeas,
           currentAction: 'deleteCategory',
+          hasNetwork: this.props.hasNetwork,
         }
       ];
 
@@ -102,6 +104,7 @@ export class Categories extends React.Component {
       type: 'deleteUserData',
       node: 'categories/' + uid,
       uid: this.props.uid,
+      hasNetwork: this.props.hasNetwork,
       nextAction: nextActions,
     });
   }
@@ -158,6 +161,7 @@ function mapStateToProps(state) {
     uid: state.main.auth.uid,
     cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
     currentAction: state.main.app.currentAction,
+    hasNetwork: state.main.app.hasNetwork,
   });
 }
 

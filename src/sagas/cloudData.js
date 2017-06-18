@@ -43,12 +43,14 @@ export function* loadUserData(action) {
 }
 
 export function* saveUserData(action) {
-
-    const saveUserDataResponse = yield call(CloudData.saveUserData, action);
+    const saveUserDataResponse = action.hasNetwork ?
+        yield call(CloudData.saveUserData, action)
+        :
+        CloudData.saveUserData(action); // will never yield a response if offline
     console.log('saveUserDataResponse', saveUserDataResponse);
 
-    if (saveUserDataResponse) {       
-        if (saveUserDataResponse.success) {
+    if (saveUserDataResponse || !action.hasNetwork) {       
+        if (saveUserDataResponse.success || !action.hasNetwork) {
 
             // We use this to dispatch another action(s) that was attached from the page
             if (action.nextAction) {
@@ -94,12 +96,14 @@ export function* saveUserData(action) {
 }
 
 export function* deleteUserData(action) {
-
-    const deleteUserDataResponse = yield call(CloudData.deleteUserData, action);
+    const deleteUserDataResponse = action.hasNetwork ?
+        yield call(CloudData.deleteUserData, action)
+        :
+        CloudData.deleteUserData(action); // will never yield a response if offline
     console.log('deleteUserDataResponse', deleteUserDataResponse);
 
-    if (deleteUserDataResponse) {       
-        if (deleteUserDataResponse.success) {
+    if (deleteUserDataResponse || !action.hasNetwork) {       
+        if (deleteUserDataResponse.success || !action.hasNetwork) {
 
             // We use this to dispatch another action(s) that was attached from the page
             if (action.nextAction) {
