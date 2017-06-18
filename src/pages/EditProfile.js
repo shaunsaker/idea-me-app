@@ -214,7 +214,8 @@ export class Profile extends React.Component {
                     <Input
                         placeholder="NAME"
                         value={this.state.editUserName}
-                        handleChange={this.updateEditUserName} />
+                        handleChange={this.updateEditUserName}
+                        maxLength={16} />
 
                     <Input
                         placeholder="EMAIL ADDRESS"

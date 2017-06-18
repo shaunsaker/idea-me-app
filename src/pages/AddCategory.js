@@ -103,6 +103,7 @@ export class AddCategory extends React.Component {
             placeholder="CATEGORY NAME"
             value={this.state.newCategory}
             handleChange={this.updateNewCategory}
+            maxLength={16}
             autoFocus />
         </InputContainer>
 

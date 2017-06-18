@@ -8,8 +8,7 @@ export default InputContainer = (props) => {
     return (
         <View style={{flex: 1, alignSelf: 'stretch', alignItems: 'center'}}>
             <KeyboardAwareScrollView
-                keyboardShouldPersistTaps='handled'
-                contentContainerStyle={{flex: 1}}>
+                keyboardShouldPersistTaps='handled'>
                 {props.children}
             </KeyboardAwareScrollView>
 

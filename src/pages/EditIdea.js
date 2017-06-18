@@ -150,7 +150,8 @@ export class EditIdea extends React.Component {
                     <Input
                         placeholder="WHAT'S THE BIG IDEA?"
                         value={this.state.editIdeaTitle}
-                        handleChange={this.updateEditIdeaTitle} />
+                        handleChange={this.updateEditIdeaTitle}
+                        maxLength={16} />
                     <Input
                         placeholder='ENTER YOUR DESCRIPTION HERE'
                         value={this.state.editIdeaDescription}

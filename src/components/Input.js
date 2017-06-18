@@ -51,9 +51,17 @@ const styles = StyleSheet.create({
 
     },
     togglePasswordText: {
-        fontSize: styleConstants.regularFont,
-        color: styleConstants.white
+        fontSize: styleConstants.smallFont,
+        color: styleConstants.white,
     },
+
+    characterCountContainer: {
+
+    },
+    characterCountText: {
+        fontSize: styleConstants.smallFont,
+        color: styleConstants.lightGrey,
+    }
 });
 
 class TogglePasswordButton extends React.Component {
@@ -130,6 +138,7 @@ export default class Input extends React.Component {
             keyboardType: React.PropTypes.string,
             autoFocus: React.PropTypes.bool,
             multiline: React.PropTypes.bool,
+            maxLength: React.PropTypes.number,
         };
     }
 
@@ -185,6 +194,15 @@ export default class Input extends React.Component {
                 hidePassword={this.state.hidePassword}
                 handlePress={this.togglePassword} />;
 
+        const characterCount = this.props.maxLength ?
+            <View style={styles.characterCountContainer}>
+                <Text style={[styles.characterCountText, styleConstants.primaryFont]}>
+                    {(this.props.value ? this.props.value.length : 0) + ' / ' + this.props.maxLength}
+                </Text>
+            </View>
+            :
+            null;
+
         const clearTextButton = this.props.value ?
             <View style={styles.clearTextButtonContainer}>
                 <DeleteButton 
@@ -224,6 +242,7 @@ export default class Input extends React.Component {
                             {this.props.placeholder}
                         </Text>
                         {togglePasswordButton}
+                        {characterCount}
                     </View>
                     <TextInput
                         ref='input'
@@ -237,6 +256,7 @@ export default class Input extends React.Component {
                         keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
                         autoFocus={this.props.autoFocus} 
                         multiline={this.props.multiline}
+                        maxLength={this.props.maxLength}
                         onChange={this.props.multiline ? (event) => this.adjustInputHeight(event) : null /*NOTE: this does not work with onContentSizeChange */} />
                     {clearTextButton}
                 </View>

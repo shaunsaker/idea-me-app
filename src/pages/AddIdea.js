@@ -143,6 +143,7 @@ export class AddIdea extends React.Component {
             placeholder="WHAT'S THE BIG IDEA?"
             value={this.state.newIdeaTitle}
             handleChange={this.updateNewIdeaTitle}
+            maxLength={16}
             autoFocus />
             
           <Input
