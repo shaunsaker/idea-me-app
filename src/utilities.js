@@ -64,6 +64,10 @@ utilities.getRandomItemFromArray = (array) => {
 
 /* OBJECTS */
 
+utilities.cloneObject = (object) => {
+    return JSON.parse(JSON.stringify(object));
+}
+
 // Takes an object array and returns a normal array without the keys
 utilities.convertObjectArrayToArrayOfObjects = (objectArray) => {
     let array = [];

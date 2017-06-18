@@ -1,7 +1,5 @@
 TODOS
 
-    All categories button sometimes does not work after save
-    Move reducers cloneObject to utilities
     If !firstTimeUser, get suburb location on editLocation page
     Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
     Dont display anonymous log in modal
@@ -12,6 +10,9 @@ TODOS
     App Icons
     Profile menu get in touch email link
     Logo
+    zIndex
+        Animate menu height
+        All categories button sometimes does not work after save
 
     Facebook/Google Sign In
     Animators as component wrappers
@@ -50,9 +51,6 @@ TODOS
     App renaming
     Apply material styles
         See material.io
-
-BUGS/ATTEMPTS NOT WORKING
-    Animate menu height
 
 IOS
     Integrate react-native-fbsdk on iOS

@@ -119,7 +119,7 @@ export default class DropdownButton extends React.Component {
     toggleExpanded() {
 
         // We need to check how many items we have so that we can render a perfect height
-        const itemCount = (this.props.headerValue ? 1 : 0) + (this.props.footerValue ? 1 : 0) + this.props.values.length;
+        const itemCount = (this.props.headerValue ? 1 : 0) + this.props.values.length;
         const dropdownInnerHeight = itemCount * this.itemHeight;
         const dropdownOuterHeight = dropdownInnerHeight < this.maxHeight ? dropdownInnerHeight : this.maxHeight;
 
