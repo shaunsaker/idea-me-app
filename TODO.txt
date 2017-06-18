@@ -1,19 +1,16 @@
 TODOS
 
-    Dont display anonymous log in modal
-    Utils   
-        Use Object.assign({}, newObject) instead of creating new objects with vars
-    If !firstTimeUser, get suburb location on editLocation page
-    Page removes padding on small devices
-        Other responsive fixes
-    On app load, if app is offline, don't display loader
     Priority dropdown in AddIdea should scroll page to bottom
-    App Icons
-    Profile menu get in touch email link
-    Logo
+    If !firstTimeUser, get suburb location on editLocation page
+    On app load, if app is offline, don't display loader
+
     zIndex
         Animate menu height
         All categories button sometimes does not work after save
+    Utils   
+        Use Object.assign({}, newObject) instead of creating new objects with vars
+    Page removes padding on small devices
+        Other responsive fixes
 
     Facebook/Google Sign In
     Animators as component wrappers
@@ -50,6 +47,8 @@ TODOS
         FIRST THINK OF TYPES OF ANNOUNCEMENTS
         Based on api prop
     App renaming
+    App Icons
+    Logo
     Apply material styles
         See material.io
 

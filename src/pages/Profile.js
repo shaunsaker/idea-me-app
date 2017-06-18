@@ -1,11 +1,13 @@
 import React from "react";
 import {
     View,
+    Linking,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import Icon from '../styles/icons/index';
 
+import config from '../config';
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
@@ -71,6 +73,9 @@ export class Profile extends React.Component {
         else if (type === 'Give us Feedback') {
             this.toggleBrowser();
         }
+        else if (type === 'Get in Touch') {
+            Linking.openURL('mailto:' + config.developer.email + '?subject=IdeaMe App');
+        }
         else {
             this.toggleActionModal();
         }
@@ -115,7 +120,7 @@ export class Profile extends React.Component {
     render() {
         const menu = this.state.showMenu && 
             <Menu 
-                values={['Edit Profile', 'About App', 'Settings', 'Give us Feedback', 'Log Out']}
+                values={['Edit Profile', 'About App', 'Settings', 'Give us Feedback', 'Get in Touch', 'Log Out']}
                 handleSelect={(type) => this.selectMenuItem(type)} />;
 
 		const browser = this.state.showBrowser ? 

@@ -2,6 +2,11 @@ import { Easing } from 'react-native';
 
 const config = {};
 
+config.developer = {
+    name: 'Shaun Saker',
+    email: 'info@shaunsaker.com',
+};
+
 config.animation = {
     duration: {
         short: 250,
