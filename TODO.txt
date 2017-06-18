@@ -1,9 +1,8 @@
 TODOS
 
-    Limit category name/idea title length
+    Input did not grow in height with multiline text
     If category deleted, selected category should change to All on Home page
     Delete modals not removing transparent bg when removed from page
-    Input did not grow in height with multiline text
     After save, saw remnants of the loader on the home page
     Move reducers cloneObject to utilities
     If !firstTimeUser, get suburb location on editLocation page
@@ -13,7 +12,6 @@ TODOS
         Other responsive fixes
     On app load, if app is offline, don't display loader
     Priority dropdown in AddIdea should scroll page to bottom
-    Inputs should show that the input was valid (label stays secondary color)
     App Icons
     Profile menu get in touch email link
     Selecting a category should scroll list to beginning

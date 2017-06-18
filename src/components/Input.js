@@ -154,7 +154,7 @@ export default class Input extends React.Component {
 
     blurInput() {
         this.setState({
-            labelColour: this.inputLabelColourBlurred,
+            labelColour: this.props.value ? this.inputLabelColourFocussed : this.inputLabelColourBlurred,
             borderColour: this.inputBorderColourBlurred,
             showTogglePasswordButton: false,
         });
