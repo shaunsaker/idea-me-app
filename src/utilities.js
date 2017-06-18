@@ -1,5 +1,15 @@
 const utilities = {};
 
+/* METHODS */
+
+utilities.getInputHeight = (inputWidth, inputLineHeight, charCount) => {
+    const charsPerLine = Math.floor(inputWidth / inputLineHeight);
+    const numberOfLines = Math.ceil(charCount / charsPerLine);
+    const inputHeight = Math.ceil(numberOfLines * inputLineHeight);
+    
+    return inputHeight;
+}
+
 /* STRINGS */
 
 utilities.firstCharToUppercase = (string) => {
