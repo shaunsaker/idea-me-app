@@ -1,9 +1,6 @@
 TODOS
 
-    Input did not grow in height with multiline text
-    If category deleted, selected category should change to All on Home page
-    Delete modals not removing transparent bg when removed from page
-    After save, saw remnants of the loader on the home page
+    All categories button sometimes does not work after save
     Move reducers cloneObject to utilities
     If !firstTimeUser, get suburb location on editLocation page
     Utils   Use Object.assign({}, newObject) instead of creating new objects with vars
@@ -14,7 +11,6 @@ TODOS
     Priority dropdown in AddIdea should scroll page to bottom
     App Icons
     Profile menu get in touch email link
-    Selecting a category should scroll list to beginning
     Logo
 
     Facebook/Google Sign In

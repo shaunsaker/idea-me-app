@@ -76,11 +76,7 @@ export class Categories extends React.Component {
     const newCategories = utilities.deleteObjectFromObjectArray(uid, this.props.categories);
     const newIdeas = this.props.ideas && utilities.findKeyValuePairAndSetKeysValueToNull({'category': targetCategory}, this.props.ideas);
 
-    this.props.dispatch({
-      type: 'deleteUserData',
-      node: 'categories/' + uid,
-      uid: this.props.uid,
-      nextAction: [
+    let nextActions = [
         {
           type: 'UPDATE_USER_DATA',
           node: 'categories',
@@ -93,7 +89,20 @@ export class Categories extends React.Component {
           userData: newIdeas,
           currentAction: 'deleteCategory',
         }
-      ]
+      ];
+
+    if (targetCategory === this.props.currentCategory) {
+      nextActions.push({
+        type: 'SELECT_CATEGORY',
+        value: 'All Categories',
+      });
+    }
+
+    this.props.dispatch({
+      type: 'deleteUserData',
+      node: 'categories/' + uid,
+      uid: this.props.uid,
+      nextAction: nextActions,
     });
   }
 
@@ -143,6 +152,7 @@ export class Categories extends React.Component {
 function mapStateToProps(state) {
   return ({
     categories: state.main.userData.categories,
+    currentCategory: state.main.appData.currentCategory,
     ideas: state.main.userData.ideas,
     profile: state.main.userData.profile,
     uid: state.main.auth.uid,

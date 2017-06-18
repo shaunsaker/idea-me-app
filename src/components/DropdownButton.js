@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
             width: 0
         },
         backgroundColor: styleConstants.white,
+        zIndex: 1,
     },
     dropdownHeader: {        
         flexDirection: 'row',
