@@ -34,6 +34,17 @@ export class EditLocation extends React.Component {
         this.setState({
             suburbs: this.props.suburbs
         });
+
+        // Get the user's current location
+        if (!this.props.currentLocation) {
+
+            // Reduce jank on page mount
+            setTimeout(() => {
+                this.props.dispatch({
+                    type: 'getUserLocation'
+                });
+            }, 500);
+        }
     }
 
     updateEditUserLocation(text) {

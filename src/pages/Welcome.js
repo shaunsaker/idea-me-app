@@ -26,6 +26,7 @@ export class Welcome extends React.Component {
         return {
             authenticated: React.PropTypes.bool,
             cloudDataSuccess: React.PropTypes.bool,
+
             uid: React.PropTypes.string,
             userEmail: React.PropTypes.string,
 			userName: React.PropTypes.string,
@@ -34,10 +35,24 @@ export class Welcome extends React.Component {
         };
     }
 
+    componentDidMount() {
+
+        // Get the user's current location
+        if (!this.props.currentLocation) {
+
+                // Reduce jank on page mount
+                setTimeout(() => {
+                    this.props.dispatch({
+                        type: 'getUserLocation'
+                    });
+                }, 500);
+        }
+    }
+
     componentDidUpdate() {
 
-		// If we're authenticated and we have not yet loaded data, load/save data to db
-		if (this.props.authenticated && !this.props.cloudDataSuccess) {
+		// If we're authenticated, we have geolocation and we have not yet loaded data, load/save data to db
+		if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
 			this.props.dispatch({
 				type: 'loadUser',
 				uid: this.props.uid,
@@ -53,7 +68,8 @@ export class Welcome extends React.Component {
 			});
 		}
 
-		if (this.props.authenticated && this.props.cloudDataSuccess) {
+        // If we have data, we have everything we need
+		else if (this.props.cloudDataSuccess) {
 			this.props.dispatch({
 				type: 'RESET_CLOUD_DATA_SUCCESS'
 			});
@@ -116,6 +132,7 @@ function mapStateToProps(state) {
     return ({
 		authenticated: state.main.auth.authenticated,
 		cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+        
 		uid: state.main.auth.uid,
 		userEmail: state.main.userData.profile.userEmail,
 		userName: state.main.userData.profile.userName,

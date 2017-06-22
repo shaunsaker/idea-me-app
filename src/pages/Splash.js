@@ -25,8 +25,6 @@ export class Splash extends React.Component {
     static get propTypes() {
         return {
             authenticated: React.PropTypes.bool,
-            geolocationSuccess: React.PropTypes.bool,
-            geolocationError: React.PropTypes.bool,
             cloudDataSuccess: React.PropTypes.bool,
             redirectToWelcomePage: React.PropTypes.bool,
 
@@ -40,7 +38,6 @@ export class Splash extends React.Component {
         NetInfo.isConnected.fetch()
             .then((isConnected) => {
                 if (!isConnected) {
-                    console.log('Not connected')
                     this.props.dispatch({
                         type: 'TOGGLE_NETWORK_STATE'
                     });
@@ -52,7 +49,7 @@ export class Splash extends React.Component {
         }
 
         // When a user is signed in and reloads app
-        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
+        else if (this.props.authenticated && !this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid
@@ -62,34 +59,26 @@ export class Splash extends React.Component {
             this.props.dispatch({
                 type: 'getUserAuth'
             });
-
-            // Get the user's current location
-            if (!this.props.geolocationSuccess || !this.props.geolocationError) {
-                this.props.dispatch({
-                    type: 'getUserLocation'
-                });
-            }
         }
     }
 
     componentDidUpdate() {
 
         // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
-        // Wait for geolocationSuccess before doing so
-        if ((this.props.geolocationSuccess || this.props.geolocationError) && this.props.redirectToWelcomePage) {
+        if (this.props.redirectToWelcomePage) {
             Actions.welcome();
         }
 
-        // If we're authenticated and we have location and have not yet loaded data, load/save data to db
-        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && !this.props.cloudDataSuccess) {
+        // If we're authenticated and we have not yet loaded data, load/save data to db
+        else if (this.props.authenticated && !this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid,
             });
         }
 
-        // If we're authenticated, we have geolocation and we have the userData, redirect to the home page
-        else if (this.props.authenticated && (this.props.geolocationSuccess || this.props.geolocationError) && this.props.cloudDataSuccess) {
+        // If we have data, we have everything we need
+        else if (this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_CLOUD_DATA_SUCCESS'
             });
@@ -132,8 +121,6 @@ function mapStateToProps(state) {
         quotes: state.main.appData.quotes,
 
         authenticated: state.main.auth.authenticated,
-        geolocationSuccess: state.main.geolocation.geolocationSuccess,
-        geolocationError: state.main.geolocation.geolocationError,
         cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         redirectToWelcomePage: state.main.auth.redirectToWelcomePage,
         uid: state.main.auth.uid,

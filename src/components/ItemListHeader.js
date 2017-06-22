@@ -2,6 +2,7 @@ import React from 'react';
 import {
     View,
     Text,
+    ActivityIndicator,
     StyleSheet,
     Dimensions,
 } from "react-native";
@@ -46,6 +47,10 @@ const styles = StyleSheet.create({
         fontSize: styleConstants.iconFont,
         color: styleConstants.white,
     },
+    loaderContainer: {
+        alignItems: 'flex-start',
+        marginTop: 4.5,
+    }
 });
 
 export default ItemListHeader = (props) => {
@@ -57,10 +62,17 @@ export default ItemListHeader = (props) => {
 		:
 		null;
 
-	const subtitle = props.value ?
-		<Text style={[styles.headerSubtitleText, styleConstants.primaryFont]}>{props.value}</Text>
-		:
-		null;
+	const subtitle = !props.value && !props.headerDisabled ?
+        <View style={styles.loaderContainer}>
+            <ActivityIndicator
+                size="small"
+                color={styleConstants.white} />
+        </View>
+        :
+        props.value ?
+            <Text style={[styles.headerSubtitleText, styleConstants.primaryFont]}>{props.value}</Text>
+            :
+            null;
 
     const header = props.disabled ?
         <View

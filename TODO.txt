@@ -1,6 +1,6 @@
 TODOS
 
-    Get location on sign in only and then in edit location as needed
+    Forgot password when user does not exist?
     Profile page has edit button BR corner
     Radio select for priorities
     Display loader when saving/editing/deleting?
@@ -11,6 +11,11 @@ TODOS
     Animators as component wrappers
     Browser uses Menu component and not ActionSheet
     Facebook/Google Sign In
+    Apply material styles
+        See material.io
+        Redesign lists
+        Modal needs padding
+        Logo
     zIndex
         Animate menu height
         All categories button sometimes does not work after save
@@ -40,11 +45,6 @@ TODOS
         Based on api prop
     App renaming
     App Icons
-    Logo
-    Apply material styles
-        See material.io
-        Redesign lists
-        Modal needs padding
     Test all errors
     Optimise code
         Remove unnecessary
