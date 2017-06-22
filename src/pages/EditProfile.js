@@ -29,7 +29,8 @@ export class Profile extends React.Component {
         this.state = {
             editUserName: null,
             editUserEmail: null,
-            showModal: false,}
+            showModal: false,
+        }
 
         this.toggleModal = this.toggleModal.bind(this);
         this.selectModalOption = this.selectModalOption.bind(this);
@@ -61,7 +62,7 @@ export class Profile extends React.Component {
         if (this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_CLOUD_DATA_SUCCESS'
-            }); 
+            });
 
             Actions.pop();
         }
@@ -82,7 +83,7 @@ export class Profile extends React.Component {
         }
     }
 
-    takePhoto() {        
+    takePhoto() {
         this.toggleModal();
 
         ImagePicker.launchCamera(config.images.imagePickerOptions, (response) => {
@@ -170,7 +171,7 @@ export class Profile extends React.Component {
     updateUserDetails() {
         this.props.dispatch({
             type: 'TOGGLE_LOADING'
-        }); 
+        });
 
         const prettyUserName = utilities.prettifyString(this.state.editUserName);
 
@@ -192,21 +193,24 @@ export class Profile extends React.Component {
             <OptionsModal
                 options={['Take a Photo', 'Choose a Photo']}
                 handleSelect={this.selectModalOption}
-                handleClose={this.toggleModal}/>
+                handleClose={this.toggleModal} />
             :
             null;
 
-        const enableContinueButton = this.state.editUserEmail && this.state.editUserName;
+        const enableContinueButton = this.state.editUserEmail && this.state.editUserName ? true : false;
 
         return (
             <Page>
 
                 <Header
                     text='Edit Profile'
-                    closeButton
+                    backButton
+                    continueButton={enableContinueButton}
+                    handleRightIconPress={this.updateUserDetails}
                     headerShadow />
 
                 <InputContainer>
+
                     <EditableImage
                         uri={this.props.userPhotoUrl}
                         handlePress={this.toggleModal} />
@@ -222,19 +226,13 @@ export class Profile extends React.Component {
                         value={this.state.editUserEmail}
                         handleChange={this.updateEditUserEmail} />
 
-                    <Button
-                        iconName='location_edit'
-                        text={this.props.userLocation}
-                        backgroundColor='transparent'
-                        handlePress={() => Actions.editLocation()} />
                 </InputContainer>
 
                 <Button
-                    iconName='check'
-                    text='Continue'
+                    iconName='location_edit'
+                    text={this.props.userLocation}
                     backgroundColor={styleConstants.white}
-                    handlePress={this.updateUserDetails}
-                    disabled={!enableContinueButton} />
+                    handlePress={() => Actions.editLocation()} />
 
                 {modal}
 

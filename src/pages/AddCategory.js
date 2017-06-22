@@ -9,7 +9,6 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
-import Button from '../components/Button';
 import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
@@ -90,7 +89,7 @@ export class AddCategory extends React.Component {
   }
 
   render() {
-    const enableContinueButton = this.state.newCategory;
+    const enableContinueButton = this.state.newCategory ? true : false;
 
     return (
       <Page>
@@ -98,9 +97,12 @@ export class AddCategory extends React.Component {
         <Header
           text='Add a Category'
           closeButton
+          continueButton={enableContinueButton}
+          handleRightIconPress={this.addNewCategory}
           headerShadow />
 
-        <InputContainer>
+        <InputContainer
+          verticalCenter>
           <Input
             placeholder="CATEGORY NAME"
             value={this.state.newCategory}
@@ -108,13 +110,6 @@ export class AddCategory extends React.Component {
             maxLength={16}
             autoFocus />
         </InputContainer>
-
-        <Button
-          iconName='check'
-          text='Continue'
-          handlePress={this.addNewCategory}
-          disabled={!enableContinueButton} 
-          backgroundColor={styleConstants.white}/>
 
         <SnackBar />
 

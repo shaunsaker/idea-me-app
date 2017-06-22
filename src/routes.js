@@ -60,6 +60,7 @@ const Scenes = Actions.create(
 		<Scene
 			key='categories'
 			component={Categories} 
+			type={ActionConst.REPLACE}
 			initial={false} />
 		<Scene
 			key='addCategory'

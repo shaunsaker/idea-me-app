@@ -1,5 +1,17 @@
 TODOS
 
+    Ideas
+        Add notes to ideas
+        Add Idea
+            Notes as tab bar
+        Whatsapp chat style or similar
+        + Text/Notes/Bullets
+        + Sketches
+        + Images
+        + Voice notes
+        + Convert Voice Note to Text
+        + Link   
+    If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
     Profile page has edit button BR corner
     Radio select for priorities
@@ -25,15 +37,8 @@ TODOS
         Other responsive fixes
     Update suburbs or use a geo-service
     Sound when idea added
-    Ideas
-        Add notes to ideas (direct button on card)
-        Whatsapp chat style or similar
-        + Text
-        + Sketches
-        + Images
-        + Voice notes
-        + Convert Voice Note to Text
-        + Link
+    Force update screen
+        Open url (research)
     Empty state
         Prepopulate idea on signup
         Tooltips

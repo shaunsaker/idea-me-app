@@ -10,7 +10,6 @@ import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import DropdownButton from '../components/DropdownButton';
-import Button from '../components/Button';
 import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
@@ -127,16 +126,19 @@ export class AddIdea extends React.Component {
   }
 
   render() {
-    const enableContinueButton = this.state.newIdeaTitle;
+    const enableContinueButton = this.state.newIdeaTitle ? true : false;
     const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
     const priorities = utilities.convertObjectArrayToArrayOfObjects(this.props.priorities);
 
     return (
-      <Page>
+      <Page
+        removeBottomPadding>
 
         <Header
           text='Add an Idea'
           closeButton
+          continueButton={enableContinueButton}
+          handleRightIconPress={this.addNewIdea}
           headerShadow />
 
         <InputContainer>
@@ -173,13 +175,6 @@ export class AddIdea extends React.Component {
             pushContent />
 
         </InputContainer>
-
-        <Button
-          iconName='check'
-          text='Continue'
-          backgroundColor={styleConstants.white}
-          handlePress={this.addNewIdea}
-          disabled={!enableContinueButton} />
 
         <SnackBar />
 

@@ -200,7 +200,7 @@ export class Home extends React.Component {
         <Header
           headerShadow
           leftComponent={() => <Logo />}
-          rightIconName='add'
+          addButton
           handleRightIconPress={() => Actions.addIdea()} />
 
         <DropdownButton

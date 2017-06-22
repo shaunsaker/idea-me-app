@@ -83,6 +83,10 @@ const styles = StyleSheet.create({
 export default class Header extends React.Component {
 	static get propTypes() {
 		return {
+			backButton: React.PropTypes.bool,
+			closeButton: React.PropTypes.bool,
+			addButton: React.PropTypes.bool,
+			continueButton: React.PropTypes.bool,
 			leftComponent: React.PropTypes.func,
 			textComponent: React.PropTypes.func,
 			text: React.PropTypes.string,
@@ -136,10 +140,19 @@ export default class Header extends React.Component {
 							style={styles.leftIcon} />
 					</Touchable>
 					:
-					this.props.textLeft ?
-						null
+					this.props.closeButton ?
+						<Touchable
+							style={this.props.showInput ? { justifyContent: 'center' } : styles.leftIconContainer}
+							onPress={() => Actions.pop()} >
+							<Icon
+								name='close'
+								style={styles.leftIcon} />
+						</Touchable>
 						:
-						<View style={styles.leftIconContainer} />;
+						this.props.textLeft ?
+							null
+							:
+							<View style={styles.leftIconContainer} />;
 
 		const textLeftStyles = this.props.textLeft ?
 			{ 
@@ -185,19 +198,28 @@ export default class Header extends React.Component {
 						style={styles.rightIcon} />
 				</Touchable>
 				:
-				this.props.closeButton ?
+				this.props.addButton ?
 					<Touchable
 						style={styles.rightIconContainer}
-						onPress={() => Actions.pop()} >
+						onPress={this.props.handleRightIconPress} >
 						<Icon
-							name='close'
+							name='add'
 							style={styles.rightIcon} />
 					</Touchable>
 					:
-					(this.props.textRight || this.props.showInput) ?
-						null
+					this.props.continueButton ?
+						<Touchable
+							style={styles.rightIconContainer}
+							onPress={this.props.handleRightIconPress} >
+							<Icon
+								name='check'
+								style={styles.rightIcon} />
+						</Touchable>
 						:
-						<View style={styles.rightIconContainer} />;
+						(this.props.textRight || this.props.showInput) ?
+							null
+							:
+							<View style={styles.rightIconContainer} />;
 
 		const clearTextButton = this.props.inputValue ?
 			<View style={styles.clearTextButtonContainer}>

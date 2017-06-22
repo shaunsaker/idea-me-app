@@ -11,8 +11,8 @@ import styleConstants from '../styles/styleConstants';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import ItemList from '../components/ItemList';
-import Button from '../components/Button';
 import ActionModal from '../components/ActionModal';
+import TabBar from '../components/TabBar';
 import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
@@ -122,11 +122,13 @@ export class Categories extends React.Component {
 
     return (
       <Page
-        backgroundColor={styleConstants.white}>
+        backgroundColor={styleConstants.white}
+        removeBottomPadding >
 
         <Header
           text='Categories'
-          backButton
+          addButton
+          handleRightIconPress={() => Actions.addCategory()}
           headerShadow />
 
         <ItemList
@@ -134,11 +136,8 @@ export class Categories extends React.Component {
           deleteIcon
           handleIconPress={this.toggleDeleteModal} />
 
-        <Button
-          iconName='add'
-          text='Add New Category'
-          backgroundColor={styleConstants.primary}
-          handlePress={() => Actions.addCategory()} />
+        <TabBar
+          currentPage='categories' />
 
         {modal}
 
