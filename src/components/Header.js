@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: styleConstants.regularFont,
-		color: styleConstants.lightGrey,
+		color: styleConstants.white,
 	},
 	rightIconContainer: {
 		flex: 1,

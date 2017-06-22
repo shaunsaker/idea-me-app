@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         width: window.width - 32,
         flex: 1,
-        backgroundColor: styleConstants.white,
+        backgroundColor: styleConstants.realWhite,
         borderWidth: 1,
         borderColor: styleConstants.white,
         margin: 16,

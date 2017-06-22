@@ -1,7 +1,16 @@
 TODOS
 
-    Facebook/Google Sign In
+    Get location on sign in only and then in edit location as needed
+    Profile page has edit button BR corner
+    Radio select for priorities
+    Display loader when saving/editing/deleting?
+        Usually don't have errors here
+        Can skip the loader altogether
+        Update store first will 
+        Perceived performance will improve 200%
     Animators as component wrappers
+    Browser uses Menu component and not ActionSheet
+    Facebook/Google Sign In
     zIndex
         Animate menu height
         All categories button sometimes does not work after save
@@ -25,6 +34,7 @@ TODOS
         Tooltips
         Email after signup detailing what app does and howtos
     Add analytics
+        Create console
     Announcement page for when I need to make some sort of announcement
         FIRST THINK OF TYPES OF ANNOUNCEMENTS
         Based on api prop
@@ -33,6 +43,8 @@ TODOS
     Logo
     Apply material styles
         See material.io
+        Redesign lists
+        Modal needs padding
     Test all errors
     Optimise code
         Remove unnecessary

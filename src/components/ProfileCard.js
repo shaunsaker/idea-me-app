@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     cardContainer: {
         position: 'relative',
         width: window.width - 32,
-        backgroundColor: styleConstants.white,
+        backgroundColor: styleConstants.realWhite,
         borderWidth: 1,
         borderColor: styleConstants.white,
         marginHorizontal: 16,
