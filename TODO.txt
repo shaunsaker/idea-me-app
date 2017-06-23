@@ -1,17 +1,18 @@
 TODOS
 
-    Ideas
-        Icons
+    Add/Edit Ideas
+        Resize Icons
+        Radio select for priorities
+        Remove description input
         Whatsapp chat style or similar
         + Text/Notes/Bullets
-            Description not necessary
         + Images
         + Voice notes
         + Link   
+    Home page notes UI
     If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
     Profile page has edit button BR corner
-    Radio select for priorities
     Display loader when saving/editing/deleting?
         Usually don't have errors here
         Can skip the loader altogether

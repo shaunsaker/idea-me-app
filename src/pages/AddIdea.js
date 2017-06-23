@@ -22,22 +22,22 @@ export class AddIdea extends React.Component {
     this.tabs = [
       {
         title: 'Note',
-        icon: 'add',
+        icon: 'note',
         action: null,
       },
       {
         title: 'Voice Note',
-        icon: 'add',
+        icon: 'voice',
         action: null,
       },
       {
         title: 'Image',
-        icon: 'add',
+        icon: 'camera',
         action: null,
       },
       {
         title: 'Link',
-        icon: 'add',
+        icon: 'link',
         action: null,
       },
     ];

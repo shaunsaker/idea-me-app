@@ -20,7 +20,10 @@ const glyphMap = {
   "location_accurate": 59662,
   "camera": 59663,
   "chevron_left": 59664,
-  "close": 59665
+  "close": 59665,
+  "link": 59669,
+  "voice": 59670,
+  "note": 59671
 };
 
 let Icon = createIconSet(glyphMap, 'IdeaMeAppIcons', 'IdeaMe-Icons.ttf');
