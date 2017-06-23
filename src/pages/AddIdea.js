@@ -10,12 +10,37 @@ import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import DropdownButton from '../components/DropdownButton';
+import TabBar from '../components/TabBar';
 import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
 export class AddIdea extends React.Component {
   constructor(props) {
     super(props);
+
+    // TabBar
+    this.tabs = [
+      {
+        title: 'Note',
+        icon: 'add',
+        action: null,
+      },
+      {
+        title: 'Voice Note',
+        icon: 'add',
+        action: null,
+      },
+      {
+        title: 'Image',
+        icon: 'add',
+        action: null,
+      },
+      {
+        title: 'Link',
+        icon: 'add',
+        action: null,
+      },
+    ];
 
     this.state = {
       newIdeaTitle: null,
@@ -141,7 +166,8 @@ export class AddIdea extends React.Component {
           handleRightIconPress={this.addNewIdea}
           headerShadow />
 
-        <InputContainer>
+        <InputContainer
+          style={{alignItems: 'center'}}>
 
           <Input
             placeholder="WHAT'S THE BIG IDEA?"
@@ -175,6 +201,11 @@ export class AddIdea extends React.Component {
             pushContent />
 
         </InputContainer>
+
+        <TabBar 
+          tabs={this.tabs}
+          backgroundColor={styleConstants.white}
+          color={styleConstants.primary} />
 
         <SnackBar />
 

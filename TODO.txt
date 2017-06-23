@@ -1,11 +1,10 @@
 TODOS
 
     Ideas
-        Add notes to ideas
-        Add Idea
-            Notes as tab bar
+        Icons
         Whatsapp chat style or similar
         + Text/Notes/Bullets
+            Description not necessary
         + Images
         + Voice notes
         + Link   

@@ -40,7 +40,7 @@ export default TabBar = (props) => {
 	const tabs = 
 		props.tabs.map((value) => {
 			const colorStyles = {
-				color: value.active ? styleConstants.secondary : styleConstants.white
+				color: value.active ? styleConstants.secondary : props.color ? props.color : styleConstants.white
 			};
 
 			return (
@@ -60,8 +60,15 @@ export default TabBar = (props) => {
 			);
 		});
 
+	const backgroundColorStyles = props.backgroundColor ?
+		{
+			backgroundColor: props.backgroundColor,
+		}
+		:
+		null;
+
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, backgroundColorStyles]}>
 			{tabs}
 		</View>
 	);
