@@ -6,10 +6,8 @@ TODOS
             Notes as tab bar
         Whatsapp chat style or similar
         + Text/Notes/Bullets
-        + Sketches
         + Images
         + Voice notes
-        + Convert Voice Note to Text
         + Link   
     If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
@@ -43,6 +41,7 @@ TODOS
         Prepopulate idea on signup
         Tooltips
         Email after signup detailing what app does and howtos
+        Rethink highlighted profile tab
     Add analytics
         Create console
     Announcement page for when I need to make some sort of announcement
@@ -62,10 +61,14 @@ TODOS
         Check reducers
         User errors should contain resets
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
-        Use shouldComponentUpdate where necessary
+        Use shouldComponentUpdate where necessary     
 
 IOS
     Integrate react-native-fbsdk on iOS
     Integrate react-native-google-signin on iOS
     Icons
     Testing!
+
+V2
+    Add Sketches to Ideas
+    Convert Voice Notes to Text
