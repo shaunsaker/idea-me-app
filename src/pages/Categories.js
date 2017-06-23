@@ -23,6 +23,28 @@ export class Categories extends React.Component {
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
 
+    // TabBar
+    this.tabs = [
+      {
+        title: 'Home',
+        icon: 'home',
+        action: () => Actions.home(),
+        active: false,
+      },
+      {
+        title: 'Categories',
+        icon: 'folder',
+        action: () => Actions.categories(),
+        active: true,
+      },
+      {
+        title: 'Profile',
+        icon: 'person',
+        action: () => Actions.profile(),
+        active: false,
+      },
+    ];
+
     this.state = {
       showModal: false,
       modalTitle: null,
@@ -137,7 +159,7 @@ export class Categories extends React.Component {
           handleIconPress={this.toggleDeleteModal} />
 
         <TabBar
-          currentPage='categories' />
+          tabs={this.tabs} />
 
         {modal}
 

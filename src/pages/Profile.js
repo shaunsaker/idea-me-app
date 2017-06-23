@@ -32,6 +32,28 @@ export class Profile extends React.Component {
         this.setCopySuccess = this.setCopySuccess.bind(this);
         this.setBrowserError = this.setBrowserError.bind(this);
 
+        // TabBar
+        this.tabs = [
+        {
+            title: 'Home',
+            icon: 'home',
+            action: () => Actions.home(),
+            active: false,
+        },
+        {
+            title: 'Categories',
+            icon: 'folder',
+            action: () => Actions.categories(),
+            active: false,
+        },
+        {
+            title: 'Profile',
+            icon: 'person',
+            action: () => Actions.profile(),
+            active: true,
+        },
+        ];
+
         this.state = {
             showMenu: false,
             showBrowser: false,
@@ -158,7 +180,7 @@ export class Profile extends React.Component {
                     handleEditImagePress={() => Actions.editProfile()} />
 
                 <TabBar
-                    currentPage='profile' />
+                    tabs={this.tabs} />
 
                 {menu}
 

@@ -32,6 +32,28 @@ export class Home extends React.Component {
     this.deleteIdea = this.deleteIdea.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
 
+    // TabBar
+    this.tabs = [
+      {
+        title: 'Home',
+        icon: 'home',
+        action: () => Actions.home(),
+        active: true,
+      },
+      {
+        title: 'Categories',
+        icon: 'folder',
+        action: () => Actions.categories(),
+        active: false,
+      },
+      {
+        title: 'Profile',
+        icon: 'person',
+        action: () => Actions.profile(),
+        active: false,
+      },
+    ];
+
     this.state = {
       showModal: false,
       modalTitle: null,
@@ -216,7 +238,7 @@ export class Home extends React.Component {
         {ideas}
 
         <TabBar
-          currentPage='home' />
+          tabs={this.tabs} />
 
         {modal}
 
