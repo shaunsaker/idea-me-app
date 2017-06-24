@@ -62,6 +62,28 @@ utilities.getRandomItemFromArray = (array) => {
     return randomItem;
 };
 
+utilities.deleteObjectWithKeyValuePairFromArray = (keyValuePair, array) => {
+    let newArray = array;
+    let index;
+    let targetKey;
+    let targetValue;
+
+    for (key in keyValuePair) {
+        targetKey = key;
+        targetValue = keyValuePair[targetKey];
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i][targetKey] === targetValue) {
+            index = i;
+        }
+    }
+
+    newArray.splice(index, 1);
+
+    return newArray;
+}
+
 /* OBJECTS */
 
 utilities.cloneObject = (object) => {

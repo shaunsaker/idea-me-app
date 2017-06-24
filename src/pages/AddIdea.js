@@ -162,13 +162,13 @@ export class AddIdea extends React.Component {
             multiline />
 
           <RadioSelect
-            displayText='Select a Priority'
+            displayText='SELECT A PRIORITY'
             currentValue={this.state.newIdeaPriority}
             values={priorities}
             handleSelect={this.selectPriority} />
 
           <DropdownButton
-            displayText='Select a Category'
+            displayText='SELECT A CATEGORY'
             currentValue={this.state.newIdeaCategory}
             values={categories}
             handleSelect={this.selectCategory}
@@ -187,7 +187,7 @@ export class AddIdea extends React.Component {
               {
                 title: 'Note',
                 icon: 'note',
-                action: null,
+                action: () => Actions.addNote(),
                 count: 0,
               },
               {

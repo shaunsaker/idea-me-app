@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     textContainer: {
         paddingTop: 16,
         paddingBottom: 8,
+        paddingHorizontal: 16,
     },
     titleText: {
         fontSize: styleConstants.regularFont,

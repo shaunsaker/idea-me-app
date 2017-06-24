@@ -172,6 +172,7 @@ export default class Input extends React.Component {
             placeholder: React.PropTypes.string,
             handleChange: React.PropTypes.func,
             handleFocus: React.PropTypes.func,
+            handleBlur: React.PropTypes.func,
             value: React.PropTypes.string,
             type: React.PropTypes.string,
             keyboardType: React.PropTypes.string,
@@ -212,7 +213,7 @@ export default class Input extends React.Component {
             showCharacterCount: true,
         });
 
-        this.props.handleFocus;
+        this.props.handleFocus && this.props.handleFocus();
     }
 
     blurInput() {
@@ -222,6 +223,8 @@ export default class Input extends React.Component {
             showTogglePasswordButton: this.props.value,
             showCharacterCount: this.props.value,
         });
+
+        this.props.handleBlur && this.props.handleBlur();
     }
 
     clearInputText() {

@@ -2,15 +2,21 @@ PENDING
     Logo    JOHAN
 
 TODOS
-    Add Idea
-        Whatsapp chat style or similar
-        + Notes
-        + Images
-        + Voice notes  
-    Categories page should display backButton if routed from add/editIdea
-        Otherwise you can't go back and lose your idea
+    Add/Edit Idea Notes functionality
+        TabBar press goes to new screen with existing notes and new note input
+            Should not be able to add notes if no title
+            Current notes title should be lightGrey if none
+            Similarly for images and voice notes
+        Notes
+        Images
+        Voice notes  
     Edit Idea (above)
     Home page notes UI
+    On all header closeX (where appropriate), modal: are you sure you want to go back? You will lose this information.
+    Input height is not readjusting correctly
+    Modal delete messages should be more descriptive, ie. are you... delete idea: Title?
+    Categories page should display backButton if routed from add/editIdea
+        Otherwise you can't go back and lose your idea
     If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
     Profile page has edit button BR corner
@@ -25,7 +31,6 @@ TODOS
     Apply material styles
         See material.io
         Redesign lists
-        Modal needs padding
         Labels same fontSize as info block description
     zIndex
         Animate menu height

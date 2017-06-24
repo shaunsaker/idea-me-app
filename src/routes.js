@@ -12,6 +12,7 @@ import SignInWithEmail from './pages/SignInWithEmail';
 import ForgotPassword from './pages/ForgotPassword';
 import Home from './pages/Home';
 import AddIdea from './pages/AddIdea';
+import AddNote from './pages/AddNote';
 import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
 import AddCategory from './pages/AddCategory';
@@ -53,6 +54,10 @@ const Scenes = Actions.create(
 			key='addIdea'
 			component={AddIdea}
 			initial={true} />
+		<Scene
+			key='addNote'
+			component={AddNote}
+			initial={false} />
 		<Scene
 			key='editIdea'
 			component={EditIdea}
