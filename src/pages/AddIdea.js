@@ -9,6 +9,7 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
+import RadioSelect from '../components/RadioSelect';
 import DropdownButton from '../components/DropdownButton';
 import TabBar from '../components/TabBar';
 import SnackBar from '../components/SnackBar';
@@ -177,6 +178,13 @@ export class AddIdea extends React.Component {
             handleChange={this.updateNewIdeaDescription}
             multiline />
 
+
+          <RadioSelect
+            displayText='Set Priority'
+            currentValue={this.state.newIdeaPriority}
+            values={priorities}
+            handleSelect={this.selectPriority} />
+
           <DropdownButton
             displayText='Select a Category'
             currentValue={this.state.newIdeaCategory}
@@ -184,14 +192,6 @@ export class AddIdea extends React.Component {
             handleSelect={this.selectCategory}
             headerIconName='edit'
             headerValue='Edit Categories'
-            buttonBackgroundColor={styleConstants.primary}
-            pushContent />
-
-          <DropdownButton
-            displayText='Select a Priority'
-            currentValue={this.state.newIdeaPriority}
-            values={priorities}
-            handleSelect={this.selectPriority}
             buttonBackgroundColor={styleConstants.primary}
             pushContent />
 

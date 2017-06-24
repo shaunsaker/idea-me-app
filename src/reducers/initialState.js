@@ -45,7 +45,7 @@ const initialState = {
         suburbs, 
         priorities: {
             '0': {
-                title: 'High',
+                title: 'Low',
                 uid: '0',
             },
             '1': {
@@ -53,7 +53,7 @@ const initialState = {
                 uid: '1',
             },
             '2': {
-                title: 'Low',
+                title: 'High',
                 uid: '2',
             },
         },
