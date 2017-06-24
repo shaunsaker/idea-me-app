@@ -1,14 +1,15 @@
-TODOS
+PENDING
+    Logo    JOHAN
 
-    Add/Edit Ideas
-        Resize Icons
+TODOS
+    Add Idea
         Radio select for priorities
-        Remove description input
         Whatsapp chat style or similar
         + Text/Notes/Bullets
         + Images
         + Voice notes
         + Link   
+    Edit Idea (above)
     Home page notes UI
     If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
@@ -25,7 +26,7 @@ TODOS
         See material.io
         Redesign lists
         Modal needs padding
-        Logo
+        Labels same fontSize as info block description
     zIndex
         Animate menu height
         All categories button sometimes does not work after save
@@ -47,6 +48,10 @@ TODOS
     Announcement page for when I need to make some sort of announcement
         FIRST THINK OF TYPES OF ANNOUNCEMENTS
         Based on api prop
+        Image uri
+        After one week
+            Enjoying the app? Help us spread the word by sharing (fb or tweet)
+                Auto populate
     App renaming
     App Icons
     Test all errors
@@ -67,6 +72,7 @@ IOS
     Integrate react-native-fbsdk on iOS
     Integrate react-native-google-signin on iOS
     Icons
+    React native keyboard spacer
     Testing!
 
 V2

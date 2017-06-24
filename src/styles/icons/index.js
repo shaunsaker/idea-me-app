@@ -21,7 +21,6 @@ const glyphMap = {
   "camera": 59663,
   "chevron_left": 59664,
   "close": 59665,
-  "link": 59669,
   "voice": 59670,
   "note": 59671
 };

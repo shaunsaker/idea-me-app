@@ -35,11 +35,6 @@ export class AddIdea extends React.Component {
         icon: 'camera',
         action: null,
       },
-      {
-        title: 'Link',
-        icon: 'link',
-        action: null,
-      },
     ];
 
     this.state = {
