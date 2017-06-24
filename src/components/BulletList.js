@@ -79,15 +79,20 @@ export default BulletList = (props) => {
         :
         <View style={styles.noteTextContainer}>
             <Text
-                style={[styles.noteText, styleConstants.primaryFont]}>
+                style={[styles.noteText, styles.greyText, styleConstants.primaryFont]}>
                 None
             </Text>
         </View>;
 
+    const titleColorStyles = props.values.length < 1 &&
+        {
+            color: styleConstants.grey,
+        };
+
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
-                <Text style={[styles.title, styleConstants.primaryFont]}>{props.title}</Text>
+                <Text style={[styles.title, titleColorStyles, styleConstants.primaryFont]}>{props.title}</Text>
             </View>
             <View
                 style={styles.notesContainer}>

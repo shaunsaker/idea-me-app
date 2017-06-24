@@ -4,8 +4,6 @@ PENDING
 TODOS
     Add/Edit Idea Notes functionality
         TabBar press goes to new screen with existing notes and new note input
-            Should not be able to add notes if no title
-            Current notes title should be lightGrey if none
             Similarly for images and voice notes
         Notes
         Images
