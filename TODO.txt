@@ -3,12 +3,12 @@ PENDING
 
 TODOS
     Add Idea
-        Radio select for priorities
         Whatsapp chat style or similar
-        + Text/Notes/Bullets
+        + Notes
         + Images
-        + Voice notes
-        + Link   
+        + Voice notes  
+    Categories page should display backButton if routed from add/editIdea
+        Otherwise you can't go back and lose your idea
     Edit Idea (above)
     Home page notes UI
     If you navigate to other page after welcome before geolocation, geolocation does not come in

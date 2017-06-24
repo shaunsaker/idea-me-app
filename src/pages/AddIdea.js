@@ -19,25 +19,6 @@ export class AddIdea extends React.Component {
   constructor(props) {
     super(props);
 
-    // TabBar
-    this.tabs = [
-      {
-        title: 'Note',
-        icon: 'note',
-        action: null,
-      },
-      {
-        title: 'Voice Note',
-        icon: 'voice',
-        action: null,
-      },
-      {
-        title: 'Image',
-        icon: 'camera',
-        action: null,
-      },
-    ];
-
     this.state = {
       newIdeaTitle: null,
       newIdeaDescription: null,
@@ -125,7 +106,7 @@ export class AddIdea extends React.Component {
     if (!isIdeaTitlePresent) {
       this.props.dispatch({
         type: 'TOGGLE_LOADING'
-      });      
+      });
 
       const newIdeas = utilities.pushObjectToObjectArray(newIdea, this.props.ideas);
 
@@ -156,14 +137,16 @@ export class AddIdea extends React.Component {
         removeBottomPadding>
 
         <Header
+          backgroundColor={styleConstants.white}
+          textColor={styleConstants.primary}
+          headerShadow
           text='Add an Idea'
           closeButton
           continueButton={enableContinueButton}
-          handleRightIconPress={this.addNewIdea}
-          headerShadow />
+          handleRightIconPress={this.addNewIdea} />
 
         <InputContainer
-          style={{alignItems: 'center'}}>
+          style={{ alignItems: 'center' }}>
 
           <Input
             placeholder="WHAT'S THE BIG IDEA?"
@@ -171,16 +154,15 @@ export class AddIdea extends React.Component {
             handleChange={this.updateNewIdeaTitle}
             maxLength={16}
             autoFocus />
-            
+
           <Input
             placeholder="ENTER YOUR DESCRIPTION HERE"
             value={this.state.newIdeaDescription}
             handleChange={this.updateNewIdeaDescription}
             multiline />
 
-
           <RadioSelect
-            displayText='Set Priority'
+            displayText='Select a Priority'
             currentValue={this.state.newIdeaPriority}
             values={priorities}
             handleSelect={this.selectPriority} />
@@ -197,10 +179,31 @@ export class AddIdea extends React.Component {
 
         </InputContainer>
 
-        <TabBar 
-          tabs={this.tabs}
+        <TabBar
           backgroundColor={styleConstants.white}
-          color={styleConstants.primary} />
+          color={styleConstants.primary}
+          tabs={
+            [
+              {
+                title: 'Note',
+                icon: 'note',
+                action: null,
+                count: 0,
+              },
+              {
+                title: 'Voice Note',
+                icon: 'voice',
+                action: null,
+                count: 0,
+              },
+              {
+                title: 'Image',
+                icon: 'camera',
+                action: null,
+                count: 0,
+              },
+            ]
+          } />
 
         <SnackBar />
 
