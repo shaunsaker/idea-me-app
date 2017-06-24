@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
 	},
 	iconContainer: {
 		paddingHorizontal: 16,
+		position: 'relative',
 	},
 	icon: {
 		fontSize: styleConstants.iconFont,
@@ -34,6 +35,15 @@ const styles = StyleSheet.create({
 		fontSize: styleConstants.smallFont,
 		marginTop: 2,
 	},
+	countContainer: {
+		position: 'absolute',
+		top: -5,
+		right: -4,
+	},
+	countText: {
+		fontSize: styleConstants.smallFont,
+		color: styleConstants.lightGrey,
+	}
 });
 
 export default TabBar = (props) => {
@@ -42,6 +52,15 @@ export default TabBar = (props) => {
 			const colorStyles = {
 				color: value.active ? styleConstants.secondary : props.color ? props.color : styleConstants.white
 			};
+
+			const count = value.count === 0 || value.count ?
+				<View style={styles.countContainer}>
+					<Text style={[styles.countText, styleConstants.primaryFont]}>
+						{value.count.toString()}
+					</Text>
+				</View>
+				:
+				null;
 
 			return (
 				<Touchable
@@ -52,6 +71,7 @@ export default TabBar = (props) => {
 						<Icon
 							name={value.icon}
 							style={[styles.icon, colorStyles]} />
+						{count}
 					</View>
 					<Text style={[styles.text, styleConstants.primaryFont, colorStyles]}>
 						{value.title}
