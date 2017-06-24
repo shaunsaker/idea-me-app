@@ -43,7 +43,10 @@ const styles = StyleSheet.create({
 	countText: {
 		fontSize: styleConstants.smallFont,
 		color: styleConstants.lightGrey,
-	}
+	},
+    disabled: {
+        opacity: 0.33
+    },
 });
 
 export default TabBar = (props) => {
@@ -62,7 +65,21 @@ export default TabBar = (props) => {
 				:
 				null;
 
-			return (
+			const tab = value.disabled ?
+				<View
+					style={[styles.tabContainer, styles.disabled]}
+					key={'tab-' + value.title}>
+					<View style={styles.iconContainer}>
+						<Icon
+							name={value.icon}
+							style={[styles.icon, colorStyles]} />
+						{count}
+					</View>
+					<Text style={[styles.text, styleConstants.primaryFont, colorStyles]}>
+						{value.title}
+					</Text>
+				</View>
+				:
 				<Touchable
 					onPress={value.action}
 					style={styles.tabContainer}
@@ -76,8 +93,9 @@ export default TabBar = (props) => {
 					<Text style={[styles.text, styleConstants.primaryFont, colorStyles]}>
 						{value.title}
 					</Text>
-				</Touchable>
-			);
+				</Touchable>;
+
+			return tab;
 		});
 
 	const backgroundColorStyles = props.backgroundColor ?

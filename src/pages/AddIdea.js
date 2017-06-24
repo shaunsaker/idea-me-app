@@ -189,18 +189,21 @@ export class AddIdea extends React.Component {
                 icon: 'note',
                 action: () => Actions.addNote(),
                 count: 0,
+                disabled: !this.state.newIdeaTitle,
               },
               {
                 title: 'Voice Note',
                 icon: 'voice',
                 action: null,
                 count: 0,
+                disabled: !this.state.newIdeaTitle,
               },
               {
                 title: 'Image',
                 icon: 'camera',
                 action: null,
                 count: 0,
+                disabled: !this.state.newIdeaTitle,
               },
             ]
           } />
