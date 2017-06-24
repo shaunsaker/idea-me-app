@@ -83,27 +83,45 @@ const styles = StyleSheet.create({
 export default class Header extends React.Component {
 	static get propTypes() {
 		return {
+			backgroundColor: React.PropTypes.string,
+			textColor: React.PropTypes.string,
+			headerShadow: React.PropTypes.bool,
+
 			backButton: React.PropTypes.bool,
 			closeButton: React.PropTypes.bool,
-			addButton: React.PropTypes.bool,
-			continueButton: React.PropTypes.bool,
 			leftComponent: React.PropTypes.func,
+			handleLeftIconPress: React.PropTypes.func,
+
 			textComponent: React.PropTypes.func,
 			text: React.PropTypes.string,
 			textLeft: React.PropTypes.bool,
 			textRight: React.PropTypes.bool,
 			handleTextPress: React.PropTypes.func,
+
+			addButton: React.PropTypes.bool,
+			continueButton: React.PropTypes.bool,
 			rightComponent: React.PropTypes.func,
+			handleRightIconPress: React.PropTypes.func,
+
 			showInput: React.PropTypes.bool,
 			inputValue: React.PropTypes.string,
 			inputPlaceholderText: React.PropTypes.string,
 			handleChangeText: React.PropTypes.func,
-			headerShadow: React.PropTypes.bool,
 		}
 	}
 
 	render() {
-		const headerShadowStyles = this.props.headerShadow ?
+		const backgroundColorStyles = this.props.backgroundColor && 
+			{
+				backgroundColor: this.props.backgroundColor,
+			};
+
+		const textColorStyles = this.props.textColor && 
+			{
+				color: this.props.textColor,
+			};
+
+		const headerShadowStyles = this.props.headerShadow &&
 			{
 				elevation: 5,
 				shadowColor: "#000000",
@@ -113,9 +131,7 @@ export default class Header extends React.Component {
 					height: 1,
 					width: 0
 				},
-			}
-			:
-			{};
+			};
 
 		const leftIcon = this.props.leftComponent ?
 			<View style={styles.leftIconContainer}>
@@ -128,7 +144,7 @@ export default class Header extends React.Component {
 					onPress={() => this.props.handleLeftIconPress} >
 					<Icon
 						name={this.props.leftIconName}
-						style={styles.leftIcon} />
+						style={[styles.leftIcon, textColorStyles]} />
 				</Touchable>
 				:
 				this.props.backButton ?
@@ -137,7 +153,7 @@ export default class Header extends React.Component {
 						onPress={() => Actions.pop()} >
 						<Icon
 							name='chevron_left'
-							style={styles.leftIcon} />
+							style={[styles.leftIcon, textColorStyles]} />
 					</Touchable>
 					:
 					this.props.closeButton ?
@@ -146,7 +162,7 @@ export default class Header extends React.Component {
 							onPress={() => Actions.pop()} >
 							<Icon
 								name='close'
-								style={styles.leftIcon} />
+								style={[styles.leftIcon, textColorStyles]} />
 						</Touchable>
 						:
 						this.props.textLeft ?
@@ -174,14 +190,14 @@ export default class Header extends React.Component {
 				<Touchable
 					style={[styles.textContainer, textLeftStyles, textRightStyles]}
 					onPress={this.props.handleTextPress} >
-					<Text style={[styles.text, styleConstants.primaryFont, this.props.textStyle]}>{this.props.text}</Text>
+					<Text style={[styles.text, styleConstants.primaryFont, textColorStyles]}>{this.props.text}</Text>
 				</Touchable>
 				:
 				(this.props.showInput || !this.props.text) ?
 					null
 					:
 					<View style={[styles.textContainer, textLeftStyles, textRightStyles]}>
-						<Text style={[styles.text, styleConstants.primaryFont, this.props.textStyle]}>{this.props.text}</Text>
+						<Text style={[styles.text, styleConstants.primaryFont, textColorStyles]}>{this.props.text}</Text>
 					</View>;
 
 		const rightIcon = this.props.rightComponent ?
@@ -195,7 +211,7 @@ export default class Header extends React.Component {
 					onPress={this.props.handleRightIconPress} >
 					<Icon
 						name={this.props.rightIconName}
-						style={styles.rightIcon} />
+						style={[styles.rightIcon, textColorStyles]} />
 				</Touchable>
 				:
 				this.props.addButton ?
@@ -204,7 +220,7 @@ export default class Header extends React.Component {
 						onPress={this.props.handleRightIconPress} >
 						<Icon
 							name='add'
-							style={styles.rightIcon} />
+							style={[styles.rightIcon, textColorStyles]} />
 					</Touchable>
 					:
 					this.props.continueButton ?
@@ -213,7 +229,7 @@ export default class Header extends React.Component {
 							onPress={this.props.handleRightIconPress} >
 							<Icon
 								name='check'
-								style={styles.rightIcon} />
+								style={[styles.rightIcon, textColorStyles]} />
 						</Touchable>
 						:
 						(this.props.textRight || this.props.showInput) ?
@@ -248,7 +264,7 @@ export default class Header extends React.Component {
 				<StatusBar
 					backgroundColor={styleConstants.transPrimary}
 					barStyle='light-content' />
-				<View style={[styles.container, headerShadowStyles, iosStyles]}>
+				<View style={[styles.container, backgroundColorStyles, headerShadowStyles, iosStyles]}>
 					{leftIcon}
 					{text}
 					{input}
