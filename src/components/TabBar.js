@@ -53,7 +53,7 @@ export default TabBar = (props) => {
 				color: value.active ? styleConstants.secondary : props.color ? props.color : styleConstants.white
 			};
 
-			const count = value.count === 0 || value.count ?
+			const count = value.count ?
 				<View style={styles.countContainer}>
 					<Text style={[styles.countText, styleConstants.primaryFont]}>
 						{value.count.toString()}
