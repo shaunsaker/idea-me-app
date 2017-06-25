@@ -12,7 +12,7 @@ import SignInWithEmail from './pages/SignInWithEmail';
 import ForgotPassword from './pages/ForgotPassword';
 import Home from './pages/Home';
 import AddIdea from './pages/AddIdea';
-import AddNote from './pages/AddNote';
+import Notes from './pages/Notes';
 import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
 import AddCategory from './pages/AddCategory';
@@ -55,8 +55,8 @@ const Scenes = Actions.create(
 			component={AddIdea}
 			initial={false} />
 		<Scene
-			key='addNote'
-			component={AddNote}
+			key='notes'
+			component={Notes}
 			initial={false} />
 		<Scene
 			key='editIdea'

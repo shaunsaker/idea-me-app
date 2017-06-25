@@ -120,7 +120,7 @@ export default BulletList = (props) => {
 
     const titleColorStyles = props.values.length < 1 &&
         {
-            color: styleConstants.grey,
+            color: styleConstants.lightGrey,
         };
 
     return (

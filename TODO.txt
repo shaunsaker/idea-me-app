@@ -5,10 +5,12 @@ TODOS
     Home page notes UI
         Add Button opens modal to add new notes/image/voice note
         Notes/images/voiceNotes press opens page with those current items
+        Need idea title on notes page
     Add/Edit Idea Notes functionality
         Images
         Voice notes  
     Edit Idea (above)
+    Consider using RN modal for animation transitions / create your own animations
     Change note icon to normal note (no plus)
     Delete Idea modal does not remove bg
     Fix home list shouldComponentUpdate

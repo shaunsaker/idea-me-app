@@ -15,6 +15,10 @@ config.animation = {
     easing: Easing.gentle,
 };
 
+config.modal = {
+    animation: 'slide',
+}
+
 config.images = {
     maxImageWidth: 100,
     imagePickerOptions: {

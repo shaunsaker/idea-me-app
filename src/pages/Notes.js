@@ -13,13 +13,14 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
+import InfoBlock from '../components/InfoBlock';
 import BulletList from '../components/BulletList';
 import Button from '../components/Button';
 import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
 
-export class AddNote extends React.Component {
+export class Notes extends React.Component {
     constructor(props) {
         super(props);
 
@@ -126,13 +127,11 @@ export class AddNote extends React.Component {
             <Page>
                 
                 <Header 
-                    backgroundColor={styleConstants.white}
-                    textColor={styleConstants.primary}
                     headerShadow
                     closeButton
                     continueButton
                     handleRightIconPress={this.submitNotes}
-                    text='Add a Note' />
+                    text='Notes' />
 
                 <InputContainer>
 
@@ -140,8 +139,13 @@ export class AddNote extends React.Component {
                         placeholder="ENTER YOUR NEW NOTE HERE"
                         value={this.state.newNote}
                         handleChange={this.updateNewNote}
-                        multiline
-                        autoFocus />
+                        multiline />
+
+                    <InfoBlock
+                        title='Test'
+                        titleColor={styleConstants.white}
+                        subtitle='Description'
+                        subtitleColor={styleConstants.lightGrey} />
 
                     <BulletList 
                         title='CURRENT NOTES:'
@@ -175,4 +179,4 @@ function mapStateToProps(state) {
     });
 }
 
-export default connect(mapStateToProps)(AddNote);
+export default connect(mapStateToProps)(Notes);

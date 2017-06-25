@@ -19,7 +19,7 @@ styleConstants.iconFont = 18;
 /* COLOURS */ 
 
 styleConstants.primary = '#393140';
-styleConstants.transPrimary = 'rgba(57, 49, 64, 0.75)'
+styleConstants.transPrimary = 'rgba(57, 49, 64, 0.85)'
 styleConstants.secondary = '#fdd835';
 styleConstants.danger = '#d32f2f';
 styleConstants.success = '#00ff00';

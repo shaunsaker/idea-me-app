@@ -189,7 +189,7 @@ export class AddIdea extends React.Component {
               {
                 title: 'Note',
                 icon: 'note',
-                action: () => Actions.addNote(),
+                action: () => Actions.notes(),
                 count: newNotesCount,
                 disabled: !this.state.newIdeaTitle,
               },

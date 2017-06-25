@@ -189,6 +189,8 @@ export class Home extends React.Component {
     else if (value === 'Voice Note') {
       Actions.voiceNotes();
     }
+    
+    this.toggleNotesModal();
   }
 
   renderItem = ({ item }) => {
@@ -233,7 +235,8 @@ export class Home extends React.Component {
 
     const deleteModal = this.state.showDeleteModal ?
       <ActionModal
-        title={'Are you sure you want to delete ' + this.state.deleteModalTitle + '?'}
+        title={this.state.deleteModalTitle}
+        subtitle='Are you sure you want to delete this?'
         handleLeftIconPress={() => this.deleteIdea(this.state.deleteModalUID)}
         handleRightIconPress={this.toggleDeleteModal} />
       :
@@ -241,8 +244,8 @@ export class Home extends React.Component {
 
     const notesModal = this.state.showNotesModal ?
       <OptionsModal
-        title='Add a Note to:'
-        subtitle='Idea Title'
+        title={this.state.notesModalIdea.title}
+        subtitle='Add a:'
         options={['Note', 'Image', 'Voice Note']}
         handleSelect={this.selectNote}
         handleClose={this.toggleNotesModal} />
