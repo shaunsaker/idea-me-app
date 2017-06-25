@@ -155,43 +155,39 @@ export class Notes extends React.Component {
             null;
 
         return (
-            <Page>
+            <Page
+                backgroundColor={styleConstants.primary}>
                 
                 <Header 
                     headerShadow
-                    backgroundColor={styleConstants.white}
-                    textColor={styleConstants.primary}
                     closeButton
                     continueButton
-                    handleRightIconPress={this.addNotes}
-                    text='Notes' />
+                    showInput
+                    inputValue={this.state.newNote}
+                    inputPlaceholderText="Add a New Note"
+                    handleChangeText={this.updateNewNote}
+                    handleRightIconPress={this.saveNotes} />
 
                 <InputContainer>
-
-                    <Input
-                        placeholder="ENTER YOUR NEW NOTE HERE"
-                        value={this.state.newNote}
-                        handleChange={this.updateNewNote}
-                        multiline />
-
-                    <InfoBlock
-                        title={this.props.idea.title}
-                        titleColor={styleConstants.white}
-                        subtitle={this.props.idea.description}
-                        subtitleColor={styleConstants.lightGrey}
-                        fullWidth />
+                    <View style={{marginTop: 8}}>
+                        <InfoBlock
+                            title={this.props.idea.title}
+                            titleColor={styleConstants.white}
+                            subtitle={this.props.idea.description}
+                            subtitleColor={styleConstants.lightGrey}
+                            fullWidth />
+                    </View>
 
                     <BulletList 
                         title='CURRENT NOTES:'
                         values={this.state.notes}
                         handleDelete={this.toggleDeleteModal} />
-
                 </InputContainer>
 
                 <Button 
                     handlePress={this.addNote}
                     text='Add Note'
-                    iconName='check'
+                    iconName='add'
                     backgroundColor={styleConstants.white}
                     disabled={!enableAddNoteButton}/>
 

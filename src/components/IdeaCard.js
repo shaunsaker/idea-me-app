@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: styleConstants.white,
         padding: 8,
-        elevation: 2,
+        elevation: 3,
     },
     buttonContainer: {
 

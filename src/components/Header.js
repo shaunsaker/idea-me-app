@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 	clearTextButtonContainer: {
 		position: 'absolute',
 		bottom: 12,
-		right: 0,
+		right: 8,
 		height: 30,
 		justifyContent: 'center',
 	},
@@ -225,7 +225,7 @@ export default class Header extends React.Component {
 					:
 					this.props.continueButton ?
 						<Touchable
-							style={styles.rightIconContainer}
+							style={this.props.showInput ? { justifyContent: 'center' } : styles.rightIconContainer}
 							onPress={this.props.handleRightIconPress} >
 							<Icon
 								name='check'
