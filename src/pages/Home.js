@@ -192,7 +192,7 @@ export class Home extends React.Component {
 
       const sortedIdeas = utilities.sortObjectArrayByKeyAndValues(currentCategoryIdeas, 'priority', ['High', 'Medium', 'Low', null]);
       currentCount = utilities.getLengthOfObject(sortedIdeas);
-      const sortedIdeasArray = utilities.convertObjectArrayToArrayOfObjects(sortedIdeas);
+      const sortedIdeasArray = utilities.convertObjectArrayToArray(sortedIdeas);
 
       ideas =
         <FlatList
@@ -204,7 +204,7 @@ export class Home extends React.Component {
           pagingEnabled />
     }
 
-    const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
+    const categories = utilities.convertObjectArrayToArray(this.props.categories);
 
     const modal = this.state.showModal ?
       <ActionModal

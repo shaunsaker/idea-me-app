@@ -63,7 +63,6 @@ export class Splash extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log(this.props.authenticated, this.props.cloudDataSuccess)
 
         // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
         if (this.props.redirectToWelcomePage) {

@@ -27,6 +27,7 @@ export class AddNote extends React.Component {
         this.addNote = this.addNote.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
         this.deleteNote = this.deleteNote.bind(this);
+        this.submitNotes = this.submitNotes.bind(this);
 
         this.state = {
             newNote: null,
@@ -38,8 +39,18 @@ export class AddNote extends React.Component {
 
     static get propTypes() {
         return {
-
+            newNotes: React.PropTypes.object,
         };
+    }
+
+    componentDidMount() {
+        if (this.props.newNotes) {
+            const newNotesArray = utilities.convertObjectArrayToArray(this.props.newNotes);
+            
+            this.setState({
+                notes: newNotesArray,
+            });
+        }
     }
 
     updateNewNote(value) {
@@ -89,6 +100,17 @@ export class AddNote extends React.Component {
         this.toggleDeleteModal();
     }
 
+    submitNotes() {
+        const newNotes = utilities.convertArrayToObjectArray(this.state.notes);
+
+        this.props.dispatch({
+            type: 'SET_NEW_NOTES',
+            newNotes,
+        });
+
+        Actions.pop();
+    }
+
     render() {
         const enableAddNoteButton = this.state.newNote && this.state.newNote;
 
@@ -109,6 +131,7 @@ export class AddNote extends React.Component {
                     headerShadow
                     closeButton
                     continueButton
+                    handleRightIconPress={this.submitNotes}
                     text='Add a Note' />
 
                 <InputContainer>
@@ -148,7 +171,7 @@ export class AddNote extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-
+        newNotes: state.main.appData.newNotes,
     });
 }
 

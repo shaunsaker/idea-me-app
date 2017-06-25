@@ -137,8 +137,8 @@ export class EditIdea extends React.Component {
 
     render() {
         const enableContinueButton = this.state.editIdeaTitle;
-        const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
-        const priorities = utilities.convertObjectArrayToArrayOfObjects(this.props.priorities)
+        const categories = utilities.convertObjectArrayToArray(this.props.categories);
+        const priorities = utilities.convertObjectArrayToArray(this.props.priorities)
 
         return (
             <Page>

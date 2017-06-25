@@ -15,11 +15,10 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         paddingVertical: 8,
-        alignItems: 'center',
     },
     title: {
-        fontSize: styleConstants.regularFont,
-        color: styleConstants.white,
+        fontSize: styleConstants.smallFont,
+        color: styleConstants.lightGrey,
     },
     radioButtonsContainer: {
         marginTop: 8,
@@ -92,6 +91,11 @@ export default class RadioSelect extends React.Component {
     }
 
 	render() {   
+        const activeTitleStyles = this.state.active && 
+            {
+                color: styleConstants.secondary,
+            };
+
         const radioButtons = this.props.values.map((value) => {
             const activeRadioButtonStyles = this.state.active === value.title && 
                 {
@@ -128,7 +132,7 @@ export default class RadioSelect extends React.Component {
 		return (
             <View style={styles.container}>
                 <View style={styles.titleContainer}>
-                    <Text style={[styles.title, styleConstants.primaryFont]}>
+                    <Text style={[styles.title, activeTitleStyles, styleConstants.primaryFont]}>
                         {this.props.displayText}
                     </Text>
                 </View>

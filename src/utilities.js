@@ -62,6 +62,7 @@ utilities.getRandomItemFromArray = (array) => {
     return randomItem;
 };
 
+// Deletes an object that matches a key value pair from an array
 utilities.deleteObjectWithKeyValuePairFromArray = (keyValuePair, array) => {
     let newArray = array;
     let index;
@@ -84,6 +85,18 @@ utilities.deleteObjectWithKeyValuePairFromArray = (keyValuePair, array) => {
     return newArray;
 }
 
+// Takes an array and converts it into an object array with the uid as parent key
+utilities.convertArrayToObjectArray = (array) => {
+    let objectArray = {}
+
+    for (let i = 0; i < array.length; i++) {
+        const uid = array[i].uid;
+        objectArray[uid] = array[i];
+    }
+
+    return objectArray;
+}
+
 /* OBJECTS */
 
 utilities.cloneObject = (object) => {
@@ -91,7 +104,7 @@ utilities.cloneObject = (object) => {
 }
 
 // Takes an object array and returns a normal array without the keys
-utilities.convertObjectArrayToArrayOfObjects = (objectArray) => {
+utilities.convertObjectArrayToArray = (objectArray) => {
     let array = [];
 
     for (key in objectArray) {

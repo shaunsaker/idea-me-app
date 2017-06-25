@@ -10,6 +10,11 @@ TODOS
         Voice notes  
     Edit Idea (above)
     Home page notes UI
+        Notes
+        Images and Voice Notes on side bar
+            Images open full screen slider
+            Voice notes new page
+    Don't use firebase storage (use device)
     On all header closeX (where appropriate), modal: are you sure you want to go back? You will lose this information.
     Input height is not readjusting correctly
     Modal delete messages should be more descriptive, ie. are you... delete idea: Title?

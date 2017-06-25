@@ -91,6 +91,7 @@ export class AddIdea extends React.Component {
       description: this.state.newIdeaDescription && utilities.firstCharToUppercase(this.state.newIdeaDescription),
       category: this.state.newIdeaCategory,
       priority: this.state.newIdeaPriority,
+      notes: this.props.newNotes,
       uid: utilities.createUID(),
     };
 
@@ -129,8 +130,9 @@ export class AddIdea extends React.Component {
 
   render() {
     const enableContinueButton = this.state.newIdeaTitle ? true : false;
-    const categories = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
-    const priorities = utilities.convertObjectArrayToArrayOfObjects(this.props.priorities);
+    const categories = utilities.convertObjectArrayToArray(this.props.categories);
+    const priorities = utilities.convertObjectArrayToArray(this.props.priorities);
+    const newNotesCount = utilities.getLengthOfObject(this.props.newNotes);
 
     return (
       <Page
@@ -188,7 +190,7 @@ export class AddIdea extends React.Component {
                 title: 'Note',
                 icon: 'note',
                 action: () => Actions.addNote(),
-                count: 0,
+                count: newNotesCount,
                 disabled: !this.state.newIdeaTitle,
               },
               {
@@ -221,6 +223,7 @@ export class AddIdea extends React.Component {
 function mapStateToProps(state) {
   return ({
     ideas: state.main.userData.ideas,
+    newNotes: state.main.appData.newNotes,
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
     uid: state.main.auth.uid,

@@ -132,7 +132,7 @@ export class Categories extends React.Component {
   }
 
   render() {
-    const categoriesArray = utilities.convertObjectArrayToArrayOfObjects(this.props.categories);
+    const categoriesArray = utilities.convertObjectArrayToArray(this.props.categories);
 
     const modal = this.state.showModal ?
       <ActionModal

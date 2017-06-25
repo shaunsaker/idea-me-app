@@ -57,6 +57,7 @@ const initialState = {
                 uid: '2',
             },
         },
+        newNotes: null,
     },
     userData: {
         profile: {

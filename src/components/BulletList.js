@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     title: {
-        fontSize: styleConstants.regularFont,
+        fontSize: styleConstants.smallFont,
         color: styleConstants.secondary,
     },
     notesContainer: {

@@ -206,10 +206,16 @@ export default function (state = initialState, action) {
 			    new_state.userData = action.userData;    
             }
 
+            new_state.appData.newNotes = null;
             new_state.cloudData.cloudDataSuccess = true;
             new_state.app.loading = false;
             new_state.app.currentAction = action.currentAction;
 			return new_state;
+
+        case 'SET_NEW_NOTES':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.newNotes = action.newNotes;
+            return new_state;
 
 		case 'SET_USER_LOCATION':
 			new_state = utilities.cloneObject(state);
