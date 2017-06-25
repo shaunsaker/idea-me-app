@@ -2,10 +2,12 @@ import React from "react";
 import {
     View,
     Text,
+    Modal,
     StyleSheet,
     Dimensions,
 } from "react-native";
 
+import config from '../config';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
@@ -16,34 +18,15 @@ const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        backgroundColor: styleConstants.transPrimary,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 5,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
-    },
-    modalContainer: {
-
+        backgroundColor: styleConstants.transPrimary,
     },
     modal: {
         width: window.width - 32,
-        justifyContent: 'center',
         backgroundColor: styleConstants.white,
-        borderWidth: 1,
-        borderColor: styleConstants.white,
-        borderBottomWidth: 0,
-        elevation: 10,
+        position: 'relative',
     },
     infoContainer: {
         backgroundColor: styleConstants.primary,
@@ -61,11 +44,11 @@ const styles = StyleSheet.create({
     },
     closeIconContainer: {
         position: 'absolute',
-        top: -36,
+        top: 0,
         right: 0,
     },
     closeIconButton: {
-        
+        padding: 8,
     },
     closeIcon: {
         fontSize: styleConstants.iconFont,
@@ -121,28 +104,35 @@ export default OptionsModal = (props) => {
     });
 
     return (
-        <View style={styles.container}>
-            <View style={styles.modalContainer}>
-                <View style={styles.closeIconContainer}>
-                    <Touchable
-                        onPress={props.handleClose}
-                        style={styles.closeIconButton} >
-                        <Icon
-                            name='close'
-                            style={styles.closeIcon} />
-                    </Touchable>        
-                </View>
-                <View style={styles.modal}>
-                    <View style={styles.infoContainer}>
-                        <InfoBlock
-                            title='Create an app'
-                            titleColor={styleConstants.white}
-                            subtitle='ADD A:'
-                            subtitleColor={styleConstants.secondary} />
+        <View>
+            <Modal 
+                animationType={config.modal.animation}
+                transparent={true}
+                visible={true}
+                onRequestClose={props.handleClose}>
+                <View style={styles.container}>
+                    <View style={styles.modal}>
+                        <View style={styles.infoContainer}>
+                            <InfoBlock
+                                title={props.title}
+                                titleColor={styleConstants.white}
+                                subtitle={props.subtitle}
+                                subtitleColor={styleConstants.secondary}
+                                fullWidth />
+                            <View style={styles.closeIconContainer}>
+                                <Touchable
+                                    onPress={props.handleClose}
+                                    style={styles.closeIconButton} >
+                                    <Icon
+                                        name='close'
+                                        style={styles.closeIcon} />
+                                </Touchable>        
+                            </View>
+                        </View>
+                        {options}
                     </View>
-                    {options}
                 </View>
-            </View>
+            </Modal>
         </View>
     );
 }

@@ -2,55 +2,34 @@ import React from "react";
 import {
     View,
     Text,
+    Modal,
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
+import config from '../config';
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
+import InfoBlock from './InfoBlock';
 import Touchable from './Touchable';
 
 const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        backgroundColor: styleConstants.transPrimary,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 5,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
+        backgroundColor: styleConstants.transPrimary,
     },
     modal: {
         width: window.width - 32,
         backgroundColor: styleConstants.white,
     },
-    textContainer: {
-        paddingTop: 16,
-        paddingBottom: 8,
-        paddingHorizontal: 16,
-    },
-    titleText: {
-        fontSize: styleConstants.regularFont,
-        color: styleConstants.primary,
-        textAlign: 'center',
-    },
-    subtitleText: {
-        fontSize: styleConstants.smallFont,
-        color: styleConstants.grey,
-        textAlign: 'center',
-        marginTop: 8,
+    infoContainer: {
+        backgroundColor: styleConstants.primary,
+        paddingTop: 8,
     },
     buttonsContainer: {
         flexDirection: 'row',
@@ -74,29 +53,41 @@ export default ActionModal = (props) => {
         null;
 
     return (
-        <View style={styles.container}>
-            <View style={styles.modal}>
-                <View style={styles.textContainer}>
-                    <Text style={[styles.titleText, styleConstants.primaryFont]}>{props.title}</Text>
-                    {subtitle}
+        <View>
+            <Modal 
+                animationType={config.modal.animation}
+                transparent={true}
+                visible={true}
+                onRequestClose={props.handleRightIconPress}>
+                <View style={styles.container}>
+                    <View style={styles.modal}>
+                        <View style={styles.infoContainer}>
+                            <InfoBlock
+                                title={props.title}
+                                titleColor={styleConstants.white}
+                                subtitle={props.subtitle}
+                                subtitleColor={styleConstants.secondary}
+                                fullWidth />
+                        </View>
+                        <View style={styles.buttonsContainer}>
+                            <Touchable
+                                style={styles.iconContainer}
+                                onPress={props.handleLeftIconPress} >
+                                <Icon
+                                    name='check'
+                                    style={[styles.icon, {color: styleConstants.danger}]} />
+                            </Touchable>
+                            <Touchable
+                                style={styles.iconContainer}
+                                onPress={props.handleRightIconPress} >
+                                <Icon
+                                    name='close'
+                                    style={styles.icon} />
+                            </Touchable>
+                        </View>
+                    </View>
                 </View>
-                <View style={styles.buttonsContainer}>
-                    <Touchable
-                        style={styles.iconContainer}
-                        onPress={props.handleLeftIconPress} >
-                        <Icon
-                            name='check'
-                            style={[styles.icon, {color: styleConstants.danger}]} />
-                    </Touchable>
-                    <Touchable
-                        style={styles.iconContainer}
-                        onPress={props.handleRightIconPress} >
-                        <Icon
-                            name='close'
-                            style={styles.icon} />
-                    </Touchable>
-                </View>
-            </View>
+            </Modal>
         </View>
     );
 }
