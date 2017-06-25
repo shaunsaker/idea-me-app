@@ -11,11 +11,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
-import InputContainer from '../components/InputContainer';
-import Input from '../components/Input';
-import InfoBlock from '../components/InfoBlock';
-import BulletList from '../components/BulletList';
-import Button from '../components/Button';
+import NoteCard from '../components/NoteCard';
 import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
@@ -40,7 +36,15 @@ export class Notes extends React.Component {
 
     static get propTypes() {
         return {
+            idea: React.PropTypes.object,
+
             newNotes: React.PropTypes.object,
+            ideas: React.PropTypes.object,
+            uid: React.PropTypes.string,
+            addIdea: React.PropTypes.bool,
+            currentAction: React.PropTypes.string,
+            cloudDataSuccess: React.PropTypes.bool,
+            hasNetwork: React.PropTypes.bool,
         };
     }
 
@@ -156,7 +160,8 @@ export class Notes extends React.Component {
 
         return (
             <Page
-                backgroundColor={styleConstants.primary}>
+                backgroundColor={styleConstants.white}
+                removeBottomPadding>
                 
                 <Header 
                     headerShadow
@@ -167,29 +172,13 @@ export class Notes extends React.Component {
                     inputPlaceholderText="Add a New Note"
                     handleChangeText={this.updateNewNote}
                     handleRightIconPress={this.addNotes} />
-
-                <InputContainer>
-                    <View style={{marginVertical: 16}}>
-                        <InfoBlock
-                            title={this.props.idea.title}
-                            titleColor={styleConstants.white}
-                            subtitle={this.props.idea.description}
-                            subtitleColor={styleConstants.lightGrey}
-                            fullWidth />
-                    </View>
-
-                    <BulletList 
-                        title='CURRENT NOTES:'
-                        values={this.state.notes}
-                        handleDelete={this.toggleDeleteModal} />
-                </InputContainer>
-
-                <Button 
-                    handlePress={this.addNote}
-                    text='Add Note'
-                    iconName='add'
-                    backgroundColor={styleConstants.white}
-                    disabled={!enableAddNoteButton}/>
+                  
+                <NoteCard
+                    idea={this.props.idea}
+                    notes={this.state.notes}
+                    handleDeleteNote={this.toggleDeleteModal}
+                    handleAddNote={this.addNote}
+                    disabled={!enableAddNoteButton} />
 
                 {deleteModal}
 

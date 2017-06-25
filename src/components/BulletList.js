@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     View,
+    ScrollView,
     Text,
     StyleSheet,
 } from "react-native";
@@ -12,21 +13,24 @@ import DeleteButton from './DeleteButton';
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         marginHorizontal: 16,
         backgroundColor: styleConstants.white,
     },
     titleContainer: {
         padding: 8,
         backgroundColor: styleConstants.primary,
-        borderWidth: 1,
-        borderColor: styleConstants.white,
     },
     title: {
         fontSize: styleConstants.smallFont,
         color: styleConstants.secondary,
     },
-    notesContainer: {
+    notesWrapper: {
+        flex: 1,
         padding: 8,
+    },
+    notesContainer: {
+        paddingBottom: 16,
     },
     noteContainer: {
         flexDirection: 'row',
@@ -82,7 +86,7 @@ export default BulletList = (props) => {
             color: props.textColor
         }; 
 
-    const notes = props.values && props.values.length ? 
+    const notes = props.values && props.values.length > 0 ? 
         props.values.map((value) => {
             const deleteButton = props.handleDelete ?
                 <View style={styles.deleteButtonContainer}>
@@ -128,9 +132,11 @@ export default BulletList = (props) => {
             <View style={styles.titleContainer}>
                 <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles, labelColorStyles,]}>{props.title}</Text>
             </View>
-            <View style={styles.notesContainer}>
+            <ScrollView 
+                style={styles.notesWrapper}
+                contentContainerStyle={styles.notesContainer}>
                 {notes}
-            </View>
+            </ScrollView>
         </View>
     )
 }

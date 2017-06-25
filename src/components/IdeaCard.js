@@ -13,7 +13,6 @@ import styleConstants from '../styles/styleConstants';
 import Touchable from './Touchable';
 import InfoBlock from './InfoBlock';
 import Menu from './Menu';
-import BulletList from './BulletList';
 import IconButton from './IconButton';
 import Label from './Label';
 
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
         color: styleConstants.primary,
     },
     infoContainer: {
-        // flex: 1,
+
     },
     labelsContainer: {
         flex: 1,
@@ -132,7 +131,7 @@ export default class IdeaCard extends React.Component {
                     this.toggleMenu();
                     this.props.handleMenuItemSelect(type, this.props.idea)
                 }
-                } />;
+            } />;
 
         const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
         const priorityLabelText = this.props.idea.priority ? this.props.idea.priority : 'Unprioritised';

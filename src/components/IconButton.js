@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
         fontSize: styleConstants.smallFont,
         color: styleConstants.primary,
     },
+    disabled: {
+        opacity: 0.33,
+    }
 });
 
 export default IconButton = (props) => {
@@ -68,7 +71,15 @@ export default IconButton = (props) => {
         :
         null;
 
-    return (
+    const button = props.disabled ?
+        <View
+            style={[styles.iconButton, backgroundColorStyles, borderColorStyles, styles.disabled]}>
+            <Icon
+                name={props.iconName}
+                style={[styles.icon, iconColorStyles]} />
+            {count}
+        </View>
+        :
         <Touchable
             onPress={props.handlePress}
             style={[styles.iconButton, backgroundColorStyles, borderColorStyles]}>
@@ -76,6 +87,7 @@ export default IconButton = (props) => {
                 name={props.iconName}
                 style={[styles.icon, iconColorStyles]} />
             {count}
-        </Touchable>
-    );
+        </Touchable>;
+
+    return button;
 }

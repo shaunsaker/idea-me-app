@@ -3,6 +3,7 @@ PENDING
 
 TODOS
     Add/Edit Idea Notes functionality
+        Use Idea Card as template
         Images
         Voice notes  
     Edit Idea (above)
