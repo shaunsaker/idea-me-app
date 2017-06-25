@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: styleConstants.white,
         padding: 8,
-        elevation: 5,
+        elevation: 2,
     },
     buttonContainer: {
 
@@ -97,8 +97,8 @@ export default class IdeaCard extends React.Component {
     static get propTypes() {
         return {
             idea: React.PropTypes.object,
-            handleSelect: React.PropTypes.func,
-            handleAddNote: React.PropTypes.func,
+            handleMenuItemSelect: React.PropTypes.func,
+            handleNotePress: React.PropTypes.func,
         };
     }
 
@@ -130,7 +130,7 @@ export default class IdeaCard extends React.Component {
                 values={['Edit', 'Share', 'Delete']}
                 handleSelect={(type) => {
                     this.toggleMenu();
-                    this.props.handleSelect(type, this.props.idea)
+                    this.props.handleMenuItemSelect(type, this.props.idea)
                 }
                 } />;
 
@@ -174,34 +174,21 @@ export default class IdeaCard extends React.Component {
                     style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
                         <IconButton
-                            handlePress={null}
+                            handlePress={() => this.props.handleNotePress('Note')}
                             iconName='note'
-                            backgroundColor={styleConstants.white}
-                            iconColor={styleConstants.primary}
                             count={notesCount} />
                     </View>
                     <View style={styles.buttonContainer}>
                         <IconButton
-                            handlePress={null}
+                            handlePress={() => this.props.handleNotePress('Image')}
                             iconName='camera'
-                            backgroundColor={styleConstants.white}
-                            iconColor={styleConstants.primary}
                             count={imagesCount} />
                     </View>
                     <View style={styles.buttonContainer}>
                         <IconButton
-                            handlePress={null}
+                            handlePress={() => this.props.handleNotePress('Voice Note')}
                             iconName='voice'
-                            backgroundColor={styleConstants.white}
-                            iconColor={styleConstants.primary}
                             count={voiceNotesCount} />
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <IconButton
-                            handlePress={this.props.handleAddNote}
-                            iconName='add'
-                            backgroundColor={styleConstants.primary}
-                            iconColor={styleConstants.secondary} />
                     </View>
                 </View>
 

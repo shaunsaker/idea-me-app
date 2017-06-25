@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: styleConstants.transPrimary,
+        backgroundColor: styleConstants.transBlack,
     },
     modal: {
         width: window.width - 32,
@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     infoContainer: {
         backgroundColor: styleConstants.primary,
         paddingTop: 8,
+        borderWidth: 1,
+        borderColor: styleConstants.white,
     },
     modalButton: {
         paddingVertical: 16,
@@ -115,9 +117,9 @@ export default OptionsModal = (props) => {
                         <View style={styles.infoContainer}>
                             <InfoBlock
                                 title={props.title}
-                                titleColor={styleConstants.white}
+                                titleColor={styleConstants.secondary}
                                 subtitle={props.subtitle}
-                                subtitleColor={styleConstants.secondary}
+                                subtitleColor={styleConstants.white}
                                 fullWidth />
                             <View style={styles.closeIconContainer}>
                                 <Touchable

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         borderColor: styleConstants.white,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 10,
+        elevation: 5,
         position: 'relative',
     },
     icon: {
@@ -28,14 +28,18 @@ const styles = StyleSheet.create({
     },
     countContainer: {
         position: 'absolute',
-        top: 0,
-        right: 0,
+        top: -2,
+        right: -2,
         backgroundColor: styleConstants.white,
-        borderRadius: 32,
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     countText: {
         fontSize: styleConstants.smallFont,
-        color: styleConstants.grey,
+        color: styleConstants.primary,
     },
 });
 

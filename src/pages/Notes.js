@@ -28,7 +28,7 @@ export class Notes extends React.Component {
         this.addNote = this.addNote.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
         this.deleteNote = this.deleteNote.bind(this);
-        this.submitNotes = this.submitNotes.bind(this);
+        this.addNotes = this.addNotes.bind(this);
 
         this.state = {
             newNote: null,
@@ -45,12 +45,23 @@ export class Notes extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.newNotes) {
-            const newNotesArray = utilities.convertObjectArrayToArray(this.props.newNotes);
+        if (this.props.newNotes || this.props.idea) {
+            const newNotes = this.props.newNotes ? this.props.newNotes : this.props.idea.notes;
+            const newNotesArray = utilities.convertObjectArrayToArray(newNotes);
             
             this.setState({
                 notes: newNotesArray,
             });
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.props.currentAction === 'addNotes' && this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'RESET_CLOUD_DATA_SUCCESS'
+            });
+
+            Actions.pop();
         }
     }
 
@@ -101,15 +112,34 @@ export class Notes extends React.Component {
         this.toggleDeleteModal();
     }
 
-    submitNotes() {
+    addNotes() {
         const newNotes = utilities.convertArrayToObjectArray(this.state.notes);
 
-        this.props.dispatch({
-            type: 'SET_NEW_NOTES',
-            newNotes,
-        });
+        // We are editing an idea's notes
+        if (this.props.idea) {
+            let newIdea = this.props.idea;
+            newIdea['notes'] = newNotes;
+            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
 
-        Actions.pop();
+            this.props.dispatch({
+                type: 'saveUserData',
+                node: 'ideas',
+                uid: this.props.uid,
+                userData: newIdeas,
+                currentAction: 'addNotes',
+                hasNetwork: this.props.hasNetwork,
+            });
+        }
+
+        // Otherwise we came from the addIdea page
+        else {
+            this.props.dispatch({
+                type: 'SET_NEW_NOTES',
+                newNotes,
+            });
+
+            Actions.pop();
+        }
     }
 
     render() {
@@ -117,7 +147,8 @@ export class Notes extends React.Component {
 
         const deleteModal = this.state.showDeleteModal ?
             <ActionModal
-                title={'Are you sure you want to delete ' + this.state.modalTitle + '?'}
+                title='Are you sure you want to delete this note?'
+                subtitle={this.state.modalTitle}
                 handleLeftIconPress={() => this.deleteNote(this.state.modalTitle)}
                 handleRightIconPress={this.toggleDeleteModal} />
             :
@@ -128,9 +159,11 @@ export class Notes extends React.Component {
                 
                 <Header 
                     headerShadow
+                    backgroundColor={styleConstants.white}
+                    textColor={styleConstants.primary}
                     closeButton
                     continueButton
-                    handleRightIconPress={this.submitNotes}
+                    handleRightIconPress={this.addNotes}
                     text='Notes' />
 
                 <InputContainer>
@@ -142,10 +175,11 @@ export class Notes extends React.Component {
                         multiline />
 
                     <InfoBlock
-                        title='Test'
+                        title={this.props.idea.title}
                         titleColor={styleConstants.white}
-                        subtitle='Description'
-                        subtitleColor={styleConstants.lightGrey} />
+                        subtitle={this.props.idea.description}
+                        subtitleColor={styleConstants.lightGrey}
+                        fullWidth />
 
                     <BulletList 
                         title='CURRENT NOTES:'
@@ -176,6 +210,11 @@ export class Notes extends React.Component {
 function mapStateToProps(state) {
     return ({
         newNotes: state.main.appData.newNotes,
+        ideas: state.main.userData.ideas,
+        uid: state.main.auth.uid,
+        currentAction: state.main.app.currentAction,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+        hasNetwork: state.main.app.hasNetwork,
     });
 }
 
