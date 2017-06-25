@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     noteContainer: {
         flexDirection: 'row',
-        marginBottom: 16,
+        marginBottom: 8,
     },
     bulletContainer: {
         marginRight: 8,

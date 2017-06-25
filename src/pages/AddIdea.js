@@ -139,8 +139,6 @@ export class AddIdea extends React.Component {
         removeBottomPadding>
 
         <Header
-          backgroundColor={styleConstants.white}
-          textColor={styleConstants.primary}
           headerShadow
           text='Add an Idea'
           closeButton
@@ -189,7 +187,13 @@ export class AddIdea extends React.Component {
               {
                 title: 'Note',
                 icon: 'note',
-                action: () => Actions.notes(),
+                action: () => Actions.notes({
+                  idea: {
+                    title: this.state.newIdeaTitle,
+                    description: this.state.newIdeaDescription,
+                  } ,
+                  addIdea: true,
+                }),
                 count: newNotesCount,
                 disabled: !this.state.newIdeaTitle,
               },
@@ -206,6 +210,10 @@ export class AddIdea extends React.Component {
                 action: null,
                 count: 0,
                 disabled: !this.state.newIdeaTitle,
+                idea: {
+                  title: this.state.newIdeaTitle,
+                  description: this.state.newIdeaDescription,
+                } 
               },
             ]
           } />

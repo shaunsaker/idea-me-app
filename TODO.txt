@@ -2,10 +2,6 @@ PENDING
     Logo    JOHAN
 
 TODOS
-    Home page notes UI
-        Add Button opens modal to add new notes/image/voice note
-        Notes/images/voiceNotes press opens page with those current items
-        Need idea title on notes page
     Add/Edit Idea Notes functionality
         Images
         Voice notes  

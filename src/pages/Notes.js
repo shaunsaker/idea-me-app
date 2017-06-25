@@ -116,7 +116,17 @@ export class Notes extends React.Component {
         const newNotes = utilities.convertArrayToObjectArray(this.state.notes);
 
         // We are editing an idea's notes
-        if (this.props.idea) {
+        if (this.props.addIdea) {
+            this.props.dispatch({
+                type: 'SET_NEW_NOTES',
+                newNotes,
+            });
+
+            Actions.pop();
+        }
+
+        // Otherwise we came from the addIdea page
+        else {
             let newIdea = this.props.idea;
             newIdea['notes'] = newNotes;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
@@ -129,16 +139,6 @@ export class Notes extends React.Component {
                 currentAction: 'addNotes',
                 hasNetwork: this.props.hasNetwork,
             });
-        }
-
-        // Otherwise we came from the addIdea page
-        else {
-            this.props.dispatch({
-                type: 'SET_NEW_NOTES',
-                newNotes,
-            });
-
-            Actions.pop();
         }
     }
 
@@ -166,10 +166,10 @@ export class Notes extends React.Component {
                     inputValue={this.state.newNote}
                     inputPlaceholderText="Add a New Note"
                     handleChangeText={this.updateNewNote}
-                    handleRightIconPress={this.saveNotes} />
+                    handleRightIconPress={this.addNotes} />
 
                 <InputContainer>
-                    <View style={{marginTop: 8}}>
+                    <View style={{marginVertical: 16}}>
                         <InfoBlock
                             title={this.props.idea.title}
                             titleColor={styleConstants.white}
