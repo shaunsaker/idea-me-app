@@ -6,12 +6,15 @@ import {
     Dimensions,
 } from "react-native";
 
+import utilities from '../utilities';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 import InfoBlock from './InfoBlock';
 import Menu from './Menu';
+import BulletList from './BulletList';
+import IconButton from './IconButton';
 import Label from './Label';
 
 const window = Dimensions.get('window');
@@ -48,11 +51,34 @@ const styles = StyleSheet.create({
         fontSize: styleConstants.iconFont,
         color: styleConstants.primary,
     },
+    infoContainer: {
+        // flex: 1,
+    },
     labelsContainer: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        alignItems: 'flex-end',
-        flexWrap: 'wrap',
+        marginBottom: 8,
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: styleConstants.white,
+        padding: 8,
+    },
+    buttonContainer: {
+
+    },
+    countContainer: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        backgroundColor: styleConstants.white,
+        borderRadius: 32,
+    },
+    countText: {
+        fontSize: styleConstants.smallFont,
+        color: styleConstants.grey,
     },
 });
 
@@ -70,10 +96,11 @@ export default class IdeaCard extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         if (
             nextState.showMenu !== this.state.showMenu ||
-            nextProps.idea.title !== this.props.idea.title || 
+            nextProps.idea.title !== this.props.idea.title ||
             nextProps.idea.description !== this.props.idea.description ||
             nextProps.idea.category !== this.props.idea.category ||
-            nextProps.idea.priority !== this.props.idea.priority
+            nextProps.idea.priority !== this.props.idea.priority ||
+            nextProps.idea.notes !== this.props.idea.notes // needs work - will never be shallow equal
         ) {
             return true;
         }
@@ -89,33 +116,39 @@ export default class IdeaCard extends React.Component {
     }
 
     render() {
-       const menu = this.state.showMenu &&
+        const menu = this.state.showMenu &&
             <Menu
                 values={['Edit', 'Share', 'Delete']}
                 handleSelect={(type) => {
-                    this.toggleMenu(); 
-                    this.props.handleSelect(type, this.props.idea)}
+                    this.toggleMenu();
+                    this.props.handleSelect(type, this.props.idea)
+                }
                 } />;
 
         const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
-        const priorityLabelText = this.props.idea.priority ? this.props.idea.priority + ' Priority' : 'Unprioritised';
+        const priorityLabelText = this.props.idea.priority ? this.props.idea.priority : 'Unprioritised';
+        const notes = utilities.convertObjectArrayToArray(this.props.idea.notes);
+        const notesCount = notes.length;
+        const imagesCount = utilities.getLengthOfObject(this.props.idea.images);
+        const voiceNotesCount = utilities.getLengthOfObject(this.props.idea.voiceNotes);
 
         return (
             <View
                 style={styles.cardContainer} >
 
-                <Touchable 
+                <Touchable
                     onPress={this.toggleMenu}
                     style={styles.menuIconContainer} >
                     <Icon name='menu' style={styles.menuIcon} />
                 </Touchable>
 
-                <View style={{flex: 1}}>
+                <View style={styles.infoContainer}>
                     <InfoBlock
                         title={this.props.idea.title}
                         subtitle={this.props.idea.description}
                         titleColor={styleConstants.primary}
-                        subtitleColor={styleConstants.grey} />
+                        subtitleColor={styleConstants.grey}
+                        fullWidth />
                 </View>
 
                 <View
@@ -126,6 +159,41 @@ export default class IdeaCard extends React.Component {
                     <Label
                         iconName='priority'
                         labelText={priorityLabelText} />
+                </View>
+
+                <View
+                    style={styles.buttonsContainer}>
+                    <View style={styles.buttonContainer}>
+                        <IconButton
+                            handlePress={null}
+                            iconName='note'
+                            backgroundColor={styleConstants.white}
+                            iconColor={styleConstants.primary} 
+                            count={notesCount} />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <IconButton
+                            handlePress={null}
+                            iconName='camera'
+                            backgroundColor={styleConstants.white}
+                            iconColor={styleConstants.primary}
+                            count={imagesCount} />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <IconButton
+                            handlePress={null}
+                            iconName='voice'
+                            backgroundColor={styleConstants.white}
+                            iconColor={styleConstants.primary}
+                            count={voiceNotesCount} />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <IconButton
+                            handlePress={null}
+                            iconName='add'
+                            backgroundColor={styleConstants.primary}
+                            iconColor={styleConstants.white} />
+                    </View>
                 </View>
 
                 {menu}

@@ -2,18 +2,16 @@ PENDING
     Logo    JOHAN
 
 TODOS
+    Home page notes UI
+        Buttons
+            onPress goes to modal or new page?
     Add/Edit Idea Notes functionality
-        TabBar press goes to new screen with existing notes and new note input
-            Similarly for images and voice notes
-        Notes
         Images
         Voice notes  
     Edit Idea (above)
-    Home page notes UI
-        Notes
-        Images and Voice Notes on side bar
-            Images open full screen slider
-            Voice notes new page
+    Change note icon to normal note (no plus)
+    Fix home list shouldComponentUpdate
+    Whereever you have elevation, add a border
     Don't use firebase storage (use device)
     On all header closeX (where appropriate), modal: are you sure you want to go back? You will lose this information.
     Input height is not readjusting correctly

@@ -146,7 +146,7 @@ export class AddNote extends React.Component {
                     <BulletList 
                         title='CURRENT NOTES:'
                         values={this.state.notes}
-                        handlePress={this.toggleDeleteModal} />
+                        handleDelete={this.toggleDeleteModal} />
 
                 </InputContainer>
 
