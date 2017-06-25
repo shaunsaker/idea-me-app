@@ -1,11 +1,15 @@
 import React from "react";
 import {
     View,
+    ScrollView,
     Text,
     StyleSheet,
+    Dimensions,
 } from "react-native";
 
 import styleConstants from '../styles/styleConstants';
+
+const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     infoContainer: {
@@ -17,6 +21,12 @@ const styles = StyleSheet.create({
         fontSize: styleConstants.largeFont,
         color: styleConstants.white,
         marginBottom: 8,
+    },
+    descriptionWrapper: {
+        maxHeight: window.height / 4.5,
+    },
+    descriptionContainer: {
+
     },
     infoTextDescription: {
         fontSize: styleConstants.regularFont,
@@ -35,14 +45,23 @@ export default InputContainer = (props) => {
             marginRight: 16,
         };
 
+    const subtitle = props.subtitle ?
+        <ScrollView
+            style={styles.descriptionWrapper}
+            contentContainerStyle={styles.descriptionContainer}>
+            <Text style={[styles.infoTextDescription, {color: props.subtitleColor}, styleConstants.primaryFont]}>
+                {props.subtitle}
+            </Text>
+        </ScrollView>
+        :
+        null;
+
     return (
         <View style={[styles.infoContainer, fullWidthStyles]}>
             <Text style={[styles.infoTextTitle, {color: props.titleColor}, styleConstants.primaryFont, fullWidthTitleStyles]}>
                 {props.title}
             </Text>
-            <Text style={[styles.infoTextDescription, {color: props.subtitleColor}, styleConstants.primaryFont]}>
-                {props.subtitle}
-            </Text>
+            {subtitle}
         </View>
     );
 }
