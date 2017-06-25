@@ -35,6 +35,15 @@ const styles = StyleSheet.create({
 });
 
 export default InputContainer = (props) => {
+    /*
+        PROPTYPES
+            title
+            subtitle
+            titleColor
+            subtitleColor
+            fullWidth
+    */
+
     const fullWidthStyles = props.fullWidth &&
         {
             paddingRight: 16,

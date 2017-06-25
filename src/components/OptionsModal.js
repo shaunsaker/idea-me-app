@@ -9,6 +9,7 @@ import {
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
+import InfoBlock from './InfoBlock';
 import Touchable from './Touchable';
 
 const window = Dimensions.get('window');
@@ -39,6 +40,14 @@ const styles = StyleSheet.create({
         width: window.width - 32,
         justifyContent: 'center',
         backgroundColor: styleConstants.white,
+        borderWidth: 1,
+        borderColor: styleConstants.white,
+        borderBottomWidth: 0,
+        elevation: 10,
+    },
+    infoContainer: {
+        backgroundColor: styleConstants.primary,
+        paddingTop: 8,
     },
     modalButton: {
         paddingVertical: 16,
@@ -65,6 +74,52 @@ const styles = StyleSheet.create({
 });
 
 export default OptionsModal = (props) => {
+    /*
+        PROPTYPES
+            title
+            subtitle
+            options
+            handleSelect
+            handleClose
+    */
+
+    const title = props.title ?
+        <View style={styles.titleContainer}>
+            <Text style={[styles.title, styleConstants.primaryFont]}>
+                {props.title}
+            </Text>
+        </View>
+        :
+        null;
+
+     const subtitle = props.subtitle ?
+        <View style={styles.subtitleContainer}>
+            <Text style={[styles.subtitle, styleConstants.primaryFont]}>
+                {props.subtitle}
+            </Text>
+        </View>
+        :
+        null;    
+
+    const text = props.title || props.subtitle ?
+        <View style={styles.textContainer}>
+            {title}
+            {subtitle}
+        </View> 
+        :
+        null;
+
+    const options = props.options.map((value) => {
+        return (
+            <Touchable
+                key={'option-' + value}
+                onPress={() => props.handleSelect(value)}
+                style={styles.modalButton}>
+                <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{value}</Text>
+            </Touchable>
+        );
+    });
+
     return (
         <View style={styles.container}>
             <View style={styles.modalContainer}>
@@ -78,19 +133,14 @@ export default OptionsModal = (props) => {
                     </Touchable>        
                 </View>
                 <View style={styles.modal}>
-                    <Touchable
-                        onPress={() => props.handleSelect(props.options[0])}
-                        style={styles.modalButton} 
-                        androidRipple
-                        androidRippleColor={styleConstants.primary}>
-                        <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{props.options[0]}</Text>
-                    </Touchable>
-                    <Touchable
-                        onPress={() => props.handleSelect(props.options[1])}
-                        style={styles.modalButton} 
-                        androidRippleColor={styleConstants.primary}>
-                        <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{props.options[1]}</Text>
-                    </Touchable>
+                    <View style={styles.infoContainer}>
+                        <InfoBlock
+                            title='Create an app'
+                            titleColor={styleConstants.white}
+                            subtitle='ADD A:'
+                            subtitleColor={styleConstants.secondary} />
+                    </View>
+                    {options}
                 </View>
             </View>
         </View>

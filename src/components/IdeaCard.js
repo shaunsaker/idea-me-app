@@ -94,6 +94,14 @@ export default class IdeaCard extends React.Component {
         }
     }
 
+    static get propTypes() {
+        return {
+            idea: React.PropTypes.object,
+            handleSelect: React.PropTypes.func,
+            handleAddNote: React.PropTypes.func,
+        };
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         if (
             nextState.showMenu !== this.state.showMenu ||
@@ -169,7 +177,7 @@ export default class IdeaCard extends React.Component {
                             handlePress={null}
                             iconName='note'
                             backgroundColor={styleConstants.white}
-                            iconColor={styleConstants.primary} 
+                            iconColor={styleConstants.primary}
                             count={notesCount} />
                     </View>
                     <View style={styles.buttonContainer}>
@@ -190,7 +198,7 @@ export default class IdeaCard extends React.Component {
                     </View>
                     <View style={styles.buttonContainer}>
                         <IconButton
-                            handlePress={null}
+                            handlePress={this.props.handleAddNote}
                             iconName='add'
                             backgroundColor={styleConstants.primary}
                             iconColor={styleConstants.secondary} />

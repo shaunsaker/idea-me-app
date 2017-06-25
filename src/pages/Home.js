@@ -17,6 +17,7 @@ import DropdownButton from '../components/DropdownButton';
 import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
 import ActionModal from '../components/ActionModal';
+import OptionsModal from '../components/OptionsModal';
 import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
@@ -31,6 +32,8 @@ export class Home extends React.Component {
     this.shareIdea = this.shareIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.toggleNotesModal = this.toggleNotesModal.bind(this);
+    this.selectNote = this.selectNote.bind(this);
 
     // TabBar
     this.tabs = [
@@ -55,9 +58,11 @@ export class Home extends React.Component {
     ];
 
     this.state = {
-      showModal: false,
-      modalTitle: null,
-      modalUID: null,
+      showDeleteModal: false,
+      deleteModalTitle: null,
+      deleteModalUID: null,
+      showNotesModal: false,
+      notesModalIdea: null,
     }
   }
 
@@ -134,16 +139,16 @@ export class Home extends React.Component {
   toggleDeleteModal(idea) {
     if (idea && idea.title) {
       this.setState({
-        showModal: true,
-        modalTitle: idea.title,
-        modalUID: idea.uid,
+        showDeleteModal: true,
+        deleteModalTitle: idea.title,
+        deleteModalUID: idea.uid,
       });
     }
     else {
       this.setState({
-        showModal: false,
-        modalTitle: null,
-        modalUID: null,
+        showDeleteModal: false,
+        deleteModalTitle: null,
+        deleteModalUID: null,
       });
     }
   }
@@ -167,11 +172,31 @@ export class Home extends React.Component {
     });
   }
 
+  toggleNotesModal(value) {
+    this.setState({
+      showNotesModal: !this.state.showNotesModal,
+      notesModalIdea: value,
+    });
+  }
+
+  selectNote(value) {
+    if (value === 'Note') {
+      Actions.notes();
+    }
+    else if (value === 'Image') {
+      Actions.images();
+    }
+    else if (value === 'Voice Note') {
+      Actions.voiceNotes();
+    }
+  }
+
   renderItem = ({ item }) => {
     return (
       <IdeaCard
         idea={item}
-        handleSelect={this.selectMenuItem} />
+        handleSelect={this.selectMenuItem}
+        handleAddNote={() => this.toggleNotesModal(item)} />
     );
   }
 
@@ -206,11 +231,21 @@ export class Home extends React.Component {
 
     const categories = utilities.convertObjectArrayToArray(this.props.categories);
 
-    const modal = this.state.showModal ?
+    const deleteModal = this.state.showDeleteModal ?
       <ActionModal
-        title={'Are you sure you want to delete ' + this.state.modalTitle + '?'}
-        handleLeftIconPress={() => this.deleteIdea(this.state.modalUID)}
+        title={'Are you sure you want to delete ' + this.state.deleteModalTitle + '?'}
+        handleLeftIconPress={() => this.deleteIdea(this.state.deleteModalUID)}
         handleRightIconPress={this.toggleDeleteModal} />
+      :
+      null;
+
+    const notesModal = this.state.showNotesModal ?
+      <OptionsModal
+        title='Add a Note to:'
+        subtitle='Idea Title'
+        options={['Note', 'Image', 'Voice Note']}
+        handleSelect={this.selectNote}
+        handleClose={this.toggleNotesModal} />
       :
       null;
 
@@ -240,7 +275,9 @@ export class Home extends React.Component {
         <TabBar
           tabs={this.tabs} />
 
-        {modal}
+        {deleteModal}
+
+        {notesModal}
 
         <SnackBar />
 
