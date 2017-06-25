@@ -3,10 +3,11 @@ PENDING
 
 TODOS
     Add/Edit Idea Notes functionality
-        Use Idea Card as template
         Images
         Voice notes  
     Edit Idea (above)
+    Componentize Note Cards and Card Lists
+    Notes header check should only show if something changed
     Consider using RN modal for animation transitions / create your own animations
     Change note icon to normal note (no plus)
     Delete Idea modal does not remove bg

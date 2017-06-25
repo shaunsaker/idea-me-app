@@ -11,7 +11,7 @@ import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
 import InfoBlock from './InfoBlock';
-import BulletList from './BulletList';
+import PhotoList from './PhotoList';
 import IconButton from './IconButton';
 
 const window = Dimensions.get('window');
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     infoContainer: {
 
     },
-    notesContainer: {
+    photosContainer: {
         flex: 1,
     },
     buttonContainer: {
@@ -53,12 +53,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NoteCard = (props) => {
+export default PhotoCard = (props) => {
 
     /*
         PROPTYPES
             idea
-            notes
+            photos
             handleDelete
     */
   
@@ -76,20 +76,18 @@ export default NoteCard = (props) => {
                         fullWidth />
                 </View>
 
-                <View style={styles.notesContainer}>
-                    <BulletList 
-                        title={'NOTES (' + props.notes.length + '):'}
-                        values={props.notes}
-                        handleDelete={() => props.handleDeleteNote(props.idea)} />
+                <View style={styles.photosContainer}>
+                    <PhotoList
+                        title={'PHOTOS (' + props.photos.length + '):'}
+                        values={props.photos} />
                 </View>
             </View>
 
             <View style={styles.buttonContainer}>
                 <IconButton
-                    handlePress={props.handleAddNote}
-                    iconName='add'
-                    iconColor={styleConstants.secondary}
-                    disabled={props.disabled} />
+                    handlePress={props.handleAddPhoto}
+                    iconName='camera'
+                    iconColor={styleConstants.secondary} />
             </View>
         </View>
     )

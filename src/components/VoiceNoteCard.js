@@ -11,7 +11,7 @@ import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
 import InfoBlock from './InfoBlock';
-import BulletList from './BulletList';
+import VoiceNoteList from './VoiceNoteList';
 import IconButton from './IconButton';
 
 const window = Dimensions.get('window');
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     infoContainer: {
 
     },
-    notesContainer: {
+    voiceNotesContainer: {
         flex: 1,
     },
     buttonContainer: {
@@ -53,12 +53,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NoteCard = (props) => {
+export default VoiceNoteCard = (props) => {
 
     /*
         PROPTYPES
             idea
-            notes
+            voiceNotes
             handleDelete
     */
   
@@ -76,20 +76,18 @@ export default NoteCard = (props) => {
                         fullWidth />
                 </View>
 
-                <View style={styles.notesContainer}>
-                    <BulletList 
-                        title={'NOTES (' + props.notes.length + '):'}
-                        values={props.notes}
-                        handleDelete={() => props.handleDeleteNote(props.idea)} />
+                <View style={styles.voiceNotesContainer}>
+                    <VoiceNoteList
+                        title={'VOICE NOTES (' + props.voiceNotes.length + '):'}
+                        values={props.voiceNotes} />
                 </View>
             </View>
 
             <View style={styles.buttonContainer}>
                 <IconButton
-                    handlePress={props.handleAddNote}
-                    iconName='add'
-                    iconColor={styleConstants.secondary}
-                    disabled={props.disabled} />
+                    handlePress={props.handleAddVoiceNote}
+                    iconName='voice'
+                    iconColor={styleConstants.secondary} />
             </View>
         </View>
     )

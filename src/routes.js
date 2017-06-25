@@ -11,8 +11,10 @@ import SignInOptions from './pages/SignInOptions';
 import SignInWithEmail from './pages/SignInWithEmail';
 import ForgotPassword from './pages/ForgotPassword';
 import Home from './pages/Home';
-import AddIdea from './pages/AddIdea';
 import Notes from './pages/Notes';
+import Photos from './pages/Photos';
+import VoiceNotes from './pages/VoiceNotes';
+import AddIdea from './pages/AddIdea';
 import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
 import AddCategory from './pages/AddCategory';
@@ -51,12 +53,20 @@ const Scenes = Actions.create(
 			type={ActionConst.REPLACE}
 			initial={false} />
 		<Scene
-			key='addIdea'
-			component={AddIdea}
-			initial={false} />
-		<Scene
 			key='notes'
 			component={Notes}
+			initial={false} />
+		<Scene
+			key='photos'
+			component={Photos}
+			initial={false} />
+		<Scene
+			key='voiceNotes'
+			component={VoiceNotes}
+			initial={false} />
+		<Scene
+			key='addIdea'
+			component={AddIdea}
 			initial={false} />
 		<Scene
 			key='editIdea'

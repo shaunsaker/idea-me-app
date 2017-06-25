@@ -137,7 +137,7 @@ export default class IdeaCard extends React.Component {
         const priorityLabelText = this.props.idea.priority ? this.props.idea.priority : 'Unprioritised';
         const notes = utilities.convertObjectArrayToArray(this.props.idea.notes);
         const notesCount = notes.length;
-        const imagesCount = utilities.getLengthOfObject(this.props.idea.images);
+        const photosCount = utilities.getLengthOfObject(this.props.idea.photos);
         const voiceNotesCount = utilities.getLengthOfObject(this.props.idea.voiceNotes);
 
         return (
@@ -179,9 +179,9 @@ export default class IdeaCard extends React.Component {
                     </View>
                     <View style={styles.buttonContainer}>
                         <IconButton
-                            handlePress={() => this.props.handleNotePress('Image')}
+                            handlePress={() => this.props.handleNotePress('Photo')}
                             iconName='camera'
-                            count={imagesCount} />
+                            count={photosCount} />
                     </View>
                     <View style={styles.buttonContainer}>
                         <IconButton

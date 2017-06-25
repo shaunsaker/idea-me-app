@@ -174,8 +174,8 @@ export class Home extends React.Component {
         idea,
       });
     }
-    else if (noteType === 'Image') {
-      Actions.images({
+    else if (noteType === 'Photo') {
+      Actions.photos({
         idea,
       });
     }
