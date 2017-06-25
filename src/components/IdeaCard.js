@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: styleConstants.white,
         padding: 8,
+        elevation: 5,
     },
     buttonContainer: {
 
@@ -192,7 +193,7 @@ export default class IdeaCard extends React.Component {
                             handlePress={null}
                             iconName='add'
                             backgroundColor={styleConstants.primary}
-                            iconColor={styleConstants.white} />
+                            iconColor={styleConstants.secondary} />
                     </View>
                 </View>
 
