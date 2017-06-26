@@ -11,7 +11,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
-import VoiceNoteCard from '../components/VoiceNoteCard';
+import NoteCard from '../components/NoteCard';
 import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
 
@@ -44,11 +44,9 @@ export class VoiceNotes extends React.Component {
                     text='VoiceNotes'
                     handleRightIconPress={null} />
 
-                <VoiceNoteCard
-                    idea={this.props.idea} 
-                    voiceNotes={this.state.voiceNotes}
-                    handleDeleteVoiceNote={null}
-                    handleAddVoiceNote={null} />
+                <NoteCard
+                    idea={this.props.idea}
+                    voiceNotes={this.state.voiceNotes} />
 
                 <SnackBar />
 

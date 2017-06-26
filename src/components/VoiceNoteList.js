@@ -14,16 +14,7 @@ import DeleteButton from './DeleteButton';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 16,
         backgroundColor: styleConstants.white,
-    },
-    titleContainer: {
-        padding: 8,
-        backgroundColor: styleConstants.primary,
-    },
-    title: {
-        fontSize: styleConstants.smallFont,
-        color: styleConstants.secondary,
     },
     notesWrapper: {
         flex: 1,
@@ -122,16 +113,8 @@ export default PhotoList = (props) => {
             </Text>
         </View>;
 
-    const titleColorStyles = props.values.length < 1 &&
-        {
-            color: styleConstants.lightGrey,
-        };
-
     return (
         <View style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles, labelColorStyles,]}>{props.title}</Text>
-            </View>
 
         </View>
     )

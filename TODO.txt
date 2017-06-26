@@ -3,7 +3,6 @@ PENDING
 
 TODOS
 
-    Componentize Note Cards and Card Lists
     Add/Edit Idea Notes functionality
         Images
         Voice notes  
@@ -11,6 +10,8 @@ TODOS
     Cards across app
         Categories
         Edit Profile
+    Use FlatList for all lists
+        shouldComponentUpdate will help render when it should
     Edit Profile header left icon should be close
     Current location should have retry button of sorts
     Modal on logout page made tabbar jump

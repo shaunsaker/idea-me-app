@@ -11,7 +11,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
-import PhotoCard from '../components/PhotoCard';
+import NoteCard from '../components/NoteCard';
 import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
 
@@ -43,11 +43,9 @@ export class Photos extends React.Component {
                     text='Photos'
                     handleRightIconPress={null} />
 
-                <PhotoCard
-                    idea={this.props.idea} 
-                    photos={this.state.photos}
-                    handleDeletePhoto={null}
-                    handleAddPhoto={null} />
+                <NoteCard
+                    idea={this.props.idea}
+                    photos={this.state.photos} />
 
                 <SnackBar />
 

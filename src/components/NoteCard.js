@@ -12,6 +12,8 @@ import styleConstants from '../styles/styleConstants';
 
 import InfoBlock from './InfoBlock';
 import BulletList from './BulletList';
+import PhotoList from './PhotoList';
+import VoiceNoteList from './VoiceNoteList';
 import IconButton from './IconButton';
 
 const window = Dimensions.get('window');
@@ -46,6 +48,15 @@ const styles = StyleSheet.create({
     },
     notesContainer: {
         flex: 1,
+        marginHorizontal: 16,
+    },
+    titleContainer: {
+        padding: 8,
+        backgroundColor: styleConstants.primary,
+    },
+    title: {
+        fontSize: styleConstants.smallFont,
+        color: styleConstants.secondary,
     },
     buttonContainer: {
         alignSelf: 'flex-end',
@@ -58,9 +69,41 @@ export default NoteCard = (props) => {
     /*
         PROPTYPES
             idea
-            notes
+            notes/photos/voiceNotes
             handleDelete
     */
+
+    let notesValues;
+    let title;
+    let notes;
+
+    if (props.notes) {
+        notesValues = props.notes;
+        title = 'NOTES';
+        notes = 
+            <BulletList 
+                values={notesValues}
+                handleDelete={() => props.handleDeleteNote(props.idea)} />;
+    }
+    else if (props.photos) {
+        notesValues = props.photos;
+        title = 'PHOTOS';
+        notes = 
+            <PhotoList
+                values={notesValues} />
+    }
+    else {
+        notesValues = props.voiceNotes;
+        title = 'VOICE NOTES';
+        notes = 
+            <VoiceNoteList
+                values={notesValues} />;
+    }
+    
+    const titleColorStyles = notesValues.length < 1 &&
+        {
+            color: styleConstants.lightGrey,
+        };       
   
     return (
         <View
@@ -77,10 +120,14 @@ export default NoteCard = (props) => {
                 </View>
 
                 <View style={styles.notesContainer}>
-                    <BulletList 
-                        title={'NOTES (' + props.notes.length + '):'}
-                        values={props.notes}
-                        handleDelete={() => props.handleDeleteNote(props.idea)} />
+                    <View style={styles.titleContainer}>
+                        <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles]}>
+                            {title + ' (' + notesValues.length + '):'}
+                        </Text>
+                    </View>
+
+                    {notes}
+
                 </View>
             </View>
 
