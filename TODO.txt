@@ -2,11 +2,26 @@ PENDING
     Logo    JOHAN
 
 TODOS
+
+    Componentize Note Cards and Card Lists
     Add/Edit Idea Notes functionality
         Images
         Voice notes  
     Edit Idea (above)
-    Componentize Note Cards and Card Lists
+    Cards across app
+        Categories
+        Edit Profile
+    Edit Profile header left icon should be close
+    Current location should have retry button of sorts
+    Modal on logout page made tabbar jump
+    No secondary colour in modals
+    Don't use browser component (use linking)
+    Welcome page styling off
+    Logout then sign in did not work
+        Had alot more ideas than previously
+    Try switch actions for tabs
+    Use babel remove console logs in production (RN perf)
+    Better, more inspiring quotes
     Notes header check should only show if something changed
     Consider using RN modal for animation transitions / create your own animations
     Change note icon to normal note (no plus)
@@ -85,3 +100,4 @@ IOS
 V2
     Add Sketches to Ideas
     Convert Voice Notes to Text
+    Public ideas and collaboration
