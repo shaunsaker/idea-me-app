@@ -2,10 +2,13 @@ PENDING
     Logo    JOHAN
 
 TODOS
-
-    Add/Edit Idea Notes functionality
-        Images
-        Voice notes  
+    Handle images as sagas
+        On image
+            Save full size and cropped path to db
+        Images errors
+        Paths - using cache at the moment which will be an issue if they clear app data
+    Add Images as notes
+    Add VoiceNotes as notes
     Edit Idea (above)
     Cards across app
         Categories
@@ -101,4 +104,5 @@ IOS
 V2
     Add Sketches to Ideas
     Convert Voice Notes to Text
+    Add Videos to Ideas
     Public ideas and collaboration

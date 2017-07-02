@@ -17,17 +17,22 @@ config.animation = {
 
 config.modal = {
     animation: 'slide',
-}
+};
 
 config.images = {
     maxImageWidth: 100,
     imagePickerOptions: {
         mediaType: 'photo',
-        noData: true,
+        noData: true, // don't attach base64 data - greatly improves performance
+        storageOptions: {
+            skipBackup: true, // don't backup to iOS cloud
+            path: 'IdeaMe', // not working in dev
+        },
     },
     imageResizerOptions: [
-        'JPEG',
-        100,
+        'JPEG',     // format
+        100,        // quality
+        0,          // rotation, outputPath below
     ],
     firestackStorageOptions: {
         contentType: 'image/jpeg',

@@ -18,6 +18,9 @@ import { loadUserData } from './cloudData';
 import { saveUserData } from './cloudData';
 import { deleteUserData } from './cloudData';
 
+// Images
+import { handleImage } from './images';
+
 // Cloud Storage
 import { uploadUserPhoto } from './cloudStorage';
 
@@ -40,6 +43,9 @@ export function* sagas() {
         fork(takeLatest, 'loadUserData', loadUserData),    
         fork(takeLatest, 'saveUserData', saveUserData),  
         fork(takeLatest, 'deleteUserData', deleteUserData),   
+
+        // Images
+        fork(takeLatest, 'handleImage', handleImage), 
 
         // Cloud Storage
 		fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),

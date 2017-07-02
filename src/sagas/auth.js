@@ -4,7 +4,7 @@ import Auth from '../auth/index';
 
 export function* getUserAuth() {
 	const getUserAuthResponse = yield call(Auth.getUserAuth);
-	console.log('getUserAuthResponse', getUserAuthResponse);
+	// console.log('getUserAuthResponse', getUserAuthResponse);
 
 	if (getUserAuthResponse.authenticated) {
 		yield put({
@@ -120,7 +120,9 @@ export function* signInUserWithFacebook() {
 			uid: uid,
 			userEmail: signInFacebookResponse.message.user.email,
 			userName: signInFacebookResponse.message.user.displayName,
-			userPhotoUrl: signInFacebookResponse.message.user.photoUrl,
+			userPhotoUrl: {
+				cropped: signInFacebookResponse.message.user.photoUrl,
+			},
 			anonymous: false
 		});
 	}
@@ -148,7 +150,9 @@ export function* signInUserWithGoogle() {
 			uid: uid,
 			userEmail: '', // TODO: Get these from the response
 			userName: '',
-			userPhotoUrl: '',
+			userPhotoUrl: {
+				cropped: '',
+			},
 			anonymous: false
 		});
 	}

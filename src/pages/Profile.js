@@ -67,7 +67,7 @@ export class Profile extends React.Component {
             userName: React.PropTypes.string,
             userEmail: React.PropTypes.string,
             userLocation: React.PropTypes.string,
-            userPhotoUrl: React.PropTypes.string,
+            userPhotoUrl: React.PropTypes.object,
             numberOfIdeas: React.PropTypes.number, 
         };
     }
@@ -173,7 +173,7 @@ export class Profile extends React.Component {
 
                 <ProfileCard
                     userName={this.props.userName}
-                    userPhotoUrl={this.props.userPhotoUrl}
+                    userPhotoUrl={this.props.userPhotoUrl.cropped}
                     userEmail={this.props.userEmail}
                     userLocation={this.props.userLocation}
                     numberOfIdeas={this.props.numberOfIdeas}

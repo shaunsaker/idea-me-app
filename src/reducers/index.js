@@ -225,8 +225,6 @@ export default function (state = initialState, action) {
 		case 'SET_USER_PHOTO':
 			new_state = utilities.cloneObject(state);
 			new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
-			new_state.cloudData.cloudDataSuccess = true;
-            new_state.app.loading = false;
 			return new_state;   
 
         case 'SELECT_CATEGORY':

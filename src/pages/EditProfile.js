@@ -1,14 +1,10 @@
 import React from "react";
 import {
     View,
-    ImageEditor,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import ImagePicker from 'react-native-image-picker';
-import ImageResizer from 'react-native-image-resizer';
 
-import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
 
@@ -34,9 +30,6 @@ export class Profile extends React.Component {
 
         this.toggleModal = this.toggleModal.bind(this);
         this.selectModalOption = this.selectModalOption.bind(this);
-        this.takePhoto = this.takePhoto.bind(this);
-        this.choosePhoto = this.choosePhoto.bind(this);
-        this.handleImage = this.handleImage.bind(this);
         this.updateEditUserName = this.updateEditUserName.bind(this);
         this.updateEditUserEmail = this.updateEditUserEmail.bind(this);
         this.updateUserDetails = this.updateUserDetails.bind(this);
@@ -48,7 +41,7 @@ export class Profile extends React.Component {
             userName: React.PropTypes.string,
             userEmail: React.PropTypes.string,
             userLocation: React.PropTypes.string,
-            userPhotoUrl: React.PropTypes.string,
+            userPhotoUrl: React.PropTypes.object,
             cloudDataSuccess: React.PropTypes.bool,
         };
     }
@@ -74,86 +67,14 @@ export class Profile extends React.Component {
         });
     }
 
-    selectModalOption(type) {
-        if (type === 'Take a Photo') {
-            this.takePhoto();
-        }
-        else {
-            this.choosePhoto();
-        }
-    }
-
-    takePhoto() {
+    selectModalOption(option) {
         this.toggleModal();
 
-        ImagePicker.launchCamera(config.images.imagePickerOptions, (response) => {
-            if (!response.didCancel) {
-                this.handleImage(response);
-            }
-        });
-    }
-
-    choosePhoto() {
-        this.toggleModal();
-
-        ImagePicker.launchImageLibrary(config.images.imagePickerOptions, (response) => {
-            if (!response.didCancel) {
-                this.handleImage(response);
-            }
-        });
-    }
-
-    handleImage(response) {
         this.props.dispatch({
-            type: 'TOGGLE_LOADING'
+            type: 'handleImage',
+            option, // Take a Photo / Choose a Photo
+            uid: this.props.uid,
         });
-
-        const portrait = response.height > response.width;
-
-        const imageResizerOptions = [
-            response.path, // path to image
-            portrait ? config.images.maxImageWidth : config.images.maxImageWidth * 2, // maxWidth
-            portrait ? config.images.maxImageWidth * 2 : config.images.maxImageWidth, // maxHeight
-            ...config.images.imageResizerOptions,
-        ];
-
-        const offsetX = portrait ? 0 : (config.images.maxImageWidth / 2 * response.width / response.height) - config.images.maxImageWidth / 2;
-        const offsetY = portrait ? (config.images.maxImageWidth / 2 * response.height / response.width) - config.images.maxImageWidth / 2 : 0;
-
-        ImageResizer.createResizedImage(...imageResizerOptions)
-            .then((resizedImageUri) => {
-                const cropOptions = {
-                    offset: {
-                        x: offsetX,
-                        y: offsetY
-                    },
-                    size: {
-                        width: config.images.maxImageWidth,
-                        height: config.images.maxImageWidth
-                    }
-                };
-
-                ImageEditor.cropImage(resizedImageUri, cropOptions,
-                    (uri) => {
-                        this.props.dispatch({
-                            type: 'uploadUserPhoto',
-                            uid: this.props.uid,
-                            path: uri
-                        });
-                    },
-                    (error) => {
-                        this.props.dispatch({
-                            type: 'CLOUD_STORAGE_ERROR',
-                            message: error.message
-                        });
-                    });
-            })
-            .catch((error) => {
-                this.props.dispatch({
-                    type: 'CLOUD_STORAGE_ERROR',
-                    message: error.message
-                });
-            });
     }
 
     updateEditUserName(value) {
@@ -191,6 +112,7 @@ export class Profile extends React.Component {
     render() {
         const modal = this.state.showModal ?
             <OptionsModal
+                title='Choose an Option'
                 options={['Take a Photo', 'Choose a Photo']}
                 handleSelect={this.selectModalOption}
                 handleClose={this.toggleModal} />
@@ -212,7 +134,7 @@ export class Profile extends React.Component {
                 <InputContainer>
 
                     <EditableImage
-                        uri={this.props.userPhotoUrl}
+                        uri={this.props.userPhotoUrl.cropped}
                         handlePress={this.toggleModal} />
 
                     <Input
