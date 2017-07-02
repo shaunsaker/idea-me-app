@@ -70,6 +70,7 @@ export default NoteCard = (props) => {
         PROPTYPES
             idea
             notes/photos/voiceNotes
+            handleViewPhotos   
             handleAdd
             handleDelete
     */
@@ -92,6 +93,7 @@ export default NoteCard = (props) => {
         notes = 
             <PhotoList
                 values={notesValues}
+                handleViewPhotos={props.handleViewPhotos}
                 handleDelete={props.handleDelete} />
     }
     else {

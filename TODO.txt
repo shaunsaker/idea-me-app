@@ -3,9 +3,6 @@ PENDING
 
 TODOS
     Add Images as notes
-        Add photos
-        Delete photos
-        Full screen view photos
         Would be great to have a loading indicator in the photo grid - there is a 1-2 second delay before seeing your photo
         Images errors
         Paths - using cache at the moment which will be an issue if they clear app data
@@ -104,6 +101,9 @@ IOS
     Icons
     React native keyboard spacer
     Testing!
+
+POSSIBLE ENHANCEMENTS (OR MOVE TO V2)
+    Full screen view photos Swipe down to close        
 
 V2
     Add Sketches to Ideas

@@ -64,12 +64,12 @@ export default PhotoList = (props) => {
             handleDelete
     */
 
-    const photos = props.values && props.values.length > 0 && 
+    const photos = props.values && props.values.length > 0 ? 
         props.values.map((value, index) => {
             return (
                 <Touchable
                     key={'photo-' + value.cropped}
-                    handlePress={null}
+                    onPress={() => props.handleViewPhotos(index)}
                     style={styles.photoContainer}>
                     <Image
                         source={{uri: value.cropped}}
@@ -81,6 +81,13 @@ export default PhotoList = (props) => {
                 </Touchable>
             );
         })
+        :
+        <View style={styles.noteTextContainer}>
+            <Text
+                style={[styles.noteText, styleConstants.primaryFont]}>
+                None
+            </Text>
+        </View>;
 
     return (
         <View style={styles.container}>

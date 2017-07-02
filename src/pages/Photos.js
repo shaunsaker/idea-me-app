@@ -12,6 +12,7 @@ import styleConstants from '../styles/styleConstants';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
+import PhotoViewer from '../components/PhotoViewer';
 import OptionsModal from '../components/OptionsModal';
 import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
@@ -21,6 +22,7 @@ export class Photos extends React.Component {
     constructor(props) {
         super(props);
 
+        this.togglePhotoViewer = this.togglePhotoViewer.bind(this);
         this.togglePhotoModal = this.togglePhotoModal.bind(this);
         this.selectPhotoOption = this.selectPhotoOption.bind(this);
         this.toggleDeletePhotoModal = this.toggleDeletePhotoModal.bind(this);
@@ -28,6 +30,7 @@ export class Photos extends React.Component {
         this.savePhotos = this.savePhotos.bind(this);
 
         this.state = {
+            showPhotoViewer: false,
             showPhotoModal: false,
             showDeletePhotoModal: false,
             deletePhotoIndex: null,
@@ -67,6 +70,20 @@ export class Photos extends React.Component {
 
             Actions.pop();
         }
+    }
+
+    componentWillUnmount() {
+        this.props.dispatch({
+            type: 'UPDATE_NEW_PHOTOS',
+            newPhotos: [],
+        });
+    }
+
+    togglePhotoViewer(index) {
+        this.setState({
+            showPhotoViewer: !this.state.showPhotoViewer,
+            photoViewerIndex: index,
+        });
     }
 
     togglePhotoModal() {
@@ -122,6 +139,14 @@ export class Photos extends React.Component {
     }
 
     render() {
+        const photoViewer = this.state.showPhotoViewer ?
+            <PhotoViewer
+                photos={this.props.newPhotos}
+                scrollToIndex={this.state.photoViewerIndex}
+                handleClose={this.togglePhotoViewer} />
+            :
+            null;
+
         const photoModal = this.state.showPhotoModal ?
             <OptionsModal
                 title='Choose an Option'
@@ -154,8 +179,11 @@ export class Photos extends React.Component {
                 <NoteCard
                     idea={this.props.idea}
                     photos={this.props.newPhotos}
+                    handleViewPhotos={this.togglePhotoViewer}
                     handleAdd={this.togglePhotoModal}
                     handleDelete={this.toggleDeletePhotoModal} />
+
+                {photoViewer}
 
                 {photoModal}
 
