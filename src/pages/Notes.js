@@ -24,7 +24,7 @@ export class Notes extends React.Component {
         this.addNote = this.addNote.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
         this.deleteNote = this.deleteNote.bind(this);
-        this.addNotes = this.addNotes.bind(this);
+        this.saveNotes = this.saveNotes.bind(this);
 
         this.state = {
             newNote: null,
@@ -60,7 +60,7 @@ export class Notes extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.props.currentAction === 'addNotes' && this.props.cloudDataSuccess) {
+        if (this.props.currentAction === 'saveNotes' && this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_CLOUD_DATA_SUCCESS'
             });
@@ -116,7 +116,7 @@ export class Notes extends React.Component {
         this.toggleDeleteModal();
     }
 
-    addNotes() {
+    saveNotes() {
         const newNotes = utilities.convertArrayToObjectArray(this.state.notes);
 
         // We are editing an idea's notes
@@ -140,7 +140,7 @@ export class Notes extends React.Component {
                 node: 'ideas',
                 uid: this.props.uid,
                 userData: newIdeas,
-                currentAction: 'addNotes',
+                currentAction: 'saveNotes',
                 hasNetwork: this.props.hasNetwork,
             });
         }
@@ -171,13 +171,13 @@ export class Notes extends React.Component {
                     inputValue={this.state.newNote}
                     inputPlaceholderText="Add a New Note"
                     handleChangeText={this.updateNewNote}
-                    handleRightIconPress={this.addNotes} />
+                    handleRightIconPress={this.saveNotes} />
                   
                 <NoteCard
                     idea={this.props.idea}
                     notes={this.state.notes}
-                    handleDeleteNote={this.toggleDeleteModal}
-                    handleAddNote={this.addNote}
+                    handleDelete={this.toggleDeleteModal}
+                    handleAdd={this.addNote}
                     disabled={!enableAddNoteButton} />
 
                 {deleteModal}

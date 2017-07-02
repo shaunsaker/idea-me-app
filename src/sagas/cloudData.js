@@ -47,7 +47,7 @@ export function* saveUserData(action) {
         yield call(CloudData.saveUserData, action)
         :
         CloudData.saveUserData(action); // will never yield a response if offline
-        // console.log('saveUserDataResponse', saveUserDataResponse);
+    console.log('saveUserDataResponse', saveUserDataResponse);
 
     if (saveUserDataResponse || !action.hasNetwork) {       
         if (saveUserDataResponse.success || !action.hasNetwork) {

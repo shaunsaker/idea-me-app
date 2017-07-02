@@ -70,6 +70,7 @@ export default NoteCard = (props) => {
         PROPTYPES
             idea
             notes/photos/voiceNotes
+            handleAdd
             handleDelete
     */
 
@@ -83,14 +84,15 @@ export default NoteCard = (props) => {
         notes = 
             <BulletList 
                 values={notesValues}
-                handleDelete={() => props.handleDeleteNote(props.idea)} />;
+                handleDelete={() => props.handleDelete(props.idea)} />;
     }
     else if (props.photos) {
         notesValues = props.photos;
         title = 'PHOTOS';
         notes = 
             <PhotoList
-                values={notesValues} />
+                values={notesValues}
+                handleDelete={props.handleDelete} />
     }
     else {
         notesValues = props.voiceNotes;
@@ -133,7 +135,7 @@ export default NoteCard = (props) => {
 
             <View style={styles.buttonContainer}>
                 <IconButton
-                    handlePress={props.handleAddNote}
+                    handlePress={props.handleAdd}
                     iconName='add'
                     iconColor={styleConstants.secondary}
                     disabled={props.disabled} />

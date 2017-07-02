@@ -25,11 +25,11 @@ export class Profile extends React.Component {
         this.state = {
             editUserName: null,
             editUserEmail: null,
-            showModal: false,
+            showPhotoModal: false,
         }
 
-        this.toggleModal = this.toggleModal.bind(this);
-        this.selectModalOption = this.selectModalOption.bind(this);
+        this.togglePhotoModal = this.togglePhotoModal.bind(this);
+        this.selectPhotoOption = this.selectPhotoOption.bind(this);
         this.updateEditUserName = this.updateEditUserName.bind(this);
         this.updateEditUserEmail = this.updateEditUserEmail.bind(this);
         this.updateUserDetails = this.updateUserDetails.bind(this);
@@ -61,19 +61,18 @@ export class Profile extends React.Component {
         }
     }
 
-    toggleModal() {
+    togglePhotoModal() {
         this.setState({
-            showModal: !this.state.showModal
+            showPhotoModal: !this.state.showPhotoModal
         });
     }
 
-    selectModalOption(option) {
-        this.toggleModal();
+    selectPhotoOption(option) {
+        this.togglePhotoModal();
 
         this.props.dispatch({
             type: 'handleImage',
             option, // Take a Photo / Choose a Photo
-            uid: this.props.uid,
         });
     }
 
@@ -110,12 +109,12 @@ export class Profile extends React.Component {
     }
 
     render() {
-        const modal = this.state.showModal ?
+        const photoModal = this.state.showPhotoModal ?
             <OptionsModal
                 title='Choose an Option'
                 options={['Take a Photo', 'Choose a Photo']}
-                handleSelect={this.selectModalOption}
-                handleClose={this.toggleModal} />
+                handleSelect={this.selectPhotoOption}
+                handleClose={this.togglePhotoModal} />
             :
             null;
 
@@ -135,7 +134,7 @@ export class Profile extends React.Component {
 
                     <EditableImage
                         uri={this.props.userPhotoUrl.cropped}
-                        handlePress={this.toggleModal} />
+                        handlePress={this.togglePhotoModal} />
 
                     <Input
                         placeholder="NAME"
@@ -156,7 +155,7 @@ export class Profile extends React.Component {
                     backgroundColor={styleConstants.white}
                     handlePress={() => Actions.editLocation()} />
 
-                {modal}
+                {photoModal}
 
                 <SnackBar />
 

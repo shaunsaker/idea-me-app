@@ -2,6 +2,8 @@ import { call, put } from 'redux-saga/effects';
 
 import Images from '../images/index';
 
+import utilities from '../utilities';
+
 export function* handleImage(action) {
     let imagePickerResponse;
 
@@ -41,10 +43,14 @@ export function* handleImage(action) {
                 const image = {
                     fullSize: imagePickerResponse.message.uri,
                     cropped: imageCropperResponse.message,
+                    uid: utilities.createUID(),
                 };
 
-                if (action.node) { // some flag indicating this is an ideas image
-
+                if (action.ideaPhoto) { // flag indicating this is an idea's photo
+                    yield put({
+                        type: 'UPDATE_NEW_PHOTOS',
+                        newPhoto: image,
+                    });
                 }
                 else {
 

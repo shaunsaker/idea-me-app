@@ -58,6 +58,7 @@ const initialState = {
             },
         },
         newNotes: null,
+        newPhotos: [],
     },
     userData: {
         profile: {

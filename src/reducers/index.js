@@ -207,10 +207,24 @@ export default function (state = initialState, action) {
             }
 
             new_state.appData.newNotes = null;
+            new_state.appData.newImages = null;
             new_state.cloudData.cloudDataSuccess = true;
             new_state.app.loading = false;
             new_state.app.currentAction = action.currentAction;
 			return new_state;
+
+        case 'UPDATE_NEW_PHOTOS':
+            new_state = utilities.cloneObject(state);
+
+            // Are we adding a single new photo or updating the whole lot (deleting a photo)
+            if (action.newPhotos) {
+                new_state.appData.newPhotos = action.newPhotos;
+            }
+            else {
+                new_state.appData.newPhotos.push(action.newPhoto);
+            }
+                
+            return new_state;
 
         case 'SET_NEW_NOTES':
             new_state = utilities.cloneObject(state);

@@ -2,21 +2,25 @@ PENDING
     Logo    JOHAN
 
 TODOS
-    Handle images as sagas
-        On image
-            Save full size and cropped path to db
+    Add Images as notes
+        Add photos
+        Delete photos
+        Full screen view photos
+        Would be great to have a loading indicator in the photo grid - there is a 1-2 second delay before seeing your photo
         Images errors
         Paths - using cache at the moment which will be an issue if they clear app data
-    Add Images as notes
     Add VoiceNotes as notes
     Edit Idea (above)
+    On close/exit, reset newPhotos, newNotes, newVoiceNotes
+    Look into setNotes on editIdea. Shouldn't this save?
+    All continue buttons should only show if appropriate
     Cards across app
         Categories
         Edit Profile
     Use FlatList for all lists
         shouldComponentUpdate will help render when it should
     Edit Profile header left icon should be close
-    Current location should have retry button of sorts
+    Current location should have retry button of sorts (if we could not get location)
     Modal on logout page made tabbar jump
     No secondary colour in modals
     Don't use browser component (use linking)

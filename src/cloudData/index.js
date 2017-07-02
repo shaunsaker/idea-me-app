@@ -33,7 +33,7 @@ export default class CloudData {
             })
             .then(() => {
                 response.success = true;
-                response.message = null;
+                response.message = action.userData;
                 resolve(response);
             })
             .catch(error => {
