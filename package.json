@@ -16,11 +16,11 @@
     "react-native-image-picker": "^0.26.3",
     "react-native-image-resizer": "^0.1.1",
     "react-native-keyboard-aware-scroll-view": "^0.2.9",
-    "react-native-router-flux": "3.38.0",
-    "react-native-vector-icons": "4.0.0",
-    "react-redux": "5.0.3",
-    "redux": "3.6.0",
-    "redux-saga": "0.14.4"
+    "react-native-router-flux": "^3.41.0",
+    "react-native-vector-icons": "^4.2.0",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-saga": "^0.15.4"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
