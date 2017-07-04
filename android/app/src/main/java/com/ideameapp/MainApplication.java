@@ -3,6 +3,7 @@ package com.ideaMeApp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import io.fullstack.firestack.FirestackPackage;
 import com.facebook.react.ReactNativeHost;
@@ -38,6 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+			new RNFSPackage(),
           new VectorIconsPackage(),
           new FirestackPackage(),
           new FBSDKPackage(mCallbackManager),

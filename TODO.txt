@@ -17,6 +17,7 @@ TODOS
     Use FlatList for all lists
         shouldComponentUpdate will help render when it should
     Edit Profile header left icon should be close
+	PhotoViewer give bottom portion some opacity to clearly see scroll indicator
     Current location should have retry button of sorts (if we could not get location)
     Modal on logout page made tabbar jump
     No secondary colour in modals
