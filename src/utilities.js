@@ -1,5 +1,22 @@
 const utilities = {};
 
+/* FILES */
+
+utilities.getFileName = (path) => {
+    const pathArray = path.split('/');
+    const fileName = pathArray[pathArray.length - 1];
+    
+    return fileName;
+}
+
+utilities.appendStringToFileName = (fileName, string) => {
+    const fileNameArray = fileName.split('.');
+    const newFileName = fileNameArray[0] + string + '.' + fileNameArray[1];
+    console.log(newFileName)
+
+    return newFileName;
+}   
+
 /* METHODS */
 
 utilities.getInputHeight = (inputWidth, inputLineHeight, charCount) => {
