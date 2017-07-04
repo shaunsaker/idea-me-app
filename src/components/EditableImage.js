@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     Image,
@@ -50,8 +51,8 @@ export default class EditableImage extends React.Component {
 
     static get propTypes() {
         return {
-            uri: React.PropTypes.string,
-            handlePress: React.PropTypes.func,
+            uri: PropTypes.string,
+            handlePress: PropTypes.func,
         };
     }
 

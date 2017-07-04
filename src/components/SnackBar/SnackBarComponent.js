@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     Text,
@@ -80,9 +81,9 @@ export default class SnackBarComponent extends React.Component {
 
     static get propTypes() {
         return {
-            text: React.PropTypes.string.isRequired,
-            success: React.PropTypes.bool,
-            handleReset: React.PropTypes.func,
+            text: PropTypes.string.isRequired,
+            success: PropTypes.bool,
+            handleReset: PropTypes.func,
         };
     }
 

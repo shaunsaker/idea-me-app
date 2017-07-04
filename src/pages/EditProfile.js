@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
 } from "react-native";
@@ -37,12 +38,12 @@ export class Profile extends React.Component {
 
     static get propTypes() {
         return {
-            uid: React.PropTypes.string,
-            userName: React.PropTypes.string,
-            userEmail: React.PropTypes.string,
-            userLocation: React.PropTypes.string,
-            userPhotoUrl: React.PropTypes.object,
-            cloudDataSuccess: React.PropTypes.bool,
+            uid: PropTypes.string,
+            userName: PropTypes.string,
+            userEmail: PropTypes.string,
+            userLocation: PropTypes.string,
+            userPhotoUrl: PropTypes.object,
+            cloudDataSuccess: PropTypes.bool,
         };
     }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     StatusBar,
     View,
@@ -24,11 +25,11 @@ export class Splash extends React.Component {
 
     static get propTypes() {
         return {
-            authenticated: React.PropTypes.bool,
-            cloudDataSuccess: React.PropTypes.bool,
-            redirectToWelcomePage: React.PropTypes.bool,
+            authenticated: PropTypes.bool,
+            cloudDataSuccess: PropTypes.bool,
+            redirectToWelcomePage: PropTypes.bool,
 
-            uid: React.PropTypes.string,
+            uid: PropTypes.string,
         };
     }
 

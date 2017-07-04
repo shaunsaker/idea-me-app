@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     Text,
@@ -169,16 +170,16 @@ export default class Input extends React.Component {
 
     static get propTypes() {
         return {
-            placeholder: React.PropTypes.string,
-            handleChange: React.PropTypes.func,
-            handleFocus: React.PropTypes.func,
-            handleBlur: React.PropTypes.func,
-            value: React.PropTypes.string,
-            type: React.PropTypes.string,
-            keyboardType: React.PropTypes.string,
-            autoFocus: React.PropTypes.bool,
-            multiline: React.PropTypes.bool,
-            maxLength: React.PropTypes.number,
+            placeholder: PropTypes.string,
+            handleChange: PropTypes.func,
+            handleFocus: PropTypes.func,
+            handleBlur: PropTypes.func,
+            value: PropTypes.string,
+            type: PropTypes.string,
+            keyboardType: PropTypes.string,
+            autoFocus: PropTypes.bool,
+            multiline: PropTypes.bool,
+            maxLength: PropTypes.number,
         };
     }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     ScrollView,
@@ -105,14 +106,14 @@ export default class DropdownButton extends React.Component {
 
     static get propTypes() {
         return {
-            displayText: React.PropTypes.string, // display text but don't pass value back, eg. Select a Category
-            currentValue: React.PropTypes.string,
-            values: React.PropTypes.array.isRequired,
-            handleSelect: React.PropTypes.func.isRequired,
-            headerIconName: React.PropTypes.string,
-            headerValue: React.PropTypes.string,
-            pushContent: React.PropTypes.bool, // animate push content below
-            buttonBackgroundColor: React.PropTypes.string,
+            displayText: PropTypes.string, // display text but don't pass value back, eg. Select a Category
+            currentValue: PropTypes.string,
+            values: PropTypes.array.isRequired,
+            handleSelect: PropTypes.func.isRequired,
+            headerIconName: PropTypes.string,
+            headerValue: PropTypes.string,
+            pushContent: PropTypes.bool, // animate push content below
+            buttonBackgroundColor: PropTypes.string,
         };
     }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     Text,
@@ -39,14 +40,14 @@ export class Photos extends React.Component {
 
     static get propTypes() {
         return {
-            idea: React.PropTypes.object,
+            idea: PropTypes.object,
 
-            newPhotos: React.PropTypes.array,
-            ideas: React.PropTypes.object,
+            newPhotos: PropTypes.array,
+            ideas: PropTypes.object,
 
-            uid: React.PropTypes.string,
-            hasNetwork: React.PropTypes.bool,
-            cloudDataSuccess: React.PropTypes.bool,
+            uid: PropTypes.string,
+            hasNetwork: PropTypes.bool,
+            cloudDataSuccess: PropTypes.bool,
         };
     }
 

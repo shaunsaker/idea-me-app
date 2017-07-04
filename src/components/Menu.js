@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
 	View,
     FlatList,
@@ -55,8 +56,8 @@ export default class Menu extends React.Component {
 
 	static get propTypes() {
 		return {
-            values: React.PropTypes.array.isRequired,
-            handleSelect: React.PropTypes.func.isRequired,
+            values: PropTypes.array.isRequired,
+            handleSelect: PropTypes.func.isRequired,
 		}
 	}
 

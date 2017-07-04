@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View
 } from "react-native";
@@ -24,14 +25,14 @@ export class Welcome extends React.Component {
 
     static get propTypes() {
         return {
-            authenticated: React.PropTypes.bool,
-            cloudDataSuccess: React.PropTypes.bool,
+            authenticated: PropTypes.bool,
+            cloudDataSuccess: PropTypes.bool,
 
-            uid: React.PropTypes.string,
-            userEmail: React.PropTypes.string,
-			userName: React.PropTypes.string,
-			userPhotoUrl: React.PropTypes.string,
-            currentLocation: React.PropTypes.string,
+            uid: PropTypes.string,
+            userEmail: PropTypes.string,
+			userName: PropTypes.string,
+			userPhotoUrl: PropTypes.object,
+            currentLocation: PropTypes.string,
         };
     }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
 	View,
 	WebView,
@@ -69,9 +70,9 @@ export default class Dropdown extends React.Component {
 
 	static get propTypes() {
 		return {
-			uri: React.PropTypes.string,
-			handleCopySuccess: React.PropTypes.func,
-			handleClose: React.PropTypes.func,
+			uri: PropTypes.string,
+			handleCopySuccess: PropTypes.func,
+			handleClose: PropTypes.func,
 		};
 	}
 

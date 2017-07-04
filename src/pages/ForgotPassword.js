@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -23,8 +24,8 @@ export class ForgotPassword extends React.Component {
 
     static get propTypes() {
         return {
-            userEmail: React.PropTypes.string,
-            errorType: React.PropTypes.string,
+            userEmail: PropTypes.string,
+            errorType: PropTypes.string,
         };
     }
 

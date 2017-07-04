@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
   View,
   FlatList,
@@ -64,13 +65,13 @@ export class Home extends React.Component {
 
   static get propTypes() {
     return {
-      ideas: React.PropTypes.object,
-      categories: React.PropTypes.object,
-      currentCategory: React.PropTypes.string,
-      uid: React.PropTypes.string,
-      cloudDataSuccess: React.PropTypes.bool,
-      currentAction: React.PropTypes.string,
-      hasNetwork: React.PropTypes.bool,
+      ideas: PropTypes.object,
+      categories: PropTypes.object,
+      currentCategory: PropTypes.string,
+      uid: PropTypes.string,
+      cloudDataSuccess: PropTypes.bool,
+      currentAction: PropTypes.string,
+      hasNetwork: PropTypes.bool,
     };
   }
 

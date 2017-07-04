@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     FlatList,
@@ -59,16 +60,16 @@ export default class ItemList extends React.Component {
 
     static get propTypes() {
         return {
-            items: React.PropTypes.array,
-            handleItemPress: React.PropTypes.func,
-            deleteIcon: React.PropTypes.bool,
-            iconName: React.PropTypes.string,
-            handleIconPress: React.PropTypes.func,
+            items: PropTypes.array,
+            handleItemPress: PropTypes.func,
+            deleteIcon: PropTypes.bool,
+            iconName: PropTypes.string,
+            handleIconPress: PropTypes.func,
 
-            headerTitle: React.PropTypes.string,
-            headerValue: React.PropTypes.string,
-            headerDisabled: React.PropTypes.bool,
-            headerIconName: React.PropTypes.string,
+            headerTitle: PropTypes.string,
+            headerValue: PropTypes.string,
+            headerDisabled: PropTypes.bool,
+            headerIconName: PropTypes.string,
         };
     }
 

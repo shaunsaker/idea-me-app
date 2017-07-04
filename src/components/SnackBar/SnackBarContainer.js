@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     StyleSheet,
@@ -25,15 +26,15 @@ export class SnackBar extends React.Component {
 
     static get propTypes() {
         return {
-            userSuccessMessage: React.PropTypes.string,
-            userErrorMessage: React.PropTypes.string,
-            authErrorMessage: React.PropTypes.string,
-            authSuccessMessage: React.PropTypes.string,
-            cloudDataErrorMessage: React.PropTypes.string,
-            cloudStorageErrorMessage: React.PropTypes.string,
+            userSuccessMessage: PropTypes.string,
+            userErrorMessage: PropTypes.string,
+            authErrorMessage: PropTypes.string,
+            authSuccessMessage: PropTypes.string,
+            cloudDataErrorMessage: PropTypes.string,
+            cloudStorageErrorMessage: PropTypes.string,
 
-            errorType: React.PropTypes.string,  
-            retryAction: React.PropTypes.object,
+            errorType: PropTypes.string,  
+            retryAction: PropTypes.object,
         };
     }
 

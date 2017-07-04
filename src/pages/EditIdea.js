@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
@@ -34,17 +35,17 @@ export class EditIdea extends React.Component {
 
     static get propTypes() {
         return {
-            initialIdeaTitle: React.PropTypes.string,
-            initialIdeaDescription: React.PropTypes.string,
-            initialIdeaCategory: React.PropTypes.string,
-            initialIdeaPriority: React.PropTypes.string,
-            ideas: React.PropTypes.object,
-            categories: React.PropTypes.object,
-            priorities: React.PropTypes.object,
-            uid: React.PropTypes.string,
-            cloudDataSuccess: React.PropTypes.bool,
-            currentAction: React.PropTypes.string,
-            hasNetwork: React.PropTypes.bool,
+            initialIdeaTitle: PropTypes.string,
+            initialIdeaDescription: PropTypes.string,
+            initialIdeaCategory: PropTypes.string,
+            initialIdeaPriority: PropTypes.string,
+            ideas: PropTypes.object,
+            categories: PropTypes.object,
+            priorities: PropTypes.object,
+            uid: PropTypes.string,
+            cloudDataSuccess: PropTypes.bool,
+            currentAction: PropTypes.string,
+            hasNetwork: PropTypes.bool,
         };
     }
 

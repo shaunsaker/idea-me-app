@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
 	View,
 	Text,
@@ -64,8 +65,8 @@ export default class ActionSheet extends React.Component {
 
     static get propTypes() {
         return {
-			handleCopy: React.PropTypes.func,
-			handleClose: React.PropTypes.func,
+			handleCopy: PropTypes.func,
+			handleClose: PropTypes.func,
         };
     }
 

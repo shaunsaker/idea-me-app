@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     View,
     Text,
@@ -95,9 +96,9 @@ export default class IdeaCard extends React.Component {
 
     static get propTypes() {
         return {
-            idea: React.PropTypes.object,
-            handleMenuItemSelect: React.PropTypes.func,
-            handleNotePress: React.PropTypes.func,
+            idea: PropTypes.object,
+            handleMenuItemSelect: PropTypes.func,
+            handleNotePress: PropTypes.func,
         };
     }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
 	View,
 	Text,
@@ -83,30 +84,30 @@ const styles = StyleSheet.create({
 export default class Header extends React.Component {
 	static get propTypes() {
 		return {
-			backgroundColor: React.PropTypes.string,
-			textColor: React.PropTypes.string,
-			headerShadow: React.PropTypes.bool,
+			backgroundColor: PropTypes.string,
+			textColor: PropTypes.string,
+			headerShadow: PropTypes.bool,
 
-			backButton: React.PropTypes.bool,
-			closeButton: React.PropTypes.bool,
-			leftComponent: React.PropTypes.func,
-			handleLeftIconPress: React.PropTypes.func,
+			backButton: PropTypes.bool,
+			closeButton: PropTypes.bool,
+			leftComponent: PropTypes.func,
+			handleLeftIconPress: PropTypes.func,
 
-			textComponent: React.PropTypes.func,
-			text: React.PropTypes.string,
-			textLeft: React.PropTypes.bool,
-			textRight: React.PropTypes.bool,
-			handleTextPress: React.PropTypes.func,
+			textComponent: PropTypes.func,
+			text: PropTypes.string,
+			textLeft: PropTypes.bool,
+			textRight: PropTypes.bool,
+			handleTextPress: PropTypes.func,
 
-			addButton: React.PropTypes.bool,
-			continueButton: React.PropTypes.bool,
-			rightComponent: React.PropTypes.func,
-			handleRightIconPress: React.PropTypes.func,
+			addButton: PropTypes.bool,
+			continueButton: PropTypes.bool,
+			rightComponent: PropTypes.func,
+			handleRightIconPress: PropTypes.func,
 
-			showInput: React.PropTypes.bool,
-			inputValue: React.PropTypes.string,
-			inputPlaceholderText: React.PropTypes.string,
-			handleChangeText: React.PropTypes.func,
+			showInput: PropTypes.bool,
+			inputValue: PropTypes.string,
+			inputPlaceholderText: PropTypes.string,
+			handleChangeText: PropTypes.func,
 		}
 	}
 

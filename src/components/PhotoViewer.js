@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     View,
     Modal,
@@ -60,9 +61,9 @@ export default class PhotoViewer extends React.Component {
 
     static get propTypes() {
         return {
-            photos:  React.PropTypes.array.isRequired,
-            scrollToIndex: React.PropTypes.number,
-            handleClose: React.PropTypes.func,
+            photos:  PropTypes.array.isRequired,
+            scrollToIndex: PropTypes.number,
+            handleClose: PropTypes.func,
         };
     }
 

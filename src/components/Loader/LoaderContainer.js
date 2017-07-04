@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
 	View,
 	StyleSheet,
@@ -19,9 +20,9 @@ const styles = StyleSheet.create({
 export class Loader extends React.Component{
     static get propTypes() {
       return {
-		hasNetwork: React.PropTypes.bool,
-		loading: React.PropTypes.bool,
-		customLoader: React.PropTypes.bool,
+		hasNetwork: PropTypes.bool,
+		loading: PropTypes.bool,
+		customLoader: PropTypes.bool,
       };
     }
 

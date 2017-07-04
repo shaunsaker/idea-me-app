@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
 	View,
     Text,
@@ -66,10 +67,10 @@ export default class RadioSelect extends React.Component {
 
 	static get propTypes() {
 		return {
-            displayText: React.PropTypes.string,
-            currentValue: React.PropTypes.string,
-            values: React.PropTypes.array,
-            handleSelect: React.PropTypes.func,
+            displayText: PropTypes.string,
+            currentValue: PropTypes.string,
+            values: PropTypes.array,
+            handleSelect: PropTypes.func,
 		}
 	}
 

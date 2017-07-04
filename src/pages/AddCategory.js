@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
@@ -26,11 +27,11 @@ export class AddCategory extends React.Component {
 
   static get propTypes() {
     return {
-      categories: React.PropTypes.object,
-      uid: React.PropTypes.string,
-      cloudDataSuccess: React.PropTypes.bool,
-      currentAction: React.PropTypes.string,
-      hasNetwork: React.PropTypes.bool,
+      categories: PropTypes.object,
+      uid: PropTypes.string,
+      cloudDataSuccess: PropTypes.bool,
+      currentAction: PropTypes.string,
+      hasNetwork: PropTypes.bool,
     };
   }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -24,9 +25,9 @@ export class EditLocation extends React.Component {
 
     static get propTypes() {
         return {
-            userLocation: React.PropTypes.string,
-            currentLocation: React.PropTypes.string,
-            suburbs: React.PropTypes.array,
+            userLocation: PropTypes.string,
+            currentLocation: PropTypes.string,
+            suburbs: PropTypes.array,
         };
     }
 

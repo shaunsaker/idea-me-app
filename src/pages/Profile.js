@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     Linking,
@@ -63,12 +64,12 @@ export class Profile extends React.Component {
 
     static get propTypes() {
         return {
-            uid: React.PropTypes.string,
-            userName: React.PropTypes.string,
-            userEmail: React.PropTypes.string,
-            userLocation: React.PropTypes.string,
-            userPhotoUrl: React.PropTypes.object,
-            numberOfIdeas: React.PropTypes.number, 
+            uid: PropTypes.string,
+            userName: PropTypes.string,
+            userEmail: PropTypes.string,
+            userLocation: PropTypes.string,
+            userPhotoUrl: PropTypes.object,
+            numberOfIdeas: PropTypes.number, 
         };
     }
 
