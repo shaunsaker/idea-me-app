@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     View,
     ScrollView,
@@ -42,6 +43,24 @@ const styles = StyleSheet.create({
         height: imageWidth,
         borderRadius: 8,
     },
+    photoErrorContainer: {
+        backgroundColor: styleConstants.white,
+        borderWidth: 1,
+        borderColor: styleConstants.lightGrey,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 2,
+    },
+    photoErrorIcon: {
+        fontSize: styleConstants.smallFont,
+        color: styleConstants.danger,
+        marginBottom: 4,
+    } ,
+    photoErrorText: {
+        fontSize: styleConstants.verySmallFont,
+        color: styleConstants.primary,
+        textAlign: 'center',
+    },
     deleteButtonContainer: {
         position: 'absolute',
         top: 4,
@@ -57,6 +76,49 @@ const styles = StyleSheet.create({
     },
 });
 
+class Photo extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.toggleLoadError = this.toggleLoadError.bind(this);
+
+        this.state = {
+            loadError: false,
+        }
+    }
+
+    static get PropTypes() {
+        return {
+            uri: PropTypes.string.isRequired,
+        }
+    }
+
+    toggleLoadError() {
+        this.setState({
+            loadError: !this.state.loadError,
+        }); 
+    }
+
+    render() {
+        const image = !this.state.loadError ?
+            <Image
+                source={{uri: this.props.uri}}
+                onError={this.toggleLoadError}
+                style={styles.photo} />
+            :
+            <View
+                style={[styles.photo, styles.photoErrorContainer]}>
+                <Icon
+                    name='error'
+                    style={styles.photoErrorIcon} />
+                <Text style={[styles.photoErrorText, styleConstants.primaryFont]}>
+                    Photo has been removed from device
+                </Text>
+            </View>;
+        return image;
+    }
+}
+
 export default PhotoList = (props) => {
     /*
         PROPTYPES
@@ -71,9 +133,8 @@ export default PhotoList = (props) => {
                     key={'photo-' + value.cropped}
                     onPress={() => props.handleViewPhotos(index)}
                     style={styles.photoContainer}>
-                    <Image
-                        source={{uri: value.cropped}}
-                        style={styles.photo} />
+                    <Photo
+                        uri={value.cropped} />
                     <View style={styles.deleteButtonContainer}>
                         <DeleteButton 
                             handlePress={() => props.handleDelete(index)}/>
