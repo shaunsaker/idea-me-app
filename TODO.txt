@@ -3,7 +3,6 @@ PENDING
 
 TODOS
     Add Images as Notes
-        createAppPhotoDirectory => createDirectory
         Paths - using cache at the moment which will be an issue if they clear app data
         Would be great to have a loading indicator in the photo grid - there is a 1-2 second delay before seeing your photo
         Images errors

@@ -1,23 +1,18 @@
 import RNFS from 'react-native-fs';
 
-import config from '../config';
-
 const response = {
     success: null,
     message: null,
 }
 
 export default class FileSystem {
-    static createAppPhotoDirectory() {
+    static createDirectory(dir) {
         return new Promise(resolve => {
-            const appPhotosDir = RNFS.PicturesDirectoryPath + '/' + config.appName;
-            console.log('appPhotosDir:', appPhotosDir);
-
-            RNFS.mkdir(appPhotosDir)
+            RNFS.mkdir(dir)
                 .then(() => {
                     response = {
                         success: true,
-                        message: appPhotosDir,
+                        message: dir,
                     }
 
                     resolve(response);

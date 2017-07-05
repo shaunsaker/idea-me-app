@@ -1,8 +1,10 @@
 import { call, put } from 'redux-saga/effects';
+import RNFS from 'react-native-fs';
 
 import Images from '../images/index';
 import FileSystem from '../fileSystem/index';
 
+import config from '../config';
 import utilities from '../utilities';
 
 export function* handleImage(action) {
@@ -20,11 +22,14 @@ export function* handleImage(action) {
     }
 
     if (imagePickerResponse.success) {
-        const createAppPhotoDirectoryResponse = yield call(FileSystem.createAppPhotoDirectory);
-        console.log('createAppPhotoDirectoryResponse', createAppPhotoDirectoryResponse);
+        const appPhotosDir = RNFS.PicturesDirectoryPath + '/' + config.appName;
+        console.log('appPhotosDir:', appPhotosDir);
 
-        if (createAppPhotoDirectoryResponse.success) {
-            const outputPath = createAppPhotoDirectoryResponse.message + '/' + utilities.getFileName(fileExistsResponse.message);
+        const createDirectoryResponse = yield call(FileSystem.createDirectory, appPhotosDir);
+        console.log('createDirectoryResponse', createDirectoryResponse);
+
+        if (createDirectoryResponse.success) {
+            const outputPath = createDirectoryResponse.message + '/' + utilities.getFileName(fileExistsResponse.message);
             console.log('Output path: ', outputPath);
 
             const moveFileOptions = {
