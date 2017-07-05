@@ -5,84 +5,71 @@ import Images from '../images/index';
 import utilities from '../utilities';
 
 export function* handleImage(action) {
-	let imagePickerResponse;
+    let imagePickerResponse;
 
-	if (action.option === 'Take a Photo') {
-		imagePickerResponse = yield call(Images.takePhoto);
-		console.log('imagePickerResponse', imagePickerResponse);
-	}
+    if (action.option === 'Take a Photo') {
+        imagePickerResponse = yield call(Images.takePhoto);
+        console.log('imagePickerResponse', imagePickerResponse);
+    }
 
-	// Choose a Photo
-	else {
-		imagePickerResponse = yield call(Images.choosePhoto);
-		console.log('imagePickerResponse', imagePickerResponse);
-	}
+    // Choose a Photo
+    else {
+        imagePickerResponse = yield call(Images.choosePhoto);
+        console.log('imagePickerResponse', imagePickerResponse);
+    }
 
-	if (imagePickerResponse.success) {
-		const moveFileOptions = {
-			path: imagePickerResponse.message.path,
-			outputPath: '/storage/emulated/0/Pictures/IdeaMe_Photos/image-test.jpg',
-		}
+    if (imagePickerResponse.success) {
+        const imageResizerOptions = {
+            uri: imagePickerResponse.message.path,
+            width: imagePickerResponse.message.width,
+            height: imagePickerResponse.message.height,
+        }
 
-		const moveFileResponse = yield call(Images.moveFile, moveFileOptions);
-		console.log('moveFileResponse', moveFileResponse);
+        const imageResizerResponse = yield call(Images.resizeImage, imageResizerOptions);
+        console.log('imageResizerResponse', imageResizerResponse);
 
-		if (moveFileResponse.success) {
-			const imageResizerOptions = {
-				uri: moveFileResponse.message.outputPath,
-				width: imagePickerResponse.message.width,
-				height: imagePickerResponse.message.height,
-			}
+        if (imageResizerResponse.success) {
+            const imageCropperOptions = {
+                uri: imageResizerResponse.message.uri,
+                portrait: imageResizerResponse.message.portrait,
+                width: imageResizerResponse.message.width,
+                height: imageResizerResponse.message.height,
+            }
 
-			const imageResizerResponse = yield call(Images.resizeImage, imageResizerOptions);
-			console.log('imageResizerResponse', imageResizerResponse);
+            const imageCropperResponse = yield call(Images.cropImage, imageCropperOptions);
+            console.log('imageCropperResponse', imageCropperResponse);
 
-			if (imageResizerResponse.success) {
-				const imageCropperOptions = {
-					uri: imageResizerResponse.message.uri,
-					portrait: imageResizerResponse.message.portrait,
-					width: imageResizerResponse.message.width,
-					height: imageResizerResponse.message.height,
-				}
+            if (imageCropperResponse.success) {
+                const image = {
+                    fullSize: imagePickerResponse.message.uri,
+                    cropped: imageCropperResponse.message,
+                    uid: utilities.createUID(),
+                };
 
-				const imageCropperResponse = yield call(Images.cropImage, imageCropperOptions);
-				console.log('imageCropperResponse', imageCropperResponse);
+                if (action.ideaPhoto) { // flag indicating this is an idea's photo
+                    yield put({
+                        type: 'UPDATE_NEW_PHOTOS',
+                        newPhoto: image,
+                    });
+                }
+                else {
 
-				if (imageCropperResponse.success) {
-					const image = {
-						fullSize: imagePickerResponse.message.uri,
-						cropped: imageCropperResponse.message,
-						uid: utilities.createUID(),
-					};
-
-					if (action.ideaPhoto) { // flag indicating this is an idea's photo
-						yield put({
-							type: 'UPDATE_NEW_PHOTOS',
-							newPhoto: image,
-						});
-					}
-					else {
-
-						// Won't save afterwards, the user should save it themselves
-						yield put({
-							type: 'SET_USER_PHOTO',
-							userPhotoUrl: image,
-						});
-					}
-				}
-				else {
-					console.log('Error')
-				}
-			}
-			else {
-				console.log('Error')
-			}
-		}
-		else {
-			console.log('Error')
-		}
-	}
-	else {
-		console.log('Error')
-	}
+                    // Won't save afterwards, the user should save it themselves
+                    yield put({
+                        type: 'SET_USER_PHOTO',
+                        userPhotoUrl: image,
+                    });
+                }
+            }
+            else {
+                console.log('Error')
+            }
+        }
+        else {
+            console.log('Error')
+        }
+    }
+    else {
+        console.log('Error')
+    }
 }
