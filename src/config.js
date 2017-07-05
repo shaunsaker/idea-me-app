@@ -28,7 +28,6 @@ config.images = {
         noData: true, // don't attach base64 data - greatly improves performance
         storageOptions: {
             skipBackup: true, // don't backup to iOS cloud
-            path: 'IdeaMe', // not working in dev
         },
     },
     imageResizerOptions: [

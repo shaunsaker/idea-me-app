@@ -49,4 +49,26 @@ export default class FileSystem {
                 });
         });
     }
+
+    static copyFile(action) {
+        return new Promise(resolve => {
+            RNFS.copyFile(action.path, action.outputPath)
+                .then(() => {
+                    response = {
+                        success: true,
+                        message: action.outputPath,
+                    }
+
+                    resolve(response);
+                })
+                .catch((error) => {
+                    response = {
+                        success: false,
+                        message: error.message,
+                    }
+
+                    resolve(response);
+                });
+        });
+    }
 }

@@ -29,20 +29,29 @@ export function* handleImage(action) {
         console.log('createDirectoryResponse', createDirectoryResponse);
 
         if (createDirectoryResponse.success) {
-            const outputPath = createDirectoryResponse.message + '/' + utilities.getFileName(fileExistsResponse.message);
+            const outputPath = createDirectoryResponse.message + '/' + utilities.getFileName(imagePickerResponse.message.path);
             console.log('Output path: ', outputPath);
 
-            const moveFileOptions = {
-                path: fileExistsResponse.message,
+            const transferFileOptions = {
+                path: imagePickerResponse.message.path,
                 outputPath,
             }
+            let transferFileResponse; // move or copy response
 
-            const moveFileResponse = yield call(FileSystem.moveFile, moveFileOptions);
-            console.log('moveFileResponse', moveFileResponse);
+            if (action.option === 'Take a Photo') {
+                transferFileResponse = yield call(FileSystem.moveFile, transferFileOptions);
+                console.log('transferFileResponse', transferFileResponse);
+            }
+            else {
 
-            if (moveFileResponse.success) {
+                // Copy the file if it was chosen from an existing directory
+                transferFileResponse = yield call(FileSystem.copyFile, transferFileOptions);
+                console.log('transferFileResponse', transferFileResponse);
+            }
+
+            if (transferFileResponse.success) {
                 const imageResizerOptions = {
-                    uri: "file:" + moveFileResponse.message,
+                    uri: "file:" + transferFileResponse.message,
                     width: imagePickerResponse.message.width,
                     height: imagePickerResponse.message.height,
                 }
@@ -63,7 +72,7 @@ export function* handleImage(action) {
 
                     if (imageCropperResponse.success) {
                         const croppedImagePath = imageCropperResponse.message.replace('file:', '');
-                        const croppedImageOutputPath = utilities.appendStringToFileName(moveFileResponse.message, '-cropped');
+                        const croppedImageOutputPath = utilities.appendStringToFileName(transferFileResponse.message, '-cropped');
 
                         const moveCroppedFileOptions = {
                             path: croppedImagePath,
@@ -74,7 +83,7 @@ export function* handleImage(action) {
 
                         if (moveCroppedFileResponse.success) {
                             const image = {
-                                fullSize: "file:" + moveFileResponse.message,
+                                fullSize: "file:" + transferFileResponse.message,
                                 cropped: "file:" + moveCroppedFileResponse.message,
                                 uid: utilities.createUID(),
                             };
