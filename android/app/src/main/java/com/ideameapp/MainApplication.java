@@ -16,6 +16,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.imagepicker.ImagePickerPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
+import com.rnfs.RNFSPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +44,8 @@ public class MainApplication extends Application implements ReactApplication {
           new FBSDKPackage(mCallbackManager),
           new RNGeocoderPackage(),
           new ImagePickerPackage(),
-          new ImageResizerPackage()
+          new ImageResizerPackage(),
+          new RNFSPackage()
       );
     }
   };

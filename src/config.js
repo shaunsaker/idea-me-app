@@ -2,6 +2,8 @@ import { Easing } from 'react-native';
 
 const config = {};
 
+config.appName = 'IdeaMe';
+
 config.developer = {
     name: 'Shaun Saker',
     email: 'info@shaunsaker.com',
