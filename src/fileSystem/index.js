@@ -8,28 +8,6 @@ const response = {
 }
 
 export default class FileSystem {
-    static doesPathExist(path) {
-        return new Promise(resolve => {
-            RNFS.exists(path)
-                .then((result) => {
-                    response = {
-                        success: result,
-                        message: path,
-                    }
-
-                    resolve(response);
-                })
-                .catch((error) => {
-                    response = {
-                        success: false,
-                        message: error.message,
-                    }
-
-                    resolve(response);
-                });
-        });
-    }
-
     static createAppPhotoDirectory() {
         return new Promise(resolve => {
             const appPhotosDir = RNFS.PicturesDirectoryPath + '/' + config.appName;

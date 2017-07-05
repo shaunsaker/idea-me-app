@@ -2,10 +2,11 @@ PENDING
     Logo    JOHAN
 
 TODOS
-    Add Images as notes
+    Add Images as Notes
+        createAppPhotoDirectory => createDirectory
+        Paths - using cache at the moment which will be an issue if they clear app data
         Would be great to have a loading indicator in the photo grid - there is a 1-2 second delay before seeing your photo
         Images errors
-        Paths - using cache at the moment which will be an issue if they clear app data
     Add VoiceNotes as notes
     Edit Idea (above)
     On close/exit, reset newPhotos, newNotes, newVoiceNotes
@@ -14,6 +15,15 @@ TODOS
     Cards across app
         Categories
         Edit Profile
+    Categories page 
+        Input header
+        Not tab page
+    RN Permissions
+    Dont convert objects into arrays, just use Object.keys
+    Dates on ideas
+    Send errors to db
+    Redux-saga
+        Takeevery and other optimisations
     Use FlatList for all lists
         shouldComponentUpdate will help render when it should
     Edit Profile header left icon should be close
