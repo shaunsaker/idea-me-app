@@ -3,8 +3,6 @@ PENDING
 
 TODOS
     Add Images as Notes
-        Would be great to have a loading indicator in the photo grid - there is a 1-2 second delay before seeing your photo
-        Image container styling off
         Images should save to DB automatically
         Only save full size image if not profile image
         Images errors

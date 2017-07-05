@@ -5,6 +5,7 @@ import {
     Modal,
     FlatList,
     Image,
+    Text,
     StyleSheet,
     Dimensions,
 } from "react-native";
@@ -19,7 +20,7 @@ const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: styleConstants.transPrimary,
+        backgroundColor: styleConstants.transBlack,
         position: 'absolute',
         top: 0,
         right: 0,
@@ -32,12 +33,33 @@ const styles = StyleSheet.create({
     photosContainer: {
 
     },
+    photoErrorContainer: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 32,
+    },
+    photoErrorIcon: {
+        fontSize: styleConstants.largeFont,
+        color: styleConstants.danger,
+        marginBottom: 16,
+    },
+    photoErrorText: {
+        fontSize: styleConstants.regularFont,
+        color: styleConstants.white,
+        textAlign: 'center',
+    },
     photoContainer: {
 
     },
     photo: {
         width: window.width,
         height: window.height,
+        zIndex: 1,
     },
     closeButtonContainer: {
         position: 'absolute',
@@ -78,6 +100,14 @@ export default class PhotoViewer extends React.Component {
     renderPhoto = ({ item, index }) => {
         return (
             <View style={styles.photoContainer}>
+                <View style={styles.photoErrorContainer}>
+                    <Icon 
+                        name='error'
+                        style={styles.photoErrorIcon} />
+                    <Text style={[styles.photoErrorText, styleConstants.primaryFont]}>
+                        Photo has either been removed from this device or moved to a different folder.
+                    </Text>
+                </View>
                 <Image
                     source={{uri: item.fullSize}}
                     style={styles.photo} />
