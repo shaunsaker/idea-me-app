@@ -3,11 +3,10 @@ PENDING
 
 TODOS
     Add Images as Notes
-        If image was not found on device, display placeholder letting the user know
-        Images should save to DB automatically
-        Image container styling off
-        Only save full size image if not profile image
         Would be great to have a loading indicator in the photo grid - there is a 1-2 second delay before seeing your photo
+        Image container styling off
+        Images should save to DB automatically
+        Only save full size image if not profile image
         Images errors
     Add VoiceNotes as notes
     Edit Idea (above)
