@@ -15,6 +15,7 @@ import BulletList from './BulletList';
 import PhotoList from './PhotoList';
 import VoiceNoteList from './VoiceNoteList';
 import IconButton from './IconButton';
+import VoiceNoteButton from './VoiceNoteButton';
 
 const window = Dimensions.get('window');
 
@@ -102,11 +103,19 @@ export default NoteCard = (props) => {
     else {
         notesValues = props.voiceNotes;
         title = 'VOICE NOTES';
-        iconName = 'voice';
         notes = 
             <VoiceNoteList
                 values={notesValues} />;
     }
+
+    const button = props.voiceNotes ?
+        <VoiceNoteButton />
+        :
+        <IconButton
+            handlePress={props.handleAdd}
+            iconName={iconName}
+            iconColor={styleConstants.secondary}
+            disabled={props.disabled} />;
     
     const titleColorStyles = notesValues.length < 1 &&
         {
@@ -140,11 +149,7 @@ export default NoteCard = (props) => {
             </View>
 
             <View style={styles.buttonContainer}>
-                <IconButton
-                    handlePress={props.handleAdd}
-                    iconName={iconName}
-                    iconColor={styleConstants.secondary}
-                    disabled={props.disabled} />
+                {button}
             </View>
         </View>
     )

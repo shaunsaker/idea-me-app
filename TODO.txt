@@ -1,10 +1,6 @@
 TODOS
     VoiceNotes
-        Add Button icon is mic
-        Button on hold shifts record view from right
-        RecordView
-            Mic icon set interval
-            Duration
+        Record audio infrastructure
         VoiceNoteItemView
             Play/Pause icon
             Line with start
