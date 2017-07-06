@@ -92,7 +92,7 @@ export default NoteCard = (props) => {
         title = 'PHOTOS';
         notes = 
             <PhotoList
-                values={notesValues}
+                photos={notesValues}
                 handleViewPhotos={props.handleViewPhotos}
                 handleDelete={props.handleDelete} />
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
-    ScrollView,
+    FlatList,
     Image,
     Text,
     StyleSheet,
@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     photo: {
         width: imageWidth,
         height: imageWidth,
-        borderRadius: 8,
         borderWidth: 1,
         borderColor: styleConstants.lightGrey,
+        borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -56,42 +56,48 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PhotoList = (props) => {
-    /*
-        PROPTYPES
-            values
-            handleDelete
-    */
+export default class PhotoList extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const photos = props.values && props.values.length > 0 ?
-        props.values.map((value, index) => {
-            return (
-                <PhotoWithError
-                    key={'photo-' + value.uid}
-                    uri={value.cropped}
-                    isThumbnail
-                    photoContainerStyles={styles.photoContainer}
-                    photoStyles={styles.photo}
-                    errorText='Photo has been removed from device'
-                    handleViewPhoto={() => props.handleViewPhotos(index)}
-                    handleDeletePhoto={() => props.handleDelete(index)} />
-            );
-        })
-        :
-        <View style={styles.noteTextContainer}>
-            <Text
-                style={[styles.noteText, styleConstants.primaryFont]}>
-                None
-            </Text>
-        </View>;
+        this.renderPhoto = this.renderPhoto.bind(this);
+    }
 
-    return (
-        <View style={styles.container}>
-            <ScrollView
+    renderPhoto = ({item, index}) => {
+        return (
+            <PhotoWithError
+                key={'photo-' + item.uid}
+                uri={item.cropped}
+                isThumbnail
+                photoContainerStyles={styles.photoContainer}
+                photoStyles={styles.photo}
+                errorText='Photo has been removed from device'
+                handleViewPhoto={() => this.props.handleViewPhotos(index)}
+                handleDeletePhoto={() => this.props.handleDelete(index)} />
+        );
+    }
+
+    render() {
+        const photos = this.props.photos && this.props.photos.length > 0 ?
+            <FlatList 
+                keyExtractor={item => 'photo-' + item.uid }
+                data={this.props.photos}
+                renderItem={this.renderPhoto}
                 style={styles.photosWrapper}
                 contentContainerStyle={styles.photosContainer}>
+            </FlatList>
+            :
+            <View style={styles.noteTextContainer}>
+                <Text
+                    style={[styles.noteText, styleConstants.primaryFont]}>
+                    None
+                </Text>
+            </View>;
+
+        return (
+            <View style={styles.container}>
                 {photos}
-            </ScrollView>
-        </View>
-    )
+            </View>
+        );
+    }
 }
