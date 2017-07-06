@@ -50,10 +50,14 @@ export function* handleImage(action) {
             }
 
             if (transferFileResponse.success) {
+                let maxWidth = action.maxWidth ? action.maxWidth : config.images.maxImageWidth;
+                console.log('maxWidth:', maxWidth);
+
                 const imageResizerOptions = {
                     uri: "file:" + transferFileResponse.message,
                     width: imagePickerResponse.message.width,
                     height: imagePickerResponse.message.height,
+                    maxWidth,
                 }
 
                 const imageResizerResponse = yield call(Images.resizeImage, imageResizerOptions);
@@ -65,6 +69,7 @@ export function* handleImage(action) {
                         portrait: imageResizerResponse.message.portrait,
                         width: imageResizerResponse.message.width,
                         height: imageResizerResponse.message.height,
+                        maxWidth,
                     }
 
                     const imageCropperResponse = yield call(Images.cropImage, imageCropperOptions);

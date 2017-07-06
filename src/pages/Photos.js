@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
     View,
     Text,
+    Dimensions,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -18,6 +19,8 @@ import OptionsModal from '../components/OptionsModal';
 import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
+
+const window = Dimensions.get('window');
 
 export class Photos extends React.Component {
     constructor(props) {
@@ -100,6 +103,7 @@ export class Photos extends React.Component {
             type: 'handleImage',
             option, // Take a Photo / Choose a Photo
             ideaPhoto: true,
+            maxWidth: Math.ceiling((window.width - 122) / 3), // 122 = padding + margin
         });
     }
 

@@ -1,6 +1,5 @@
 TODOS
     Add Images as Notes
-        Optimise cropping of images based on device dimensions
         Images should save to DB automatically
         Only save full size image if not profile image
         Images errors

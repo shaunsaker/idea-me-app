@@ -60,8 +60,8 @@ export default class Photos {
 
             const imageResizerOptions = [
                 action.uri, // uri to image
-                portrait ? config.images.maxImageWidth : config.images.maxImageWidth * 2, // maxWidth
-                portrait ? config.images.maxImageWidth * 2 : config.images.maxImageWidth, // maxHeight
+                portrait ? action.maxWidth : action.maxWidth * 2, // maxWidth
+                portrait ? action.maxWidth * 2 : action.maxWidth, // maxHeight
                 ...config.images.imageResizerOptions, // type, quality, rotation
             ];
 
@@ -90,8 +90,8 @@ export default class Photos {
 
     static cropImage(action) {
         return new Promise(resolve => {
-            const offsetX = action.portrait ? 0 : (config.images.maxImageWidth / 2 * action.width / action.height) - config.images.maxImageWidth / 2;
-            const offsetY = action.portrait ? (config.images.maxImageWidth / 2 * action.height / action.width) - config.images.maxImageWidth / 2 : 0;
+            const offsetX = action.portrait ? 0 : (action.maxWidth / 2 * action.width / action.height) - action.maxWidth / 2;
+            const offsetY = action.portrait ? (action.maxWidth / 2 * action.height / action.width) - action.maxWidth / 2 : 0;
 
             const cropOptions = {
                 offset: {
@@ -99,8 +99,8 @@ export default class Photos {
                     y: offsetY
                 },
                 size: {
-                    width: config.images.maxImageWidth,
-                    height: config.images.maxImageWidth
+                    width: action.maxWidth,
+                    height: action.maxWidth
                 }
             };
 
