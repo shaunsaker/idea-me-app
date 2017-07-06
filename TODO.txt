@@ -1,13 +1,23 @@
-PENDING
-    Logo    JOHAN
-
 TODOS
     Add Images as Notes
+        PhotoList should use FlatList
+        Optimise cropping of images based on device dimensions
         Images should save to DB automatically
         Only save full size image if not profile image
         Images errors
+            Saga missing else statement 
     Add VoiceNotes as notes
-    Edit Idea (above)
+    Edit Idea Notes
+    Notes should save on add/delete
+    App does not load in offline mode
+    Home Flatlist initial number to render to 3 or so
+        shouldComponentUpdate
+    Animate new notes in
+        Layoutanimation
+    Note input at bottom of screen (Whatsapp style)
+    Remove animation from logo
+    Don't scroll to beginning on delete idea
+    Animations useNativeDriver where possible (non-layout properties)
     On close/exit, reset newPhotos, newNotes, newVoiceNotes
     Look into setNotes on editIdea. Shouldn't this save?
     All continue buttons should only show if appropriate
@@ -69,7 +79,8 @@ TODOS
     Utils   
         Use Object.assign({}, newObject) instead of creating new objects with vars
     Page removes padding on small devices
-        Other responsive fixes
+        Other responsive fixes (portrait/landscape)
+            Add listener to dimensions on orientation change and adjust page component accordingly
     Update suburbs or use a geo-service
     Sound when idea added
     Force update screen

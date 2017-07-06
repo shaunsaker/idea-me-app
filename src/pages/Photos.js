@@ -144,7 +144,8 @@ export class Photos extends React.Component {
             <PhotoViewer
                 photos={this.props.newPhotos}
                 scrollToIndex={this.state.photoViewerIndex}
-                handleClose={this.togglePhotoViewer} />
+                handleClose={this.togglePhotoViewer}
+                handleDeletePhoto={this.toggleDeletePhotoModal} />
             :
             null;
 

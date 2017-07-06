@@ -14,6 +14,7 @@ import config from '../config';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
+import PhotoWithError from './PhotoWithError';
 import Touchable from './Touchable';
 
 const window = Dimensions.get('window');
@@ -33,33 +34,14 @@ const styles = StyleSheet.create({
     photosContainer: {
 
     },
-    photoErrorContainer: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 32,
-    },
-    photoErrorIcon: {
-        fontSize: styleConstants.largeFont,
-        color: styleConstants.danger,
-        marginBottom: 16,
-    },
-    photoErrorText: {
-        fontSize: styleConstants.regularFont,
-        color: styleConstants.white,
-        textAlign: 'center',
-    },
     photoContainer: {
 
     },
     photo: {
         width: window.width,
         height: window.height,
-        zIndex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     closeButtonContainer: {
         position: 'absolute',
@@ -86,6 +68,7 @@ export default class PhotoViewer extends React.Component {
             photos:  PropTypes.array.isRequired,
             scrollToIndex: PropTypes.number,
             handleClose: PropTypes.func,
+            handleDeletePhoto: PropTypes.func,
         };
     }
 
@@ -96,24 +79,6 @@ export default class PhotoViewer extends React.Component {
             this.refs.photosList.scrollToIndex({ index: this.props.scrollToIndex || 0, animated: false });
         }, 0);
     }
-
-    renderPhoto = ({ item, index }) => {
-        return (
-            <View style={styles.photoContainer}>
-                <View style={styles.photoErrorContainer}>
-                    <Icon 
-                        name='error'
-                        style={styles.photoErrorIcon} />
-                    <Text style={[styles.photoErrorText, styleConstants.primaryFont]}>
-                        Photo has either been removed from this device or moved to a different folder.
-                    </Text>
-                </View>
-                <Image
-                    source={{uri: item.fullSize}}
-                    style={styles.photo} />
-            </View>
-        );
-    };
     
     getItemLayout = (data, index) => (
         {
@@ -121,7 +86,21 @@ export default class PhotoViewer extends React.Component {
             offset: window.width * index,
             index,
         }
-    );
+    )
+
+    renderPhoto = ({ item, index }) => {
+        return (
+            <PhotoWithError
+                key={'photo-' + item.uid}
+                uri={item.fullSize}
+                photoContainerStyles={styles.photoContainer}
+                photoStyles={styles.photo}
+                errorText='Photo has either been removed from this device or moved to a different folder.'
+                handleDeletePhoto={() => { 
+                    this.props.handleDeletePhoto(index);                
+                }} />
+        );
+    }
 
     render() {
         return (

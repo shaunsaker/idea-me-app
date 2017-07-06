@@ -48,6 +48,17 @@ const styles = StyleSheet.create({
 });
 
 export default Button = (props) => {
+    /*
+        PROPTYPES
+            backgroundColor
+            iconName
+            disabled
+            text
+            handlePress
+            androidRipple
+            androidRippleColor
+    */
+
     const altColor =
         props.backgroundColor === 'transparent' || props.backgroundColor === styleConstants.primary ?
             styleConstants.white

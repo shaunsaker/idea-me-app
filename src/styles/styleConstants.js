@@ -28,6 +28,6 @@ styleConstants.white = '#f4f7fd';
 styleConstants.realWhite = '#ffffff';
 styleConstants.lightGrey = '#b0b3cf'; 
 styleConstants.grey = '#808092';
-styleConstants.transBlack = 'rgba(0, 0, 0, 0.75)';
+styleConstants.transBlack = 'rgba(0, 0, 0, 0.9)';
 
 export default styleConstants;
