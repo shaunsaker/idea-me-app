@@ -1,5 +1,14 @@
 TODOS
-    Add VoiceNotes as notes
+    VoiceNotes
+        Add Button icon is mic
+        Button on hold shifts record view from right
+        RecordView
+            Mic icon set interval
+            Duration
+        VoiceNoteItemView
+            Play/Pause icon
+            Line with start
+            Duration
     Edit Idea Notes
     Notes should save on add/delete
     Images should save to DB automatically

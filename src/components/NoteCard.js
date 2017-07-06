@@ -77,11 +77,13 @@ export default NoteCard = (props) => {
 
     let notesValues;
     let title;
+    let iconName;
     let notes;
 
     if (props.notes) {
         notesValues = props.notes;
         title = 'NOTES';
+        iconName = 'note';
         notes = 
             <BulletList 
                 values={notesValues}
@@ -90,6 +92,7 @@ export default NoteCard = (props) => {
     else if (props.photos) {
         notesValues = props.photos;
         title = 'PHOTOS';
+        iconName = 'camera';
         notes = 
             <PhotoList
                 photos={notesValues}
@@ -99,6 +102,7 @@ export default NoteCard = (props) => {
     else {
         notesValues = props.voiceNotes;
         title = 'VOICE NOTES';
+        iconName = 'voice';
         notes = 
             <VoiceNoteList
                 values={notesValues} />;
@@ -138,7 +142,7 @@ export default NoteCard = (props) => {
             <View style={styles.buttonContainer}>
                 <IconButton
                     handlePress={props.handleAdd}
-                    iconName='add'
+                    iconName={iconName}
                     iconColor={styleConstants.secondary}
                     disabled={props.disabled} />
             </View>
