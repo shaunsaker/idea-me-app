@@ -1,12 +1,8 @@
 TODOS
-    Add Images as Notes
-        Images should save to DB automatically
-        Only save full size image if not profile image
-        Images errors
-            Saga missing else statement 
     Add VoiceNotes as notes
     Edit Idea Notes
     Notes should save on add/delete
+    Images should save to DB automatically
     App does not load in offline mode
     Home Flatlist initial number to render to 3 or so
         shouldComponentUpdate

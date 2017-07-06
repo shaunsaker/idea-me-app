@@ -108,24 +108,45 @@ export function* handleImage(action) {
                                 });
                             }
                         }
+                        else {
+                            yield put({
+                                type: 'IMAGE_ERROR',
+                                message: moveCroppedFileResponse.message,
+                            });
+                        }
                     }
                     else {
-                        console.log('Error')
+                        yield put({
+                            type: 'IMAGE_ERROR',
+                            message: imageCropperResponse.message,
+                        });
                     }
                 }
                 else {
-                    console.log('Error')
+                    yield put({
+                        type: 'IMAGE_ERROR',
+                        message: imageResizerResponse.message,
+                    });
                 }
             }
             else {
-                console.log('Error')
+                yield put({
+                    type: 'IMAGE_ERROR',
+                    message: transferFileResponse.message,
+                });
             }
         }
         else {
-            console.log('Error')
+            yield put({
+                type: 'IMAGE_ERROR',
+                message: createDirectoryResponse.message,
+            });
         }
     }
     else {
-        console.log('Error')
+        yield put({
+            type: 'IMAGE_ERROR',
+            message: imagePickerResponse.message,
+        });
     }
 }

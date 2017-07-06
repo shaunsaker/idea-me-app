@@ -30,6 +30,7 @@ export class SnackBar extends React.Component {
             userErrorMessage: PropTypes.string,
             authErrorMessage: PropTypes.string,
             authSuccessMessage: PropTypes.string,
+            imageErrorMessage: PropTypes.string,
             cloudDataErrorMessage: PropTypes.string,
             cloudStorageErrorMessage: PropTypes.string,
 
@@ -74,13 +75,16 @@ export class SnackBar extends React.Component {
                 this.props.authErrorMessage ?
                     this.props.authErrorMessage 
                     :
-                    this.props.cloudDataErrorMessage ?
-                        this.props.cloudDataErrorMessage 
+                    this.props.imageErrorMessage ?
+                        this.props.imageErrorMessage
                         :
-                        this.props.cloudStorageErrorMessage ?
-                            this.props.cloudStorageErrorMessage 
+                        this.props.cloudDataErrorMessage ?
+                            this.props.cloudDataErrorMessage 
                             :
-                            null;  
+                            this.props.cloudStorageErrorMessage ?
+                                this.props.cloudStorageErrorMessage 
+                                :
+                                null;  
 
         const errorSnackBar = errorMessage ?
             <SnackBarComponent 
@@ -122,6 +126,7 @@ function mapStateToProps(state) {
         userErrorMessage: state.main.app.userErrorMessage,
         authErrorMessage: state.main.auth.authErrorMessage,
         authSuccessMessage: state.main.auth.authSuccessMessage,
+        imageErrorMessage: state.main.images.imageErrorMessage,
         cloudDataErrorMessage: state.main.cloudData.cloudDataErrorMessage,
         cloudStorageErrorMessage: state.main.cloudStorage.cloudcloudStorageErrorMessage,
 

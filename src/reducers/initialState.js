@@ -39,6 +39,9 @@ const initialState = {
         geolocationSuccess: null,
         geolocationError: null,
     },
+    images: {
+        imageErrorMessage: null,
+    },
     appData: {
         currentCategory: 'All Categories',
         quotes, // can be an array because we are not saving this anywhere

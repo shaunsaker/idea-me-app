@@ -103,7 +103,7 @@ export class Photos extends React.Component {
             type: 'handleImage',
             option, // Take a Photo / Choose a Photo
             ideaPhoto: true,
-            maxWidth: Math.ceiling((window.width - 122) / 3), // 122 = padding + margin
+            maxWidth: Math.ceil((window.width - 122) / 3), // 122 = padding + margin
         });
     }
 

@@ -110,6 +110,19 @@ export default function (state = initialState, action) {
 			new_state.app.errorType = null;
             return new_state;
 
+        case 'IMAGE_ERROR':
+            new_state = utilities.cloneObject(state);
+            new_state.images.imageErrorMessage = action.message;
+            new_state.app.errorType = 'IMAGE';
+            new_state.app.loading = false;
+            return new_state;
+
+        case 'RESET_IMAGE_ERROR':
+            new_state = utilities.cloneObject(state);
+            new_state.images.imageErrorMessage = null;
+            new_state.app.errorType = null;
+            return new_state;
+
         case 'CLOUD_DATA_ERROR':
             new_state = utilities.cloneObject(state);
             new_state.cloudData.cloudDataErrorMessage = action.message;
