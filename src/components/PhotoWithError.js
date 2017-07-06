@@ -119,6 +119,7 @@ export default class PhotoWithError extends React.Component {
                             source={{uri: this.props.uri}}
                             onError={this.toggleLoadError}
                             style={this.props.photoStyles} />
+                        {deleteButton}
                     </Touchable> 
                     :
                     <View style={this.props.photoContainerStyles}>

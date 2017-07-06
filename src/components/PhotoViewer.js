@@ -97,6 +97,7 @@ export default class PhotoViewer extends React.Component {
                 photoStyles={styles.photo}
                 errorText='Photo has either been removed from this device or moved to a different folder.'
                 handleDeletePhoto={() => { 
+                    this.props.handleClose();
                     this.props.handleDeletePhoto(index);                
                 }} />
         );
