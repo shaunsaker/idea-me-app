@@ -200,7 +200,7 @@ export default class NoteTaker extends React.Component {
                             <AnimateRotate
                                 rotateForward={this.state.isExpanding}
                                 rotateBackward={this.state.isCompressing}
-                                rotateTo='360deg'
+                                rotateTo='-360deg'
                                 duration={config.animation.duration.long}>
                                 <Animated.Text style={colorStyles}>
                                     <Icon
