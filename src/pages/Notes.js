@@ -168,10 +168,7 @@ export class Notes extends React.Component {
                     headerShadow
                     closeButton
                     continueButton
-                    showInput
-                    inputValue={this.state.newNote}
-                    inputPlaceholderText="Add a New Note"
-                    handleChangeText={this.updateNewNote}
+                    text='NOTES'
                     handleRightIconPress={this.saveNotes} />
                   
                 <NoteCard
@@ -179,7 +176,9 @@ export class Notes extends React.Component {
                     notes={this.state.notes}
                     handleDelete={this.toggleDeleteModal}
                     handleAdd={this.addNote}
-                    disabled={!enableAddNoteButton} />
+                    disabled={!enableAddNoteButton}
+                    inputValue={this.state.newNote}
+                    handleChangeText={this.updateNewNote} />
 
                 {deleteModal}
 

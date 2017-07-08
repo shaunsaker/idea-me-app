@@ -14,6 +14,7 @@ import InfoBlock from './InfoBlock';
 import BulletList from './BulletList';
 import PhotoList from './PhotoList';
 import VoiceNoteList from './VoiceNoteList';
+import NoteTaker from './NoteTaker';
 import IconButton from './IconButton';
 import VoiceNoteRecorder from './VoiceNoteRecorder';
 
@@ -74,6 +75,10 @@ export default NoteCard = (props) => {
             handleViewPhotos   
             handleAdd
             handleDelete
+
+            NOTES
+                inputValue
+                handleChangeText
     */
 
     let notesValues;
@@ -108,14 +113,20 @@ export default NoteCard = (props) => {
                 values={notesValues} />;
     }
 
-    const button = props.voiceNotes ?
-        <VoiceNoteRecorder />
+    const button = props.notes ?
+        <NoteTaker
+            handleAddNote={props.handleAdd}
+            inputValue={props.inputValue}
+            handleChangeText={props.handleChangeText} />
         :
-        <IconButton
-            handlePress={props.handleAdd}
-            iconName={iconName}
-            iconColor={styleConstants.secondary}
-            disabled={props.disabled} />;
+        props.voiceNotes ?
+            <VoiceNoteRecorder />
+            :
+            <IconButton
+                handlePress={props.handleAdd}
+                iconName={iconName}
+                iconColor={styleConstants.secondary}
+                disabled={props.disabled} />;
     
     const titleColorStyles = notesValues.length < 1 &&
         {

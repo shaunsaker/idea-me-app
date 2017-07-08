@@ -1,16 +1,9 @@
 TODOS
-    Note add buttons need elevation
     Notes
         NoteTaker component
             Expands to reveal input
+    Note add buttons need elevation
     VoiceNotes
-        Voice note recording UI
-            No need for will unmount
-            Clear timer and setState in handleOnPressOut
-            Mid-transition onPressIn/out
-                Icon color buggy
-                    Color stays white
-                DurationText buggy
         Record audio infrastructure
         VoiceNoteItemView
             Play/Pause icon
@@ -53,6 +46,8 @@ TODOS
     Edit Profile header left icon should be close
     Current location should have retry button of sorts (if we could not get location)
     Modal on logout page made tabbar jump
+    Header uses BlankInput component
+    BlankInput and Input autogrow needs work when clearing text
     No secondary colour in modals
     Don't use browser component (use linking)
     Welcome page styling off
@@ -82,6 +77,7 @@ TODOS
         Update store first will 
         Perceived performance will improve 200%
     Animators as component wrappers
+        Only if you can offload to useNativeDriver / you are only animating one value
     Browser uses Menu component and not ActionSheet
     Facebook/Google Sign In
     Apply material styles

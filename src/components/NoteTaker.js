@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
     View,
     TouchableWithoutFeedback,
+    TouchableOpacity,
     Text,
     StyleSheet,
     Dimensions,
@@ -13,8 +14,9 @@ import config from '../config';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
-import AnimateBlink from '../animators/AnimateBlink';
+import AnimateFadeIn from '../animators/AnimateFadeIn';
 import AnimateRotate from '../animators/AnimateRotate';
+import BlankInput from './BlankInput';
 
 const window = Dimensions.get('window');
 
@@ -23,33 +25,40 @@ const styles = StyleSheet.create({
 
     },
     button: {
-        height: 53,
-        padding: 16,
+        minHeight: 53,
+        paddingLeft: 16,
         borderRadius: 36,
         borderWidth: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        position: 'relative',
     },
     buttonIcon: {
         fontSize: styleConstants.iconFont,
     },
-    durationTextContainer: {
-        justifyContent: 'center',
-        marginLeft: 8,
+    actionButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 16,
     },
-    durationText: {
-        fontSize: styleConstants.regularFont,
+    actionButtonIcon: {
+        fontSize: styleConstants.iconFont,
         color: styleConstants.primary,
-    }
+    },
+    inputWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
 });
 
-export default class VoiceNoteRecorder extends React.Component {
+export default class NoteTaker extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleOnPressIn = this.handleOnPressIn.bind(this);
-        this.handleOnPressOut = this.handleOnPressOut.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleActionButtonPress = this.handleActionButtonPress.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.expandButton = this.expandButton.bind(this);
         this.compressButton = this.compressButton.bind(this);
 
@@ -67,15 +76,26 @@ export default class VoiceNoteRecorder extends React.Component {
 
     static get propTypes() {
         return {
-
+            handleAddNote: PropTypes.func,
+            inputValue: PropTypes.string,
+            handleChangeText: PropTypes.func,
         }
     }
 
-    handleOnPressIn() {
+    handleOpen() {
         this.expandButton();
     }
 
-    handleOnPressOut() {
+    handleActionButtonPress() {
+        if (this.props.inputValue && this.props.inputValue.length > 0) {
+            this.props.handleAddNote();
+        }
+        else {
+            this.handleClose();
+        }
+    }
+
+    handleClose() {
         this.compressButton();
     }
 
@@ -115,7 +135,6 @@ export default class VoiceNoteRecorder extends React.Component {
             }
         ).start(() => {
             this.setState({
-                isExpanded: false, // fixes a bug when compressing mid-transition
                 isCompressing: false,
                 isCompressed: true,
             });
@@ -137,7 +156,7 @@ export default class VoiceNoteRecorder extends React.Component {
         }
         const color = this.state.animatedValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [styleConstants.secondary, styleConstants.danger],
+            outputRange: [styleConstants.secondary, styleConstants.primary],
         });
         const colorStyles = {
             color,
@@ -146,33 +165,53 @@ export default class VoiceNoteRecorder extends React.Component {
             borderColor: color,
         }
 
-        const durationText = this.state.isExpanded && !this.state.isCompressing &&
-            <View style={styles.durationTextContainer}>
-                <Text style={[styles.durationText, styleConstants.primaryFont]}>
-                    0:00
-                </Text>
-            </View>;
+        const actionButton = this.state.isExpanded &&
+            <TouchableOpacity
+                onPress={this.handleActionButtonPress}
+                style={styles.actionButton}>
+                <Icon
+                    name='close'
+                    style={styles.actionButtonIcon} />
+            </TouchableOpacity>;
+
+        const input = this.state.isExpanded &&
+            <BlankInput
+                placeholderText='Add a Note'
+                placeholderTextColor={styleConstants.lightGrey}
+                value={this.props.inputValue}
+                valueColor={styleConstants.primary}
+                handleChange={this.props.handleChangeText}
+                handleFocus={null}
+                handleBlur={null}
+                multiline />;
 
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback
-                    onPressIn={this.handleOnPressIn}
-                    onPressOut={this.handleOnPressOut}>
+                    onPress={this.handleOpen}>
                     <View>
                         <Animated.View style={[styles.button, widthStyles, backgroundColorStyles, borderColorStyles]}>
-                            <AnimateBlink
-                                shouldAnimate={this.state.isExpanded && !this.state.isCompressing}>
+                            <AnimateRotate
+                                rotateForward={this.state.isExpanding}
+                                rotateBackward={this.state.isCompressing}
+                                rotateTo='360deg'
+                                duration={config.animation.duration.long}>
+                                <Animated.Text style={colorStyles}>
+                                    <Icon
+                                        name='note'
+                                        style={styles.buttonIcon} />
+                                </Animated.Text>
+                            </AnimateRotate>
+                            <AnimateFadeIn style={styles.inputWrapper}>
+                                {input}
                                 <AnimateRotate
-                                    rotateForward={this.state.isExpanding}
-                                    rotateBackward={this.state.isCompressing}>
-                                    <Animated.Text style={colorStyles}>
-                                        <Icon
-                                            name='voice'
-                                            style={styles.buttonIcon} />
-                                    </Animated.Text>
+                                    rotateForward={this.props.inputValue && this.props.inputValue.length > 0}
+                                    rotateBackward={!this.props.inputValue}
+                                    rotateTo='45deg'
+                                    duration={config.animation.duration.short}>
+                                    {actionButton}
                                 </AnimateRotate>
-                            </AnimateBlink>
-                            {durationText}
+                            </AnimateFadeIn>
                         </Animated.View>
                     </View>
                 </TouchableWithoutFeedback>
