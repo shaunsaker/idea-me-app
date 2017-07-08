@@ -15,6 +15,8 @@ import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
 
+import DeleteButton from './DeleteButton';
+
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
 
     clearTextButtonContainer: {
         position: 'absolute',
-        bottom: 0,
+        top: 0,
         right: 0,
         height: 45.5,
         paddingLeft: 8,
@@ -103,6 +105,7 @@ export default class BlankInput extends React.Component {
     clearInputText() {
         this.refs.input.focus();
         this.props.handleChange('');
+        this.adjustInputHeight(0);
     }
 
     adjustInputHeight(newInputHeight) {
@@ -121,6 +124,14 @@ export default class BlankInput extends React.Component {
     }
 
     render() {
+        const clearTextButton = this.props.value ?
+            <View style={styles.clearTextButtonContainer}>
+                <DeleteButton 
+                    handlePress={this.clearInputText}/>
+            </View>
+            :
+            null;
+
         const inputStyles = {
             height: this.state.inputHeight,
             color: this.props.valueColor,
@@ -143,6 +154,8 @@ export default class BlankInput extends React.Component {
                         autoFocus={this.props.autoFocus} 
                         multiline={this.props.multiline}
                         onChange={this.props.multiline ? (event) => this.adjustInputHeight(event.nativeEvent.contentSize.height) : null /*NOTE: this does not work with onContentSizeChange */} />
+
+                        {clearTextButton}
                 </View>
             </TouchableWithoutFeedback>
         );

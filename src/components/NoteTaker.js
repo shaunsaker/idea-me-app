@@ -87,7 +87,7 @@ export default class NoteTaker extends React.Component {
 
     handleActionButtonPress() {
         if (this.props.inputValue && this.props.inputValue.length > 0) {
-            this.props.handleAddNote();
+            this.props.handleAdd();
         }
         else {
             this.handleClose();
@@ -141,6 +141,8 @@ export default class NoteTaker extends React.Component {
     }
 
     render() {
+        console.log(this.props.inputValue)
+
         const widthStyles = {
             width: this.state.animatedValue.interpolate({
                 inputRange: [0, 1],
@@ -187,6 +189,7 @@ export default class NoteTaker extends React.Component {
                     handleBlur={null}
                     multiline />
             </AnimateFadeIn>;
+            
 
         return (
             <View style={styles.container}>

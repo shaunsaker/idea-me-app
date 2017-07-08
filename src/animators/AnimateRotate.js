@@ -20,7 +20,7 @@ export default class AnimateRotate extends React.Component {
 
     static get propTypes() {
         return {
-            rotateForward: PropTypes.bool,
+            // rotateForward: PropTypes.bool, // BUG - getting string
             rotateBackward: PropTypes.bool,
             rotateTo: PropTypes.string,
             duration: PropTypes.number,

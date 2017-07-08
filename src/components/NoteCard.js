@@ -115,7 +115,7 @@ export default NoteCard = (props) => {
 
     const button = props.notes ?
         <NoteTaker
-            handleAddNote={props.handleAdd}
+            handleAdd={props.handleAdd}
             inputValue={props.inputValue}
             handleChangeText={props.handleChangeText} />
         :
