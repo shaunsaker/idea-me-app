@@ -5,6 +5,7 @@ import {
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+// import { AudioRecorder } from 'react-native-audio';
 
 import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
@@ -19,6 +20,8 @@ export class VoiceNotes extends React.Component {
     constructor(props) {
         super(props);
 
+        this.recordAudio = this.recordAudio.bind(this);
+
         this.state = {
             voiceNotes: [],
         }
@@ -29,6 +32,12 @@ export class VoiceNotes extends React.Component {
         return {
 
         };
+    }
+
+    recordAudio() {
+        const path = '/data/user/0/com.ideaMeApp/files';
+
+
     }
 
     render() {
@@ -46,6 +55,7 @@ export class VoiceNotes extends React.Component {
 
                 <NoteCard
                     idea={this.props.idea}
+                    handleAdd={this.recordAudio}
                     voiceNotes={this.state.voiceNotes} />
 
                 <SnackBar />

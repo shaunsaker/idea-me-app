@@ -17,6 +17,7 @@ import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.imagepicker.ImagePickerPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.rnfs.RNFSPackage;
+import com.futurice.rctaudiotoolkit.AudioPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +46,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNGeocoderPackage(),
           new ImagePickerPackage(),
           new ImageResizerPackage(),
-          new RNFSPackage()
+          new RNFSPackage(),
+          new AudioPackage()
       );
     }
   };
