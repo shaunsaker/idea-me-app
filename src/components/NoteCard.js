@@ -120,7 +120,8 @@ export default NoteCard = (props) => {
             handleChangeText={props.handleChangeText} />
         :
         props.voiceNotes ?
-            <VoiceNoteRecorder />
+            <VoiceNoteRecorder
+                handleRecord={props.handleRecord} />
             :
             <IconButton
                 handlePress={props.handleAdd}

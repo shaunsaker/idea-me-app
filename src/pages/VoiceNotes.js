@@ -11,6 +11,7 @@ import {
     Recorder
 } from 'react-native-audio-toolkit';
 
+import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../styles/styleConstants';
 
@@ -28,12 +29,12 @@ export class VoiceNotes extends React.Component {
         this.toggleRecording = this.toggleRecording.bind(this);
         this.togglePlayback = this.togglePlayback.bind(this);
 
-        this.filePath = 'IdeaMe-' + utilities.createUID() + '.mp4';
         this.recorder;
         this.player;
 
         this.state = {
             voiceNotes: [],
+            newVoiceNote: null,
         }
     }
 
@@ -46,7 +47,7 @@ export class VoiceNotes extends React.Component {
 
     componentDidMount() {
         this.reloadRecorder();
-        this.reloadPlayer();
+        // this.reloadPlayer();
     }
 
     reloadPlayer() {
@@ -55,7 +56,7 @@ export class VoiceNotes extends React.Component {
         }
 
         this.player = new Player(
-            this.filePath, 
+            this.filePath,
             {
                 autoDestroy: false
             }
@@ -67,8 +68,10 @@ export class VoiceNotes extends React.Component {
             this.recorder.destroy();
         }
 
+        const newFileName = 'IdeaMe-' + utilities.createUID() + '.' + config.voiceNotes.format;
+
         this.recorder = new Recorder(
-            this.filePath,
+            newFileName,
             {
                 bitrate: 256000,
                 channels: 2,
@@ -82,26 +85,34 @@ export class VoiceNotes extends React.Component {
 
     togglePlayback() {
         this.player.playPause((error, playing) => {
-            console.log('Playback toggling');
             if (error) {
                 console.log(error);
             }
             if (playing) {
-                console.log('Playing')
+                // do nothing
             }
         });
     }
 
     toggleRecording() {
         this.recorder.toggleRecord((error, stopped) => {
-            console.log('Recording toggling');
             if (error) {
                 console.log(error);
             }
             if (stopped) {
-                console.log('Recording stopped');
+                let newVoiceNotes = this.state.voiceNotes;
+                newVoiceNotes.push(this.state.newVoiceNote);
+                this.setState({
+                    voiceNotes: newVoiceNotes,
+                    newVoiceNote: null,
+                });
+
                 this.reloadRecorder();
             }
+        }).prepare((error, path) => {
+            this.setState({
+                newVoiceNote: path,
+            });
         });
     }
 
@@ -121,7 +132,9 @@ export class VoiceNotes extends React.Component {
                 <NoteCard
                     idea={this.props.idea}
                     handleAdd={this.recordAudio}
-                    voiceNotes={this.state.voiceNotes} />
+                    voiceNotes={this.state.voiceNotes}
+                    handleRecord={this.toggleRecording}
+                    handlePlay={this.togglePlayback} />
 
                 <TouchableOpacity
                     onPress={this.toggleRecording}

@@ -39,7 +39,11 @@ config.images = {
         contentType: 'image/jpeg',
         contentEncoding: 'base64',
     },
-};  
+}; 
+
+config.voiceNotes = {
+    format: 'mp4',
+} 
 
 config.googleSignIn = {
     webClientId: '',

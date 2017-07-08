@@ -98,6 +98,8 @@ export default class VoiceNoteRecorder extends React.Component {
                 isExpanding: false,
                 isExpanded: true,
             });
+
+            this.props.handleRecord(); // start recording
         });
     }
 
@@ -120,6 +122,8 @@ export default class VoiceNoteRecorder extends React.Component {
                 isCompressing: false,
                 isCompressed: true,
             });
+
+            this.props.handleRecord(); // stop recording
         });
     }
 
