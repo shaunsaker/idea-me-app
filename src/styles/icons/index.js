@@ -22,7 +22,9 @@ const glyphMap = {
   "chevron_left": 59664,
   "close": 59665,
   "voice": 59670,
-  "note": 59671
+  "note": 59671,
+  "play": 59669,
+  "pause": 59672
 };
 
 let Icon = createIconSet(glyphMap, 'IdeaMeAppIcons', 'IdeaMe-Icons.ttf');

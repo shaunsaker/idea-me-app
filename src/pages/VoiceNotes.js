@@ -134,19 +134,8 @@ export class VoiceNotes extends React.Component {
                     handleAdd={this.recordAudio}
                     voiceNotes={this.state.voiceNotes}
                     handleRecord={this.toggleRecording}
-                    handlePlay={this.togglePlayback} />
-
-                <TouchableOpacity
-                    onPress={this.toggleRecording}
-                    style={{ paddingVertical: 16 }}>
-                    <Text>Record</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    onPress={this.togglePlayback}
-                    style={{ paddingVertical: 16 }}>
-                    <Text>Play</Text>
-                </TouchableOpacity>
+                    handlePlay={this.togglePlayback}
+                    handleDelete={null} />
 
                 <SnackBar />
 

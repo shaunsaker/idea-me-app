@@ -16,26 +16,50 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: styleConstants.white,
     },
-    notesWrapper: {
+    voiceNotesWrapper: {
         flex: 1,
         padding: 8,
     },
-    notesContainer: {
+    voiceNotesContainer: {
         paddingBottom: 16,
     },
-    noteContainer: {
+    voiceNoteContainer: {
         flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: 8,
     },
-    bulletContainer: {
-        marginRight: 8,
-        top: 8,
-        alignSelf: 'flex-start',
+    voiceNoteIconContainer: {
+
     },
-    bullet: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
+    voiceNoteIcon: {
+        fontSize: styleConstants.iconFont,
+        color: styleConstants.primary,
+    },
+    voiceNoteDurationTextContainer: {
+        marginLeft: 8,
+    },
+    voiceNoteDurationText: {
+        fontSize: styleConstants.regularFont,
+        color: styleConstants.transPrimary,
+    },
+    voiceNoteProgressContainer: {
+        flex: 1,
+        marginHorizontal: 8,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+    },
+    voiceNoteProgressMarker: {
+        position: 'absolute',
+        top: 4.5,
+        left: 0,
+        backgroundColor: styleConstants.primary,
+        width: 16,
+        height: 16,
+        borderRadius: 8,
+        zIndex: 1,
+    },
+    voiceNoteProgressLine: {
+        height: 2,
         backgroundColor: styleConstants.lightGrey,
     },
     noteTextContainer: {
@@ -46,18 +70,13 @@ const styles = StyleSheet.create({
         fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
     },
-    deleteButtonContainer: {
-        top: 4,
-    },
 });
 
-export default PhotoList = (props) => {
+export default VoiceNoteList = (props) => {
     /*
         PROPTYPES
             labelColor
-            bulletColor
             textColor
-            title
             values
             handleDelete
     */
@@ -67,11 +86,6 @@ export default PhotoList = (props) => {
             color: props.labelColor
         };
 
-    const bulletColorStyles = props.bulletColor && 
-        {
-            backgroundColor: props.bulletColor
-        };
-
     const textColorStyles = props.textColor && 
         {
             color: props.textColor
@@ -79,27 +93,30 @@ export default PhotoList = (props) => {
 
     const notes = props.values && props.values.length > 0 ? 
         props.values.map((value) => {
-            const deleteButton = props.handleDelete ?
-                <View style={styles.deleteButtonContainer}>
-                    <DeleteButton
-                        handlePress={() => props.handleDelete(value)} />
-                </View>
+            const deleteButton = !props.handleDelete ?
+                <DeleteButton
+                    handlePress={() => props.handleDelete(value)} />
                 :
                 null;
 
             return (
                 <View 
-                    key={'bullet-' + value.title}
-                    style={styles.noteContainer}>
-                    <View style={styles.bulletContainer}>
-                        <View style={[styles.bullet, bulletColorStyles]} />
+                    key={'voiceNote-' + value}
+                    style={styles.voiceNoteContainer}>
+                    <View style={styles.voiceNoteIconContainer}>
+                        <Icon 
+                            name='play'
+                            style={styles.voiceNoteIcon} />                        
                     </View>
-                    <View style={styles.noteTextContainer}>
+                    <View style={styles.voiceNoteDurationTextContainer}>
                         <Text
-                            key={'voiceNote-' + value.title}
-                            style={[styles.noteText, styleConstants.primaryFont, textColorStyles]}>
-                            {value.title}
+                            style={[styles.voiceNoteDurationText, styleConstants.primaryFont]}>
+                            0:00
                         </Text>
+                    </View>
+                    <View style={styles.voiceNoteProgressContainer}>
+                        <View style={styles.voiceNoteProgressMarker} />
+                        <View style={styles.voiceNoteProgressLine} />
                     </View>
                     {deleteButton}
                 </View>
@@ -108,14 +125,18 @@ export default PhotoList = (props) => {
         :
         <View style={styles.noteTextContainer}>
             <Text
-                style={[styles.noteText, styles.greyText, styleConstants.primaryFont, textColorStyles]}>
+                style={[styles.noteText, styleConstants.primaryFont, textColorStyles]}>
                 None
             </Text>
         </View>;
 
     return (
         <View style={styles.container}>
-
+            <ScrollView 
+                style={styles.voiceNotesWrapper}
+                contentContainerStyle={styles.voiceNotesContainer}>
+                {notes}
+            </ScrollView>
         </View>
     )
 }

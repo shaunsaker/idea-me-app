@@ -103,7 +103,7 @@ export default BulletList = (props) => {
         :
         <View style={styles.noteTextContainer}>
             <Text
-                style={[styles.noteText, styles.greyText, styleConstants.primaryFont, textColorStyles]}>
+                style={[styles.noteText, styleConstants.primaryFont, textColorStyles]}>
                 None
             </Text>
         </View>;

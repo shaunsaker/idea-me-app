@@ -110,7 +110,8 @@ export default NoteCard = (props) => {
         title = 'VOICE NOTES';
         notes = 
             <VoiceNoteList
-                values={notesValues} />;
+                values={notesValues}
+                handleDelete={props.handleDelete} />;
     }
 
     const button = props.notes ?
