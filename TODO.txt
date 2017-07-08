@@ -1,8 +1,4 @@
 TODOS
-    Notes
-        NoteTaker component
-            Expands to reveal input
-    Note add buttons need elevation
     VoiceNotes
         Record audio infrastructure
         VoiceNoteItemView

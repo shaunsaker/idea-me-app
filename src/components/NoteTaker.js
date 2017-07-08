@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
     },
 });
 
@@ -166,24 +165,28 @@ export default class NoteTaker extends React.Component {
         }
 
         const actionButton = this.state.isExpanded &&
-            <TouchableOpacity
-                onPress={this.handleActionButtonPress}
-                style={styles.actionButton}>
-                <Icon
-                    name='close'
-                    style={styles.actionButtonIcon} />
-            </TouchableOpacity>;
+            <AnimateFadeIn>
+                <TouchableOpacity
+                    onPress={this.handleActionButtonPress}
+                    style={styles.actionButton}>
+                    <Icon
+                        name='close'
+                        style={styles.actionButtonIcon} />
+                </TouchableOpacity>
+            </AnimateFadeIn>;
 
         const input = this.state.isExpanded &&
-            <BlankInput
-                placeholderText='Add a Note'
-                placeholderTextColor={styleConstants.lightGrey}
-                value={this.props.inputValue}
-                valueColor={styleConstants.primary}
-                handleChange={this.props.handleChangeText}
-                handleFocus={null}
-                handleBlur={null}
-                multiline />;
+            <AnimateFadeIn style={styles.inputWrapper}>
+                <BlankInput
+                    placeholderText='Add a Note'
+                    placeholderTextColor={styleConstants.lightGrey}
+                    value={this.props.inputValue}
+                    valueColor={styleConstants.primary}
+                    handleChange={this.props.handleChangeText}
+                    handleFocus={null}
+                    handleBlur={null}
+                    multiline />
+            </AnimateFadeIn>;
 
         return (
             <View style={styles.container}>
@@ -202,16 +205,14 @@ export default class NoteTaker extends React.Component {
                                         style={styles.buttonIcon} />
                                 </Animated.Text>
                             </AnimateRotate>
-                            <AnimateFadeIn style={styles.inputWrapper}>
-                                {input}
-                                <AnimateRotate
-                                    rotateForward={this.props.inputValue && this.props.inputValue.length > 0}
-                                    rotateBackward={!this.props.inputValue}
-                                    rotateTo='45deg'
-                                    duration={config.animation.duration.short}>
-                                    {actionButton}
-                                </AnimateRotate>
-                            </AnimateFadeIn>
+                            {input}
+                            <AnimateRotate
+                                rotateForward={this.props.inputValue && this.props.inputValue.length > 0}
+                                rotateBackward={!this.props.inputValue}
+                                rotateTo='45deg'
+                                duration={config.animation.duration.short}>
+                                {actionButton}
+                            </AnimateRotate>
                         </Animated.View>
                     </View>
                 </TouchableWithoutFeedback>

@@ -15,6 +15,7 @@ import styleConstants from '../styles/styleConstants';
 
 import AnimateBlink from '../animators/AnimateBlink';
 import AnimateRotate from '../animators/AnimateRotate';
+import AnimateFadeIn from '../animators/AnimateFadeIn';
 
 const window = Dimensions.get('window');
 
@@ -147,11 +148,13 @@ export default class VoiceNoteRecorder extends React.Component {
         }
 
         const durationText = this.state.isExpanded && !this.state.isCompressing &&
-            <View style={styles.durationTextContainer}>
-                <Text style={[styles.durationText, styleConstants.primaryFont]}>
-                    0:00
-                </Text>
-            </View>;
+            <AnimateFadeIn>
+                <View style={styles.durationTextContainer}>
+                    <Text style={[styles.durationText, styleConstants.primaryFont]}>
+                        0:00
+                    </Text>
+                </View>
+            </AnimateFadeIn>;
 
         return (
             <View style={styles.container}>
@@ -164,7 +167,9 @@ export default class VoiceNoteRecorder extends React.Component {
                                 shouldAnimate={this.state.isExpanded && !this.state.isCompressing}>
                                 <AnimateRotate
                                     rotateForward={this.state.isExpanding}
-                                    rotateBackward={this.state.isCompressing}>
+                                    rotateBackward={this.state.isCompressing}
+                                    rotateTo='360deg'
+                                    duration={config.animation.duration.long} >
                                     <Animated.Text style={colorStyles}>
                                         <Icon
                                             name='voice'

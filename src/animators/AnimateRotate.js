@@ -6,7 +6,7 @@ import {
 
 import config from '../config';
 
-export default class AnimateBlink extends React.Component {
+export default class AnimateRotate extends React.Component {
     constructor(props) {
         super(props);
 
