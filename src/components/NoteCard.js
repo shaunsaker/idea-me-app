@@ -15,7 +15,7 @@ import BulletList from './BulletList';
 import PhotoList from './PhotoList';
 import VoiceNoteList from './VoiceNoteList';
 import IconButton from './IconButton';
-import VoiceNoteButton from './VoiceNoteButton';
+import VoiceNoteRecorder from './VoiceNoteRecorder';
 
 const window = Dimensions.get('window');
 
@@ -109,7 +109,7 @@ export default NoteCard = (props) => {
     }
 
     const button = props.voiceNotes ?
-        <VoiceNoteButton />
+        <VoiceNoteRecorder />
         :
         <IconButton
             handlePress={props.handleAdd}

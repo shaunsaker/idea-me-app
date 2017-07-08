@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class VoiceNoteButton extends React.Component {
+export default class VoiceNoteRecorder extends React.Component {
     constructor(props) {
         super(props);
 
@@ -142,12 +142,21 @@ export default class VoiceNoteButton extends React.Component {
             inputRange: [0, 1],
             outputRange: [styleConstants.secondary, styleConstants.danger],
         });
+        const rotation = this.state.animatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['0deg', '360deg'],
+        });
 
         const colorStyles = {
             color: this.state.displayIcon ? color : styleConstants.white,
         }
         const borderColorStyles = {
             borderColor: color,
+        }
+        const rotationStyles = {
+            transform: [
+                {rotate: rotation},
+            ],
         }
 
         const durationText = this.state.isExpanded &&
@@ -164,7 +173,7 @@ export default class VoiceNoteButton extends React.Component {
                     onPressOut={this.handleOnPressOut}>
                     <View>
                         <Animated.View style={[styles.button, widthStyles, backgroundColorStyles, borderColorStyles]}>
-                            <Animated.Text style={colorStyles}>
+                            <Animated.Text style={[colorStyles, rotationStyles]}>
                                 <Icon
                                     name='voice'
                                     style={styles.buttonIcon} />
