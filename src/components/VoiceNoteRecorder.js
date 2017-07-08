@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import config from '../config';
+import utilities from '../utilities';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
@@ -53,9 +54,12 @@ export default class VoiceNoteRecorder extends React.Component {
         this.handleOnPressOut = this.handleOnPressOut.bind(this);
         this.expandButton = this.expandButton.bind(this);
         this.compressButton = this.compressButton.bind(this);
+        this.startTimer = this.startTimer.bind(this);
+        this.clearTimer = this.clearTimer.bind(this);
 
         this.initialButtonWidth = 52;
         this.finalButtonWidth = window.width - 64; // 64 = margin + padding
+        this.timer;
 
         this.state = {
             animatedValue: new Animated.Value(0),
@@ -63,6 +67,7 @@ export default class VoiceNoteRecorder extends React.Component {
             isExpanding: false,
             isCompressed: true,
             isCompressing: false,
+            duration: 0,
         }
     }
 
@@ -73,10 +78,12 @@ export default class VoiceNoteRecorder extends React.Component {
     }
 
     handleOnPressIn() {
+        this.clearTimer(); // in case of mid-transition change
         this.expandButton();
     }
 
     handleOnPressOut() {
+        this.clearTimer();
         this.compressButton();
     }
 
@@ -99,7 +106,8 @@ export default class VoiceNoteRecorder extends React.Component {
                 isExpanded: true,
             });
 
-            this.props.handleRecord(); // start recording
+            this.startTimer();
+            // this.props.handleRecord(); // start recording
         });
     }
 
@@ -123,7 +131,23 @@ export default class VoiceNoteRecorder extends React.Component {
                 isCompressed: true,
             });
 
-            this.props.handleRecord(); // stop recording
+            // this.props.handleRecord(); // stop recording
+        });
+    }
+
+    startTimer() {
+        this.timer = setInterval(() => {
+            this.setState({
+                duration: this.state.duration += 1,
+            });
+        }, 1000);
+    }
+
+    clearTimer() {
+        clearInterval(this.timer);
+
+        this.setState({
+            duration: 0,
         });
     }
 
@@ -155,7 +179,7 @@ export default class VoiceNoteRecorder extends React.Component {
             <AnimateFadeIn>
                 <View style={styles.durationTextContainer}>
                     <Text style={[styles.durationText, styleConstants.primaryFont]}>
-                        0:00
+                        {utilities.getPrettyMinutesFromSeconds(this.state.duration)}
                     </Text>
                 </View>
             </AnimateFadeIn>;

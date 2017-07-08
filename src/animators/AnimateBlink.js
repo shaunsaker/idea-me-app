@@ -25,7 +25,9 @@ export default class AnimateBlink extends React.Component {
     }
 
     componentDidMount() {
-        this.props.shouldAnimate && this.blinkOut(); // start shown then blinkOut
+        setTimeout(() => {
+            this.props.shouldAnimate && this.blinkOut(); // start shown then blinkOut
+        }, 67); // wait for first animation frame
     }
 
     componentDidUpdate(prevProps) {
@@ -39,7 +41,7 @@ export default class AnimateBlink extends React.Component {
             this.state.animatedValue,
             {
                 toValue: 1,
-                duration: config.animation.long,
+                duration: 500,
                 easing: config.animation.easing,
                 useNativeDriver: true,
             }
@@ -53,7 +55,7 @@ export default class AnimateBlink extends React.Component {
             this.state.animatedValue,
             {
                 toValue: 0,
-                duration: config.animation.long,
+                duration: 500,
                 easing: config.animation.easing,
                 useNativeDriver: true,
             }

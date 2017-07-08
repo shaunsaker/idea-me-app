@@ -1,5 +1,24 @@
 const utilities = {};
 
+/* TIMING */
+
+utilities.getPrettyMinutesFromSeconds = (seconds) => {
+
+    // 126 => 2:06
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds - (minutes * 60);
+
+    // add zero padding if necessary
+    let zeroPadding = '';
+    if (remainingSeconds < 10) {
+        zeroPadding = '0';
+    }
+
+    const prettyMinutes = minutes + ':' + zeroPadding + remainingSeconds;
+
+    return prettyMinutes;
+}
+
 /* FILES */
 
 utilities.getFileName = (path) => {
