@@ -44,22 +44,31 @@ export default class Counter extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.displayDuration) {
-            this.setState({
-                displayDuration: this.props.displayDuration,
-            });
-        }
-        else if (this.props.startTimer) {
+        if (this.props.startTimer) {
             this.startTimer();
         }
     }
 
     componentDidUpdate(prevProps) {
+
+        // 0/Pause => Play
         if (this.props.startTimer && this.props.startTimer !== prevProps.startTimer) {
             this.startTimer();
         }
+
+        // Play => Pause
+        else if (this.props.pauseTimer && this.props.pauseTimer !== prevProps.pauseTimer) {
+            this.clearTimer();
+        }
+
+        // Stopped
         else if (!this.props.startTimer && this.props.startTimer !== prevProps.startTimer) {
             this.clearTimer();
+
+            this.setState({
+                isCounting: false,
+                duration: 0,
+            });
         }
     }
 
@@ -85,6 +94,7 @@ export default class Counter extends React.Component {
 
                 this.setState({
                     isCounting: false,
+                    duration: 0,
                 });
             }
 
@@ -102,7 +112,7 @@ export default class Counter extends React.Component {
     }
 
     render() {
-        const duration = this.state.isCounting ? this.state.duration : this.props.displayDuration ? this.props.displayDuration : 0;
+        const duration = this.state.isCounting ? Math.round(this.state.duration) : this.props.displayDuration ? Math.round(this.props.displayDuration) : 0;
         const durationText = utilities.getPrettyMinutesFromSeconds(duration);
 
         return (

@@ -72,13 +72,18 @@ export default NoteCard = (props) => {
         PROPTYPES
             idea
             notes/photos/voiceNotes
-            handleViewPhotos   
             handleAdd
             handleDelete
 
             NOTES
                 inputValue
                 handleChangeText
+
+            PHOTOS
+                handleViewPhotos   
+
+            VOICENOTES
+                handleRecord
     */
 
     let notesValues;

@@ -8,6 +8,7 @@ import {
     Dimensions,
     Animated,
 } from "react-native";
+import { Recorder } from 'react-native-audio-toolkit';
 
 import config from '../config';
 import utilities from '../utilities';
@@ -51,9 +52,12 @@ export default class VoiceNoteRecorder extends React.Component {
         this.handleOnPressOut = this.handleOnPressOut.bind(this);
         this.expandButton = this.expandButton.bind(this);
         this.compressButton = this.compressButton.bind(this);
+        this.reloadRecorder = this.reloadRecorder.bind(this);
+        this.toggleRecording = this.toggleRecording.bind(this);
 
         this.initialButtonWidth = 52;
         this.finalButtonWidth = window.width - 64; // 64 = margin + padding
+        this.recorder;
 
         this.state = {
             animatedValue: new Animated.Value(0),
@@ -61,6 +65,7 @@ export default class VoiceNoteRecorder extends React.Component {
             isExpanding: false,
             isCompressed: true,
             isCompressing: false,
+            newVoiceNoteFilePath: null,
         }
     }
 
@@ -70,12 +75,16 @@ export default class VoiceNoteRecorder extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.reloadRecorder();
+    }
+
     handleOnPressIn() {
         this.expandButton();
     }
 
     handleOnPressOut() {
-        this.compressButton();
+        this.compressButton();;
     }
 
     expandButton() {
@@ -97,7 +106,7 @@ export default class VoiceNoteRecorder extends React.Component {
                 isExpanded: true,
             });
 
-            this.props.handleRecord(); // start recording
+            this.toggleRecording(); // start recording
         });
     }
 
@@ -121,7 +130,43 @@ export default class VoiceNoteRecorder extends React.Component {
                 isCompressed: true,
             });
 
-            this.props.handleRecord(); // stop recording
+            this.toggleRecording(); // stop recording
+        });
+    }
+
+    reloadRecorder() {
+        if (this.recorder) {
+            this.recorder.destroy();
+        }
+
+        const newFileName = 'IdeaMe-' + utilities.createUID() + '.mp4';
+
+        this.recorder = new Recorder(
+            newFileName, // this.fileName
+            {
+                bitrate: 256000,
+                channels: 2,
+                sampleRate: 44100,
+                quality: 'max',
+                //format: 'ac3', // autodetected from path
+                //encoder: 'aac', // autodetected from path
+            }
+        ).prepare((error, path) => {
+            this.setState({
+                newVoiceNoteFilePath: path,
+            })
+        });
+    }
+
+    toggleRecording() {
+        this.recorder.toggleRecord((error, stopped) => {
+            if (error) {
+                console.log(error);
+            }
+            if (stopped) {
+                this.props.handleRecord(this.state.newVoiceNoteFilePath);
+                this.reloadRecorder();
+            }
         });
     }
 

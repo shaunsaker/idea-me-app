@@ -8,8 +8,10 @@ import {
     Dimensions,
     Animated,
 } from "react-native";
+import { Player } from 'react-native-audio-toolkit'; 
 
 import config from '../config';
+import utilities from '../utilities';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
@@ -57,28 +59,36 @@ export default class VoiceNotePlayer extends React.Component {
     constructor(props) {
         super(props);
 
+        this.reloadPlayer = this.reloadPlayer.bind(this);
+        this.togglePlayback = this.togglePlayback.bind(this);
+        this.translateProgressMarker = this.translateProgressMarker.bind(this);
+
         this.animationDuration = config.animation.duration.short;
+        this.player;
 
         this.state = {
             progressTrackLength: null,
             currentTranslateAmount: 0,
             translateAmountPerCycle: null,
             animatedValue: new Animated.Value(0),
+            isPlaying: false,
+            isPaused: false,
+            duration: null,
         }
     }
 
     static get propTypes() {
         return {
             voiceNote: PropTypes.object.isRequired,
-            handlePlay: PropTypes.func.isRequired,
-            isPlaying: PropTypes.bool, 
         }
     }
 
     componentDidMount() {
+        this.reloadPlayer();
+
         this.refs.progressTrack.measure((a, b, c, d, e, width) => {
-            const progressTrackLength = width - 70;
-            const translateAmountPerCycle = (progressTrackLength * this.animationDuration) / (this.props.voiceNote.duration * 1000);
+            const progressTrackLength = width - 8;
+            const translateAmountPerCycle = (progressTrackLength * this.animationDuration) / (this.state.duration * 1000);
 
             this.setState({
                 progressTrackLength,
@@ -87,10 +97,70 @@ export default class VoiceNotePlayer extends React.Component {
         });
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.isPlaying && this.props.isPlaying !== prevProps.isPlaying) {
+    componentWillUnmount() {
+        if (this.player) {
+            this.player.destroy();
+        }
+    }
+
+    reloadPlayer() {
+        if (this.player) {
+            this.player.destroy();
+        }
+
+        this.player = new Player(
+            utilities.getFileName(this.props.voiceNote.filePath), 
+            {
+                autoDestroy: false
+            }
+        ).prepare(() => {
+            this.setState({
+                duration: this.player.duration / 1000,
+            });
+        });
+
+        this.player.on('ended', () => {
+            this.setState({
+                isPlaying: false,
+                isPaused: false,
+            });
+        });
+    }
+
+    togglePlayback() {
+
+        // 0 => Play
+        if (!this.state.isPlaying && !this.state.isPaused) {
+            this.setState({
+                isPlaying: true,
+                isPaused: false,
+            });
+
             this.translateProgressMarker();
         }
+
+        // Play => Pause
+        else if (this.state.isPlaying) {
+            this.setState({
+                isPlaying: false,
+                isPaused: true,
+            });
+        }
+
+        // Pause => Play
+        else if (this.state.isPaused) {
+            this.setState({
+                isPlaying: true,
+                isPaused: false,
+            });
+
+            this.translateProgressMarker();
+        }
+
+        this.player.playPause((error, paused) => {
+
+            // Do  nothing
+        });
     }
 
     translateProgressMarker() {
@@ -105,14 +175,23 @@ export default class VoiceNotePlayer extends React.Component {
                 useNativeDriver: true,
             }
         ).start(() => {
-            if (this.props.isPlaying && nextTranslateAmount <= this.state.progressTrackLength) {
+
+            // 0/Paused => Play
+            if (this.state.isPlaying && nextTranslateAmount <= this.state.progressTrackLength) {
                 this.setState({
                     currentTranslateAmount: nextTranslateAmount,
                 });
 
                 this.translateProgressMarker();
             }
-            else if (!this.props.isPaused) {
+
+            // Play => Paused
+            else if (this.state.isPaused) {
+                // do nothing
+            }
+
+            // Stopped
+            else {
                 this.setState({
                     currentTranslateAmount: 0,
                 });
@@ -121,7 +200,7 @@ export default class VoiceNotePlayer extends React.Component {
     }
 
     render() {
-        const iconName = this.props.isPlaying ? 'pause' : 'play';
+        const iconName = this.state.isPlaying ? 'pause' : 'play';
         const progressMarkerStyles = {
             transform: [
                 { translateX: this.state.currentTranslateAmount},
@@ -131,7 +210,7 @@ export default class VoiceNotePlayer extends React.Component {
         return (
             <View style={styles.voiceNoteContainer}>
                 <Touchable
-                    onPress={() => this.props.handlePlay(this.props.voiceNote.filePath)}
+                    onPress={this.togglePlayback}
                     style={styles.voiceNoteIconContainer}>
                     <Icon
                         name={iconName}
@@ -139,9 +218,10 @@ export default class VoiceNotePlayer extends React.Component {
                 </Touchable>
                 <View style={styles.voiceNoteDurationTextContainer}>
                     <Counter
-                        displayDuration={this.props.voiceNote.duration}
-                        totalDuration={this.props.voiceNote.duration}
-                        startTimer={this.props.isPlaying} />
+                        displayDuration={this.state.duration}
+                        totalDuration={this.state.duration}
+                        startTimer={this.state.isPlaying}
+                        pauseTimer={this.state.isPaused} />
                 </View>
                 <View style={styles.voiceNoteProgressContainer}>
                     <Animated.View style={[styles.voiceNoteProgressMarker, progressMarkerStyles]} />
