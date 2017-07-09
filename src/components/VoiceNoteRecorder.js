@@ -97,7 +97,7 @@ export default class VoiceNoteRecorder extends React.Component {
                 isExpanded: true,
             });
 
-            // this.props.handleRecord(); // start recording
+            this.props.handleRecord(); // start recording
         });
     }
 
@@ -121,7 +121,7 @@ export default class VoiceNoteRecorder extends React.Component {
                 isCompressed: true,
             });
 
-            // this.props.handleRecord(); // stop recording
+            this.props.handleRecord(); // stop recording
         });
     }
 
@@ -149,6 +149,12 @@ export default class VoiceNoteRecorder extends React.Component {
             borderColor: color,
         }
 
+        const duration = this.state.isExpanded && !this.state.isCollapsing &&
+            <AnimateFadeIn style={styles.durationTextContainer}>
+                <Counter
+                    startTimer />
+            </AnimateFadeIn>;
+
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback
@@ -170,10 +176,7 @@ export default class VoiceNoteRecorder extends React.Component {
                                     </Animated.Text>
                                 </AnimateRotate>
                             </AnimateBlink>
-                            <AnimateFadeIn style={styles.durationTextContainer}>
-                                <Counter 
-                                    startTimer={this.state.isExpanded && !this.state.isCompressing}/>
-                            </AnimateFadeIn>
+                            {duration}
                         </Animated.View>
                     </View>
                 </TouchableWithoutFeedback>

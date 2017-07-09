@@ -38,8 +38,8 @@ export default class Counter extends React.Component {
 
     static get propTypes() {
         return {
-            displayDuration: PropTypes.string, // to display initially - can be null
-            totalDuration: PropTypes.string, // total to count to - can be null
+            displayDuration: PropTypes.number, // to display initially - can be null
+            totalDuration: PropTypes.number, // total to count to - can be null
             startTimer: PropTypes.bool,
         }
     }
@@ -50,13 +50,16 @@ export default class Counter extends React.Component {
                 displayDuration: this.props.displayDuration,
             });
         }
+        else if (this.props.startTimer) {
+            this.startTimer();
+        }
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.startTimer && this.props.startTimer !== prevProps.startTimer) {
             this.startTimer();
         }
-        else if (!this.props.startTimer && this.props.startTimer !== prevProps.startTime) {
+        else if (!this.props.startTimer && this.props.startTimer !== prevProps.startTimer) {
             this.clearTimer();
         }
     }
@@ -66,6 +69,10 @@ export default class Counter extends React.Component {
     }
 
     startTimer() {
+        this.setState({
+            isCounting: true,
+        });
+
         this.timer = setInterval(() => {
             if (this.props.totalDuration && this.state.duration < this.props.totalDuration) {
                 this.setState({
@@ -76,6 +83,10 @@ export default class Counter extends React.Component {
             // We've hit our total count
             else if (this.props.totalDuration) {
                 this.clearTimer();
+
+                this.setState({
+                    isCounting: false,
+                });
             }
 
             // No total to count to
@@ -93,7 +104,7 @@ export default class Counter extends React.Component {
 
     render() {
         const duration = this.state.isCounting ? this.state.duration : this.state.displayDuration;
-        const durationText = utilities.getPrettyMinutes(duration);
+        const durationText = utilities.getPrettyMinutesFromSeconds(duration);
 
         return (
             <View style={styles.container}>

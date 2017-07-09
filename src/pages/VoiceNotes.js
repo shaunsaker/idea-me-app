@@ -113,7 +113,7 @@ export class VoiceNotes extends React.Component {
             // Stop recording
             if (stopped) {
                 let newVoiceNotes = this.state.voiceNotes;
-                const duration = utilities.getPrettyMinutes(this.state.newVoiceNote.initialDuration - time)
+                const duration = Math.floor((time - this.state.newVoiceNote.initialDuration) / 1000);
                 let newVoiceNote = {
                     filePath: this.state.newVoiceNote.filePath,
                     duration

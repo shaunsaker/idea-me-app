@@ -4,17 +4,17 @@ const utilities = {};
 
 utilities.getPrettyMinutesFromSeconds = (seconds) => {
 
-    // 126 => 2:06
+    // 126 => 02:06
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds - (minutes * 60);
 
-    // add zero padding if necessary
-    let zeroPadding = '';
+    // add zero padding for seconds, if necessary
+    let zeroPaddingSeconds = '';
     if (remainingSeconds < 10) {
-        zeroPadding = '0';
+        zeroPaddingSeconds = '0';
     }
 
-    const prettyMinutes = minutes + ':' + zeroPadding + remainingSeconds;
+    const prettyMinutes = minutes + ':' + zeroPaddingSeconds + remainingSeconds;
 
     return prettyMinutes;
 }

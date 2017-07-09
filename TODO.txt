@@ -1,8 +1,8 @@
 TODOS
     VoiceNotes
-        VoiceNoteList uses FlatList
         Play voice note functionality
         Save voice notes
+    VoiceNoteList and BulletList uses FlatList (like PhotoList)
     PhotoWithError
         Full page uses infoBlock with page border
     Idea category and priority should ref relevant uids
