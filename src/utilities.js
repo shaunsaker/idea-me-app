@@ -31,7 +31,6 @@ utilities.getFileName = (path) => {
 utilities.appendStringToFileName = (fileName, string) => {
     const fileNameArray = fileName.split('.');
     const newFileName = fileNameArray[0] + string + '.' + fileNameArray[1];
-    console.log(newFileName)
 
     return newFileName;
 }   

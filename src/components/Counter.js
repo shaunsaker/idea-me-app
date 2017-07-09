@@ -30,7 +30,6 @@ export default class Counter extends React.Component {
         this.timer;
 
         this.state = {
-            displayDuration: 0, // assume this is zero
             duration: 0,
             isCounting: false,
         }
@@ -103,7 +102,7 @@ export default class Counter extends React.Component {
     }
 
     render() {
-        const duration = this.state.isCounting ? this.state.duration : this.state.displayDuration;
+        const duration = this.state.isCounting ? this.state.duration : this.props.displayDuration ? this.props.displayDuration : 0;
         const durationText = utilities.getPrettyMinutesFromSeconds(duration);
 
         return (

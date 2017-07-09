@@ -51,20 +51,6 @@ export class VoiceNotes extends React.Component {
 
     componentDidMount() {
         this.reloadRecorder();
-        // this.reloadPlayer();
-    }
-
-    reloadPlayer() {
-        if (this.player) {
-            this.player.destroy();
-        }
-
-        this.player = new Player(
-            this.filePath,
-            {
-                autoDestroy: false
-            }
-        );
     }
 
     reloadRecorder() {
@@ -85,21 +71,6 @@ export class VoiceNotes extends React.Component {
                 //encoder: 'aac', // autodetected from path
             }
         );
-    }
-
-    togglePlayback() {
-        this.setState({
-            isPlaying: !this.state.isPlaying,
-        });
-
-        this.player.playPause((error, playing) => {
-            if (error) {
-                console.log(error);
-            }
-            if (playing) {
-                // do nothing
-            }
-        });
     }
 
     toggleRecording() {
@@ -148,6 +119,56 @@ export class VoiceNotes extends React.Component {
         });
     }
 
+    togglePlayback(filePath) {
+        this.setState({
+            isPlaying: !this.state.isPlaying,
+        });
+        // console.log('Playing')
+
+        // const fileName = utilities.getFileName(filePath);
+        // console.log('Attempting to play:', fileName)
+
+        // if (this.player) {
+        //     this.player.destroy();
+        // }
+
+        // this.player = new Player(
+        //     fileName, // BUG: does not work with fileName, filePath or URI
+        //     {
+        //         autoDestroy: false
+        //     }
+        // ).prepare((error) => {
+        //     if (error) {
+        //         console.log('Prepare Player:', error.err);
+        //     }
+        //     else {
+
+        //         // Start playing the file once prepare has completed
+        //         this.player.playPause((error, playing) => {
+        //             if (error) {
+        //                 console.log('Play Pause:', error.err);
+        //             }
+
+        //             // Playing
+        //             else if (playing) {
+        //                 this.setState({
+        //                     isPlaying: !this.state.isPlaying,
+        //                 });
+        //                 console.log('Playing')
+        //             }
+
+        //             // Paused
+        //             else {
+        //                 console.log('Paused')
+        //             }
+        //         });
+        //     }
+        // });
+
+        // this.player.on('ended')
+        // this.player.on('pause')
+    }
+
     render() {
         return (
             <Page
@@ -158,7 +179,7 @@ export class VoiceNotes extends React.Component {
                     headerShadow
                     closeButton
                     continueButton
-                    text='VoiceNotes'
+                    text='Voice Notes'
                     handleRightIconPress={null} />
 
                 <NoteCard

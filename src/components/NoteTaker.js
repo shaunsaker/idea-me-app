@@ -141,8 +141,6 @@ export default class NoteTaker extends React.Component {
     }
 
     render() {
-        console.log(this.props.inputValue)
-
         const widthStyles = {
             width: this.state.animatedValue.interpolate({
                 inputRange: [0, 1],
