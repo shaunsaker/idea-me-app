@@ -9,6 +9,8 @@ import {
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
+import Touchable from './Touchable';
+import Counter from './Counter';
 import DeleteButton from './DeleteButton';
 
 const styles = StyleSheet.create({
@@ -37,10 +39,6 @@ const styles = StyleSheet.create({
     },
     voiceNoteDurationTextContainer: {
         marginLeft: 8,
-    },
-    voiceNoteDurationText: {
-        fontSize: styleConstants.regularFont,
-        color: styleConstants.transPrimary,
     },
     voiceNoteProgressContainer: {
         flex: 1,
@@ -103,16 +101,18 @@ export default VoiceNoteList = (props) => {
                 <View 
                     key={'voiceNote-' + value.filePath}
                     style={styles.voiceNoteContainer}>
-                    <View style={styles.voiceNoteIconContainer}>
+                    <Touchable
+                        onPress={() => props.handlePlay(value.filePath)}
+                        style={styles.voiceNoteIconContainer}>
                         <Icon 
                             name='play'
                             style={styles.voiceNoteIcon} />                        
-                    </View>
+                    </Touchable>
                     <View style={styles.voiceNoteDurationTextContainer}>
-                        <Text
-                            style={[styles.voiceNoteDurationText, styleConstants.primaryFont]}>
-                            {value.duration}
-                        </Text>
+                        <Counter
+                            displayDuration={value.duration} 
+                            totalDuration={value.duration} 
+                            startTimer={props.isPlaying} />
                     </View>
                     <View style={styles.voiceNoteProgressContainer}>
                         <View style={styles.voiceNoteProgressMarker} />

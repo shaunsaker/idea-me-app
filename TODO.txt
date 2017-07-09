@@ -1,6 +1,5 @@
 TODOS
     VoiceNotes
-        Counter component for recording and playback
         VoiceNoteList uses FlatList
         Play voice note functionality
         Save voice notes

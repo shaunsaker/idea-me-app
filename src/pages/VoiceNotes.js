@@ -38,6 +38,7 @@ export class VoiceNotes extends React.Component {
                 filePath: null,
                 initialDuration: null, // used to calculate duration of recording
             },
+            isPlaying: false,
         }
     }
 
@@ -87,6 +88,10 @@ export class VoiceNotes extends React.Component {
     }
 
     togglePlayback() {
+        this.setState({
+            isPlaying: !this.state.isPlaying,
+        });
+
         this.player.playPause((error, playing) => {
             if (error) {
                 console.log(error);
@@ -158,10 +163,11 @@ export class VoiceNotes extends React.Component {
 
                 <NoteCard
                     idea={this.props.idea}
-                    handleAdd={this.recordAudio}
                     voiceNotes={this.state.voiceNotes}
+                    handleAdd={this.recordAudio}
                     handleRecord={this.toggleRecording}
                     handlePlay={this.togglePlayback}
+                    isPlaying={this.state.isPlaying}
                     handleDelete={null} />
 
                 <SnackBar />
