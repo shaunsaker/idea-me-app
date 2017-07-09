@@ -64,7 +64,7 @@ export default VoiceNoteList = (props) => {
         props.values.map((value) => {
             return (
                 <View 
-                    key={'voiceNote-' + value.fileName}
+                    key={'voiceNote-' + value.filePath}
                     style={styles.voiceNoteContainer}>
                     <VoiceNotePlayer
                         voiceNote={value}

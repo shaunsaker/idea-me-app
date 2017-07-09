@@ -1,7 +1,7 @@
 TODOS
     VoiceNotes
-        Play voice note functionality
         Save voice notes
+        Delete voice notes
     VoiceNoteList and BulletList uses FlatList (like PhotoList)
     PhotoWithError
         Full page uses infoBlock with page border
