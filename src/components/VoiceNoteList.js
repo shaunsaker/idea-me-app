@@ -95,13 +95,13 @@ export default VoiceNoteList = (props) => {
         props.values.map((value) => {
             const deleteButton = !props.handleDelete ?
                 <DeleteButton
-                    handlePress={() => props.handleDelete(value)} />
+                    handlePress={() => props.handleDelete(value.filePath)} />
                 :
                 null;
 
             return (
                 <View 
-                    key={'voiceNote-' + value}
+                    key={'voiceNote-' + value.filePath}
                     style={styles.voiceNoteContainer}>
                     <View style={styles.voiceNoteIconContainer}>
                         <Icon 
@@ -111,7 +111,7 @@ export default VoiceNoteList = (props) => {
                     <View style={styles.voiceNoteDurationTextContainer}>
                         <Text
                             style={[styles.voiceNoteDurationText, styleConstants.primaryFont]}>
-                            0:00
+                            {value.duration}
                         </Text>
                     </View>
                     <View style={styles.voiceNoteProgressContainer}>

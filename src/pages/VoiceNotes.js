@@ -34,7 +34,10 @@ export class VoiceNotes extends React.Component {
 
         this.state = {
             voiceNotes: [],
-            newVoiceNote: null,
+            newVoiceNote: {
+                filePath: null,
+                initialDuration: null, // used to calculate duration of recording
+            },
         }
     }
 
@@ -95,23 +98,47 @@ export class VoiceNotes extends React.Component {
     }
 
     toggleRecording() {
+        const time = Date.now();
+
         this.recorder.toggleRecord((error, stopped) => {
             if (error) {
                 console.log(error);
             }
+
+            // Stop recording
             if (stopped) {
                 let newVoiceNotes = this.state.voiceNotes;
-                newVoiceNotes.push(this.state.newVoiceNote);
+                const duration = utilities.getPrettyMinutes(this.state.newVoiceNote.initialDuration - time)
+                let newVoiceNote = {
+                    filePath: this.state.newVoiceNote.filePath,
+                    duration
+                };
+
+                newVoiceNotes.push(newVoiceNote);
                 this.setState({
                     voiceNotes: newVoiceNotes,
-                    newVoiceNote: null,
+                    newVoiceNote: {
+                        filePath: null,
+                        initialDuration: null,
+                    },
                 });
 
                 this.reloadRecorder();
             }
+
+            // Start recording
+            else {
+                let newVoiceNote = this.state.newVoiceNote;
+                newVoiceNote.initialDuration = time;
+                this.setState({
+                    newVoiceNote
+                });
+            }
         }).prepare((error, path) => {
             this.setState({
-                newVoiceNote: path,
+                newVoiceNote: {
+                    filePath: path,
+                }
             });
         });
     }

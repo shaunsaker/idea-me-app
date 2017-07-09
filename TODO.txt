@@ -1,10 +1,9 @@
 TODOS
     VoiceNotes
-        Record audio infrastructure
-        VoiceNoteItemView
-            Play/Pause icon
-            Line with start
-            Duration
+        Counter component for recording and playback
+        VoiceNoteList uses FlatList
+        Play voice note functionality
+        Save voice notes
     PhotoWithError
         Full page uses infoBlock with page border
     Idea category and priority should ref relevant uids
@@ -15,7 +14,7 @@ TODOS
     Edit Idea Notes
     App does not load in offline mode
     Animate new notes in
-        Layoutanimation
+        Layoutanimation // AnimateFadeIn // NEW AnimateHeight
     Remove animation from logo
     Don't scroll to beginning on delete idea
     Animations useNativeDriver where possible (non-layout properties)
