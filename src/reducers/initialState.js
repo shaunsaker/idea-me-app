@@ -61,8 +61,8 @@ const initialState = {
             },
         },
         newNotes: null,
+        newPhotos: null,
         newVoiceNotes: null,
-        newPhotos: [],
     },
     userData: {
         profile: {

@@ -226,7 +226,12 @@ export default function (state = initialState, action) {
             new_state.app.currentAction = action.currentAction;
 			return new_state;
 
-        case 'UPDATE_NEW_PHOTOS':
+        case 'SET_NEW_NOTES':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.newNotes = action.newNotes;
+            return new_state;
+
+        case 'SET_NEW_PHOTOS':
             new_state = utilities.cloneObject(state);
 
             // Are we adding a single new photo or updating the whole lot (deleting a photo)
@@ -237,11 +242,6 @@ export default function (state = initialState, action) {
                 new_state.appData.newPhotos.push(action.newPhoto);
             }
                 
-            return new_state;
-
-        case 'SET_NEW_NOTES':
-            new_state = utilities.cloneObject(state);
-            new_state.appData.newNotes = action.newNotes;
             return new_state;
 
         case 'SET_NEW_VOICE_NOTES':

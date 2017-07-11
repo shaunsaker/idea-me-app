@@ -85,6 +85,7 @@ export function* handleImage(action) {
                         }
 
                         const moveCroppedFileResponse = yield call(FileSystem.moveFile, moveCroppedFileOptions);
+                        console.log('moveCroppedFileResponse', moveCroppedFileResponse);
 
                         if (moveCroppedFileResponse.success) {
                             const image = {
@@ -95,7 +96,7 @@ export function* handleImage(action) {
 
                             if (action.ideaPhoto) { // flag indicating this is an idea's photo
                                 yield put({
-                                    type: 'UPDATE_NEW_PHOTOS',
+                                    type: 'SET_NEW_PHOTOS',
                                     newPhoto: image,
                                 });
                             }

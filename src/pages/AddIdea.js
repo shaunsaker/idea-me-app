@@ -134,6 +134,8 @@ export class AddIdea extends React.Component {
     const categories = utilities.convertObjectArrayToArray(this.props.categories);
     const priorities = utilities.convertObjectArrayToArray(this.props.priorities);
     const newNotesCount = utilities.getLengthOfObject(this.props.newNotes);
+    const newPhotosCount = utilities.getLengthOfObject(this.props.newPhotos);
+    const newVoiceNotesCount = utilities.getLengthOfObject(this.props.newVoiceNotes);
 
     return (
       <Page
@@ -199,22 +201,28 @@ export class AddIdea extends React.Component {
                 disabled: !this.state.newIdeaTitle,
               },
               {
-                title: 'Voice Note',
-                icon: 'voice',
-                action: null,
-                count: 0,
-                disabled: !this.state.newIdeaTitle,
-              },
-              {
-                title: 'Image',
+                title: 'Photo',
                 icon: 'camera',
-                action: null,
-                count: 0,
+                action: () => Actions.photos({
+                  idea: {
+                    title: this.state.newIdeaTitle,
+                    description: this.state.newIdeaDescription,
+                  } ,
+                  addIdea: true,
+                }),
+                count: newPhotosCount,
                 disabled: !this.state.newIdeaTitle,
                 idea: {
                   title: this.state.newIdeaTitle,
                   description: this.state.newIdeaDescription,
                 } 
+              },
+              {
+                title: 'Voice Note',
+                icon: 'voice',
+                action: null,
+                count: newVoiceNotesCount,
+                disabled: !this.state.newIdeaTitle,
               },
             ]
           } />
@@ -233,6 +241,8 @@ function mapStateToProps(state) {
   return ({
     ideas: state.main.userData.ideas,
     newNotes: state.main.appData.newNotes,
+    newPhotos: state.main.appData.newPhotos,
+    newVoiceNotes: state.main.appData.newVoiceNotes,
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
     uid: state.main.auth.uid,

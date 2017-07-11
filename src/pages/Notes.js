@@ -120,7 +120,7 @@ export class Notes extends React.Component {
     saveNotes() {
         const newNotes = utilities.convertArrayToObjectArray(this.state.notes);
 
-        // We are editing an idea's notes
+        // Adding an idea
         if (this.props.addIdea) {
             this.props.dispatch({
                 type: 'SET_NEW_NOTES',
@@ -130,7 +130,7 @@ export class Notes extends React.Component {
             Actions.pop();
         }
 
-        // Otherwise we came from the addIdea page
+        // Editing Idea
         else {
             let newIdea = this.props.idea;
             newIdea['notes'] = newNotes;
@@ -168,11 +168,12 @@ export class Notes extends React.Component {
                     headerShadow
                     closeButton
                     continueButton
-                    text='NOTES'
+                    text='Notes'
                     handleRightIconPress={this.saveNotes} />
                   
                 <NoteCard
                     idea={this.props.idea}
+                    type='notes'
                     notes={this.state.notes}
                     handleDelete={this.toggleDeleteModal}
                     handleAdd={this.addNote}

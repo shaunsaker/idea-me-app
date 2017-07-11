@@ -65,7 +65,7 @@ export default class PhotoList extends React.Component {
 
     static get propTypes() {
         return {
-            photos: PropTypes.array.isRequired,
+            photos: PropTypes.array,
         }
     }
 
@@ -93,11 +93,13 @@ export default class PhotoList extends React.Component {
                 contentContainerStyle={styles.photosContainer}>
             </FlatList>
             :
-            <View style={styles.noteTextContainer}>
-                <Text
-                    style={[styles.noteText, styleConstants.primaryFont]}>
-                    None
-                </Text>
+            <View style={styles.photosWrapper}>
+                <View style={styles.noteTextContainer}>
+                    <Text
+                        style={[styles.noteText, styleConstants.primaryFont]}>
+                        None
+                    </Text>
+                </View>
             </View>;
 
         return (

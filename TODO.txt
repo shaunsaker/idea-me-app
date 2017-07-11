@@ -3,13 +3,20 @@ ONGOING
 
 TODOS     
     Notes
+        OnIdea
         AddIdea
+        EditIdea
     Photos 
+        OnIdea
         AddIdea
         EditIdea
     VoiceNotes
+        OnIdea
         AddIdea
         EditIdea
+    Delete notes is handled differently. Make it the same as photos and voiceNotes
+    Photos use profile photo flag instead of idea photo flag
+    Cropped photos are blurry
     PhotoWithError
         Full page uses infoBlock with page border
     Notes modalTitle should refer to note not idea title

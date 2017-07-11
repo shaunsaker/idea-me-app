@@ -110,7 +110,7 @@ export class VoiceNotes extends React.Component {
     saveVoiceNotes() {
         const newVoiceNotes = utilities.convertArrayToObjectArray(this.state.voiceNotes);
 
-        // We are editing an idea's voiceNotes
+        // Adding an idea
         if (this.props.addIdea) {
             this.props.dispatch({
                 type: 'SET_NEW_VOICE_NOTES',
@@ -120,7 +120,7 @@ export class VoiceNotes extends React.Component {
             Actions.pop();
         }
 
-        // Otherwise we came from the addIdea page
+        // Editing an idea
         else {
             let newIdea = this.props.idea;
             newIdea['voiceNotes'] = newVoiceNotes;
@@ -155,15 +155,16 @@ export class VoiceNotes extends React.Component {
                     headerShadow
                     closeButton
                     continueButton
-                    text='VoiceNotes'
+                    text='Voice Notes'
                     handleRightIconPress={this.saveVoiceNotes} />
 
                 <NoteCard
                     idea={this.props.idea}
+                    type='voiceNotes'
+                    voiceNotes={this.state.voiceNotes} 
                     handleRecord={this.addNewVoiceNote}
                     handlePlay={this.togglePlayback}
-                    handleDelete={this.toggleDeleteModal}
-                    voiceNotes={this.state.voiceNotes} />
+                    handleDelete={this.toggleDeleteModal} />
 
                 {deleteModal}
 
@@ -179,8 +180,8 @@ export class VoiceNotes extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        newVoiceNotes: state.main.appData.newVoiceNotes, // from addIdea page
-        ideas: state.main.userData.ideas,
+        newVoiceNotes: state.main.appData.newVoiceNotes,
+        ideas: state.main.userData.ideas,        
         uid: state.main.auth.uid,
         currentAction: state.main.app.currentAction,
         cloudDataSuccess: state.main.cloudData.cloudDataSuccess,

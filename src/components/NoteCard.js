@@ -91,55 +91,60 @@ export default NoteCard = (props) => {
     let iconName;
     let notes;
 
-    if (props.notes) {
+    if (props.type === 'notes') {
         notesValues = props.notes;
         title = 'NOTES';
         iconName = 'note';
-        notes = 
-            <BulletList 
+        notes =
+            <BulletList
                 notes={notesValues}
                 handleDelete={() => props.handleDelete(props.idea)} />;
     }
-    else if (props.photos) {
+    else if (props.type === 'photos') {
         notesValues = props.photos;
         title = 'PHOTOS';
         iconName = 'camera';
-        notes = 
+        notes =
             <PhotoList
                 photos={notesValues}
                 handleViewPhotos={props.handleViewPhotos}
                 handleDelete={props.handleDelete} />
     }
-    else {
+    else if (props.type === 'voiceNotes') {
         notesValues = props.voiceNotes;
         title = 'VOICE NOTES';
-        notes = 
+        notes =
             <VoiceNoteList
                 voiceNotes={notesValues}
                 handleDelete={props.handleDelete} />;
     }
 
-    const button = props.notes ?
+    const button = props.type === 'notes' ?
         <NoteTaker
             handleAdd={props.handleAdd}
             inputValue={props.inputValue}
             handleChangeText={props.handleChangeText} />
         :
-        props.voiceNotes ?
-            <VoiceNoteRecorder
-                handleRecord={props.handleRecord} />
-            :
+        props.type === 'photos' ?
             <IconButton
                 handlePress={props.handleAdd}
                 iconName={iconName}
                 iconColor={styleConstants.secondary}
-                disabled={props.disabled} />;
-    
-    const titleColorStyles = notesValues.length < 1 &&
+                disabled={props.disabled} />
+            :
+            props.type === 'voiceNotes' ?
+                <VoiceNoteRecorder
+                    handleRecord={props.handleRecord} />
+                :
+                null;
+
+    const titleColorStyles = notesValues && notesValues.length < 1 &&
         {
             color: styleConstants.lightGrey,
-        };       
-  
+        };
+
+    const notesCount = notesValues ? notesValues.length : 0;
+
     return (
         <View
             style={styles.cardContainer} >
@@ -157,7 +162,7 @@ export default NoteCard = (props) => {
                 <View style={styles.notesContainer}>
                     <View style={styles.titleContainer}>
                         <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles]}>
-                            {title + ' (' + notesValues.length + '):'}
+                            {title + ' (' + notesCount + '):'}
                         </Text>
                     </View>
 

@@ -61,7 +61,7 @@ export default class BulletList extends React.Component {
 
     static get propTypes() {
         return {
-            notes: PropTypes.array.isRequired,
+            notes: PropTypes.array,
             handleDelete: PropTypes.func,
         }
     }
@@ -98,11 +98,13 @@ export default class BulletList extends React.Component {
                 contentContainerStyle={styles.notesContainer}>
             </FlatList>
             :
-            <View style={styles.noteTextContainer}>
-                <Text
-                    style={[styles.noteText, styleConstants.primaryFont]}>
-                    None
-                </Text>
+            <View style={styles.notesWrapper}>
+                <View style={styles.noteTextContainer}>
+                    <Text
+                        style={[styles.noteText, styleConstants.primaryFont]}>
+                        None
+                    </Text>
+                </View>
             </View>;
 
         return (

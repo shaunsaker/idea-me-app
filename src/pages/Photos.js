@@ -45,7 +45,7 @@ export class Photos extends React.Component {
         return {
             idea: PropTypes.object,
 
-            newPhotos: PropTypes.array,
+            newPhotos: PropTypes.object,
             ideas: PropTypes.object,
 
             uid: PropTypes.string,
@@ -56,7 +56,7 @@ export class Photos extends React.Component {
 
     componentDidMount() {
         if (this.props.newPhotos || this.props.idea) {
-            const newPhotos = this.props.newPhotos.length ? this.props.newPhotos : this.props.idea.photos;
+            const newPhotos = this.props.newPhotos ? this.props.newPhotos : this.props.idea.photos;
             const newPhotosArray = utilities.convertObjectArrayToArray(newPhotos);
             
             this.props.dispatch({
@@ -129,18 +129,32 @@ export class Photos extends React.Component {
     savePhotos() {
         const newPhotos = utilities.convertArrayToObjectArray(this.props.newPhotos);
 
-        let newIdea = this.props.idea;
-        newIdea['photos'] = newPhotos;
-        const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+        // Adding an idea
+        if (this.props.addIdea) {
+            this.props.dispatch({
+                type: 'SET_NEW_PHOTOS',
+                newPhotos,
+            });
 
-        this.props.dispatch({
-            type: 'saveUserData',
-            node: 'ideas',
-            uid: this.props.uid,
-            userData: newIdeas,
-            currentAction: 'savePhotos',
-            hasNetwork: this.props.hasNetwork,
-        });
+            Actions.pop();
+        }
+
+        // Editing an idea
+        else {
+            let newIdea = this.props.idea;
+            newIdea['photos'] = newPhotos;
+            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+
+            this.props.dispatch({
+                type: 'saveUserData',
+                node: 'ideas',
+                uid: this.props.uid,
+                userData: newIdeas,
+                currentAction: 'savePhotos',
+                hasNetwork: this.props.hasNetwork,
+                ideaPhoto: true, // TODO: rather set profile photo flag
+            });
+        }
     }
 
     render() {
@@ -184,7 +198,8 @@ export class Photos extends React.Component {
 
                 <NoteCard
                     idea={this.props.idea}
-                    photos={this.props.newPhotos}
+                    type='photos'
+                    photos={this.state.photos}
                     handleViewPhotos={this.togglePhotoViewer}
                     handleAdd={this.togglePhotoModal}
                     handleDelete={this.toggleDeletePhotoModal} />
@@ -209,7 +224,6 @@ function mapStateToProps(state) {
     return ({
         newPhotos: state.main.appData.newPhotos,
         ideas: state.main.userData.ideas,
-
         uid: state.main.auth.uid,
         hasNetwork: state.main.app.hasNetwork,
         currentAction: state.main.app.currentAction,

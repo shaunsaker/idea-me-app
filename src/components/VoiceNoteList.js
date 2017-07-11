@@ -50,7 +50,7 @@ export default class VoiceNoteList extends React.Component {
 
     static get propTypes() {
         return {
-            voiceNotes: PropTypes.array.isRequired,
+            voiceNotes: PropTypes.array,
             handleDelete: PropTypes.func,
         }
     }
@@ -76,11 +76,13 @@ export default class VoiceNoteList extends React.Component {
                 contentContainerStyle={styles.voiceNotesContainer}>
             </FlatList>
             :
-            <View style={styles.noteTextContainer}>
-                <Text
-                    style={[styles.noteText, styleConstants.primaryFont]}>
-                    None
-                </Text>
+            <View style={styles.voiceNotesWrapper}>
+                <View style={styles.noteTextContainer}>
+                    <Text
+                        style={[styles.noteText, styleConstants.primaryFont]}>
+                        None
+                    </Text>
+                </View>
             </View>;
 
         return (
