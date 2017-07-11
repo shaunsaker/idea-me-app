@@ -115,9 +115,7 @@ export default NoteCard = (props) => {
         title = 'VOICE NOTES';
         notes = 
             <VoiceNoteList
-                values={notesValues}
-                handlePlay={props.handlePlay}
-                isPlaying={props.isPlaying}
+                voiceNotes={notesValues}
                 handleDelete={props.handleDelete} />;
     }
 

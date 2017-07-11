@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     View,
-    ScrollView,
+    FlatList,
     Text,
     StyleSheet,
 } from "react-native";
@@ -40,56 +41,52 @@ const styles = StyleSheet.create({
     },
 });
 
-export default VoiceNoteList = (props) => {
-    /*
-        PROPTYPES
-            labelColor
-            textColor
-            values
-            handleDelete
-            isPlaying
-    */
+export default class VoiceNoteList extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const labelColorStyles = props.labelColor && 
-        {
-            color: props.labelColor
-        };
+        this.renderVoiceNote = this.renderVoiceNote.bind(this);
+    }
 
-    const textColorStyles = props.textColor && 
-        {
-            color: props.textColor
-        }; 
+    static get propTypes() {
+        return {
+            voiceNotes: PropTypes.array.isRequired,
+            handleDelete: PropTypes.func,
+        }
+    }
 
-    const notes = props.values && props.values.length > 0 ? 
-        props.values.map((value) => {
-            return (
-                <View 
-                    key={'voiceNote-' + value.uid}
-                    style={styles.voiceNoteContainer}>
-                    <VoiceNotePlayer
-                        voiceNote={value}
-                        handlePlay={props.handlePlay}
-                        isPlaying={props.isPlaying} />
-                    <DeleteButton
-                        handlePress={() => props.handleDelete(value.uid)} />
-                </View>
-            );
-        })
-        :
-        <View style={styles.noteTextContainer}>
-            <Text
-                style={[styles.noteText, styleConstants.primaryFont, textColorStyles]}>
-                None
-            </Text>
-        </View>;
+    renderVoiceNote = ({ item }) => {
+        return (
+            <View style={styles.voiceNoteContainer}>
+                <VoiceNotePlayer
+                    voiceNote={item} />
+                <DeleteButton
+                    handlePress={() => this.props.handleDelete(item.uid)} />
+            </View>
+        )
+    }
 
-    return (
-        <View style={styles.container}>
-            <ScrollView 
+    render() {
+        const notes = this.props.voiceNotes && this.props.voiceNotes.length > 0 ?
+            <FlatList
+                keyExtractor={item => 'voiceNote-' + item.uid}
+                data={this.props.voiceNotes}
+                renderItem={this.renderVoiceNote}
                 style={styles.voiceNotesWrapper}
                 contentContainerStyle={styles.voiceNotesContainer}>
+            </FlatList>
+            :
+            <View style={styles.noteTextContainer}>
+                <Text
+                    style={[styles.noteText, styleConstants.primaryFont]}>
+                    None
+                </Text>
+            </View>;
+
+        return (
+            <View style={styles.container}>
                 {notes}
-            </ScrollView>
-        </View>
-    )
+            </View>
+        )
+    }
 }

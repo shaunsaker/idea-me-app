@@ -1,10 +1,10 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
     View,
     Text,
     TouchableOpacity,
 } from "react-native";
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Recorder } from 'react-native-audio-toolkit';

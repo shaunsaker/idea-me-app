@@ -63,6 +63,12 @@ export default class PhotoList extends React.Component {
         this.renderPhoto = this.renderPhoto.bind(this);
     }
 
+    static get propTypes() {
+        return {
+            photos: PropTypes.array.isRequired,
+        }
+    }
+
     renderPhoto = ({item, index}) => {
         return (
             <PhotoWithError

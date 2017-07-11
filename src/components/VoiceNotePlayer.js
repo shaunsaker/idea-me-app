@@ -95,8 +95,6 @@ export default class VoiceNotePlayer extends React.Component {
                 const progressTrackLength = width - 16;
                 const translateAmountPerCycle = (progressTrackLength * this.animationDuration) / (this.state.duration * 1000);
 
-                console.log(progressTrackLength, this.animationDuration, this.state.duration, translateAmountPerCycle);
-
                 this.setState({
                     progressTrackLength,
                     translateAmountPerCycle,
