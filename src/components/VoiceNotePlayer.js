@@ -61,7 +61,7 @@ export default class VoiceNotePlayer extends React.Component {
 
         this.reloadPlayer = this.reloadPlayer.bind(this);
         this.togglePlayback = this.togglePlayback.bind(this);
-        this.translateProgressMarker = this.translateProgressMarker.bind(this);
+        this.animate = this.animate.bind(this);
 
         this.animationDuration = config.animation.duration.short;
         this.player;
@@ -85,16 +85,24 @@ export default class VoiceNotePlayer extends React.Component {
 
     componentDidMount() {
         this.reloadPlayer();
+    }
 
-        this.refs.progressTrack.measure((a, b, c, d, e, width) => {
-            const progressTrackLength = width - 8;
-            const translateAmountPerCycle = (progressTrackLength * this.animationDuration) / (this.state.duration * 1000);
+    componentDidUpdate(prevProps, prevState) {
 
-            this.setState({
-                progressTrackLength,
-                translateAmountPerCycle,
+        // When duration state set, use it to calculate translateAmountPerCycle
+        if (this.state.duration && this.state.duration !== prevState.duration) {
+            this.refs.progressTrack.measure((a, b, c, d, e, width) => {
+                const progressTrackLength = width - 16;
+                const translateAmountPerCycle = (progressTrackLength * this.animationDuration) / (this.state.duration * 1000);
+
+                console.log(progressTrackLength, this.animationDuration, this.state.duration, translateAmountPerCycle);
+
+                this.setState({
+                    progressTrackLength,
+                    translateAmountPerCycle,
+                });
             });
-        });
+        }
     }
 
     componentWillUnmount() {
@@ -136,7 +144,7 @@ export default class VoiceNotePlayer extends React.Component {
                 isPaused: false,
             });
 
-            this.translateProgressMarker();
+            this.animate();
         }
 
         // Play => Pause
@@ -154,7 +162,7 @@ export default class VoiceNotePlayer extends React.Component {
                 isPaused: false,
             });
 
-            this.translateProgressMarker();
+            this.animate();
         }
 
         this.player.playPause((error, paused) => {
@@ -163,7 +171,7 @@ export default class VoiceNotePlayer extends React.Component {
         });
     }
 
-    translateProgressMarker() {
+    animate() {
         let nextTranslateAmount = this.state.currentTranslateAmount + this.state.translateAmountPerCycle;
 
         Animated.timing(
@@ -182,16 +190,11 @@ export default class VoiceNotePlayer extends React.Component {
                     currentTranslateAmount: nextTranslateAmount,
                 });
 
-                this.translateProgressMarker();
+                this.animate();
             }
 
-            // Play => Paused
-            else if (this.state.isPaused) {
-                // do nothing
-            }
-
-            // Stopped
-            else {
+            // Stopped (paused does nothing)
+            else if (!this.state.isPaused) {
                 this.setState({
                     currentTranslateAmount: 0,
                 });

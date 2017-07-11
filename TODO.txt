@@ -1,8 +1,5 @@
 TODOS
     VoiceNotes
-        Track animation is not 100%
-            Width
-            Expected dynamic type double but had type null
         Voice notes should be moved to dir that persists, ie. document dir (not sure if it persists currently)
     VoiceNoteList and BulletList uses FlatList (like PhotoList)
     VoiceNotes (from Notes) - look into newNotes? (May be from addIdea)
