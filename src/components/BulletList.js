@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     View,
-    ScrollView,
+    FlatList,
     Text,
     StyleSheet,
 } from "react-native";
@@ -51,70 +52,63 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BulletList = (props) => {
-    /*
-        PROPTYPES
-            labelColor
-            bulletColor
-            textColor
-            title
-            values
-            handleDelete
-    */
+export default class BulletList extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const bulletColorStyles = props.bulletColor && 
-        {
-            backgroundColor: props.bulletColor
-        };
+        this.renderBullet = this.renderBullet.bind(this);
+    }
 
-    const textColorStyles = props.textColor && 
-        {
-            color: props.textColor
-        }; 
+    static get propTypes() {
+        return {
+            notes: PropTypes.array.isRequired,
+            handleDelete: PropTypes.func,
+        }
+    }
 
-    const notes = props.values && props.values.length > 0 ? 
-        props.values.map((value) => {
-            const deleteButton = props.handleDelete ?
+    renderBullet = ({ item }) => {
+        return (
+            <View
+                style={styles.noteContainer}>
+                <View style={styles.bulletContainer}>
+                    <View style={styles.bullet} />
+                </View>
+                <View style={styles.noteTextContainer}>
+                    <Text
+                        key={'note-' + item.title}
+                        style={[styles.noteText, styleConstants.primaryFont]}>
+                        {item.title}
+                    </Text>
+                </View>
                 <View style={styles.deleteButtonContainer}>
                     <DeleteButton
-                        handlePress={() => props.handleDelete(value)} />
+                        handlePress={() => this.props.handleDelete(item)} />
                 </View>
-                :
-                null;
+            </View>
+        )
+    }
 
-            return (
-                <View 
-                    key={'bullet-' + value.title}
-                    style={styles.noteContainer}>
-                    <View style={styles.bulletContainer}>
-                        <View style={[styles.bullet, bulletColorStyles]} />
-                    </View>
-                    <View style={styles.noteTextContainer}>
-                        <Text
-                            key={'note-' + value.title}
-                            style={[styles.noteText, styleConstants.primaryFont, textColorStyles]}>
-                            {value.title}
-                        </Text>
-                    </View>
-                    {deleteButton}
-                </View>
-            );
-        })
-        :
-        <View style={styles.noteTextContainer}>
-            <Text
-                style={[styles.noteText, styleConstants.primaryFont, textColorStyles]}>
-                None
-            </Text>
-        </View>;
-
-    return (
-        <View style={styles.container}>
-            <ScrollView 
+    render() {
+        const notes = this.props.notes && this.props.notes.length > 0 ?
+            <FlatList
+                keyExtractor={item => 'note-' + item.uid}
+                data={this.props.notes}
+                renderItem={this.renderBullet}
                 style={styles.notesWrapper}
                 contentContainerStyle={styles.notesContainer}>
+            </FlatList>
+            :
+            <View style={styles.noteTextContainer}>
+                <Text
+                    style={[styles.noteText, styleConstants.primaryFont]}>
+                    None
+                </Text>
+            </View>;
+
+        return (
+            <View style={styles.container}>
                 {notes}
-            </ScrollView>
-        </View>
-    )
+            </View>
+        )
+    }
 }

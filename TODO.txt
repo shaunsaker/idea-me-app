@@ -2,8 +2,6 @@ ONGOING
     Voice notes should be moved to dir that persists, ie. document dir (not sure if it persists currently - TEST)
 
 TODOS     
-    VoiceNoteList and BulletList uses FlatList (like PhotoList)
-    VoiceNotes (from Notes) - look into newNotes? (May be from addIdea)
     Notes
         AddIdea
     Photos 

@@ -97,7 +97,7 @@ export default NoteCard = (props) => {
         iconName = 'note';
         notes = 
             <BulletList 
-                values={notesValues}
+                notes={notesValues}
                 handleDelete={() => props.handleDelete(props.idea)} />;
     }
     else if (props.photos) {
