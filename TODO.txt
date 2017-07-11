@@ -1,10 +1,22 @@
 TODOS
     VoiceNotes
-        Save voice notes
-        Delete voice notes
+        Track animation is not 100%
+            Width
+            Expected dynamic type double but had type null
+        Voice notes should be moved to dir that persists, ie. document dir (not sure if it persists currently)
     VoiceNoteList and BulletList uses FlatList (like PhotoList)
+    VoiceNotes (from Notes) - look into newNotes? (May be from addIdea)
+    Notes
+        AddIdea
+    Photos 
+        AddIdea
+        EditIdea
+    VoiceNotes
+        AddIdea
+        EditIdea
     PhotoWithError
         Full page uses infoBlock with page border
+    Notes modalTitle should refer to note not idea title
     Idea category and priority should ref relevant uids
     No need to keep uid as key value pair
     Why do I need to login button and screen from Welcome page  

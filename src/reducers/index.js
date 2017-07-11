@@ -244,6 +244,11 @@ export default function (state = initialState, action) {
             new_state.appData.newNotes = action.newNotes;
             return new_state;
 
+        case 'SET_NEW_VOICE_NOTES':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.newVoiceNotes = action.newVoiceNotes;
+            return new_state;
+
 		case 'SET_USER_LOCATION':
 			new_state = utilities.cloneObject(state);
 			new_state.userData.profile.userLocation = action.userLocation;
