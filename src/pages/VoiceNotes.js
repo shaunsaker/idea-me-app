@@ -31,7 +31,7 @@ export class VoiceNotes extends React.Component {
         this.state = {
             voiceNotes: [],
             showDeleteModal: false,
-            modalVoiceNotePath: null,
+            modalUID: null,
         }
     }
 
@@ -73,6 +73,7 @@ export class VoiceNotes extends React.Component {
     addNewVoiceNote(newVoiceNoteFilePath) {
         let newVoiceNotes = this.state.voiceNotes;
         const newVoiceNote = {
+            uid: utilities.createUID(),
             filePath: newVoiceNoteFilePath,
         }
         newVoiceNotes.push(newVoiceNote);
@@ -85,19 +86,19 @@ export class VoiceNotes extends React.Component {
         if (value) {
             this.setState({
                 showDeleteModal: true,
-                modalVoiceNotePath: value,
+                modalUID: value,
             });
         }
         else {
             this.setState({
                 showDeleteModal: false,
-                modalVoiceNotePath: null,
+                modalUID: null,
             });
         }
     }
 
     deleteVoiceNote(value) {
-        let newVoiceNotes = utilities.deleteObjectWithKeyValuePairFromArray({filePath: value}, this.state.voiceNotes);
+        let newVoiceNotes = utilities.deleteObjectWithKeyValuePairFromArray({uid: value}, this.state.voiceNotes);
 
         this.setState({
             voiceNotes: newVoiceNotes,
@@ -140,7 +141,7 @@ export class VoiceNotes extends React.Component {
         const deleteModal = this.state.showDeleteModal ?
             <ActionModal
                 title='Are you sure you want to delete this voiceNote?'
-                handleLeftIconPress={() => this.deleteVoiceNote(this.state.modalVoiceNotePath)}
+                handleLeftIconPress={() => this.deleteVoiceNote(this.state.modalUID)}
                 handleRightIconPress={this.toggleDeleteModal} />
             :
             null;

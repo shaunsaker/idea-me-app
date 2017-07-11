@@ -64,14 +64,14 @@ export default VoiceNoteList = (props) => {
         props.values.map((value) => {
             return (
                 <View 
-                    key={'voiceNote-' + value.filePath}
+                    key={'voiceNote-' + value.uid}
                     style={styles.voiceNoteContainer}>
                     <VoiceNotePlayer
                         voiceNote={value}
                         handlePlay={props.handlePlay}
                         isPlaying={props.isPlaying} />
                     <DeleteButton
-                        handlePress={() => props.handleDelete(value.filePath)} />
+                        handlePress={() => props.handleDelete(value.uid)} />
                 </View>
             );
         })
