@@ -2,8 +2,6 @@ ONGOING
     Voice notes should be moved to dir that persists, ie. document dir (not sure if it persists currently - TEST)
 
 TODOS     
-    On NoteTaker expand, focus input
-    IdeaCard hz margin too much
     Replace windowWidth with const { width } = 
     Create responsive component for testing (Page component)
     Delete notes is handled differently. Make it the same as photos and voiceNotes
