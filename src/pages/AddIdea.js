@@ -73,7 +73,6 @@ export class AddIdea extends React.Component {
   }
 
   selectCategory(value) {
-
     if (value === 'Edit Categories') {
       Actions.categories();
     }

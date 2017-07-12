@@ -1,6 +1,6 @@
 TODOS     
     Categories page 
-        On Edit Categories, close dropdown menu
+        Categories should be FlatList
         Add and Update category in categories page
         Test add, update, delete
         Delete AddCategory page
