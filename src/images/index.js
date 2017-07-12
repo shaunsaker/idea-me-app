@@ -62,7 +62,7 @@ export default class Photos {
                 action.uri, // uri to image
                 portrait ? action.maxWidth : action.maxWidth * 2, // maxWidth
                 portrait ? action.maxWidth * 2 : action.maxWidth, // maxHeight
-                ...config.images.imageResizerOptions, // type, quality, rotation
+                ...config.images.imageResizerOptions, // format, quality, rotation
             ];
 
             ImageResizer.createResizedImage(...imageResizerOptions)

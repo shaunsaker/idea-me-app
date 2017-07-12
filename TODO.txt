@@ -1,11 +1,4 @@
-ONGOING
-    Voice notes should be moved to dir that persists, ie. document dir (not sure if it persists currently - TEST)
-
 TODOS     
-    Create responsive component for testing (Page component)
-    Delete notes is handled differently. Make it the same as photos and voiceNotes
-    Photos use profile photo flag instead of idea photo flag
-    Cropped photos are blurry
     Categories page is not tab page
         Because from addIdea, you can't go back
     PhotoWithError
@@ -111,6 +104,9 @@ TODOS
         After one week
             Enjoying the app? Help us spread the word by sharing (fb or tweet)
                 Auto populate
+
+WRAP UP
+    Create responsive component for testing (Page component)           
     App renaming
     App Icons
     Test all errors
@@ -126,13 +122,12 @@ TODOS
         User errors should contain resets
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
         Use shouldComponentUpdate where necessary     
-
-IOS
-    Integrate react-native-fbsdk on iOS
-    Integrate react-native-google-signin on iOS
-    Icons
-    React native keyboard spacer
-    Testing!
+    IOS
+        Integrate react-native-fbsdk on iOS
+        Integrate react-native-google-signin on iOS
+        Icons
+        React native keyboard spacer
+        Testing!
 
 V2
     Add Sketches to Ideas

@@ -1,5 +1,6 @@
-import { Easing } from 'react-native';
+import { Easing, Dimensions } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
 const config = {};
 
 config.appName = 'IdeaMe';
@@ -22,7 +23,7 @@ config.modal = {
 };
 
 config.images = {
-    maxImageWidth: 100,
+    maxImageWidth: (width - 122) / 3,// minus padding/margin in view
     imagePickerOptions: {
         mediaType: 'photo',
         noData: true, // don't attach base64 data - greatly improves performance
@@ -33,7 +34,7 @@ config.images = {
     imageResizerOptions: [
         'JPEG',     // format
         100,        // quality
-        0,          // rotation, outputPath below
+        0,          // rotation
     ],
     firestackStorageOptions: {
         contentType: 'image/jpeg',
