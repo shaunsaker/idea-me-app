@@ -185,6 +185,7 @@ export default class NoteTaker extends React.Component {
                     handleChange={this.props.handleChangeText}
                     handleFocus={null}
                     handleBlur={null}
+                    autoFocus={true}
                     multiline />
             </AnimateFadeIn>;
             
