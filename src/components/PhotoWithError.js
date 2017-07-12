@@ -96,7 +96,7 @@ export default class PhotoWithError extends React.Component {
         const deleteButton = this.props.isThumbnail ?
             <View style={styles.deleteButtonContainerSmall}>
                 <DeleteButton
-                    handlePress={null} />
+                    handlePress={this.props.handleDeletePhoto} />
             </View>
             :
             <View style={styles.deleteButtonContainerLarge}>

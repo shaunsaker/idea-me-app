@@ -2,21 +2,18 @@ ONGOING
     Voice notes should be moved to dir that persists, ie. document dir (not sure if it persists currently - TEST)
 
 TODOS     
-    Notes
-        OnIdea
-        AddIdea
-        EditIdea
-    Photos 
-        OnIdea
-        AddIdea
-        EditIdea
-    VoiceNotes
-        OnIdea
-        AddIdea
-        EditIdea
+    If any note additions are cancelled, delete the files
+    Move styles to bottom of files
+    [...effects] deprecated in favor of all([...effects])
+    On NoteTaker expand, focus input
+    IdeaCard hz margin too much
+    Replace windowWidth with const { width } = 
+    Create responsive component for testing (Page component)
     Delete notes is handled differently. Make it the same as photos and voiceNotes
     Photos use profile photo flag instead of idea photo flag
     Cropped photos are blurry
+    Categories page is not tab page
+        Because from addIdea, you can't go back
     PhotoWithError
         Full page uses infoBlock with page border
     Notes modalTitle should refer to note not idea title
@@ -39,8 +36,7 @@ TODOS
         Categories
         Edit Profile
     Categories page 
-        Input header
-        Not tab page
+        NoteTaker
     RN Permissions
     Dont convert objects into arrays, just use Object.keys
     Dates on ideas
@@ -80,6 +76,7 @@ TODOS
     If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
     Profile page has edit button BR corner
+    Rethink sharing ideas
     Display loader when saving/editing/deleting?
         Usually don't have errors here
         Can skip the loader altogether
@@ -142,11 +139,9 @@ IOS
     React native keyboard spacer
     Testing!
 
-POSSIBLE ENHANCEMENTS (OR MOVE TO V2)
-    Full screen view photos Swipe down to close        
-
 V2
     Add Sketches to Ideas
     Convert Voice Notes to Text
     Add Videos to Ideas
     Public ideas and collaboration
+    Full screen view photos Swipe down to close  

@@ -220,7 +220,8 @@ export default function (state = initialState, action) {
             }
 
             new_state.appData.newNotes = null;
-            new_state.appData.newImages = null;
+            new_state.appData.newPhotos = null;
+            new_state.appData.newVoiceNotes = null;
             new_state.cloudData.cloudDataSuccess = true;
             new_state.app.loading = false;
             new_state.app.currentAction = action.currentAction;
@@ -234,12 +235,15 @@ export default function (state = initialState, action) {
         case 'SET_NEW_PHOTOS':
             new_state = utilities.cloneObject(state);
 
-            // Are we adding a single new photo or updating the whole lot (deleting a photo)
+            // Updating all new photos
             if (action.newPhotos) {
-                new_state.appData.newPhotos = action.newPhotos;
+                new_state.appData.newPhotos = action.newPhotos; // this action won't be dispatched if action.newPhotos is null
             }
+
+            // Adding a single photo
             else {
-                new_state.appData.newPhotos.push(action.newPhoto);
+                const newPhotos = new_state.appData.newPhotos ? new_state.appData.newPhotos : {};
+                new_state.appData.newPhotos = utilities.pushObjectToObjectArray(action.newPhoto, newPhotos);
             }
                 
             return new_state;
@@ -247,6 +251,13 @@ export default function (state = initialState, action) {
         case 'SET_NEW_VOICE_NOTES':
             new_state = utilities.cloneObject(state);
             new_state.appData.newVoiceNotes = action.newVoiceNotes;
+            return new_state;
+
+        case 'CLEAR_ALL_NOTES':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.newNotes = null;
+            new_state.appData.newPhotos = null;
+            new_state.appData.newVoiceNotes = null;
             return new_state;
 
 		case 'SET_USER_LOCATION':

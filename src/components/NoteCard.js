@@ -138,12 +138,12 @@ export default NoteCard = (props) => {
                 :
                 null;
 
-    const titleColorStyles = notesValues && notesValues.length < 1 &&
+    const notesCount = notesValues ? notesValues.length : 0;
+
+    const titleColorStyles = notesCount === 0 &&
         {
             color: styleConstants.lightGrey,
         };
-
-    const notesCount = notesValues ? notesValues.length : 0;
 
     return (
         <View

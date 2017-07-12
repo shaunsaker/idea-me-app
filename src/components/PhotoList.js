@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     photosContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+        paddingTop: 4,
         paddingBottom: 16,
     },
     photoContainer: {
@@ -79,7 +80,7 @@ export default class PhotoList extends React.Component {
                 photoStyles={styles.photo}
                 errorText='Photo has been removed from device'
                 handleViewPhoto={() => this.props.handleViewPhotos(index)}
-                handleDeletePhoto={() => this.props.handleDelete(index)} />
+                handleDeletePhoto={() => this.props.handleDelete(item.uid)} />
         );
     }
 

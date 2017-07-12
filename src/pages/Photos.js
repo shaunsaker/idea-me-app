@@ -47,7 +47,6 @@ export class Photos extends React.Component {
 
             newPhotos: PropTypes.object,
             ideas: PropTypes.object,
-
             uid: PropTypes.string,
             hasNetwork: PropTypes.bool,
             cloudDataSuccess: PropTypes.bool,
@@ -55,14 +54,15 @@ export class Photos extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.newPhotos || this.props.idea) {
-            const newPhotos = this.props.newPhotos ? this.props.newPhotos : this.props.idea.photos;
-            const newPhotosArray = utilities.convertObjectArrayToArray(newPhotos);
+        if (this.props.idea) {
+            const newPhotos = this.props.idea.photos;
             
-            this.props.dispatch({
-                type: 'UPDATE_NEW_PHOTOS',
-                newPhotos: newPhotosArray,
-            });
+            if (newPhotos) {
+                this.props.dispatch({
+                    type: 'SET_NEW_PHOTOS',
+                    newPhotos: this.props.idea.photos,
+                });
+            }
         }
     }
 
@@ -77,10 +77,11 @@ export class Photos extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.dispatch({
-            type: 'UPDATE_NEW_PHOTOS',
-            newPhotos: [],
-        });
+        if (!this.props.addIdea) {
+            this.props.dispatch({
+                type: 'CLEAR_ALL_NOTES',
+            });
+        }
     }
 
     togglePhotoViewer(index) {
@@ -102,24 +103,23 @@ export class Photos extends React.Component {
         this.props.dispatch({
             type: 'handleImage',
             option, // Take a Photo / Choose a Photo
-            ideaPhoto: true,
+            ideaPhoto: true, // TODO: this flag will be used for profile photos rather
             maxWidth: Math.ceil((window.width - 122) / 3), // 122 = padding + margin
         });
     }
 
-    toggleDeletePhotoModal(index) {
+    toggleDeletePhotoModal(uid) {
         this.setState({
             showDeletePhotoModal: !this.state.showDeletePhotoModal,
-            deletePhotoIndex: index && index,
+            deletePhotoUID: uid && uid,
         });
     }
 
     deletePhoto() {
-        let newPhotos = this.props.newPhotos;
-        newPhotos.splice(this.state.deletePhotoIndex, 1);
+        let newPhotos = utilities.removeObjectFromObjectArray(this.state.deletePhotoUID, this.props.newPhotos);
 
         this.props.dispatch({
-            type: 'UPDATE_NEW_PHOTOS',
+            type: 'SET_NEW_PHOTOS',
             newPhotos,
         }); 
 
@@ -127,13 +127,12 @@ export class Photos extends React.Component {
     }
 
     savePhotos() {
-        const newPhotos = utilities.convertArrayToObjectArray(this.props.newPhotos);
 
         // Adding an idea
         if (this.props.addIdea) {
             this.props.dispatch({
                 type: 'SET_NEW_PHOTOS',
-                newPhotos,
+                newPhotos: this.props.newPhotos,
             });
 
             Actions.pop();
@@ -142,7 +141,7 @@ export class Photos extends React.Component {
         // Editing an idea
         else {
             let newIdea = this.props.idea;
-            newIdea['photos'] = newPhotos;
+            newIdea['photos'] = this.props.newPhotos;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
 
             this.props.dispatch({
@@ -158,9 +157,11 @@ export class Photos extends React.Component {
     }
 
     render() {
+        const photosArray = utilities.convertObjectArrayToArray(this.props.newPhotos);
+
         const photoViewer = this.state.showPhotoViewer ?
             <PhotoViewer
-                photos={this.props.newPhotos}
+                photos={photosArray}
                 scrollToIndex={this.state.photoViewerIndex}
                 handleClose={this.togglePhotoViewer}
                 handleDeletePhoto={this.toggleDeletePhotoModal} />
@@ -199,7 +200,7 @@ export class Photos extends React.Component {
                 <NoteCard
                     idea={this.props.idea}
                     type='photos'
-                    photos={this.state.photos}
+                    photos={photosArray}
                     handleViewPhotos={this.togglePhotoViewer}
                     handleAdd={this.togglePhotoModal}
                     handleDelete={this.toggleDeletePhotoModal} />

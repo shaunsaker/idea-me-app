@@ -31,7 +31,7 @@ export class AddIdea extends React.Component {
     this.updateNewIdeaDescription = this.updateNewIdeaDescription.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
     this.selectPriority = this.selectPriority.bind(this);
-    this.addNewIdea = this.addNewIdea.bind(this);
+    this.saveNewIdea = this.saveNewIdea.bind(this);
   }
 
   static get propTypes() {
@@ -39,6 +39,10 @@ export class AddIdea extends React.Component {
       ideas: PropTypes.object,
       categories: PropTypes.object,
       priorities: PropTypes.object,
+      newNotes: PropTypes.object,
+      newPhotos: PropTypes.object,
+      newVoiceNotes: PropTypes.object,
+
       uid: PropTypes.string,
       cloudDataSuccess: PropTypes.bool,
       currentAction: PropTypes.string,
@@ -86,13 +90,15 @@ export class AddIdea extends React.Component {
     });
   }
 
-  addNewIdea() {
+  saveNewIdea() {
     const newIdea = {
       title: utilities.firstCharToUppercase(this.state.newIdeaTitle),
       description: this.state.newIdeaDescription && utilities.firstCharToUppercase(this.state.newIdeaDescription),
       category: this.state.newIdeaCategory,
       priority: this.state.newIdeaPriority,
       notes: this.props.newNotes,
+      photos: this.props.newPhotos,
+      voiceNotes: this.props.newVoiceNotes,
       uid: utilities.createUID(),
     };
 
@@ -146,7 +152,7 @@ export class AddIdea extends React.Component {
           text='Add an Idea'
           closeButton
           continueButton={enableContinueButton}
-          handleRightIconPress={this.addNewIdea} />
+          handleRightIconPress={this.saveNewIdea} />
 
         <InputContainer
           style={{ alignItems: 'center' }}>
@@ -194,7 +200,7 @@ export class AddIdea extends React.Component {
                   idea: {
                     title: this.state.newIdeaTitle,
                     description: this.state.newIdeaDescription,
-                  } ,
+                  },
                   addIdea: true,
                 }),
                 count: newNotesCount,
@@ -207,20 +213,22 @@ export class AddIdea extends React.Component {
                   idea: {
                     title: this.state.newIdeaTitle,
                     description: this.state.newIdeaDescription,
-                  } ,
+                  },
                   addIdea: true,
                 }),
                 count: newPhotosCount,
                 disabled: !this.state.newIdeaTitle,
-                idea: {
-                  title: this.state.newIdeaTitle,
-                  description: this.state.newIdeaDescription,
-                } 
               },
               {
                 title: 'Voice Note',
                 icon: 'voice',
-                action: null,
+                action: () => Actions.voiceNotes({
+                  idea: {
+                    title: this.state.newIdeaTitle,
+                    description: this.state.newIdeaDescription,
+                  },
+                  addIdea: true,
+                }),
                 count: newVoiceNotesCount,
                 disabled: !this.state.newIdeaTitle,
               },

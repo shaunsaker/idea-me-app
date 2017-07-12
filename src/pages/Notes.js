@@ -70,6 +70,14 @@ export class Notes extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        if (!this.props.addIdea) { 
+            this.props.dispatch({
+                type: 'CLEAR_ALL_NOTES',
+            });
+        }
+    }
+
     updateNewNote(value) {
         this.setState({
             newNote: value
@@ -130,7 +138,7 @@ export class Notes extends React.Component {
             Actions.pop();
         }
 
-        // Editing Idea
+        // Idea from home page
         else {
             let newIdea = this.props.idea;
             newIdea['notes'] = newNotes;

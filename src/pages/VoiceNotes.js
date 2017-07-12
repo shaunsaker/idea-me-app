@@ -31,7 +31,7 @@ export class VoiceNotes extends React.Component {
         this.state = {
             voiceNotes: [],
             showDeleteModal: false,
-            modalUID: null,
+            deleteVoiceNoteUID: null,
         }
     }
 
@@ -70,6 +70,14 @@ export class VoiceNotes extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        if (!this.props.addIdea) {
+            this.props.dispatch({
+                type: 'CLEAR_ALL_NOTES',
+            });
+        }
+    }
+
     addNewVoiceNote(newVoiceNoteFilePath) {
         let newVoiceNotes = this.state.voiceNotes;
         const newVoiceNote = {
@@ -86,13 +94,13 @@ export class VoiceNotes extends React.Component {
         if (value) {
             this.setState({
                 showDeleteModal: true,
-                modalUID: value,
+                deleteVoiceNoteUID: value,
             });
         }
         else {
             this.setState({
                 showDeleteModal: false,
-                modalUID: null,
+                deleteVoiceNoteUID: null,
             });
         }
     }
@@ -124,6 +132,7 @@ export class VoiceNotes extends React.Component {
         else {
             let newIdea = this.props.idea;
             newIdea['voiceNotes'] = newVoiceNotes;
+            console.log(newIdea)
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
 
             this.props.dispatch({
@@ -140,8 +149,8 @@ export class VoiceNotes extends React.Component {
     render() {
         const deleteModal = this.state.showDeleteModal ?
             <ActionModal
-                title='Are you sure you want to delete this voiceNote?'
-                handleLeftIconPress={() => this.deleteVoiceNote(this.state.modalUID)}
+                title='Are you sure you want to delete this Voice Note?'
+                handleLeftIconPress={() => this.deleteVoiceNote(this.state.deleteVoiceNoteUID)}
                 handleRightIconPress={this.toggleDeleteModal} />
             :
             null;
