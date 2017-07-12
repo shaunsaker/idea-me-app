@@ -75,7 +75,6 @@ export default class BulletList extends React.Component {
                 </View>
                 <View style={styles.noteTextContainer}>
                     <Text
-                        key={'note-' + item.title}
                         style={[styles.noteText, styleConstants.primaryFont]}>
                         {item.title}
                     </Text>
@@ -89,10 +88,10 @@ export default class BulletList extends React.Component {
     }
 
     render() {
-        const notes = this.props.notes && this.props.notes.length > 0 ?
+        const bullets = this.props.values && this.props.values.length > 0 ?
             <FlatList
-                keyExtractor={item => 'note-' + item.uid}
-                data={this.props.notes}
+                keyExtractor={item => 'bullet-' + item.uid}
+                data={this.props.values}
                 renderItem={this.renderBullet}
                 style={styles.notesWrapper}
                 contentContainerStyle={styles.notesContainer}>
@@ -109,7 +108,7 @@ export default class BulletList extends React.Component {
 
         return (
             <View style={styles.container}>
-                {notes}
+                {bullets}
             </View>
         )
     }

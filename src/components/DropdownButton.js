@@ -8,6 +8,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
+import { Actions } from 'react-native-router-flux';
 
 import config from '../config';
 import Icon from '../styles/icons/index';
@@ -198,6 +199,17 @@ export default class DropdownButton extends React.Component {
             </Touchable>
             :
             null;
+
+        const editCategories = this.props.editCategories &&
+            <Touchable
+                style={styles.dropdownHeader}
+                onPress={() => { Actions.categories() }}>
+                <Icon name='edit' style={styles.dropdownHeaderIcon} />
+                <Text
+                    style={[styles.dropdownHeaderText, styleConstants.primaryFont]}>
+                    Edit Categories
+                </Text>
+            </Touchable>;
             
         const itemList =
             <Animated.View
@@ -205,6 +217,7 @@ export default class DropdownButton extends React.Component {
                 <ScrollView style={styles.dropdownItemsContainer}>
                     {header}
                     {this.props.values.map((item) => this.renderItem(item))}
+                    {editCategories}
                 </ScrollView>
             </Animated.View>;
 

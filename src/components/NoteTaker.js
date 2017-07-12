@@ -75,6 +75,7 @@ export default class NoteTaker extends React.Component {
 
     static get propTypes() {
         return {
+            text: PropTypes.string,
             handleAddNote: PropTypes.func,
             inputValue: PropTypes.string,
             handleChangeText: PropTypes.func,
@@ -178,7 +179,7 @@ export default class NoteTaker extends React.Component {
         const input = this.state.isExpanded &&
             <AnimateFadeIn style={styles.inputWrapper}>
                 <BlankInput
-                    placeholderText='Add a Note'
+                    placeholderText={this.props.text}
                     placeholderTextColor={styleConstants.lightGrey}
                     value={this.props.inputValue}
                     valueColor={styleConstants.primary}

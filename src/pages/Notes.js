@@ -183,6 +183,7 @@ export class Notes extends React.Component {
                     idea={this.props.idea}
                     type='notes'
                     notes={this.state.notes}
+                    displayInfo
                     handleDelete={this.toggleDeleteModal}
                     handleAdd={this.addNote}
                     disabled={!enableAddNoteButton}

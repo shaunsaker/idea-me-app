@@ -171,6 +171,7 @@ export class VoiceNotes extends React.Component {
                     idea={this.props.idea}
                     type='voiceNotes'
                     voiceNotes={this.state.voiceNotes} 
+                    displayInfo
                     handleRecord={this.addNewVoiceNote}
                     handlePlay={this.togglePlayback}
                     handleDelete={this.toggleDeleteModal} />

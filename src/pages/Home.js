@@ -43,12 +43,6 @@ export class Home extends React.Component {
         active: true,
       },
       {
-        title: 'Categories',
-        icon: 'folder',
-        action: () => Actions.categories(),
-        active: false,
-      },
-      {
         title: 'Profile',
         icon: 'person',
         action: () => Actions.profile(),
@@ -250,6 +244,7 @@ export class Home extends React.Component {
         <DropdownButton
           buttonBackgroundColor={styleConstants.primary}
           categoriesButton
+          editCategories
           values={categories}
           currentCategory={this.props.currentCategory}
           handleSelect={this.selectCategory}

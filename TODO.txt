@@ -1,9 +1,17 @@
 TODOS     
-    Categories page is not tab page
-        Because from addIdea, you can't go back
+    Categories page 
+        On Edit Categories, close dropdown menu
+        Add and Update category in categories page
+        Test add, update, delete
+        Delete AddCategory page
+    Dropdown button menu heights are incorrect
     PhotoWithError
         Full page uses infoBlock with page border
-    On back from notes/photos/voiceNotes
+    On back from notes/photos/voiceNotes/categories/editLocation
+        If no changes display backButton
+        If changes
+            Display close button
+            Display continue button
         Display modal saying are you sure (if has notes)
         On close/exit, reset newPhotos, newNotes, newVoiceNotes
         If any note additions are cancelled, delete the files using react-native-fs
@@ -18,13 +26,8 @@ TODOS
     Remove animation from logo
     Don't scroll to beginning on delete idea
     Animations useNativeDriver where possible (non-layout properties)
-
-    All continue buttons should only show if appropriate
     Cards across app
-        Categories
         Edit Profile
-    Categories page 
-        NoteTaker
     RN Permissions
     Dont convert objects into arrays, just use Object.keys
     Dates on ideas
@@ -55,12 +58,9 @@ TODOS
     Delete Idea modal does not remove bg
     Fix home list shouldComponentUpdate
     Whereever you have elevation, add a border
-    Don't use firebase storage (use device)
     On all header closeX (where appropriate), modal: are you sure you want to go back? You will lose this information.
     Input height is not readjusting correctly
     Modal delete messages should be more descriptive, ie. are you... delete idea: Title?
-    Categories page should display backButton if routed from add/editIdea
-        Otherwise you can't go back and lose your idea
     If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
     Profile page has edit button BR corner
@@ -74,13 +74,7 @@ TODOS
         Only if you can offload to useNativeDriver / you are only animating one value
     Browser uses Menu component and not ActionSheet
     Facebook/Google Sign In
-    Apply material styles
-        See material.io
-        Redesign lists
-        Labels same fontSize as info block description
-    zIndex
-        Animate menu height
-        All categories button sometimes does not work after save
+    Animate menu height
     Utils   
         Use Object.assign({}, newObject) instead of creating new objects with vars
     Page removes padding on small devices
@@ -88,15 +82,13 @@ TODOS
             Add listener to dimensions on orientation change and adjust page component accordingly
     Update suburbs or use a geo-service
     Sound when idea added
-    Force update screen
-        Open url (research)
+    Handle app updates
+        Force?
     Empty state
         Prepopulate idea on signup
         Tooltips
         Email after signup detailing what app does and howtos
         Rethink highlighted profile tab
-    Add analytics
-        Create console
     Announcement page for when I need to make some sort of announcement
         FIRST THINK OF TYPES OF ANNOUNCEMENTS
         Based on api prop
@@ -104,6 +96,10 @@ TODOS
         After one week
             Enjoying the app? Help us spread the word by sharing (fb or tweet)
                 Auto populate
+    Apply material styles
+        See material.io
+        Redesign lists
+        Labels same fontSize as info block description  
 
 WRAP UP
     Create responsive component for testing (Page component)           
@@ -127,8 +123,9 @@ WRAP UP
         Integrate react-native-google-signin on iOS
         Icons
         React native keyboard spacer
-        Testing!
-
+    Add analytics
+        Create console
+        
 V2
     Add Sketches to Ideas
     Convert Voice Notes to Text

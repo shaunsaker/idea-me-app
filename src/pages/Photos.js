@@ -201,6 +201,7 @@ export class Photos extends React.Component {
                     idea={this.props.idea}
                     type='photos'
                     photos={photosArray}
+                    displayInfo
                     handleViewPhotos={this.togglePhotoViewer}
                     handleAdd={this.togglePhotoModal}
                     handleDelete={this.toggleDeletePhotoModal} />

@@ -11,9 +11,8 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';
-import ItemList from '../components/ItemList';
+import NoteCard from '../components/NoteCard';
 import ActionModal from '../components/ActionModal';
-import TabBar from '../components/TabBar';
 import SnackBar from '../components/SnackBar';
 import Loader from '../components/Loader';
 
@@ -23,28 +22,6 @@ export class Categories extends React.Component {
 
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
-
-    // TabBar
-    this.tabs = [
-      {
-        title: 'Home',
-        icon: 'home',
-        action: () => Actions.home(),
-        active: false,
-      },
-      {
-        title: 'Categories',
-        icon: 'folder',
-        action: () => Actions.categories(),
-        active: true,
-      },
-      {
-        title: 'Profile',
-        icon: 'person',
-        action: () => Actions.profile(),
-        active: false,
-      },
-    ];
 
     this.state = {
       showModal: false,
@@ -150,17 +127,18 @@ export class Categories extends React.Component {
 
         <Header
           text='Categories'
-          addButton
-          handleRightIconPress={() => Actions.addCategory()}
+          backButton={false /* TODO: only if not different */}
+          closeButton={true /* TODO: only if different */}
+          continueButton={true /* TODO: only if different */}
           headerShadow />
 
-        <ItemList
-          items={categoriesArray}
-          deleteIcon
-          handleIconPress={this.toggleDeleteModal} />
-
-        <TabBar
-          tabs={this.tabs} />
+        <NoteCard
+            type='categories'
+            categories={categoriesArray}
+            handleDelete={this.toggleDeleteModal}
+            handleAdd={this.addCategory /* TODO */}
+            inputValue={this.state.newCategory}
+            handleChangeText={this.updateNewCategory} />
 
         {modal}
 

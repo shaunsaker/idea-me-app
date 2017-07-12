@@ -71,11 +71,11 @@ export default NoteCard = (props) => {
     /*
         PROPTYPES
             idea
-            notes/photos/voiceNotes
+            notes/photos/voiceNotes/categories
             handleAdd
             handleDelete
 
-            NOTES
+            NOTES/CATEGORIES
                 inputValue
                 handleChangeText
 
@@ -90,6 +90,7 @@ export default NoteCard = (props) => {
     let title;
     let iconName;
     let notes;
+    let button;
 
     if (props.type === 'notes') {
         notesValues = props.notes;
@@ -97,8 +98,29 @@ export default NoteCard = (props) => {
         iconName = 'note';
         notes =
             <BulletList
-                notes={notesValues}
+                values={notesValues}
                 handleDelete={() => props.handleDelete(props.idea)} />;
+        button =
+            <NoteTaker
+                text='Add a Note'
+                handleAdd={props.handleAdd}
+                inputValue={props.inputValue}
+                handleChangeText={props.handleChangeText} />
+    }
+    else if (props.type === 'categories') {
+        notesValues = props.categories;
+        title = 'CATEGORIES';
+        iconName = 'folder';
+        notes =
+            <BulletList
+                values={notesValues}
+                handleDelete={props.handleDelete} />;
+        button =
+            <NoteTaker
+                text='Add a Category'
+                handleAdd={props.handleAdd}
+                inputValue={props.inputValue}
+                handleChangeText={props.handleChangeText} />
     }
     else if (props.type === 'photos') {
         notesValues = props.photos;
@@ -109,6 +131,12 @@ export default NoteCard = (props) => {
                 photos={notesValues}
                 handleViewPhotos={props.handleViewPhotos}
                 handleDelete={props.handleDelete} />
+        button =
+            <IconButton
+                handlePress={props.handleAdd}
+                iconName={iconName}
+                iconColor={styleConstants.secondary}
+                disabled={props.disabled} />
     }
     else if (props.type === 'voiceNotes') {
         notesValues = props.voiceNotes;
@@ -117,26 +145,10 @@ export default NoteCard = (props) => {
             <VoiceNoteList
                 voiceNotes={notesValues}
                 handleDelete={props.handleDelete} />;
+        button =
+            <VoiceNoteRecorder
+                handleRecord={props.handleRecord} />
     }
-
-    const button = props.type === 'notes' ?
-        <NoteTaker
-            handleAdd={props.handleAdd}
-            inputValue={props.inputValue}
-            handleChangeText={props.handleChangeText} />
-        :
-        props.type === 'photos' ?
-            <IconButton
-                handlePress={props.handleAdd}
-                iconName={iconName}
-                iconColor={styleConstants.secondary}
-                disabled={props.disabled} />
-            :
-            props.type === 'voiceNotes' ?
-                <VoiceNoteRecorder
-                    handleRecord={props.handleRecord} />
-                :
-                null;
 
     const notesCount = notesValues ? notesValues.length : 0;
 
@@ -145,19 +157,23 @@ export default NoteCard = (props) => {
             color: styleConstants.lightGrey,
         };
 
+    const infoBlock = props.displayInfo &&
+        <View style={styles.infoContainer}>
+            <InfoBlock
+                title={props.idea.title}
+                subtitle={props.idea.description}
+                titleColor={styleConstants.primary}
+                subtitleColor={styleConstants.grey}
+                fullWidth />
+        </View>;
+
     return (
         <View
             style={styles.cardContainer} >
 
             <View style={styles.contentContainer}>
-                <View style={styles.infoContainer}>
-                    <InfoBlock
-                        title={props.idea.title}
-                        subtitle={props.idea.description}
-                        titleColor={styleConstants.primary}
-                        subtitleColor={styleConstants.grey}
-                        fullWidth />
-                </View>
+
+                {infoBlock}
 
                 <View style={styles.notesContainer}>
                     <View style={styles.titleContainer}>
