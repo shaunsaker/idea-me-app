@@ -14,8 +14,8 @@ import styleConstants from '../styles/styleConstants';
 
 import PhotoWithError from './PhotoWithError';
 
-const window = Dimensions.get('window');
-const imageWidth = (window.width - 122) / 3; // 122 = padding and margin
+const { width, height } = Dimensions.get('window');
+const imageWidth = (width - 122) / 3; // 122 = padding and margin
 
 const styles = StyleSheet.create({
     container: {

@@ -14,7 +14,7 @@ import styleConstants from '../styles/styleConstants';
 import InfoBlock from './InfoBlock';
 import Touchable from './Touchable';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.transBlack,
     },
     modal: {
-        width: window.width - 32,
+        width: width - 32,
         backgroundColor: styleConstants.white,
         position: 'relative',
     },

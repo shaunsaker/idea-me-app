@@ -20,7 +20,7 @@ import AnimateRotate from '../animators/AnimateRotate';
 import AnimateFadeIn from '../animators/AnimateFadeIn';
 import Counter from './Counter';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -56,7 +56,7 @@ export default class VoiceNoteRecorder extends React.Component {
         this.toggleRecording = this.toggleRecording.bind(this);
 
         this.initialButtonWidth = 52;
-        this.finalButtonWidth = window.width - 64; // 64 = margin + padding
+        this.finalButtonWidth = width - 64; // 64 = margin + padding
         this.recorder;
 
         this.state = {

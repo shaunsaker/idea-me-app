@@ -17,7 +17,7 @@ import Touchable from './Touchable';
 import Button from './Button';
 import CategoriesButton from './CategoriesButton';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     dropdownContainer: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         top: 76,
         left: 0,
         right: 0,
-        width: window.width - 32,
+        width: width - 32,
         elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         paddingVertical: 8,
-        width: window.width - 32,        
+        width: width - 32,        
     },
     dropdownItemText: {
         color: styleConstants.primary,

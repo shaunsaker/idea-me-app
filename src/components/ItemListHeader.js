@@ -12,11 +12,11 @@ import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 
-const windowWidth = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     header: {
-        width: windowWidth,
+        width,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

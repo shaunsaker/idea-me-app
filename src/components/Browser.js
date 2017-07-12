@@ -23,14 +23,14 @@ import SnackBar from './SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: styleConstants.white,
 		position: 'absolute',
-		width: window.width,
-		height: window.height,
+		width: width,
+		height: height,
 		elevation: 5,
 		shadowColor: "#000000",
 		shadowOpacity: 0.6,
@@ -65,7 +65,7 @@ export default class Dropdown extends React.Component {
 			showActionSheet: false,
 		}
 
-		this.position = new Animated.Value(window.height);
+		this.position = new Animated.Value(height);
 	}
 
 	static get propTypes() {

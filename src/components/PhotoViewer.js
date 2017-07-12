@@ -17,7 +17,7 @@ import styleConstants from '../styles/styleConstants';
 import PhotoWithError from './PhotoWithError';
 import Touchable from './Touchable';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
 
     },
     photo: {
-        width: window.width,
-        height: window.height,
+        width,
+        height,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -82,8 +82,8 @@ export default class PhotoViewer extends React.Component {
     
     getItemLayout = (data, index) => (
         {
-            length: window.width,
-            offset: window.width * index,
+            length: width,
+            offset: width * index,
             index,
         }
     )

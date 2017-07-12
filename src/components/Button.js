@@ -11,11 +11,11 @@ import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     button: {
-        width: window.width - 32,
+        width: width - 32,
         height: 56,
         flexDirection: 'row',
         paddingHorizontal: 16,

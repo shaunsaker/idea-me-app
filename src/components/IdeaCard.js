@@ -17,12 +17,12 @@ import Menu from './Menu';
 import IconButton from './IconButton';
 import Label from './Label';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     cardContainer: {
         position: 'relative',
-        width: window.width - 32,
+        width: width - 32,
         flex: 1,
         backgroundColor: styleConstants.realWhite,
         borderWidth: 1,

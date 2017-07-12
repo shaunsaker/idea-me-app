@@ -17,7 +17,7 @@ import styleConstants from '../styles/styleConstants';
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';
 
-const windowWidth = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 const iosStyles = Platform.OS === 'ios' &&
 	{
@@ -27,7 +27,7 @@ const iosStyles = Platform.OS === 'ios' &&
 
 const styles = StyleSheet.create({
 	container: {
-		width: windowWidth,
+		width,
 		height: 56,
 		flexDirection: 'row',
 		justifyContent: 'space-between',

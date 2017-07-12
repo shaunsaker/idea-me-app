@@ -12,12 +12,12 @@ import Icon from '../../styles/icons/index';
 import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
 
-const windowWidth = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     messageWrapper: {
         position: 'absolute',
-        width: windowWidth, 
+        width, 
         backgroundColor: styleConstants.grey,
         borderTopWidth: 1,
         borderTopColor: styleConstants.lightGrey,

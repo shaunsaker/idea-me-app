@@ -5,7 +5,6 @@ import {
     Image,
     Text,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import Icon from '../styles/icons/index';
@@ -14,8 +13,6 @@ import styleConstants from '../styles/styleConstants';
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';
 import Button from './Button';
-
-const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     photoErrorIcon: {

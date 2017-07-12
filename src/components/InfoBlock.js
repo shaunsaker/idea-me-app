@@ -9,7 +9,7 @@ import {
 
 import styleConstants from '../styles/styleConstants';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     infoContainer: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     descriptionWrapper: {
-        maxHeight: window.height / 4.5,
+        maxHeight: height / 4.5,
     },
     descriptionContainer: {
 

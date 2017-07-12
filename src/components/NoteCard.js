@@ -18,14 +18,14 @@ import NoteTaker from './NoteTaker';
 import IconButton from './IconButton';
 import VoiceNoteRecorder from './VoiceNoteRecorder';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     cardContainer: {
         flex: 1,
         justifyContent: 'space-between',
         position: 'relative',
-        width: window.width - 32,
+        width: width - 32,
         backgroundColor: styleConstants.realWhite,
         borderWidth: 1,
         borderColor: styleConstants.white,

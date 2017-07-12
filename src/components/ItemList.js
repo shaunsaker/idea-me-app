@@ -15,7 +15,7 @@ import Touchable from './Touchable';
 import ItemListHeader from './ItemListHeader'
 import DeleteButton from './DeleteButton';
 
-const windowWidth = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     listWrapper: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
     },
     listItem: {
-        width: windowWidth,
+        width,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

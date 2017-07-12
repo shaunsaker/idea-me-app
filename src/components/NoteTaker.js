@@ -18,7 +18,7 @@ import AnimateFadeIn from '../animators/AnimateFadeIn';
 import AnimateRotate from '../animators/AnimateRotate';
 import BlankInput from './BlankInput';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -62,7 +62,7 @@ export default class NoteTaker extends React.Component {
         this.compressButton = this.compressButton.bind(this);
 
         this.initialButtonWidth = 52;
-        this.finalButtonWidth = window.width - 64; // 64 = margin + padding
+        this.finalButtonWidth = width - 64; // 64 = margin + padding
 
         this.state = {
             animatedValue: new Animated.Value(0),

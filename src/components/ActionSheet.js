@@ -14,7 +14,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
 	actionSheetContainer: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 			height: 1,
 			width: 0
 		},
-		width: window.width - 32
+		width: width - 32
 	},
 	button: {
 		flexDirection: 'row',
@@ -60,7 +60,7 @@ export default class ActionSheet extends React.Component {
 		
 		this.animatePosition = this.animatePosition.bind(this);
 		
-		this.position = new Animated.Value(window.height / -2);
+		this.position = new Animated.Value(height / -2);
 	}
 
     static get propTypes() {

@@ -18,11 +18,11 @@ import styleConstants from '../styles/styleConstants';
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';
 
-const windowWidth = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     inputWrapper: {
-        width: windowWidth - 32,
+        width: width - 32,
         marginVertical: 16,
         alignSelf: 'center',
     },
@@ -196,7 +196,7 @@ export default class Input extends React.Component {
         if (!prevProps.value && this.props.value && this.props.multiline) {
 
             // Use utils to get input height based on inputWidth, inputLineHeight and charCount
-            const inputHeight = utilities.getInputHeight((windowWidth - 32), 21, this.props.value.length)
+            const inputHeight = utilities.getInputHeight((width - 32), 21, this.props.value.length)
             
             if (inputHeight > this.minimumInputHeight) {
                 this.setState({

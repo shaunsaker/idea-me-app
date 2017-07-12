@@ -8,6 +8,8 @@ import {
 import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
 	container: {
 		width: 100,
@@ -20,7 +22,6 @@ export default class LoaderComponent extends React.Component {
 	constructor() {
 		super();
 
-		this.windowWidth = Dimensions.get('window').width;
 		this.opacity = new Animated.Value(0);
 		this.position = new Animated.Value(-100);	
 
@@ -50,7 +51,7 @@ export default class LoaderComponent extends React.Component {
 		Animated.timing(
 			this.position,
 			{
-				toValue: this.windowWidth,
+				toValue: width,
 				duration: 2000,
 				easing: config.animation.easing
 			}

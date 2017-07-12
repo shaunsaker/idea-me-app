@@ -20,7 +20,7 @@ import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
 
-const window = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export class Photos extends React.Component {
     constructor(props) {
@@ -104,7 +104,7 @@ export class Photos extends React.Component {
             type: 'handleImage',
             option, // Take a Photo / Choose a Photo
             ideaPhoto: true, // TODO: this flag will be used for profile photos rather
-            maxWidth: Math.ceil((window.width - 122) / 3), // 122 = padding + margin
+            maxWidth: Math.ceil((width - 122) / 3), // 122 = padding + margin
         });
     }
 
