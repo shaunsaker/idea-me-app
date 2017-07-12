@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {
     View,
-    ScrollView,
+    FlatList,
     Text,
     Animated,
     StyleSheet,
@@ -95,6 +95,7 @@ export default class DropdownButton extends React.Component {
 
         this.handleSelect = this.handleSelect.bind(this);
         this.toggleExpanded = this.toggleExpanded.bind(this);
+        this.scrollToBeginning = this.scrollToBeginning.bind(this);
         this.renderItem = this.renderItem.bind(this);
 
         this.maxHeight = 216;
@@ -120,6 +121,7 @@ export default class DropdownButton extends React.Component {
     }
 
     handleSelect(value) {
+        this.scrollToBeginning();
         this.toggleExpanded();
         this.props.handleSelect(value);
     }
@@ -162,7 +164,11 @@ export default class DropdownButton extends React.Component {
         }
     }
 
-    renderItem(item) {
+    scrollToBeginning() {
+        this.refs.itemList.scrollToOffset({ x: 0, y: 0, animated: false });
+    }
+
+    renderItem = ({ item }) => {
         return (
             <Touchable
                 style={styles.dropdownItem}
@@ -220,12 +226,14 @@ export default class DropdownButton extends React.Component {
         const itemList =
             <Animated.View
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
-                <ScrollView 
-                    style={styles.dropdownItemsContainer}>
-                    {header}
-                    {this.props.values.map((item) => this.renderItem(item))}
-                    {editCategories}
-                </ScrollView>
+                <FlatList 
+                    keyExtractor={item => 'category-' + item.uid }
+                    ref='itemList'
+                    data={this.props.values}
+                    renderItem={this.renderItem}
+                    ListHeaderComponent={ () => header}
+                    ListFooterComponent={() => editCategories}
+                    style={styles.dropdownItemsContainer} />
             </Animated.View>;
 
         const button = this.props.categoriesButton ?

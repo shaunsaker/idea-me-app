@@ -1,6 +1,5 @@
 TODOS     
     Categories page 
-        Categories should be FlatList
         Add and Update category in categories page
         Test add, update, delete
         Delete AddCategory page
