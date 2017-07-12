@@ -80,6 +80,12 @@ export default class RadioSelect extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.currentValue && this.props.currentValue !== prevProps.currentValue && this.props.currentValue !== this.state.active) {
+            this.setActive(this.props.currentValue);
+        }
+    }
+
     select(value) {
         this.setActive(value);
         this.props.handleSelect(value);
