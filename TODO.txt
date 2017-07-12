@@ -2,9 +2,6 @@ ONGOING
     Voice notes should be moved to dir that persists, ie. document dir (not sure if it persists currently - TEST)
 
 TODOS     
-    If any note additions are cancelled, delete the files
-    Move styles to bottom of files
-    [...effects] deprecated in favor of all([...effects])
     On NoteTaker expand, focus input
     IdeaCard hz margin too much
     Replace windowWidth with const { width } = 
@@ -16,21 +13,22 @@ TODOS
         Because from addIdea, you can't go back
     PhotoWithError
         Full page uses infoBlock with page border
+    On back from notes/photos/voiceNotes
+        Display modal saying are you sure (if has notes)
+        On close/exit, reset newPhotos, newNotes, newVoiceNotes
+        If any note additions are cancelled, delete the files using react-native-fs
     Notes modalTitle should refer to note not idea title
     Idea category and priority should ref relevant uids
     No need to keep uid as key value pair
     Why do I need to login button and screen from Welcome page  
     From open to add notes should be as quick as possible
-    Images on delete not working
-    Edit Idea Notes
     App does not load in offline mode
     Animate new notes in
         Layoutanimation // AnimateFadeIn // NEW AnimateHeight
     Remove animation from logo
     Don't scroll to beginning on delete idea
     Animations useNativeDriver where possible (non-layout properties)
-    On close/exit, reset newPhotos, newNotes, newVoiceNotes
-    Look into setNotes on editIdea. Shouldn't this save?
+
     All continue buttons should only show if appropriate
     Cards across app
         Categories

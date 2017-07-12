@@ -1,5 +1,4 @@
-import { takeLatest } from 'redux-saga/effects';
-import { fork } from 'redux-saga/effects';
+import { takeLatest, fork, all } from 'redux-saga/effects';
 
 // Auth
 import { getUserAuth } from './auth';
@@ -25,7 +24,7 @@ import { handleImage } from './images';
 import { uploadUserPhoto } from './cloudStorage';
 
 export function* sagas() {
-    yield [
+    yield all([
 
         // Auth
         fork(takeLatest, 'getUserAuth', getUserAuth),
@@ -49,5 +48,5 @@ export function* sagas() {
 
         // Cloud Storage
 		fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),
-    ];
+    ]);
 }

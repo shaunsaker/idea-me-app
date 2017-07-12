@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, all } from 'redux-saga/effects';
 
 import utilities from '../utilities';
 import CloudData from '../cloudData/index';
@@ -63,7 +63,7 @@ export function* saveUserData(action) {
                         actionsArray.push(put(action.nextAction[i]));
                     }
 
-                    yield actionsArray;
+                    yield all(actionsArray);
                 }
                 else {
                     yield put(action.nextAction);
