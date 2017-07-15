@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: styleConstants.white,
         margin: 16,
-        paddingVertical: 16,
+        paddingTop: 16,
+        paddingBottom: 12,
         paddingHorizontal: 8,
         elevation: 5,
         shadowColor: "#000000",
@@ -52,13 +53,12 @@ const styles = StyleSheet.create({
         color: styleConstants.primary,
     },
     infoContainer: {
-
+        flex: 1,
     },
     labelsContainer: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        marginBottom: 8,
+        marginBottom: 12,
     },
     buttonsContainer: {
         flexDirection: 'row',
