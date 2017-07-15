@@ -59,9 +59,11 @@ export class Notes extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.dispatch({
-            type: 'CLEAR_ALL_NOTES',
-        });
+        if (!this.props.addIdea) {
+            this.props.dispatch({
+                type: 'CLEAR_ALL_NOTES',
+            });
+        }
     }
 
     updateNewNote(value) {
@@ -76,21 +78,15 @@ export class Notes extends React.Component {
             uid: utilities.createUID(),
         };
 
-        // If add/edit idea => update newNotes in store
-        if (this.props.addIdea) {
-            const newNotes = utilities.pushObjectToObjectArray(newNote, this.props.newNotes);
+        const newNotes = utilities.pushObjectToObjectArray(newNote, this.props.newNotes);
 
-            this.props.dispatch({
-                type: 'SET_NEW_NOTES',
-                newNotes,
-            });
-        }
+        this.props.dispatch({
+            type: 'SET_NEW_NOTES',
+            newNotes,
+        });
 
-        // Else (onIdea) => update ideas notes and save ideas to db
-        else {
+        if (!this.props.addIdea) {
             let newIdea = this.props.idea;
-            let newNotes = newIdea['notes'];
-            newNotes = utilities.pushObjectToObjectArray(newNote, newNotes);
             newIdea['notes'] = newNotes;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
 
@@ -139,22 +135,15 @@ export class Notes extends React.Component {
     }
 
     deleteNote() {
+        const newNotes = utilities.removeObjectFromObjectArray(this.state.deleteNoteUID, this.props.newNotes);
 
-        // If addIdea prop => remove from this.props.newNotes
-        if (this.props.addIdea) {
-            const newNotes = utilities.removeObjectFromObjectArray(this.state.deleteNoteUID, this.props.newNotes);
+        this.props.dispatch({
+            type: 'SET_NEW_NOTES',
+            newNotes,
+        });
 
-            this.props.dispatch({
-                type: 'SET_NEW_NOTES',
-                newNotes,
-            });
-        }
-
-        // Else (onIdea) => delete from idea and call deleteUserData
-        else {
+        if (!this.props.addIdea) {
             let newIdea = this.props.idea;
-            let newNotes = newIdea['notes'];
-            newNotes = utilities.removeObjectFromObjectArray(this.state.deleteNoteUID, newNotes);
             newIdea['notes'] = newNotes;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
 

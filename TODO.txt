@@ -1,6 +1,6 @@
 TODOS
     Notes are added and deleted immediately
-        OnIdea      newNotes as state
+        OnIdea     DONE
         AddIdea
         EditIdea
     Photos are added and deleted immediately
