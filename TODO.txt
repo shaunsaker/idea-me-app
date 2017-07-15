@@ -1,5 +1,4 @@
 TODOS
-    Handle profile Photo
     Voice Notes are added and deleted immediately
         On delete voiceNote remove from device
     Categories are added and deleted immediately
@@ -56,7 +55,9 @@ TODOS
                 Auto populate
         After one free month
             Trial about to expire, unless you give us feedback
-    Facebook/Google Sign In        
+    Facebook/Google Sign In    
+    About App
+    App Settings?    
     Change store before dispatching cloudData actions
         No loading display
         Categories immediately

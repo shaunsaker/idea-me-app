@@ -246,6 +246,11 @@ export default function (state = initialState, action) {
             new_state.images.temporaryImage = action.image;
             return new_state;
 
+        case 'CLEAR_TEMPORARY_IMAGE':
+            new_state = utilities.cloneObject(state);
+            new_state.images.temporaryImage = null;
+            return new_state;
+
         case 'SET_NEW_PHOTOS':
             new_state = utilities.cloneObject(state);
             new_state.appData.newPhotos = action.newPhotos;

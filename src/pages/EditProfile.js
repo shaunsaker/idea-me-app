@@ -34,6 +34,7 @@ export class Profile extends React.Component {
         this.updateEditUserName = this.updateEditUserName.bind(this);
         this.updateEditUserEmail = this.updateEditUserEmail.bind(this);
         this.updateUserDetails = this.updateUserDetails.bind(this);
+        this.cancelEditProfile = this.cancelEditProfile.bind(this);
     }
 
     static get propTypes() {
@@ -43,6 +44,7 @@ export class Profile extends React.Component {
             userEmail: PropTypes.string,
             userLocation: PropTypes.string,
             userPhotoUrl: PropTypes.object,
+            temporaryImage: PropTypes.object,
             cloudDataSuccess: PropTypes.bool,
         };
     }
@@ -52,7 +54,7 @@ export class Profile extends React.Component {
         this.updateEditUserEmail(this.props.userEmail);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         if (this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_CLOUD_DATA_SUCCESS'
@@ -95,6 +97,7 @@ export class Profile extends React.Component {
         });
 
         const prettyUserName = utilities.prettifyString(this.state.editUserName);
+        const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage : this.props.userPhotoUrl;
 
         this.props.dispatch({
             type: 'saveUserData',
@@ -104,12 +107,36 @@ export class Profile extends React.Component {
                 userName: prettyUserName,
                 userEmail: this.state.editUserEmail,
                 userLocation: this.props.userLocation,
-                userPhotoUrl: this.props.userPhotoUrl,
+                userPhotoUrl,
             }
         });
     }
 
+    cancelEditProfile() {
+        if (this.props.temporaryImage) {
+            let newPhotoFullSizeURI = this.props.temporaryImage.fullSize;
+            let newPhotoCroppedURI = this.props.temporaryImage.cropped;
+            const newPhotosURIArray = [newPhotoFullSizeURI, newPhotoCroppedURI]
+            const newPhotosPathsArray = utilities.convertURIsToPaths(newPhotosURIArray);
+
+            this.props.dispatch({
+                type: 'CLEAR_TEMPORARY_IMAGE'
+            });
+
+            for (let i = 0; i < newPhotosPathsArray.length; i++) {
+                this.props.dispatch({
+                    type: 'deleteFile',
+                    path: newPhotosPathsArray[i],
+                });
+            }
+        }
+
+        Actions.pop();
+    }
+
     render() {
+        const enableContinueButton = this.state.editUserEmail && this.state.editUserName ? true : false;
+
         const photoModal = this.state.showPhotoModal ?
             <OptionsModal
                 title='Choose an Option'
@@ -119,14 +146,15 @@ export class Profile extends React.Component {
             :
             null;
 
-        const enableContinueButton = this.state.editUserEmail && this.state.editUserName ? true : false;
-
+        const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage.cropped : this.props.userPhotoUrl.cropped;
+        
         return (
             <Page>
 
                 <Header
                     text='Edit Profile'
-                    backButton
+                    closeButton
+                    handleLeftIconPress={this.cancelEditProfile}
                     continueButton={enableContinueButton}
                     handleRightIconPress={this.updateUserDetails}
                     headerShadow />
@@ -134,7 +162,7 @@ export class Profile extends React.Component {
                 <InputContainer>
 
                     <EditableImage
-                        uri={this.props.userPhotoUrl.cropped}
+                        uri={userPhotoUrl}
                         handlePress={this.togglePhotoModal} />
 
                     <Input
@@ -175,6 +203,7 @@ function mapStateToProps(state) {
         userEmail: state.main.userData.profile.userEmail,
         userLocation: state.main.userData.profile.userLocation,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+        temporaryImage: state.main.images.temporaryImage,
         cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
     });
 }
