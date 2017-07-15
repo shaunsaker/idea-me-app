@@ -60,6 +60,12 @@ export class AddIdea extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: 'CLEAR_ALL_NOTES',
+    });
+  }
+
   updateNewIdeaTitle(value) {
     this.setState({
       newIdeaTitle: value

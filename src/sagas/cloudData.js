@@ -77,6 +77,10 @@ export function* saveUserData(action) {
             else {
 
                 // On success, do nothing (store was updated before)
+                // TEMP
+                yield put({
+                    type: 'CLOUD_DATA_SUCCESS',
+                });
             }
         }
 

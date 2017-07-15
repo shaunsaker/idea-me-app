@@ -92,6 +92,12 @@ export class EditIdea extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        this.props.dispatch({
+            type: 'CLEAR_ALL_NOTES',
+        });
+    }
+
     updateEditIdeaTitle(value) {
         this.setState({
             editIdeaTitle: value

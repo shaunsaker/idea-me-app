@@ -1,8 +1,4 @@
 TODOS
-    Notes are added and deleted immediately
-        OnIdea     DONE
-        AddIdea
-        EditIdea
     Photos are added and deleted immediately
         On delete photo remove thumbnail and full size from device
     Voice Notes are added and deleted immediately

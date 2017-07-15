@@ -86,7 +86,7 @@ export class Notes extends React.Component {
         });
 
         if (!this.props.addIdea) {
-            let newIdea = this.props.idea;
+            let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
 
@@ -94,7 +94,7 @@ export class Notes extends React.Component {
                 type: 'SET_NEW_NOTES',
                 newNotes,
             });
-
+            
             // Dispatch to store
             this.props.dispatch({
                 type: 'UPDATE_USER_DATA',
@@ -143,7 +143,7 @@ export class Notes extends React.Component {
         });
 
         if (!this.props.addIdea) {
-            let newIdea = this.props.idea;
+            let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
 
