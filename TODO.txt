@@ -1,6 +1,4 @@
 TODOS
-    Voice Notes are added and deleted immediately
-        On delete voiceNote remove from device
     Categories are added and deleted immediately
     Ideas are added, edited and deleted immediately
 

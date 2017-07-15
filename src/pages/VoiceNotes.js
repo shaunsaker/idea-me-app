@@ -16,7 +16,6 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
 import ActionModal from '../components/ActionModal';
-import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
 
 export class VoiceNotes extends React.Component {
@@ -26,10 +25,8 @@ export class VoiceNotes extends React.Component {
         this.addNewVoiceNote = this.addNewVoiceNote.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
         this.deleteVoiceNote = this.deleteVoiceNote.bind(this);
-        this.saveVoiceNotes = this.saveVoiceNotes.bind(this);
 
         this.state = {
-            voiceNotes: [],
             showDeleteModal: false,
             deleteVoiceNoteUID: null,
         }
@@ -38,35 +35,25 @@ export class VoiceNotes extends React.Component {
     static get propTypes() {
         return {
             idea: PropTypes.object,
+            addIdea: PropTypes.bool,
 
             newVoiceNotes: PropTypes.object,
             ideas: PropTypes.object,
             uid: PropTypes.string,
-            addIdea: PropTypes.bool,
-            currentAction: PropTypes.string,
-            cloudDataSuccess: PropTypes.bool,
             hasNetwork: PropTypes.bool,
         };
     }
 
     componentDidMount() {
-        if (this.props.newVoiceNotes || this.props.idea) {
-            const newVoiceNotes = this.props.newVoiceNotes ? this.props.newVoiceNotes : this.props.idea.voiceNotes;
-            const newVoiceNotesArray = utilities.convertObjectArrayToArray(newVoiceNotes);
-            
-            this.setState({
-                voiceNotes: newVoiceNotesArray,
-            });
-        }
-    }
 
-    componentDidUpdate() {
-        if (this.props.currentAction === 'saveVoiceNotes' && this.props.cloudDataSuccess) {
+        // If our idea has voiceNotes or newVoiceNotes were passed in as props from add/edit idea pages
+        if (this.props.idea.voiceNotes || this.props.newVoiceNotes) {
+            const newVoiceNotes = this.props.idea.voiceNotes ? this.props.idea.voiceNotes : this.props.newVoiceNotes;
+
             this.props.dispatch({
-                type: 'RESET_CLOUD_DATA_SUCCESS'
+                type: 'SET_NEW_VOICE_NOTES',
+                newVoiceNotes,
             });
-
-            Actions.pop();
         }
     }
 
@@ -79,78 +66,87 @@ export class VoiceNotes extends React.Component {
     }
 
     addNewVoiceNote(newVoiceNoteFilePath) {
-        let newVoiceNotes = this.state.voiceNotes;
         const newVoiceNote = {
             uid: utilities.createUID(),
             filePath: newVoiceNoteFilePath,
         }
-        newVoiceNotes.push(newVoiceNote);
-        this.setState({
-            voiceNotes: newVoiceNotes,
-        });  
-    }
 
-    toggleDeleteModal(value) {
-        if (value) {
-            this.setState({
-                showDeleteModal: true,
-                deleteVoiceNoteUID: value,
-            });
-        }
-        else {
-            this.setState({
-                showDeleteModal: false,
-                deleteVoiceNoteUID: null,
-            });
-        }
-    }
+        const newVoiceNotes = utilities.pushObjectToObjectArray(newVoiceNote, this.props.newVoiceNotes);
 
-    deleteVoiceNote(value) {
-        let newVoiceNotes = utilities.deleteObjectWithKeyValuePairFromArray({uid: value}, this.state.voiceNotes);
+        this.props.dispatch({
+            type: 'SET_NEW_VOICE_NOTES',
+            newVoiceNotes,
+        });
 
-        this.setState({
-            voiceNotes: newVoiceNotes,
-        }); 
-
-        this.toggleDeleteModal();
-    }
-
-    saveVoiceNotes() {
-        const newVoiceNotes = utilities.convertArrayToObjectArray(this.state.voiceNotes);
-
-        // Adding an idea
-        if (this.props.addIdea) {
-            this.props.dispatch({
-                type: 'SET_NEW_VOICE_NOTES',
-                newVoiceNotes,
-            });
-
-            Actions.pop();
-        }
-
-        // Editing an idea
-        else {
-            let newIdea = this.props.idea;
+        if (!this.props.addIdea) {
+            let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['voiceNotes'] = newVoiceNotes;
-            console.log(newIdea)
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
 
+            // Dispatch to store
+            this.props.dispatch({
+                type: 'UPDATE_USER_DATA',
+                node: 'ideas',
+                userData: newIdeas,
+            });
+
+            // Dispatch to db
             this.props.dispatch({
                 type: 'saveUserData',
                 node: 'ideas',
                 uid: this.props.uid,
                 userData: newIdeas,
-                currentAction: 'saveVoiceNotes',
                 hasNetwork: this.props.hasNetwork,
             });
         }
     }
 
+    toggleDeleteModal(voiceNote) {
+        this.setState({
+            showDeleteModal: !this.state.showDeleteModal,
+            deleteVoiceNoteUID: voiceNote && voiceNote.uid, // will be null if closed
+        });
+    }
+
+    deleteVoiceNote() {
+        const newVoiceNotes = utilities.removeObjectFromObjectArray(this.state.deleteVoiceNoteUID, this.props.newVoiceNotes);
+
+        this.props.dispatch({
+            type: 'SET_NEW_VOICE_NOTES',
+            newVoiceNotes,
+        });
+
+        if (!this.props.addIdea) {
+            let newIdea = utilities.cloneObject(this.props.idea);
+            newIdea['voiceNotes'] = newVoiceNotes;
+            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+
+            // Dispatch to store
+            this.props.dispatch({
+                type: 'UPDATE_USER_DATA',
+                node: 'ideas',
+                userData: newIdeas,
+            });
+
+            // Dispatch to db
+            this.props.dispatch({
+                type: 'deleteUserData',
+                node: 'ideas/' + this.props.idea.uid + '/voiceNotes/' + this.state.deleteVoiceNoteUID,
+                uid: this.props.uid,
+                hasNetwork: this.props.hasNetwork,
+            });
+        }
+
+        this.toggleDeleteModal();
+    }
+
     render() {
+        const voiceNotesArray = utilities.convertObjectArrayToArray(this.props.newVoiceNotes);
+
         const deleteModal = this.state.showDeleteModal ?
             <ActionModal
                 title='Are you sure you want to delete this Voice Note?'
-                handleLeftIconPress={() => this.deleteVoiceNote(this.state.deleteVoiceNoteUID)}
+                handleLeftIconPress={this.deleteVoiceNote}
                 handleRightIconPress={this.toggleDeleteModal} />
             :
             null;
@@ -162,16 +158,13 @@ export class VoiceNotes extends React.Component {
 
                 <Header
                     headerShadow
-                    closeButton
-                    handleLeftIconPress={() => Actions.pop()}
-                    continueButton
-                    text='Voice Notes'
-                    handleRightIconPress={this.saveVoiceNotes} />
+                    backButton
+                    text='Voice Notes' />
 
                 <NoteCard
                     idea={this.props.idea}
                     type='voiceNotes'
-                    voiceNotes={this.state.voiceNotes} 
+                    voiceNotes={voiceNotesArray}
                     displayInfo
                     handleRecord={this.addNewVoiceNote}
                     handlePlay={this.togglePlayback}
@@ -181,9 +174,6 @@ export class VoiceNotes extends React.Component {
 
                 <SnackBar />
 
-                <Loader
-                    position='bottom' />
-
             </Page>
         );
     }
@@ -192,7 +182,7 @@ export class VoiceNotes extends React.Component {
 function mapStateToProps(state) {
     return ({
         newVoiceNotes: state.main.appData.newVoiceNotes,
-        ideas: state.main.userData.ideas,        
+        ideas: state.main.userData.ideas,
         uid: state.main.auth.uid,
         currentAction: state.main.app.currentAction,
         cloudDataSuccess: state.main.cloudData.cloudDataSuccess,

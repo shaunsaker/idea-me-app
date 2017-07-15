@@ -157,9 +157,16 @@ export class AddIdea extends React.Component {
         });
       }
     }
-    else if (this.props.newVoiceNotes) {
 
-      // TODO
+    if (this.props.newVoiceNotes) {
+      const newVoiceNotesPathsArray = utilities.getValuesThatMatchKeyFromObjectArray('filePath', this.props.newVoiceNotes);
+
+      for (let i = 0; i < newVoiceNotesPathsArray.length; i++) {
+        this.props.dispatch({
+          type: 'deleteFile',
+          path: newVoiceNotesPathsArray[i],
+        });
+      }
     }
 
     Actions.pop();

@@ -61,7 +61,7 @@ export default class VoiceNoteList extends React.Component {
                 <VoiceNotePlayer
                     voiceNote={item} />
                 <DeleteButton
-                    handlePress={() => this.props.handleDelete(item.uid)} />
+                    handlePress={() => this.props.handleDelete(item)} />
             </View>
         )
     }

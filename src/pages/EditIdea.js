@@ -194,9 +194,19 @@ export class EditIdea extends React.Component {
                 }
             }
         }
-        else if (this.props.newVoiceNotes) {
+        
+        if (this.props.newVoiceNotes) {
 
-            // TODO
+            // Get the difference between newVoiceNotes and initial idea voiceNotes
+            const newVoiceNotes = utilities.getDifferenceBetweenObjectArrays(this.props.newVoiceNotes, this.props.initialIdeaVoiceNotes);
+            const newVoiceNotesPathsArray = utilities.getValuesThatMatchKeyFromObjectArray('filePath', newVoiceNotes);
+
+            for (let i = 0; i < newVoiceNotesPathsArray.length; i++) {
+                this.props.dispatch({
+                    type: 'deleteFile',
+                    path: newVoiceNotesPathsArray[i],
+                });
+            }
         }
 
         Actions.pop();
