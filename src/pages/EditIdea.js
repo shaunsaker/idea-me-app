@@ -13,6 +13,7 @@ import Input from '../components/Input';
 import RadioSelect from '../components/RadioSelect';
 import DropdownButton from '../components/DropdownButton';
 import TabBar from '../components/TabBar';
+import ActionModal from '../components/ActionModal';
 import SnackBar from '../components/SnackBar';
 
 export class EditIdea extends React.Component {
@@ -24,6 +25,7 @@ export class EditIdea extends React.Component {
         this.selectCategory = this.selectCategory.bind(this);
         this.selectPriority = this.selectPriority.bind(this);
         this.updateIdea = this.updateIdea.bind(this);
+        this.toggleCancelModal = this.toggleCancelModal.bind(this);
         this.cancelEditIdea = this.cancelEditIdea.bind(this);
 
         this.state = {
@@ -31,6 +33,7 @@ export class EditIdea extends React.Component {
             editIdeaDescription: null,
             editIdeaCategory: null,
             editIdeaPriority: null,
+            showCancelModal: false,
         }
     }
 
@@ -158,7 +161,12 @@ export class EditIdea extends React.Component {
                 message: 'An idea with this title already exists'
             });
         }
+    }
 
+    toggleCancelModal() {
+        this.setState({
+            showCancelModal: !this.state.showCancelModal,
+        });
     }
 
     cancelEditIdea() {
@@ -183,7 +191,7 @@ export class EditIdea extends React.Component {
                 }
             }
         }
-        
+
         if (this.props.newVoiceNotes) {
 
             // Get the difference between newVoiceNotes and initial idea voiceNotes
@@ -198,6 +206,7 @@ export class EditIdea extends React.Component {
             }
         }
 
+        this.state.showCancelModal && this.toggleCancelModal();
         Actions.pop();
     }
 
@@ -209,6 +218,13 @@ export class EditIdea extends React.Component {
         const editPhotosCount = utilities.getLengthOfObject(this.props.newPhotos);
         const editVoiceNotesCount = utilities.getLengthOfObject(this.props.newVoiceNotes);
 
+        const cancelModal = this.state.showCancelModal &&
+            <ActionModal
+                title='Are you sure you want to exit without saving your idea?'
+                subtitle='You will lose all the data you added.'
+                handleLeftIconPress={this.cancelEditIdea}
+                handleRightIconPress={this.toggleCancelModal} />;
+
         return (
             <Page
                 removeBottomPadding>
@@ -217,7 +233,7 @@ export class EditIdea extends React.Component {
                     text='Edit Idea'
                     headerShadow
                     closeButton
-                    handleLeftIconPress={this.cancelEditIdea}
+                    handleLeftIconPress={enableContinueButton ? this.toggleCancelModal : this.cancelNewIdea}
                     continueButton={enableContinueButton}
                     handleRightIconPress={this.updateIdea}
                 />
@@ -299,6 +315,8 @@ export class EditIdea extends React.Component {
                             },
                         ]
                     } />
+                
+                {cancelModal}
 
                 <SnackBar />
 

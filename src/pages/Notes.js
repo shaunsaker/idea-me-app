@@ -153,14 +153,12 @@ export class Notes extends React.Component {
     render() {
         const notesArray = utilities.convertObjectArrayToArray(this.props.newNotes);
 
-        const deleteModal = this.state.showDeleteModal ?
+        const deleteModal = this.state.showDeleteModal &&
             <ActionModal
                 title='Are you sure you want to delete this note?'
                 subtitle={this.state.deleteNoteModalTitle}
                 handleLeftIconPress={this.deleteNote}
-                handleRightIconPress={this.toggleDeleteModal} />
-            :
-            null;
+                handleRightIconPress={this.toggleDeleteModal} />;
 
         return (
             <Page

@@ -1,5 +1,4 @@
 TODOS
-    Cancel modals
     IdeaCard labels should float to bottom (flex: 1 on infoBlock)
     Get rid of currentAction props, reset actions where appropriate (ie. loadUserData should reset)
     Animations 
