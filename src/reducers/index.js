@@ -145,12 +145,6 @@ export default function (state = initialState, action) {
 			new_state.app.retryAction.data = null;
             return new_state;
 
-        case 'RESET_CLOUD_DATA_SUCCESS':
-            new_state = utilities.cloneObject(state);
-            new_state.cloudData.cloudDataSuccess = null;
-            new_state.app.currentAction = null;
-            return new_state;
-
         case 'CLOUD_STORAGE_ERROR':
             new_state = utilities.cloneObject(state);
             new_state.cloudStorage.cloudcloudStorageErrorMessage = action.message;
@@ -218,15 +212,8 @@ export default function (state = initialState, action) {
             else {
 			    new_state.userData = action.userData;    
             }
-
-            new_state.appData.newNotes = null;
-            new_state.appData.newPhotos = null;
-            new_state.appData.newVoiceNotes = null;
-            new_state.cloudData.cloudDataSuccess = true;
-            new_state.app.loading = false;
-            new_state.app.currentAction = action.currentAction;
-			return new_state;
-
+            return new_state;
+            
         case 'SET_NEW_NOTES':
             new_state = utilities.cloneObject(state);
             new_state.appData.newNotes = action.newNotes;

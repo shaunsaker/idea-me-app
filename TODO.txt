@@ -1,9 +1,14 @@
 TODOS
     Notes are added and deleted immediately
+        OnIdea      newNotes as state
+        AddIdea
+        EditIdea
     Photos are added and deleted immediately
+        On delete photo remove thumbnail and full size from device
     Voice Notes are added and deleted immediately
-    On delete photo remove thumbnail and full size from device
-    On delete voiceNote remove from device
+        On delete voiceNote remove from device
+    Categories are added and deleted immediately
+    Ideas are added, edited and deleted immediately
 
     Animations 
         useNativeDriver where possible (non-layout properties)

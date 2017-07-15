@@ -14,7 +14,6 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
 import ActionModal from '../components/ActionModal';
-import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
 
 export class Notes extends React.Component {
@@ -25,57 +24,44 @@ export class Notes extends React.Component {
         this.addNote = this.addNote.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
         this.deleteNote = this.deleteNote.bind(this);
-        this.saveNotes = this.saveNotes.bind(this);
 
         this.state = {
             newNote: null,
-            notes: [],
             showDeleteModal: false,
-            modalTitle: null,
+            deleteNoteModalTitle: null,
+            deleteNoteUID: null,
         }
     }
 
     static get propTypes() {
         return {
-            idea: PropTypes.object,
-
+            idea: PropTypes.object, // idea indicates on idea notes
+            addIdea: PropTypes.bool, // flag indicating add/edit idea page notes
             newNotes: PropTypes.object,
             ideas: PropTypes.object,
             uid: PropTypes.string,
-            addIdea: PropTypes.bool,
-            currentAction: PropTypes.string,
             cloudDataSuccess: PropTypes.bool,
             hasNetwork: PropTypes.bool,
         };
     }
 
     componentDidMount() {
-        if (this.props.newNotes || this.props.idea) {
-            const newNotes = this.props.newNotes ? this.props.newNotes : this.props.idea.notes;
-            const newNotesArray = utilities.convertObjectArrayToArray(newNotes);
-            
-            this.setState({
-                notes: newNotesArray,
-            });
-        }
-    }
 
-    componentDidUpdate() {
-        if (this.props.currentAction === 'saveNotes' && this.props.cloudDataSuccess) {
+        // If our idea has notes or newNotes were passed in as props from add/edit idea pages
+        if (this.props.idea.notes || this.props.newNotes) {
+            const newNotes = this.props.idea.notes ? this.props.idea.notes : this.props.newNotes;
+
             this.props.dispatch({
-                type: 'RESET_CLOUD_DATA_SUCCESS'
-            });
-
-            Actions.pop();
+                type: 'SET_NEW_NOTES',
+                newNotes,
+            });  
         }
     }
 
     componentWillUnmount() {
-        if (!this.props.addIdea) { 
-            this.props.dispatch({
-                type: 'CLEAR_ALL_NOTES',
-            });
-        }
+        this.props.dispatch({
+            type: 'CLEAR_ALL_NOTES',
+        });
     }
 
     updateNewNote(value) {
@@ -85,84 +71,126 @@ export class Notes extends React.Component {
     }
 
     addNote() {
-        let newNotes = this.state.notes;
-
         const newNote = {
             title: this.state.newNote,
             uid: utilities.createUID(),
         };
 
-        newNotes.push(newNote);
-
-        this.setState({
-            notes: newNotes,
-            newNote: null,
-        });
-    }
-
-    toggleDeleteModal(value) {
-        if (value && value.title) {
-            this.setState({
-                showDeleteModal: true,
-                modalTitle: value.title,
-            });
-        }
-        else {
-            this.setState({
-                showDeleteModal: false,
-                modalTitle: null,
-            });
-        }
-    }
-
-    deleteNote(value) {
-        let newNotes = utilities.deleteObjectWithKeyValuePairFromArray({title: value}, this.state.notes);
-
-        this.setState({
-            notes: newNotes,
-        }); 
-
-        this.toggleDeleteModal();
-    }
-
-    saveNotes() {
-        const newNotes = utilities.convertArrayToObjectArray(this.state.notes);
-
-        // Adding an idea
+        // If add/edit idea => update newNotes in store
         if (this.props.addIdea) {
+            const newNotes = utilities.pushObjectToObjectArray(newNote, this.props.newNotes);
+
+            this.props.dispatch({
+                type: 'SET_NEW_NOTES',
+                newNotes,
+            });
+        }
+
+        // Else (onIdea) => update ideas notes and save ideas to db
+        else {
+            let newIdea = this.props.idea;
+            let newNotes = newIdea['notes'];
+            newNotes = utilities.pushObjectToObjectArray(newNote, newNotes);
+            newIdea['notes'] = newNotes;
+            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+
             this.props.dispatch({
                 type: 'SET_NEW_NOTES',
                 newNotes,
             });
 
-            Actions.pop();
-        }
+            // Dispatch to store
+            this.props.dispatch({
+                type: 'UPDATE_USER_DATA',
+                node: 'ideas',
+                userData: newIdeas,
+            });
 
-        // Idea from home page
-        else {
-            let newIdea = this.props.idea;
-            newIdea['notes'] = newNotes;
-            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
-
+            // Dispatch to db
             this.props.dispatch({
                 type: 'saveUserData',
                 node: 'ideas',
                 uid: this.props.uid,
                 userData: newIdeas,
-                currentAction: 'saveNotes',
                 hasNetwork: this.props.hasNetwork,
+            });
+        }
+
+        this.setState({
+            newNote: null,
+        });
+    }
+
+    toggleDeleteModal(note) {
+        if (note && note.title) {
+            this.setState({
+                showDeleteModal: true,
+                deleteNoteModalTitle: note.title,
+                deleteNoteUID: note.uid,
+            });
+        }
+        else {
+            this.setState({
+                showDeleteModal: false,
+                deleteNoteModalTitle: null,
+                deleteNoteUID: null,
             });
         }
     }
 
+    deleteNote() {
+
+        // If addIdea prop => remove from this.props.newNotes
+        if (this.props.addIdea) {
+            const newNotes = utilities.removeObjectFromObjectArray(this.state.deleteNoteUID, this.props.newNotes);
+
+            this.props.dispatch({
+                type: 'SET_NEW_NOTES',
+                newNotes,
+            });
+        }
+
+        // Else (onIdea) => delete from idea and call deleteUserData
+        else {
+            let newIdea = this.props.idea;
+            let newNotes = newIdea['notes'];
+            newNotes = utilities.removeObjectFromObjectArray(this.state.deleteNoteUID, newNotes);
+            newIdea['notes'] = newNotes;
+            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+
+            // Set new notes so we can view them
+            this.props.dispatch({
+                type: 'SET_NEW_NOTES',
+                newNotes,
+            });
+
+            // Dispatch to store
+            this.props.dispatch({
+                type: 'UPDATE_USER_DATA',
+                node: 'ideas',
+                userData: newIdeas,
+            });
+
+            // Dispatch to db
+            this.props.dispatch({
+                type: 'deleteUserData',
+                node: 'ideas/' + this.props.idea.uid + '/notes/' + this.state.deleteNoteUID,
+                uid: this.props.uid,
+                hasNetwork: this.props.hasNetwork,
+            });
+        }
+
+        this.toggleDeleteModal();
+    }
+
     render() {
-        const enableAddNoteButton = this.state.newNote && this.state.newNote;
+        const notesArray = utilities.convertObjectArrayToArray(this.props.newNotes);
 
         const deleteModal = this.state.showDeleteModal ?
             <ActionModal
                 title='Are you sure you want to delete this note?'
-                subtitle={this.state.modalTitle}
-                handleLeftIconPress={() => this.deleteNote(this.state.modalTitle)}
+                subtitle={this.state.deleteNoteModalTitle}
+                handleLeftIconPress={this.deleteNote}
                 handleRightIconPress={this.toggleDeleteModal} />
             :
             null;
@@ -171,31 +199,25 @@ export class Notes extends React.Component {
             <Page
                 backgroundColor={styleConstants.white}
                 removeBottomPadding>
-                
-                <Header 
+
+                <Header
                     headerShadow
-                    closeButton
-                    continueButton
-                    text='Notes'
-                    handleRightIconPress={this.saveNotes} />
-                  
+                    backButton
+                    text='Notes' />
+
                 <NoteCard
                     idea={this.props.idea}
                     type='notes'
-                    notes={this.state.notes}
+                    notes={notesArray}
                     displayInfo
                     handleDelete={this.toggleDeleteModal}
                     handleAdd={this.addNote}
-                    disabled={!enableAddNoteButton}
                     inputValue={this.state.newNote}
                     handleChangeText={this.updateNewNote} />
 
                 {deleteModal}
 
                 <SnackBar />
-
-                <Loader 
-                    position='bottom'/>
 
             </Page>
         );
@@ -207,7 +229,6 @@ function mapStateToProps(state) {
         newNotes: state.main.appData.newNotes,
         ideas: state.main.userData.ideas,
         uid: state.main.auth.uid,
-        currentAction: state.main.app.currentAction,
         cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         hasNetwork: state.main.app.hasNetwork,
     });
