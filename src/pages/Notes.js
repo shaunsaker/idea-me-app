@@ -74,7 +74,7 @@ export class Notes extends React.Component {
 
     addNote() {
         const newNote = {
-            title: this.state.newNote,
+            title: utilities.prettifyString(this.state.newNote),
             uid: utilities.createUID(),
         };
 
@@ -107,9 +107,7 @@ export class Notes extends React.Component {
             });
         }
 
-        this.setState({
-            newNote: null,
-        });
+        this.updateNewNote('');
     }
 
     toggleDeleteModal(note) {

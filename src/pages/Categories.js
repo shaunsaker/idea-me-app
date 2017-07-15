@@ -20,14 +20,15 @@ export class Categories extends React.Component {
     super(props);
 
     this.updateNewCategory = this.updateNewCategory.bind(this);
-    this.addNewCategory = this.addNewCategory.bind(this);
+    this.addCategory = this.addCategory.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
 
     this.state = {
       newCategory: null,
-      showModal: false,
-      deleteCategory: null,
+      showDeleteModal: false,
+      deleteCategoryModalTitle: null,
+      deleteCategoryUID: null,
     }
   }
 
@@ -37,8 +38,6 @@ export class Categories extends React.Component {
       currentCategory: PropTypes.string,
       ideas: PropTypes.object,
       uid: PropTypes.string,
-      cloudDataSuccess: PropTypes.bool,
-      currentAction: PropTypes.string,
       hasNetwork: PropTypes.bool,
     };
   }
@@ -49,11 +48,12 @@ export class Categories extends React.Component {
     });
   }
 
-  addNewCategory() {
+  addCategory() {
     const newCategory = {
       title: utilities.prettifyString(this.state.newCategory),
       uid: utilities.createUID(),
     };
+
     let isCategoryPresent;
 
     // if we have categories
@@ -64,8 +64,17 @@ export class Categories extends React.Component {
     }
 
     if (!isCategoryPresent) {
-      const newCategories = utilities.pushObjectToObjectArray(newCategory, this.props.categories);
+      let newCategories = utilities.cloneObject(this.props.categories);
+      newCategories = utilities.pushObjectToObjectArray(newCategory, newCategories);
 
+      // Dispatch to store
+      this.props.dispatch({
+        type: 'UPDATE_USER_DATA',
+        node: 'categories',
+        userData: newCategories,
+      });
+
+      // Dispatch to db
       this.props.dispatch({
         type: 'saveUserData',
         node: 'categories',
@@ -79,61 +88,57 @@ export class Categories extends React.Component {
     else {
       this.props.dispatch({
         type: 'USER_ERROR',
-        message: 'A category with this name already exists'
+        message: 'A category with this name already exists.'
       });
     }
   }
 
   toggleDeleteModal(category) {
-
-    if (category && category.title) {
-      this.setState({
-        showModal: true,
-        deleteCategory: category,
-      });
-    }
-    else {
-      this.setState({
-        showModal: false,
-        deleteCategory: null,
-      });
-    }
+    this.setState({
+      showDeleteModal: !this.state.showDeleteModal,
+      deleteCategoryModalTitle: category && category.title, // will be null if closed
+      deleteCategoryUID: category && category.uid, // will be null if closed
+    });
   }
 
-  deleteCategory(category) {
-    const newCategories = utilities.deleteObjectFromObjectArray(category.uid, this.props.categories)
-    const newIdeas = utilities.findKeyValuePairAndSetKeysValueToNull({ category: category.title }, this.props.ideas);
-    const nextActions = [
-      {
-        type: 'UPDATE_USER_DATA',
-        node: 'categories',
-        userData: newCategories,
-      },
-      {
-        type: 'saveUserData',
-        node: 'ideas',
-        uid: this.props.uid,
-        userData: newIdeas,
-        currentAction: 'deleteCategory',
-        hasNetwork: this.props.hasNetwork,
-      }
-    ];
+  deleteCategory() {
+    let newCategories = utilities.cloneObject(this.props.categories);
+    newCategories = utilities.deleteObjectFromObjectArray(this.state.deleteCategoryUID, newCategories);
+    let newIdeas = utilities.cloneObject(this.props.ideas);
+    newIdeas = utilities.findKeyValuePairAndSetKeysValueToNull({ category: this.state.deleteCategoryModalTitle }, newIdeas);
 
     // Check current category prop
-    if (category.title === this.props.currentCategory) {
-      nextActions.push({
+    if (this.state.deleteCategoryModalTitle === this.props.currentCategory) {
+      this.props.dispatch({
         type: 'SELECT_CATEGORY',
         value: 'All Categories',
       });
     }
 
-    // Save as bulk action (delete, props, save)
+    this.props.dispatch({
+      type: 'UPDATE_USER_DATA',
+      node: 'categories',
+      userData: newCategories,
+    });
+
+    this.props.dispatch({
+      type: 'UPDATE_USER_DATA',
+      node: 'ideas',
+      userData: newIdeas,
+    });
+
     this.props.dispatch({
       type: 'deleteUserData',
-      node: 'categories/' + category.uid,
+      node: 'categories/' + this.state.deleteCategoryUID,
       uid: this.props.uid,
       hasNetwork: this.props.hasNetwork,
-      nextAction: nextActions,
+      nextAction: {
+        type: 'saveUserData',
+        node: 'ideas',
+        uid: this.props.uid,
+        userData: newIdeas,
+        hasNetwork: this.props.hasNetwork,
+      },
     });
 
     this.toggleDeleteModal();
@@ -142,13 +147,11 @@ export class Categories extends React.Component {
   render() {
     const categoriesArray = utilities.convertObjectArrayToArray(this.props.categories);
 
-    const modal = this.state.showModal ?
+    const modal = this.state.showDeleteModal &&
       <ActionModal
-        title={'Are you sure you want to delete ' + this.state.deleteCategory.title + '?'}
-        handleLeftIconPress={() => this.deleteCategory(this.state.deleteCategory)}
-        handleRightIconPress={this.toggleDeleteModal} />
-      :
-      null;
+        title={'Are you sure you want to delete ' + this.state.deleteCategoryModalTitle + '?'}
+        handleLeftIconPress={this.deleteCategory}
+        handleRightIconPress={this.toggleDeleteModal} />;
 
     return (
       <Page
@@ -166,7 +169,7 @@ export class Categories extends React.Component {
           hideTitle
           inputValue={this.state.newCategory}
           handleChangeText={this.updateNewCategory}
-          handleAdd={this.addNewCategory}
+          handleAdd={this.addCategory}
           handleDelete={this.toggleDeleteModal} />
 
         {modal}
@@ -184,8 +187,6 @@ function mapStateToProps(state) {
     currentCategory: state.main.appData.currentCategory,
     ideas: state.main.userData.ideas,
     uid: state.main.auth.uid,
-    cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
-    currentAction: state.main.app.currentAction,
     hasNetwork: state.main.app.hasNetwork,
   });
 }

@@ -1,7 +1,6 @@
 TODOS
-    Categories are added and deleted immediately
     Ideas are added, edited and deleted immediately
-
+    Don't need ? : null, just use &&
     Animations 
         useNativeDriver where possible (non-layout properties)
         Use wrappers wherever possible
