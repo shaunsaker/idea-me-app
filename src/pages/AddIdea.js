@@ -32,6 +32,7 @@ export class AddIdea extends React.Component {
     this.selectCategory = this.selectCategory.bind(this);
     this.selectPriority = this.selectPriority.bind(this);
     this.saveNewIdea = this.saveNewIdea.bind(this);
+    this.cancelNewIdea = this.cancelNewIdea.bind(this);
   }
 
   static get propTypes() {
@@ -140,6 +141,30 @@ export class AddIdea extends React.Component {
     }
   }
 
+  cancelNewIdea() {
+
+    // Remove unused files
+    if (this.props.newPhotos) {
+      let newPhotosFullSizeURIArray = utilities.getValuesThatMatchKeyFromObjectArray('fullSize', this.props.newPhotos);
+      let newPhotosCroppedURIArray = utilities.getValuesThatMatchKeyFromObjectArray('cropped', this.props.newPhotos);
+      const newPhotosURIArray = newPhotosFullSizeURIArray.concat(newPhotosCroppedURIArray);
+      const newPhotosPathsArray = utilities.convertURIsToPaths(newPhotosURIArray);
+
+      for (let i = 0; i < newPhotosPathsArray.length; i++) {
+        this.props.dispatch({
+          type: 'deleteFile',
+          path: newPhotosPathsArray[i],
+        });
+      }
+    }
+    else if (this.props.newVoiceNotes) {
+
+      // TODO
+    }
+
+    Actions.pop();
+  }
+
   render() {
     const enableContinueButton = this.state.newIdeaTitle ? true : false;
     const categories = utilities.convertObjectArrayToArray(this.props.categories);
@@ -156,6 +181,7 @@ export class AddIdea extends React.Component {
           headerShadow
           text='Add an Idea'
           closeButton
+          handleLeftIconPress={this.cancelNewIdea}
           continueButton={enableContinueButton}
           handleRightIconPress={this.saveNewIdea} />
 

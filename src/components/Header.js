@@ -160,7 +160,7 @@ export default class Header extends React.Component {
 					this.props.closeButton ?
 						<Touchable
 							style={this.props.showInput ? { justifyContent: 'center' } : styles.leftIconContainer}
-							onPress={() => Actions.pop()} >
+							onPress={this.props.handleLeftIconPress} >
 							<Icon
 								name='close'
 								style={[styles.leftIcon, textColorStyles]} />

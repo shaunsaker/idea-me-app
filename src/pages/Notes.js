@@ -37,10 +37,10 @@ export class Notes extends React.Component {
         return {
             idea: PropTypes.object, // idea indicates on idea notes
             addIdea: PropTypes.bool, // flag indicating add/edit idea page notes
+
             newNotes: PropTypes.object,
             ideas: PropTypes.object,
             uid: PropTypes.string,
-            cloudDataSuccess: PropTypes.bool,
             hasNetwork: PropTypes.bool,
         };
     }
@@ -89,11 +89,6 @@ export class Notes extends React.Component {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
-
-            this.props.dispatch({
-                type: 'SET_NEW_NOTES',
-                newNotes,
-            });
             
             // Dispatch to store
             this.props.dispatch({
@@ -118,20 +113,11 @@ export class Notes extends React.Component {
     }
 
     toggleDeleteModal(note) {
-        if (note && note.title) {
-            this.setState({
-                showDeleteModal: true,
-                deleteNoteModalTitle: note.title,
-                deleteNoteUID: note.uid,
-            });
-        }
-        else {
-            this.setState({
-                showDeleteModal: false,
-                deleteNoteModalTitle: null,
-                deleteNoteUID: null,
-            });
-        }
+        this.setState({
+            showDeleteModal: !this.state.showDeleteModal,
+            deleteNoteModalTitle: note && note.title, // will be null if closed
+            deleteNoteUID: note && note.uid, // will be null if closed
+        });
     }
 
     deleteNote() {
@@ -146,12 +132,6 @@ export class Notes extends React.Component {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
-
-            // Set new notes so we can view them
-            this.props.dispatch({
-                type: 'SET_NEW_NOTES',
-                newNotes,
-            });
 
             // Dispatch to store
             this.props.dispatch({
@@ -218,7 +198,6 @@ function mapStateToProps(state) {
         newNotes: state.main.appData.newNotes,
         ideas: state.main.userData.ideas,
         uid: state.main.auth.uid,
-        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         hasNetwork: state.main.app.hasNetwork,
     });
 }

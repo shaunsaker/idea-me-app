@@ -93,21 +93,11 @@ export function* handleImage(action) {
                                 cropped: "file:" + moveCroppedFileResponse.message,
                                 uid: utilities.createUID(),
                             };
-
-                            if (action.ideaPhoto) { // flag indicating this is an idea's photo
-                                yield put({
-                                    type: 'SET_NEW_PHOTOS',
-                                    newPhoto: image,
-                                });
-                            }
-                            else {
-
-                                // Won't save afterwards, the user should save it themselves
-                                yield put({
-                                    type: 'SET_USER_PHOTO',
-                                    userPhotoUrl: image,
-                                });
-                            }
+                            
+                            yield put({
+                                type: 'SET_TEMPORARY_IMAGE',
+                                image,
+                            });
                         }
                         else {
                             yield put({

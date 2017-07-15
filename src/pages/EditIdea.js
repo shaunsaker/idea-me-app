@@ -25,6 +25,7 @@ export class EditIdea extends React.Component {
         this.selectCategory = this.selectCategory.bind(this);
         this.selectPriority = this.selectPriority.bind(this);
         this.updateIdea = this.updateIdea.bind(this);
+        this.cancelEditIdea = this.cancelEditIdea.bind(this);
 
         this.state = {
             editIdeaTitle: null,
@@ -171,6 +172,36 @@ export class EditIdea extends React.Component {
 
     }
 
+    cancelEditIdea() {
+
+        // Remove unused files
+        if (this.props.newPhotos) {
+
+            // Get the difference between newPhotos and initial idea photos
+            const newPhotos = utilities.getDifferenceBetweenObjectArrays(this.props.newPhotos, this.props.initialIdeaPhotos);
+
+            if (newPhotos) {
+                let newPhotosFullSizeURIArray = utilities.getValuesThatMatchKeyFromObjectArray('fullSize', newPhotos);
+                let newPhotosCroppedURIArray = utilities.getValuesThatMatchKeyFromObjectArray('cropped', newPhotos);
+                const newPhotosURIArray = newPhotosFullSizeURIArray.concat(newPhotosCroppedURIArray);
+                const newPhotosPathsArray = utilities.convertURIsToPaths(newPhotosURIArray);
+
+                for (let i = 0; i < newPhotosPathsArray.length; i++) {
+                    this.props.dispatch({
+                        type: 'deleteFile',
+                        path: newPhotosPathsArray[i],
+                    });
+                }
+            }
+        }
+        else if (this.props.newVoiceNotes) {
+
+            // TODO
+        }
+
+        Actions.pop();
+    }
+
     render() {
         const enableContinueButton = this.state.editIdeaTitle ? true : false;
         const categories = utilities.convertObjectArrayToArray(this.props.categories);
@@ -187,6 +218,7 @@ export class EditIdea extends React.Component {
                     text='Edit Idea'
                     headerShadow
                     closeButton
+                    handleLeftIconPress={this.cancelEditIdea}
                     continueButton={enableContinueButton}
                     handleRightIconPress={this.updateIdea}
                 />

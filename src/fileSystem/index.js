@@ -71,4 +71,26 @@ export default class FileSystem {
                 });
         });
     }
+
+    static deleteFile(action) {
+        return new Promise(resolve => {
+            RNFS.unlink(action.path)
+                .then(() => {
+                    response = {
+                        success: true,
+                        message: action.path,
+                    }
+
+                    resolve(response);
+                })
+                .catch((error) => {
+                    response = {
+                        success: false,
+                        message: error.message,
+                    }
+
+                    resolve(response);
+                });
+        });
+    }
 }

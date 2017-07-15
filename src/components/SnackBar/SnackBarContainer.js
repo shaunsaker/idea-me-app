@@ -84,7 +84,10 @@ export class SnackBar extends React.Component {
                             this.props.cloudStorageErrorMessage ?
                                 this.props.cloudStorageErrorMessage 
                                 :
-                                null;  
+                                this.props.fileSystemErrorMessage ?
+                                    this.props.fileSystemErrorMessage
+                                    :
+                                    null;  
 
         const errorSnackBar = errorMessage ?
             <SnackBarComponent 
@@ -129,6 +132,7 @@ function mapStateToProps(state) {
         imageErrorMessage: state.main.images.imageErrorMessage,
         cloudDataErrorMessage: state.main.cloudData.cloudDataErrorMessage,
         cloudStorageErrorMessage: state.main.cloudStorage.cloudcloudStorageErrorMessage,
+        fileSystemErrorMessage: state.main.fileSystem.fileSystemErrorMessage,
 
         errorType: state.main.app.errorType,
         retryAction: state.main.app.retryAction,

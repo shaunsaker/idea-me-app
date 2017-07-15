@@ -163,6 +163,7 @@ export class VoiceNotes extends React.Component {
                 <Header
                     headerShadow
                     closeButton
+                    handleLeftIconPress={() => Actions.pop()}
                     continueButton
                     text='Voice Notes'
                     handleRightIconPress={this.saveVoiceNotes} />

@@ -40,7 +40,11 @@ const initialState = {
         geolocationError: null,
     },
     images: {
+        temporaryImage: null,
         imageErrorMessage: null,
+    },
+    fileSystem: {
+        fileSystemErrorMessage: null,
     },
     appData: {
         currentCategory: 'All Categories',

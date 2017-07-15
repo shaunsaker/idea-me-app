@@ -208,6 +208,18 @@ export default function (state = initialState, action) {
 			new_state.app.retryAction.data = null;
             return new_state;
 
+        case 'FILE_SYSTEM_ERROR':
+            new_state = utilities.cloneObject(state);
+            new_state.fileSystem.fileSystemErrorMessage = action.message;
+            new_state.app.errorType = 'FILE_SYSTEM';
+            return new_state;
+
+        case 'RESET_FILE_SYSTEM_ERROR':
+            new_state = utilities.cloneObject(state);
+            new_state.fileSystem.fileSystemErrorMessage = null;
+            new_state.app.errorType = null;
+            return new_state;
+
         /* USER DATA */
         case 'UPDATE_USER_DATA':
 			new_state = utilities.cloneObject(state);
@@ -229,20 +241,15 @@ export default function (state = initialState, action) {
             new_state.appData.newNotes = action.newNotes;
             return new_state;
 
+        case 'SET_TEMPORARY_IMAGE':
+            new_state = utilities.cloneObject(state);
+            new_state.images.temporaryImage = action.image;
+            return new_state;
+
         case 'SET_NEW_PHOTOS':
             new_state = utilities.cloneObject(state);
-
-            // Updating all new photos
-            if (action.newPhotos) {
-                new_state.appData.newPhotos = action.newPhotos; // this action won't be dispatched if action.newPhotos is null
-            }
-
-            // Adding a single photo
-            else {
-                const newPhotos = new_state.appData.newPhotos ? new_state.appData.newPhotos : {};
-                new_state.appData.newPhotos = utilities.pushObjectToObjectArray(action.newPhoto, newPhotos);
-            }
-                
+            new_state.appData.newPhotos = action.newPhotos;
+            new_state.images.temporaryImage = null;
             return new_state;
 
         case 'SET_NEW_VOICE_NOTES':

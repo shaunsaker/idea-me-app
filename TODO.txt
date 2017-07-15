@@ -1,6 +1,5 @@
 TODOS
-    Photos are added and deleted immediately
-        On delete photo remove thumbnail and full size from device
+    Handle profile Photo
     Voice Notes are added and deleted immediately
         On delete voiceNote remove from device
     Categories are added and deleted immediately

@@ -35,6 +35,18 @@ utilities.appendStringToFileName = (fileName, string) => {
     return newFileName;
 }   
 
+utilities.convertURIsToPaths = (array) => {
+    let newArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const value = array[i];
+        const newValue = value.replace('file:', '');
+        newArray.push(newValue);
+    }
+
+    return newArray;
+}
+
 /* METHODS */
 
 utilities.getInputHeight = (inputWidth, inputLineHeight, charCount) => {
@@ -304,5 +316,62 @@ utilities.getLengthOfObject = (object) => {
 
     return counter;
 };  
+
+utilities.getValuesThatMatchKeyFromObjectArray = (targetKey, objectArray) => {
+    let valuesArray = [];
+
+    for (key in objectArray) {
+        valuesArray.push(objectArray[key][targetKey]);
+    }
+
+    return valuesArray;
+}
+
+// Returns an object array with objects missing in new object array relative to old object array (NOTE: does not account for objects in old array that are not in new array - only added objects to new array)
+utilities.getDifferenceBetweenObjectArrays = (newObjectArray, oldObjectArray) => {
+    const newObjectArrayKeys = Object.keys(newObjectArray);
+    const oldObjectArrayKeys = Object.keys(oldObjectArray);
+    let foundKey;
+    let missingObjects = null;
+
+    /*
+
+    NEW
+
+    {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+    }
+
+    OLD
+
+    {
+        1: {},
+        2: {},
+    }
+
+    */
+
+    for (newKey in newObjectArray) {
+        foundKey = false;
+
+        for (oldKey in oldObjectArray) {
+            if (newKey === oldKey) {
+                foundKey = true;
+            }
+        }
+
+        if (!foundKey) {
+            if (!missingObjects) {
+                missingObjects = {};
+            }
+            missingObjects[newKey] = newObjectArray[newKey];
+        }
+    }
+
+    return missingObjects;
+}
 
 export default utilities;

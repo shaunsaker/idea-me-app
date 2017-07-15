@@ -28,6 +28,9 @@ import { handleImage } from './images';
 // Cloud Storage
 import { uploadUserPhoto } from './cloudStorage';
 
+// File System
+import { deleteFile } from './fileSystem';
+
 export function* sagas() {
     yield all([
 
@@ -52,6 +55,9 @@ export function* sagas() {
         fork(takeLatest, 'handleImage', handleImage), 
 
         // Cloud Storage
-		fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),
+        fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),
+        
+        // File System
+        fork(takeEvery, 'deleteFile', deleteFile),
     ]);
 }
