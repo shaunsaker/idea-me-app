@@ -3,11 +3,10 @@ import {
     Text,
     View,
     StyleSheet,
-    Animated,
 } from "react-native";
-import Icon from '../styles/icons/index';
 
 import config from '../config';
+import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
 const styles = StyleSheet.create({
@@ -22,6 +21,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         fontSize: styleConstants.iconFont,
+        color: styleConstants.secondary,
     },
     text: {
         fontSize: 28,
@@ -29,44 +29,19 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class Logo extends React.Component {
-    constructor(props) {
-        super(props);
+export default Logo = (props) => {
+    return (
+        <View
+            style={styles.container} >
+            <Text style={styles.iconContainer}>
+                <Icon
+                    name='lightbulb'
+                    style={styles.icon} />
+            </Text>
+            <Text style={[styles.text, styleConstants.secondaryFont]}>
+                IdeaMe
+            </Text>
+        </View>
+    );
 
-        this.state = {
-            animatedValue: new Animated.Value(0)
-        }
-    }
-
-    componentDidMount() {
-        Animated.timing(
-            this.state.animatedValue,
-            {
-                toValue: 1,
-                duration: config.animation.duration.long,
-                easing: config.animation.easing,
-            }
-        ).start();
-    }
-
-    render() {
-        const animatedColor = this.state.animatedValue.interpolate({
-            inputRange: [0, 1],
-            outputRange: [styleConstants.lightGrey, styleConstants.secondary]
-        });
-
-        return (
-            <View
-                style={styles.container} >
-                <Animated.Text style={[styles.iconContainer, {color: animatedColor}]}>
-                    <Icon
-                        name='lightbulb'
-                        style={styles.icon} />
-                </Animated.Text>
-                <Text style={[styles.text, styleConstants.secondaryFont]}>
-                    IdeaMe
-                </Text>
-            </View>
-        );
-    }
 }

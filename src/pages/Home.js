@@ -74,8 +74,6 @@ export class Home extends React.Component {
       this.props.dispatch({
         type: 'RESET_CLOUD_DATA_SUCCESS',
       });
-
-      this.scrollToBeginning();
     }
   }
 
@@ -244,7 +242,6 @@ export class Home extends React.Component {
         <DropdownButton
           buttonBackgroundColor={styleConstants.primary}
           categoriesButton
-          editCategories
           values={categories}
           currentCategory={this.props.currentCategory}
           handleSelect={this.selectCategory}

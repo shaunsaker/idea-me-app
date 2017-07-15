@@ -180,8 +180,6 @@ export class AddIdea extends React.Component {
             currentValue={this.state.newIdeaCategory}
             values={categories}
             handleSelect={this.selectCategory}
-            headerIconName='edit'
-            headerValue='Edit Categories'
             buttonBackgroundColor={styleConstants.primary}
             pushContent />
 

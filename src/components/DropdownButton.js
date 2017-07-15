@@ -99,7 +99,7 @@ export default class DropdownButton extends React.Component {
         this.renderItem = this.renderItem.bind(this);
 
         this.maxHeight = 216;
-        this.itemHeight = 44;
+        this.itemHeight = 41.5;
 
         this.state = {
             isExpanded: false,
@@ -121,7 +121,7 @@ export default class DropdownButton extends React.Component {
     }
 
     handleSelect(value) {
-        this.scrollToBeginning();
+        this.props.values.length && this.scrollToBeginning(); // only if we have values
         this.toggleExpanded();
         this.props.handleSelect(value);
     }
@@ -129,7 +129,7 @@ export default class DropdownButton extends React.Component {
     toggleExpanded() {
 
         // We need to check how many items we have so that we can render a perfect height
-        const itemCount = (this.props.headerValue ? 1 : 0) + this.props.values.length;
+        let itemCount = (this.props.headerValue ? 1 : 0) + this.props.values.length + 1; // + 1 for Edit Categories
         const dropdownInnerHeight = itemCount * this.itemHeight;
         const dropdownOuterHeight = dropdownInnerHeight < this.maxHeight ? dropdownInnerHeight : this.maxHeight;
 
@@ -194,16 +194,10 @@ export default class DropdownButton extends React.Component {
                 maxHeight: this.maxHeight   
             };
 
-        const headerIcon = this.props.headerIconName ?
-            <Icon name={this.props.headerIconName} style={styles.dropdownHeaderIcon} />
-            :
-            null;
-
         const header = this.props.headerValue && this.props.currentValue !== this.props.headerValue ?
             <Touchable
                 style={styles.dropdownHeader}
                 onPress={() => { this.handleSelect(this.props.headerValue) }}>
-                {headerIcon}
                 <Text
                     style={[styles.dropdownHeaderText, styleConstants.primaryFont]}>
                     {this.props.headerValue}
@@ -212,7 +206,7 @@ export default class DropdownButton extends React.Component {
             :
             null;
 
-        const editCategories = this.props.editCategories &&
+        const editCategories =
             <Touchable
                 style={styles.dropdownHeader}
                 onPress={() => { this.handleSelect('Edit Categories') }}>
@@ -222,8 +216,8 @@ export default class DropdownButton extends React.Component {
                     Edit Categories
                 </Text>
             </Touchable>;
-            
-        const itemList =
+        
+        const itemList = this.props.values.length ?
             <Animated.View
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
                 <FlatList 
@@ -231,10 +225,15 @@ export default class DropdownButton extends React.Component {
                     ref='itemList'
                     data={this.props.values}
                     renderItem={this.renderItem}
-                    ListHeaderComponent={ () => header}
-                    ListFooterComponent={() => editCategories}
+                    ListHeaderComponent={header ? () => header: null}
+                    ListFooterComponent={editCategories ? () => editCategories : null}
                     style={styles.dropdownItemsContainer} />
-            </Animated.View>;
+            </Animated.View>
+            :
+            <Animated.View
+                style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
+                {editCategories}
+            </Animated.View>
 
         const button = this.props.categoriesButton ?
             <CategoriesButton 

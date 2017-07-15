@@ -1,81 +1,40 @@
-TODOS     
-    Categories page 
-        Add and Update category in categories page
-        Test add, update, delete
-        Delete AddCategory page
-    Dropdown button menu heights are incorrect
-    PhotoWithError
-        Full page uses infoBlock with page border
-    On back from notes/photos/voiceNotes/categories/editLocation
-        If no changes display backButton
-        If changes
-            Display close button
-            Display continue button
-        Display modal saying are you sure (if has notes)
-        On close/exit, reset newPhotos, newNotes, newVoiceNotes
-        If any note additions are cancelled, delete the files using react-native-fs
-    Notes modalTitle should refer to note not idea title
-    Idea category and priority should ref relevant uids
-    No need to keep uid as key value pair
-    Why do I need to login button and screen from Welcome page  
-    From open to add notes should be as quick as possible
-    App does not load in offline mode
-    Animate new notes in
-        Layoutanimation // AnimateFadeIn // NEW AnimateHeight
-    Remove animation from logo
-    Don't scroll to beginning on delete idea
-    Animations useNativeDriver where possible (non-layout properties)
+TODOS
+    Notes are added and deleted immediately
+    Photos are added and deleted immediately
+    Voice Notes are added and deleted immediately
+    On delete photo remove thumbnail and full size from device
+    On delete voiceNote remove from device
+
+    Animations 
+        useNativeDriver where possible (non-layout properties)
+        Use wrappers wherever possible
     Cards across app
         Edit Profile
-    RN Permissions
-    Dont convert objects into arrays, just use Object.keys
     Dates on ideas
-    Send errors to db
     Animate radios
         Buttons with text in middle
-    Redux-saga
-        Takeevery and other optimisations
     Use FlatList/VirtualizedList for all lists
         shouldComponentUpdate will help render when it should
         A number of other perf increasing methods
     Edit Profile header left icon should be close
-    Current location should have retry button of sorts (if we could not get location)
     Modal on logout page made tabbar jump
     Header uses BlankInput component
     BlankInput and Input autogrow needs work when clearing text
     No secondary colour in modals
     Don't use browser component (use linking)
-    Welcome page styling off
-    Logout then sign in did not work
-        Had alot more ideas than previously
     Try switch actions for tabs
     Use babel remove console logs in production (RN perf)
     Better, more inspiring quotes
-    Notes header check should only show if something changed
-    Consider using RN modal for animation transitions / create your own animations
-    Change note icon to normal note (no plus)
-    Delete Idea modal does not remove bg
-    Fix home list shouldComponentUpdate
+    Icons
+        Get normal note icon for when not adding
+        Get camera plus icon for when adding
+        Get voice note plus icon for when adding
     Whereever you have elevation, add a border
-    On all header closeX (where appropriate), modal: are you sure you want to go back? You will lose this information.
-    Input height is not readjusting correctly
-    Modal delete messages should be more descriptive, ie. are you... delete idea: Title?
     If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
     Profile page has edit button BR corner
     Rethink sharing ideas
-    Display loader when saving/editing/deleting?
-        Usually don't have errors here
-        Can skip the loader altogether
-        Update store first will 
-        Perceived performance will improve 200%
-    Animators as component wrappers
-        Only if you can offload to useNativeDriver / you are only animating one value
-    Browser uses Menu component and not ActionSheet
-    Facebook/Google Sign In
     Animate menu height
-    Utils   
-        Use Object.assign({}, newObject) instead of creating new objects with vars
     Page removes padding on small devices
         Other responsive fixes (portrait/landscape)
             Add listener to dimensions on orientation change and adjust page component accordingly
@@ -95,16 +54,31 @@ TODOS
         After one week
             Enjoying the app? Help us spread the word by sharing (fb or tweet)
                 Auto populate
+        After one free month
+            Trial about to expire, unless you give us feedback
+    Facebook/Google Sign In        
+    Change store before dispatching cloudData actions
+        No loading display
+        Categories immediately
+        Add Ideas immediately
+        Edit Edits immediately
+        Add and Delete Notes immediately
+        Add and Delete Photos immediately
+        Add and Delete VoiceNotes immediately
+        Headers all display back button (no close and continue)
+        Remove current actions    
     Apply material styles
         See material.io
         Redesign lists
         Labels same fontSize as info block description  
 
 WRAP UP
+    RN Permissions
     Create responsive component for testing (Page component)           
     App renaming
     App Icons
     Test all errors
+        Send errors to db
     Optimise code
         Remove unnecessary
         Check proptypes

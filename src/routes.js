@@ -17,7 +17,6 @@ import VoiceNotes from './pages/VoiceNotes';
 import AddIdea from './pages/AddIdea';
 import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
-import AddCategory from './pages/AddCategory';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
 import EditLocation from './pages/EditLocation';
@@ -75,10 +74,6 @@ const Scenes = Actions.create(
 		<Scene
 			key='categories'
 			component={Categories} 
-			initial={false} />
-		<Scene
-			key='addCategory'
-			component={AddCategory}
 			initial={false} />
 		<Scene
 			key='profile'

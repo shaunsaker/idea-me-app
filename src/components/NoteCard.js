@@ -99,7 +99,7 @@ export default NoteCard = (props) => {
         notes =
             <BulletList
                 values={notesValues}
-                handleDelete={() => props.handleDelete(props.idea)} />;
+                handleDelete={props.handleDelete} />;
         button =
             <NoteTaker
                 text='Add a Note'
@@ -167,6 +167,13 @@ export default NoteCard = (props) => {
                 fullWidth />
         </View>;
 
+    const titleComponent = !props.hideTitle &&
+        <View style={styles.titleContainer}>
+            <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles]}>
+                {title + ' (' + notesCount + '):'}
+            </Text>
+        </View>;
+
     return (
         <View
             style={styles.cardContainer} >
@@ -176,11 +183,7 @@ export default NoteCard = (props) => {
                 {infoBlock}
 
                 <View style={styles.notesContainer}>
-                    <View style={styles.titleContainer}>
-                        <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles]}>
-                            {title + ' (' + notesCount + '):'}
-                        </Text>
-                    </View>
+                    {titleComponent}
 
                     {notes}
 

@@ -47,17 +47,17 @@ const initialState = {
         quotes, // can be an array because we are not saving this anywhere
         suburbs, 
         priorities: {
-            '0': {
+            '583027200': {
                 title: 'Low',
-                uid: '0',
+                uid: '583027200',
             },
-            '1': {
+            '583027201': {
                 title: 'Medium',
-                uid: '1',
+                uid: '583027201',
             },
-            '2': {
+            '583027202': {
                 title: 'High',
-                uid: '2',
+                uid: '583027202',
             },
         },
         newNotes: null,
@@ -79,14 +79,14 @@ const initialState = {
         //         title: 'Test1',
         //         description: null,
         //         category: 'Test',
-        //         priority: 'Low',
+        //         priority: 'High',
         //         uid: '1497182894539',
         //     },
         //      '1497182894540': {
         //         title: 'Test2',
         //         description: null,
         //         category: null,
-        //         priority: 'High',
+        //         priority: 'Low',
         //         uid: '1497182894540',
         //     },
         //     '1497182894541': {

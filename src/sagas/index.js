@@ -1,4 +1,9 @@
-import { takeLatest, fork, all } from 'redux-saga/effects';
+import { 
+    takeLatest,
+    takeEvery, 
+    fork, 
+    all 
+} from 'redux-saga/effects';
 
 // Auth
 import { getUserAuth } from './auth';
@@ -40,8 +45,8 @@ export function* sagas() {
 
         // Cloud Data
         fork(takeLatest, 'loadUserData', loadUserData),    
-        fork(takeLatest, 'saveUserData', saveUserData),  
-        fork(takeLatest, 'deleteUserData', deleteUserData),   
+        fork(takeEvery, 'saveUserData', saveUserData),  
+        fork(takeEvery, 'deleteUserData', deleteUserData),   
 
         // Images
         fork(takeLatest, 'handleImage', handleImage), 

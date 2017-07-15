@@ -102,6 +102,7 @@ export class Welcome extends React.Component {
                 <Logo />
 
                 <InfoBlock
+                    fixSubtitleHeight
                     title="Have great ideas and no where to store them?"
                     subtitle="You've come to the right place." 
                     titleColor={styleConstants.white} 

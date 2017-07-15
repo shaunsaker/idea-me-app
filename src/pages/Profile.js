@@ -42,12 +42,6 @@ export class Profile extends React.Component {
             active: false,
         },
         {
-            title: 'Categories',
-            icon: 'folder',
-            action: () => Actions.categories(),
-            active: false,
-        },
-        {
             title: 'Profile',
             icon: 'person',
             action: () => Actions.profile(),

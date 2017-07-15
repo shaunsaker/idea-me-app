@@ -211,8 +211,6 @@ export class EditIdea extends React.Component {
                         currentValue={this.state.editIdeaCategory}
                         values={categories}
                         handleSelect={this.selectCategory}
-                        headerIconName='edit'
-                        headerValue='Edit Categories'
                         buttonBackgroundColor={styleConstants.primary}
                         pushContent />
 

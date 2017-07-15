@@ -107,7 +107,7 @@ export class SignInOptions extends React.Component {
                 fauxFooter>
 
                 <Header 
-                    closeButton />
+                    backButton />
 
                 <View>
                     <Button

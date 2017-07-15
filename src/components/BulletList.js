@@ -10,6 +10,7 @@ import {
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
+import AnimateFadeIn from '../animators/AnimateFadeIn';
 import DeleteButton from './DeleteButton';
 
 const styles = StyleSheet.create({
@@ -20,9 +21,11 @@ const styles = StyleSheet.create({
     notesWrapper: {
         flex: 1,
         padding: 8,
+                borderRadius: 4,
     },
     notesContainer: {
         paddingBottom: 16,
+        borderRadius: 4,
     },
     noteContainer: {
         flexDirection: 'row',
