@@ -184,8 +184,6 @@ function mapStateToProps(state) {
         newVoiceNotes: state.main.appData.newVoiceNotes,
         ideas: state.main.userData.ideas,
         uid: state.main.auth.uid,
-        currentAction: state.main.app.currentAction,
-        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         hasNetwork: state.main.app.hasNetwork,
     });
 }

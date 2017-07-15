@@ -21,7 +21,6 @@ const initialState = {
 			type: null,
 			data: null,
 		},
-        currentAction: null, // addIdea, deleteIdea, editIdea, addCategory, deleteCategory
 
         userSuccessMessage: null,
         userErrorMessage: null,

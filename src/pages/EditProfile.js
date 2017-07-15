@@ -16,8 +16,8 @@ import EditableImage from '../components/EditableImage';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import OptionsModal from '../components/OptionsModal';
+import ActionModal from '../components/ActionModal';
 import SnackBar from '../components/SnackBar';
-import Loader from '../components/Loader';
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -27,6 +27,7 @@ export class Profile extends React.Component {
             editUserName: null,
             editUserEmail: null,
             showPhotoModal: false,
+            showCancelModal: false,
         }
 
         this.togglePhotoModal = this.togglePhotoModal.bind(this);
@@ -34,6 +35,7 @@ export class Profile extends React.Component {
         this.updateEditUserName = this.updateEditUserName.bind(this);
         this.updateEditUserEmail = this.updateEditUserEmail.bind(this);
         this.updateUserDetails = this.updateUserDetails.bind(this);
+        this.toggleCancelModal = this.toggleCancelModal.bind(this);
         this.cancelEditProfile = this.cancelEditProfile.bind(this);
     }
 
@@ -45,23 +47,12 @@ export class Profile extends React.Component {
             userLocation: PropTypes.string,
             userPhotoUrl: PropTypes.object,
             temporaryImage: PropTypes.object,
-            cloudDataSuccess: PropTypes.bool,
         };
     }
 
     componentDidMount() {
         this.updateEditUserName(this.props.userName);
         this.updateEditUserEmail(this.props.userEmail);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.cloudDataSuccess) {
-            this.props.dispatch({
-                type: 'RESET_CLOUD_DATA_SUCCESS'
-            });
-
-            Actions.pop();
-        }
     }
 
     togglePhotoModal() {
@@ -92,23 +83,34 @@ export class Profile extends React.Component {
     }
 
     updateUserDetails() {
-        this.props.dispatch({
-            type: 'TOGGLE_LOADING'
-        });
-
         const prettyUserName = utilities.prettifyString(this.state.editUserName);
         const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage : this.props.userPhotoUrl;
+        const userData = {
+            userName: prettyUserName,
+            userEmail: this.state.editUserEmail,
+            userLocation: this.props.userLocation,
+            userPhotoUrl,
+        }
+
+        this.props.dispatch({
+            type: 'UPDATE_USER_DATA',
+            node: 'profile',
+            userData,
+        });
 
         this.props.dispatch({
             type: 'saveUserData',
             node: 'profile',
             uid: this.props.uid,
-            userData: {
-                userName: prettyUserName,
-                userEmail: this.state.editUserEmail,
-                userLocation: this.props.userLocation,
-                userPhotoUrl,
-            }
+            userData,
+        });
+
+        Actions.pop();
+    }
+
+    toggleCancelModal() {
+        this.setState({
+            showCancelModal: !this.state.showCancelModal,
         });
     }
 
@@ -131,11 +133,13 @@ export class Profile extends React.Component {
             }
         }
 
+        this.state.showCancelModal && this.toggleCancelModal();
         Actions.pop();
     }
 
     render() {
         const enableContinueButton = this.state.editUserEmail && this.state.editUserName ? true : false;
+        const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage.cropped : this.props.userPhotoUrl.cropped;
 
         const photoModal = this.state.showPhotoModal ?
             <OptionsModal
@@ -146,15 +150,20 @@ export class Profile extends React.Component {
             :
             null;
 
-        const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage.cropped : this.props.userPhotoUrl.cropped;
-        
+        const cancelModal = this.state.showCancelModal &&
+            <ActionModal
+                title='Are you sure you want to exit without saving your profile?'
+                subtitle='You will lose all the data you added.'
+                handleLeftIconPress={this.cancelEditProfile}
+                handleRightIconPress={this.toggleCancelModal} />;
+
         return (
             <Page>
 
                 <Header
                     text='Edit Profile'
                     closeButton
-                    handleLeftIconPress={this.cancelEditProfile}
+                    handleLeftIconPress={enableContinueButton ? this.toggleCancelModal : this.cancelEditProfile}
                     continueButton={enableContinueButton}
                     handleRightIconPress={this.updateUserDetails}
                     headerShadow />
@@ -186,10 +195,9 @@ export class Profile extends React.Component {
 
                 {photoModal}
 
-                <SnackBar />
+                {cancelModal}
 
-                <Loader
-                    position='bottom' />
+                <SnackBar />
 
             </Page >
         );
@@ -204,7 +212,6 @@ function mapStateToProps(state) {
         userLocation: state.main.userData.profile.userLocation,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
         temporaryImage: state.main.images.temporaryImage,
-        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
     });
 }
 
