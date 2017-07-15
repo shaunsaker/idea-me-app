@@ -38,6 +38,7 @@ export function* loadUserData(action) {
                 retryAction: {
                     type: 'loadUserData',
                     data: {
+                        uid: action.uid,
                         userData: action.userData,
                     },
                 },
@@ -74,12 +75,8 @@ export function* saveUserData(action) {
                 }
             }
             else {
-                yield put({
-                    type: 'UPDATE_USER_DATA',
-                    node: action.node,
-                    userData: action.userData,
-                    currentAction: action.currentAction,
-                });
+
+                // On success, do nothing (store was updated before)
             }
         }
 
@@ -89,9 +86,12 @@ export function* saveUserData(action) {
                 type: 'CLOUD_DATA_ERROR',
                 message: saveUserDataResponse.message,
                 retryAction: {
-                    type: 'loadUserData',
+                    type: 'saveUserData',
                     data: {
+                        node: action.node,
+                        uid: action.uid,
                         userData: action.userData,
+                        hasNetwork: action.hasNetwork,
                     },
                 },
             });
@@ -127,11 +127,8 @@ export function* deleteUserData(action) {
                 }
             }
             else {
-                yield put({
-                    type: 'UPDATE_USER_DATA',
-                    node: action.node,
-                    userData: action.userData,
-                });
+
+                // On success, do nothing (store was updated before)
             }
         }
 
@@ -141,9 +138,12 @@ export function* deleteUserData(action) {
                 type: 'CLOUD_DATA_ERROR',
                 message: deleteUserDataResponse.message,
                 retryAction: {
-                    type: 'loadUserData',
+                    type: 'deleteUserData',
                     data: {
+                        node: action.node,
+                        uid: action.uid,
                         userData: action.userData,
+                        hasNetwork: action.hasNetwork,
                     },
                 },
             });
