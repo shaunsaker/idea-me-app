@@ -19,7 +19,6 @@ import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
 import ActionModal from '../components/ActionModal';
 import SnackBar from '../components/SnackBar';
-import Loader from '../components/Loader';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -52,8 +51,8 @@ export class Home extends React.Component {
 
     this.state = {
       showDeleteModal: false,
-      deleteModalTitle: null,
-      deleteModalUID: null,
+      deleteIdeaModalTitle: null,
+      deleteIdeaUID: null,
     }
   }
 
@@ -63,18 +62,8 @@ export class Home extends React.Component {
       categories: PropTypes.object,
       currentCategory: PropTypes.string,
       uid: PropTypes.string,
-      cloudDataSuccess: PropTypes.bool,
-      currentAction: PropTypes.string,
       hasNetwork: PropTypes.bool,
     };
-  }
-
-  componentDidUpdate() {
-    if (this.props.currentAction === 'deleteIdea' && this.props.cloudDataSuccess) {
-      this.props.dispatch({
-        type: 'RESET_CLOUD_DATA_SUCCESS',
-      });
-    }
   }
 
   selectCategory(value) {
@@ -126,39 +115,34 @@ export class Home extends React.Component {
   }
 
   toggleDeleteModal(idea) {
-    if (idea && idea.title) {
-      this.setState({
-        showDeleteModal: true,
-        deleteModalTitle: idea.title,
-        deleteModalUID: idea.uid,
-      });
-    }
-    else {
-      this.setState({
-        showDeleteModal: false,
-        deleteModalTitle: null,
-        deleteModalUID: null,
-      });
-    }
+    this.setState({
+        showDeleteModal: !this.state.showDeleteModal,
+        deleteIdeaModalTitle: idea && idea.title, // will be null if closed
+        deleteIdeaUID: idea && idea.uid, // will be null if closed
+    });
   }
 
-  deleteIdea(uid) {
+  deleteIdea() {
+    let newIdeas = utilities.cloneObject(this.props.ideas);
+    newIdeas = utilities.deleteObjectFromObjectArray(this.state.deleteIdeaUID, newIdeas);
+
+    // Dispatch to store
     this.props.dispatch({
-      type: 'TOGGLE_LOADING'
+        type: 'UPDATE_USER_DATA',
+        node: 'ideas',
+        userData: newIdeas,
+    });
+
+    // Dispatch to db
+    this.props.dispatch({
+        type: 'deleteUserData',
+        node: 'ideas/' + this.state.deleteIdeaUID,
+        uid: this.props.uid,
+        hasNetwork: this.props.hasNetwork,
     });
 
     this.toggleDeleteModal();
-
-    const newIdeas = utilities.deleteObjectFromObjectArray(uid, this.props.ideas);
-
-    this.props.dispatch({
-      type: 'saveUserData',
-      node: 'ideas',
-      uid: this.props.uid,
-      userData: newIdeas,
-      currentAction: 'deleteIdea',
-      hasNetwork: this.props.hasNetwork,
-    });
+    this.scrollToBeginning(); // otherwise we land up with a blank screen in some cases
   }
 
   handleNotePress(noteType, idea) {
@@ -222,8 +206,8 @@ export class Home extends React.Component {
     const deleteModal = this.state.showDeleteModal ?
       <ActionModal
         title='Are you sure you want to delete this idea?'
-        subtitle={this.state.deleteModalTitle}
-        handleLeftIconPress={() => this.deleteIdea(this.state.deleteModalUID)}
+        subtitle={this.state.deleteIdeaModalTitle}
+        handleLeftIconPress={this.deleteIdea}
         handleRightIconPress={this.toggleDeleteModal} />
       :
       null;
@@ -258,8 +242,6 @@ export class Home extends React.Component {
 
         <SnackBar />
 
-        <Loader />
-
       </Page >
     );
   }
@@ -271,8 +253,6 @@ function mapStateToProps(state) {
     categories: state.main.userData.categories,
     currentCategory: state.main.appData.currentCategory,
     uid: state.main.auth.uid,
-    cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
-    currentAction: state.main.app.currentAction,
     hasNetwork: state.main.app.hasNetwork,
   });
 }

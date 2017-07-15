@@ -1,6 +1,7 @@
 TODOS
-    Ideas are added, edited and deleted immediately
-    Don't need ? : null, just use &&
+    Cancel modals
+    IdeaCard labels should float to bottom (flex: 1 on infoBlock)
+    Get rid of currentAction props, reset actions where appropriate (ie. loadUserData should reset)
     Animations 
         useNativeDriver where possible (non-layout properties)
         Use wrappers wherever possible
@@ -78,6 +79,7 @@ WRAP UP
     Test all errors
         Send errors to db
     Optimise code
+        Don't need ? : null, just use &&
         Remove unnecessary
         Check proptypes
         Lifecycle methods at top with other methods following order of this bindings

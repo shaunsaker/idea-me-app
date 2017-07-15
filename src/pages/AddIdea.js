@@ -14,7 +14,6 @@ import RadioSelect from '../components/RadioSelect';
 import DropdownButton from '../components/DropdownButton';
 import TabBar from '../components/TabBar';
 import SnackBar from '../components/SnackBar';
-import Loader from '../components/Loader';
 
 export class AddIdea extends React.Component {
   constructor(props) {
@@ -43,21 +42,8 @@ export class AddIdea extends React.Component {
       newNotes: PropTypes.object,
       newPhotos: PropTypes.object,
       newVoiceNotes: PropTypes.object,
-
       uid: PropTypes.string,
-      cloudDataSuccess: PropTypes.bool,
-      currentAction: PropTypes.string,
       hasNetwork: PropTypes.bool,
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.props.currentAction === 'addIdea' && this.props.cloudDataSuccess) {
-      this.props.dispatch({
-        type: 'RESET_CLOUD_DATA_SUCCESS'
-      });
-
-      Actions.pop();
     }
   }
 
@@ -118,20 +104,23 @@ export class AddIdea extends React.Component {
     }
 
     if (!isIdeaTitlePresent) {
-      this.props.dispatch({
-        type: 'TOGGLE_LOADING'
-      });
-
       const newIdeas = utilities.pushObjectToObjectArray(newIdea, this.props.ideas);
+
+      this.props.dispatch({
+        type: 'UPDATE_USER_DATA',
+        node: 'ideas',
+        userData: newIdeas,
+      });
 
       this.props.dispatch({
         type: 'saveUserData',
         node: 'ideas',
         uid: this.props.uid,
         userData: newIdeas,
-        currentAction: 'addIdea',
         hasNetwork: this.props.hasNetwork,
       });
+
+      Actions.pop();
     }
     else {
       this.props.dispatch({
@@ -273,9 +262,6 @@ export class AddIdea extends React.Component {
 
         <SnackBar />
 
-        <Loader
-          position='bottom' />
-
       </Page >
     );
   }
@@ -290,8 +276,6 @@ function mapStateToProps(state) {
     categories: state.main.userData.categories,
     priorities: state.main.appData.priorities,
     uid: state.main.auth.uid,
-    cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
-    currentAction: state.main.app.currentAction,
     hasNetwork: state.main.app.hasNetwork,
   });
 }
