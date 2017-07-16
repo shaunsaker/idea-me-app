@@ -18,7 +18,6 @@ import Menu from '../components/Menu';
 import ProfileCard from '../components/ProfileCard';
 import Button from '../components/Button';
 import TabBar from '../components/TabBar';
-import Browser from '../components/Browser';
 import ActionModal from '../components/ActionModal';
 import SnackBar from '../components/SnackBar';
 
@@ -28,11 +27,8 @@ export class Profile extends React.Component {
 
         this.toggleMenu = this.toggleMenu.bind(this);
         this.selectMenuItem = this.selectMenuItem.bind(this);
-        this.toggleBrowser = this.toggleBrowser.bind(this);
         this.signOutUser = this.signOutUser.bind(this);
         this.toggleActionModal = this.toggleActionModal.bind(this);
-        this.setCopySuccess = this.setCopySuccess.bind(this);
-        this.setBrowserError = this.setBrowserError.bind(this);
 
         // TabBar
         this.tabs = [
@@ -52,7 +48,6 @@ export class Profile extends React.Component {
 
         this.state = {
             showMenu: false,
-            showBrowser: false,
             showActionModal: false,
         }
     }
@@ -89,7 +84,7 @@ export class Profile extends React.Component {
             // TODO
         }
         else if (type === 'Give us Feedback') {
-            this.toggleBrowser();
+            Linking.openURL('www.google.com');
         }
         else if (type === 'Get in Touch') {
             Linking.openURL('mailto:' + config.developer.email + '?subject=IdeaMe App');
@@ -97,12 +92,6 @@ export class Profile extends React.Component {
         else {
             this.toggleActionModal();
         }
-    }
-
-    toggleBrowser() {
-        this.setState({
-            showBrowser: !this.state.showBrowser,
-        });
     }
 
     toggleActionModal() {
@@ -119,36 +108,11 @@ export class Profile extends React.Component {
         Actions.welcome();
     }
 
-    setCopySuccess() {
-        this.props.dispatch({
-            type: 'USER_SUCCESS',
-            message: 'Link copied to clipboard successfully.'
-        });
-    }
-
-    setBrowserError() {
-        this.toggleBrowser();
-
-        this.props.dispatch({
-            type: 'USER_ERROR',
-            message: 'Could not load webpage.'
-        });
-    }
-
     render() {
         const menu = this.state.showMenu &&
             <Menu
                 values={['Edit Profile', 'About App', 'Settings', 'Give us Feedback', 'Get in Touch', 'Log Out']}
                 handleSelect={(type) => this.selectMenuItem(type)} />;
-
-        const browser = this.state.showBrowser ?
-            <Browser
-                uri='https://goo.gl/forms/RQZxYiLZw7DxNDu03'
-                handleClose={this.toggleBrowser}
-                handleCopySuccess={this.setCopySuccess}
-                handleBrowserError={this.setBrowserError} />
-            :
-            null;
 
         const actionModal = this.state.showActionModal &&
             <ActionModal
@@ -181,8 +145,6 @@ export class Profile extends React.Component {
                     tabs={this.tabs} />
 
                 {menu}
-
-                {browser}
 
                 {actionModal}
 

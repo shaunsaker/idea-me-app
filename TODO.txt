@@ -1,10 +1,9 @@
 TODOS
-    Header uses BlankInput component
-    Don't use browser component (use linking)
     Whereever you have elevation, add a border
     Profile page has edit button BR corner
     Remove EditLocation page
         EditProfile has 'Use Current Location' button that fetches location and updates input
+        Remove input component from header
     Animate radios
         Buttons with text in middle
     BlankInput and Input autogrow needs work when clearing text
@@ -69,6 +68,8 @@ TODOS
     RN Permissions
 
 WRAP UP  
+    User survey
+        Add link to Profile page
     App renaming
     App Icons
     Test all errors
