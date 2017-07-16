@@ -16,7 +16,7 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import Menu from '../components/Menu';
 import ProfileCard from '../components/ProfileCard';
-import Button from '../components/Button';
+import IconButton from '../components/IconButton';
 import TabBar from '../components/TabBar';
 import ActionModal from '../components/ActionModal';
 import SnackBar from '../components/SnackBar';
@@ -72,10 +72,7 @@ export class Profile extends React.Component {
     selectMenuItem(type) {
         this.toggleMenu();
 
-        if (type === 'Edit Profile') {
-            Actions.editProfile();
-        }
-        else if (type === 'About App') {
+        if (type === 'About App') {
 
             // TODO
         }
@@ -111,7 +108,7 @@ export class Profile extends React.Component {
     render() {
         const menu = this.state.showMenu &&
             <Menu
-                values={['Edit Profile', 'About App', 'Settings', 'Give us Feedback', 'Get in Touch', 'Log Out']}
+                values={['About App', 'Settings', 'Give us Feedback', 'Get in Touch', 'Log Out']}
                 handleSelect={(type) => this.selectMenuItem(type)} />;
 
         const actionModal = this.state.showActionModal &&
@@ -140,6 +137,14 @@ export class Profile extends React.Component {
                     userLocation={this.props.userLocation}
                     numberOfIdeas={numberOfIdeas}
                     handleEditImagePress={() => Actions.editProfile()} />
+
+                <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+                    <IconButton
+                        iconName='edit'
+                        backgroundColor={styleConstants.primary}
+                        iconColor={styleConstants.secondary}
+                        handlePress={() => Actions.editProfile()}/>
+                </View>
 
                 <TabBar
                     tabs={this.tabs} />

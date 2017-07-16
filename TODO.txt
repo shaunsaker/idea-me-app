@@ -1,6 +1,5 @@
 TODOS
     Whereever you have elevation, add a border
-    Profile page has edit button BR corner
     Remove EditLocation page
         EditProfile has 'Use Current Location' button that fetches location and updates input
         Remove input component from header

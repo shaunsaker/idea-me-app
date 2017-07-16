@@ -47,6 +47,16 @@ const styles = StyleSheet.create({
 });
 
 export default IconButton = (props) => {
+    /*
+        PROPS
+            backgroundColor
+            iconName
+            iconColor
+            handlePress
+            count
+            disabled
+    */
+
     const backgroundColorStyles = props.backgroundColor && 
         {
             backgroundColor: props.backgroundColor,
