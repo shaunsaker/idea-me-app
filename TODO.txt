@@ -1,5 +1,4 @@
 TODOS
-    Note card only shows title
     Profile card shows number of user ideas
     Animations 
         useNativeDriver where possible (non-layout properties)

@@ -161,9 +161,7 @@ export default NoteCard = (props) => {
         <View style={styles.infoContainer}>
             <InfoBlock
                 title={props.idea.title}
-                subtitle={props.idea.description}
                 titleColor={styleConstants.primary}
-                subtitleColor={styleConstants.grey}
                 fullWidth />
         </View>;
 
