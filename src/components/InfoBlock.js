@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     infoTextTitle: {
         fontSize: styleConstants.largeFont,
         color: styleConstants.white,
-        marginBottom: 8,
     },
     descriptionWrapper: {
         maxHeight: height / 4.5,
@@ -29,6 +28,7 @@ const styles = StyleSheet.create({
 
     },
     infoTextDescription: {
+        marginTop: 8,
         fontSize: styleConstants.regularFont,
         color: styleConstants.white,
     },

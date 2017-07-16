@@ -66,9 +66,9 @@ export default ActionModal = (props) => {
                         <View style={styles.infoContainer}>
                             <InfoBlock
                                 title={props.title}
-                                titleColor={styleConstants.secondary}
+                                titleColor={styleConstants.white}
                                 subtitle={props.subtitle}
-                                subtitleColor={styleConstants.white}
+                                subtitleColor={styleConstants.lightGrey}
                                 fullWidth />
                         </View>
                         <View style={styles.buttonsContainer}>

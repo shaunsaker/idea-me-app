@@ -68,32 +68,6 @@ export default OptionsModal = (props) => {
             handleClose
     */
 
-    const title = props.title ?
-        <View style={styles.titleContainer}>
-            <Text style={[styles.title, styleConstants.primaryFont]}>
-                {props.title}
-            </Text>
-        </View>
-        :
-        null;
-
-     const subtitle = props.subtitle ?
-        <View style={styles.subtitleContainer}>
-            <Text style={[styles.subtitle, styleConstants.primaryFont]}>
-                {props.subtitle}
-            </Text>
-        </View>
-        :
-        null;    
-
-    const text = props.title || props.subtitle ?
-        <View style={styles.textContainer}>
-            {title}
-            {subtitle}
-        </View> 
-        :
-        null;
-
     const options = props.options.map((value) => {
         return (
             <Touchable
@@ -117,9 +91,9 @@ export default OptionsModal = (props) => {
                         <View style={styles.infoContainer}>
                             <InfoBlock
                                 title={props.title}
-                                titleColor={styleConstants.secondary}
+                                titleColor={styleConstants.white}
                                 subtitle={props.subtitle}
-                                subtitleColor={styleConstants.white}
+                                subtitleColor={styleConstants.lightGrey}
                                 fullWidth />
                             <View style={styles.closeIconContainer}>
                                 <Touchable

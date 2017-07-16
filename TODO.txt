@@ -1,11 +1,15 @@
 TODOS
+    Header uses BlankInput component
+    Don't use browser component (use linking)
+    Whereever you have elevation, add a border
+    Profile page has edit button BR corner
+    Remove EditLocation page
+        EditProfile has 'Use Current Location' button that fetches location and updates input
     Animate radios
         Buttons with text in middle
-    Header uses BlankInput component
     BlankInput and Input autogrow needs work when clearing text
         Animate height
-    No secondary colour in modals
-    Don't use browser component (use linking)
+    Animate menu height 
     Animations 
         useNativeDriver where possible (non-layout properties)
         Use wrappers wherever possible
@@ -20,16 +24,11 @@ TODOS
         Get normal note icon for when not adding
         Get camera plus icon for when adding
         Get voice note plus icon for when adding
-    Whereever you have elevation, add a border
     If you navigate to other page after welcome before geolocation, geolocation does not come in
     Forgot password when user does not exist?
-    Profile page has edit button BR corner
     Rethink sharing ideas
-    Animate menu height
-    Page removes padding on small devices
-        Other responsive fixes (portrait/landscape)
-            Add listener to dimensions on orientation change and adjust page component accordingly
-    Update suburbs or use a geo-service
+    Responsiveness
+        Use page component
     Sound when idea added
     Handle app updates
         Force?
@@ -67,10 +66,9 @@ TODOS
         See material.io
         Redesign lists
         Labels same fontSize as info block description  
-
-WRAP UP
     RN Permissions
-    Create responsive component for testing (Page component)           
+
+WRAP UP  
     App renaming
     App Icons
     Test all errors
@@ -82,7 +80,7 @@ WRAP UP
         React native keyboard spacer
     Add analytics
         Create console
-        
+
 V2
     Add Sketches to Ideas
     Convert Voice Notes to Text
