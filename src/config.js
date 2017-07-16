@@ -23,7 +23,7 @@ config.modal = {
 };
 
 config.images = {
-    maxImageWidth: (width - 122) / 3,// minus padding/margin in view
+    maxImageWidth: 100,
     imagePickerOptions: {
         mediaType: 'photo',
         noData: true, // don't attach base64 data - greatly improves performance

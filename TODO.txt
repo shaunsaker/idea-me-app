@@ -1,20 +1,19 @@
 TODOS
-    Thumbnail images are very blurry
+    Note card only shows title
+    Profile card shows number of user ideas
     Animations 
         useNativeDriver where possible (non-layout properties)
         Use wrappers wherever possible
-    Cards across app
-        Edit Profile
     Dates on ideas
     Animate radios
         Buttons with text in middle
     Use FlatList/VirtualizedList for all lists
         shouldComponentUpdate will help render when it should
         A number of other perf increasing methods
-    Edit Profile header left icon should be close
     Modal on logout page made tabbar jump
     Header uses BlankInput component
     BlankInput and Input autogrow needs work when clearing text
+        Animate height
     No secondary colour in modals
     Don't use browser component (use linking)
     Try switch actions for tabs
@@ -53,29 +52,7 @@ TODOS
             Trial about to expire, unless you give us feedback
     Facebook/Google Sign In    
     About App
-    App Settings?    
-    Change store before dispatching cloudData actions
-        No loading display
-        Categories immediately
-        Add Ideas immediately
-        Edit Edits immediately
-        Add and Delete Notes immediately
-        Add and Delete Photos immediately
-        Add and Delete VoiceNotes immediately
-        Headers all display back button (no close and continue)
-        Remove current actions    
-    Apply material styles
-        See material.io
-        Redesign lists
-        Labels same fontSize as info block description  
-
-WRAP UP
-    RN Permissions
-    Create responsive component for testing (Page component)           
-    App renaming
-    App Icons
-    Test all errors
-        Send errors to db
+    App Settings?   
     Optimise code
         Don't need ? : null, just use &&
         Remove unnecessary
@@ -88,7 +65,19 @@ WRAP UP
         Check reducers
         User errors should contain resets
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
-        Use shouldComponentUpdate where necessary     
+        Use shouldComponentUpdate where necessary   
+    Apply material styles
+        See material.io
+        Redesign lists
+        Labels same fontSize as info block description  
+
+WRAP UP
+    RN Permissions
+    Create responsive component for testing (Page component)           
+    App renaming
+    App Icons
+    Test all errors
+        Send errors to db   
     IOS
         Integrate react-native-fbsdk on iOS
         Integrate react-native-google-signin on iOS

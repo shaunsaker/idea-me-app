@@ -12,7 +12,7 @@ import {
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
-import PhotoWithError from './PhotoWithError';
+import Photo from './Photo';
 
 const { width, height } = Dimensions.get('window');
 const imageWidth = (width - 122) / 3; // 122 = padding and margin
@@ -72,7 +72,7 @@ export default class PhotoList extends React.Component {
 
     renderPhoto = ({item, index}) => {
         return (
-            <PhotoWithError
+            <Photo
                 key={'photo-' + item.uid}
                 uri={item.cropped}
                 isThumbnail

@@ -51,7 +51,6 @@ export function* handleImage(action) {
 
             if (transferFileResponse.success) {
                 let maxWidth = action.maxWidth ? action.maxWidth : config.images.maxImageWidth;
-                console.log('maxWidth:', maxWidth);
 
                 const imageResizerOptions = {
                     uri: "file:" + transferFileResponse.message,

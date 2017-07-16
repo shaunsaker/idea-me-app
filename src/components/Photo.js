@@ -5,6 +5,7 @@ import {
     Image,
     Text,
     StyleSheet,
+    ActivityIndicator,
 } from "react-native";
 
 import Icon from '../styles/icons/index';
@@ -15,6 +16,14 @@ import DeleteButton from './DeleteButton';
 import Button from './Button';
 
 const styles = StyleSheet.create({
+    photoLoadingContainer: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        backgroundColor: styleConstants.lightGrey,
+    },
     photoErrorIcon: {
         color: styleConstants.danger,
     },
@@ -50,13 +59,15 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class PhotoWithError extends React.Component {
+export default class Photo extends React.Component {
     constructor(props) {
         super(props);
 
+        this.toggleLoading = this.toggleLoading.bind(this);
         this.toggleLoadError = this.toggleLoadError.bind(this);
 
         this.state = {
+            loading: true,
             loadError: false,
         }
     }
@@ -73,6 +84,12 @@ export default class PhotoWithError extends React.Component {
         }
     }
 
+    toggleLoading() {
+        this.setState({
+            loading: !this.state.loading,
+        }); 
+    }
+
     toggleLoadError() {
         this.setState({
             loadError: !this.state.loadError,
@@ -80,6 +97,13 @@ export default class PhotoWithError extends React.Component {
     }
 
     render() {
+        const photoLoadingComponent = this.state.loading &&
+            <View style={styles.photoLoadingContainer}>
+                <ActivityIndicator
+                    size='small'
+                    color={styleConstants.primary} />
+            </View>;
+
         const photoErrorIconStyles = this.props.isThumbnail ?
             [styles.photoErrorIcon, styles.photoErrorIconSmall]
             :
@@ -114,16 +138,20 @@ export default class PhotoWithError extends React.Component {
                         style={this.props.photoContainerStyles}>
                         <Image
                             source={{uri: this.props.uri}}
+                            onLoadEnd={this.toggleLoading}
                             onError={this.toggleLoadError}
                             style={this.props.photoStyles} />
                         {deleteButton}
+                        {photoLoadingComponent}
                     </Touchable> 
                     :
                     <View style={this.props.photoContainerStyles}>
                         <Image
                             source={{uri: this.props.uri}}
+                            onLoadEnd={this.toggleLoading}
                             onError={this.toggleLoadError}
                             style={this.props.photoStyles} />
+                        {photoLoadingComponent}
                     </View>
                 :
                 this.props.isThumbnail ?
