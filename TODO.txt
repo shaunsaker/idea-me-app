@@ -1,5 +1,4 @@
 TODOS
-    Dates on ideas
     Animate radios
         Buttons with text in middle
     Header uses BlankInput component

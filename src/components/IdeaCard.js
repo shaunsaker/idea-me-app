@@ -55,6 +55,13 @@ const styles = StyleSheet.create({
     infoContainer: {
         flex: 1,
     },
+    dateContainer: {
+        marginTop: 4,
+    },
+    dateText: {
+        fontSize: styleConstants.smallFont,
+        color: styleConstants.lightGrey,
+    },
     labelsContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
@@ -135,6 +142,7 @@ export default class IdeaCard extends React.Component {
                 }
             } />;
 
+        const dateCreated = utilities.getPrettyDate(this.props.idea.uid);
         const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
         const priorityLabelText = this.props.idea.priority ? this.props.idea.priority : 'Unprioritised';
         const notes = utilities.convertObjectArrayToArray(this.props.idea.notes);
@@ -159,6 +167,12 @@ export default class IdeaCard extends React.Component {
                         titleColor={styleConstants.primary}
                         subtitleColor={styleConstants.grey}
                         fullWidth />
+
+                    <View style={styles.dateContainer}>
+                        <Text style={[styles.dateText, styleConstants.primaryFont]}>
+                            {'Created: ' + dateCreated}
+                        </Text>                        
+                    </View>
                 </View>
 
                 <View

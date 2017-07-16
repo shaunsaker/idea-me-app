@@ -19,6 +19,19 @@ utilities.getPrettyMinutesFromSeconds = (seconds) => {
     return prettyMinutes;
 }
 
+utilities.getPrettyDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const year = date.getFullYear();
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    const prettyDate = day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes;
+    return prettyDate;
+}
+
 /* FILES */
 
 utilities.getFileName = (path) => {
