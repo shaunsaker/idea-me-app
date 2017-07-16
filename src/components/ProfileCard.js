@@ -94,12 +94,10 @@ export default ProfileCard = (props) => {
                 style={styles.editImageIcon} />
         </Touchable>;
 
-    const ideasLabel = props.numberOfIdeas ?
+    const ideasLabel = props.numberOfIdeas &&
         <Label
             iconName='lightbulb'
-            labelText={props.numberOfIdeas + ' excellent idea' + (props.numberOfIdeas > 1 ? 's' : '')} />
-        :
-        null;
+            labelText={props.numberOfIdeas + ' excellent idea' + (props.numberOfIdeas > 1 ? 's' : '')} />;
     
     return (
         <View

@@ -8,6 +8,7 @@ import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 
 import config from '../config';
+import utilities from '../utilities';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
@@ -27,7 +28,7 @@ export class Profile extends React.Component {
 
         this.toggleMenu = this.toggleMenu.bind(this);
         this.selectMenuItem = this.selectMenuItem.bind(this);
-		this.toggleBrowser = this.toggleBrowser.bind(this);
+        this.toggleBrowser = this.toggleBrowser.bind(this);
         this.signOutUser = this.signOutUser.bind(this);
         this.toggleActionModal = this.toggleActionModal.bind(this);
         this.setCopySuccess = this.setCopySuccess.bind(this);
@@ -35,18 +36,18 @@ export class Profile extends React.Component {
 
         // TabBar
         this.tabs = [
-        {
-            title: 'Home',
-            icon: 'home',
-            action: () => Actions.home(),
-            active: false,
-        },
-        {
-            title: 'Profile',
-            icon: 'person',
-            action: () => Actions.profile(),
-            active: true,
-        },
+            {
+                title: 'Home',
+                icon: 'home',
+                action: () => Actions.home(),
+                active: false,
+            },
+            {
+                title: 'Profile',
+                icon: 'person',
+                action: () => Actions.profile(),
+                active: true,
+            },
         ];
 
         this.state = {
@@ -63,7 +64,7 @@ export class Profile extends React.Component {
             userEmail: PropTypes.string,
             userLocation: PropTypes.string,
             userPhotoUrl: PropTypes.object,
-            numberOfIdeas: PropTypes.number, 
+            numberOfIdeas: PropTypes.number,
         };
     }
 
@@ -98,18 +99,18 @@ export class Profile extends React.Component {
         }
     }
 
-	toggleBrowser() {
-		this.setState({
-			showBrowser: !this.state.showBrowser,
-		});
-	}
+    toggleBrowser() {
+        this.setState({
+            showBrowser: !this.state.showBrowser,
+        });
+    }
 
     toggleActionModal() {
         this.setState({
             showActionModal: !this.state.showActionModal,
         });
     }
-    
+
     signOutUser() {
         this.props.dispatch({
             type: 'signOutUser'
@@ -122,7 +123,7 @@ export class Profile extends React.Component {
         this.props.dispatch({
             type: 'USER_SUCCESS',
             message: 'Link copied to clipboard successfully.'
-        });    
+        });
     }
 
     setBrowserError() {
@@ -131,29 +132,31 @@ export class Profile extends React.Component {
         this.props.dispatch({
             type: 'USER_ERROR',
             message: 'Could not load webpage.'
-        }); 
+        });
     }
 
     render() {
-        const menu = this.state.showMenu && 
-            <Menu 
+        const menu = this.state.showMenu &&
+            <Menu
                 values={['Edit Profile', 'About App', 'Settings', 'Give us Feedback', 'Get in Touch', 'Log Out']}
                 handleSelect={(type) => this.selectMenuItem(type)} />;
 
-		const browser = this.state.showBrowser ? 
-			<Browser
-				uri='https://goo.gl/forms/RQZxYiLZw7DxNDu03' 
-				handleClose={this.toggleBrowser}
+        const browser = this.state.showBrowser ?
+            <Browser
+                uri='https://goo.gl/forms/RQZxYiLZw7DxNDu03'
+                handleClose={this.toggleBrowser}
                 handleCopySuccess={this.setCopySuccess}
                 handleBrowserError={this.setBrowserError} />
-			:
-			null;                
+            :
+            null;
 
         const actionModal = this.state.showActionModal &&
             <ActionModal
                 title={'Are you sure you want to Log Out?'}
                 handleLeftIconPress={() => this.signOutUser()}
                 handleRightIconPress={this.toggleActionModal} />;
+
+        const numberOfIdeas = utilities.getLengthOfObject(this.props.ideas);
 
         return (
             <Page
@@ -171,7 +174,7 @@ export class Profile extends React.Component {
                     userPhotoUrl={this.props.userPhotoUrl.cropped}
                     userEmail={this.props.userEmail}
                     userLocation={this.props.userLocation}
-                    numberOfIdeas={this.props.numberOfIdeas}
+                    numberOfIdeas={numberOfIdeas}
                     handleEditImagePress={() => Actions.editProfile()} />
 
                 <TabBar
@@ -179,7 +182,7 @@ export class Profile extends React.Component {
 
                 {menu}
 
-				{browser}
+                {browser}
 
                 {actionModal}
 
@@ -197,7 +200,7 @@ function mapStateToProps(state) {
         userEmail: state.main.userData.profile.userEmail || 'Not Set',
         userLocation: state.main.userData.profile.userLocation || 'Not Set',
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
-        numberOfIdeas: state.main.userData.ideas && state.main.userData.ideas.length,
+        ideas: state.main.userData.ideas,
     });
 }
 

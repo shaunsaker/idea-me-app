@@ -1,20 +1,19 @@
 TODOS
-    Profile card shows number of user ideas
-    Animations 
-        useNativeDriver where possible (non-layout properties)
-        Use wrappers wherever possible
     Dates on ideas
     Animate radios
         Buttons with text in middle
-    Use FlatList/VirtualizedList for all lists
-        shouldComponentUpdate will help render when it should
-        A number of other perf increasing methods
-    Modal on logout page made tabbar jump
     Header uses BlankInput component
     BlankInput and Input autogrow needs work when clearing text
         Animate height
     No secondary colour in modals
     Don't use browser component (use linking)
+    Animations 
+        useNativeDriver where possible (non-layout properties)
+        Use wrappers wherever possible
+    Use FlatList/VirtualizedList for all lists
+        shouldComponentUpdate will help render when it should
+        A number of other perf increasing methods
+    Modal on logout page made tabbar jump
     Try switch actions for tabs
     Use babel remove console logs in production (RN perf)
     Better, more inspiring quotes
