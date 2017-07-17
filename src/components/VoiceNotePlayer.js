@@ -93,7 +93,7 @@ export default class VoiceNotePlayer extends React.Component {
         if (this.state.duration && this.state.duration !== prevState.duration) {
             this.refs.progressTrack.measure((a, b, c, d, e, width) => {
                 const progressTrackLength = width - 16;
-                const translateAmountPerCycle = (progressTrackLength * this.animationDuration) / (this.state.duration * 1000);
+                const translateAmountPerCycle = (progressTrackLength * this.animationDuration) / (this.state.duration * 1000 - 250); // -250 ms start time
 
                 this.setState({
                     progressTrackLength,

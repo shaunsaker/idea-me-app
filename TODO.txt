@@ -1,7 +1,5 @@
 TODOS
     Animations 
-        Voice note player track animation needs work
-            Caused by play delay
         Animate radios
             Buttons with text in middle
         BlankInput and Input autogrow needs work when clearing text
