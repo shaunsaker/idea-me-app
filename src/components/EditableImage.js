@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: styleConstants.transPrimary,
         borderWidth: 2,
         borderColor: styleConstants.white,
     },
@@ -47,6 +46,12 @@ const styles = StyleSheet.create({
 export default class EditableImage extends React.Component {
     constructor(props) {
         super(props);
+
+        this.toggleEditMode = this.toggleEditMode.bind(this);
+
+        this.state = {
+            isEditable: true,
+        }
     }
 
     static get propTypes() {
@@ -54,6 +59,20 @@ export default class EditableImage extends React.Component {
             uri: PropTypes.string,
             handlePress: PropTypes.func,
         };
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.uri && this.props.uri !== prevProps.uri) {
+            this.setState({
+                isEditable: false,
+            });
+        }
+    } 
+
+    toggleEditMode() {
+        this.setState({
+            isEditable: true,
+        });
     }
 
     render() {
@@ -64,17 +83,26 @@ export default class EditableImage extends React.Component {
             :
             null;
 
+        const editImageContainerStyles = this.state.isEditable && {
+            backgroundColor: styleConstants.transPrimary,
+        }
+
+        const editIcon = this.state.isEditable &&
+            <Icon
+                name='camera'
+                style={styles.editImageIcon} />;
+
         return (
             <View style={styles.imageContainer}>
 
                 {image}
 
                 <Touchable
-                    onPress={this.props.handlePress}
-                    style={styles.editImageContainer} >
-                    <Icon
-                        name='camera'
-                        style={styles.editImageIcon} />
+                    onPress={this.state.isEditable ? this.props.handlePress : this.toggleEditMode}
+                    style={[styles.editImageContainer, editImageContainerStyles]} >
+
+                    {editIcon}
+
                 </Touchable>
                 
             </View>

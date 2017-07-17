@@ -1,5 +1,4 @@
 TODOS
-    Edit Profile photo should not show camera button after adding new, only after press
     Blur sign in / forgot password inputs on sign in
     CloudData success flag no longer working on load user data
     Remove EditLocation page
