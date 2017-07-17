@@ -1,25 +1,16 @@
 TODOS
-    Blur sign in / forgot password inputs on sign in
-    CloudData success flag no longer working on load user data
-    Remove EditLocation page
-        EditProfile has 'Use Current Location' button that fetches location and updates input
-        Remove input component from header
-    Only display confirmation modal if any data has changed
-    Voice note player track animation needs work
-        Caused by play delay
-    Animate radios
-        Buttons with text in middle
-    BlankInput and Input autogrow needs work when clearing text
-        Animate height
-    Animate menu height 
     Animations 
+        Voice note player track animation needs work
+            Caused by play delay
+        Animate radios
+            Buttons with text in middle
+        BlankInput and Input autogrow needs work when clearing text
+        Animate height
+        Animate menu height 
         useNativeDriver where possible (non-layout properties)
         Use wrappers wherever possible
-    Use FlatList/VirtualizedList for all lists
-        shouldComponentUpdate will help render when it should
-        A number of other perf increasing methods
     Modal on logout page made tabbar jump
-    Try switch actions for tabs
+    Try switch actions for tabs?
     Use babel remove console logs in production (RN perf)
     Better, more inspiring quotes
     Icons
@@ -53,6 +44,8 @@ TODOS
     About App
     App Settings?   
     Optimise code
+        Use FlatList/VirtualizedList for all lists
+            shouldComponentUpdate will help render when it should
         Don't need ? : null, just use &&
         Remove unnecessary
         Check proptypes

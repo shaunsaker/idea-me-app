@@ -161,7 +161,7 @@ export class Profile extends React.Component {
                     <IconButton
                         iconName='edit'
                         backgroundColor={styleConstants.primary}
-                        iconColor={styleConstants.secondary}
+                        iconColor={styleConstants.realWhite}
                         handlePress={() => Actions.editProfile()} />
                 </View>
 

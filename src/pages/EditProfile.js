@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {
     View,
+    Text,
+    TouchableOpacity,
+    ActivityIndicator,
+    StyleSheet,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -19,21 +23,45 @@ import OptionsModal from '../components/OptionsModal';
 import ActionModal from '../components/ActionModal';
 import SnackBar from '../components/SnackBar';
 
-export class Profile extends React.Component {
+const styles = StyleSheet.create({
+    currentLocationButtonContainer: {
+        marginHorizontal: 16,
+    },
+    currentLocationButton: {
+
+    },
+    currentLocationButtonText: {
+        fontSize: styleConstants.smallFont,
+        color: styleConstants.lightGrey,
+        textDecorationLine: 'underline',
+    },
+    currentLocationLoadingContainer: {
+        position: 'absolute',
+        bottom: 45,
+        left: 16,
+    },
+});
+
+export class EditProfile extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             editUserName: null,
             editUserEmail: null,
+            editUserLocation: null,
             showPhotoModal: false,
             showCancelModal: false,
+            hasFetchedLocation: false,
+            isFetchingLocation: false,
         }
 
         this.togglePhotoModal = this.togglePhotoModal.bind(this);
         this.selectPhotoOption = this.selectPhotoOption.bind(this);
         this.updateEditUserName = this.updateEditUserName.bind(this);
         this.updateEditUserEmail = this.updateEditUserEmail.bind(this);
+        this.updateEditUserLocation = this.updateEditUserLocation.bind(this);
+        this.getUserLocation = this.getUserLocation.bind(this);
         this.updateUserDetails = this.updateUserDetails.bind(this);
         this.toggleCancelModal = this.toggleCancelModal.bind(this);
         this.cancelEditProfile = this.cancelEditProfile.bind(this);
@@ -46,6 +74,7 @@ export class Profile extends React.Component {
             userEmail: PropTypes.string,
             userLocation: PropTypes.string,
             userPhotoUrl: PropTypes.object,
+            currentLocation: PropTypes.string,
             temporaryImage: PropTypes.object,
         };
     }
@@ -53,6 +82,18 @@ export class Profile extends React.Component {
     componentDidMount() {
         this.updateEditUserName(this.props.userName);
         this.updateEditUserEmail(this.props.userEmail);
+        this.updateEditUserLocation(this.props.userLocation);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.currentLocation && this.props.currentLocation !== prevProps.currentLocation) {
+            this.updateEditUserLocation(this.props.currentLocation);
+
+            this.setState({
+                hasFetchedLocation: true,
+                isFetchingLocation: false,
+            });
+        }
     }
 
     togglePhotoModal() {
@@ -79,6 +120,24 @@ export class Profile extends React.Component {
     updateEditUserEmail(value) {
         this.setState({
             editUserEmail: value
+        });
+    }
+
+    updateEditUserLocation(value) {
+        this.setState({
+            editUserLocation: value,
+        });
+    }
+
+    getUserLocation() {
+        this.updateEditUserLocation('');
+
+        this.setState({
+            isFetchingLocation: true,
+        });
+
+        this.props.dispatch({
+            type: 'getUserLocation',
         });
     }
 
@@ -138,8 +197,26 @@ export class Profile extends React.Component {
     }
 
     render() {
-        const enableContinueButton = this.state.editUserEmail && this.state.editUserName ? true : false;
+        const enableContinueButton = this.state.editUserEmail && this.state.editUserName && this.state.editUserLocation ? true : false;
         const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage.cropped : this.props.userPhotoUrl && this.props.userPhotoUrl.cropped;
+
+        const currentLocationComponent = this.state.isFetchingLocation ?
+            <View style={styles.currentLocationLoadingContainer}>
+                <ActivityIndicator
+                    size="small"
+                    color={styleConstants.lightGrey} />
+            </View>
+            :
+            !this.state.hasFetchedLocation &&
+                <View style={styles.currentLocationButtonContainer}>
+                    <TouchableOpacity
+                        onPress={this.getUserLocation}
+                        style={styles.currentLocationButton}>
+                        <Text style={[styles.currentLocationButtonText, styleConstants.primaryFont]}>
+                            Use Your Current location
+                        </Text>
+                    </TouchableOpacity>
+                </View>;
 
         const photoModal = this.state.showPhotoModal ?
             <OptionsModal
@@ -185,13 +262,14 @@ export class Profile extends React.Component {
                         value={this.state.editUserEmail}
                         handleChange={this.updateEditUserEmail} />
 
-                </InputContainer>
+                    <Input
+                        placeholder="LOCATION"
+                        value={this.state.editUserLocation}
+                        handleChange={this.updateEditUserLocation} />
 
-                <Button
-                    iconName='location_edit'
-                    text={this.props.userLocation}
-                    backgroundColor={styleConstants.white}
-                    handlePress={() => Actions.editLocation()} />
+                    {currentLocationComponent}
+
+                </InputContainer>
 
                 {photoModal}
 
@@ -210,9 +288,10 @@ function mapStateToProps(state) {
         userName: state.main.userData.profile.userName,
         userEmail: state.main.userData.profile.userEmail,
         userLocation: state.main.userData.profile.userLocation,
+        currentLocation: state.main.geolocation.currentLocation,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
         temporaryImage: state.main.images.temporaryImage,
     });
 }
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps)(EditProfile);

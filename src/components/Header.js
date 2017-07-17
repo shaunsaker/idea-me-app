@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
 	View,
 	Text,
-	TextInput,
 	StatusBar,
 	StyleSheet,
 	Dimensions,
@@ -62,23 +61,6 @@ const styles = StyleSheet.create({
 		fontSize: styleConstants.iconFont,
 		color: styleConstants.white,
 	},
-	inputContainer: {
-		flex: 1,
-		justifyContent: 'center',
-	},
-	input: {
-		fontSize: styleConstants.regularFont,
-		color: styleConstants.white,
-		paddingLeft: 16,
-		paddingRight: 32,
-	},
-	clearTextButtonContainer: {
-		position: 'absolute',
-		bottom: 12,
-		right: 8,
-		height: 30,
-		justifyContent: 'center',
-	},
 });
 
 export default class Header extends React.Component {
@@ -103,11 +85,6 @@ export default class Header extends React.Component {
 			continueButton: PropTypes.bool,
 			rightComponent: PropTypes.func,
 			handleRightIconPress: PropTypes.func,
-
-			showInput: PropTypes.bool,
-			inputValue: PropTypes.string,
-			inputPlaceholderText: PropTypes.string,
-			handleChangeText: PropTypes.func,
 		}
 	}
 
@@ -141,7 +118,7 @@ export default class Header extends React.Component {
 			:
 			this.props.leftIconName ?
 				<Touchable
-					style={(this.props.showInput || this.props.textLeft) ? { justifyContent: 'center' } : styles.leftIconContainer}
+					style={(this.props.textLeft) ? { justifyContent: 'center' } : styles.leftIconContainer}
 					onPress={() => this.props.handleLeftIconPress} >
 					<Icon
 						name={this.props.leftIconName}
@@ -150,7 +127,7 @@ export default class Header extends React.Component {
 				:
 				this.props.backButton ?
 					<Touchable
-						style={this.props.showInput ? { justifyContent: 'center' } : styles.leftIconContainer}
+						style={styles.leftIconContainer}
 						onPress={() => Actions.pop()} >
 						<Icon
 							name='chevron_left'
@@ -159,7 +136,7 @@ export default class Header extends React.Component {
 					:
 					this.props.closeButton ?
 						<Touchable
-							style={this.props.showInput ? { justifyContent: 'center' } : styles.leftIconContainer}
+							style={styles.leftIconContainer}
 							onPress={this.props.handleLeftIconPress} >
 							<Icon
 								name='close'
@@ -194,7 +171,7 @@ export default class Header extends React.Component {
 					<Text style={[styles.text, styleConstants.primaryFont, textColorStyles]}>{this.props.text}</Text>
 				</Touchable>
 				:
-				(this.props.showInput || !this.props.text) ?
+				(!this.props.text) ?
 					null
 					:
 					<View style={[styles.textContainer, textLeftStyles, textRightStyles]}>
@@ -202,7 +179,7 @@ export default class Header extends React.Component {
 					</View>;
 
 		const rightIcon = this.props.rightComponent ?
-			<View style={this.props.showInput ? { justifyContent: 'center' } : styles.rightIconContainer}>
+			<View style={styles.rightIconContainer}>
 				{this.props.rightComponent()}
 			</View>
 			:
@@ -226,39 +203,17 @@ export default class Header extends React.Component {
 					:
 					this.props.continueButton ?
 						<Touchable
-							style={this.props.showInput ? { justifyContent: 'center' } : styles.rightIconContainer}
+							style={styles.rightIconContainer}
 							onPress={this.props.handleRightIconPress} >
 							<Icon
 								name='check'
 								style={[styles.rightIcon, textColorStyles]} />
 						</Touchable>
 						:
-						(this.props.textRight || this.props.showInput) ?
+						(this.props.textRight) ?
 							null
 							:
 							<View style={styles.rightIconContainer} />;
-
-		const clearTextButton = this.props.inputValue ?
-			<View style={styles.clearTextButtonContainer}>
-				<DeleteButton
-					handlePress={() => this.props.handleChangeText('')} />
-			</View>
-			:
-			null;
-
-		const input = this.props.showInput ?
-			<View style={styles.inputContainer}>
-				<TextInput
-					value={this.props.inputValue}
-					placeholder={this.props.inputPlaceholderText}
-					placeholderTextColor={styleConstants.lightGrey}
-					onChangeText={(text) => this.props.handleChangeText(text)}
-					underlineColorAndroid='transparent'
-					style={[styles.input, styleConstants.primaryFont]} />
-				{clearTextButton}
-			</View>
-			:
-			null;
 
 		return (
 			<View>
@@ -268,7 +223,6 @@ export default class Header extends React.Component {
 				<View style={[styles.container, backgroundColorStyles, headerShadowStyles, iosStyles]}>
 					{leftIcon}
 					{text}
-					{input}
 					{rightIcon}
 				</View>
 			</View>

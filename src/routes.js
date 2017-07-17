@@ -19,7 +19,6 @@ import EditIdea from './pages/EditIdea';
 import Categories from './pages/Categories';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
-import EditLocation from './pages/EditLocation';
 
 const Scenes = Actions.create(
 	<Scene 
@@ -83,10 +82,6 @@ const Scenes = Actions.create(
 		<Scene
 			key='editProfile'
 			component={EditProfile}
-			initial={false} />
-		<Scene
-			key='editLocation'
-			component={EditLocation}
 			initial={false} />
 	</Scene>
 )

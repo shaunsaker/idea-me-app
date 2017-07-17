@@ -1,5 +1,4 @@
 import quotes from '../resources/quotes';
-import suburbs from '../resources/suburbs';
 
 const initialState = {
     auth: {
@@ -48,7 +47,6 @@ const initialState = {
     appData: {
         currentCategory: 'All Categories',
         quotes, // can be an array because we are not saving this anywhere
-        suburbs, 
         priorities: {
             '583027200': {
                 title: 'Low',
