@@ -139,7 +139,7 @@ export class Profile extends React.Component {
 
     render() {
         const enableContinueButton = this.state.editUserEmail && this.state.editUserName ? true : false;
-        const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage.cropped : this.props.userPhotoUrl.cropped;
+        const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage.cropped : this.props.userPhotoUrl && this.props.userPhotoUrl.cropped;
 
         const photoModal = this.state.showPhotoModal ?
             <OptionsModal

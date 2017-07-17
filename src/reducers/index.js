@@ -239,6 +239,11 @@ export default function (state = initialState, action) {
             new_state.appData.newNotes = action.newNotes;
             return new_state;
 
+        case 'CLEAR_NEW_NOTES':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.newNotes = null;
+            return new_state;
+
         case 'SET_TEMPORARY_IMAGE':
             new_state = utilities.cloneObject(state);
             new_state.images.temporaryImage = action.image;
@@ -255,9 +260,19 @@ export default function (state = initialState, action) {
             new_state.images.temporaryImage = null;
             return new_state;
 
+        case 'CLEAR_NEW_PHOTOS':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.newPhotos = null;
+            return new_state;
+
         case 'SET_NEW_VOICE_NOTES':
             new_state = utilities.cloneObject(state);
             new_state.appData.newVoiceNotes = action.newVoiceNotes;
+            return new_state;
+
+        case 'CLEAR_NEW_VOICE_NOTES':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.newVoiceNotes = null;
             return new_state;
 
         case 'CLEAR_ALL_NOTES':

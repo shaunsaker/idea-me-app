@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     dateContainer: {
-        marginTop: 4,
+        marginHorizontal: 16,
     },
     dateText: {
         fontSize: styleConstants.smallFont,
@@ -142,7 +142,7 @@ export default class IdeaCard extends React.Component {
                 }
             } />;
 
-        const dateCreated = utilities.getPrettyDate(this.props.idea.uid);
+        const dateCreated = utilities.getPrettyDate(Number(this.props.idea.uid));
         const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
         const priorityLabelText = this.props.idea.priority ? this.props.idea.priority : 'Unprioritised';
         const notes = utilities.convertObjectArrayToArray(this.props.idea.notes);

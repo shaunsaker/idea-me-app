@@ -47,17 +47,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',        
         paddingVertical: 8,
         paddingHorizontal: 16,
-        backgroundColor: styleConstants.primary,
-        borderWidth: 1,
-        borderColor: styleConstants.white,
+        backgroundColor: styleConstants.realWhite,
+        borderBottomWidth: 1,
+        borderColor: styleConstants.lightGrey,
     },
     dropdownHeaderIcon: {
         marginRight: 12,
-        color: styleConstants.white,
+        color: styleConstants.primary,
         fontSize: styleConstants.iconFont,
     },
     dropdownHeaderText: {
-        color: styleConstants.white,
+        color: styleConstants.primary,
         fontSize: styleConstants.regularFont,
         textAlign: 'center',
     },
@@ -78,12 +78,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',        
         paddingVertical: 8,
         paddingHorizontal: 16,
-        backgroundColor: styleConstants.primary,
-        borderWidth: 1,
-        borderColor: styleConstants.white,
+        backgroundColor: styleConstants.realWhite,
+        borderTopWidth: 1,
+        borderColor: styleConstants.lightGrey,
     },
+    dropdownFooterIcon: {
+        marginRight: 12,
+        color: styleConstants.primary,
+        fontSize: styleConstants.iconFont,
+    },       
     dropdownFooterText: {
-        color: styleConstants.white,
+        color: styleConstants.primary,
         fontSize: styleConstants.regularFont,
         textAlign: 'center',
     },
@@ -208,11 +213,11 @@ export default class DropdownButton extends React.Component {
 
         const editCategories =
             <Touchable
-                style={styles.dropdownHeader}
+                style={styles.dropdownFooter}
                 onPress={() => { this.handleSelect('Edit Categories') }}>
-                <Icon name='edit' style={styles.dropdownHeaderIcon} />
+                <Icon name='edit' style={styles.dropdownFooterIcon} />
                 <Text
-                    style={[styles.dropdownHeaderText, styleConstants.primaryFont]}>
+                    style={[styles.dropdownFooterText, styleConstants.primaryFont]}>
                     Edit Categories
                 </Text>
             </Touchable>;

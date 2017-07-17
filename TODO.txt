@@ -1,8 +1,13 @@
 TODOS
-    Whereever you have elevation, add a border
+    Edit Profile photo should not show camera button after adding new, only after press
+    Blur sign in / forgot password inputs on sign in
+    CloudData success flag no longer working on load user data
     Remove EditLocation page
         EditProfile has 'Use Current Location' button that fetches location and updates input
         Remove input component from header
+    Only display confirmation modal if any data has changed
+    Voice note player track animation needs work
+        Caused by play delay
     Animate radios
         Buttons with text in middle
     BlankInput and Input autogrow needs work when clearing text
@@ -26,6 +31,7 @@ TODOS
     Forgot password when user does not exist?
     Rethink sharing ideas
     Responsiveness
+        Whereever you have elevation, add a border
         Use page component
     Sound when idea added
     Handle app updates

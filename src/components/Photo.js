@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
         left: 0,
-        backgroundColor: styleConstants.lightGrey,
+        backgroundColor: styleConstants.realWhite,
+        justifyContent: 'center',
+        borderRadius: 8,
     },
     photoErrorIcon: {
         color: styleConstants.danger,
@@ -75,19 +77,20 @@ export default class Photo extends React.Component {
     static get PropTypes() {
         return {
             uri: PropTypes.string.isRequired,
-            isThumbnail: PropTypes.bool, // will render smaller text, icon and deleteButton
+            isThumbnail: PropTypes.bool, // will render smaller error text, icon and deleteButton (if applicable)
             photoContainerStyles: PropTypes.object, // used for photo and error
             photoStyles: PropTypes.object,  // used for photo and error
-            errorText: PropTypes.string,
-            handleViewPhoto: PropTypes.func, // thumbnail
-            handleDeletePhoto: PropTypes.func, // if fullSize image, will provide this if image not found
+            errorText: PropTypes.string, // if load error, it will display this text
+            handlePress: PropTypes.func, // if provided, the thumbnail will be pressable
+            deleteOnErrorOnly: PropTypes.bool, // if true, only provide delete button if there was an error loading
+            handleDeletePhoto: PropTypes.func, // if provided, delete button will be provided
         }
     }
 
     toggleLoading() {
         this.setState({
             loading: !this.state.loading,
-        }); 
+        });
     }
 
     toggleLoadError() {
@@ -114,49 +117,32 @@ export default class Photo extends React.Component {
             :
             [styles.photoErrorText, styles.photoErrorTextLarge];
 
-        const deleteButton = this.props.isThumbnail ?
-            <View style={styles.deleteButtonContainerSmall}>
-                <DeleteButton
-                    handlePress={this.props.handleDeletePhoto} />
-            </View>
+        const deleteButton = this.props.handleDeletePhoto ?
+            this.props.isThumbnail ?
+                <View style={styles.deleteButtonContainerSmall}>
+                    <DeleteButton
+                        handlePress={this.props.handleDeletePhoto} />
+                </View>
+                :
+                <View style={styles.deleteButtonContainerLarge}>
+                    <Button
+                        text='Delete Photo Reference'
+                        iconName='camera'
+                        backgroundColor='transparent'
+                        androidRipple
+                        androidRippleColor={styleConstants.primary}
+                        handlePress={this.props.handleDeletePhoto} />
+                </View>
             :
-            <View style={styles.deleteButtonContainerLarge}>
-                <Button
-                    text='Delete Photo Reference'
-                    iconName='camera'
-                    backgroundColor='transparent'
-                    androidRipple
-                    androidRippleColor={styleConstants.primary}
-                    handlePress={this.props.handleDeletePhoto} />
-            </View>     
+            null;
 
         const photo =
-            !this.state.loadError ?
-                this.props.isThumbnail ?
+
+            // Load failed
+            this.state.loadError ?
+                this.props.isThumbail ?
                     <Touchable
-                        onPress={this.props.handleViewPhoto}
-                        style={this.props.photoContainerStyles}>
-                        <Image
-                            source={{uri: this.props.uri}}
-                            onLoadEnd={this.toggleLoading}
-                            onError={this.toggleLoadError}
-                            style={this.props.photoStyles} />
-                        {deleteButton}
-                        {photoLoadingComponent}
-                    </Touchable> 
-                    :
-                    <View style={this.props.photoContainerStyles}>
-                        <Image
-                            source={{uri: this.props.uri}}
-                            onLoadEnd={this.toggleLoading}
-                            onError={this.toggleLoadError}
-                            style={this.props.photoStyles} />
-                        {photoLoadingComponent}
-                    </View>
-                :
-                this.props.isThumbnail ?
-                    <Touchable 
-                        onPress={this.props.handleViewPhoto}
+                        onPress={this.props.handlePress}
                         style={this.props.photoContainerStyles}>
                         <View
                             style={this.props.photoStyles}>
@@ -181,6 +167,41 @@ export default class Photo extends React.Component {
                             </Text>
                             {deleteButton}
                         </View>
+                    </View>
+                :
+
+                // Load succeeded
+                this.props.isThumbnail ?
+                    this.props.handlePress ?
+                        <Touchable
+                            onPress={this.props.handlePress}
+                            style={this.props.photoContainerStyles}>
+                            <Image
+                                source={{ uri: this.props.uri }}
+                                onLoadEnd={this.toggleLoading}
+                                onError={this.toggleLoadError}
+                                style={this.props.photoStyles} />
+                            {!this.props.deleteOnErrorOnly && deleteButton}
+                            {photoLoadingComponent}
+                        </Touchable>
+                        :
+                        <View style={this.props.photoContainerStyles}>
+                            <Image
+                                source={{ uri: this.props.uri }}
+                                onLoadEnd={this.toggleLoading}
+                                onError={this.toggleLoadError}
+                                style={this.props.photoStyles} />
+                            {!this.props.deleteOnErrorOnly && deleteButton}
+                            {photoLoadingComponent}
+                        </View>
+                    :
+                    <View style={this.props.photoContainerStyles}>
+                        <Image
+                            source={{ uri: this.props.uri }}
+                            onLoadEnd={this.toggleLoading}
+                            onError={this.toggleLoadError}
+                            style={this.props.photoStyles} />
+                        {photoLoadingComponent}
                     </View>;
 
         return photo;

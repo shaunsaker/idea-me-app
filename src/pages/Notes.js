@@ -45,7 +45,7 @@ export class Notes extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
 
         // If our idea has notes or newNotes were passed in as props from add/edit idea pages
         if (this.props.idea.notes || this.props.newNotes) {
@@ -61,7 +61,7 @@ export class Notes extends React.Component {
     componentWillUnmount() {
         if (!this.props.addIdea) {
             this.props.dispatch({
-                type: 'CLEAR_ALL_NOTES',
+                type: 'CLEAR_NEW_NOTES',
             });
         }
     }

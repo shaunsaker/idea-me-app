@@ -44,7 +44,7 @@ export class VoiceNotes extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
 
         // If our idea has voiceNotes or newVoiceNotes were passed in as props from add/edit idea pages
         if (this.props.idea.voiceNotes || this.props.newVoiceNotes) {
@@ -60,7 +60,7 @@ export class VoiceNotes extends React.Component {
     componentWillUnmount() {
         if (!this.props.addIdea) {
             this.props.dispatch({
-                type: 'CLEAR_ALL_NOTES',
+                type: 'CLEAR_NEW_VOICE_NOTES',
             });
         }
     }

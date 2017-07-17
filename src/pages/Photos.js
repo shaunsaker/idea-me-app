@@ -53,7 +53,7 @@ export class Photos extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
 
         // If our idea has photos or newPhotos were passed in as props from add/edit idea pages
         if (this.props.idea.photos || this.props.newPhotos) {
@@ -104,7 +104,7 @@ export class Photos extends React.Component {
     componentWillUnmount() {
         if (!this.props.addIdea) {
             this.props.dispatch({
-                type: 'CLEAR_ALL_NOTES',
+                type: 'CLEAR_NEW_PHOTOS',
             });
         }
     }

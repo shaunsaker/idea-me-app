@@ -48,29 +48,30 @@ export default InputContainer = (props) => {
         {
             paddingRight: 16,
         };
-    
-    const fullWidthTitleStyles = props.fullWidth && 
+
+    const fullWidthTitleStyles = props.fullWidth &&
         {
             marginRight: 16,
         };
 
-    const subtitle = props.subtitle &&
+    const subtitle = props.subtitle ?
         props.fixSubtitleHeight ?
-            <Text style={[styles.infoTextDescription, {color: props.subtitleColor}, styleConstants.primaryFont]}>
+            <Text style={[styles.infoTextDescription, { color: props.subtitleColor }, styleConstants.primaryFont]}>
                 {props.subtitle}
             </Text>
             :
             <ScrollView
                 style={styles.descriptionWrapper}
                 contentContainerStyle={styles.descriptionContainer}>
-                <Text style={[styles.infoTextDescription, {color: props.subtitleColor}, styleConstants.primaryFont]}>
+                <Text style={[styles.infoTextDescription, { color: props.subtitleColor }, styleConstants.primaryFont]}>
                     {props.subtitle}
                 </Text>
-            </ScrollView>;
+            </ScrollView>
+        : null;
 
     return (
         <View style={[styles.infoContainer, fullWidthStyles]}>
-            <Text style={[styles.infoTextTitle, {color: props.titleColor}, styleConstants.primaryFont, fullWidthTitleStyles]}>
+            <Text style={[styles.infoTextTitle, { color: props.titleColor }, styleConstants.primaryFont, fullWidthTitleStyles]}>
                 {props.title}
             </Text>
             {subtitle}

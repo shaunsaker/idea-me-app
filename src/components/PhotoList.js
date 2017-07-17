@@ -79,7 +79,7 @@ export default class PhotoList extends React.Component {
                 photoContainerStyles={styles.photoContainer}
                 photoStyles={styles.photo}
                 errorText='Photo has been removed from device'
-                handleViewPhoto={() => this.props.handleViewPhotos(index)}
+                handlePress={() => this.props.handleViewPhotos(index)}
                 handleDeletePhoto={() => this.props.handleDelete(item)} />
         );
     }

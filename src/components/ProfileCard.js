@@ -10,6 +10,7 @@ import {
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
+import Photo from './Photo';
 import Touchable from './Touchable';
 import InfoBlock from './InfoBlock';
 import Label from './Label';
@@ -38,12 +39,16 @@ const styles = StyleSheet.create({
     profileImageContainer: {
         position: 'absolute',
         top: 16,
-        right: 16
+        right: 16,
     },
     profileImage: {
         width: 75,
         height: 75,
         borderRadius: 37.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: styleConstants.lightGrey,
     },
     editImageContainer: {
         width: 75,
@@ -82,17 +87,24 @@ const styles = StyleSheet.create({
 
 export default ProfileCard = (props) => {
     const profilePhoto = props.userPhotoUrl ?
-        <Image
-            source={{uri: props.userPhotoUrl}}
-            style={styles.profileImage} />
+        <Photo
+            uri={props.userPhotoUrl} 
+            isThumbnail
+            photoContainerStyles={styles.profileImageContainer}
+            photoStyles={styles.profileImage}
+            errorText='Photo not found'
+            deleteOnErrorOnly
+            handleDeletePhoto={props.handleDeletePhoto} />
         :
-        <Touchable
-            onPress={props.handleEditImagePress}
-            style={styles.editImageContainer} >
-            <Icon
-                name='camera'
-                style={styles.editImageIcon} />
-        </Touchable>;
+        <View style={styles.profileImageContainer}>
+            <Touchable
+                onPress={props.handleEditImagePress}
+                style={styles.editImageContainer} >
+                <Icon
+                    name='camera'
+                    style={styles.editImageIcon} />
+            </Touchable>
+        </View>;
 
     const ideasLabel = props.numberOfIdeas &&
         <Label
@@ -109,10 +121,7 @@ export default ProfileCard = (props) => {
                 titleColor={styleConstants.primary}
                 subtitleColor={styleConstants.grey} />
 
-            <View
-                style={styles.profileImageContainer}>
-                {profilePhoto}
-            </View>
+            {profilePhoto}
 
             <View style={styles.emailContainer}>
                 <Icon name='mail' style={styles.emailIcon} />

@@ -14,7 +14,7 @@ import config from '../config';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
-import PhotoWithError from './PhotoWithError';
+import Photo from './Photo';
 import Touchable from './Touchable';
 
 const { width, height } = Dimensions.get('window');
@@ -90,7 +90,7 @@ export default class PhotoViewer extends React.Component {
 
     renderPhoto = ({ item, index }) => {
         return (
-            <PhotoWithError
+            <Photo
                 key={'photo-' + item.uid}
                 uri={item.fullSize}
                 photoContainerStyles={styles.photoContainer}

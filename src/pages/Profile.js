@@ -29,6 +29,7 @@ export class Profile extends React.Component {
         this.selectMenuItem = this.selectMenuItem.bind(this);
         this.signOutUser = this.signOutUser.bind(this);
         this.toggleActionModal = this.toggleActionModal.bind(this);
+        this.deletePhoto = this.deletePhoto.bind(this); // If the user moved/deleted their image from their device, allow them to delete the ref to it
 
         // TabBar
         this.tabs = [
@@ -105,6 +106,23 @@ export class Profile extends React.Component {
         Actions.welcome();
     }
 
+    deletePhoto() {
+
+        // Dispatch to store
+        this.props.dispatch({
+            type: 'SET_USER_PHOTO',
+            userPhotoUrl: null,
+        });
+
+        // Dispatch to db
+        this.props.dispatch({
+            type: 'deleteUserData',
+            node: 'profile/userPhotoUrl',
+            uid: this.props.uid,
+            hasNetwork: this.props.hasNetwork,
+        });
+    }
+
     render() {
         const menu = this.state.showMenu &&
             <Menu
@@ -132,18 +150,19 @@ export class Profile extends React.Component {
 
                 <ProfileCard
                     userName={this.props.userName}
-                    userPhotoUrl={this.props.userPhotoUrl.cropped}
+                    userPhotoUrl={this.props.userPhotoUrl && this.props.userPhotoUrl.cropped}
                     userEmail={this.props.userEmail}
                     userLocation={this.props.userLocation}
                     numberOfIdeas={numberOfIdeas}
-                    handleEditImagePress={() => Actions.editProfile()} />
+                    handleEditImagePress={() => Actions.editProfile()}
+                    handleDeletePhoto={this.deletePhoto} />
 
-                <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+                <View style={{ position: 'absolute', bottom: 68, right: 16 }}>
                     <IconButton
                         iconName='edit'
                         backgroundColor={styleConstants.primary}
                         iconColor={styleConstants.secondary}
-                        handlePress={() => Actions.editProfile()}/>
+                        handlePress={() => Actions.editProfile()} />
                 </View>
 
                 <TabBar

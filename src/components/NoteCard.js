@@ -74,6 +74,7 @@ export default NoteCard = (props) => {
             notes/photos/voiceNotes/categories
             handleAdd
             handleDelete
+            hideTitle
 
             NOTES/CATEGORIES
                 inputValue
