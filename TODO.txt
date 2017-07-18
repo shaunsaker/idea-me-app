@@ -3,15 +3,11 @@ KEEP AN EYE
 
 TODOS
     Animations 
-        TranslateX
-            Loader
+        TranslateY
+            SnackBar
         Stretch/Compress
             NoteTaker (need to pass back state)
             VoiceNoteRecorder (need to pass back state)
-        TranslateY
-            SnackBar
-        useNativeDriver where possible (non-layout properties)
-        Use wrappers wherever possible
     Modal on logout page made tabbar jump
     Try switch actions for tabs?
     Use babel remove console logs in production (RN perf)

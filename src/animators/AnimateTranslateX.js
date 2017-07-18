@@ -21,6 +21,7 @@ export default class AnimateTranslateX extends React.Component {
         return {
             initialValue: PropTypes.number,
             finalValue: PropTypes.number,
+            duration: PropTypes.number,
             repeat: PropTypes.bool,
         }
     }
@@ -34,7 +35,7 @@ export default class AnimateTranslateX extends React.Component {
             this.state.animatedValue,
             {
                 toValue: 1,
-                duration: config.animation.short,
+                duration: this.props.duration || config.animation.short,
                 easing: config.animation.easing,
                 useNativeDriver: true,
             }

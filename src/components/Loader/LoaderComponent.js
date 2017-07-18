@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-    Animated,
+    View,
 	StyleSheet,
 } from 'react-native';
 
-import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
 
 import AnimateFadeIn from '../../animators/AnimateFadeIn';
+import AnimateTranslateX from '../../animators/AnimateTranslateX';
 
 const styles = StyleSheet.create({
 	container: {
@@ -17,43 +17,21 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default class LoaderComponent extends React.Component {
-	constructor() {
-		super();
+export default LoaderComponent = (props) => {
+    const animatedStyles = {
+        left: this.position,
+    }
 
-		this.position = new Animated.Value(-100);	
-
-		this.animateRight = this.animateRight.bind(this);	
-	}
-
-	componentDidMount() {
-		this.animateRight();
-	}
-
-	animateRight() {
-		this.position.setValue(-100);
-
-		Animated.timing(
-			this.position,
-			{
-				toValue: styleConstants.windowWidth,
-				duration: 2000,
-				easing: config.animation.easing
-			}
-		).start(() => {
-			this.animateRight()
-		});
-	}
-
-	render() {
-		const animatedStyles = {
-			left: this.position,
-		}
-
-		return (
-            <AnimateFadeIn>
-			    <Animated.View style={[styles.container, animatedStyles]} />
-            </AnimateFadeIn>
-		);
-	}
+    return (
+        <AnimateFadeIn
+            shouldAnimate={true}>
+            <AnimateTranslateX
+                initialValue={-100}
+                finalValue={styleConstants.windowWidth}
+                duration={2000}
+                repeat >
+                <View style={styles.container} />
+            </AnimateTranslateX>
+        </AnimateFadeIn>
+    );
 }

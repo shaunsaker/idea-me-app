@@ -10,7 +10,8 @@ import LoaderComponent from './LoaderComponent';
 
 const styles = StyleSheet.create({
 	container: {
-		position: 'absolute',
+        position: 'absolute',
+        bottom: 0,
 		left: 0,
 		right: 0,
 		height: 5,
@@ -32,23 +33,8 @@ export class Loader extends React.Component{
 			:
 			null;
 
-		let loaderContainerStyles;
-
-		if (this.props.position === 'top') {
-			loaderContainerStyles = {top: 0}
-		}
-		else if (this.props.position === 'clearHeader') {
-			loaderContainerStyles = {top: 56}
-		}
-		else if (this.props.position === 'bottom') {
-			loaderContainerStyles = {bottom: 0}
-		}
-		else {
-			loaderContainerStyles = {bottom: 56}
-		}
-
 		return (
-			<View style={[styles.container, loaderContainerStyles]}>	
+			<View style={styles.container}>	
 				{loader}
 			</View>
 		);
