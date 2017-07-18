@@ -3,8 +3,6 @@ KEEP AN EYE
 
 TODOS
     Animations 
-        Animate radios
-            Buttons with text in middle
         BlankInput and Input autogrow needs work when clearing text
         Animate height
         Animate menu height 
