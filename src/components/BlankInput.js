@@ -49,16 +49,16 @@ export default class BlankInput extends React.Component {
     constructor(props) {
         super(props);
 
-        this.minimumInputHeight = 45.5;
+        this.focusInput = this.focusInput.bind(this);
+        this.blurInput = this.blurInput.bind(this);
+        this.clearInputText = this.clearInputText.bind(this);
+        this.setInputHeight = this.setInputHeight.bind(this);
+
+        this.minimumInputHeight = 44.5;
 
         this.state = {
             inputHeight: this.minimumInputHeight,
         }
-
-        this.focusInput = this.focusInput.bind(this);
-        this.blurInput = this.blurInput.bind(this);
-        this.clearInputText = this.clearInputText.bind(this);
-        this.adjustInputHeight = this.adjustInputHeight.bind(this);
     }
 
     static get propTypes() {
@@ -75,22 +75,6 @@ export default class BlankInput extends React.Component {
         };
     }
 
-    componentDidUpdate(prevProps) {
-
-        // When our input has just received it's value after mounting
-        if (!prevProps.value && this.props.value && this.props.multiline) {
-
-            // Use utils to get input height based on inputWidth, inputLineHeight and charCount
-            const inputHeight = utilities.getInputHeight((styleConstants.windowWidth - 32), 21, this.props.value.length)
-            
-            if (inputHeight > this.minimumInputHeight) {
-                this.setState({
-                    inputHeight,
-                });
-            }
-        }
-    }
-
     focusInput() {
         this.props.handleFocus && this.props.handleFocus();
     }
@@ -102,10 +86,10 @@ export default class BlankInput extends React.Component {
     clearInputText() {
         this.refs.input.focus();
         this.props.handleChange('');
-        this.adjustInputHeight(0);
+        this.setInputHeight(0);
     }
 
-    adjustInputHeight(newInputHeight) {
+    setInputHeight(newInputHeight) {       
         if (newInputHeight > this.minimumInputHeight) {
             this.setState({
                 inputHeight: newInputHeight
@@ -113,7 +97,7 @@ export default class BlankInput extends React.Component {
         }
 
         // If an input was cleared
-        else if (this.minimumInputHeight > newInputHeight) {
+        else if (newInputHeight <= this.minimumInputHeight) {
             this.setState({
                 inputHeight: this.minimumInputHeight
             });
@@ -150,7 +134,7 @@ export default class BlankInput extends React.Component {
                         onBlur={this.blurInput}
                         autoFocus={this.props.autoFocus} 
                         multiline={this.props.multiline}
-                        onChange={this.props.multiline ? (event) => this.adjustInputHeight(event.nativeEvent.contentSize.height) : null /*NOTE: this does not work with onContentSizeChange */} />
+                        onChange={this.props.multiline ? (event) => this.setInputHeight(event.nativeEvent.contentSize.height) : null /*NOTE: this does not work with onContentSizeChange */} />
 
                         {clearTextButton}
                 </View>
