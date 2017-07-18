@@ -6,8 +6,6 @@ import {
     TouchableWithoutFeedback,
     TextInput,
     StyleSheet,
-    Animated,
-    Platform,
 } from "react-native";
 
 import config from '../config';

@@ -16,6 +16,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';
+import AnimateTranslateX from '../animators/AnimateTranslateX';
 
 const styles = StyleSheet.create({
     inputWrapper: {
@@ -62,82 +63,6 @@ const styles = StyleSheet.create({
         color: styleConstants.lightGrey,
     }
 });
-
-class TogglePasswordButton extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            rightPosition: new Animated.Value(-40) // start hidden
-        }
-    }
-
-    componentDidMount() {
-        Animated.timing(
-            this.state.rightPosition,
-            {
-                toValue: 0,
-                duration: config.animation.duration.short,
-                easing: config.animation.easing,
-            }
-        ).start();
-    }
-
-    render() {
-        const animatedStyles = {
-            right: this.state.rightPosition,
-        }
-
-        return (
-            <Animated.View style={animatedStyles}>
-                <Touchable
-                    onPress={this.props.handlePress}
-                    style={styles.togglePasswordContainer} >
-                    <Text style={[styles.togglePasswordText, styleConstants.primaryFont]}>
-                        {this.props.hidePassword ? 'Show' : 'Hide'}
-                    </Text>
-                </Touchable>
-            </Animated.View>
-        )
-    }
-}
-
-class CharacterCount extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            rightPosition: new Animated.Value(-40) // start hidden
-        }
-    }
-
-    componentDidMount() {
-        Animated.timing(
-            this.state.rightPosition,
-            {
-                toValue: 0,
-                duration: config.animation.duration.short,
-                easing: config.animation.easing,
-            }
-        ).start();
-    }
-
-    render() {
-        const animatedStyles = {
-            right: this.state.rightPosition,
-        }
-
-        return (
-            <Animated.View style={animatedStyles}>
-                <View style={styles.characterCountContainer}>
-                    <Text style={[styles.characterCountText, styleConstants.primaryFont]}>
-                        {(this.props.value ? this.props.value.length : 0) + ' / ' + this.props.maxLength}
-                    </Text>
-                </View>
-            </Animated.View>
-        )
-    }
-}
 
 export default class Input extends React.Component {
     constructor(props) {
@@ -254,14 +179,28 @@ export default class Input extends React.Component {
 
     render() {
         const togglePasswordButton = this.props.type === 'password' && this.state.showTogglePasswordButton &&
-            <TogglePasswordButton
-                hidePassword={this.state.hidePassword}
-                handlePress={this.togglePassword} />;
+            <AnimateTranslateX
+                initialValue={40}
+                finalValue={0}>
+                <Touchable
+                    onPress={this.togglePassword}
+                    style={styles.togglePasswordContainer} >
+                    <Text style={[styles.togglePasswordText, styleConstants.primaryFont]}>
+                        {this.state.hidePassword ? 'Show' : 'Hide'}
+                    </Text>
+                </Touchable>
+            </AnimateTranslateX>;
 
         const characterCount = this.props.maxLength && this.state.showCharacterCount &&
-            <CharacterCount
-                value={this.props.value}
-                maxLength={this.props.maxLength} />;
+            <AnimateTranslateX
+                initialValue={40}
+                finalValue={0}>
+                <View style={styles.characterCountContainer}>
+                    <Text style={[styles.characterCountText, styleConstants.primaryFont]}>
+                        {(this.props.value ? this.props.value.length : 0) + ' / ' + this.props.maxLength}
+                    </Text>
+                </View>
+            </AnimateTranslateX>
 
         const clearTextButton = this.props.value ?
             <View style={styles.clearTextButtonContainer}>

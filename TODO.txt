@@ -3,7 +3,13 @@ KEEP AN EYE
 
 TODOS
     Animations 
-        Use height animator in dropdown button
+        TranslateX
+            Loader
+        Stretch/Compress
+            NoteTaker (need to pass back state)
+            VoiceNoteRecorder (need to pass back state)
+        TranslateY
+            SnackBar
         useNativeDriver where possible (non-layout properties)
         Use wrappers wherever possible
     Modal on logout page made tabbar jump
@@ -78,3 +84,4 @@ V2
     Add Videos to Ideas
     Public ideas and collaboration
     Full screen view photos Swipe down to close  
+    Use height animator in dropdown button?

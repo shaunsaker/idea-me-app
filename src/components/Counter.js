@@ -4,7 +4,6 @@ import {
     View,
     Text,
     StyleSheet,
-    Animated,
 } from "react-native";
 
 import utilities from '../utilities';

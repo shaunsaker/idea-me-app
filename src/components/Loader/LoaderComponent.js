@@ -1,11 +1,13 @@
 import React from 'react';
 import {
+    Animated,
 	StyleSheet,
-	Animated,
 } from 'react-native';
 
 import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
+
+import AnimateFadeIn from '../../animators/AnimateFadeIn';
 
 const styles = StyleSheet.create({
 	container: {
@@ -19,27 +21,13 @@ export default class LoaderComponent extends React.Component {
 	constructor() {
 		super();
 
-		this.opacity = new Animated.Value(0);
 		this.position = new Animated.Value(-100);	
 
-		this.animateOpacity = this.animateOpacity.bind(this);
 		this.animateRight = this.animateRight.bind(this);	
 	}
 
 	componentDidMount() {
-		this.animateOpacity();
 		this.animateRight();
-	}
-
-	animateOpacity() {
-		Animated.timing(
-			this.opacity,
-			{
-				toValue: 1,
-				duration: 2000,
-				easing: config.animation.easing
-			}
-		).start();
 	}
 
 	animateRight() {
@@ -59,12 +47,13 @@ export default class LoaderComponent extends React.Component {
 
 	render() {
 		const animatedStyles = {
-			opacity: this.opacity,
 			left: this.position,
 		}
 
 		return (
-			<Animated.View style={[styles.container, animatedStyles]} />
+            <AnimateFadeIn>
+			    <Animated.View style={[styles.container, animatedStyles]} />
+            </AnimateFadeIn>
 		);
 	}
 }
