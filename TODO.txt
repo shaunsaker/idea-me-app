@@ -3,8 +3,6 @@ KEEP AN EYE
 
 TODOS
     Animations 
-        BlankInput and Input autogrow needs work when clearing text
-        Animate height
         Animate menu height 
         useNativeDriver where possible (non-layout properties)
         Use wrappers wherever possible

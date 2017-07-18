@@ -192,8 +192,8 @@ export default class Input extends React.Component {
         // When our input has just received it's value after mounting
         if (!prevProps.value && this.props.value && this.props.multiline) {
 
-            // Use utils to get input height based on inputWidth, inputLineHeight and charCount
-            const inputHeight = utilities.getInputHeight((styleConstants.windowWidth - 32), 21, this.props.value.length)
+            // Use utils to get input height based on inputWidth, fontSize and charCount
+            const inputHeight = utilities.getInputHeight((styleConstants.windowWidth - 32), styleConstants.regularFont, this.props.value.length)
             
             if (inputHeight > this.minimumInputHeight) {
                 this.setState({
@@ -228,6 +228,7 @@ export default class Input extends React.Component {
     clearInputText() {
         this.refs.input.focus();
         this.props.handleChange('');
+        this.adjustInputHeight(0);
     }
 
     togglePassword() {
@@ -244,7 +245,7 @@ export default class Input extends React.Component {
         }
 
         // If an input was cleared
-        else if (this.minimumInputHeight > newInputHeight) {
+        else if (newInputHeight <= this.minimumInputHeight) {
             this.setState({
                 inputHeight: this.minimumInputHeight
             });
