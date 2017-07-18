@@ -10,6 +10,7 @@ import {
 import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
+import AnimateHeight from '../animators/AnimateHeight';
 
 const styles = StyleSheet.create({
     menuItemsWrapper: {
@@ -52,6 +53,8 @@ export default class Menu extends React.Component {
         super(props);
 
         this.renderItem = this.renderItem.bind(this);
+
+        this.itemHeight = 41;
     }
 
 	static get propTypes() {
@@ -76,13 +79,17 @@ export default class Menu extends React.Component {
 
 	render() {   
 		return (
-            <FlatList
-                keyExtractor={item => 'menu' + item}
-                data={this.props.values}
-                renderItem={this.renderItem}
-                style={styles.menuItemsWrapper}
-                contentContainerStyle={styles.menuItemsContainer}
-                ItemSeparatorComponent={() => <View style={styles.separator} />} />
+            <View style={styles.menuItemsWrapper}>
+                <AnimateHeight
+                    height={this.props.values.length * this.itemHeight}>
+                    <FlatList
+                        keyExtractor={item => 'menu' + item}
+                        data={this.props.values}
+                        renderItem={this.renderItem}
+                        contentContainerStyle={styles.menuItemsContainer}
+                        ItemSeparatorComponent={() => <View style={styles.separator} />} />
+                </AnimateHeight>
+            </View>
 		);
 	}
 }

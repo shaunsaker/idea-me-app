@@ -3,7 +3,7 @@ KEEP AN EYE
 
 TODOS
     Animations 
-        Animate menu height 
+        Use height animator in dropdown button
         useNativeDriver where possible (non-layout properties)
         Use wrappers wherever possible
     Modal on logout page made tabbar jump
