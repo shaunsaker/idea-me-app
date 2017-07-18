@@ -5,7 +5,6 @@ import {
     FlatList,
     Text,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import Icon from '../styles/icons/index';
@@ -15,8 +14,6 @@ import Touchable from './Touchable';
 import ItemListHeader from './ItemListHeader'
 import DeleteButton from './DeleteButton';
 
-const { width, height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     listWrapper: {
         flex: 1,
@@ -25,7 +22,7 @@ const styles = StyleSheet.create({
 
     },
     listItem: {
-        width,
+        width: styleConstants.windowWidth,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

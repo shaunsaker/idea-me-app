@@ -18,7 +18,7 @@ import Menu from '../components/Menu';
 import ProfileCard from '../components/ProfileCard';
 import IconButton from '../components/IconButton';
 import TabBar from '../components/TabBar';
-import ActionModal from '../components/ActionModal';
+import ActionModal from '../modals/ActionModal';
 import SnackBar from '../components/SnackBar';
 
 export class Profile extends React.Component {

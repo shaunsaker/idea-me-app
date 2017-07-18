@@ -1,3 +1,4 @@
+import { Dimensions } from 'react-native';
 const styleConstants = {};
 
 /* FONT FAMILIES */
@@ -29,5 +30,13 @@ styleConstants.realWhite = '#ffffff';
 styleConstants.lightGrey = '#b0b3cf'; 
 styleConstants.grey = '#808092';
 styleConstants.transBlack = 'rgba(0, 0, 0, 0.9)';
+
+/* DIMENSIONS */
+
+const { width, height } = Dimensions.get('window'); 
+
+styleConstants.windowWidth = width;
+styleConstants.windowHeight = height;
+styleConstants.noteCardCell = (width - 122) / 3; // 3 grid incl. padding and margin
 
 export default styleConstants;

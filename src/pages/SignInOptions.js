@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import Button from '../components/Button';
-import ActionModal from '../components/ActionModal';
+import ActionModal from '../modals/ActionModal';
 import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
 

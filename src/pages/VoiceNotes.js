@@ -15,7 +15,7 @@ import styleConstants from '../styles/styleConstants';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
-import ActionModal from '../components/ActionModal';
+import ActionModal from '../modals/ActionModal';
 import SnackBar from '../components/SnackBar';
 
 export class VoiceNotes extends React.Component {
@@ -44,7 +44,7 @@ export class VoiceNotes extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         // If our idea has voiceNotes or newVoiceNotes were passed in as props from add/edit idea pages
         if (this.props.idea.voiceNotes || this.props.newVoiceNotes) {

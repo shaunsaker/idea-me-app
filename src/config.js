@@ -1,6 +1,5 @@
-import { Easing, Dimensions } from 'react-native';
+import { Easing } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
 const config = {};
 
 config.appName = 'IdeaMe';

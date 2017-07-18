@@ -6,7 +6,6 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet,
-    Dimensions,
     Animated,
 } from "react-native";
 
@@ -17,8 +16,6 @@ import styleConstants from '../styles/styleConstants';
 import AnimateFadeIn from '../animators/AnimateFadeIn';
 import AnimateRotate from '../animators/AnimateRotate';
 import BlankInput from './BlankInput';
-
-const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -62,7 +59,7 @@ export default class NoteTaker extends React.Component {
         this.compressButton = this.compressButton.bind(this);
 
         this.initialButtonWidth = 52;
-        this.finalButtonWidth = width - 64; // 64 = margin + padding
+        this.finalButtonWidth = styleConstants.windowWidth - 64; // 64 = margin + padding
 
         this.state = {
             animatedValue: new Animated.Value(0),
@@ -156,7 +153,7 @@ export default class NoteTaker extends React.Component {
         }
         const color = this.state.animatedValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [styleConstants.secondary, styleConstants.primary],
+            outputRange: [styleConstants.white, styleConstants.primary],
         });
         const colorStyles = {
             color,

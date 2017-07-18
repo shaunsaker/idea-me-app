@@ -6,16 +6,12 @@ import {
     Image,
     Text,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
 import Photo from './Photo';
-
-const { width, height } = Dimensions.get('window');
-const imageWidth = (width - 122) / 3; // 122 = padding and margin
 
 const styles = StyleSheet.create({
     container: {
@@ -33,14 +29,14 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
     },
     photoContainer: {
-        width: imageWidth,
-        height: imageWidth,
+        width: styleConstants.noteCardCell,
+        height: styleConstants.noteCardCell,
         marginHorizontal: 4,
         marginBottom: 8,
     },
     photo: {
-        width: imageWidth,
-        height: imageWidth,
+        width: styleConstants.noteCardCell,
+        height: styleConstants.noteCardCell,
         borderWidth: 1,
         borderColor: styleConstants.lightGrey,
         borderRadius: 8,

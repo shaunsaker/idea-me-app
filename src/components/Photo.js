@@ -65,7 +65,8 @@ export default class Photo extends React.Component {
     constructor(props) {
         super(props);
 
-        this.toggleLoading = this.toggleLoading.bind(this);
+        this.setLoadingTrue = this.setLoadingTrue.bind(this);
+        this.setLoadingFalse = this.setLoadingFalse.bind(this);
         this.toggleLoadError = this.toggleLoadError.bind(this);
 
         this.state = {
@@ -87,9 +88,21 @@ export default class Photo extends React.Component {
         }
     }
 
-    toggleLoading() {
+    componentDidUpdate(prevProps) {
+        if (this.props.uri && this.props.uri !== prevProps.uri) {
+            this.setLoadingTrue();
+        }
+    }
+
+    setLoadingTrue() {
         this.setState({
-            loading: !this.state.loading,
+            loading: true,
+        });
+    }
+
+    setLoadingFalse() {
+        this.setState({
+            loading: false,
         });
     }
 
@@ -136,6 +149,13 @@ export default class Photo extends React.Component {
             :
             null;
 
+        const image =
+            <Image
+                source={{ uri: this.props.uri }}
+                onLoadEnd={this.setLoadingFalse}
+                onError={this.toggleLoadError}
+                style={this.props.photoStyles} />;
+
         const photo =
 
             // Load failed
@@ -176,31 +196,19 @@ export default class Photo extends React.Component {
                         <Touchable
                             onPress={this.props.handlePress}
                             style={this.props.photoContainerStyles}>
-                            <Image
-                                source={{ uri: this.props.uri }}
-                                onLoadEnd={this.toggleLoading}
-                                onError={this.toggleLoadError}
-                                style={this.props.photoStyles} />
+                            {image}
                             {!this.props.deleteOnErrorOnly && deleteButton}
                             {photoLoadingComponent}
                         </Touchable>
                         :
                         <View style={this.props.photoContainerStyles}>
-                            <Image
-                                source={{ uri: this.props.uri }}
-                                onLoadEnd={this.toggleLoading}
-                                onError={this.toggleLoadError}
-                                style={this.props.photoStyles} />
+                            {image}
                             {!this.props.deleteOnErrorOnly && deleteButton}
                             {photoLoadingComponent}
                         </View>
                     :
                     <View style={this.props.photoContainerStyles}>
-                        <Image
-                            source={{ uri: this.props.uri }}
-                            onLoadEnd={this.toggleLoading}
-                            onError={this.toggleLoadError}
-                            style={this.props.photoStyles} />
+                        {image}
                         {photoLoadingComponent}
                     </View>;
 

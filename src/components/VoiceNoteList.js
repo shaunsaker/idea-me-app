@@ -23,11 +23,15 @@ const styles = StyleSheet.create({
         padding: 8,
     },
     voiceNotesContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingTop: 4,
         paddingBottom: 16,
     },
     voiceNoteContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        width: styleConstants.noteCardCell,
+        height: styleConstants.noteCardCell,
+        marginHorizontal: 4,
         marginBottom: 8,
     },
 
@@ -38,6 +42,13 @@ const styles = StyleSheet.create({
     noteText: {
         fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
+    },
+
+    deleteButtonContainer: {
+        position: 'absolute',
+        top: 4,
+        right: 4,
+        elevation: 10,
     },
 });
 
@@ -60,8 +71,10 @@ export default class VoiceNoteList extends React.Component {
             <View style={styles.voiceNoteContainer}>
                 <VoiceNotePlayer
                     voiceNote={item} />
-                <DeleteButton
-                    handlePress={() => this.props.handleDelete(item)} />
+                <View style={styles.deleteButtonContainer}>
+                    <DeleteButton
+                        handlePress={() => this.props.handleDelete(item)} />
+                </View>
             </View>
         )
     }

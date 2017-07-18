@@ -1,3 +1,6 @@
+KEEP AN EYE
+    Profile photo was not found production mode (this is where logging errors to db will be handy)
+
 TODOS
     Animations 
         Animate radios
@@ -11,19 +14,10 @@ TODOS
     Try switch actions for tabs?
     Use babel remove console logs in production (RN perf)
     Better, more inspiring quotes
-    Icons
-        Get normal note icon for when not adding
-        Get camera plus icon for when adding
-        Get voice note plus icon for when adding
-    If you navigate to other page after welcome before geolocation, geolocation does not come in
+    Only get geolocation in Edit Profile page
     Forgot password when user does not exist?
-    Rethink sharing ideas
-    Responsiveness
-        Whereever you have elevation, add a border
-        Use page component
     Sound when idea added
-    Handle app updates
-        Force?
+    Rethink sharing ideas 
     Empty state
         Prepopulate idea on signup
         Tooltips
@@ -37,10 +31,24 @@ TODOS
             Enjoying the app? Help us spread the word by sharing (fb or tweet)
                 Auto populate
         After one free month
-            Trial about to expire, unless you give us feedback
-    Facebook/Google Sign In    
+            Trial about to expire, unless you give us feedback 
     About App
-    App Settings?   
+    App Settings?  
+    Apply material styles
+        See material.io
+        Redesign lists
+        Labels same fontSize as info block description 
+    Responsiveness
+        Whereever you have elevation, add a border
+        Use page component
+    Handle app updates
+        Force?
+    Facebook/Google Sign In  
+    RN Permissions  
+    User survey
+        Add link to Profile page
+
+WRAP UP  
     Optimise code
         Use FlatList/VirtualizedList for all lists
             shouldComponentUpdate will help render when it should
@@ -55,16 +63,7 @@ TODOS
         Check reducers
         User errors should contain resets
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
-        Use shouldComponentUpdate where necessary   
-    Apply material styles
-        See material.io
-        Redesign lists
-        Labels same fontSize as info block description  
-    RN Permissions
-
-WRAP UP  
-    User survey
-        Add link to Profile page
+        Use shouldComponentUpdate where necessary 
     App renaming
     App Icons
     Test all errors

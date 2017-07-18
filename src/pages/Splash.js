@@ -15,12 +15,21 @@ import styleConstants from '../styles/styleConstants';
 import Page from '../components/Page';
 import InfoBlock from '../components/InfoBlock';
 import SnackBar from '../components/SnackBar';
+import InfoModal from '../modals/InfoModal';
 
 export class Splash extends React.Component {
     constructor(props) {
         super(props);
 
+        this.runLogic = this.runLogic.bind(this);
+        this.toggleNetworkState = this.toggleNetworkState.bind(this);
+        this.toggleNetworkModal = this.toggleNetworkModal.bind(this);
+
         this.quote = utilities.getRandomItemFromArray(this.props.quotes);
+
+        this.state = {
+            showNetworkModal: false,
+        }
     }
 
     static get propTypes() {
@@ -34,61 +43,82 @@ export class Splash extends React.Component {
     }
 
     componentDidMount() {
+        this.runLogic();
+    }
+
+    componentDidUpdate() {
+        this.runLogic();
+    }
+
+    runLogic() {
 
         // Check if the user is connected to a network
         NetInfo.isConnected.fetch()
             .then((isConnected) => {
                 if (!isConnected) {
-                    this.props.dispatch({
-                        type: 'TOGGLE_NETWORK_STATE'
-                    });
+
+                    // Only if a modal is not already present
+                    if (!this.state.showNetworkModal) {
+                        this.toggleNetworkState();
+                    }
+                }
+                else {
+                    if (this.state.showNetworkModal) {
+                        this.toggleNetworkState();
+                    }
+
+                    // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
+                    if (this.props.redirectToWelcomePage) {
+                        Actions.welcome();
+                    }
+
+                    // If we're authenticated and we have not yet loaded data, load/save data to db
+                    else if (this.props.authenticated && !this.props.cloudDataSuccess) {
+                        this.props.dispatch({
+                            type: 'loadUserData',
+                            uid: this.props.uid,
+                        });
+                    }
+
+                    // If we have data, we have everything we need
+                    else if (this.props.authenticated && this.props.cloudDataSuccess) {
+                        this.props.dispatch({
+                            type: 'RESET_CLOUD_DATA_SUCCESS'
+                        });
+
+                        Actions.home();
+                    }
+                    else if (!this.props.authenticated) {
+                        this.props.dispatch({
+                            type: 'getUserAuth',
+                        });
+                    }
                 }
             });
-
-        if (this.props.redirectToWelcomePage) {
-            Actions.welcome();
-        }
-
-        // When a user is signed in and reloads app
-        else if (this.props.authenticated && !this.props.cloudDataSuccess) {
-            this.props.dispatch({
-                type: 'loadUserData',
-                uid: this.props.uid
-            });
-        }
-        else if (!this.props.authenticated) {
-            this.props.dispatch({
-                type: 'getUserAuth'
-            });
-        }
     }
 
-    componentDidUpdate() {
+    toggleNetworkState() {
+        this.props.dispatch({
+            type: 'TOGGLE_NETWORK_STATE'
+        });
 
-        // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
-        if (this.props.redirectToWelcomePage) {
-            Actions.welcome();
-        }
+        this.toggleNetworkModal();
+    }
 
-        // If we're authenticated and we have not yet loaded data, load/save data to db
-        else if (this.props.authenticated && !this.props.cloudDataSuccess) {
-            this.props.dispatch({
-                type: 'loadUserData',
-                uid: this.props.uid,
-            });
-        }
-
-        // If we have data, we have everything we need
-        else if (this.props.authenticated && this.props.cloudDataSuccess) {
-            this.props.dispatch({
-                type: 'RESET_CLOUD_DATA_SUCCESS'
-            });
-
-            Actions.home();
-        }
+    toggleNetworkModal() {
+        this.setState({
+            showNetworkModal: !this.state.showNetworkModal,
+        });
     }
 
     render() {
+        const networkModal = this.state.showNetworkModal &&
+            <InfoModal
+                title='Network Error'
+                subtitle='Check Your Connection and Hit Retry'
+                handlePress={this.runLogic}
+                handleClose={this.toggleNetworkModal} />
+
         return (
             <Page
                 justifyContent='center'
@@ -109,6 +139,8 @@ export class Splash extends React.Component {
                         subtitle={this.quote.author}
                         subtitleColor={styleConstants.lightGrey} />
                 </View>
+
+                {networkModal}
 
                 <SnackBar />
 

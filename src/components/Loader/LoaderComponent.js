@@ -2,13 +2,10 @@ import React from 'react';
 import {
 	StyleSheet,
 	Animated,
-	Dimensions,
 } from 'react-native';
 
 import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
-
-const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
 	container: {
@@ -51,7 +48,7 @@ export default class LoaderComponent extends React.Component {
 		Animated.timing(
 			this.position,
 			{
-				toValue: width,
+				toValue: styleConstants.windowWidth,
 				duration: 2000,
 				easing: config.animation.easing
 			}

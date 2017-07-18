@@ -4,7 +4,6 @@ import {
     Text,
     ActivityIndicator,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import Icon from '../styles/icons/index';
@@ -12,11 +11,9 @@ import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 
-const { width, height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     header: {
-        width,
+        width: styleConstants.windowWidth,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

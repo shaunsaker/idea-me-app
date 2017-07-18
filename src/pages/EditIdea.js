@@ -13,7 +13,7 @@ import Input from '../components/Input';
 import RadioSelect from '../components/RadioSelect';
 import DropdownButton from '../components/DropdownButton';
 import TabBar from '../components/TabBar';
-import ActionModal from '../components/ActionModal';
+import ActionModal from '../modals/ActionModal';
 import SnackBar from '../components/SnackBar';
 
 export class EditIdea extends React.Component {

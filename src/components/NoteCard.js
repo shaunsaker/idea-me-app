@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import utilities from '../utilities';
@@ -18,14 +17,12 @@ import NoteTaker from './NoteTaker';
 import IconButton from './IconButton';
 import VoiceNoteRecorder from './VoiceNoteRecorder';
 
-const { width, height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     cardContainer: {
         flex: 1,
         justifyContent: 'space-between',
         position: 'relative',
-        width: width - 32,
+        width: styleConstants.windowWidth - 32,
         backgroundColor: styleConstants.realWhite,
         borderWidth: 1,
         borderColor: styleConstants.white,
@@ -136,7 +133,7 @@ export default NoteCard = (props) => {
             <IconButton
                 handlePress={props.handleAdd}
                 iconName={iconName}
-                iconColor={styleConstants.secondary}
+                iconColor={styleConstants.white}
                 disabled={props.disabled} />
     }
     else if (props.type === 'voiceNotes') {

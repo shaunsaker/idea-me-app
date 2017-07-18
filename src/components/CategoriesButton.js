@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import Icon from '../styles/icons/index';
@@ -11,11 +10,9 @@ import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 
-const { width, height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     button: {
-        width: width - 32,
+        width: styleConstants.windowWidth - 32,
         height: 56,
         paddingHorizontal: 16,
         borderWidth: 1,

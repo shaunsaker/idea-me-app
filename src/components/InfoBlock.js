@@ -4,12 +4,9 @@ import {
     ScrollView,
     Text,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import styleConstants from '../styles/styleConstants';
-
-const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     infoContainer: {
@@ -22,7 +19,7 @@ const styles = StyleSheet.create({
         color: styleConstants.white,
     },
     descriptionWrapper: {
-        maxHeight: height / 4.5,
+        maxHeight: styleConstants.windowHeight / 4.5,
     },
     descriptionContainer: {
 

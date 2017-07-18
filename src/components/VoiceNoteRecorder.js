@@ -5,7 +5,6 @@ import {
     TouchableWithoutFeedback,
     Text,
     StyleSheet,
-    Dimensions,
     Animated,
 } from "react-native";
 import { Recorder } from 'react-native-audio-toolkit';
@@ -19,8 +18,6 @@ import AnimateBlink from '../animators/AnimateBlink';
 import AnimateRotate from '../animators/AnimateRotate';
 import AnimateFadeIn from '../animators/AnimateFadeIn';
 import Counter from './Counter';
-
-const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -56,7 +53,7 @@ export default class VoiceNoteRecorder extends React.Component {
         this.toggleRecording = this.toggleRecording.bind(this);
 
         this.initialButtonWidth = 52;
-        this.finalButtonWidth = width - 64; // 64 = margin + padding
+        this.finalButtonWidth = styleConstants.windowWidth - 64; // 64 = margin + padding
         this.recorder;
 
         this.state = {
@@ -185,7 +182,7 @@ export default class VoiceNoteRecorder extends React.Component {
         }
         const color = this.state.animatedValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [styleConstants.secondary, styleConstants.danger],
+            outputRange: [styleConstants.white, styleConstants.danger],
         });
         const colorStyles = {
             color,

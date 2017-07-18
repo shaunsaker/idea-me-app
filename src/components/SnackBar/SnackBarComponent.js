@@ -5,19 +5,16 @@ import {
     Text,
     Animated,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 import Icon from '../../styles/icons/index';
 
 import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
 
-const { width, height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     messageWrapper: {
         position: 'absolute',
-        width, 
+        width: styleConstants.windowWidth, 
         backgroundColor: styleConstants.grey,
         borderTopWidth: 1,
         borderTopColor: styleConstants.lightGrey,

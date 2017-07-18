@@ -24,7 +24,8 @@ const glyphMap = {
   "voice": 59670,
   "note": 59671,
   "play": 59669,
-  "pause": 59672
+  "pause": 59672,
+  "refresh": 59673,
 };
 
 let Icon = createIconSet(glyphMap, 'IdeaMeAppIcons', 'IdeaMe-Icons.ttf');

@@ -7,7 +7,6 @@ import {
     Image,
     Text,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import config from '../config';
@@ -16,8 +15,6 @@ import styleConstants from '../styles/styleConstants';
 
 import Photo from './Photo';
 import Touchable from './Touchable';
-
-const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -38,8 +35,8 @@ const styles = StyleSheet.create({
 
     },
     photo: {
-        width,
-        height,
+        width: styleConstants.windowWidth,
+        height: styleConstants.windowHeight,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -82,8 +79,8 @@ export default class PhotoViewer extends React.Component {
     
     getItemLayout = (data, index) => (
         {
-            length: width,
-            offset: width * index,
+            length: styleConstants.windowWidth,
+            offset: styleConstants.windowWidth * index,
             index,
         }
     )

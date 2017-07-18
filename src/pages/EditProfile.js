@@ -19,9 +19,9 @@ import InputContainer from '../components/InputContainer';
 import EditableImage from '../components/EditableImage';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import OptionsModal from '../components/OptionsModal';
-import ActionModal from '../components/ActionModal';
 import SnackBar from '../components/SnackBar';
+import OptionsModal from '../modals/OptionsModal';
+import ActionModal from '../modals/ActionModal';
 
 const styles = StyleSheet.create({
     currentLocationButtonContainer: {

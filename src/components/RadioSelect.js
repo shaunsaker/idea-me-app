@@ -10,6 +10,8 @@ import styleConstants from '../styles/styleConstants';
 
 import Touchable from './Touchable';
 
+const radioButtonWidth = (styleConstants.windowWidth - 32) / 3;
+
 const styles = StyleSheet.create({
     container: {
  
@@ -24,28 +26,19 @@ const styles = StyleSheet.create({
     radioButtonsContainer: {
         marginTop: 8,
         flexDirection: 'row',
+        borderWidth: 1,
+        borderColor: styleConstants.lightGrey,
     },
     radioButtonContainer: {
-        flex: 1,
-        alignItems: 'center',
+
     },
     radioButton: {
-        width: 16,
-        height: 16,
-        borderRadius: 8,
-        borderWidth: 2,
-        borderColor: styleConstants.lightGrey,
+        width: radioButtonWidth,
+        height: 56,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    radioButtonInner: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        padding: 4,
-    },
     labelContainer: {
-        paddingVertical: 8,
     },
     label: {
         fontSize: styleConstants.regularFont,
@@ -104,33 +97,17 @@ export default class RadioSelect extends React.Component {
             };
 
         const radioButtons = this.props.values.map((value) => {
-            const activeRadioButtonStyles = this.state.active === value.title && 
-                {
-                    borderColor: styleConstants.white,
-                };
-            
-            const activeRadioButtonInnerStyles = this.state.active === value.title && 
-                {
-                    backgroundColor: styleConstants.secondary,
-                };
-
-            const activeLabelStyles = this.state.active === value.title &&
-                {
-                    color: styleConstants.white,
-                };
-
             return (
                 <Touchable
                     key={'radio-' + value.title}
                     style={styles.radioButtonContainer}
                     onPress={() => this.select(value.title)}>
-                    <View style={[styles.radioButton,activeRadioButtonStyles]}>
-                        <View style={[styles.radioButtonInner, activeRadioButtonInnerStyles]} />
-                    </View>
-                    <View style={styles.labelContainer}>
-                        <Text style={[styles.label, styleConstants.primaryFont, activeLabelStyles]}>
-                            {value.title}
-                        </Text>
+                    <View style={[styles.radioButton]}>
+                        <View style={styles.labelContainer}>
+                            <Text style={[styles.label, styleConstants.primaryFont]}>
+                                {value.title}
+                            </Text>
+                        </View>
                     </View>
                 </Touchable> 
             );
@@ -144,9 +121,8 @@ export default class RadioSelect extends React.Component {
                     </Text>
                 </View>
                 <View style={styles.radioButtonsContainer}>
-
-                    {radioButtons}
-
+                    <View style={{position: 'absolute', zIndex: -1, left: 0, width: radioButtonWidth, height: 56, backgroundColor: 'red'}} />
+                    {radioButtons}                 
                 </View>
             </View>
 		);

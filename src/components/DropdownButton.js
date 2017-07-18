@@ -6,7 +6,6 @@ import {
     Text,
     Animated,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 import { Actions } from 'react-native-router-flux';
 
@@ -18,8 +17,6 @@ import Touchable from './Touchable';
 import Button from './Button';
 import CategoriesButton from './CategoriesButton';
 
-const { width, height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     dropdownContainer: {
         position: 'relative',
@@ -29,7 +26,7 @@ const styles = StyleSheet.create({
         top: 76,
         left: 0,
         right: 0,
-        width: width - 32,
+        width: styleConstants.windowWidth - 32,
         elevation: 5,
         shadowColor: "#000000",
         shadowOpacity: 0.6,
@@ -65,7 +62,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         paddingVertical: 8,
-        width: width - 32,        
+        width: styleConstants.windowWidth - 32,        
     },
     dropdownItemText: {
         color: styleConstants.primary,

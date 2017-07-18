@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
     View,
     Text,
-    Dimensions,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -15,12 +14,10 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
 import PhotoViewer from '../components/PhotoViewer';
-import OptionsModal from '../components/OptionsModal';
-import ActionModal from '../components/ActionModal';
 import Loader from '../components/Loader';
 import SnackBar from '../components/SnackBar';
-
-const { width, height } = Dimensions.get('window');
+import OptionsModal from '../modals/OptionsModal';
+import ActionModal from '../modals/ActionModal';
 
 export class Photos extends React.Component {
     constructor(props) {
@@ -53,12 +50,12 @@ export class Photos extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         // If our idea has photos or newPhotos were passed in as props from add/edit idea pages
         if (this.props.idea.photos || this.props.newPhotos) {
             const newPhotos = this.props.idea.photos ? this.props.idea.photos : this.props.newPhotos;
-            
+
             this.props.dispatch({
                 type: 'SET_NEW_PHOTOS',
                 newPhotos,
@@ -128,7 +125,7 @@ export class Photos extends React.Component {
         this.props.dispatch({
             type: 'handleImage',
             option, // Take a Photo / Choose a Photo
-            maxWidth: Math.ceil((width - 122) / 3), // 122 = padding + margin
+            maxWidth: Math.ceil(styleConstants.noteCardCell),
         });
     }
 

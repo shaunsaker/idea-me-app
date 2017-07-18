@@ -13,8 +13,8 @@ import Input from '../components/Input';
 import RadioSelect from '../components/RadioSelect';
 import DropdownButton from '../components/DropdownButton';
 import TabBar from '../components/TabBar';
-import ActionModal from '../components/ActionModal';
 import SnackBar from '../components/SnackBar';
+import ActionModal from '../modals/ActionModal';
 
 export class AddIdea extends React.Component {
     constructor(props) {

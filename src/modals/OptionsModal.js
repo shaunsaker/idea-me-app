@@ -4,17 +4,14 @@ import {
     Text,
     Modal,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import config from '../config';
 import Icon from '../styles/icons/index';
 import styleConstants from '../styles/styleConstants';
 
-import InfoBlock from './InfoBlock';
-import Touchable from './Touchable';
-
-const { width, height } = Dimensions.get('window');
+import InfoBlock from '../components/InfoBlock';
+import Touchable from '../components/Touchable';
 
 const styles = StyleSheet.create({
     container: {
@@ -24,7 +21,7 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.transBlack,
     },
     modal: {
-        width: width - 32,
+        width: styleConstants.windowWidth - 32,
         backgroundColor: styleConstants.white,
         position: 'relative',
     },

@@ -4,7 +4,6 @@ import {
     Image,
     Text,
     StyleSheet,
-    Dimensions,
 } from "react-native";
 
 import Icon from '../styles/icons/index';
@@ -15,12 +14,10 @@ import Touchable from './Touchable';
 import InfoBlock from './InfoBlock';
 import Label from './Label';
 
-const { width, height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     cardContainer: {
         position: 'relative',
-        width: width - 32,
+        width: styleConstants.windowWidth - 32,
         backgroundColor: styleConstants.realWhite,
         borderWidth: 1,
         borderColor: styleConstants.white,

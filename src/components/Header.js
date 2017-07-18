@@ -5,7 +5,6 @@ import {
 	Text,
 	StatusBar,
 	StyleSheet,
-	Dimensions,
 	Platform
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -16,8 +15,6 @@ import styleConstants from '../styles/styleConstants';
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';
 
-const { width, height } = Dimensions.get('window');
-
 const iosStyles = Platform.OS === 'ios' &&
 	{
 		paddingTop: 20,
@@ -26,7 +23,7 @@ const iosStyles = Platform.OS === 'ios' &&
 
 const styles = StyleSheet.create({
 	container: {
-		width,
+		width: styleConstants.windowWidth,
 		height: 56,
 		flexDirection: 'row',
 		justifyContent: 'space-between',

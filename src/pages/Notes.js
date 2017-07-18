@@ -13,7 +13,7 @@ import styleConstants from '../styles/styleConstants';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
-import ActionModal from '../components/ActionModal';
+import ActionModal from '../modals/ActionModal';
 import SnackBar from '../components/SnackBar';
 
 export class Notes extends React.Component {
@@ -45,7 +45,7 @@ export class Notes extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         // If our idea has notes or newNotes were passed in as props from add/edit idea pages
         if (this.props.idea.notes || this.props.newNotes) {

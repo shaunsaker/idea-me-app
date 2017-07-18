@@ -17,7 +17,7 @@ import Logo from '../components/Logo';
 import DropdownButton from '../components/DropdownButton';
 import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
-import ActionModal from '../components/ActionModal';
+import ActionModal from '../modals/ActionModal';
 import SnackBar from '../components/SnackBar';
 
 export class Home extends React.Component {

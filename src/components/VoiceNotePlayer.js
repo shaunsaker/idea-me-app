@@ -5,8 +5,6 @@ import {
     TouchableWithoutFeedback,
     Text,
     StyleSheet,
-    Dimensions,
-    Animated,
 } from "react-native";
 import { Player } from 'react-native-audio-toolkit'; 
 
@@ -21,8 +19,13 @@ import Counter from './Counter';
 const styles = StyleSheet.create({
     voiceNoteContainer: {
         flex: 1,
-        flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: styleConstants.realWhite,
+        borderWidth: 1,
+        borderColor: styleConstants.lightGrey,
+        borderRadius: 8,
+        elevation: 3,
     },
     voiceNoteIconContainer: {
 
@@ -32,26 +35,7 @@ const styles = StyleSheet.create({
         color: styleConstants.primary,
     },
     voiceNoteDurationTextContainer: {
-        marginLeft: 8,
-    },
-    voiceNoteProgressContainer: {
-        flex: 1,
-        marginHorizontal: 8,
-        alignSelf: 'stretch',
-        justifyContent: 'center',
-    },
-    voiceNoteProgressMarker: {
-        position: 'absolute',
-        top: 4.5,
-        backgroundColor: styleConstants.primary,
-        width: 16,
-        height: 16,
-        borderRadius: 8,
-        zIndex: 1,
-    },
-    voiceNoteProgressTrack: {
-        height: 2,
-        backgroundColor: styleConstants.lightGrey,
+
     },
 });
 
@@ -61,16 +45,10 @@ export default class VoiceNotePlayer extends React.Component {
 
         this.reloadPlayer = this.reloadPlayer.bind(this);
         this.togglePlayback = this.togglePlayback.bind(this);
-        this.animate = this.animate.bind(this);
 
-        this.animationDuration = config.animation.duration.short;
         this.player;
 
         this.state = {
-            progressTrackLength: null,
-            currentTranslateAmount: 0,
-            translateAmountPerCycle: null,
-            animatedValue: new Animated.Value(0),
             isPlaying: false,
             isPaused: false,
             duration: null,
@@ -85,22 +63,6 @@ export default class VoiceNotePlayer extends React.Component {
 
     componentDidMount() {
         this.reloadPlayer();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-
-        // When duration state set, use it to calculate translateAmountPerCycle
-        if (this.state.duration && this.state.duration !== prevState.duration) {
-            this.refs.progressTrack.measure((a, b, c, d, e, width) => {
-                const progressTrackLength = width - 16;
-                const translateAmountPerCycle = (progressTrackLength * this.animationDuration) / (this.state.duration * 1000 - 250); // -250 ms start time
-
-                this.setState({
-                    progressTrackLength,
-                    translateAmountPerCycle,
-                });
-            });
-        }
     }
 
     componentWillUnmount() {
@@ -135,14 +97,12 @@ export default class VoiceNotePlayer extends React.Component {
 
     togglePlayback() {
 
-        // 0 => Play
-        if (!this.state.isPlaying && !this.state.isPaused) {
+        // 0 => Play || Pause => Play
+        if ((!this.state.isPlaying && !this.state.isPaused) || this.state.isPaused) {
             this.setState({
                 isPlaying: true,
                 isPaused: false,
             });
-
-            this.animate();
         }
 
         // Play => Pause
@@ -153,70 +113,28 @@ export default class VoiceNotePlayer extends React.Component {
             });
         }
 
-        // Pause => Play
-        else if (this.state.isPaused) {
-            this.setState({
-                isPlaying: true,
-                isPaused: false,
-            });
-
-            this.animate();
-        }
-
         this.player.playPause((error, paused) => {
 
             // Do  nothing
         });
     }
 
-    animate() {
-        let nextTranslateAmount = this.state.currentTranslateAmount + this.state.translateAmountPerCycle;
-
-        Animated.timing(
-            this.state.animatedValue,
-            {
-                toValue: nextTranslateAmount,
-                duration: this.animationDuration,
-                easing: config.animation.easing,
-                useNativeDriver: true,
-            }
-        ).start(() => {
-
-            // 0/Paused => Play
-            if (this.state.isPlaying && nextTranslateAmount <= this.state.progressTrackLength) {
-                this.setState({
-                    currentTranslateAmount: nextTranslateAmount,
-                });
-
-                this.animate();
-            }
-
-            // Stopped (paused does nothing)
-            else if (!this.state.isPaused) {
-                this.setState({
-                    currentTranslateAmount: 0,
-                });
-            }
-        });
-    }
-
     render() {
-        const iconName = this.state.isPlaying ? 'pause' : 'play';
-        const progressMarkerStyles = {
-            transform: [
-                { translateX: this.state.currentTranslateAmount},
-            ],
+        const containerStyles = this.state.isPlaying && {
+            backgroundColor: 'transparent',
         }
 
+        const iconName = this.state.isPlaying ? 'pause' : 'play';
+
         return (
-            <View style={styles.voiceNoteContainer}>
-                <Touchable
-                    onPress={this.togglePlayback}
-                    style={styles.voiceNoteIconContainer}>
+            <Touchable 
+                onPress={this.togglePlayback}
+                style={[styles.voiceNoteContainer, containerStyles]} >
+                <View style={styles.voiceNoteIconContainer}>
                     <Icon
                         name={iconName}
                         style={styles.voiceNoteIcon} />
-                </Touchable>
+                </View>
                 <View style={styles.voiceNoteDurationTextContainer}>
                     <Counter
                         displayDuration={this.state.duration}
@@ -224,14 +142,7 @@ export default class VoiceNotePlayer extends React.Component {
                         startTimer={this.state.isPlaying}
                         pauseTimer={this.state.isPaused} />
                 </View>
-                <View style={styles.voiceNoteProgressContainer}>
-                    <Animated.View style={[styles.voiceNoteProgressMarker, progressMarkerStyles]} />
-                    <View  
-                        ref='progressTrack'
-                        onLayout={() => null} 
-                        style={styles.voiceNoteProgressTrack} />
-                </View>
-            </View>
+            </Touchable>
         );
     }
 }
