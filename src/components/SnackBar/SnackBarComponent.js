@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
     View,
     Text,
-    Animated,
     StyleSheet,
 } from "react-native";
 import Icon from '../../styles/icons/index';
@@ -11,9 +10,12 @@ import Icon from '../../styles/icons/index';
 import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
 
+import AnimateTranslateY from '../../animators/AnimateTranslateY';
+
 const styles = StyleSheet.create({
     messageWrapper: {
         position: 'absolute',
+        bottom: 0,
         width: styleConstants.windowWidth, 
         backgroundColor: styleConstants.grey,
         borderTopWidth: 1,
@@ -67,13 +69,13 @@ export default class SnackBarComponent extends React.Component {
     constructor(props) {
         super(props);
 
+        this.hideSnackBar = this.hideSnackBar.bind(this);
+
         this.height = 81;
 
         this.state = {
-            bottom: new Animated.Value((this.height) * -1),
+            hideSnackBar: false,
         }
-
-        this.hideSnackBar = this.hideSnackBar.bind(this);
     }
 
     static get propTypes() {
@@ -84,34 +86,16 @@ export default class SnackBarComponent extends React.Component {
         };
     }
 
-    componentDidMount() {   
-        Animated.timing(
-            this.state.bottom,
-            {
-                toValue: 0,
-                duration: config.animation.duration.short,
-                easing: config.animation.easing,
-            }
-        ).start();
-    }
-
     hideSnackBar() {
-        Animated.timing(
-            this.state.bottom,
-            {
-                toValue: (this.height) * -1,
-                duration: config.animation.duration.short,
-                easing: config.animation.easing,
-            }
-        ).start(() => {
-            this.props.handleReset();
+        this.setState({
+            hideSnackBar: true,
         });
     }
 
     render() {
         const iconName = this.props.success ? 'check' : 'error';   
 
-        const retryButton = this.props.handleRetryAction ?
+        const retryButton = this.props.handleRetryAction &&
             <Touchable
                 onPress={this.props.handleRetryAction}
                 style={styles.retryButton}>
@@ -119,12 +103,15 @@ export default class SnackBarComponent extends React.Component {
                     style={[styles.retryButtonText, styleConstants.primaryFont]}>
                     RETRY
                 </Text>  
-            </Touchable>
-            :
-            null;
+            </Touchable>;
 
         return (
-            <Animated.View style={[styles.messageWrapper, { bottom: this.state.bottom }]}>
+            <AnimateTranslateY
+                styles={styles.messageWrapper}
+                initialValue={this.height}
+                finalValue={0}
+                shouldAnimateOut={this.state.hideSnackBar}
+                animateOutCallback={this.props.handleReset}>
                 <View style={styles.messageContainer}>
                     <View style={styles.iconContainer}>
                         <Icon
@@ -147,7 +134,7 @@ export default class SnackBarComponent extends React.Component {
                         name='close'
                         style={styles.icon} />
                 </Touchable>
-            </Animated.View>
+            </AnimateTranslateY>
         );
     }
 }

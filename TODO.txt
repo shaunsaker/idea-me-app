@@ -1,16 +1,4 @@
-KEEP AN EYE
-    Profile photo was not found production mode (this is where logging errors to db will be handy)
-
 TODOS
-    Animations 
-        TranslateY
-            SnackBar
-        Stretch/Compress
-            NoteTaker (need to pass back state)
-            VoiceNoteRecorder (need to pass back state)
-    Modal on logout page made tabbar jump
-    Try switch actions for tabs?
-    Use babel remove console logs in production (RN perf)
     Better, more inspiring quotes
     Only get geolocation in Edit Profile page
     Forgot password when user does not exist?
