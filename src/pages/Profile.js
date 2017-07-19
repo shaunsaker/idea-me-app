@@ -87,6 +87,8 @@ export class Profile extends React.Component {
         else if (type === 'Get in Touch') {
             Linking.openURL('mailto:' + config.developer.email + '?subject=IdeaMe App');
         }
+
+        // Logout
         else {
             this.toggleActionModal();
         }
@@ -124,6 +126,8 @@ export class Profile extends React.Component {
     }
 
     render() {
+        const numberOfIdeas = utilities.getLengthOfObject(this.props.ideas);
+
         const menu = this.state.showMenu &&
             <Menu
                 values={['About App', 'Settings', 'Give us Feedback', 'Get in Touch', 'Log Out']}
@@ -131,16 +135,14 @@ export class Profile extends React.Component {
 
         const actionModal = this.state.showActionModal &&
             <ActionModal
-                title={'Are you sure you want to Log Out?'}
+                title='Are you sure you want to Log Out?'
                 handleLeftIconPress={() => this.signOutUser()}
                 handleRightIconPress={this.toggleActionModal} />;
 
-        const numberOfIdeas = utilities.getLengthOfObject(this.props.ideas);
-
         return (
             <Page
-                removeBottomPadding
-                backgroundColor={styleConstants.white}>
+                backgroundColor={styleConstants.white}
+                removeBottomPadding>
 
                 <Header
                     text='Profile'
@@ -148,14 +150,16 @@ export class Profile extends React.Component {
                     rightIconName='menu'
                     handleRightIconPress={this.toggleMenu} />
 
-                <ProfileCard
-                    userName={this.props.userName}
-                    userPhotoUrl={this.props.userPhotoUrl && this.props.userPhotoUrl.cropped}
-                    userEmail={this.props.userEmail}
-                    userLocation={this.props.userLocation}
-                    numberOfIdeas={numberOfIdeas}
-                    handleEditImagePress={() => Actions.editProfile()}
-                    handleDeletePhoto={this.deletePhoto} />
+                <View style={{flex: 1, justifyContent: 'center'}}>
+                    <ProfileCard
+                        userName={this.props.userName}
+                        userPhotoUrl={this.props.userPhotoUrl && this.props.userPhotoUrl.cropped}
+                        userEmail={this.props.userEmail}
+                        userLocation={this.props.userLocation}
+                        numberOfIdeas={numberOfIdeas}
+                        handleEditImagePress={() => Actions.editProfile()}
+                        handleDeletePhoto={this.deletePhoto} />
+                </View>
 
                 <View style={{ position: 'absolute', bottom: 68, right: 16 }}>
                     <IconButton
