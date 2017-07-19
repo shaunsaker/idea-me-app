@@ -1,5 +1,4 @@
 TODOS
-    Better, more inspiring quotes
     Only get geolocation in Edit Profile page
     Forgot password when user does not exist?
     Sound when idea added
