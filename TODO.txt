@@ -1,13 +1,9 @@
 TODOS
-    On idea add
-        Play sound
-        Vibrate
-    Rethink sharing ideas 
-    Empty state
+    Empty state / First time user
+        (prop comes from: if loadUserData empty / anonymous login)
         Prepopulate idea on signup
-        Tooltips
-        Email after signup detailing what app does and howtos
-        Rethink highlighted profile tab
+        Tooltips          
+        Highlighted profile tab
     Announcement page for when I need to make some sort of announcement
         FIRST THINK OF TYPES OF ANNOUNCEMENTS
         Based on api prop
@@ -34,6 +30,16 @@ TODOS
         Add link to Profile page
 
 WRAP UP  
+    Test all errors
+        Dispatch errors 
+            Voice note record
+            Share
+        Send errors to db  
+    IOS
+        Integrate react-native-fbsdk on iOS
+        Integrate react-native-google-signin on iOS
+        Icons
+        React native keyboard spacer?
     Optimise code
         Use FlatList/VirtualizedList for all lists
             shouldComponentUpdate will help render when it should
@@ -50,16 +56,10 @@ WRAP UP
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
         Use shouldComponentUpdate where necessary 
     App renaming
-    App Icons
-    Test all errors
-        Send errors to db   
-    IOS
-        Integrate react-native-fbsdk on iOS
-        Integrate react-native-google-signin on iOS
-        Icons
-        React native keyboard spacer
+    App Icons 
     Add analytics
         Create console
+    Password reset email templates on FB console
 
 V2
     Add Sketches to Ideas
@@ -68,6 +68,8 @@ V2
     Public ideas and collaboration
     Full screen view photos Swipe down to close  
     Use height animator in dropdown button?
+    Play sound on idea add
+    Email after signup detailing what app does and howtos 
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app

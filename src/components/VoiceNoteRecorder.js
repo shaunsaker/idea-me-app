@@ -158,7 +158,7 @@ export default class VoiceNoteRecorder extends React.Component {
     toggleRecording() {
         this.recorder.toggleRecord((error, stopped) => {
             if (error) {
-                console.log(error);
+                console.log(error); // TODO: dispatch error
             }
             if (stopped) {
                 this.props.handleRecord(this.state.newVoiceNoteFilePath);

@@ -30,7 +30,7 @@ export function* signInUserWithEmail(action) {
             type: 'SIGN_IN_USER',
             uid: signUpUserWithEmailResponse.message.user.uid,
             userEmail: signUpUserWithEmailResponse.message.user.email,
-            anonymous: false
+            anonymous: false,
         });
     }
 

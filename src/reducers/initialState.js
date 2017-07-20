@@ -4,11 +4,12 @@ const initialState = {
     auth: {
         uid: null,
         authenticated: null,
-        userPassword: null,        
+        firstTimeUser: null,
         anonymous: null,
         redirectToWelcomePage: null,
+        userPassword: null,
 
-		authSuccessMessage: null, // for password reset feedback
+        authSuccessMessage: null, // for password reset feedback
         authErrorMessage: null,
     },
     app: {
@@ -16,10 +17,10 @@ const initialState = {
         loading: false, // needs to be true on initial app load
 
         errorType: null,
-		retryAction: {
-			type: null,
-			data: null,
-		},
+        retryAction: {
+            type: null,
+            data: null,
+        },
 
         userSuccessMessage: null,
         userErrorMessage: null,

@@ -39,7 +39,6 @@ export default class AnimateTranslateY extends React.Component {
     }
 
     animateIn() {
-        console.log('Animating in')
         Animated.timing(
             this.state.animatedValue,
             {

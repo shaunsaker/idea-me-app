@@ -24,8 +24,13 @@ export default function (state = initialState, action) {
             new_state = utilities.cloneObject(state);
             new_state.auth.authenticated = true;
             new_state.auth.uid = action.uid;
-            new_state.auth.anonymous = action.anonymous;
             new_state.auth.redirectToWelcomePage = false;
+
+            if (action.anonymous) {
+                new_state.auth.anonymous = true;
+                new_state.auth.firstTimeUser = true;
+            }
+
             return new_state;
 
         case 'SIGN_OUT_USER':
@@ -144,6 +149,12 @@ export default function (state = initialState, action) {
             new_state.app.errorType = null;
             new_state.app.retryAction.type = null;
             new_state.app.retryAction.data = null;
+            return new_state;
+
+        case 'CLOUD_DATA_SUCCESS':
+            new_state = utilities.cloneObject(state);
+            new_state.cloudData.cloudDataSuccess = true;
+            new_state.auth.firstTimeUser = action.firstTimeUser;
             return new_state;
 
         case 'RESET_CLOUD_DATA_SUCCESS':

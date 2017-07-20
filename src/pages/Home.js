@@ -63,6 +63,7 @@ export class Home extends React.Component {
             currentCategory: PropTypes.string,
             uid: PropTypes.string,
             hasNetwork: PropTypes.bool,
+            firstTimeUser: PropTypes.bool,
         };
     }
 
@@ -173,6 +174,7 @@ export class Home extends React.Component {
     }
 
     render() {
+        console.log('Is first time user', this.props.firstTimeUser);
         let currentCount = 0;
         const totalCount = utilities.getLengthOfObject(this.props.ideas);
 
@@ -254,6 +256,7 @@ function mapStateToProps(state) {
         currentCategory: state.main.appData.currentCategory,
         uid: state.main.auth.uid,
         hasNetwork: state.main.app.hasNetwork,
+        firstTimeUser: state.main.auth.firstTimeUser,
     });
 }
 

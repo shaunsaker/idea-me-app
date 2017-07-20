@@ -1,7 +1,7 @@
-import { 
-    call, 
-    put, 
-    all 
+import {
+    call,
+    put,
+    all
 } from 'redux-saga/effects';
 
 import utilities from '../utilities';
@@ -10,13 +10,13 @@ import CloudData from '../cloudData/index';
 export function* loadUserData(action) {
 
     const loadUserDataResponse = yield call(CloudData.loadUserData, action);
-    //console.log('loadUserDataResponse', loadUserDataResponse);
+    console.log('loadUserDataResponse', loadUserDataResponse);
 
-    if (loadUserDataResponse) {       
+    if (loadUserDataResponse) {
         if (loadUserDataResponse.success && loadUserDataResponse.message) {
             yield put({
                 type: 'UPDATE_USER_DATA',
-                userData: loadUserDataResponse.message
+                userData: loadUserDataResponse.message,
             });
         }
 
@@ -27,6 +27,7 @@ export function* loadUserData(action) {
                 uid: action.uid,
                 node: 'profile',
                 userData: action.userData,
+                firstTimeUser: true,
             });
         }
 
@@ -52,14 +53,14 @@ export function* saveUserData(action) {
         yield call(CloudData.saveUserData, action)
         :
         CloudData.saveUserData(action); // will never yield a response if offline
-    console.log('saveUserDataResponse', saveUserDataResponse);
+    console.log('saveUserDataResponse', saveUserDataResponse, action.hasNetwork);
 
-    if (saveUserDataResponse || !action.hasNetwork) {       
+    if (saveUserDataResponse || !action.hasNetwork) {
         if (saveUserDataResponse.success || !action.hasNetwork) {
 
             // We use this to dispatch another action(s) that was attached from the page
             if (action.nextAction) {
-                
+
                 // action.nextAction can be an array of actions so lets check for that, if true, yield those actions as an array with put methods attached
                 if (Array.isArray(action.nextAction)) {
                     let actionsArray = [];
@@ -75,11 +76,9 @@ export function* saveUserData(action) {
                 }
             }
             else {
-
-                // On success, do nothing (store was updated before)
-                // TEMP
                 yield put({
                     type: 'CLOUD_DATA_SUCCESS',
+                    firstTimeUser: action.firstTimeUser,
                 });
             }
         }
@@ -110,7 +109,7 @@ export function* deleteUserData(action) {
         CloudData.deleteUserData(action); // will never yield a response if offline
     console.log('deleteUserDataResponse', deleteUserDataResponse);
 
-    if (deleteUserDataResponse || !action.hasNetwork) {       
+    if (deleteUserDataResponse || !action.hasNetwork) {
         if (deleteUserDataResponse.success || !action.hasNetwork) {
 
             // We use this to dispatch another action(s) that was attached from the page
