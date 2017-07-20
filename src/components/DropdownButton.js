@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
         backgroundColor: styleConstants.white,
         zIndex: 1,
     },
-    dropdownHeader: {        
+    dropdownHeader: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',        
+        alignItems: 'center',
         paddingVertical: 8,
         paddingHorizontal: 16,
         backgroundColor: styleConstants.realWhite,
@@ -58,32 +58,31 @@ const styles = StyleSheet.create({
         fontSize: styleConstants.regularFont,
         textAlign: 'center',
     },
-    dropdownItem: {        
+    dropdownItem: {
         flexDirection: 'row',
         justifyContent: 'center',
         paddingVertical: 8,
-        width: styleConstants.windowWidth - 32,        
+        width: styleConstants.windowWidth - 32,
     },
     dropdownItemText: {
         color: styleConstants.primary,
         fontSize: styleConstants.regularFont,
         textAlign: 'center',
     },
-    dropdownFooter: {        
+    dropdownFooter: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',        
+        alignItems: 'center',
         paddingVertical: 8,
         paddingHorizontal: 16,
         backgroundColor: styleConstants.realWhite,
-        borderTopWidth: 1,
-        borderColor: styleConstants.lightGrey,
+        elevation: 10, // without this, footer flows into underlaying content
     },
     dropdownFooterIcon: {
         marginRight: 12,
         color: styleConstants.primary,
         fontSize: styleConstants.iconFont,
-    },       
+    },
     dropdownFooterText: {
         color: styleConstants.primary,
         fontSize: styleConstants.regularFont,
@@ -144,7 +143,7 @@ export default class DropdownButton extends React.Component {
             Animated.timing(
                 this.state.height,
                 {
-                    toValue: dropdownInnerHeight, 
+                    toValue: dropdownInnerHeight,
                     duration: config.animation.duration.short,
                     easing: config.animation.easing,
                 }
@@ -193,7 +192,7 @@ export default class DropdownButton extends React.Component {
             }
             :
             {
-                maxHeight: this.maxHeight   
+                maxHeight: this.maxHeight
             };
 
         const header = this.props.headerValue && this.props.currentValue !== this.props.headerValue ?
@@ -218,16 +217,16 @@ export default class DropdownButton extends React.Component {
                     Edit Categories
                 </Text>
             </Touchable>;
-        
+
         const itemList = this.props.values.length ?
             <Animated.View
                 style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
-                <FlatList 
-                    keyExtractor={item => 'category-' + item.uid }
+                <FlatList
+                    keyExtractor={item => 'category-' + item.uid}
                     ref='itemList'
                     data={this.props.values}
                     renderItem={this.renderItem}
-                    ListHeaderComponent={header ? () => header: null}
+                    ListHeaderComponent={header ? () => header : null}
                     ListFooterComponent={editCategories ? () => editCategories : null}
                     style={styles.dropdownItemsContainer} />
             </Animated.View>
@@ -238,7 +237,7 @@ export default class DropdownButton extends React.Component {
             </Animated.View>
 
         const button = this.props.categoriesButton ?
-            <CategoriesButton 
+            <CategoriesButton
                 backgroundColor={this.props.buttonBackgroundColor}
                 handlePress={this.toggleExpanded}
                 currentCategory={this.props.currentCategory}
