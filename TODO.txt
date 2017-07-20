@@ -1,6 +1,5 @@
 TODOS
     Empty state / First time user
-        (prop comes from: if loadUserData empty / anonymous login)
         Prepopulate idea on signup
         Tooltips          
         Highlighted profile tab

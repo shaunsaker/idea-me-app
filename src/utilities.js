@@ -20,15 +20,18 @@ utilities.getPrettyMinutesFromSeconds = (seconds) => {
 }
 
 utilities.getPrettyDate = (timestamp) => {
-    const date = new Date(timestamp);
+    const date = new Date(timestamp * 1000);
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const year = date.getFullYear();
     const month = months[date.getMonth()];
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
+    let day = date.getDate();
+    day = utilities.addZeroPadding(day);
+    let hours = date.getHours();
+    hours = utilities.addZeroPadding(day);
+    let minutes = date.getMinutes();
+    minutes = utilities.addZeroPadding(day);
 
-    const prettyDate = day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes;
+    let prettyDate = day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes;
     return prettyDate;
 }
 
@@ -37,7 +40,7 @@ utilities.getPrettyDate = (timestamp) => {
 utilities.getFileName = (path) => {
     const pathArray = path.split('/');
     const fileName = pathArray[pathArray.length - 1];
-    
+
     return fileName;
 }
 
@@ -46,7 +49,7 @@ utilities.appendStringToFileName = (fileName, string) => {
     const newFileName = fileNameArray[0] + string + '.' + fileNameArray[1];
 
     return newFileName;
-}   
+}
 
 utilities.convertURIsToPaths = (array) => {
     let newArray = [];
@@ -66,7 +69,7 @@ utilities.getInputHeight = (inputWidth, inputLineHeight, charCount) => {
     const charsPerLine = Math.floor(inputWidth / inputLineHeight);
     const numberOfLines = Math.ceil(charCount / charsPerLine);
     const inputHeight = Math.ceil(numberOfLines * inputLineHeight);
-    
+
     return inputHeight;
 }
 
@@ -99,9 +102,17 @@ utilities.createUID = () => {
 }
 
 utilities.prettifyUrl = (url) => {
-	const prettyUrl = url.split('//')[1].split('/')[0];
+    const prettyUrl = url.split('//')[1].split('/')[0];
 
-	return prettyUrl;
+    return prettyUrl;
+}
+
+utilities.addZeroPadding = (number) => {
+    let zeroPaddedNumber = number.toString();
+    if (zeroPaddedNumber < 10) {
+        zeroPaddedNumber = '0' + zeroPaddedNumber;
+    }
+    return zeroPaddedNumber;
 }
 
 /* ARRAYS */
@@ -204,7 +215,7 @@ utilities.pushObjectToObjectArray = (object, objectArray) => {
     newObject[uid] = object;
 
     if (objectArray) {
-        newObjectArray = {...objectArray, ...newObject};
+        newObjectArray = { ...objectArray, ...newObject };
     }
 
     // If the object array was empty/null
@@ -314,7 +325,7 @@ utilities.sortObjectArrayByKeyAndValues = (objectArray, targetKey, values) => {
     }
 
     if (lastSubObjectArray) {
-        newObjectArray = {...newObjectArray, ...lastSubObjectArray};
+        newObjectArray = { ...newObjectArray, ...lastSubObjectArray };
     }
 
     return newObjectArray;
@@ -328,7 +339,7 @@ utilities.getLengthOfObject = (object) => {
     }
 
     return counter;
-};  
+};
 
 utilities.getValuesThatMatchKeyFromObjectArray = (targetKey, objectArray) => {
     let valuesArray = [];

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         color: styleConstants.white,
     },
     descriptionWrapper: {
-        maxHeight: styleConstants.windowHeight / 4.5,
+
     },
     descriptionContainer: {
 
@@ -39,6 +39,7 @@ export default InputContainer = (props) => {
             titleColor
             subtitleColor
             fullWidth
+            limitDescriptionHeightTo // if provided, scrollView with maxHeight will be used for description
     */
 
     const fullWidthStyles = props.fullWidth &&
@@ -52,18 +53,18 @@ export default InputContainer = (props) => {
         };
 
     const subtitle = props.subtitle ?
-        props.fixSubtitleHeight ?
-            <Text style={[styles.infoTextDescription, { color: props.subtitleColor }, styleConstants.primaryFont]}>
-                {props.subtitle}
-            </Text>
-            :
+        props.limitDescriptionHeightTo ?
             <ScrollView
-                style={styles.descriptionWrapper}
+                style={[styles.descriptionWrapper, { maxHeight: props.limitDescriptionHeightTo }]}
                 contentContainerStyle={styles.descriptionContainer}>
                 <Text style={[styles.infoTextDescription, { color: props.subtitleColor }, styleConstants.primaryFont]}>
                     {props.subtitle}
                 </Text>
             </ScrollView>
+            :
+            <Text style={[styles.infoTextDescription, { color: props.subtitleColor }, styleConstants.primaryFont]}>
+                {props.subtitle}
+            </Text>
         : null;
 
     return (

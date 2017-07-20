@@ -64,6 +64,7 @@ export class Home extends React.Component {
             uid: PropTypes.string,
             hasNetwork: PropTypes.bool,
             firstTimeUser: PropTypes.bool,
+            firstTimeUserIdea: PropTypes.object,
         };
     }
 
@@ -174,11 +175,16 @@ export class Home extends React.Component {
     }
 
     render() {
-        console.log('Is first time user', this.props.firstTimeUser);
         let currentCount = 0;
         const totalCount = utilities.getLengthOfObject(this.props.ideas);
 
-        let ideas = <View style={{ flex: 1 }}></View>; // TODO: empty state
+        // First time user / empty state
+        let ideas =
+            <IdeaCard
+                idea={this.props.firstTimeUserIdea}
+                handleMenuItemSelect={this.handleMenuItemSelect}
+                handleNotePress={(noteType) => this.handleNotePress(noteType, item)} />;
+
         let currentCategoryIdeas;
 
         if (this.props.ideas) {
@@ -257,6 +263,7 @@ function mapStateToProps(state) {
         uid: state.main.auth.uid,
         hasNetwork: state.main.app.hasNetwork,
         firstTimeUser: state.main.auth.firstTimeUser,
+        firstTimeUserIdea: state.main.appData.firstTimeUserIdea,
     });
 }
 

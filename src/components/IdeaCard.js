@@ -137,7 +137,7 @@ export default class IdeaCard extends React.Component {
                     this.toggleMenu();
                     this.props.handleMenuItemSelect(type, this.props.idea)
                 }
-            } />;
+                } />;
 
         const dateCreated = utilities.getPrettyDate(Number(this.props.idea.uid));
         const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
@@ -163,12 +163,13 @@ export default class IdeaCard extends React.Component {
                         subtitle={this.props.idea.description}
                         titleColor={styleConstants.primary}
                         subtitleColor={styleConstants.grey}
-                        fullWidth />
+                        fullWidth
+                        limitDescriptionHeightTo={82} />
 
                     <View style={styles.dateContainer}>
                         <Text style={[styles.dateText, styleConstants.primaryFont]}>
                             {'Created: ' + dateCreated}
-                        </Text>                        
+                        </Text>
                     </View>
                 </View>
 

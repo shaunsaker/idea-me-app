@@ -46,6 +46,13 @@ const initialState = {
         fileSystemErrorMessage: null,
     },
     appData: {
+        firstTimeUserIdea: {
+            title: 'Get Familiar with IdeaMe',
+            description: "Hey! You've made it. You're a few steps away from success. Follow the tooltips for some handy advice and if all else fails, give us a shout from the menu found on your Profile page. We are super keen to hear from you! Good luck!",
+            category: null,
+            priority: 'High',
+            uid: '583027200',
+        },
         currentCategory: 'All Categories',
         quotes, // can be an array because we are not saving this anywhere
         priorities: {
