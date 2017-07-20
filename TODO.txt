@@ -1,6 +1,4 @@
 TODOS
-    Raw Text bug somewhere 0 (Profile page)
-    Group reducer actions
     Continue anonymously didnt work initially (may have been debug mode issue)
     Forgot password when user does not exist?
         App crashes after auth error reducer

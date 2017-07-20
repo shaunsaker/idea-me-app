@@ -51,9 +51,9 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 37.5,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: styleConstants.transPrimary,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: styleConstants.transPrimary,
     },
     editImageIcon: {
         fontSize: styleConstants.largeFont,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         color: styleConstants.primary,
         marginRight: 8,
         marginTop: 2,
-    },  
+    },
     emailText: {
         fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 export default ProfileCard = (props) => {
     const profilePhoto = props.userPhotoUrl ?
         <Photo
-            uri={props.userPhotoUrl} 
+            uri={props.userPhotoUrl}
             isThumbnail
             photoContainerStyles={styles.profileImageContainer}
             photoStyles={styles.profileImage}
@@ -103,15 +103,19 @@ export default ProfileCard = (props) => {
             </Touchable>
         </View>;
 
-    const ideasLabel = props.numberOfIdeas &&
+    const ideasLabelText = props.numberOfIdeas + ' excellent idea' + (props.numberOfIdeas > 1 ? 's' : '');
+
+    const ideasLabel = props.numberOfIdeas ?
         <Label
             iconName='lightbulb'
-            labelText={props.numberOfIdeas + ' excellent idea' + (props.numberOfIdeas > 1 ? 's' : '')} />;
-    
+            labelText={ideasLabelText} />
+        :
+        null;
+
     return (
         <View
             style={styles.cardContainer} >
-            
+
             <InfoBlock
                 title={props.userName}
                 subtitle={props.userLocation}
