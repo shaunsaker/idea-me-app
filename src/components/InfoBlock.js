@@ -5,8 +5,11 @@ import {
     Text,
     StyleSheet,
 } from "react-native";
+import PropTypes from 'prop-types';
 
 import styleConstants from '../styles/styleConstants';
+
+import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     infoContainer: {
@@ -31,48 +34,74 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InputContainer = (props) => {
-    /*
-        PROPTYPES
-            title
-            subtitle
-            titleColor
-            subtitleColor
-            fullWidth
-            limitDescriptionHeightTo // if provided, scrollView with maxHeight will be used for description
-    */
+export default class InfoBlock extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const fullWidthStyles = props.fullWidth &&
-        {
-            paddingRight: 16,
-        };
+        this.toggleReadMoreMode = this.toggleReadMoreMode.bind(this);
 
-    const fullWidthTitleStyles = props.fullWidth &&
-        {
-            marginRight: 16,
-        };
+        this.state = {
+            readMoreMode: false,
+        }
+    }
 
-    const subtitle = props.subtitle ?
-        props.limitDescriptionHeightTo ?
-            <ScrollView
-                style={[styles.descriptionWrapper, { maxHeight: props.limitDescriptionHeightTo }]}
-                contentContainerStyle={styles.descriptionContainer}>
-                <Text style={[styles.infoTextDescription, { color: props.subtitleColor }, styleConstants.primaryFont]}>
-                    {props.subtitle}
+    static get propTypes() {
+        return {
+            title: PropTypes.string,
+            subtitle: PropTypes.string,
+            titleColor: PropTypes.string,
+            subtitleColor: PropTypes.string,
+            fullWidth: PropTypes.bool,
+            limitDescriptionHeight: PropTypes.bool,
+        }
+    }
+
+    toggleReadMoreMode() {
+        this.setState({
+            readMoreMode: !this.state.readMoreMode,
+        });
+    }
+
+    render() {
+        const fullWidthStyles = this.props.fullWidth &&
+            {
+                paddingRight: 16,
+            };
+
+        const fullWidthTitleStyles = this.props.fullWidth &&
+            {
+                marginRight: 16,
+            };
+
+        const subtitle = this.props.subtitle ?
+            this.props.limitDescriptionHeight ?
+                <ScrollView
+                    style={styles.descriptionWrapper}
+                    contentContainerStyle={styles.descriptionContainer}>
+                    <Touchable
+                        onPress={this.toggleReadMoreMode}
+                        androidRipple
+                        style={styles.infoTextDescriptionContainer}>
+                        <Text
+                            numberOfLines={this.state.readMoreMode ? null : 4}
+                            style={[styles.infoTextDescription, { color: this.props.subtitleColor }, styleConstants.primaryFont]}>
+                            {this.props.subtitle}
+                        </Text>
+                    </Touchable>
+                </ScrollView>
+                :
+                <Text style={[styles.infoTextDescription, { color: this.props.subtitleColor }, styleConstants.primaryFont]}>
+                    {this.props.subtitle}
                 </Text>
-            </ScrollView>
-            :
-            <Text style={[styles.infoTextDescription, { color: props.subtitleColor }, styleConstants.primaryFont]}>
-                {props.subtitle}
-            </Text>
-        : null;
+            : null;
 
-    return (
-        <View style={[styles.infoContainer, fullWidthStyles]}>
-            <Text style={[styles.infoTextTitle, { color: props.titleColor }, styleConstants.primaryFont, fullWidthTitleStyles]}>
-                {props.title}
-            </Text>
-            {subtitle}
-        </View>
-    );
+        return (
+            <View style={[styles.infoContainer, fullWidthStyles]}>
+                <Text style={[styles.infoTextTitle, { color: this.props.titleColor }, styleConstants.primaryFont, fullWidthTitleStyles]}>
+                    {this.props.title}
+                </Text>
+                {subtitle}
+            </View>
+        );
+    }
 }

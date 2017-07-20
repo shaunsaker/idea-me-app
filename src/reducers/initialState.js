@@ -47,7 +47,7 @@ const initialState = {
     },
     appData: {
         firstTimeUserIdea: {
-            title: 'Get Familiar with IdeaMe',
+            title: 'Get Familiar',
             description: "Hey! You've made it. You're a few steps away from success. Follow the tooltips for some handy advice and if all else fails, give us a shout from the menu found on your Profile page. We are super keen to hear from you! Good luck!",
             category: null,
             priority: 'High',

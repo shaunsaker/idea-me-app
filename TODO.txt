@@ -1,6 +1,6 @@
 TODOS
+    Dropdown menu needs work
     Empty state / First time user
-        Prepopulate idea on signup
         Tooltips          
         Highlighted profile tab
     Announcement page for when I need to make some sort of announcement

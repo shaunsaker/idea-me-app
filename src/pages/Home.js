@@ -183,7 +183,8 @@ export class Home extends React.Component {
             <IdeaCard
                 idea={this.props.firstTimeUserIdea}
                 handleMenuItemSelect={this.handleMenuItemSelect}
-                handleNotePress={(noteType) => this.handleNotePress(noteType, item)} />;
+                handleNotePress={(noteType) => this.handleNotePress(noteType, item)}
+                firstTimeUser />;
 
         let currentCategoryIdeas;
 

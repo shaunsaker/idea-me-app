@@ -139,13 +139,20 @@ export default class IdeaCard extends React.Component {
                 }
                 } />;
 
-        const dateCreated = utilities.getPrettyDate(Number(this.props.idea.uid));
+        const dateCreated = !this.props.firstTimeUser && utilities.getPrettyDate(Number(this.props.idea.uid));
         const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
         const priorityLabelText = this.props.idea.priority ? this.props.idea.priority : 'Unprioritised';
         const notes = utilities.convertObjectArrayToArray(this.props.idea.notes);
         const notesCount = notes.length;
         const photosCount = utilities.getLengthOfObject(this.props.idea.photos);
         const voiceNotesCount = utilities.getLengthOfObject(this.props.idea.voiceNotes);
+
+        const dateCreatedComponent = !this.props.firstTimeUser &&
+            <View style={styles.dateContainer}>
+                <Text style={[styles.dateText, styleConstants.primaryFont]}>
+                    {'Created: ' + dateCreated}
+                </Text>
+            </View>
 
         return (
             <View
@@ -164,13 +171,9 @@ export default class IdeaCard extends React.Component {
                         titleColor={styleConstants.primary}
                         subtitleColor={styleConstants.grey}
                         fullWidth
-                        limitDescriptionHeightTo={82} />
+                        limitDescriptionHeight />
 
-                    <View style={styles.dateContainer}>
-                        <Text style={[styles.dateText, styleConstants.primaryFont]}>
-                            {'Created: ' + dateCreated}
-                        </Text>
-                    </View>
+                    {dateCreatedComponent}
                 </View>
 
                 <View
