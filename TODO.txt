@@ -1,8 +1,9 @@
 TODOS
     Forgot password when user does not exist?
         App crashes after auth error reducer
-    AnimateTranslateX mounting in forgot password?
-    Sound when idea added
+    On idea add
+        Play sound
+        Vibrate
     Rethink sharing ideas 
     Empty state
         Prepopulate idea on signup

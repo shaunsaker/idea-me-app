@@ -136,8 +136,7 @@ export class SignInWithEmail extends React.Component {
 
                 <SnackBar />
 
-                <Loader
-                    position='bottom' />
+                <Loader />
 
             </Page>
         );

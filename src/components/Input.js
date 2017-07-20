@@ -119,7 +119,7 @@ export default class Input extends React.Component {
 
             // Use utils to get input height based on inputWidth, fontSize and charCount
             const inputHeight = utilities.getInputHeight((styleConstants.windowWidth - 32), styleConstants.regularFont, this.props.value.length)
-            
+
             if (inputHeight > this.minimumInputHeight) {
                 this.setState({
                     inputHeight,
@@ -180,6 +180,7 @@ export default class Input extends React.Component {
     render() {
         const togglePasswordButton = this.props.type === 'password' && this.state.showTogglePasswordButton &&
             <AnimateTranslateX
+                shouldAnimate
                 initialValue={40}
                 finalValue={0}>
                 <Touchable
@@ -193,6 +194,7 @@ export default class Input extends React.Component {
 
         const characterCount = this.props.maxLength && this.state.showCharacterCount &&
             <AnimateTranslateX
+                shouldAnimate
                 initialValue={40}
                 finalValue={0}>
                 <View style={styles.characterCountContainer}>
@@ -204,18 +206,18 @@ export default class Input extends React.Component {
 
         const clearTextButton = this.props.value ?
             <View style={styles.clearTextButtonContainer}>
-                <DeleteButton 
-                    handlePress={this.clearInputText}/>
+                <DeleteButton
+                    handlePress={this.clearInputText} />
             </View>
             :
             null;
 
         const inputLabelStyles = {
             color: this.state.labelColour,
-        } 
+        }
 
         // Fix for ios
-		const inputContainerStyles = Platform.OS === 'ios' && 
+        const inputContainerStyles = Platform.OS === 'ios' &&
             {
                 borderBottomWidth: 1,
                 borderBottomColor: this.state.borderColour,
@@ -226,7 +228,7 @@ export default class Input extends React.Component {
             {
                 borderBottomWidth: 1,
                 borderBottomColor: this.state.borderColour,
-            };    
+            };
 
         const inputStyles = {
             height: this.state.inputHeight,
@@ -253,7 +255,7 @@ export default class Input extends React.Component {
                         onBlur={this.blurInput}
                         secureTextEntry={this.props.type === 'password' && this.state.hidePassword}
                         keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
-                        autoFocus={this.props.autoFocus} 
+                        autoFocus={this.props.autoFocus}
                         multiline={this.props.multiline}
                         maxLength={this.props.maxLength}
                         onChange={this.props.multiline ? (event) => this.adjustInputHeight(event.nativeEvent.contentSize.height) : null /*NOTE: this does not work with onContentSizeChange */} />

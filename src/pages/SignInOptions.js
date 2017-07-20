@@ -42,6 +42,10 @@ export class SignInOptions extends React.Component {
 
         // Anonymous user (no data)
         if (this.props.authenticated && this.props.currentLocation && this.props.anonymous) {
+            this.props.dispatch({
+                type: 'TOGGLE_LOADING',
+            });
+
             Actions.home();
         }
 
@@ -139,8 +143,7 @@ export class SignInOptions extends React.Component {
 
                 <SnackBar />
 
-                <Loader
-                    position='bottom' />
+                <Loader />
 
             </Page>
         );

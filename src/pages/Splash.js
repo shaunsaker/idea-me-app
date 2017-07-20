@@ -14,8 +14,8 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import InfoBlock from '../components/InfoBlock';
-import SnackBar from '../widgets/SnackBar';
 import InfoModal from '../modals/InfoModal';
+import SnackBar from '../widgets/SnackBar';
 
 export class Splash extends React.Component {
     constructor(props) {
@@ -74,6 +74,10 @@ export class Splash extends React.Component {
 
                     // Anonymous user (no data)
                     else if (this.props.authenticated && this.props.anonymous) {
+                        this.props.dispatch({
+                            type: 'TOGGLE_LOADING',
+                        });
+
                         Actions.home();
                     }
 

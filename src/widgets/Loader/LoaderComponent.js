@@ -1,37 +1,67 @@
 import React from 'react';
 import {
     View,
-	StyleSheet,
+    StyleSheet,
+    Animated,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
+import config from '../../config';
 import styleConstants from '../../styles/styleConstants';
 
 import AnimateFadeIn from '../../animators/AnimateFadeIn';
-import AnimateTranslateX from '../../animators/AnimateTranslateX';
 
 const styles = StyleSheet.create({
-	container: {
-		width: 100,
-		height: 5,
-		backgroundColor: styleConstants.secondary,
-	},
+    container: {
+        width: 100,
+        height: 5,
+        backgroundColor: styleConstants.secondary,
+    },
 });
 
-export default LoaderComponent = (props) => {
-    const animatedStyles = {
-        left: this.position,
+export default class LoaderComponent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.animate = this.animate.bind(this);
+
+        this.position = new Animated.Value(-100);
     }
 
-    return (
-        <AnimateFadeIn
-            shouldAnimate={true}>
-            <AnimateTranslateX
-                initialValue={-100}
-                finalValue={styleConstants.windowWidth}
-                duration={2000}
-                repeat >
-                <View style={styles.container} />
-            </AnimateTranslateX>
-        </AnimateFadeIn>
-    );
+    componentDidMount() {
+        this.animate();
+    }
+
+    animate() {
+        this.position.setValue(-100);
+
+        Animated.timing(
+            this.position,
+            {
+                toValue: styleConstants.windowWidth,
+                duration: 2000,
+                easing: config.animation.easing,
+                useNativeDriver: true,
+            }
+        ).start(() => {
+            this.animate();
+        });
+    }
+
+    render() {
+        const animatedStyles = {
+            transform: [{
+                translateX: this.position,
+            }],
+        }
+
+        return (
+            <AnimateFadeIn
+                shouldAnimate={true}>
+                <Animated.View style={animatedStyles}>
+                    <View style={styles.container} />
+                </Animated.View>
+            </AnimateFadeIn>
+        );
+    }
 }
