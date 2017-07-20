@@ -46,6 +46,7 @@ export class Home extends React.Component {
                 icon: 'person',
                 action: () => Actions.profile(),
                 active: false,
+                highlighted: false,
             },
         ];
 
@@ -66,6 +67,12 @@ export class Home extends React.Component {
             firstTimeUser: PropTypes.bool,
             firstTimeUserIdea: PropTypes.object,
         };
+    }
+
+    componentDidMount() {
+        if (this.props.firstTimeUser) {
+            this.tabs[1].highlighted = true;
+        }
     }
 
     selectCategory(value) {
