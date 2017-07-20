@@ -1,6 +1,4 @@
 TODOS
-    Forgot password when user does not exist?
-        App crashes after auth error reducer
     On idea add
         Play sound
         Vibrate
@@ -70,3 +68,6 @@ V2
     Public ideas and collaboration
     Full screen view photos Swipe down to close  
     Use height animator in dropdown button?
+
+KNOWN BUGS
+    Forgot password when user does not exist crashes app

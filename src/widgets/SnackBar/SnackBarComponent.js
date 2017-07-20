@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     messageWrapper: {
         position: 'absolute',
         bottom: 0,
-        width: styleConstants.windowWidth, 
+        width: styleConstants.windowWidth,
         backgroundColor: styleConstants.grey,
         borderTopWidth: 1,
         borderTopColor: styleConstants.lightGrey,
@@ -93,7 +93,7 @@ export default class SnackBarComponent extends React.Component {
     }
 
     render() {
-        const iconName = this.props.success ? 'check' : 'error';   
+        const iconName = this.props.success ? 'check' : 'error';
 
         const retryButton = this.props.handleRetryAction &&
             <Touchable
@@ -102,7 +102,7 @@ export default class SnackBarComponent extends React.Component {
                 <Text
                     style={[styles.retryButtonText, styleConstants.primaryFont]}>
                     RETRY
-                </Text>  
+                </Text>
             </Touchable>;
 
         return (
@@ -116,7 +116,7 @@ export default class SnackBarComponent extends React.Component {
                     <View style={styles.iconContainer}>
                         <Icon
                             name={iconName}
-                            style={[styles.icon, {color: this.props.success ? styleConstants.success : styleConstants.danger}]} />
+                            style={[styles.icon, { color: this.props.success ? styleConstants.success : styleConstants.danger }]} />
                     </View>
                     <View style={styles.messageTextContainer}>
                         <Text

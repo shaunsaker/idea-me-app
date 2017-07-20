@@ -34,13 +34,13 @@ export class SnackBar extends React.Component {
             cloudDataErrorMessage: PropTypes.string,
             cloudStorageErrorMessage: PropTypes.string,
 
-            errorType: PropTypes.string,  
+            errorType: PropTypes.string,
             retryAction: PropTypes.object,
         };
     }
 
     resetError() {
-        
+
         // Reset the error depending on the type of error
         const action = (this.props.userSuccessMessage || this.props.authSuccessMessage) ?
             'RESET_' + this.props.errorType + '_SUCCESS'
@@ -68,36 +68,36 @@ export class SnackBar extends React.Component {
     }
 
     render() {
-        const errorMessage = 
-            this.props.userErrorMessage ? 
+        const errorMessage =
+            this.props.userErrorMessage ?
                 this.props.userErrorMessage
                 :
                 this.props.authErrorMessage ?
-                    this.props.authErrorMessage 
+                    this.props.authErrorMessage
                     :
                     this.props.imageErrorMessage ?
                         this.props.imageErrorMessage
                         :
                         this.props.cloudDataErrorMessage ?
-                            this.props.cloudDataErrorMessage 
+                            this.props.cloudDataErrorMessage
                             :
                             this.props.cloudStorageErrorMessage ?
-                                this.props.cloudStorageErrorMessage 
+                                this.props.cloudStorageErrorMessage
                                 :
                                 this.props.fileSystemErrorMessage ?
                                     this.props.fileSystemErrorMessage
                                     :
-                                    null;  
+                                    null;
 
         const errorSnackBar = errorMessage ?
-            <SnackBarComponent 
-                text={errorMessage} 
+            <SnackBarComponent
+                text={errorMessage}
                 handleReset={this.resetError}
-                handleRetryAction={this.props.retryAction.type ? this.retryAction : null} />
+                handleRetryAction={this.props.retryAction.type && this.retryAction} />
             :
             null;
 
-        const successMessage =  
+        const successMessage =
             this.props.userSuccessMessage ?
                 this.props.userSuccessMessage
                 :
@@ -107,13 +107,13 @@ export class SnackBar extends React.Component {
                     null;
 
         const successSnackBar = successMessage ?
-            <SnackBarComponent 
-                text={successMessage} 
+            <SnackBarComponent
+                text={successMessage}
                 success
                 handleReset={this.resetError} />
             :
             null;
-            
+
         return (
             <View style={styles.container}>
                 {errorSnackBar}

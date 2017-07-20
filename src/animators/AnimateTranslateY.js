@@ -52,7 +52,6 @@ export default class AnimateTranslateY extends React.Component {
     }
 
     animateOut() {
-        console.log('Animating out')
         Animated.timing(
             this.state.animatedValue,
             {

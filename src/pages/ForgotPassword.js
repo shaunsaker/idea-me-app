@@ -25,7 +25,6 @@ export class ForgotPassword extends React.Component {
     static get propTypes() {
         return {
             userEmail: PropTypes.string,
-            errorType: PropTypes.string,
         };
     }
 
@@ -91,7 +90,6 @@ export class ForgotPassword extends React.Component {
 function mapStateToProps(state) {
     return ({
         userEmail: state.main.userData.profile.userEmail,
-        errorType: state.main.app.errorType,
     });
 }
 
