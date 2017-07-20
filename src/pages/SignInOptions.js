@@ -40,8 +40,13 @@ export class SignInOptions extends React.Component {
 
     componentDidUpdate() {
 
+        // Anonymous user (no data)
+        if (this.props.authenticated && this.props.currentLocation && this.props.anonymous) {
+            Actions.home();
+        }
+
         // If we're authenticated, we have geolocation and we have not yet loaded data, load/save data to db
-        if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
+        else if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'loadUser',
                 uid: this.props.uid,
@@ -145,6 +150,7 @@ export class SignInOptions extends React.Component {
 function mapStateToProps(state) {
     return ({
         authenticated: state.main.auth.authenticated,
+        anonymous: state.main.auth.anonymous,
         cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
 
         uid: state.main.auth.uid,

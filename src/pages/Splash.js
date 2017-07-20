@@ -72,6 +72,11 @@ export class Splash extends React.Component {
                         Actions.welcome();
                     }
 
+                    // Anonymous user (no data)
+                    else if (this.props.authenticated && this.props.anonymous) {
+                        Actions.home();
+                    }
+
                     // If we're authenticated and we have not yet loaded data, load/save data to db
                     else if (this.props.authenticated && !this.props.cloudDataSuccess) {
                         this.props.dispatch({
@@ -154,6 +159,7 @@ function mapStateToProps(state) {
         quotes: state.main.appData.quotes,
 
         authenticated: state.main.auth.authenticated,
+        anonymous: state.main.auth.anonymous,
         cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
         redirectToWelcomePage: state.main.auth.redirectToWelcomePage,
         uid: state.main.auth.uid,
