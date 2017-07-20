@@ -19,7 +19,7 @@ import ProfileCard from '../components/ProfileCard';
 import IconButton from '../components/IconButton';
 import TabBar from '../components/TabBar';
 import ActionModal from '../modals/ActionModal';
-import SnackBar from '../components/SnackBar';
+import SnackBar from '../widgets/SnackBar';
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -150,7 +150,7 @@ export class Profile extends React.Component {
                     rightIconName='menu'
                     handleRightIconPress={this.toggleMenu} />
 
-                <View style={{flex: 1, justifyContent: 'center'}}>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
                     <ProfileCard
                         userName={this.props.userName}
                         userPhotoUrl={this.props.userPhotoUrl && this.props.userPhotoUrl.cropped}

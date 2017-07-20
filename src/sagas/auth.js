@@ -99,9 +99,9 @@ export function* sendPasswordResetEmail(action) {
 			type: 'AUTH_ERROR',
 			message: passwordResetResponse.message,
 			retryAction: {
-				type: 'signInUserWithEmail',
+				type: 'sendPasswordResetEmail',
 				data: {
-					email: action.email,
+					userEmail: action.userEmail,
 				},
 			},	
 		});

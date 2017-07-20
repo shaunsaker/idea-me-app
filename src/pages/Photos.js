@@ -14,8 +14,8 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
 import PhotoViewer from '../components/PhotoViewer';
-import Loader from '../components/Loader';
-import SnackBar from '../components/SnackBar';
+import Loader from '../widgets/Loader';
+import SnackBar from '../widgets/SnackBar';
 import OptionsModal from '../modals/OptionsModal';
 import ActionModal from '../modals/ActionModal';
 
@@ -78,7 +78,7 @@ export class Photos extends React.Component {
                 let newIdea = utilities.cloneObject(this.props.idea);
                 newIdea['photos'] = newPhotos;
                 const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
-                
+
                 // Dispatch to store
                 this.props.dispatch({
                     type: 'UPDATE_USER_DATA',
@@ -142,7 +142,7 @@ export class Photos extends React.Component {
         this.props.dispatch({
             type: 'SET_NEW_PHOTOS',
             newPhotos,
-        }); 
+        });
 
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
@@ -186,7 +186,7 @@ export class Photos extends React.Component {
                 handleClose={this.togglePhotoModal} />;
 
         const deletePhotoModal = this.state.showDeleteModal &&
-            <ActionModal 
+            <ActionModal
                 title={'Are you sure you want to delete this photo?'}
                 handleLeftIconPress={this.deletePhoto}
                 handleRightIconPress={this.toggleDeleteModal} />;

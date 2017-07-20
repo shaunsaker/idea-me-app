@@ -14,7 +14,7 @@ import RadioSelect from '../components/RadioSelect';
 import DropdownButton from '../components/DropdownButton';
 import TabBar from '../components/TabBar';
 import ActionModal from '../modals/ActionModal';
-import SnackBar from '../components/SnackBar';
+import SnackBar from '../widgets/SnackBar';
 
 export class EditIdea extends React.Component {
     constructor(props) {
@@ -315,7 +315,7 @@ export class EditIdea extends React.Component {
                             },
                         ]
                     } />
-                
+
                 {cancelModal}
 
                 <SnackBar />

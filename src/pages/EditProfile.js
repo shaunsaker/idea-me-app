@@ -19,7 +19,7 @@ import InputContainer from '../components/InputContainer';
 import EditableImage from '../components/EditableImage';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import SnackBar from '../components/SnackBar';
+import SnackBar from '../widgets/SnackBar';
 import OptionsModal from '../modals/OptionsModal';
 import ActionModal from '../modals/ActionModal';
 
@@ -208,15 +208,15 @@ export class EditProfile extends React.Component {
             </View>
             :
             !this.state.hasFetchedLocation &&
-                <View style={styles.currentLocationButtonContainer}>
-                    <TouchableOpacity
-                        onPress={this.getUserLocation}
-                        style={styles.currentLocationButton}>
-                        <Text style={[styles.currentLocationButtonText, styleConstants.primaryFont]}>
-                            Use Your Current location
+            <View style={styles.currentLocationButtonContainer}>
+                <TouchableOpacity
+                    onPress={this.getUserLocation}
+                    style={styles.currentLocationButton}>
+                    <Text style={[styles.currentLocationButtonText, styleConstants.primaryFont]}>
+                        Use Your Current location
                         </Text>
-                    </TouchableOpacity>
-                </View>;
+                </TouchableOpacity>
+            </View>;
 
         const photoModal = this.state.showPhotoModal ?
             <OptionsModal

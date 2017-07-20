@@ -9,8 +9,8 @@ import InputContainer from '../components/InputContainer';
 import InfoBlock from '../components/InfoBlock';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import Loader from '../components/Loader';
-import SnackBar from '../components/SnackBar';
+import Loader from '../widgets/Loader';
+import SnackBar from '../widgets/SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -37,29 +37,29 @@ export class SignInWithEmail extends React.Component {
 
     componentDidUpdate() {
 
-		// If we're authenticated and we have not yet loaded data, load/save data to db
-		if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
-			this.props.dispatch({
-				type: 'loadUserData',
+        // If we're authenticated and we have not yet loaded data, load/save data to db
+        if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'loadUserData',
                 uid: this.props.uid,
 
                 // Add these for the ride in case we have a new user
                 node: 'profile',
-				userData: {
+                userData: {
                     userEmail: this.props.userEmail,
                     userLocation: this.props.currentLocation,
-				}
-			});
-		}
+                }
+            });
+        }
 
         // If we have data, we have everything we need
-		if (this.props.cloudDataSuccess) {
+        if (this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_CLOUD_DATA_SUCCESS'
             });
 
-			Actions.home();
-		}
+            Actions.home();
+        }
     }
 
     updateUserEmail(text) {
@@ -97,7 +97,7 @@ export class SignInWithEmail extends React.Component {
     }
 
     render() {
-        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0 && this.props.userPassword; 
+        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0 && this.props.userPassword;
 
         return (
             <Page>
@@ -126,7 +126,7 @@ export class SignInWithEmail extends React.Component {
                         handleFocus={this.resetError}
                         type='password' />
                 </InputContainer>
-                
+
                 <Button
                     iconName='check'
                     handlePress={this.signIn}

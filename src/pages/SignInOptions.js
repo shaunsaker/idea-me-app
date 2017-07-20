@@ -10,15 +10,15 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import ActionModal from '../modals/ActionModal';
-import Loader from '../components/Loader';
-import SnackBar from '../components/SnackBar';
+import Loader from '../widgets/Loader';
+import SnackBar from '../widgets/SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
 export class SignInOptions extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.signInUserWithFacebook = this.signInUserWithFacebook.bind(this);
         this.signInUserWithGoogle = this.signInUserWithGoogle.bind(this);
         this.signInUserWithEmail = this.signInUserWithEmail.bind(this);
@@ -28,43 +28,43 @@ export class SignInOptions extends React.Component {
     static get propTypes() {
         return {
             authenticated: PropTypes.bool,
-			cloudDataSuccess: PropTypes.bool,
-            
+            cloudDataSuccess: PropTypes.bool,
+
             uid: PropTypes.string,
             userEmail: PropTypes.string,
-			userName: PropTypes.string,
-			userPhotoUrl: PropTypes.string,
+            userName: PropTypes.string,
+            userPhotoUrl: PropTypes.string,
             currentLocation: PropTypes.string,
         };
     }
 
     componentDidUpdate() {
 
-		// If we're authenticated, we have geolocation and we have not yet loaded data, load/save data to db
-		if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
-			this.props.dispatch({
-				type: 'loadUser',
-				uid: this.props.uid,
+        // If we're authenticated, we have geolocation and we have not yet loaded data, load/save data to db
+        if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'loadUser',
+                uid: this.props.uid,
 
                 // Add these for the ride in case we have a new user
                 node: 'profile',
-				userData: {
+                userData: {
                     userEmail: this.props.userEmail,
-					userName: this.props.userName,
-					userPhotoUrl: this.props.userPhotoUrl,
+                    userName: this.props.userName,
+                    userPhotoUrl: this.props.userPhotoUrl,
                     userLocation: this.props.currentLocation,
-				},
-			});
-		}
+                },
+            });
+        }
 
         // If we have data, we have everything we need
-		else if (this.props.cloudDataSuccess) {
-			this.props.dispatch({
-				type: 'RESET_CLOUD_DATA_SUCCESS'
-			});
+        else if (this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'RESET_CLOUD_DATA_SUCCESS'
+            });
 
-			Actions.home();
-		}
+            Actions.home();
+        }
     }
 
     signInUserWithFacebook() {
@@ -81,7 +81,7 @@ export class SignInOptions extends React.Component {
         this.props.dispatch({
             type: 'TOGGLE_LOADING'
         });
-        
+
         this.props.dispatch({
             type: 'signInUserWithGoogle'
         });
@@ -106,37 +106,37 @@ export class SignInOptions extends React.Component {
             <Page
                 fauxFooter>
 
-                <Header 
+                <Header
                     backButton />
 
                 <View>
                     <Button
                         iconName='facebook'
-                        handlePress={this.signInUserWithFacebook}                         
+                        handlePress={this.signInUserWithFacebook}
                         text='Continue with Facebook'
                         backgroundColor={styleConstants.white} />
                     <Button
                         iconName='google'
-                        handlePress={this.signInUserWithGoogle} 
+                        handlePress={this.signInUserWithGoogle}
                         text='Continue with Google'
                         backgroundColor={styleConstants.white} />
                     <Button
                         iconName='mail'
-                        handlePress={this.signInUserWithEmail} 
+                        handlePress={this.signInUserWithEmail}
                         text='Continue with Email'
                         backgroundColor='transparent' />
                     <Button
                         iconName='anonymous'
-                        handlePress={this.signInUserAnonymously} 
+                        handlePress={this.signInUserAnonymously}
                         text='Continue Anonymously'
                         backgroundColor='transparent' />
                 </View>
 
-				<SnackBar />
+                <SnackBar />
 
-				<Loader
+                <Loader
                     position='bottom' />
-                
+
             </Page>
         );
     }
@@ -144,14 +144,14 @@ export class SignInOptions extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-		authenticated: state.main.auth.authenticated,
-		cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
-        
-		uid: state.main.auth.uid,
-		userEmail: state.main.userData.profile.userEmail,
-		userName: state.main.userData.profile.userName,
-		userPhotoUrl: state.main.userData.profile.userPhotoUrl,
-		currentLocation: state.main.geolocation.currentLocation,
+        authenticated: state.main.auth.authenticated,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+
+        uid: state.main.auth.uid,
+        userEmail: state.main.userData.profile.userEmail,
+        userName: state.main.userData.profile.userName,
+        userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+        currentLocation: state.main.geolocation.currentLocation,
     });
 }
 

@@ -16,7 +16,7 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
 import ActionModal from '../modals/ActionModal';
-import SnackBar from '../components/SnackBar';
+import SnackBar from '../widgets/SnackBar';
 
 export class VoiceNotes extends React.Component {
     constructor(props) {

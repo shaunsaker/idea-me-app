@@ -52,10 +52,6 @@ const quotes = [
         author: 'Anais Nin'
     },
     {
-        title: 'Capital isn’t that important in business. Experience isn’t that important. You can get both of these things. What is important is ideas.',
-        author: 'Harvey S. Firestone'
-    }, 
-    {
         title: 'If I have a thousand ideas and only one turns out to be good, I am satisfied.',
         author: 'Alfred Bernhard Nobel'
     }, 

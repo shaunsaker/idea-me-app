@@ -1,6 +1,10 @@
 TODOS
-    Only get geolocation in Edit Profile page
+    Raw Text bug somewhere 0 (Profile page)
+    Group reducer actions
+    Continue anonymously didnt work initially (may have been debug mode issue)
     Forgot password when user does not exist?
+        App crashes after auth error reducer
+    AnimateTranslateX mounting in forgot password?
     Sound when idea added
     Rethink sharing ideas 
     Empty state

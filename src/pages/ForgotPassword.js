@@ -9,8 +9,8 @@ import InfoBlock from '../components/InfoBlock';
 import InputContainer from '../components/InputContainer';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import Loader from '../components/Loader';
-import SnackBar from '../components/SnackBar';
+import Loader from '../widgets/Loader';
+import SnackBar from '../widgets/SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
@@ -37,18 +37,18 @@ export class ForgotPassword extends React.Component {
     }
 
     sendPasswordResetEmail() {
-		this.props.dispatch({
-			type: 'TOGGLE_LOADING'
-		});
+        this.props.dispatch({
+            type: 'TOGGLE_LOADING'
+        });
 
-		this.props.dispatch({
-			type: 'sendPasswordResetEmail',
-			email: this.props.email
-		});
+        this.props.dispatch({
+            type: 'sendPasswordResetEmail',
+            userEmail: this.props.userEmail
+        });
     }
 
     render() {
-        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0; 
+        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0 && this.props.userEmail.indexOf('.') > 0;
 
         return (
             <Page>
@@ -61,7 +61,7 @@ export class ForgotPassword extends React.Component {
                     <InfoBlock
                         title="Forgot your password?"
                         subtitle="Enter your email address and we'll send you a link to reset it."
-                        titleColor={styleConstants.white} 
+                        titleColor={styleConstants.white}
                         subtitleColor={styleConstants.white} />
 
                     <Input
@@ -81,9 +81,9 @@ export class ForgotPassword extends React.Component {
 
                 <SnackBar />
 
-                <Loader 
-                    position='bottom'/>
-                
+                <Loader
+                    position='bottom' />
+
             </Page>
         );
     }

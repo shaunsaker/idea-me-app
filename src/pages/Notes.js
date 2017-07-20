@@ -14,7 +14,7 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
 import ActionModal from '../modals/ActionModal';
-import SnackBar from '../components/SnackBar';
+import SnackBar from '../widgets/SnackBar';
 
 export class Notes extends React.Component {
     constructor(props) {
@@ -54,7 +54,7 @@ export class Notes extends React.Component {
             this.props.dispatch({
                 type: 'SET_NEW_NOTES',
                 newNotes,
-            });  
+            });
         }
     }
 
@@ -89,7 +89,7 @@ export class Notes extends React.Component {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
             const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
-            
+
             // Dispatch to store
             this.props.dispatch({
                 type: 'UPDATE_USER_DATA',

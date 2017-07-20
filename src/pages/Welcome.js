@@ -11,15 +11,15 @@ import Header from '../components/Header';
 import Logo from '../components/Logo';
 import InfoBlock from '../components/InfoBlock';
 import Button from '../components/Button';
-import Loader from '../components/Loader';
-import SnackBar from '../components/SnackBar';
+import Loader from '../widgets/Loader';
+import SnackBar from '../widgets/SnackBar';
 
 import styleConstants from '../styles/styleConstants';
 
 export class Welcome extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.signInUserWithFacebook = this.signInUserWithFacebook.bind(this);
     }
 
@@ -30,8 +30,8 @@ export class Welcome extends React.Component {
 
             uid: PropTypes.string,
             userEmail: PropTypes.string,
-			userName: PropTypes.string,
-			userPhotoUrl: PropTypes.object,
+            userName: PropTypes.string,
+            userPhotoUrl: PropTypes.object,
             currentLocation: PropTypes.string,
         };
     }
@@ -41,42 +41,42 @@ export class Welcome extends React.Component {
         // Get the user's current location
         if (!this.props.currentLocation) {
 
-                // Reduce jank on page mount
-                setTimeout(() => {
-                    this.props.dispatch({
-                        type: 'getUserLocation'
-                    });
-                }, 500);
+            // Reduce jank on page mount
+            setTimeout(() => {
+                this.props.dispatch({
+                    type: 'getUserLocation'
+                });
+            }, 500);
         }
     }
 
     componentDidUpdate() {
 
-		// If we're authenticated, we have geolocation and we have not yet loaded data, load/save data to db
-		if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
-			this.props.dispatch({
-				type: 'loadUser',
-				uid: this.props.uid,
+        // If we're authenticated, we have geolocation and we have not yet loaded data, load/save data to db
+        if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'loadUser',
+                uid: this.props.uid,
 
                 // Add these for the ride in case we have a new user
                 node: 'profile',
-				userData: {
+                userData: {
                     userEmail: this.props.userEmail,
-					userName: this.props.userName,
-					userPhotoUrl: this.props.userPhotoUrl,
+                    userName: this.props.userName,
+                    userPhotoUrl: this.props.userPhotoUrl,
                     userLocation: this.props.currentLocation,
-				},
-			});
-		}
+                },
+            });
+        }
 
         // If we have data, we have everything we need
-		else if (this.props.cloudDataSuccess) {
-			this.props.dispatch({
-				type: 'RESET_CLOUD_DATA_SUCCESS'
-			});
+        else if (this.props.cloudDataSuccess) {
+            this.props.dispatch({
+                type: 'RESET_CLOUD_DATA_SUCCESS'
+            });
 
-			Actions.home();
-		}
+            Actions.home();
+        }
     }
 
     signInUserWithFacebook() {
@@ -91,10 +91,10 @@ export class Welcome extends React.Component {
 
     render() {
         return (
-            <Page 
+            <Page
                 fauxFooter>
-                
-                <Header 
+
+                <Header
                     text='Log In'
                     handleTextPress={() => Actions.signInWithEmail()}
                     textRight />
@@ -104,26 +104,26 @@ export class Welcome extends React.Component {
                 <InfoBlock
                     fixSubtitleHeight
                     title="Have great ideas and no where to store them?"
-                    subtitle="You've come to the right place." 
-                    titleColor={styleConstants.white} 
+                    subtitle="You've come to the right place."
+                    titleColor={styleConstants.white}
                     subtitleColor={styleConstants.white} />
 
                 <View>
                     <Button
                         iconName='facebook'
-                        handlePress={this.signInUserWithFacebook}                             
+                        handlePress={this.signInUserWithFacebook}
                         text='Continue with Facebook'
                         backgroundColor={styleConstants.white} />
                     <Button
-                        handlePress={() => Actions.signInOptions()}                           
+                        handlePress={() => Actions.signInOptions()}
                         text='More Options'
                         backgroundColor='transparent' />
                 </View>
 
                 <SnackBar />
 
-                <Loader 
-                    position='bottom'/>
+                <Loader
+                    position='bottom' />
 
             </Page>
         );
@@ -132,14 +132,14 @@ export class Welcome extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-		authenticated: state.main.auth.authenticated,
-		cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
-        
-		uid: state.main.auth.uid,
-		userEmail: state.main.userData.profile.userEmail,
-		userName: state.main.userData.profile.userName,
-		userPhotoUrl: state.main.userData.profile.userPhotoUrl,
-		currentLocation: state.main.geolocation.currentLocation,
+        authenticated: state.main.auth.authenticated,
+        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+
+        uid: state.main.auth.uid,
+        userEmail: state.main.userData.profile.userEmail,
+        userName: state.main.userData.profile.userName,
+        userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+        currentLocation: state.main.geolocation.currentLocation,
     });
 }
 

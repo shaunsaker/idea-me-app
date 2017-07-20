@@ -14,7 +14,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Page from '../components/Page';
 import InfoBlock from '../components/InfoBlock';
-import SnackBar from '../components/SnackBar';
+import SnackBar from '../widgets/SnackBar';
 import InfoModal from '../modals/InfoModal';
 
 export class Splash extends React.Component {
