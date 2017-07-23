@@ -10,7 +10,7 @@ import {
 
 import config from '../config';
 import utilities from '../utilities';
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 import DeleteButton from './DeleteButton';
 
@@ -87,7 +87,7 @@ export default class BlankInput extends React.Component {
         this.setInputHeight(0);
     }
 
-    setInputHeight(newInputHeight) {       
+    setInputHeight(newInputHeight) {
         if (newInputHeight > this.minimumInputHeight) {
             this.setState({
                 inputHeight: newInputHeight
@@ -105,8 +105,8 @@ export default class BlankInput extends React.Component {
     render() {
         const clearTextButton = this.props.value ?
             <View style={styles.clearTextButtonContainer}>
-                <DeleteButton 
-                    handlePress={this.clearInputText}/>
+                <DeleteButton
+                    handlePress={this.clearInputText} />
             </View>
             :
             null;
@@ -130,11 +130,11 @@ export default class BlankInput extends React.Component {
                         onChangeText={(text) => this.props.handleChange(text)}
                         onFocus={this.focusInput}
                         onBlur={this.blurInput}
-                        autoFocus={this.props.autoFocus} 
+                        autoFocus={this.props.autoFocus}
                         multiline={this.props.multiline}
                         onChange={this.props.multiline ? (event) => this.setInputHeight(event.nativeEvent.contentSize.height) : null /*NOTE: this does not work with onContentSizeChange */} />
 
-                        {clearTextButton}
+                    {clearTextButton}
                 </View>
             </TouchableWithoutFeedback>
         );

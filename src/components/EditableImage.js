@@ -7,8 +7,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 
@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     editImageContainer: {
-		position: 'absolute',
-		top: 0,
+        position: 'absolute',
+        top: 0,
         width: 100,
         height: 100,
         borderRadius: 50,
-		justifyContent: 'center',
-		alignItems: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         borderWidth: 2,
         borderColor: styleConstants.white,
     },
@@ -67,7 +67,7 @@ export default class EditableImage extends React.Component {
                 isEditable: false,
             });
         }
-    } 
+    }
 
     toggleEditMode() {
         this.setState({
@@ -78,7 +78,7 @@ export default class EditableImage extends React.Component {
     render() {
         const image = this.props.uri ?
             <Image
-                source={{uri: this.props.uri}} 
+                source={{ uri: this.props.uri }}
                 style={styles.image} />
             :
             null;
@@ -104,7 +104,7 @@ export default class EditableImage extends React.Component {
                     {editIcon}
 
                 </Touchable>
-                
+
             </View>
         );
     }

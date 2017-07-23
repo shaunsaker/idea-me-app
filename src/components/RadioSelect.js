@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {
-	View,
+    View,
     Text,
-	StyleSheet,
+    StyleSheet,
 } from "react-native";
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     container: {
- 
+
     },
     titleContainer: {
         paddingVertical: 8,
@@ -65,14 +65,14 @@ export default class RadioSelect extends React.Component {
         };
     }
 
-	static get propTypes() {
-		return {
+    static get propTypes() {
+        return {
             displayText: PropTypes.string,
             currentValue: PropTypes.string,
             values: PropTypes.array,
             handleSelect: PropTypes.func,
-		}
-	}
+        }
+    }
 
     componentDidMount() {
         if (this.props.currentValue) {
@@ -97,19 +97,19 @@ export default class RadioSelect extends React.Component {
         });
     }
 
-	render() {   
-        const activeTitleStyles = this.state.active && 
+    render() {
+        const activeTitleStyles = this.state.active &&
             {
                 color: styleConstants.secondary,
             };
 
         const radioButtons = this.props.values.map((value) => {
-            const activeRadioButtonStyles = this.state.active === value.title && 
+            const activeRadioButtonStyles = this.state.active === value.title &&
                 {
                     borderColor: styleConstants.white,
                 };
-            
-            const activeRadioButtonInnerStyles = this.state.active === value.title && 
+
+            const activeRadioButtonInnerStyles = this.state.active === value.title &&
                 {
                     backgroundColor: styleConstants.secondary,
                 };
@@ -124,7 +124,7 @@ export default class RadioSelect extends React.Component {
                     key={'radio-' + value.title}
                     style={styles.radioButtonContainer}
                     onPress={() => this.select(value.title)}>
-                    <View style={[styles.radioButton,activeRadioButtonStyles]}>
+                    <View style={[styles.radioButton, activeRadioButtonStyles]}>
                         <View style={[styles.radioButtonInner, activeRadioButtonInnerStyles]} />
                     </View>
                     <View style={styles.labelContainer}>
@@ -132,11 +132,11 @@ export default class RadioSelect extends React.Component {
                             {value.title}
                         </Text>
                     </View>
-                </Touchable> 
+                </Touchable>
             );
         });
 
-		return (
+        return (
             <View style={styles.container}>
                 <View style={styles.titleContainer}>
                     <Text style={[styles.title, activeTitleStyles, styleConstants.primaryFont]}>
@@ -149,6 +149,6 @@ export default class RadioSelect extends React.Component {
 
                 </View>
             </View>
-		);
-	}
+        );
+    }
 }

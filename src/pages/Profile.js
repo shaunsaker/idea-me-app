@@ -9,8 +9,8 @@ import { connect } from "react-redux";
 
 import config from '../config';
 import utilities from '../utilities';
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';

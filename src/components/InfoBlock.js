@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import PropTypes from 'prop-types';
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 

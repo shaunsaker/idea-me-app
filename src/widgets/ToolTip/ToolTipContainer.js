@@ -6,7 +6,7 @@ import {
 } from "react-native";
 import { connect } from 'react-redux';
 
-import styleConstants from '../../styles/styleConstants';
+import styleConstants from '../../assets/styleConstants';
 
 import ToolTipComponent from './ToolTipComponent';
 

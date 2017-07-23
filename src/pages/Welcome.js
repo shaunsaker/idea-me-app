@@ -14,7 +14,7 @@ import Button from '../components/Button';
 import Loader from '../widgets/Loader';
 import SnackBar from '../widgets/SnackBar';
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 export class Welcome extends React.Component {
     constructor(props) {

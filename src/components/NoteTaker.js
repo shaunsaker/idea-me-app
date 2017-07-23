@@ -10,8 +10,8 @@ import {
 } from "react-native";
 
 import config from '../config';
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import AnimateFadeIn from '../animators/AnimateFadeIn';
 import AnimateRotate from '../animators/AnimateRotate';
@@ -186,7 +186,7 @@ export default class NoteTaker extends React.Component {
                     autoFocus={true}
                     multiline />
             </AnimateFadeIn>;
-            
+
 
         return (
             <View style={styles.container}>

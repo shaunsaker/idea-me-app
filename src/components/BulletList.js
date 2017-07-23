@@ -7,8 +7,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import AnimateFadeIn from '../animators/AnimateFadeIn';
 import DeleteButton from './DeleteButton';
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     notesWrapper: {
         flex: 1,
         padding: 8,
-                borderRadius: 4,
+        borderRadius: 4,
     },
     notesContainer: {
         paddingBottom: 16,

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import utilities from '../utilities';
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';

@@ -13,7 +13,7 @@ import ActionModal from '../modals/ActionModal';
 import Loader from '../widgets/Loader';
 import SnackBar from '../widgets/SnackBar';
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 export class SignInOptions extends React.Component {
     constructor(props) {

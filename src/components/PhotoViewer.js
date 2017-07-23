@@ -10,8 +10,8 @@ import {
 } from "react-native";
 
 import config from '../config';
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Photo from './Photo';
 import Touchable from './Touchable';

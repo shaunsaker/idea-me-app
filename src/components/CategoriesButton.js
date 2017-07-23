@@ -5,8 +5,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 
@@ -51,18 +51,18 @@ export default CategoriesButton = (props) => {
         props.backgroundColor === 'transparent' || props.backgroundColor === styleConstants.primary ?
             styleConstants.white
             :
-            styleConstants.primary;       
+            styleConstants.primary;
 
     return (
         <View>
             <Touchable
-                onPress={props.handlePress} 
+                onPress={props.handlePress}
                 style={[styles.button, { backgroundColor: props.backgroundColor }, props.style]}
                 androidRipple
                 androidRippleColor={altColor}>
                 <View style={styles.container}>
                     <View style={styles.textContainer}>
-                        <Icon 
+                        <Icon
                             name='folder'
                             style={styles.icon} />
                         <Text
@@ -71,7 +71,7 @@ export default CategoriesButton = (props) => {
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
-                        <Icon 
+                        <Icon
                             name='lightbulb'
                             style={styles.icon} />
                         <Text

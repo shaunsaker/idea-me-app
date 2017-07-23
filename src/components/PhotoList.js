@@ -8,8 +8,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Photo from './Photo';
 
@@ -66,7 +66,7 @@ export default class PhotoList extends React.Component {
         }
     }
 
-    renderPhoto = ({item, index}) => {
+    renderPhoto = ({ item, index }) => {
         return (
             <Photo
                 key={'photo-' + item.uid}
@@ -82,8 +82,8 @@ export default class PhotoList extends React.Component {
 
     render() {
         const photos = this.props.photos && this.props.photos.length > 0 ?
-            <FlatList 
-                keyExtractor={item => 'photo-' + item.uid }
+            <FlatList
+                keyExtractor={item => 'photo-' + item.uid}
                 data={this.props.photos}
                 renderItem={this.renderPhoto}
                 style={styles.photosWrapper}

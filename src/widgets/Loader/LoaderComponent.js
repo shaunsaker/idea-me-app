@@ -7,7 +7,7 @@ import {
 import PropTypes from 'prop-types';
 
 import config from '../../config';
-import styleConstants from '../../styles/styleConstants';
+import styleConstants from '../../assets/styleConstants';
 
 import AnimateFadeIn from '../../animators/AnimateFadeIn';
 

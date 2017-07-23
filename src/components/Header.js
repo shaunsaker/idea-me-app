@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';

@@ -7,8 +7,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 import ItemListHeader from './ItemListHeader'
@@ -112,12 +112,12 @@ export default class ItemList extends React.Component {
 
     render() {
         const header = this.props.headerTitle ?
-            <ItemListHeader 
-               title={this.props.headerTitle}
-               value={this.props.headerValue}
-               disabled={this.props.headerDisabled}
-               iconName={this.props.headerIconName}
-               handlePress={this.props.handleItemPress} />
+            <ItemListHeader
+                title={this.props.headerTitle}
+                value={this.props.headerValue}
+                disabled={this.props.headerDisabled}
+                iconName={this.props.headerIconName}
+                handlePress={this.props.handleItemPress} />
             :
             null;
 

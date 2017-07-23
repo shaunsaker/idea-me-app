@@ -5,8 +5,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 
@@ -60,13 +60,13 @@ export default Button = (props) => {
         props.backgroundColor === 'transparent' || props.backgroundColor === styleConstants.primary ?
             styleConstants.white
             :
-            styleConstants.primary;       
+            styleConstants.primary;
 
-    const icon = 
+    const icon =
         props.iconName ?
             <Icon
                 name={props.iconName}
-                style={[styles.icon, {color: altColor}]} />
+                style={[styles.icon, { color: altColor }]} />
             :
             null;
 
@@ -78,10 +78,10 @@ export default Button = (props) => {
                 style={[styles.text, { color: altColor }, styleConstants.primaryFont]}>
                 {props.text}
             </Text>
-        </View>  
+        </View>
         :
         <Touchable
-            onPress={props.handlePress} 
+            onPress={props.handlePress}
             style={[styles.button, { backgroundColor: props.backgroundColor }, props.style]}
             androidRipple
             androidRippleColor={altColor}>

@@ -5,10 +5,10 @@ import {
     Text,
     StyleSheet,
 } from "react-native";
-import Icon from '../../styles/icons/index';
+import Icon from '../../assets/icons/index';
 
 import config from '../../config';
-import styleConstants from '../../styles/styleConstants';
+import styleConstants from '../../assets/styleConstants';
 
 import AnimateTranslateY from '../../animators/AnimateTranslateY';
 

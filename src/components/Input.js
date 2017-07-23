@@ -12,7 +12,7 @@ import {
 
 import config from '../config';
 import utilities from '../utilities';
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';

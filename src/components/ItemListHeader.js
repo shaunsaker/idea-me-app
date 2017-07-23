@@ -6,8 +6,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 
@@ -51,15 +51,15 @@ const styles = StyleSheet.create({
 });
 
 export default ItemListHeader = (props) => {
-	const icon = props.iconName ?
-		<View
-			style={styles.headerIconContainer}>
-			<Icon name={props.iconName} style={styles.headerIcon} />
-		</View>
-		:
-		null;
+    const icon = props.iconName ?
+        <View
+            style={styles.headerIconContainer}>
+            <Icon name={props.iconName} style={styles.headerIcon} />
+        </View>
+        :
+        null;
 
-	const subtitle = !props.value && !props.headerDisabled ?
+    const subtitle = !props.value && !props.headerDisabled ?
         <View style={styles.loaderContainer}>
             <ActivityIndicator
                 size="small"
@@ -84,10 +84,10 @@ export default ItemListHeader = (props) => {
             {icon}
 
         </View>
-        :    
+        :
         props.handlePress ?
             <Touchable
-                onPress={() => props.handlePress({title: props.value})}
+                onPress={() => props.handlePress({ title: props.value })}
                 style={styles.header}
                 androidRipple
                 androidRippleColor={styleConstants.white}>

@@ -4,9 +4,9 @@ import {
     Text,
     StyleSheet,
 } from "react-native";
-import Icon from '../styles/icons/index';
+import Icon from '../assets/icons/index';
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 const styles = StyleSheet.create({
     label: {

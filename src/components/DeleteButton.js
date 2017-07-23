@@ -4,8 +4,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 
@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
 });
 
 export default DeleteButton = (props) => {
-        return (
-            <View style={styles.deleteButtonContainer}>
-                <Touchable
-                    onPress={props.handlePress}
-                    style={styles.deleteButton}>
-                    <Icon
-                        name='close'
-                        style={styles.deleteIcon} />
-                </Touchable>
-            </View>
-        );
+    return (
+        <View style={styles.deleteButtonContainer}>
+            <Touchable
+                onPress={props.handlePress}
+                style={styles.deleteButton}>
+                <Icon
+                    name='close'
+                    style={styles.deleteIcon} />
+            </Touchable>
+        </View>
+    );
 }

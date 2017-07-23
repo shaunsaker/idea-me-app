@@ -7,10 +7,10 @@ import {
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import Icon from '../styles/icons/index';
+import Icon from '../assets/icons/index';
 
 import utilities from '../utilities';
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 import Page from '../components/Page';
 import InfoBlock from '../components/InfoBlock';

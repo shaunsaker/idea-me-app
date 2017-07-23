@@ -7,8 +7,8 @@ import {
 } from "react-native";
 
 import config from '../config';
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import InfoBlock from '../components/InfoBlock';
 import Button from '../components/Button';

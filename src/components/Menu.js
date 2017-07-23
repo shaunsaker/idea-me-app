@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {
-	View,
+    View,
     FlatList,
-	Text,
-	StyleSheet,
+    Text,
+    StyleSheet,
 } from "react-native";
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 import AnimateHeight from '../animators/AnimateHeight';
@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
             width: 0
         },
     },
-	menuItemsContainer: {
+    menuItemsContainer: {
 
-	},
+    },
     menuItemContainer: {
         justifyContent: 'center',
         padding: 8,
@@ -57,18 +57,18 @@ export default class Menu extends React.Component {
         this.itemHeight = 41;
     }
 
-	static get propTypes() {
-		return {
+    static get propTypes() {
+        return {
             values: PropTypes.array.isRequired,
             handleSelect: PropTypes.func.isRequired,
-		}
-	}
+        }
+    }
 
     renderItem({ item }) {
         return (
             <Touchable
                 style={styles.menuItemContainer}
-                onPress={() => this.props.handleSelect(item) } >
+                onPress={() => this.props.handleSelect(item)} >
                 <Text
                     style={[styles.menuItemText, styleConstants.primaryFont]}>
                     {item}
@@ -77,8 +77,8 @@ export default class Menu extends React.Component {
         )
     }
 
-	render() {   
-		return (
+    render() {
+        return (
             <View style={styles.menuItemsWrapper}>
                 <AnimateHeight
                     height={this.props.values.length * this.itemHeight}>
@@ -90,6 +90,6 @@ export default class Menu extends React.Component {
                         ItemSeparatorComponent={() => <View style={styles.separator} />} />
                 </AnimateHeight>
             </View>
-		);
-	}
+        );
+    }
 }

@@ -7,8 +7,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import VoiceNotePlayer from './VoiceNotePlayer';
 import DeleteButton from './DeleteButton';

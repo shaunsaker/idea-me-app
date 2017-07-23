@@ -10,7 +10,7 @@ import { Actions } from 'react-native-router-flux';
 import { Recorder } from 'react-native-audio-toolkit';
 
 import utilities from '../utilities';
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 import Page from '../components/Page';
 import Header from '../components/Header';

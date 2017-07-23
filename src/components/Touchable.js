@@ -6,7 +6,7 @@ import {
     Platform,
 } from "react-native";
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 export default Touchable = (props) => {
     const touchable = props.androidRipple && Platform.OS === 'android' ?

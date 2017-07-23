@@ -1,7 +1,5 @@
 TODOS
-    Edit Profile save popped to home and not profile
-    loadUserDataResponse came through twice with firstTimeUser
-    Styles => Assets
+    Refactor store to use error message section as opposed to separate error messages (SnackBar will be more performant)
     Play sound on idea add
     Input height on mount is shit
     Announcement page for when I need to make some sort of announcement
@@ -23,9 +21,9 @@ TODOS
         Use page component
             On enable, can test screen dimensions from Tablet
                 Width and height variations based on common devices (smallest and largest)
-        Info block description number of lines should be based on dimensions
-    Handle app updates
-        Force?
+    Forced app updates
+        Libs
+        Update screen
     Facebook/Google Sign In  
     RN Permissions  
     User survey
@@ -72,7 +70,6 @@ V2
     Use height animator in dropdown button?
     Email after signup detailing what app does and howtos 
     Group idea editing (sharing category boards between groups)
-    Refactor store to use error message section as opposed to separate error messages (SnackBar will be more performant)
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app

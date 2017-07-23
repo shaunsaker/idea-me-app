@@ -11,8 +11,8 @@ import { Recorder } from 'react-native-audio-toolkit';
 
 import config from '../config';
 import utilities from '../utilities';
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import AnimateBlink from '../animators/AnimateBlink';
 import AnimateRotate from '../animators/AnimateRotate';

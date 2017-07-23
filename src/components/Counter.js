@@ -7,7 +7,7 @@ import {
 } from "react-native";
 
 import utilities from '../utilities';
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 const styles = StyleSheet.create({
     container: {

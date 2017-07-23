@@ -5,8 +5,8 @@ import {
     StyleSheet,
 } from "react-native";
 
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 
@@ -57,17 +57,17 @@ export default IconButton = (props) => {
             disabled
     */
 
-    const backgroundColorStyles = props.backgroundColor && 
+    const backgroundColorStyles = props.backgroundColor &&
         {
             backgroundColor: props.backgroundColor,
         };
 
-    const iconColorStyles = props.iconColor && 
+    const iconColorStyles = props.iconColor &&
         {
             color: props.iconColor,
         };
 
-    const borderColorStyles = props.iconColor && 
+    const borderColorStyles = props.iconColor &&
         {
             borderColor: props.iconColor,
         };
@@ -77,7 +77,7 @@ export default IconButton = (props) => {
             <Text style={[styles.countText, styleConstants.primaryFont]}>
                 {props.count}
             </Text>
-        </View> 
+        </View>
         :
         null;
 

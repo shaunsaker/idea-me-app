@@ -6,12 +6,12 @@ import {
     Text,
     StyleSheet,
 } from "react-native";
-import { Player } from 'react-native-audio-toolkit'; 
+import { Player } from 'react-native-audio-toolkit';
 
 import config from '../config';
 import utilities from '../utilities';
-import Icon from '../styles/icons/index';
-import styleConstants from '../styles/styleConstants';
+import Icon from '../assets/icons/index';
+import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 import Counter from './Counter';
@@ -77,7 +77,7 @@ export default class VoiceNotePlayer extends React.Component {
         }
 
         this.player = new Player(
-            utilities.getFileName(this.props.voiceNote.filePath), 
+            utilities.getFileName(this.props.voiceNote.filePath),
             {
                 autoDestroy: false
             }
@@ -127,7 +127,7 @@ export default class VoiceNotePlayer extends React.Component {
         const iconName = this.state.isPlaying ? 'pause' : 'play';
 
         return (
-            <Touchable 
+            <Touchable
                 onPress={this.togglePlayback}
                 style={[styles.voiceNoteContainer, containerStyles]} >
                 <View style={styles.voiceNoteIconContainer}>

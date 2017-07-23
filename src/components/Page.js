@@ -4,7 +4,7 @@ import {
     StyleSheet,
 } from "react-native";
 
-import styleConstants from '../styles/styleConstants';
+import styleConstants from '../assets/styleConstants';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
 });
 
 export default Page = (props) => {
-    const pageStyles = 
+    const pageStyles =
         {
             backgroundColor: props.backgroundColor ? props.backgroundColor : styleConstants.primary,
             justifyContent: props.justifyContent ? props.justifyContent : 'space-between',
             paddingBottom: props.removeBottomPadding ? 0 : props.fauxFooter ? 0 : 16,
         }
 
-    const fauxFooter = props.fauxFooter ? <View style={{height: 56}} /> : null;
+    const fauxFooter = props.fauxFooter ? <View style={{ height: 56 }} /> : null;
 
     return (
         <View style={[styles.container, pageStyles]} >
