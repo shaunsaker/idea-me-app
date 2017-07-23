@@ -1,6 +1,5 @@
 TODOS
-    Refactor store to use error message section as opposed to separate error messages (SnackBar will be more performant)
-    Get geolocation as needed on signin (blocks ui thread until received)
+    Edit Profile save popped to home and not profile
     loadUserDataResponse came through twice with firstTimeUser
     Styles => Assets
     Play sound on idea add
@@ -73,6 +72,7 @@ V2
     Use height animator in dropdown button?
     Email after signup detailing what app does and howtos 
     Group idea editing (sharing category boards between groups)
+    Refactor store to use error message section as opposed to separate error messages (SnackBar will be more performant)
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app

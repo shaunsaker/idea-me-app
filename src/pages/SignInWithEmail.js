@@ -31,14 +31,13 @@ export class SignInWithEmail extends React.Component {
             uid: PropTypes.string,
             userEmail: PropTypes.string,
             userPassword: PropTypes.string,
-            currentLocation: PropTypes.string,
         };
     }
 
     componentDidUpdate() {
 
         // If we're authenticated and we have not yet loaded data, load/save data to db
-        if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
+        if (this.props.authenticated && !this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid,
@@ -47,7 +46,6 @@ export class SignInWithEmail extends React.Component {
                 node: 'profile',
                 userData: {
                     userEmail: this.props.userEmail,
-                    userLocation: this.props.currentLocation,
                 }
             });
         }
@@ -151,7 +149,6 @@ function mapStateToProps(state) {
         uid: state.main.auth.uid,
         userEmail: state.main.userData.profile.userEmail,
         userPassword: state.main.auth.userPassword,
-        currentLocation: state.main.geolocation.currentLocation,
     });
 }
 

@@ -32,28 +32,13 @@ export class Welcome extends React.Component {
             userEmail: PropTypes.string,
             userName: PropTypes.string,
             userPhotoUrl: PropTypes.object,
-            currentLocation: PropTypes.string,
         };
-    }
-
-    componentDidMount() {
-
-        // Get the user's current location
-        if (!this.props.currentLocation) {
-
-            // Reduce jank on page mount
-            setTimeout(() => {
-                this.props.dispatch({
-                    type: 'getUserLocation'
-                });
-            }, 500);
-        }
     }
 
     componentDidUpdate() {
 
-        // If we're authenticated, we have geolocation and we have not yet loaded data, load/save data to db
-        if (this.props.authenticated && this.props.currentLocation && !this.props.cloudDataSuccess) {
+        // If we're authenticated, we have not yet loaded data, load/save data to db
+        if (this.props.authenticated && !this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'loadUser',
                 uid: this.props.uid,
@@ -64,7 +49,6 @@ export class Welcome extends React.Component {
                     userEmail: this.props.userEmail,
                     userName: this.props.userName,
                     userPhotoUrl: this.props.userPhotoUrl,
-                    userLocation: this.props.currentLocation,
                 },
             });
         }
@@ -137,7 +121,6 @@ function mapStateToProps(state) {
         userEmail: state.main.userData.profile.userEmail,
         userName: state.main.userData.profile.userName,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
-        currentLocation: state.main.geolocation.currentLocation,
     });
 }
 
