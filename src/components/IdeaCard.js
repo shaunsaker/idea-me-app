@@ -114,7 +114,9 @@ export default class IdeaCard extends React.Component {
             nextProps.idea.description !== this.props.idea.description ||
             nextProps.idea.category !== this.props.idea.category ||
             nextProps.idea.priority !== this.props.idea.priority ||
-            nextProps.idea.notes !== this.props.idea.notes // needs work - will never be shallow equal
+            utilities.getLengthOfObject(nextProps.idea.notes) !== utilities.getLengthOfObject(this.props.idea.notes) ||
+            utilities.getLengthOfObject(nextProps.idea.photos) !== utilities.getLengthOfObject(this.props.idea.photos) ||
+            utilities.getLengthOfObject(nextProps.idea.voiceNotes) !== utilities.getLengthOfObject(this.props.idea.voiceNotes)
         ) {
             return true;
         }
@@ -139,20 +141,12 @@ export default class IdeaCard extends React.Component {
                 }
                 } />;
 
-        const dateCreated = !this.props.firstTimeUser && utilities.getPrettyDate(Number(this.props.idea.uid));
+        const dateCreated = utilities.getPrettyDate(Number(this.props.idea.uid));
         const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
         const priorityLabelText = this.props.idea.priority ? this.props.idea.priority : 'Unprioritised';
-        const notes = utilities.convertObjectArrayToArray(this.props.idea.notes);
-        const notesCount = notes.length;
+        const notesCount = utilities.getLengthOfObject(this.props.idea.notes);
         const photosCount = utilities.getLengthOfObject(this.props.idea.photos);
         const voiceNotesCount = utilities.getLengthOfObject(this.props.idea.voiceNotes);
-
-        const dateCreatedComponent = !this.props.firstTimeUser &&
-            <View style={styles.dateContainer}>
-                <Text style={[styles.dateText, styleConstants.primaryFont]}>
-                    {'Created: ' + dateCreated}
-                </Text>
-            </View>
 
         return (
             <View
@@ -173,7 +167,11 @@ export default class IdeaCard extends React.Component {
                         fullWidth
                         limitDescriptionHeight />
 
-                    {dateCreatedComponent}
+                    <View style={styles.dateContainer}>
+                        <Text style={[styles.dateText, styleConstants.primaryFont]}>
+                            {'Created: ' + dateCreated}
+                        </Text>
+                    </View>
                 </View>
 
                 <View

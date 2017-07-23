@@ -41,6 +41,29 @@ export default function (state = initialState, action) {
 
             return new_state;
 
+        /*
+            TOOLTIPS
+        */
+        case 'SHOW_TOOL_TIPS':
+            new_state = utilities.cloneObject(state);
+            new_state.app.showToolTips = true;
+
+            return new_state;
+
+        case 'SET_NEXT_TOOL_TIP':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.currentToolTipUID = action.newToolTipUID;
+
+            return new_state;
+
+        case 'CANCEL_ONBOARDING':
+            new_state = utilities.cloneObject(state);
+            new_state.auth.firstTimeUser = false;
+            new_state.app.showToolTips = false;
+            new_state.appData.currentToolTipUID = null;
+
+            return new_state;
+
 		/*
 			GEOLOCATION
 		*/

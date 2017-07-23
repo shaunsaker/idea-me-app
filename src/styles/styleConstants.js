@@ -18,7 +18,7 @@ styleConstants.smallFont = 16;
 styleConstants.verySmallFont = 12;
 styleConstants.iconFont = 18;
 
-/* COLOURS */ 
+/* COLOURS */
 
 styleConstants.primary = '#393140';
 styleConstants.transPrimary = 'rgba(57, 49, 64, 0.75)';
@@ -27,13 +27,13 @@ styleConstants.danger = '#d32f2f';
 styleConstants.success = '#00ff00';
 styleConstants.white = '#f4f7fd';
 styleConstants.realWhite = '#ffffff';
-styleConstants.lightGrey = '#b0b3cf'; 
+styleConstants.lightGrey = '#b0b3cf';
 styleConstants.grey = '#808092';
-styleConstants.transBlack = 'rgba(0, 0, 0, 0.9)';
+styleConstants.transBlack = 'rgba(0, 0, 0, 0.75)';
 
 /* DIMENSIONS */
 
-const { width, height } = Dimensions.get('window'); 
+const { width, height } = Dimensions.get('window');
 
 styleConstants.windowWidth = width;
 styleConstants.windowHeight = height;

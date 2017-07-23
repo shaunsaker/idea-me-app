@@ -15,6 +15,7 @@ import DropdownButton from '../components/DropdownButton';
 import TabBar from '../components/TabBar';
 import SnackBar from '../widgets/SnackBar';
 import ActionModal from '../modals/ActionModal';
+import ToolTip from '../widgets/ToolTip';
 
 export class AddIdea extends React.Component {
     constructor(props) {
@@ -205,8 +206,7 @@ export class AddIdea extends React.Component {
                         placeholder="WHAT'S THE BIG IDEA?"
                         value={this.state.newIdeaTitle}
                         handleChange={this.updateNewIdeaTitle}
-                        maxLength={16}
-                        autoFocus />
+                        maxLength={16} />
 
                     <Input
                         placeholder="ENTER YOUR DESCRIPTION HERE"
@@ -280,6 +280,8 @@ export class AddIdea extends React.Component {
                 {cancelModal}
 
                 <SnackBar />
+
+                <ToolTip />
 
             </Page >
         );

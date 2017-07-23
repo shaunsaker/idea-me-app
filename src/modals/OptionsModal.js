@@ -78,7 +78,7 @@ export default OptionsModal = (props) => {
 
     return (
         <View>
-            <Modal 
+            <Modal
                 animationType={config.modal.animation}
                 transparent={true}
                 visible={true}
@@ -99,7 +99,7 @@ export default OptionsModal = (props) => {
                                     <Icon
                                         name='close'
                                         style={styles.closeIcon} />
-                                </Touchable>        
+                                </Touchable>
                             </View>
                         </View>
                         {options}

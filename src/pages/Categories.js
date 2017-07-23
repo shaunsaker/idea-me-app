@@ -14,6 +14,7 @@ import Header from '../components/Header';
 import NoteCard from '../components/NoteCard';
 import ActionModal from '../modals/ActionModal';
 import SnackBar from '../widgets/SnackBar';
+import ToolTip from '../widgets/ToolTip';
 
 export class Categories extends React.Component {
     constructor(props) {
@@ -64,7 +65,9 @@ export class Categories extends React.Component {
         }
 
         if (!isCategoryPresent) {
-            let newCategories = utilities.cloneObject(this.props.categories);
+
+            // If we don't have any categories, create a new object
+            let newCategories = this.props.categories ? utilities.cloneObject(this.props.categories) : {};
             newCategories = utilities.pushObjectToObjectArray(newCategory, newCategories);
 
             // Dispatch to store
@@ -175,6 +178,8 @@ export class Categories extends React.Component {
                 {modal}
 
                 <SnackBar />
+
+                <ToolTip />
 
             </Page >
         );

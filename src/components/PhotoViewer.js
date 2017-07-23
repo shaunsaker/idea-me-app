@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         right: 0,
         padding: 16,
     },
-    closeButton: {  
+    closeButton: {
         fontSize: styleConstants.iconFont,
         color: styleConstants.white,
     },
@@ -62,7 +62,7 @@ export default class PhotoViewer extends React.Component {
 
     static get propTypes() {
         return {
-            photos:  PropTypes.array.isRequired,
+            photos: PropTypes.array.isRequired,
             scrollToIndex: PropTypes.number,
             handleClose: PropTypes.func,
             handleDeletePhoto: PropTypes.func,
@@ -76,7 +76,7 @@ export default class PhotoViewer extends React.Component {
             this.refs.photosList.scrollToIndex({ index: this.props.scrollToIndex || 0, animated: false });
         }, 0);
     }
-    
+
     getItemLayout = (data, index) => (
         {
             length: styleConstants.windowWidth,
@@ -93,9 +93,9 @@ export default class PhotoViewer extends React.Component {
                 photoContainerStyles={styles.photoContainer}
                 photoStyles={styles.photo}
                 errorText='Photo has either been removed from this device or moved to a different folder.'
-                handleDeletePhoto={() => { 
+                handleDeletePhoto={() => {
                     this.props.handleClose();
-                    this.props.handleDeletePhoto(item.uid);                
+                    this.props.handleDeletePhoto(item.uid);
                 }} />
         );
     }
@@ -103,15 +103,15 @@ export default class PhotoViewer extends React.Component {
     render() {
         return (
             <View>
-                <Modal 
+                <Modal
                     animationType={'fade'}
                     transparent={true}
                     visible={true}
                     onRequestClose={this.props.handleClose}>
                     <View style={styles.container}>
-                        <FlatList 
+                        <FlatList
                             ref='photosList'
-                            keyExtractor={item => 'photo-' + item.uid }
+                            keyExtractor={item => 'photo-' + item.uid}
                             data={this.props.photos}
                             renderItem={this.renderPhoto}
                             getItemLayout={this.getItemLayout}
@@ -121,7 +121,7 @@ export default class PhotoViewer extends React.Component {
                             pagingEnabled>
                         </FlatList>
 
-                        <Touchable 
+                        <Touchable
                             onPress={this.props.handleClose}
                             style={styles.closeButtonContainer}>
                             <Icon

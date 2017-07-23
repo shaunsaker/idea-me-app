@@ -1,4 +1,5 @@
 import quotes from '../resources/quotes';
+import toolTips from '../resources/toolTips';
 
 const initialState = {
     auth: {
@@ -14,7 +15,8 @@ const initialState = {
     },
     app: {
         hasNetwork: true, // assume this is true on app load
-        loading: false, // needs to be true on initial app load
+        loading: false,
+        showToolTips: false,
 
         errorType: null,
         retryAction: {
@@ -46,15 +48,12 @@ const initialState = {
         fileSystemErrorMessage: null,
     },
     appData: {
-        firstTimeUserIdea: {
-            title: 'Get Familiar',
-            description: "Hey! You've made it. You're a few steps away from success. Follow the tooltips for some handy advice and if all else fails, give us a shout from the menu found on your Profile page. We are super keen to hear from you! Good luck!",
-            category: null,
-            priority: 'High',
-            uid: '583027200',
-        },
+        currentToolTipUID: 'tooltip-1', // start with tooltip-1
         currentCategory: 'All Categories',
         quotes, // can be an array because we are not saving this anywhere
+        newNotes: null,
+        newPhotos: null,
+        newVoiceNotes: null,
         priorities: {
             '583027200': {
                 title: 'Low',
@@ -69,9 +68,7 @@ const initialState = {
                 uid: '583027202',
             },
         },
-        newNotes: null,
-        newPhotos: null,
-        newVoiceNotes: null,
+        toolTips,
     },
     userData: {
         profile: {

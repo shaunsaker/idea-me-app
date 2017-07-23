@@ -56,8 +56,7 @@ export default class LoaderComponent extends React.Component {
         }
 
         return (
-            <AnimateFadeIn
-                shouldAnimate={true}>
+            <AnimateFadeIn>
                 <Animated.View style={animatedStyles}>
                     <View style={styles.container} />
                 </Animated.View>

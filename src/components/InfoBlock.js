@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
     descriptionContainer: {
 
     },
+    infoTextDescriptionContainer: {
+
+    },
     infoTextDescription: {
         marginTop: 8,
         fontSize: styleConstants.regularFont,
@@ -52,7 +55,7 @@ export default class InfoBlock extends React.Component {
             titleColor: PropTypes.string,
             subtitleColor: PropTypes.string,
             fullWidth: PropTypes.bool,
-            limitDescriptionHeight: PropTypes.bool,
+            maxNumberOfSubtitleLines: PropTypes.number,
         }
     }
 
@@ -74,7 +77,7 @@ export default class InfoBlock extends React.Component {
             };
 
         const subtitle = this.props.subtitle ?
-            this.props.limitDescriptionHeight ?
+            this.props.maxNumberOfSubtitleLines ?
                 <ScrollView
                     style={styles.descriptionWrapper}
                     contentContainerStyle={styles.descriptionContainer}>
@@ -83,7 +86,7 @@ export default class InfoBlock extends React.Component {
                         androidRipple
                         style={styles.infoTextDescriptionContainer}>
                         <Text
-                            numberOfLines={this.state.readMoreMode ? null : 4}
+                            numberOfLines={this.state.readMoreMode ? null : this.props.maxNumberOfSubtitleLines}
                             style={[styles.infoTextDescription, { color: this.props.subtitleColor }, styleConstants.primaryFont]}>
                             {this.props.subtitle}
                         </Text>

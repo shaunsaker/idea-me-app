@@ -17,12 +17,6 @@ export default class AnimateFadeIn extends React.Component {
         }
     }
 
-    static get propTypes() {
-        return {
-            shouldAnimate: PropTypes.bool,
-        }
-    }
-
     componentDidMount() {
         this.fadeIn();
     }
@@ -38,7 +32,7 @@ export default class AnimateFadeIn extends React.Component {
             }
         ).start();
     }
-    
+
     render() {
         const opacityStyles = {
             opacity: this.state.animatedValue,

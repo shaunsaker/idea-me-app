@@ -1,8 +1,12 @@
 TODOS
-    Empty state / First time user
-        Tooltips          
+    Dates not working
+    Refactor store to use error message section as opposed to separate error messages (SnackBar will be more performant)
+    Get geolocation as needed on signin (blocks ui thread until received)
+    loadUserDataResponse came through twice with firstTimeUser
+    Styles => Assets
+    Play sound on idea add
+    Input height on mount is shit
     Announcement page for when I need to make some sort of announcement
-        FIRST THINK OF TYPES OF ANNOUNCEMENTS
         Based on api prop
         Image uri
         After one week
@@ -11,14 +15,17 @@ TODOS
         After one free month
             Trial about to expire, unless you give us feedback 
     About App
-    App Settings?  
+    Remove App Settings ref
+    Contact Linking should check if can email, otherwise copy email address to clipboard
     Apply material styles
         See material.io
-        Redesign lists
         Labels same fontSize as info block description 
     Responsiveness
         Whereever you have elevation, add a border
         Use page component
+            On enable, can test screen dimensions from Tablet
+                Width and height variations based on common devices (smallest and largest)
+        Info block description number of lines should be based on dimensions
     Handle app updates
         Force?
     Facebook/Google Sign In  
@@ -65,8 +72,8 @@ V2
     Public ideas and collaboration
     Full screen view photos Swipe down to close  
     Use height animator in dropdown button?
-    Play sound on idea add
     Email after signup detailing what app does and howtos 
+    Group idea editing (sharing category boards between groups)
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app

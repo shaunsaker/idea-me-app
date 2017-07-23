@@ -74,7 +74,7 @@ export default TabBar = (props) => {
                 :
                 null;
 
-            const highlight = !value.active && value.highlighted &&
+            const highlight = props.highlightProfileTab && value.title === 'Profile' && !value.active &&
                 <View style={styles.highlight} />;
 
             const tab = value.disabled ?

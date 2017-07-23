@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 export default ActionModal = (props) => {
     return (
         <View>
-            <Modal 
+            <Modal
                 animationType={config.modal.animation}
                 transparent={true}
                 visible={true}
@@ -69,7 +69,7 @@ export default ActionModal = (props) => {
                                 onPress={props.handleLeftIconPress} >
                                 <Icon
                                     name='check'
-                                    style={[styles.icon, {color: styleConstants.danger}]} />
+                                    style={[styles.icon, { color: styleConstants.danger }]} />
                             </Touchable>
                             <Touchable
                                 style={styles.iconContainer}

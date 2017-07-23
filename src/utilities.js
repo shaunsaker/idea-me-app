@@ -115,6 +115,15 @@ utilities.addZeroPadding = (number) => {
     return zeroPaddedNumber;
 }
 
+// Eg. 'toolTip-1' => 'toolTip-2'
+utilities.incrementNumberInString = (string, delimiter) => {
+    const stringArray = string.split(delimiter);
+    const nextNumber = Number(stringArray[1]) + 1;
+    const newString = stringArray[0] + delimiter + nextNumber;
+
+    return newString;
+}
+
 /* ARRAYS */
 
 utilities.filterArrayByValue = (value, array) => {

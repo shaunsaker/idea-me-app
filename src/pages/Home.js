@@ -15,10 +15,13 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import Logo from '../components/Logo';
 import DropdownButton from '../components/DropdownButton';
+import InfoBlock from '../components/InfoBlock';
+import Button from '../components/Button';
 import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
 import ActionModal from '../modals/ActionModal';
 import SnackBar from '../widgets/SnackBar';
+import ToolTip from '../widgets/ToolTip';
 
 export class Home extends React.Component {
     constructor(props) {
@@ -32,6 +35,8 @@ export class Home extends React.Component {
         this.deleteIdea = this.deleteIdea.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
         this.handleNotePress = this.handleNotePress.bind(this);
+        this.showToolTips = this.showToolTips.bind(this);
+        this.cancelOnboarding = this.cancelOnboarding.bind(this);
 
         // TabBar
         this.tabs = [
@@ -46,7 +51,6 @@ export class Home extends React.Component {
                 icon: 'person',
                 action: () => Actions.profile(),
                 active: false,
-                highlighted: false,
             },
         ];
 
@@ -54,6 +58,7 @@ export class Home extends React.Component {
             showDeleteModal: false,
             deleteIdeaModalTitle: null,
             deleteIdeaUID: null,
+            highlightProfileTab: false,
         }
     }
 
@@ -65,13 +70,14 @@ export class Home extends React.Component {
             uid: PropTypes.string,
             hasNetwork: PropTypes.bool,
             firstTimeUser: PropTypes.bool,
-            firstTimeUserIdea: PropTypes.object,
         };
     }
 
     componentDidMount() {
         if (this.props.firstTimeUser) {
-            this.tabs[1].highlighted = true;
+            this.setState({
+                highlightProfileTab: true,
+            });
         }
     }
 
@@ -172,6 +178,18 @@ export class Home extends React.Component {
         }
     }
 
+    showToolTips() {
+        this.props.dispatch({
+            type: 'SHOW_TOOL_TIPS',
+        });
+    }
+
+    cancelOnboarding() {
+        this.props.dispatch({
+            type: 'CANCEL_ONBOARDING',
+        });
+    }
+
     renderItem = ({ item }) => {
         return (
             <IdeaCard
@@ -186,12 +204,27 @@ export class Home extends React.Component {
         const totalCount = utilities.getLengthOfObject(this.props.ideas);
 
         // First time user / empty state
-        let ideas =
-            <IdeaCard
-                idea={this.props.firstTimeUserIdea}
-                handleMenuItemSelect={this.handleMenuItemSelect}
-                handleNotePress={(noteType) => this.handleNotePress(noteType, item)}
-                firstTimeUser />;
+        let ideas = this.props.firstTimeUser ?
+            <View style={{ flex: 1, justifyContent: 'center', marginVertical: 16 }}>
+                <InfoBlock
+                    title='Get Familiar'
+                    subtitle="Hey! You've made it. You're a few steps away from success. Hit the 'Get Started' button for some handy tooltips (or skip them altogether). If all else fails, give us a shout from the menu found on your Profile page. Good luck! "
+                    titleColor={styleConstants.primary}
+                    subtitleColor={styleConstants.grey}
+                    fullWidth />
+                <Button
+                    text='Get Started'
+                    iconName='check'
+                    backgroundColor={styleConstants.white}
+                    handlePress={this.showToolTips} />
+                <Button
+                    text='No Thanks'
+                    iconName='close'
+                    backgroundColor={styleConstants.white}
+                    handlePress={this.cancelOnboarding} />
+            </View>
+            :
+            <View style={{ flex: 1 }} />;
 
         let currentCategoryIdeas;
 
@@ -219,14 +252,23 @@ export class Home extends React.Component {
 
         const categories = utilities.convertObjectArrayToArray(this.props.categories);
 
-        const deleteModal = this.state.showDeleteModal ?
+        const dropdownButtonComponent = !this.props.firstTimeUser &&
+            <DropdownButton
+                buttonBackgroundColor={styleConstants.primary}
+                categoriesButton
+                values={categories}
+                currentCategory={this.props.currentCategory}
+                handleSelect={this.selectCategory}
+                headerValue={this.props.currentCategory !== 'All Categories' ? 'All Categories' : ''}
+                currentCount={currentCount}
+                totalCount={totalCount} />
+
+        const deleteModal = this.state.showDeleteModal &&
             <ActionModal
                 title='Are you sure you want to delete this idea?'
                 subtitle={this.state.deleteIdeaModalTitle}
                 handleLeftIconPress={this.deleteIdea}
                 handleRightIconPress={this.toggleDeleteModal} />
-            :
-            null;
 
         return (
             <Page
@@ -239,24 +281,19 @@ export class Home extends React.Component {
                     addButton
                     handleRightIconPress={() => Actions.addIdea()} />
 
-                <DropdownButton
-                    buttonBackgroundColor={styleConstants.primary}
-                    categoriesButton
-                    values={categories}
-                    currentCategory={this.props.currentCategory}
-                    handleSelect={this.selectCategory}
-                    headerValue={this.props.currentCategory !== 'All Categories' ? 'All Categories' : ''}
-                    currentCount={currentCount}
-                    totalCount={totalCount} />
+                {dropdownButtonComponent}
 
                 {ideas}
 
                 <TabBar
-                    tabs={this.tabs} />
+                    tabs={this.tabs}
+                    highlightProfileTab={this.state.highlightProfileTab} />
 
                 {deleteModal}
 
                 <SnackBar />
+
+                <ToolTip />
 
             </Page >
         );
@@ -271,7 +308,6 @@ function mapStateToProps(state) {
         uid: state.main.auth.uid,
         hasNetwork: state.main.app.hasNetwork,
         firstTimeUser: state.main.auth.firstTimeUser,
-        firstTimeUserIdea: state.main.appData.firstTimeUserIdea,
     });
 }
 
