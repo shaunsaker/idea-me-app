@@ -20,16 +20,16 @@ utilities.getPrettyMinutesFromSeconds = (seconds) => {
 }
 
 utilities.getPrettyDate = (timestamp) => {
-    const date = new Date(timestamp * 1000);
+    const date = new Date(timestamp);
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const year = date.getFullYear();
     const month = months[date.getMonth()];
     let day = date.getDate();
     day = utilities.addZeroPadding(day);
     let hours = date.getHours();
-    hours = utilities.addZeroPadding(day);
+    hours = utilities.addZeroPadding(hours);
     let minutes = date.getMinutes();
-    minutes = utilities.addZeroPadding(day);
+    minutes = utilities.addZeroPadding(minutes);
 
     let prettyDate = day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes;
     return prettyDate;

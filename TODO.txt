@@ -1,5 +1,4 @@
 TODOS
-    Dates not working
     Refactor store to use error message section as opposed to separate error messages (SnackBar will be more performant)
     Get geolocation as needed on signin (blocks ui thread until received)
     loadUserDataResponse came through twice with firstTimeUser
