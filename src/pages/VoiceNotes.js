@@ -71,7 +71,7 @@ export class VoiceNotes extends React.Component {
             filePath: newVoiceNoteFilePath,
         }
 
-        const newVoiceNotes = utilities.pushObjectToObjectArray(newVoiceNote, this.props.newVoiceNotes);
+        const newVoiceNotes = utilities.pushObjectToDictionary(newVoiceNote, this.props.newVoiceNotes);
 
         this.props.dispatch({
             type: 'SET_NEW_VOICE_NOTES',
@@ -81,7 +81,7 @@ export class VoiceNotes extends React.Component {
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['voiceNotes'] = newVoiceNotes;
-            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
 
             // Dispatch to store
             this.props.dispatch({
@@ -109,7 +109,7 @@ export class VoiceNotes extends React.Component {
     }
 
     deleteVoiceNote() {
-        const newVoiceNotes = utilities.removeObjectFromObjectArray(this.state.deleteVoiceNoteUID, this.props.newVoiceNotes);
+        const newVoiceNotes = utilities.removeObjectFromDictionary(this.state.deleteVoiceNoteUID, this.props.newVoiceNotes);
 
         this.props.dispatch({
             type: 'SET_NEW_VOICE_NOTES',
@@ -119,7 +119,7 @@ export class VoiceNotes extends React.Component {
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['voiceNotes'] = newVoiceNotes;
-            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
 
             // Dispatch to store
             this.props.dispatch({
@@ -141,7 +141,7 @@ export class VoiceNotes extends React.Component {
     }
 
     render() {
-        const voiceNotesArray = utilities.convertObjectArrayToArray(this.props.newVoiceNotes);
+        const voiceNotesArray = utilities.convertDictionaryToArray(this.props.newVoiceNotes);
 
         const deleteModal = this.state.showDeleteModal ?
             <ActionModal
@@ -183,8 +183,8 @@ function mapStateToProps(state) {
     return ({
         newVoiceNotes: state.main.appData.newVoiceNotes,
         ideas: state.main.userData.ideas,
-        uid: state.main.auth.uid,
-        hasNetwork: state.main.app.hasNetwork,
+        uid: state.main.userAuth.uid,
+        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

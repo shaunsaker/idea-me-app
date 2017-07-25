@@ -10,7 +10,7 @@ const response = {
     success: null
 };
 
-export default class Auth {
+export default class UserAuth {
     static getUserAuth() {
         return new Promise(resolve => {
             firestack.auth.getCurrentUser()
@@ -167,7 +167,7 @@ export default class Auth {
                     resolve(response);
                 })
                 .catch(error => {
-					response.authenticated = false;
+                    response.authenticated = false;
                     response.message = error;
                     resolve(response);
                 });

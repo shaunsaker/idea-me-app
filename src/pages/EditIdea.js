@@ -131,13 +131,13 @@ export class EditIdea extends React.Component {
         };
 
         let isIdeaTitlePresent;
-        const remainingIdeas = utilities.removeObjectFromObjectArray(this.props.initialIdeaUID, this.props.ideas);
+        const remainingIdeas = utilities.removeObjectFromDictionary(this.props.initialIdeaUID, this.props.ideas);
 
         // check if the new idea title is already present (but exclude our current idea)
-        isIdeaTitlePresent = utilities.isKeyValuePairPresentInObjectArray({ title: editedIdea.title }, remainingIdeas);
+        isIdeaTitlePresent = utilities.isKeyValuePairPresentInDictionary({ title: editedIdea.title }, remainingIdeas);
 
         if (!isIdeaTitlePresent) {
-            const newIdeas = utilities.updateObjectInObjectArray(this.props.initialIdeaUID, editedIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(this.props.initialIdeaUID, editedIdea, this.props.ideas);
 
             this.props.dispatch({
                 type: 'UPDATE_USER_DATA',
@@ -157,7 +157,8 @@ export class EditIdea extends React.Component {
         }
         else {
             this.props.dispatch({
-                type: 'USER_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'USER',
                 message: 'An idea with this title already exists'
             });
         }
@@ -175,11 +176,11 @@ export class EditIdea extends React.Component {
         if (this.props.newPhotos) {
 
             // Get the difference between newPhotos and initial idea photos
-            const newPhotos = utilities.getDifferenceBetweenObjectArrays(this.props.newPhotos, this.props.initialIdeaPhotos);
+            const newPhotos = utilities.getDifferenceBetweenDictionarys(this.props.newPhotos, this.props.initialIdeaPhotos);
 
             if (newPhotos) {
-                let newPhotosFullSizeURIArray = utilities.getValuesThatMatchKeyFromObjectArray('fullSize', newPhotos);
-                let newPhotosCroppedURIArray = utilities.getValuesThatMatchKeyFromObjectArray('cropped', newPhotos);
+                let newPhotosFullSizeURIArray = utilities.getValuesThatMatchKeyFromDictionary('fullSize', newPhotos);
+                let newPhotosCroppedURIArray = utilities.getValuesThatMatchKeyFromDictionary('cropped', newPhotos);
                 const newPhotosURIArray = newPhotosFullSizeURIArray.concat(newPhotosCroppedURIArray);
                 const newPhotosPathsArray = utilities.convertURIsToPaths(newPhotosURIArray);
 
@@ -195,8 +196,8 @@ export class EditIdea extends React.Component {
         if (this.props.newVoiceNotes) {
 
             // Get the difference between newVoiceNotes and initial idea voiceNotes
-            const newVoiceNotes = utilities.getDifferenceBetweenObjectArrays(this.props.newVoiceNotes, this.props.initialIdeaVoiceNotes);
-            const newVoiceNotesPathsArray = utilities.getValuesThatMatchKeyFromObjectArray('filePath', newVoiceNotes);
+            const newVoiceNotes = utilities.getDifferenceBetweenDictionarys(this.props.newVoiceNotes, this.props.initialIdeaVoiceNotes);
+            const newVoiceNotesPathsArray = utilities.getValuesThatMatchKeyFromDictionary('filePath', newVoiceNotes);
 
             for (let i = 0; i < newVoiceNotesPathsArray.length; i++) {
                 this.props.dispatch({
@@ -212,8 +213,8 @@ export class EditIdea extends React.Component {
 
     render() {
         const enableContinueButton = this.state.editIdeaTitle ? true : false;
-        const categories = utilities.convertObjectArrayToArray(this.props.categories);
-        const priorities = utilities.convertObjectArrayToArray(this.props.priorities);
+        const categories = utilities.convertDictionaryToArray(this.props.categories);
+        const priorities = utilities.convertDictionaryToArray(this.props.priorities);
         const editNotesCount = utilities.getLengthOfObject(this.props.newNotes);
         const editPhotosCount = utilities.getLengthOfObject(this.props.newPhotos);
         const editVoiceNotesCount = utilities.getLengthOfObject(this.props.newVoiceNotes);
@@ -341,8 +342,8 @@ function mapStateToProps(state) {
         newVoiceNotes: state.main.appData.newVoiceNotes,
         categories: state.main.userData.categories,
         priorities: state.main.appData.priorities,
-        uid: state.main.auth.uid,
-        hasNetwork: state.main.app.hasNetwork,
+        uid: state.main.userAuth.uid,
+        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

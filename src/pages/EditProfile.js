@@ -284,13 +284,13 @@ export class EditProfile extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        uid: state.main.auth.uid,
+        uid: state.main.userAuth.uid,
         userName: state.main.userData.profile.userName,
         userEmail: state.main.userData.profile.userEmail,
         userLocation: state.main.userData.profile.userLocation,
-        currentLocation: state.main.geolocation.currentLocation,
+        currentLocation: state.main.appData.currentLocation,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
-        temporaryImage: state.main.images.temporaryImage,
+        temporaryImage: state.main.appData.temporaryImage,
     });
 }
 

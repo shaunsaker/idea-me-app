@@ -25,10 +25,11 @@ export class Splash extends React.Component {
         this.toggleNetworkState = this.toggleNetworkState.bind(this);
         this.toggleNetworkModal = this.toggleNetworkModal.bind(this);
 
-        this.quote = utilities.getRandomItemFromArray(this.props.quotes);
+        this.quote = utilities.getRandomItemFromDictionary(this.props.quotes);
 
         this.state = {
             showNetworkModal: false,
+            isFethingData: false,
         }
     }
 
@@ -82,7 +83,11 @@ export class Splash extends React.Component {
                     }
 
                     // If we're authenticated and we have not yet loaded data, load/save data to db
-                    else if (this.props.authenticated && !this.props.cloudDataSuccess) {
+                    else if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
+                        this.setState({
+                            isFetchingData: true,
+                        });
+
                         this.props.dispatch({
                             type: 'loadUserData',
                             uid: this.props.uid,
@@ -92,7 +97,7 @@ export class Splash extends React.Component {
                     // If we have data, we have everything we need
                     else if (this.props.authenticated && this.props.cloudDataSuccess) {
                         this.props.dispatch({
-                            type: 'RESET_CLOUD_DATA_SUCCESS'
+                            type: 'RESET_ERROR'
                         });
 
                         Actions.home();
@@ -142,11 +147,11 @@ export class Splash extends React.Component {
 
                 <View style={{ position: 'absolute', bottom: 0 }}>
                     <InfoBlock
-                        fullWidth
                         title={this.quote.title}
-                        titleColor={styleConstants.white}
                         subtitle={this.quote.author}
-                        subtitleColor={styleConstants.lightGrey} />
+                        titleColor={styleConstants.white}
+                        subtitleColor={styleConstants.lightGrey}
+                        fullWidth />
                 </View>
 
                 {networkModal}
@@ -162,11 +167,11 @@ function mapStateToProps(state) {
     return {
         quotes: state.main.appData.quotes,
 
-        authenticated: state.main.auth.authenticated,
-        anonymous: state.main.auth.anonymous,
-        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
-        redirectToWelcomePage: state.main.auth.redirectToWelcomePage,
-        uid: state.main.auth.uid,
+        authenticated: state.main.userAuth.authenticated,
+        anonymous: state.main.userAuth.anonymous,
+        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
+        redirectToWelcomePage: state.main.userAuth.redirectToWelcomePage,
+        uid: state.main.userAuth.uid,
     };
 }
 

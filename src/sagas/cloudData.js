@@ -8,9 +8,8 @@ import utilities from '../utilities';
 import CloudData from '../cloudData/index';
 
 export function* loadUserData(action) {
-
     const loadUserDataResponse = yield call(CloudData.loadUserData, action);
-    console.log('loadUserDataResponse', loadUserDataResponse);
+    // console.log('loadUserDataResponse', loadUserDataResponse);
 
     if (loadUserDataResponse) {
         if (loadUserDataResponse.success && loadUserDataResponse.message) {
@@ -34,7 +33,8 @@ export function* loadUserData(action) {
         // We must have an error
         else {
             yield put({
-                type: 'CLOUD_DATA_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'CLOUD_DATA',
                 message: loadUserDataResponse.message,
                 retryAction: {
                     type: 'loadUserData',
@@ -86,7 +86,8 @@ export function* saveUserData(action) {
         // We must have an error
         else {
             yield put({
-                type: 'CLOUD_DATA_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'CLOUD_DATA',
                 message: saveUserDataResponse.message,
                 retryAction: {
                     type: 'saveUserData',
@@ -138,7 +139,8 @@ export function* deleteUserData(action) {
         // We must have an error
         else {
             yield put({
-                type: 'CLOUD_DATA_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'CLOUD_DATA',
                 message: deleteUserDataResponse.message,
                 retryAction: {
                     type: 'deleteUserData',

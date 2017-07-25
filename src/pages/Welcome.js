@@ -56,7 +56,7 @@ export class Welcome extends React.Component {
         // If we have data, we have everything we need
         else if (this.props.cloudDataSuccess) {
             this.props.dispatch({
-                type: 'RESET_CLOUD_DATA_SUCCESS'
+                type: 'RESET_ERROR'
             });
 
             Actions.home();
@@ -114,10 +114,10 @@ export class Welcome extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        authenticated: state.main.auth.authenticated,
-        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+        authenticated: state.main.userAuth.authenticated,
+        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
 
-        uid: state.main.auth.uid,
+        uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
         userName: state.main.userData.profile.userName,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,

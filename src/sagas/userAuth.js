@@ -1,9 +1,9 @@
 import { call, put } from 'redux-saga/effects';
 
-import Auth from '../auth/index';
+import UserAuth from '../userAuth/index';
 
 export function* getUserAuth() {
-    const getUserAuthResponse = yield call(Auth.getUserAuth);
+    const getUserAuthResponse = yield call(UserAuth.getUserAuth);
     // console.log('getUserAuthResponse', getUserAuthResponse);
 
     if (getUserAuthResponse.authenticated) {
@@ -22,7 +22,7 @@ export function* getUserAuth() {
 
 export function* signInUserWithEmail(action) {
 
-    const signUpUserWithEmailResponse = yield call(Auth.signUpUserWithEmail, action);
+    const signUpUserWithEmailResponse = yield call(UserAuth.signUpUserWithEmail, action);
     console.log('signUpUserWithEmailResponse', signUpUserWithEmailResponse);
 
     if (signUpUserWithEmailResponse.authenticated) {
@@ -37,7 +37,8 @@ export function* signInUserWithEmail(action) {
     // Handle network errors, if any
     else if (signUpUserWithEmailResponse.message.errorMessage.indexOf('A network') > -1) {
         yield put({
-            type: 'AUTH_ERROR',
+            type: 'SET_ERROR',
+            errorType: 'AUTH',
             message: 'A network error has occured.',
             retryAction: {
                 type: 'signInUserWithEmail',
@@ -55,7 +56,7 @@ export function* signInUserWithEmail(action) {
             emailInUse = true;
         }
 
-        const signInUserWithEmailResponse = yield call(Auth.signInUserWithEmail, action);
+        const signInUserWithEmailResponse = yield call(UserAuth.signInUserWithEmail, action);
         console.log('signInUserWithEmailResponse', signInUserWithEmailResponse);
 
         if (signInUserWithEmailResponse.authenticated) {
@@ -69,7 +70,8 @@ export function* signInUserWithEmail(action) {
         }
         else {
             yield put({
-                type: 'AUTH_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'AUTH',
                 message: emailInUse ? 'This email address is already in use' : signInUserWithEmailResponse.message.errorMessage,
                 retryAction: {
                     type: 'signInUserWithEmail',
@@ -85,18 +87,20 @@ export function* signInUserWithEmail(action) {
 
 export function* sendPasswordResetEmail(action) {
 
-    const passwordResetResponse = yield call(Auth.sendPasswordResetEmail, action);
+    const passwordResetResponse = yield call(UserAuth.sendPasswordResetEmail, action);
     console.log('passwordResetResponse', passwordResetResponse);
 
     if (passwordResetResponse.success) {
         yield put({
-            type: 'USER_SUCCESS',
+            type: 'SET_SUCCESS',
+            type: 'USER',
             message: 'Email sent successfully'
         });
     }
     else {
         yield put({
-            type: 'AUTH_ERROR',
+            type: 'SET_ERROR',
+            errorType: 'AUTH',
             message: passwordResetResponse.message,
             retryAction: {
                 type: 'sendPasswordResetEmail',
@@ -110,7 +114,7 @@ export function* sendPasswordResetEmail(action) {
 
 export function* signInUserWithFacebook() {
 
-    const signInFacebookResponse = yield call(Auth.signInUserWithFacebook);
+    const signInFacebookResponse = yield call(UserAuth.signInUserWithFacebook);
     console.log('signInFacebookResponse', signInFacebookResponse);
 
     if (signInFacebookResponse.authenticated) {
@@ -128,7 +132,8 @@ export function* signInUserWithFacebook() {
     }
     else {
         yield put({
-            type: 'AUTH_ERROR',
+            type: 'SET_ERROR',
+            errorType: 'AUTH',
             message: 'We were unable to connect to Facebook.',
             retryAction: {
                 type: 'signInUserWithFacebook',
@@ -139,7 +144,7 @@ export function* signInUserWithFacebook() {
 
 export function* signInUserWithGoogle() {
 
-    const signInGoogleResponse = yield call(Auth.signInUserWithGoogle);
+    const signInGoogleResponse = yield call(UserAuth.signInUserWithGoogle);
     console.log('signInGoogleResponse', signInGoogleResponse);
 
     if (signInGoogleResponse.authenticated) {
@@ -158,7 +163,8 @@ export function* signInUserWithGoogle() {
     }
     else {
         yield put({
-            type: 'AUTH_ERROR',
+            type: 'SET_ERROR',
+            errorType: 'AUTH',
             message: signInGoogleResponse.message,
             retryAction: {
                 type: 'signInUserWithGoogle',
@@ -169,7 +175,7 @@ export function* signInUserWithGoogle() {
 
 export function* signInUserAnonymously() {
 
-    const signInUserAnonymouslyResponse = yield call(Auth.signInUserAnonymously);
+    const signInUserAnonymouslyResponse = yield call(UserAuth.signInUserAnonymously);
     console.log('signInUserAnonymouslyResponse', signInUserAnonymouslyResponse);
 
     if (signInUserAnonymouslyResponse.authenticated) {
@@ -183,7 +189,8 @@ export function* signInUserAnonymously() {
     }
     else {
         yield put({
-            type: 'AUTH_ERROR',
+            type: 'SET_ERROR',
+            errorType: 'AUTH',
             message: signInUserAnonymouslyResponse.message,
             retryAction: {
                 type: 'signInUserAnonymously',
@@ -194,7 +201,7 @@ export function* signInUserAnonymously() {
 
 export function* signOutUser() {
 
-    const signOutUserResponse = yield call(Auth.signOutUser);
+    const signOutUserResponse = yield call(UserAuth.signOutUser);
     console.log('signOutUserResponse', signOutUserResponse);
 
     if (signOutUserResponse.success) {
@@ -204,7 +211,8 @@ export function* signOutUser() {
     }
     else {
         yield put({
-            type: 'AUTH_ERROR',
+            type: 'SET_ERROR',
+            errorType: 'AUTH',
             message: signOutUserResponse.message,
             retryAction: {
                 type: 'signOutUser',

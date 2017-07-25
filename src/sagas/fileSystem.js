@@ -15,7 +15,8 @@ export function* deleteFile(action) {
     }
     else {
         yield put({
-            type: 'FILE_SYSTEM_ERROR',
+            type: 'SET_ERROR',
+            errorType: 'FILE_SYSTEM',
             message: deleteFileResponse.message,
         });
     }

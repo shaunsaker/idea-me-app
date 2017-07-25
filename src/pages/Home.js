@@ -139,7 +139,7 @@ export class Home extends React.Component {
 
     deleteIdea() {
         let newIdeas = utilities.cloneObject(this.props.ideas);
-        newIdeas = utilities.deleteObjectFromObjectArray(this.state.deleteIdeaUID, newIdeas);
+        newIdeas = utilities.deleteObjectFromDictionary(this.state.deleteIdeaUID, newIdeas);
 
         // Dispatch to store
         this.props.dispatch({
@@ -233,12 +233,12 @@ export class Home extends React.Component {
                 currentCategoryIdeas = this.props.ideas;
             }
             else {
-                currentCategoryIdeas = utilities.filterObjectArrayByKeyValuePair({ category: this.props.currentCategory }, this.props.ideas);
+                currentCategoryIdeas = utilities.filterDictionaryByKeyValuePair({ category: this.props.currentCategory }, this.props.ideas);
             }
 
-            const sortedIdeas = utilities.sortObjectArrayByKeyAndValues(currentCategoryIdeas, 'priority', ['High', 'Medium', 'Low', null]);
+            const sortedIdeas = utilities.sortDictionaryByKeyAndValues(currentCategoryIdeas, 'priority', ['High', 'Medium', 'Low', null]);
             currentCount = utilities.getLengthOfObject(sortedIdeas);
-            const sortedIdeasArray = utilities.convertObjectArrayToArray(sortedIdeas);
+            const sortedIdeasArray = utilities.convertDictionaryToArray(sortedIdeas);
 
             ideas =
                 <FlatList
@@ -250,7 +250,7 @@ export class Home extends React.Component {
                     pagingEnabled />
         }
 
-        const categories = utilities.convertObjectArrayToArray(this.props.categories);
+        const categories = utilities.convertDictionaryToArray(this.props.categories);
 
         const dropdownButtonComponent = !this.props.firstTimeUser &&
             <DropdownButton
@@ -305,9 +305,9 @@ function mapStateToProps(state) {
         ideas: state.main.userData.ideas,
         categories: state.main.userData.categories,
         currentCategory: state.main.appData.currentCategory,
-        uid: state.main.auth.uid,
-        hasNetwork: state.main.app.hasNetwork,
-        firstTimeUser: state.main.auth.firstTimeUser,
+        uid: state.main.userAuth.uid,
+        hasNetwork: state.main.appState.hasNetwork,
+        firstTimeUser: state.main.userAuth.firstTimeUser,
     });
 }
 

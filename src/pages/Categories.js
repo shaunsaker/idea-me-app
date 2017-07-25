@@ -61,14 +61,14 @@ export class Categories extends React.Component {
         if (this.props.categories) {
 
             // check if the category title is already present
-            isCategoryPresent = utilities.isKeyValuePairPresentInObjectArray({ title: newCategory.title }, this.props.categories);
+            isCategoryPresent = utilities.isKeyValuePairPresentInDictionary({ title: newCategory.title }, this.props.categories);
         }
 
         if (!isCategoryPresent) {
 
             // If we don't have any categories, create a new object
             let newCategories = this.props.categories ? utilities.cloneObject(this.props.categories) : {};
-            newCategories = utilities.pushObjectToObjectArray(newCategory, newCategories);
+            newCategories = utilities.pushObjectToDictionary(newCategory, newCategories);
 
             // Dispatch to store
             this.props.dispatch({
@@ -90,7 +90,8 @@ export class Categories extends React.Component {
         }
         else {
             this.props.dispatch({
-                type: 'USER_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'USER',
                 message: 'A category with this name already exists.'
             });
         }
@@ -106,7 +107,7 @@ export class Categories extends React.Component {
 
     deleteCategory() {
         let newCategories = utilities.cloneObject(this.props.categories);
-        newCategories = utilities.deleteObjectFromObjectArray(this.state.deleteCategoryUID, newCategories);
+        newCategories = utilities.deleteObjectFromDictionary(this.state.deleteCategoryUID, newCategories);
         let newIdeas = utilities.cloneObject(this.props.ideas);
         newIdeas = utilities.findKeyValuePairAndSetKeysValueToNull({ category: this.state.deleteCategoryModalTitle }, newIdeas);
 
@@ -148,7 +149,7 @@ export class Categories extends React.Component {
     }
 
     render() {
-        const categoriesArray = utilities.convertObjectArrayToArray(this.props.categories);
+        const categoriesArray = utilities.convertDictionaryToArray(this.props.categories);
 
         const modal = this.state.showDeleteModal &&
             <ActionModal
@@ -191,8 +192,8 @@ function mapStateToProps(state) {
         categories: state.main.userData.categories,
         currentCategory: state.main.appData.currentCategory,
         ideas: state.main.userData.ideas,
-        uid: state.main.auth.uid,
-        hasNetwork: state.main.app.hasNetwork,
+        uid: state.main.userAuth.uid,
+        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

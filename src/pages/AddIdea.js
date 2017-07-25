@@ -104,11 +104,11 @@ export class AddIdea extends React.Component {
         if (this.props.ideas) {
 
             // check if the idea title is already present
-            isIdeaTitlePresent = utilities.isKeyValuePairPresentInObjectArray({ title: newIdea.title }, this.props.ideas);
+            isIdeaTitlePresent = utilities.isKeyValuePairPresentInDictionary({ title: newIdea.title }, this.props.ideas);
         }
 
         if (!isIdeaTitlePresent) {
-            const newIdeas = utilities.pushObjectToObjectArray(newIdea, this.props.ideas);
+            const newIdeas = utilities.pushObjectToDictionary(newIdea, this.props.ideas);
 
             this.props.dispatch({
                 type: 'UPDATE_USER_DATA',
@@ -128,7 +128,8 @@ export class AddIdea extends React.Component {
         }
         else {
             this.props.dispatch({
-                type: 'USER_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'USER',
                 message: 'An idea with this title already exists'
             });
         }
@@ -144,8 +145,8 @@ export class AddIdea extends React.Component {
 
         // Remove unused files
         if (this.props.newPhotos) {
-            let newPhotosFullSizeURIArray = utilities.getValuesThatMatchKeyFromObjectArray('fullSize', this.props.newPhotos);
-            let newPhotosCroppedURIArray = utilities.getValuesThatMatchKeyFromObjectArray('cropped', this.props.newPhotos);
+            let newPhotosFullSizeURIArray = utilities.getValuesThatMatchKeyFromDictionary('fullSize', this.props.newPhotos);
+            let newPhotosCroppedURIArray = utilities.getValuesThatMatchKeyFromDictionary('cropped', this.props.newPhotos);
             const newPhotosURIArray = newPhotosFullSizeURIArray.concat(newPhotosCroppedURIArray);
             const newPhotosPathsArray = utilities.convertURIsToPaths(newPhotosURIArray);
 
@@ -158,7 +159,7 @@ export class AddIdea extends React.Component {
         }
 
         if (this.props.newVoiceNotes) {
-            const newVoiceNotesPathsArray = utilities.getValuesThatMatchKeyFromObjectArray('filePath', this.props.newVoiceNotes);
+            const newVoiceNotesPathsArray = utilities.getValuesThatMatchKeyFromDictionary('filePath', this.props.newVoiceNotes);
 
             for (let i = 0; i < newVoiceNotesPathsArray.length; i++) {
                 this.props.dispatch({
@@ -174,8 +175,8 @@ export class AddIdea extends React.Component {
 
     render() {
         const enableContinueButton = this.state.newIdeaTitle ? true : false;
-        const categories = utilities.convertObjectArrayToArray(this.props.categories);
-        const priorities = utilities.convertObjectArrayToArray(this.props.priorities);
+        const categories = utilities.convertDictionaryToArray(this.props.categories);
+        const priorities = utilities.convertDictionaryToArray(this.props.priorities);
         const newNotesCount = utilities.getLengthOfObject(this.props.newNotes);
         const newPhotosCount = utilities.getLengthOfObject(this.props.newPhotos);
         const newVoiceNotesCount = utilities.getLengthOfObject(this.props.newVoiceNotes);
@@ -296,8 +297,8 @@ function mapStateToProps(state) {
         newVoiceNotes: state.main.appData.newVoiceNotes,
         categories: state.main.userData.categories,
         priorities: state.main.appData.priorities,
-        uid: state.main.auth.uid,
-        hasNetwork: state.main.app.hasNetwork,
+        uid: state.main.userAuth.uid,
+        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

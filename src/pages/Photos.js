@@ -67,7 +67,7 @@ export class Photos extends React.Component {
 
         // If an image was taken/saved
         if (this.props.temporaryImage && this.props.temporaryImage !== prevProps.temporaryImage) {
-            const newPhotos = utilities.pushObjectToObjectArray(this.props.temporaryImage, this.props.newPhotos);
+            const newPhotos = utilities.pushObjectToDictionary(this.props.temporaryImage, this.props.newPhotos);
 
             this.props.dispatch({
                 type: 'SET_NEW_PHOTOS',
@@ -77,7 +77,7 @@ export class Photos extends React.Component {
             if (!this.props.addIdea) {
                 let newIdea = utilities.cloneObject(this.props.idea);
                 newIdea['photos'] = newPhotos;
-                const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+                const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
 
                 // Dispatch to store
                 this.props.dispatch({
@@ -137,7 +137,7 @@ export class Photos extends React.Component {
     }
 
     deletePhoto() {
-        let newPhotos = utilities.removeObjectFromObjectArray(this.state.deletePhotoUID, this.props.newPhotos);
+        let newPhotos = utilities.removeObjectFromDictionary(this.state.deletePhotoUID, this.props.newPhotos);
 
         this.props.dispatch({
             type: 'SET_NEW_PHOTOS',
@@ -147,7 +147,7 @@ export class Photos extends React.Component {
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['photos'] = newPhotos;
-            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
 
             // Dispatch to store
             this.props.dispatch({
@@ -169,7 +169,7 @@ export class Photos extends React.Component {
     }
 
     render() {
-        const photosArray = utilities.convertObjectArrayToArray(this.props.newPhotos);
+        const photosArray = utilities.convertDictionaryToArray(this.props.newPhotos);
 
         const photoViewer = this.state.showPhotoViewer &&
             <PhotoViewer
@@ -227,11 +227,11 @@ export class Photos extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        temporaryImage: state.main.images.temporaryImage,
+        temporaryImage: state.main.appData.temporaryImage,
         newPhotos: state.main.appData.newPhotos,
         ideas: state.main.userData.ideas,
-        uid: state.main.auth.uid,
-        hasNetwork: state.main.app.hasNetwork,
+        uid: state.main.userAuth.uid,
+        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

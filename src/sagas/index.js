@@ -1,18 +1,18 @@
-import { 
+import {
     takeLatest,
-    takeEvery, 
-    fork, 
-    all 
+    takeEvery,
+    fork,
+    all
 } from 'redux-saga/effects';
 
 // Auth
-import { getUserAuth } from './auth';
-import { signInUserWithEmail } from './auth';
-import { sendPasswordResetEmail } from './auth';
-import { signInUserWithFacebook } from './auth';
-import { signInUserWithGoogle } from './auth';
-import { signInUserAnonymously } from './auth';
-import { signOutUser } from './auth';
+import { getUserAuth } from './userAuth';
+import { signInUserWithEmail } from './userAuth';
+import { sendPasswordResetEmail } from './userAuth';
+import { signInUserWithFacebook } from './userAuth';
+import { signInUserWithGoogle } from './userAuth';
+import { signInUserAnonymously } from './userAuth';
+import { signOutUser } from './userAuth';
 
 // Geolocation
 import { getUserLocation } from './geolocation';
@@ -47,16 +47,16 @@ export function* sagas() {
         fork(takeLatest, 'getUserLocation', getUserLocation),
 
         // Cloud Data
-        fork(takeLatest, 'loadUserData', loadUserData),    
-        fork(takeEvery, 'saveUserData', saveUserData),  
-        fork(takeEvery, 'deleteUserData', deleteUserData),   
+        fork(takeLatest, 'loadUserData', loadUserData),
+        fork(takeEvery, 'saveUserData', saveUserData),
+        fork(takeEvery, 'deleteUserData', deleteUserData),
 
         // Images
-        fork(takeLatest, 'handleImage', handleImage), 
+        fork(takeLatest, 'handleImage', handleImage),
 
         // Cloud Storage
         fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),
-        
+
         // File System
         fork(takeEvery, 'deleteFile', deleteFile),
     ]);

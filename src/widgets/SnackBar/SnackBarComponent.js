@@ -80,9 +80,10 @@ export default class SnackBarComponent extends React.Component {
 
     static get propTypes() {
         return {
-            text: PropTypes.string.isRequired,
+            text: PropTypes.string,
             success: PropTypes.bool,
             handleReset: PropTypes.func,
+            handleRetryAction: PropTypes.func,
         };
     }
 

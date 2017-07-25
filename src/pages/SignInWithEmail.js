@@ -53,7 +53,7 @@ export class SignInWithEmail extends React.Component {
         // If we have data, we have everything we need
         if (this.props.cloudDataSuccess) {
             this.props.dispatch({
-                type: 'RESET_CLOUD_DATA_SUCCESS'
+                type: 'RESET_ERROR'
             });
 
             Actions.home();
@@ -88,7 +88,8 @@ export class SignInWithEmail extends React.Component {
         }
         else if (this.props.userPassword && this.props.userPassword.length < 6) {
             this.props.dispatch({
-                type: 'USER_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'USER',
                 message: 'Password should be at least 6 characters long'
             });
         }
@@ -143,12 +144,12 @@ export class SignInWithEmail extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        authenticated: state.main.auth.authenticated,
-        cloudDataSuccess: state.main.cloudData.cloudDataSuccess,
+        authenticated: state.main.userAuth.authenticated,
+        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
 
-        uid: state.main.auth.uid,
+        uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
-        userPassword: state.main.auth.userPassword,
+        userPassword: state.main.userAuth.userPassword,
     });
 }
 

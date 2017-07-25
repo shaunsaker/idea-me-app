@@ -26,26 +26,16 @@ export class SnackBar extends React.Component {
 
     static get propTypes() {
         return {
-            userSuccessMessage: PropTypes.string,
-            userErrorMessage: PropTypes.string,
-            authErrorMessage: PropTypes.string,
-            authSuccessMessage: PropTypes.string,
-            imageErrorMessage: PropTypes.string,
-            cloudDataErrorMessage: PropTypes.string,
-            cloudStorageErrorMessage: PropTypes.string,
-
-            errorType: PropTypes.string,
+            error: PropTypes.object,
             retryAction: PropTypes.object,
         };
     }
 
     resetError() {
 
-        // Reset the error depending on the type of error
-        const action = (this.props.userSuccessMessage || this.props.authSuccessMessage) ?
-            'RESET_' + this.props.errorType + '_SUCCESS'
-            :
-            'RESET_' + this.props.errorType + '_ERROR';
+        // Reset the error depending on the type of error and success/error
+        const actionType = this.props.error.success ? 'SUCCESS' : 'ERROR';
+        const action = 'RESET_' + this.props.error.type + '_' + actionType;
 
         this.props.dispatch({
             type: action
@@ -68,56 +58,19 @@ export class SnackBar extends React.Component {
     }
 
     render() {
-        const errorMessage =
-            this.props.userErrorMessage ?
-                this.props.userErrorMessage
-                :
-                this.props.authErrorMessage ?
-                    this.props.authErrorMessage
-                    :
-                    this.props.imageErrorMessage ?
-                        this.props.imageErrorMessage
-                        :
-                        this.props.cloudDataErrorMessage ?
-                            this.props.cloudDataErrorMessage
-                            :
-                            this.props.cloudStorageErrorMessage ?
-                                this.props.cloudStorageErrorMessage
-                                :
-                                this.props.fileSystemErrorMessage ?
-                                    this.props.fileSystemErrorMessage
-                                    :
-                                    null;
 
-        const errorSnackBar = errorMessage ?
+        // If we have an error/success
+        // Not cloud data success
+        const snackBar = this.props.error.type && (this.props.error.type !== 'CLOUD_DATA' && this.props.error.success) &&
             <SnackBarComponent
-                text={errorMessage}
+                text={this.props.error.message}
+                success={this.props.error.success}
                 handleReset={this.resetError}
-                handleRetryAction={this.props.retryAction.type && this.retryAction} />
-            :
-            null;
-
-        const successMessage =
-            this.props.userSuccessMessage ?
-                this.props.userSuccessMessage
-                :
-                this.props.authSuccessMessage ?
-                    this.props.authSuccessMessage
-                    :
-                    null;
-
-        const successSnackBar = successMessage ?
-            <SnackBarComponent
-                text={successMessage}
-                success
-                handleReset={this.resetError} />
-            :
-            null;
+                handleRetryAction={this.props.retryAction.type && this.retryAction} />;
 
         return (
             <View style={styles.container}>
-                {errorSnackBar}
-                {successSnackBar}
+                {snackBar}
             </View>
         );
     }
@@ -125,17 +78,8 @@ export class SnackBar extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        userSuccessMessage: state.main.app.userSuccessMessage,
-        userErrorMessage: state.main.app.userErrorMessage,
-        authErrorMessage: state.main.auth.authErrorMessage,
-        authSuccessMessage: state.main.auth.authSuccessMessage,
-        imageErrorMessage: state.main.images.imageErrorMessage,
-        cloudDataErrorMessage: state.main.cloudData.cloudDataErrorMessage,
-        cloudStorageErrorMessage: state.main.cloudStorage.cloudcloudStorageErrorMessage,
-        fileSystemErrorMessage: state.main.fileSystem.fileSystemErrorMessage,
-
-        errorType: state.main.app.errorType,
-        retryAction: state.main.app.retryAction,
+        error: state.main.appState.error,
+        retryAction: state.main.appState.retryAction,
     }
 }
 

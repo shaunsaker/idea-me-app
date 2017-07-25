@@ -1,7 +1,7 @@
 TODOS
-    Refactor store to use error message section as opposed to separate error messages (SnackBar will be more performant)
+    Profile did not update with location change
     Play sound on idea add
-    Input height on mount is shit
+    Input height on mount is not working
     Announcement page for when I need to make some sort of announcement
         Based on api prop
         Image uri

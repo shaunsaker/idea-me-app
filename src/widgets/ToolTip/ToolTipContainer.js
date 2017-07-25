@@ -125,7 +125,7 @@ export class ToolTip extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        showToolTips: state.main.app.showToolTips,
+        showToolTips: state.main.appState.showToolTips,
         currentToolTipUID: state.main.appData.currentToolTipUID,
         toolTips: state.main.appData.toolTips,
         currentPage: state.routes.scene.name,

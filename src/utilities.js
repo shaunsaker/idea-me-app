@@ -136,12 +136,6 @@ utilities.filterArrayByValue = (value, array) => {
     return filteredArray;
 }
 
-utilities.getRandomItemFromArray = (array) => {
-    const randomNumber = Math.round(Math.random() * (array.length - 1));
-    const randomItem = array[randomNumber];
-    return randomItem;
-};
-
 // Deletes an object that matches a key value pair from an array
 utilities.deleteObjectWithKeyValuePairFromArray = (keyValuePair, array) => {
     let newArray = array;
@@ -165,16 +159,16 @@ utilities.deleteObjectWithKeyValuePairFromArray = (keyValuePair, array) => {
     return newArray;
 }
 
-// Takes an array and converts it into an object array with the uid as parent key
-utilities.convertArrayToObjectArray = (array) => {
-    let objectArray = {}
+// Takes an array and converts it into a dictionary with the uid as parent key
+utilities.convertArrayToDictionary = (array) => {
+    let dictionary = {}
 
     for (let i = 0; i < array.length; i++) {
         const uid = array[i].uid;
-        objectArray[uid] = array[i];
+        dictionary[uid] = array[i];
     }
 
-    return objectArray;
+    return dictionary;
 }
 
 /* OBJECTS */
@@ -183,19 +177,28 @@ utilities.cloneObject = (object) => {
     return JSON.parse(JSON.stringify(object));
 }
 
-// Takes an object array and returns a normal array without the keys
-utilities.convertObjectArrayToArray = (objectArray) => {
+utilities.getRandomItemFromDictionary = (dictionary) => {
+    const array = Object.values(dictionary);
+    const dictionaryLength = utilities.getLengthOfObject(dictionary);
+    const randomNumber = Math.round(Math.random() * (dictionaryLength - 1));
+    const randomItem = array[randomNumber];
+
+    return randomItem;
+};
+
+// Takes a dictionary and returns a normal array without the keys
+utilities.convertDictionaryToArray = (dictionary) => {
     let array = [];
 
-    for (key in objectArray) {
-        array.push(objectArray[key]);
+    for (key in dictionary) {
+        array.push(dictionary[key]);
     }
 
     return array;
 }
 
-// Takes a key value pair and checks to see if that key value pair is present in an object array
-utilities.isKeyValuePairPresentInObjectArray = (keyValuePair, objectArray) => {
+// Takes a key value pair and checks to see if that key value pair is present in a dictionary
+utilities.isKeyValuePairPresentInDictionary = (keyValuePair, dictionary) => {
     let targetKey;
     let targetValue;
 
@@ -206,8 +209,8 @@ utilities.isKeyValuePairPresentInObjectArray = (keyValuePair, objectArray) => {
 
     let isKeyValuePairPresent;
 
-    for (key in objectArray) {
-        if (objectArray[key][targetKey] === targetValue) {
+    for (key in dictionary) {
+        if (dictionary[key][targetKey] === targetValue) {
             isKeyValuePairPresent = true;
         }
     }
@@ -215,129 +218,129 @@ utilities.isKeyValuePairPresentInObjectArray = (keyValuePair, objectArray) => {
     return isKeyValuePairPresent;
 }
 
-// Takes a new object, creates a unique id and pushes it to an object array
-utilities.pushObjectToObjectArray = (object, objectArray) => {
+// Takes a new object, creates a unique id and pushes it to a dictionary
+utilities.pushObjectToDictionary = (object, dictionary) => {
     let newObject = {};
-    let newObjectArray;
+    let newDictionary;
 
     const uid = object.uid;
     newObject[uid] = object;
 
-    if (objectArray) {
-        newObjectArray = { ...objectArray, ...newObject };
+    if (dictionary) {
+        newDictionary = { ...dictionary, ...newObject };
     }
 
     // If the object array was empty/null
     else {
-        newObjectArray = newObject;
+        newDictionary = newObject;
     }
 
-    return newObjectArray;
+    return newDictionary;
 }
 
-// Removes an object from an object array that matches the uid/key, value or key value pair (if present)
-utilities.removeObjectFromObjectArray = (uid, objectArray) => {
-    let newObjectArray = {};
+// Removes an object from a dictionary that matches the uid/key, value or key value pair (if present)
+utilities.removeObjectFromDictionary = (uid, dictionary) => {
+    let newDictionary = {};
 
-    for (key in objectArray) {
+    for (key in dictionary) {
         if (key !== uid) {
-            newObjectArray[key] = objectArray[key];
+            newDictionary[key] = dictionary[key];
         }
     }
 
-    return newObjectArray;
+    return newDictionary;
 }
 
 // Deletes an object from a single tier object array that matches a key
-utilities.deleteObjectFromObjectArray = (targetKey, objectArray) => {
-    let newObjectArray = {};
+utilities.deleteObjectFromDictionary = (targetKey, dictionary) => {
+    let newDictionary = {};
 
-    for (key in objectArray) {
+    for (key in dictionary) {
         if (key !== targetKey) {
-            newObjectArray[key] = objectArray[key];
+            newDictionary[key] = dictionary[key];
         }
     }
 
-    return newObjectArray;
+    return newDictionary;
 }
 
 // Finds a key value pair in a two tier object array and sets the keys value to null
-utilities.findKeyValuePairAndSetKeysValueToNull = (targetKeyValuePair, objectArray) => {
+utilities.findKeyValuePairAndSetKeysValueToNull = (targetKeyValuePair, dictionary) => {
     let targetKey;
     let targetValue;
-    let newObjectArray = objectArray;
+    let newDictionary = dictionary;
 
     for (pairKey in targetKeyValuePair) {
         targetKey = pairKey;
         targetValue = targetKeyValuePair[pairKey];
     }
 
-    for (key in newObjectArray) {
-        for (subKey in newObjectArray[key]) {
-            if (subKey === targetKey && newObjectArray[key][subKey] === targetValue) {
-                newObjectArray[key][subKey] = null;
+    for (key in newDictionary) {
+        for (subKey in newDictionary[key]) {
+            if (subKey === targetKey && newDictionary[key][subKey] === targetValue) {
+                newDictionary[key][subKey] = null;
             }
         }
 
     }
 
-    return newObjectArray;
+    return newDictionary;
 }
 
-// Updates an object array's object at a given uid
-utilities.updateObjectInObjectArray = (uid, newObject, objectArray) => {
-    let newObjectArray = objectArray;
+// Updates a dictionary's object at a given uid
+utilities.updateObjectInDictionary = (uid, newObject, dictionary) => {
+    let newDictionary = dictionary;
 
-    newObjectArray[uid] = newObject;
+    newDictionary[uid] = newObject;
 
-    return newObjectArray;
+    return newDictionary;
 }
 
 // Returns a new object array filtered by a key value pair
-utilities.filterObjectArrayByKeyValuePair = (keyValuePair, objectArray) => {
+utilities.filterDictionaryByKeyValuePair = (keyValuePair, dictionary) => {
     let targetKey;
     let targetValue;
-    let newObjectArray = {};
+    let newDictionary = {};
 
     for (key in keyValuePair) {
         targetKey = key;
         targetValue = keyValuePair[targetKey];
     }
 
-    for (key in objectArray) {
-        if (objectArray[key][targetKey] === targetValue) {
-            newObjectArray[key] = objectArray[key];
+    for (key in dictionary) {
+        if (dictionary[key][targetKey] === targetValue) {
+            newDictionary[key] = dictionary[key];
         }
     }
 
-    return newObjectArray;
+    return newDictionary;
 }
 
-// Sorts an object array on key name and array of values where the first value in the array will be at the top of the object array
-utilities.sortObjectArrayByKeyAndValues = (objectArray, targetKey, values) => {
-    let newObjectArray = {};
-    let lastSubObjectArray = {};
+// Sorts a dictionary on key name and array of values where the first value in the array will be at the top of the object array
+utilities.sortDictionaryByKeyAndValues = (dictionary, targetKey, values) => {
+    let newDictionary = {};
+    let lastSubDictionary = {};
 
     for (let i = 0; i < values.length; i++) {
-        for (key in objectArray) {
-            if (objectArray[key].hasOwnProperty(targetKey)) {
-                for (subKey in objectArray[key]) {
-                    if (subKey === targetKey && objectArray[key][targetKey] === values[i]) {
-                        newObjectArray[key] = objectArray[key];
+        for (key in dictionary) {
+            if (dictionary[key].hasOwnProperty(targetKey)) {
+                for (subKey in dictionary[key]) {
+                    if (subKey === targetKey && dictionary[key][targetKey] === values[i]) {
+                        newDictionary[key] = dictionary[key];
                     }
                 }
             }
             else {
-                lastSubObjectArray[key] = objectArray[key];
+                lastSubDictionary[key] = dictionary[key];
             }
         }
     }
 
-    if (lastSubObjectArray) {
-        newObjectArray = { ...newObjectArray, ...lastSubObjectArray };
+    if (lastSubDictionary) {
+        newDictionary = { ...newDictionary, ...lastSubDictionary };
     }
 
-    return newObjectArray;
+    return newDictionary;
 }
 
 utilities.getLengthOfObject = (object) => {
@@ -350,20 +353,20 @@ utilities.getLengthOfObject = (object) => {
     return counter;
 };
 
-utilities.getValuesThatMatchKeyFromObjectArray = (targetKey, objectArray) => {
+utilities.getValuesThatMatchKeyFromDictionary = (targetKey, dictionary) => {
     let valuesArray = [];
 
-    for (key in objectArray) {
-        valuesArray.push(objectArray[key][targetKey]);
+    for (key in dictionary) {
+        valuesArray.push(dictionary[key][targetKey]);
     }
 
     return valuesArray;
 }
 
-// Returns an object array with objects missing in new object array relative to old object array (NOTE: does not account for objects in old array that are not in new array - only added objects to new array)
-utilities.getDifferenceBetweenObjectArrays = (newObjectArray, oldObjectArray) => {
-    const newObjectArrayKeys = Object.keys(newObjectArray);
-    const oldObjectArrayKeys = Object.keys(oldObjectArray);
+// Returns a dictionary with objects missing in new object array relative to old object array (NOTE: does not account for objects in old array that are not in new array - only added objects to new array)
+utilities.getDifferenceBetweenDictionarys = (newDictionary, oldDictionary) => {
+    const newDictionaryKeys = Object.keys(newDictionary);
+    const oldDictionaryKeys = Object.keys(oldDictionary);
     let foundKey;
     let missingObjects = null;
 
@@ -387,10 +390,10 @@ utilities.getDifferenceBetweenObjectArrays = (newObjectArray, oldObjectArray) =>
 
     */
 
-    for (newKey in newObjectArray) {
+    for (newKey in newDictionary) {
         foundKey = false;
 
-        for (oldKey in oldObjectArray) {
+        for (oldKey in oldDictionary) {
             if (newKey === oldKey) {
                 foundKey = true;
             }
@@ -400,7 +403,7 @@ utilities.getDifferenceBetweenObjectArrays = (newObjectArray, oldObjectArray) =>
             if (!missingObjects) {
                 missingObjects = {};
             }
-            missingObjects[newKey] = newObjectArray[newKey];
+            missingObjects[newKey] = newDictionary[newKey];
         }
     }
 

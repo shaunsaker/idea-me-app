@@ -12,23 +12,23 @@ export default function (state = initialState, action) {
 
         case 'UPDATE_USER_PASSWORD':
             new_state = utilities.cloneObject(state);
-            new_state.auth.userPassword = action.value;
+            new_state.userAuth.userPassword = action.value;
             return new_state;
 
         case 'REDIRECT_USER_TO_WELCOME_PAGE':
             new_state = utilities.cloneObject(state);
-            new_state.auth.redirectToWelcomePage = true;
+            new_state.userAuth.redirectToWelcomePage = true;
             return new_state;
 
         case 'SIGN_IN_USER':
             new_state = utilities.cloneObject(state);
-            new_state.auth.authenticated = true;
-            new_state.auth.uid = action.uid;
-            new_state.auth.redirectToWelcomePage = false;
+            new_state.userAuth.authenticated = true;
+            new_state.userAuth.uid = action.uid;
+            new_state.userAuth.redirectToWelcomePage = false;
 
             if (action.anonymous) {
-                new_state.auth.anonymous = true;
-                new_state.auth.firstTimeUser = true;
+                new_state.userAuth.anonymous = true;
+                new_state.userAuth.firstTimeUser = true;
             }
 
             return new_state;
@@ -36,8 +36,8 @@ export default function (state = initialState, action) {
         case 'SIGN_OUT_USER':
             new_state = utilities.cloneObject(state);
             new_state = initialState;
-            new_state.app.loading = false;
-            new_state.auth.redirectToWelcomePage = true;
+            new_state.appState.loading = false;
+            new_state.userAuth.redirectToWelcomePage = true;
 
             return new_state;
 
@@ -46,7 +46,7 @@ export default function (state = initialState, action) {
         */
         case 'SHOW_TOOL_TIPS':
             new_state = utilities.cloneObject(state);
-            new_state.app.showToolTips = true;
+            new_state.appState.showToolTips = true;
 
             return new_state;
 
@@ -58,215 +58,82 @@ export default function (state = initialState, action) {
 
         case 'CANCEL_ONBOARDING':
             new_state = utilities.cloneObject(state);
-            new_state.auth.firstTimeUser = false;
-            new_state.app.showToolTips = false;
+            new_state.userAuth.firstTimeUser = false;
+            new_state.appState.showToolTips = false;
             new_state.appData.currentToolTipUID = null;
 
             return new_state;
 
-		/*
-			GEOLOCATION
-		*/
-        case 'SET_CURRENT_LOCATION':
-            new_state = utilities.cloneObject(state);
-            new_state.geolocation.currentLocation = action.currentLocation;
-            new_state.geolocation.geolocationSuccess = true;
-            new_state.app.loading = false; // for profile page
-            return new_state;
-
         /* APP */
-        case 'TOGGLE_LOADING':
-            new_state = utilities.cloneObject(state);
-            new_state.app.loading = !new_state.app.loading;
-            return new_state;
-
         case 'TOGGLE_NETWORK_STATE':
             new_state = utilities.cloneObject(state);
-            new_state.app.hasNetwork = !new_state.app.hasNetwork;
+            new_state.appState.hasNetwork = !new_state.appState.hasNetwork;
+            return new_state;
+
+        case 'TOGGLE_LOADING':
+            new_state = utilities.cloneObject(state);
+            new_state.appState.loading = !new_state.appState.loading;
             return new_state;
 
 		/*
 			SUCCESS/ERROR MESSAGES
-		*/
-        case 'AUTH_SUCCESS':
+        */
+        case 'SET_SUCCESS':
             new_state = utilities.cloneObject(state);
-            new_state.auth.authSuccessMessage = action.message;
-            new_state.app.loading = false;
-            new_state.app.errorType = 'AUTH';
+            new_state.appState.error.type = action.errorType;
+            new_state.appState.error.message = action.message;
+            new_state.appState.error.success = true;
+            new_state.appState.loading = false;
+
+            // Cloud data attaches this
+            if (action.firstTimeUser) {
+                new_state.userAuth.firstTimeUser = action.firstTimeUser;
+            }
+
             return new_state;
 
-        case 'RESET_AUTH_SUCCESS':
+        case 'SET_ERROR':
             new_state = utilities.cloneObject(state);
-            new_state.auth.authSuccessMessage = null;
-            new_state.app.errorType = null;
-            return new_state;
+            new_state.appState.error.type = action.errorType;
+            new_state.appState.error.message = action.message;
+            new_state.appState.error.success = false;
+            new_state.appState.loading = false;
 
-        case 'AUTH_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.auth.authErrorMessage = action.message;
-            new_state.app.loading = false;
-            new_state.app.errorType = 'AUTH';
-
-            if (action.retryAction && action.retryAction.type) new_state.app.retryAction.type = action.retryAction.type;
-
+            // Attach a retry action if provided
+            if (action.retryAction && action.retryAction.type) {
+                new_state.appState.retryAction.type = action.retryAction.type;
+            }
             if (action.retryAction && action.retryAction.data) {
-                new_state.app.retryAction.data = {
+                new_state.appState.retryAction.data = {
                     ...action.retryAction.data
                 }
             }
 
-            return new_state;
-
-        case 'RESET_AUTH_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.auth.authErrorMessage = null;
-            new_state.app.errorType = null;
-            new_state.app.retryAction.type = null;
-            new_state.app.retryAction.data = null;
-            return new_state;
-
-        case 'GEOLOCATION_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.geolocation.currentLocation = action.message;
-            new_state.geolocation.geolocationError = true;
-            new_state.app.errorType = 'GEOLOCATION';
-            new_state.app.loading = false;
-            return new_state;
-
-        case 'RESET_GEOLOCATION_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.geolocation.geolocationError = null;
-            new_state.app.errorType = null;
-            return new_state;
-
-        case 'IMAGE_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.images.imageErrorMessage = action.message;
-            new_state.app.errorType = 'IMAGE';
-            new_state.app.loading = false;
-            return new_state;
-
-        case 'RESET_IMAGE_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.images.imageErrorMessage = null;
-            new_state.app.errorType = null;
-            return new_state;
-
-        case 'CLOUD_DATA_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.cloudData.cloudDataErrorMessage = action.message;
-            new_state.app.loading = false;
-            new_state.app.errorType = 'CLOUD_DATA';
-
-            if (action.retryAction && action.retryAction.type) new_state.app.retryAction.type = action.retryAction.type;
-            if (action.retryAction && action.retryAction.data) {
-                new_state.app.retryAction.data = {
-                    ...action.retryAction.data,
-                }
-            }
-            return new_state;
-
-        case 'RESET_CLOUD_DATA_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.cloudData.cloudDataErrorMessage = null;
-            new_state.app.errorType = null;
-            new_state.app.retryAction.type = null;
-            new_state.app.retryAction.data = null;
-            return new_state;
-
-        case 'CLOUD_DATA_SUCCESS':
-            new_state = utilities.cloneObject(state);
-            new_state.cloudData.cloudDataSuccess = true;
-            new_state.auth.firstTimeUser = action.firstTimeUser;
-            return new_state;
-
-        case 'RESET_CLOUD_DATA_SUCCESS':
-            new_state = utilities.cloneObject(state);
-            new_state.cloudData.cloudDataSuccess = null;
-            return new_state;
-
-        case 'CLOUD_STORAGE_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.cloudStorage.cloudcloudStorageErrorMessage = action.message;
-            new_state.app.loading = false;
-            new_state.app.errorType = 'CLOUD_STORAGE';
-
-            if (action.retryAction && action.retryAction.type) new_state.app.retryAction.type = action.retryAction.type;
-            if (action.retryAction && action.retryAction.data) {
-                new_state.app.retryAction.data = {
-                    ...action.retryAction.data,
-                }
-            }
-            return new_state;
-
-        case 'RESET_CLOUD_STORAGE_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.cloudStorage.cloudcloudStorageErrorMessage = null;
-            new_state.app.errorType = null;
-            new_state.app.retryAction.type = null;
-            new_state.app.retryAction.data = null;
-            return new_state;
-
-        case 'USER_SUCCESS':
-            new_state = utilities.cloneObject(state);
-            new_state.app.userSuccessMessage = action.message;
-            new_state.app.loading = false;
-            new_state.app.errorType = 'USER';
-            return new_state;
-
-        case 'RESET_USER_SUCCESS':
-            new_state = utilities.cloneObject(state);
-            new_state.app.userSuccessMessage = null;
-            new_state.app.errorType = null;
-            return new_state;
-
-        case 'USER_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.app.userErrorMessage = action.message;
-            new_state.app.loading = false;
-            new_state.app.errorType = 'USER';
-
-            if (action.retryAction && action.retryAction.type) new_state.app.retryAction.type = action.retryAction.type;
-            if (action.retryAction && action.retryAction.data) {
-                new_state.app.retryAction.data = {
-                    ...action.retryAction.data,
-                }
-            }
-            return new_state;
-
-        case 'RESET_USER_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.app.userErrorMessage = null;
-            new_state.app.errorType = null;
-            new_state.app.retryAction.type = null;
-            new_state.app.retryAction.data = null;
-            return new_state;
-
-        case 'FILE_SYSTEM_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.fileSystem.fileSystemErrorMessage = action.message;
-            new_state.app.errorType = 'FILE_SYSTEM';
-            return new_state;
-
-        case 'RESET_FILE_SYSTEM_ERROR':
-            new_state = utilities.cloneObject(state);
-            new_state.fileSystem.fileSystemErrorMessage = null;
-            new_state.app.errorType = null;
-            return new_state;
-
-        /* USER DATA */
-        case 'UPDATE_USER_DATA':
-            new_state = utilities.cloneObject(state);
-
-            if (action.node) {
-                new_state.userData[action.node] = action.userData;
-            }
-            else {
-                new_state.userData = action.userData;
+            // Geolocation attaches this 
+            if (action.currentLocation) {
+                new_state.appData.currentLocation = action.currentLocation;
             }
 
-            new_state.cloudData.cloudDataSuccess = true;
-            new_state.app.loading = false;
+            return new_state;
+
+        case 'RESET_ERROR':
+            new_state = utilities.cloneObject(state);
+            new_state.appState.error.type = null;
+            new_state.appState.error.message = null;
+            new_state.appState.error.success = null;
+            return new_state;
+
+        /* APP DATA */
+
+        case 'SET_CURRENT_LOCATION':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.currentLocation = action.currentLocation;
+            new_state.appState.loading = false; // for profile page
+            return new_state;
+
+        case 'SELECT_CATEGORY':
+            new_state = utilities.cloneObject(state);
+            new_state.appData.currentCategory = action.value;
             return new_state;
 
         case 'SET_NEW_NOTES':
@@ -281,18 +148,18 @@ export default function (state = initialState, action) {
 
         case 'SET_TEMPORARY_IMAGE':
             new_state = utilities.cloneObject(state);
-            new_state.images.temporaryImage = action.image;
+            new_state.appData.temporaryImage = action.image;
             return new_state;
 
         case 'CLEAR_TEMPORARY_IMAGE':
             new_state = utilities.cloneObject(state);
-            new_state.images.temporaryImage = null;
+            new_state.appData.temporaryImage = null;
             return new_state;
 
         case 'SET_NEW_PHOTOS':
             new_state = utilities.cloneObject(state);
             new_state.appData.newPhotos = action.newPhotos;
-            new_state.images.temporaryImage = null;
+            new_state.appData.temporaryImage = null;
             return new_state;
 
         case 'CLEAR_NEW_PHOTOS':
@@ -317,6 +184,23 @@ export default function (state = initialState, action) {
             new_state.appData.newVoiceNotes = null;
             return new_state;
 
+        /* USER DATA */
+        case 'UPDATE_USER_DATA':
+            new_state = utilities.cloneObject(state);
+
+            if (action.node) {
+                new_state.userData[action.node] = action.userData;
+            }
+            else {
+                new_state.userData = action.userData;
+            }
+
+            new_state.appState.error.type = 'CLOUD_DATA';
+            new_state.appState.error.message = null;
+            new_state.appState.error.success = true;
+            new_state.appState.loading = false;
+            return new_state;
+
         case 'SET_USER_LOCATION':
             new_state = utilities.cloneObject(state);
             new_state.userData.profile.userLocation = action.userLocation;
@@ -325,11 +209,6 @@ export default function (state = initialState, action) {
         case 'SET_USER_PHOTO':
             new_state = utilities.cloneObject(state);
             new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
-            return new_state;
-
-        case 'SELECT_CATEGORY':
-            new_state = utilities.cloneObject(state);
-            new_state.appData.currentCategory = action.value;
             return new_state;
 
         default:

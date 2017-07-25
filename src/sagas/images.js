@@ -92,7 +92,7 @@ export function* handleImage(action) {
                                 cropped: "file:" + moveCroppedFileResponse.message,
                                 uid: utilities.createUID(),
                             };
-                            
+
                             yield put({
                                 type: 'SET_TEMPORARY_IMAGE',
                                 image,
@@ -100,42 +100,48 @@ export function* handleImage(action) {
                         }
                         else {
                             yield put({
-                                type: 'IMAGE_ERROR',
+                                type: 'SET_ERROR',
+                                errorType: 'IMAGE',
                                 message: moveCroppedFileResponse.message,
                             });
                         }
                     }
                     else {
                         yield put({
-                            type: 'IMAGE_ERROR',
+                            type: 'SET_ERROR',
+                            errorType: 'IMAGE',
                             message: imageCropperResponse.message,
                         });
                     }
                 }
                 else {
                     yield put({
-                        type: 'IMAGE_ERROR',
+                        type: 'SET_ERROR',
+                        errorType: 'IMAGE',
                         message: imageResizerResponse.message,
                     });
                 }
             }
             else {
                 yield put({
-                    type: 'IMAGE_ERROR',
+                    type: 'SET_ERROR',
+                    errorType: 'IMAGE',
                     message: transferFileResponse.message,
                 });
             }
         }
         else {
             yield put({
-                type: 'IMAGE_ERROR',
+                type: 'SET_ERROR',
+                errorType: 'IMAGE',
                 message: createDirectoryResponse.message,
             });
         }
     }
     else {
         yield put({
-            type: 'IMAGE_ERROR',
+            type: 'SET_ERROR',
+            errorType: 'IMAGE',
             message: imagePickerResponse.message,
         });
     }

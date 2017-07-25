@@ -40,8 +40,8 @@ export class Loader extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        hasNetwork: state.main.app.hasNetwork,
-        loading: state.main.app.loading,
+        hasNetwork: state.main.appState.hasNetwork,
+        loading: state.main.appState.loading,
     }
 }
 

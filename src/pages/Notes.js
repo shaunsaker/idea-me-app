@@ -78,7 +78,7 @@ export class Notes extends React.Component {
             uid: utilities.createUID(),
         };
 
-        const newNotes = utilities.pushObjectToObjectArray(newNote, this.props.newNotes);
+        const newNotes = utilities.pushObjectToDictionary(newNote, this.props.newNotes);
 
         this.props.dispatch({
             type: 'SET_NEW_NOTES',
@@ -88,7 +88,7 @@ export class Notes extends React.Component {
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
-            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
 
             // Dispatch to store
             this.props.dispatch({
@@ -119,7 +119,7 @@ export class Notes extends React.Component {
     }
 
     deleteNote() {
-        const newNotes = utilities.removeObjectFromObjectArray(this.state.deleteNoteUID, this.props.newNotes);
+        const newNotes = utilities.removeObjectFromDictionary(this.state.deleteNoteUID, this.props.newNotes);
 
         this.props.dispatch({
             type: 'SET_NEW_NOTES',
@@ -129,7 +129,7 @@ export class Notes extends React.Component {
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
-            const newIdeas = utilities.updateObjectInObjectArray(this.props.idea.uid, newIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
 
             // Dispatch to store
             this.props.dispatch({
@@ -151,7 +151,7 @@ export class Notes extends React.Component {
     }
 
     render() {
-        const notesArray = utilities.convertObjectArrayToArray(this.props.newNotes);
+        const notesArray = utilities.convertDictionaryToArray(this.props.newNotes);
 
         const deleteModal = this.state.showDeleteModal &&
             <ActionModal
@@ -193,8 +193,8 @@ function mapStateToProps(state) {
     return ({
         newNotes: state.main.appData.newNotes,
         ideas: state.main.userData.ideas,
-        uid: state.main.auth.uid,
-        hasNetwork: state.main.app.hasNetwork,
+        uid: state.main.userAuth.uid,
+        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 
