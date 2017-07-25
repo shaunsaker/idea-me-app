@@ -1,6 +1,4 @@
 TODOS
-    Some elements need more elevation
-        Profile menu and Profile Card overlap
     Using InfoModal on Splash page
         check if user date joined === One week
             Enjoying the app? Help us spread the word by sharing to ...

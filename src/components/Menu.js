@@ -14,7 +14,7 @@ import AnimateHeight from '../animators/AnimateHeight';
 
 const styles = StyleSheet.create({
     menuItemsWrapper: {
-        ...styleConstants.regularShadow,
+        ...styleConstants.largeShadow,
         position: 'absolute',
         top: 66,
         right: 16,
