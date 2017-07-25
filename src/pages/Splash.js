@@ -28,7 +28,6 @@ export class Splash extends React.Component {
         this.shareApp = this.shareApp.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
         this.toggleAnnouncementModal = this.toggleAnnouncementModal.bind(this);
-        this.closeAnnouncementModal = this.closeAnnouncementModal.bind(this);
 
         this.quote = utilities.getRandomItemFromDictionary(this.props.quotes);
 
@@ -113,7 +112,7 @@ export class Splash extends React.Component {
                     }
 
                     // If we have data, we have everything we need
-                    else if (this.props.authenticated && this.props.cloudDataSuccess && this.props.dateJoined && this.props.announcement) {
+                    else if (this.props.authenticated && this.props.cloudDataSuccess && this.props.dateJoined) { // TODO: add this.props.announcement
 
                         // If user has been using app for a week = approx 604800s
                         const currentDate = Date.now();
@@ -122,9 +121,9 @@ export class Splash extends React.Component {
                         if (showShareModal && !this.props.hasSeenShareModal) {
                             this.toggleShareModal();
                         }
-                        else if (this.props.announcement.title) {
-                            this.toggleAnnouncementModal();
-                        }
+                        // else if (this.props.announcement.title) {
+                        //     this.toggleAnnouncementModal();
+                        // }
                         else {
                             this.props.dispatch({
                                 type: 'RESET_ERROR'
@@ -215,7 +214,7 @@ export class Splash extends React.Component {
                 handlePress={this.shareApp}
                 handleClose={this.closeShareModal} />;
 
-        const announcementModal = showAnnouncementModal &&
+        const announcementModal = this.state.showAnnouncementModal &&
             <InfoModal
                 title={this.props.announcement.title}
                 subtitle={this.props.announcement.subtitle}

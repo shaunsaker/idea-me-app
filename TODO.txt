@@ -1,13 +1,16 @@
 TODOS
+    NoteCard needs refactoring
+        Should only be a display component (render children)
     App Settings
         Disable sounds
     About App
         Name
         Version
         Developer
+    Log Known Bugs to Github
     Announcement Modal
         Test with props on fb
-            // announcement should have value if empty, otherwise should have at least title
+            Announcement should have value if empty, otherwise should have at least title
     Splash Share Modal
         Share icon
         Sharing functionality (need to be able to share link to play store/apple store)
@@ -20,7 +23,8 @@ TODOS
         Add link to Profile page
     Apply material styles
         See material.io
-        Labels same fontSize as info block description 
+        Tooltips need more impact
+        Dropdown button header/footer need work
     Responsiveness
         Use page component
             On enable, can test screen dimensions from Tablet
@@ -55,8 +59,6 @@ WRAP UP
         Use shouldComponentUpdate where necessary 
     App renaming
     App Icons 
-    Add analytics
-        Create console
     Password reset email templates on FB console
 
 V2

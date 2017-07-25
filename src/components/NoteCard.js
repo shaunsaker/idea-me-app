@@ -61,7 +61,7 @@ export default NoteCard = (props) => {
     /*
         PROPTYPES
             idea
-            notes/photos/voiceNotes/categories
+            notes/photos/voiceNotes/categories/settings
             handleAdd
             handleDelete
             hideTitle
@@ -69,6 +69,9 @@ export default NoteCard = (props) => {
             NOTES/CATEGORIES
                 inputValue
                 handleChangeText
+
+            SETTINGS
+                handleSelectSetting
 
             PHOTOS
                 handleViewPhotos   

@@ -78,8 +78,7 @@ export class Profile extends React.Component {
             // TODO
         }
         else if (type === 'Settings') {
-
-            // TODO
+            Actions.settings();
         }
         else if (type === 'Give us Feedback') {
             Linking.openURL('www.google.com');
