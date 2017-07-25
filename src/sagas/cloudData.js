@@ -9,7 +9,7 @@ import CloudData from '../cloudData/index';
 
 export function* loadUserData(action) {
     const loadUserDataResponse = yield call(CloudData.loadUserData, action);
-    // console.log('loadUserDataResponse', loadUserDataResponse);
+    console.log('loadUserDataResponse', loadUserDataResponse);
 
     if (loadUserDataResponse) {
         if (loadUserDataResponse.success && loadUserDataResponse.message) {

@@ -24,11 +24,14 @@ export class Splash extends React.Component {
         this.runLogic = this.runLogic.bind(this);
         this.toggleNetworkState = this.toggleNetworkState.bind(this);
         this.toggleNetworkModal = this.toggleNetworkModal.bind(this);
+        this.shareApp = this.shareApp.bind(this);
+        this.closeShareModal = this.closeShareModal.bind(this);
 
         this.quote = utilities.getRandomItemFromDictionary(this.props.quotes);
 
         this.state = {
             showNetworkModal: false,
+            showShareModal: false,
             isFethingData: false,
         }
     }
@@ -36,10 +39,16 @@ export class Splash extends React.Component {
     static get propTypes() {
         return {
             authenticated: PropTypes.bool,
-            cloudDataSuccess: PropTypes.bool,
+            anonymous: PropTypes.bool,
             redirectToWelcomePage: PropTypes.bool,
-
             uid: PropTypes.string,
+
+            cloudDataSuccess: PropTypes.bool,
+
+            quotes: PropTypes.object,
+
+            dateJoined: PropTypes.number,
+            hasSeenShareModal: PropTypes.bool,
         };
     }
 
@@ -95,12 +104,25 @@ export class Splash extends React.Component {
                     }
 
                     // If we have data, we have everything we need
-                    else if (this.props.authenticated && this.props.cloudDataSuccess) {
-                        this.props.dispatch({
-                            type: 'RESET_ERROR'
-                        });
+                    else if (this.props.authenticated && this.props.cloudDataSuccess && this.props.dateJoined) {
 
-                        Actions.home();
+                        // One week = approx 604800ms
+                        const currentDate = Date.now();
+                        const showShareModal = (currentDate - this.props.dateJoined >= 604800 * 1000);
+
+                        // If user has been using app for a week (equivalent)
+                        if (showShareModal && !this.props.hasSeenShareModal) {
+                            this.setState({
+                                showShareModal: true,
+                            });
+                        }
+                        else {
+                            this.props.dispatch({
+                                type: 'RESET_ERROR'
+                            });
+
+                            Actions.home();
+                        }
                     }
                     else if (!this.props.authenticated) {
                         this.props.dispatch({
@@ -125,13 +147,54 @@ export class Splash extends React.Component {
         });
     }
 
+    shareApp() {
+        console.log('Shared')
+
+        this.closeShareModal();
+    }
+
+    closeShareModal() {
+        this.props.dispatch({
+            type: 'saveUserData',
+            uid: this.props.uid,
+            node: 'app',
+            userData: {
+                hasSeenShareModal: true,
+            },
+        });
+
+        this.setState({
+            showShareModal: false,
+        });
+
+        // Might take a while for the hasSeenShareModal prop to come in so let's redirect manually
+        this.props.dispatch({
+            type: 'RESET_ERROR'
+        });
+
+        Actions.home();
+    }
+
     render() {
         const networkModal = this.state.showNetworkModal &&
             <InfoModal
                 title='Network Error'
-                subtitle='Check Your Connection and Hit Retry'
+                subtitle='Check Your Connection and Hit Retry.'
+                buttonText='Retry'
+                buttonIconName='refresh'
+                canClose={false}
                 handlePress={this.runLogic}
                 handleClose={this.toggleNetworkModal} />
+
+        const shareModal = this.state.showShareModal &&
+            <InfoModal
+                title='Enjoying IdeaMe?'
+                subtitle='Help us spread the word by sharing the app with your friends.'
+                buttonText='Share'
+                buttonIconName='share'
+                canClose
+                handlePress={this.shareApp}
+                handleClose={this.closeShareModal} />;
 
         return (
             <Page
@@ -156,6 +219,8 @@ export class Splash extends React.Component {
 
                 {networkModal}
 
+                {shareModal}
+
                 <SnackBar />
 
             </Page>
@@ -165,13 +230,17 @@ export class Splash extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        quotes: state.main.appData.quotes,
-
         authenticated: state.main.userAuth.authenticated,
         anonymous: state.main.userAuth.anonymous,
-        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
         redirectToWelcomePage: state.main.userAuth.redirectToWelcomePage,
         uid: state.main.userAuth.uid,
+
+        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
+
+        quotes: state.main.appData.quotes,
+
+        dateJoined: state.main.userData.profile.dateJoined,
+        hasSeenShareModal: state.main.userData.app && state.main.userData.app.hasSeenShareModal,
     };
 }
 

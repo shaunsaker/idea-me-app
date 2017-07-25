@@ -34,6 +34,18 @@ const styles = StyleSheet.create({
     buttonContainer: {
         padding: 16,
     },
+    closeIconContainer: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+    },
+    closeIconButton: {
+        padding: 8,
+    },
+    closeIcon: {
+        fontSize: styleConstants.iconFont,
+        color: styleConstants.white,
+    },
 });
 
 export default InfoModal = (props) => {
@@ -41,9 +53,23 @@ export default InfoModal = (props) => {
         PROPS
             title
             subtitle
+            buttonText
+            buttonIconName
+            canClose
             handlePress
             handleClose
     */
+
+    const closeButton = props.canClose &&
+        <View style={styles.closeIconContainer}>
+            <Touchable
+                onPress={props.handleClose}
+                style={styles.closeIconButton} >
+                <Icon
+                    name='close'
+                    style={styles.closeIcon} />
+            </Touchable>
+        </View>
 
     return (
         <View>
@@ -63,10 +89,13 @@ export default InfoModal = (props) => {
                                 fullWidth />
                         </View>
                         <Button
-                            text='Retry'
-                            iconName='refresh'
+                            text={props.buttonText}
+                            iconName={props.buttonIconName}
                             backgroundColor={styleConstants.white}
                             handlePress={props.handlePress} />
+
+                        {closeButton}
+
                     </View>
                 </View>
             </Modal>

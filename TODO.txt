@@ -1,11 +1,18 @@
 TODOS
-    Using InfoModal on Splash page
-        check if user date joined === One week
-            Enjoying the app? Help us spread the word by sharing to ...
-            Set db.app.hasSeenShareModal = true
+    Customisable messages on app start
+        Checks db for props
+            title
+            buttonText
+            closeModal (and other actions)
+    Splash Share Modal
+        Share icon
+        Sharing functionality (need to be able to share link to play store/apple store)
     App Settings
         Disable sounds
     About App
+        Name
+        Version
+        Developer
     Contact Linking should check if can email, otherwise copy email address to clipboard
     Forced app updates
         InfoModal on Splash screen
