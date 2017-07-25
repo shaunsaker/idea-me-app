@@ -1,7 +1,6 @@
 TODOS
-    Profile did not update with location change
-    Play sound on idea add
     Input height on mount is not working
+    Play sound on idea add
     Announcement page for when I need to make some sort of announcement
         Based on api prop
         Image uri

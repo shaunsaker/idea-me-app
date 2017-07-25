@@ -147,7 +147,7 @@ export class EditProfile extends React.Component {
         const userData = {
             userName: prettyUserName,
             userEmail: this.state.editUserEmail,
-            userLocation: this.props.userLocation,
+            userLocation: this.props.currentLocation ? this.props.currentLocation : this.props.userLocation,
             userPhotoUrl,
         }
 
