@@ -49,6 +49,7 @@ export class Welcome extends React.Component {
                     userEmail: this.props.userEmail,
                     userName: this.props.userName,
                     userPhotoUrl: this.props.userPhotoUrl,
+                    dateJoined: Date.now(),
                 },
             });
         }

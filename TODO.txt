@@ -1,8 +1,8 @@
 TODOS
-    Instead of Not Set in profileCard, use Name, email location eetc.
     After I signup a new user with email
         I did not get moved to Home screen
             Did not get show firstTimeUser screen
+    Instead of Not Set in profileCard, use Name, email location eetc.
     Some elements need more elevation
         Profile menu and Profile Card overlap
     Using InfoModal on Splash page

@@ -46,6 +46,7 @@ export class SignInWithEmail extends React.Component {
                 node: 'profile',
                 userData: {
                     userEmail: this.props.userEmail,
+                    dateJoined: Date.now(),
                 }
             });
         }
