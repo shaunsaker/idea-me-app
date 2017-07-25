@@ -1,31 +1,31 @@
 TODOS
-    Announcement page for when I need to make some sort of announcement
-        Based on api prop
-        Image uri
-        After one week
-            Enjoying the app? Help us spread the word by sharing (fb or tweet)
-                Auto populate
-        After one free month
-            Trial about to expire, unless you give us feedback 
+    Instead of Not Set in profileCard, use Name, email location eetc.
+    After I signup a new user with email
+        I did not get moved to Home screen
+            Did not get show firstTimeUser screen
+    Some elements need more elevation
+        Profile menu and Profile Card overlap
+    Using InfoModal on Splash page
+        check if user date joined === One week
+            Enjoying the app? Help us spread the word by sharing to ...
+            Set db.app.hasSeenShareModal = true
     App Settings
         Disable sounds
     About App
     Contact Linking should check if can email, otherwise copy email address to clipboard
-    Apply material styles
-        See material.io
-        Labels same fontSize as info block description 
-    Responsiveness
-        Whereever you have elevation, add a border
-        Use page component
-            On enable, can test screen dimensions from Tablet
-                Width and height variations based on common devices (smallest and largest)
     Forced app updates
-        Libs
-        Update screen
+        InfoModal on Splash screen
     Facebook/Google Sign In  
     RN Permissions  
     User survey
         Add link to Profile page
+    Apply material styles
+        See material.io
+        Labels same fontSize as info block description 
+    Responsiveness
+        Use page component
+            On enable, can test screen dimensions from Tablet
+                Width and height variations based on common devices (smallest and largest)
 
 WRAP UP  
     Test all errors

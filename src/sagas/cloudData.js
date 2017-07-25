@@ -19,13 +19,16 @@ export function* loadUserData(action) {
             });
         }
 
-        // No user data
+        // No user data (new user)
         else if (loadUserDataResponse.success && !loadUserDataResponse.message) {
+            let userData = action.userData;
+            userData['dateJoined'] = Date.now();
+
             yield put({
                 type: 'saveUserData',
                 uid: action.uid,
                 node: 'profile',
-                userData: action.userData,
+                userData,
                 firstTimeUser: true,
             });
         }
