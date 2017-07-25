@@ -19,6 +19,7 @@ import InfoBlock from '../components/InfoBlock';
 import Button from '../components/Button';
 import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
+import SoundPlayer from '../components/SoundPlayer';
 import ActionModal from '../modals/ActionModal';
 import SnackBar from '../widgets/SnackBar';
 import ToolTip from '../widgets/ToolTip';
@@ -59,6 +60,7 @@ export class Home extends React.Component {
             deleteIdeaModalTitle: null,
             deleteIdeaUID: null,
             highlightProfileTab: false,
+            ideaAdded: false,
         }
     }
 
@@ -77,6 +79,24 @@ export class Home extends React.Component {
         if (this.props.firstTimeUser) {
             this.setState({
                 highlightProfileTab: true,
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        let ideaAdded;
+
+        // Check if an idea has been added so we can play a sound
+        if (utilities.getLengthOfObject(this.props.ideas) > utilities.getLengthOfObject(prevProps.ideas)) {
+            ideaAdded = true;
+        }
+        else {
+            ideaAdded = false;
+        }
+
+        if (ideaAdded !== this.state.ideaAdded) {
+            this.setState({
+                ideaAdded,
             });
         }
     }
@@ -288,6 +308,10 @@ export class Home extends React.Component {
                 <TabBar
                     tabs={this.tabs}
                     highlightProfileTab={this.state.highlightProfileTab} />
+
+                <SoundPlayer
+                    fileName='ding.mp3'
+                    playSound={this.state.ideaAdded} />
 
                 {deleteModal}
 

@@ -1,6 +1,7 @@
 TODOS
-    Input height on mount is not working
-    Play sound on idea add
+    Elevation constant in styleConstants
+        Add border on Android API <= 19
+        Include ios shadow
     Announcement page for when I need to make some sort of announcement
         Based on api prop
         Image uri
@@ -9,8 +10,9 @@ TODOS
                 Auto populate
         After one free month
             Trial about to expire, unless you give us feedback 
+    App Settings
+        Disable sounds
     About App
-    Remove App Settings ref
     Contact Linking should check if can email, otherwise copy email address to clipboard
     Apply material styles
         See material.io
@@ -39,6 +41,7 @@ WRAP UP
         Integrate react-native-google-signin on iOS
         Icons
         React native keyboard spacer?
+        Sounds
     Optimise code
         Use FlatList/VirtualizedList for all lists
             shouldComponentUpdate will help render when it should
