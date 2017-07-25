@@ -186,9 +186,9 @@ export class Profile extends React.Component {
 function mapStateToProps(state) {
     return ({
         uid: state.main.userAuth.uid,
-        userName: state.main.userData.profile.userName || 'Not Set',
-        userEmail: state.main.userData.profile.userEmail || 'Not Set',
-        userLocation: state.main.userData.profile.userLocation || 'Not Set',
+        userName: state.main.userData.profile.userName || 'Name',
+        userEmail: state.main.userData.profile.userEmail || 'Email',
+        userLocation: state.main.userData.profile.userLocation || 'Location',
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
         ideas: state.main.userData.ideas,
     });
