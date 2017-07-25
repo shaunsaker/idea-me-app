@@ -16,6 +16,7 @@ import Label from './Label';
 
 const styles = StyleSheet.create({
     cardContainer: {
+        ...styleConstants.regularShadow,
         position: 'relative',
         width: styleConstants.windowWidth - 32,
         backgroundColor: styleConstants.realWhite,
@@ -24,14 +25,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         paddingVertical: 16,
         paddingHorizontal: 8,
-        elevation: 5,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
     },
     profileImageContainer: {
         position: 'absolute',

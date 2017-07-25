@@ -14,6 +14,8 @@ import AnimateTranslateY from '../../animators/AnimateTranslateY';
 
 const styles = StyleSheet.create({
     messageWrapper: {
+        ...styleConstants.largeShadow,
+        elevation: 100, // TODO: check if this is necessary
         position: 'absolute',
         bottom: 0,
         width: styleConstants.windowWidth,
@@ -22,7 +24,6 @@ const styles = StyleSheet.create({
         borderTopColor: styleConstants.lightGrey,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        elevation: 100,
         minHeight: 80,
         padding: 8,
     },

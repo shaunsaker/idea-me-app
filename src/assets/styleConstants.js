@@ -1,4 +1,7 @@
-import { Dimensions } from 'react-native';
+import {
+    Dimensions,
+    Platform,
+} from 'react-native';
 const styleConstants = {};
 
 /* FONT FAMILIES */
@@ -29,6 +32,7 @@ styleConstants.white = '#f4f7fd';
 styleConstants.realWhite = '#ffffff';
 styleConstants.lightGrey = '#b0b3cf';
 styleConstants.grey = '#808092';
+styleConstants.black = '#000000';
 styleConstants.transBlack = 'rgba(0, 0, 0, 0.75)';
 
 /* DIMENSIONS */
@@ -38,5 +42,55 @@ const { width, height } = Dimensions.get('window');
 styleConstants.windowWidth = width;
 styleConstants.windowHeight = height;
 styleConstants.noteCardCell = (width - 122) / 3; // 3 grid incl. padding and margin
+
+/* SHADOWS */
+
+// Elevation does not work on Android V4 so we add a border as a fallback
+const isEarlyAndroid = Platform.OS === 'Android' && Platform.Version <= 19;
+
+styleConstants.smallShadow = {
+    elevation: 3,
+    borderWidth: isEarlyAndroid ? 1 : 0,
+    borderColor: isEarlyAndroid ? styleConstants.lightGrey : null,
+
+    // iOS
+    shadowColor: styleConstants.black,
+    shadowOpacity: 0.17,
+    shadowRadius: 2,
+    shadowOffset: {
+        height: 1,
+        width: 0
+    },
+};
+
+styleConstants.regularShadow = {
+    elevation: 5,
+    borderWidth: isEarlyAndroid ? 1 : 0,
+    borderColor: isEarlyAndroid ? styleConstants.lightGrey : null,
+
+    // iOS
+    shadowColor: styleConstants.black,
+    shadowOpacity: 0.33,
+    shadowRadius: 2,
+    shadowOffset: {
+        height: 1,
+        width: 0
+    },
+};
+
+styleConstants.largeShadow = {
+    elevation: 10,
+    borderWidth: isEarlyAndroid ? 1 : 0,
+    borderColor: isEarlyAndroid ? styleConstants.lightGrey : null,
+
+    // iOS
+    shadowColor: styleConstants.black,
+    shadowOpacity: 0.33,
+    shadowRadius: 4,
+    shadowOffset: {
+        height: 2,
+        width: 0
+    },
+};
 
 export default styleConstants;

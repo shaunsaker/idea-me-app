@@ -22,19 +22,12 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     dropdownItemsWrapper: {
+        ...styleConstants.regularShadow,
         position: 'absolute',
         top: 76,
         left: 0,
         right: 0,
         width: styleConstants.windowWidth - 32,
-        elevation: 5,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
         backgroundColor: styleConstants.white,
         zIndex: 1,
     },

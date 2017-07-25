@@ -18,6 +18,7 @@ import Counter from './Counter';
 
 const styles = StyleSheet.create({
     voiceNoteContainer: {
+        ...styleConstants.smallShadow,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -25,7 +26,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: styleConstants.lightGrey,
         borderRadius: 8,
-        elevation: 3,
     },
     voiceNoteIconContainer: {
 

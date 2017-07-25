@@ -15,10 +15,10 @@ import AnimateFadeIn from '../../animators/AnimateFadeIn';
 
 const styles = StyleSheet.create({
     wrapper: {
+        ...styleConstants.largeShadow,
         position: 'absolute',
         width: styleConstants.windowWidth / 1.5,
         backgroundColor: styleConstants.realWhite,
-        elevation: 15,
         borderWidth: 1,
         borderColor: styleConstants.primary,
     },

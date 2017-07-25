@@ -1,7 +1,4 @@
 TODOS
-    Elevation constant in styleConstants
-        Add border on Android API <= 19
-        Include ios shadow
     Announcement page for when I need to make some sort of announcement
         Based on api prop
         Image uri

@@ -12,6 +12,7 @@ import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     iconButton: {
+        ...styleConstants.regularShadow,
         backgroundColor: styleConstants.primary,
         padding: 16,
         borderRadius: 36,
@@ -19,7 +20,6 @@ const styles = StyleSheet.create({
         borderColor: styleConstants.white,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 5,
         position: 'relative',
     },
     icon: {

@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
     },
 
     deleteButtonContainer: {
+        ...styleConstants.largeShadow,
         position: 'absolute',
         top: 4,
         right: 4,
-        elevation: 10,
     },
 });
 

@@ -96,17 +96,7 @@ export default class Header extends React.Component {
                 color: this.props.textColor,
             };
 
-        const headerShadowStyles = this.props.headerShadow &&
-            {
-                elevation: 5,
-                shadowColor: "#000000",
-                shadowOpacity: 0.6,
-                shadowRadius: 2,
-                shadowOffset: {
-                    height: 1,
-                    width: 0
-                },
-            };
+        const headerShadowStyles = this.props.headerShadow && styleConstants.regularShadow;
 
         const leftIcon = this.props.leftComponent ?
             <View style={styles.leftIconContainer}>

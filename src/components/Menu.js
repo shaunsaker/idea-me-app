@@ -14,19 +14,12 @@ import AnimateHeight from '../animators/AnimateHeight';
 
 const styles = StyleSheet.create({
     menuItemsWrapper: {
+        ...styleConstants.regularShadow,
         position: 'absolute',
         top: 66,
         right: 16,
         width: 164,
         backgroundColor: styleConstants.white,
-        elevation: 10,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 1,
-            width: 0
-        },
     },
     menuItemsContainer: {
 

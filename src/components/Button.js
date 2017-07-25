@@ -12,6 +12,7 @@ import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     button: {
+        ...styleConstants.regularShadow,
         width: styleConstants.windowWidth - 32,
         height: 56,
         flexDirection: 'row',
@@ -20,14 +21,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1,
         borderColor: styleConstants.white,
-        elevation: 5,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
         marginTop: 16,
         alignSelf: 'center',
     },

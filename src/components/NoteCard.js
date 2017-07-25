@@ -19,6 +19,7 @@ import VoiceNoteRecorder from './VoiceNoteRecorder';
 
 const styles = StyleSheet.create({
     cardContainer: {
+        ...styleConstants.regularShadow,
         flex: 1,
         justifyContent: 'space-between',
         position: 'relative',
@@ -29,14 +30,6 @@ const styles = StyleSheet.create({
         margin: 16,
         paddingVertical: 16,
         paddingHorizontal: 8,
-        elevation: 5,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
     },
     contentContainer: {
         flex: 1,

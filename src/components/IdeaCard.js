@@ -18,6 +18,7 @@ import Label from './Label';
 
 const styles = StyleSheet.create({
     cardContainer: {
+        ...styleConstants.regularShadow,
         position: 'relative',
         width: styleConstants.windowWidth - 32,
         flex: 1,
@@ -28,14 +29,6 @@ const styles = StyleSheet.create({
         paddingTop: 16,
         paddingBottom: 12,
         paddingHorizontal: 8,
-        elevation: 5,
-        shadowColor: "#000000",
-        shadowOpacity: 0.6,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 2,
-            width: 0
-        },
     },
     menuIconContainer: {
         position: 'absolute',
@@ -65,12 +58,12 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     buttonsContainer: {
+        ...styleConstants.smallShadow,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: styleConstants.white,
         marginHorizontal: 4,
         padding: 8,
-        elevation: 3,
     },
     buttonContainer: {
 
