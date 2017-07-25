@@ -9,7 +9,7 @@ import CloudData from '../cloudData/index';
 
 export function* loadUserData(action) {
     const loadUserDataResponse = yield call(CloudData.loadUserData, action);
-    console.log('loadUserDataResponse', loadUserDataResponse);
+    // console.log('loadUserDataResponse', loadUserDataResponse);
 
     if (loadUserDataResponse) {
         if (loadUserDataResponse.success && loadUserDataResponse.message) {
@@ -42,6 +42,33 @@ export function* loadUserData(action) {
                         uid: action.uid,
                         userData: action.userData,
                     },
+                },
+            });
+        }
+    }
+}
+
+export function* loadAppData() {
+    const loadAppDataResponse = yield call(CloudData.loadAppData);
+    console.log('loadAppDataResponse', loadAppDataResponse);
+
+    if (loadAppDataResponse) {
+        if (loadAppDataResponse.success) {
+            yield put({
+                type: 'UPDATE_APP_DATA',
+                appData: loadAppDataResponse.message,
+            });
+        }
+
+        // We must have an error
+        else {
+            yield put({
+                type: 'SET_ERROR',
+                errorType: 'CLOUD_DATA',
+                message: loadUserDataResponse.message,
+                retryAction: {
+                    type: 'loadAppData',
+                    data: null,
                 },
             });
         }

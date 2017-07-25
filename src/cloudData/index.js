@@ -7,8 +7,22 @@ const response = {
 
 export default class CloudData {
     static loadUserData(action) {
-        return new Promise(resolve => { 
+        return new Promise(resolve => {
             firestack.database.ref('users/' + action.uid).on('value', snapshot => {
+                response.success = true;
+                response.message = snapshot.val();
+                resolve(response);
+            }, (error) => {
+                response.success = false;
+                response.message = error.message;
+                resolve(response);
+            });
+        });
+    }
+
+    static loadAppData() {
+        return new Promise(resolve => {
+            firestack.database.ref('app/').on('value', snapshot => {
                 response.success = true;
                 response.message = snapshot.val();
                 resolve(response);
@@ -28,19 +42,19 @@ export default class CloudData {
         console.log('Dispatching save at users/' + action.uid + '/' + nodeRef);
 
         return new Promise(resolve => {
-            firestack.database.ref('users/' + action.uid + '/' + nodeRef).update({ 
+            firestack.database.ref('users/' + action.uid + '/' + nodeRef).update({
                 ...action.userData,
             })
-            .then(() => {
-                response.success = true;
-                response.message = action.userData;
-                resolve(response);
-            })
-            .catch(error => {
-                response.success = false;
-                response.message = error.message;
-                resolve(response);
-            });
+                .then(() => {
+                    response.success = true;
+                    response.message = action.userData;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
+                });
         });
     }
 
@@ -53,16 +67,16 @@ export default class CloudData {
 
         return new Promise(resolve => {
             firestack.database.ref('users/' + action.uid + '/' + nodeRef).remove()
-            .then(() => {
-                response.success = true;
-                response.message = null;
-                resolve(response);
-            })
-            .catch(error => {
-                response.success = false;
-                response.message = error.message;
-                resolve(response);
-            });
+                .then(() => {
+                    response.success = true;
+                    response.message = null;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
+                });
         });
     }
 }

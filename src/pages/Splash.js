@@ -24,14 +24,18 @@ export class Splash extends React.Component {
         this.runLogic = this.runLogic.bind(this);
         this.toggleNetworkState = this.toggleNetworkState.bind(this);
         this.toggleNetworkModal = this.toggleNetworkModal.bind(this);
+        this.toggleShareModal = this.toggleShareModal.bind(this);
         this.shareApp = this.shareApp.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
+        this.toggleAnnouncementModal = this.toggleAnnouncementModal.bind(this);
+        this.closeAnnouncementModal = this.closeAnnouncementModal.bind(this);
 
         this.quote = utilities.getRandomItemFromDictionary(this.props.quotes);
 
         this.state = {
             showNetworkModal: false,
             showShareModal: false,
+            showAnnouncementModal: false,
             isFethingData: false,
         }
     }
@@ -46,6 +50,7 @@ export class Splash extends React.Component {
             cloudDataSuccess: PropTypes.bool,
 
             quotes: PropTypes.object,
+            announcement: PropTypes.object,
 
             dateJoined: PropTypes.number,
             hasSeenShareModal: PropTypes.bool,
@@ -101,20 +106,24 @@ export class Splash extends React.Component {
                             type: 'loadUserData',
                             uid: this.props.uid,
                         });
+
+                        this.props.dispatch({
+                            type: 'loadAppData',
+                        });
                     }
 
                     // If we have data, we have everything we need
-                    else if (this.props.authenticated && this.props.cloudDataSuccess && this.props.dateJoined) {
+                    else if (this.props.authenticated && this.props.cloudDataSuccess && this.props.dateJoined && this.props.announcement) {
 
-                        // One week = approx 604800ms
+                        // If user has been using app for a week = approx 604800s
                         const currentDate = Date.now();
                         const showShareModal = (currentDate - this.props.dateJoined >= 604800 * 1000);
 
-                        // If user has been using app for a week (equivalent)
                         if (showShareModal && !this.props.hasSeenShareModal) {
-                            this.setState({
-                                showShareModal: true,
-                            });
+                            this.toggleShareModal();
+                        }
+                        else if (this.props.announcement.title) {
+                            this.toggleAnnouncementModal();
                         }
                         else {
                             this.props.dispatch({
@@ -147,10 +156,16 @@ export class Splash extends React.Component {
         });
     }
 
-    shareApp() {
-        console.log('Shared')
+    toggleShareModal() {
+        this.setState({
+            showShareModal: !this.state.showShareModal,
+        });
+    }
 
-        this.closeShareModal();
+    shareApp() {
+        console.log('Shared'); // TODO
+
+        this.closeShareModal(); // TODO: On share success/cancel
     }
 
     closeShareModal() {
@@ -163,16 +178,20 @@ export class Splash extends React.Component {
             },
         });
 
-        this.setState({
-            showShareModal: false,
-        });
+        this.toggleShareModal();
 
-        // Might take a while for the hasSeenShareModal prop to come in so let's redirect manually
+        // Might take a while for the hasSeenShareModal prop to come in so let's redirect immediately
         this.props.dispatch({
             type: 'RESET_ERROR'
         });
 
         Actions.home();
+    }
+
+    toggleAnnouncementModal() {
+        this.setState({
+            showAnnouncementModal: !this.state.showAnnouncementModal,
+        });
     }
 
     render() {
@@ -195,6 +214,16 @@ export class Splash extends React.Component {
                 canClose
                 handlePress={this.shareApp}
                 handleClose={this.closeShareModal} />;
+
+        const announcementModal = showAnnouncementModal &&
+            <InfoModal
+                title={this.props.announcement.title}
+                subtitle={this.props.announcement.subtitle}
+                buttonText={this.props.announcement.buttonText}
+                buttonIconName={this.props.announcement.buttonIconName}
+                canClose={this.props.announcement.canClose}
+                handlePress={this.toggleAnnouncementModal}
+                handleClose={this.toggleAnnouncementModal} />;
 
         return (
             <Page
@@ -221,6 +250,8 @@ export class Splash extends React.Component {
 
                 {shareModal}
 
+                {announcementModal}
+
                 <SnackBar />
 
             </Page>
@@ -238,6 +269,7 @@ function mapStateToProps(state) {
         cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
 
         quotes: state.main.appData.quotes,
+        announcement: state.main.appData.announcement,
 
         dateJoined: state.main.userData.profile.dateJoined,
         hasSeenShareModal: state.main.userData.app && state.main.userData.app.hasSeenShareModal,

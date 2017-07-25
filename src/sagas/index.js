@@ -19,6 +19,7 @@ import { getUserLocation } from './geolocation';
 
 // Cloud Data
 import { loadUserData } from './cloudData';
+import { loadAppData } from './cloudData';
 import { saveUserData } from './cloudData';
 import { deleteUserData } from './cloudData';
 
@@ -48,6 +49,7 @@ export function* sagas() {
 
         // Cloud Data
         fork(takeLatest, 'loadUserData', loadUserData),
+        fork(takeLatest, 'loadAppData', loadAppData),
         fork(takeEvery, 'saveUserData', saveUserData),
         fork(takeEvery, 'deleteUserData', deleteUserData),
 

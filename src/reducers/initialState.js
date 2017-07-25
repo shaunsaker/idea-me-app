@@ -41,6 +41,9 @@ const initialState = {
         quotes,
         toolTips,
         priorities,
+
+        // From db
+        announcement: null,
     },
     userData: {
         profile: {

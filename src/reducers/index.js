@@ -124,6 +124,13 @@ export default function (state = initialState, action) {
             return new_state;
 
         /* APP DATA */
+        case 'UPDATE_APP_DATA':
+            new_state = utilities.cloneObject(state);
+            new_state.appData = {
+                ...new_state.appData,
+                ...action.appData,
+            };
+            return new_state;
 
         case 'SET_CURRENT_LOCATION':
             new_state = utilities.cloneObject(state);
