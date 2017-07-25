@@ -77,7 +77,8 @@ export function* saveUserData(action) {
             }
             else {
                 yield put({
-                    type: 'CLOUD_DATA_SUCCESS',
+                    type: 'SET_SUCCESS',
+                    errorType: 'CLOUD_DATA',
                     firstTimeUser: action.firstTimeUser,
                 });
             }
