@@ -27,6 +27,8 @@ export class Profile extends React.Component {
 
         this.toggleMenu = this.toggleMenu.bind(this);
         this.selectMenuItem = this.selectMenuItem.bind(this);
+        this.handleFeedback = this.handleFeedback.bind(this);
+        this.handleContact = this.handleContact.bind(this);
         this.signOutUser = this.signOutUser.bind(this);
         this.toggleActionModal = this.toggleActionModal.bind(this);
         this.deletePhoto = this.deletePhoto.bind(this); // If the user moved/deleted their image from their device, allow them to delete the ref to it
@@ -80,16 +82,24 @@ export class Profile extends React.Component {
             Actions.settings();
         }
         else if (type === 'Give us Feedback') {
-            Linking.openURL('www.google.com');
+            this.handleFeedback();
         }
         else if (type === 'Get in Touch') {
-            Linking.openURL('mailto:' + config.developer.email + '?subject=IdeaMe App');
+            this.handleContact();
         }
 
         // Logout
         else {
             this.toggleActionModal();
         }
+    }
+
+    handleFeedback() {
+        Linking.openURL('www.google.com');
+    }
+
+    handleContact() {
+        Linking.openURL('mailto:' + config.developer.email + '?subject=IdeaMe App');
     }
 
     toggleActionModal() {

@@ -1,5 +1,4 @@
 TODOS
-    Contact Linking should check if can email, otherwise copy email address to clipboard
     Log Known Bugs to Github
     Announcement Modal
         Test with props on fb
