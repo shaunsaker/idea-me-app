@@ -28,14 +28,12 @@ export class Splash extends React.Component {
         this.toggleShareModal = this.toggleShareModal.bind(this);
         this.shareApp = this.shareApp.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
-        this.toggleAnnouncementModal = this.toggleAnnouncementModal.bind(this);
 
         this.quote = utilities.getRandomItemFromDictionary(this.props.quotes);
 
         this.state = {
             showNetworkModal: false,
             showShareModal: false,
-            showAnnouncementModal: false,
             isFethingData: false,
         }
     }
@@ -50,7 +48,6 @@ export class Splash extends React.Component {
             cloudDataSuccess: PropTypes.bool,
 
             quotes: PropTypes.object,
-            announcement: PropTypes.object,
 
             dateJoined: PropTypes.number,
             hasSeenShareModal: PropTypes.bool,
@@ -113,7 +110,7 @@ export class Splash extends React.Component {
                     }
 
                     // If we have data, we have everything we need
-                    else if (this.props.authenticated && this.props.cloudDataSuccess) { // TODO: add this.props.dateJoined && this.props.announcement
+                    else if (this.props.authenticated && this.props.cloudDataSuccess && this.props.dateJoined) {
 
                         // If user has been using app for a week = approx 604800s
                         const currentDate = Date.now();
@@ -122,9 +119,6 @@ export class Splash extends React.Component {
                         if ((this.props.oneWeekUser || (showShareModal && !this.props.hasSeenShareModal)) && !this.state.showShareModal) {
                             this.toggleShareModal();
                         }
-                        // else if (this.props.announcement.title) {
-                        //     this.toggleAnnouncementModal();
-                        // }
                         else if (!this.state.showShareModal) {
                             this.props.dispatch({
                                 type: 'RESET_ERROR'
@@ -188,12 +182,6 @@ export class Splash extends React.Component {
         Actions.home();
     }
 
-    toggleAnnouncementModal() {
-        this.setState({
-            showAnnouncementModal: !this.state.showAnnouncementModal,
-        });
-    }
-
     render() {
         const networkModal = this.state.showNetworkModal &&
             <InfoModal
@@ -214,16 +202,6 @@ export class Splash extends React.Component {
                 canClose
                 handlePress={this.shareApp}
                 handleClose={this.closeShareModal} />;
-
-        const announcementModal = this.state.showAnnouncementModal &&
-            <InfoModal
-                title={this.props.announcement.title}
-                subtitle={this.props.announcement.subtitle}
-                buttonText={this.props.announcement.buttonText}
-                buttonIconName={this.props.announcement.buttonIconName}
-                canClose={this.props.announcement.canClose}
-                handlePress={this.toggleAnnouncementModal}
-                handleClose={this.toggleAnnouncementModal} />;
 
         return (
             <Page
@@ -250,8 +228,6 @@ export class Splash extends React.Component {
 
                 {shareModal}
 
-                {announcementModal}
-
                 <SnackBar />
 
             </Page>
@@ -269,10 +245,9 @@ function mapStateToProps(state) {
         cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
 
         quotes: state.main.appData.quotes,
-        announcement: state.main.appData.announcement,
 
         dateJoined: state.main.userData.profile.dateJoined,
-        oneWeekUser: config.testing.oneWeekUser, // testing
+        oneWeekUser: config.testing.oneWeekUser,
         hasSeenShareModal: state.main.userData.app && state.main.userData.app.hasSeenShareModal,
     };
 }

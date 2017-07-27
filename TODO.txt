@@ -1,8 +1,4 @@
 TODOS
-    Log Known Bugs to Github
-    Announcement Modal
-        Test with props on fb
-            Announcement should have value if empty, otherwise should have at least title
     Splash Share Modal
         Sharing functionality (need to be able to share link to play store/apple store)
     Forced app updates

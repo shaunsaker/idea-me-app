@@ -285,8 +285,6 @@ export class Home extends React.Component {
             <OptionsModal
                 title='Get Familiar'
                 subtitle="Hey! You've made it. Continue for some handy tooltips (or skip them altogether). Good luck!"
-                titleColor={styleConstants.primary}
-                subtitleColor={styleConstants.lightGrey}
                 options={['Get Started', 'No Thanks']}
                 handleSelect={this.handleFirstTimeUserSelect}
                 handleClose={this.toggleFirstTimeUserModal} />
@@ -343,7 +341,7 @@ export class Home extends React.Component {
 function mapStateToProps(state) {
     return ({
         uid: state.main.userAuth.uid,
-        firstTimeUser: config.testing.firstTimeUser || state.main.userAuth.firstTimeUser, // testing
+        firstTimeUser: config.testing.firstTimeUser || state.main.userAuth.firstTimeUser,
         hasNetwork: state.main.appState.hasNetwork,
         currentCategory: state.main.appData.currentCategory,
         ideas: state.main.userData.ideas,
