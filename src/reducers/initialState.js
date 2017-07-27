@@ -46,6 +46,14 @@ const initialState = {
         announcement: null,
     },
     userData: {
+        settings: {
+            shouldPlaySound: {
+                title: 'App Sounds',
+                iconName: 'bell',
+                enabled: true,
+                uid: 'shouldPlaySound',
+            },
+        },
         profile: {
             userName: null,
             userEmail: null,

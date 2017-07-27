@@ -1,8 +1,9 @@
 TODOS
-    NoteCard needs refactoring
-        Should only be a display component (render children)
-    App Settings
-        Disable sounds
+    FirstTimeUser screen needs to be more exiciting
+        Modal
+        Semi-transparent bg image of ideas
+    Profile edit popped twice
+    Note delete popped
     About App
         Name
         Version

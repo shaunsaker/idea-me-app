@@ -44,13 +44,15 @@ export class Welcome extends React.Component {
                 uid: this.props.uid,
 
                 // Add these for the ride in case we have a new user
-                node: 'profile',
                 userData: {
-                    userEmail: this.props.userEmail,
-                    userName: this.props.userName,
-                    userPhotoUrl: this.props.userPhotoUrl,
-                    dateJoined: Date.now(),
-                },
+                    settings: this.props.userSettings,
+                    profile: {
+                        userEmail: this.props.userEmail,
+                        userName: this.props.userName,
+                        userPhotoUrl: this.props.userPhotoUrl,
+                        dateJoined: Date.now(),
+                    },
+                }
             });
         }
 
@@ -122,6 +124,7 @@ function mapStateToProps(state) {
         userEmail: state.main.userData.profile.userEmail,
         userName: state.main.userData.profile.userName,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+        userSettings: state.main.userData.settings,
     });
 }
 

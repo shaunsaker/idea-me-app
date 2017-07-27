@@ -40,6 +40,7 @@ export default class CloudData {
         const nodeRef = action.node || '';
 
         console.log('Dispatching save at users/' + action.uid + '/' + nodeRef);
+        console.log(action.userData);
 
         return new Promise(resolve => {
             firestack.database.ref('users/' + action.uid + '/' + nodeRef).update({

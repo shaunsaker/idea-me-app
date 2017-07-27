@@ -290,6 +290,11 @@ export class Home extends React.Component {
                 handleLeftIconPress={this.deleteIdea}
                 handleRightIconPress={this.toggleDeleteModal} />
 
+        const soundPlayer = this.props.shouldPlaySounds &&
+            <SoundPlayer
+                fileName='ding.mp3'
+                playSound={this.state.ideaAdded} />
+
         return (
             <Page
                 backgroundColor={styleConstants.white}
@@ -309,9 +314,7 @@ export class Home extends React.Component {
                     tabs={this.tabs}
                     highlightProfileTab={this.state.highlightProfileTab} />
 
-                <SoundPlayer
-                    fileName='ding.mp3'
-                    playSound={this.state.ideaAdded} />
+                {soundPlayer}
 
                 {deleteModal}
 
@@ -326,12 +329,13 @@ export class Home extends React.Component {
 
 function mapStateToProps(state) {
     return ({
+        uid: state.main.userAuth.uid,
+        firstTimeUser: state.main.userAuth.firstTimeUser,
+        hasNetwork: state.main.appState.hasNetwork,
+        currentCategory: state.main.appData.currentCategory,
         ideas: state.main.userData.ideas,
         categories: state.main.userData.categories,
-        currentCategory: state.main.appData.currentCategory,
-        uid: state.main.userAuth.uid,
-        hasNetwork: state.main.appState.hasNetwork,
-        firstTimeUser: state.main.userAuth.firstTimeUser,
+        shouldPlaySounds: state.main.userData.settings.shouldPlaySounds,
     });
 }
 

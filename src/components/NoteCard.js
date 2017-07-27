@@ -61,7 +61,7 @@ export default NoteCard = (props) => {
     /*
         PROPTYPES
             idea
-            notes/photos/voiceNotes/categories/settings
+            notes/photos/voiceNotes/categories
             handleAdd
             handleDelete
             hideTitle
@@ -69,9 +69,6 @@ export default NoteCard = (props) => {
             NOTES/CATEGORIES
                 inputValue
                 handleChangeText
-
-            SETTINGS
-                handleSelectSetting
 
             PHOTOS
                 handleViewPhotos   
@@ -82,14 +79,12 @@ export default NoteCard = (props) => {
 
     let notesValues;
     let title;
-    let iconName;
     let notes;
     let button;
 
     if (props.type === 'notes') {
         notesValues = props.notes;
         title = 'NOTES';
-        iconName = 'note';
         notes =
             <BulletList
                 values={notesValues}
@@ -103,8 +98,6 @@ export default NoteCard = (props) => {
     }
     else if (props.type === 'categories') {
         notesValues = props.categories;
-        title = 'CATEGORIES';
-        iconName = 'folder';
         notes =
             <BulletList
                 values={notesValues}
@@ -119,7 +112,6 @@ export default NoteCard = (props) => {
     else if (props.type === 'photos') {
         notesValues = props.photos;
         title = 'PHOTOS';
-        iconName = 'camera';
         notes =
             <PhotoList
                 photos={notesValues}
@@ -128,7 +120,7 @@ export default NoteCard = (props) => {
         button =
             <IconButton
                 handlePress={props.handleAdd}
-                iconName={iconName}
+                iconName='camera'
                 iconColor={styleConstants.white}
                 disabled={props.disabled} />
     }
@@ -146,7 +138,7 @@ export default NoteCard = (props) => {
 
     const notesCount = notesValues ? notesValues.length : 0;
 
-    const titleColorStyles = notesCount === 0 &&
+    const titleColorStyles = title && notesCount === 0 &&
         {
             color: styleConstants.lightGrey,
         };
@@ -166,6 +158,11 @@ export default NoteCard = (props) => {
             </Text>
         </View>;
 
+    const buttonComponent = button &&
+        <View style={styles.buttonContainer}>
+            {button}
+        </View>;
+
     return (
         <View
             style={styles.cardContainer} >
@@ -182,9 +179,8 @@ export default NoteCard = (props) => {
                 </View>
             </View>
 
-            <View style={styles.buttonContainer}>
-                {button}
-            </View>
+            {buttonComponent}
+
         </View>
     )
 }

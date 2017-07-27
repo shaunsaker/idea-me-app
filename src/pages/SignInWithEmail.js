@@ -43,10 +43,12 @@ export class SignInWithEmail extends React.Component {
                 uid: this.props.uid,
 
                 // Add these for the ride in case we have a new user
-                node: 'profile',
                 userData: {
-                    userEmail: this.props.userEmail,
-                    dateJoined: Date.now(),
+                    settings: this.props.userSettings,
+                    profile: {
+                        userEmail: this.props.userEmail,
+                        dateJoined: Date.now(),
+                    },
                 }
             });
         }
@@ -151,6 +153,8 @@ function mapStateToProps(state) {
         uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
         userPassword: state.main.userAuth.userPassword,
+
+        userSettings: state.main.userData.settings,
     });
 }
 

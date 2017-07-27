@@ -112,7 +112,7 @@ export class Splash extends React.Component {
                     }
 
                     // If we have data, we have everything we need
-                    else if (this.props.authenticated && this.props.cloudDataSuccess && this.props.dateJoined) { // TODO: add this.props.announcement
+                    else if (this.props.authenticated && this.props.cloudDataSuccess) { // TODO: add this.props.dateJoined && this.props.announcement
 
                         // If user has been using app for a week = approx 604800s
                         const currentDate = Date.now();
