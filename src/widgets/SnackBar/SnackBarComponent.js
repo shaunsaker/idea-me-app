@@ -105,7 +105,7 @@ export default class SnackBarComponent extends React.Component {
                     style={[styles.retryButtonText, styleConstants.primaryFont]}>
                     RETRY
                 </Text>
-            </Touchable>;
+            </Touchable>
 
         return (
             <AnimateTranslateY

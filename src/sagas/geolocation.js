@@ -21,7 +21,10 @@ export function* getUserLocation(action) {
             yield put({
                 type: 'SET_ERROR',
                 errorType: 'GEOLOCATION',
-                currentLocation: 'Geolocation Services not Available',
+                message: 'Geolocation services not available.',
+                retryAction: {
+                    type: 'getUserLocation',
+                },
             });
         }
     }
@@ -29,7 +32,10 @@ export function* getUserLocation(action) {
         yield put({
             type: 'SET_ERROR',
             errorType: 'GEOLOCATION',
-            currentLocation: 'Geolocation Services not Available',
+            message: 'Geolocation services not available.',
+            retryAction: {
+                type: 'getUserLocation',
+            },
         });
     }
 }

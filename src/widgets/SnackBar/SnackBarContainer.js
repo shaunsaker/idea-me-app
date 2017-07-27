@@ -32,13 +32,8 @@ export class SnackBar extends React.Component {
     }
 
     resetError() {
-
-        // Reset the error depending on the type of error and success/error
-        const actionType = this.props.error.success ? 'SUCCESS' : 'ERROR';
-        const action = 'RESET_' + this.props.error.type + '_' + actionType;
-
         this.props.dispatch({
-            type: action
+            type: 'RESET_ERROR',
         });
     }
 
@@ -61,12 +56,12 @@ export class SnackBar extends React.Component {
 
         // If we have an error/success
         // Not cloud data success
-        const snackBar = this.props.error.type && (this.props.error.type !== 'CLOUD_DATA' && this.props.error.success) &&
+        const snackBar = this.props.error.type && !(this.props.error.type === 'CLOUD_DATA' && this.props.error.success) &&
             <SnackBarComponent
                 text={this.props.error.message}
                 success={this.props.error.success}
                 handleReset={this.resetError}
-                handleRetryAction={this.props.retryAction.type && this.retryAction} />;
+                handleRetryAction={this.props.retryAction.type && this.retryAction} />
 
         return (
             <View style={styles.container}>

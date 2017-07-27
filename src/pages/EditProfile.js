@@ -76,6 +76,7 @@ export class EditProfile extends React.Component {
             userPhotoUrl: PropTypes.object,
             currentLocation: PropTypes.string,
             temporaryImage: PropTypes.object,
+            geolocationError: PropTypes.bool,
         };
     }
 
@@ -91,6 +92,11 @@ export class EditProfile extends React.Component {
 
             this.setState({
                 hasFetchedLocation: true,
+                isFetchingLocation: false,
+            });
+        }
+        else if (this.props.geolocationError && this.props.geolocationError !== prevProps.geolocationError) {
+            this.setState({
                 isFetchingLocation: false,
             });
         }
@@ -197,7 +203,7 @@ export class EditProfile extends React.Component {
     }
 
     render() {
-        const enableContinueButton = this.state.editUserEmail && this.state.editUserName && this.state.editUserLocation ? true : false;
+        const enableContinueButton = this.state.editUserEmail && this.state.editUserName ? true : false; // location not always important
         const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage.cropped : this.props.userPhotoUrl && this.props.userPhotoUrl.cropped;
 
         const currentLocationComponent = this.state.isFetchingLocation ?
@@ -291,6 +297,7 @@ function mapStateToProps(state) {
         currentLocation: state.main.appData.currentLocation,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
         temporaryImage: state.main.appData.temporaryImage,
+        geolocationError: state.main.appState.error.type === 'GEOLOCATION',
     });
 }
 

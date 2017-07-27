@@ -48,7 +48,7 @@ const initialState = {
     userData: {
         settings: {
             shouldPlaySound: {
-                title: 'App Sounds',
+                title: 'Sounds',
                 iconName: 'music_note',
                 enabled: true,
                 uid: 'shouldPlaySound',

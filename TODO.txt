@@ -1,9 +1,12 @@
 TODOS
+    Geo services should give you an error and not set 'Geolocation Services not Available'
+    Home/Profile pages are popping pages on top, listening for same flag
+        Profile edit popped twice
+        Note delete popped
+    Need more settings to make the page feasible (at least 2)
     FirstTimeUser screen needs to be more exiciting
         Modal
         Semi-transparent bg image of ideas
-    Profile edit popped twice
-    Note delete popped
     About App
         Name
         Version
@@ -29,6 +32,7 @@ TODOS
         Use page component
             On enable, can test screen dimensions from Tablet
                 Width and height variations based on common devices (smallest and largest)
+                Height is important
 
 WRAP UP  
     Test all errors
@@ -43,10 +47,10 @@ WRAP UP
         React native keyboard spacer?
         Sounds
     Optimise code
-        Use FlatList/VirtualizedList for all lists
+        Use FlatList/VirtualizedList for all lists > screen width/height
             shouldComponentUpdate will help render when it should
-        Don't need ? : null, just use &&
-        Remove unnecessary
+        Don't need ? : null, just use && (watch out for raw text bug)
+        Remove unnecessary imports/code
         Check proptypes
         Lifecycle methods at top with other methods following order of this bindings
         All imports used

@@ -79,6 +79,7 @@ export class Settings extends React.Component {
 
                 <Header
                     text='Settings'
+                    headerShadow
                     backButton />
 
                 <View style={styles.settingsContainer}>

@@ -109,11 +109,6 @@ export default function (state = initialState, action) {
                 }
             }
 
-            // Geolocation attaches this 
-            if (action.currentLocation) {
-                new_state.appData.currentLocation = action.currentLocation;
-            }
-
             return new_state;
 
         case 'RESET_ERROR':
