@@ -22,6 +22,7 @@ import IdeaCard from '../components/IdeaCard';
 import TabBar from '../components/TabBar';
 import SoundPlayer from '../components/SoundPlayer';
 import ActionModal from '../modals/ActionModal';
+import OptionsModal from '../modals/OptionsModal';
 import SnackBar from '../widgets/SnackBar';
 import ToolTip from '../widgets/ToolTip';
 
@@ -37,6 +38,8 @@ export class Home extends React.Component {
         this.deleteIdea = this.deleteIdea.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
         this.handleNotePress = this.handleNotePress.bind(this);
+        this.toggleFirstTimeUserModal = this.toggleFirstTimeUserModal.bind(this);
+        this.handleFirstTimeUserSelect = this.handleFirstTimeUserSelect.bind(this);
         this.showToolTips = this.showToolTips.bind(this);
         this.cancelOnboarding = this.cancelOnboarding.bind(this);
 
@@ -57,6 +60,7 @@ export class Home extends React.Component {
         ];
 
         this.state = {
+            showFirstTimeUserModal: false,
             showDeleteModal: false,
             deleteIdeaModalTitle: null,
             deleteIdeaUID: null,
@@ -78,6 +82,8 @@ export class Home extends React.Component {
 
     componentDidMount() {
         if (this.props.firstTimeUser) {
+            this.toggleFirstTimeUserModal();
+
             this.setState({
                 highlightProfileTab: true,
             });
@@ -199,6 +205,23 @@ export class Home extends React.Component {
         }
     }
 
+    toggleFirstTimeUserModal() {
+        this.setState({
+            showFirstTimeUserModal: !this.state.showFirstTimeUserModal,
+        });
+    }
+
+    handleFirstTimeUserSelect(option) {
+        if (option === 'Get Started') {
+            this.showToolTips();
+        }
+        else {
+            this.cancelOnboarding();
+        }
+
+        this.toggleFirstTimeUserModal();
+    }
+
     showToolTips() {
         this.props.dispatch({
             type: 'SHOW_TOOL_TIPS',
@@ -224,28 +247,8 @@ export class Home extends React.Component {
         let currentCount = 0;
         const totalCount = utilities.getLengthOfObject(this.props.ideas);
 
-        // First time user / empty state
-        let ideas = this.props.firstTimeUser ?
-            <View style={{ flex: 1, justifyContent: 'center', marginVertical: 16 }}>
-                <InfoBlock
-                    title='Get Familiar'
-                    subtitle="Hey! You've made it. You're a few steps away from success. Hit the 'Get Started' button for some handy tooltips (or skip them altogether). If all else fails, give us a shout from the menu found on your Profile page. Good luck! "
-                    titleColor={styleConstants.primary}
-                    subtitleColor={styleConstants.grey}
-                    fullWidth />
-                <Button
-                    text='Get Started'
-                    iconName='check'
-                    backgroundColor={styleConstants.white}
-                    handlePress={this.showToolTips} />
-                <Button
-                    text='No Thanks'
-                    iconName='close'
-                    backgroundColor={styleConstants.white}
-                    handlePress={this.cancelOnboarding} />
-            </View>
-            :
-            <View style={{ flex: 1 }} />;
+        // Empty state
+        let ideas = <View style={{ flex: 1 }} />;
 
         let currentCategoryIdeas;
 
@@ -273,16 +276,20 @@ export class Home extends React.Component {
 
         const categories = utilities.convertDictionaryToArray(this.props.categories);
 
-        const dropdownButtonComponent = !this.props.firstTimeUser &&
-            <DropdownButton
-                buttonBackgroundColor={styleConstants.primary}
-                categoriesButton
-                values={categories}
-                currentCategory={this.props.currentCategory}
-                handleSelect={this.selectCategory}
-                headerValue={this.props.currentCategory !== 'All Categories' ? 'All Categories' : ''}
-                currentCount={currentCount}
-                totalCount={totalCount} />
+        const soundPlayer = this.props.shouldPlaySounds &&
+            <SoundPlayer
+                fileName='ding.mp3'
+                playSound={this.state.ideaAdded} />
+
+        const firstTimeUserModal = this.state.showFirstTimeUserModal &&
+            <OptionsModal
+                title='Get Familiar'
+                subtitle="Hey! You've made it. Continue for some handy tooltips (or skip them altogether). Good luck!"
+                titleColor={styleConstants.primary}
+                subtitleColor={styleConstants.lightGrey}
+                options={['Get Started', 'No Thanks']}
+                handleSelect={this.handleFirstTimeUserSelect}
+                handleClose={this.toggleFirstTimeUserModal} />
 
         const deleteModal = this.state.showDeleteModal &&
             <ActionModal
@@ -290,11 +297,6 @@ export class Home extends React.Component {
                 subtitle={this.state.deleteIdeaModalTitle}
                 handleLeftIconPress={this.deleteIdea}
                 handleRightIconPress={this.toggleDeleteModal} />
-
-        const soundPlayer = this.props.shouldPlaySounds &&
-            <SoundPlayer
-                fileName='ding.mp3'
-                playSound={this.state.ideaAdded} />
 
         return (
             <Page
@@ -307,7 +309,15 @@ export class Home extends React.Component {
                     addButton
                     handleRightIconPress={() => Actions.addIdea()} />
 
-                {dropdownButtonComponent}
+                <DropdownButton
+                    buttonBackgroundColor={styleConstants.primary}
+                    categoriesButton
+                    values={categories}
+                    currentCategory={this.props.currentCategory}
+                    handleSelect={this.selectCategory}
+                    headerValue={this.props.currentCategory !== 'All Categories' ? 'All Categories' : ''}
+                    currentCount={currentCount}
+                    totalCount={totalCount} />
 
                 {ideas}
 
@@ -316,6 +326,8 @@ export class Home extends React.Component {
                     highlightProfileTab={this.state.highlightProfileTab} />
 
                 {soundPlayer}
+
+                {firstTimeUserModal}
 
                 {deleteModal}
 

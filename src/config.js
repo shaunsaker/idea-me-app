@@ -11,7 +11,7 @@ config.developer = {
 };
 
 config.testing = {
-    firstTimeUser: true,
+    firstTimeUser: false,
     oneWeekUser: false,
 }
 
