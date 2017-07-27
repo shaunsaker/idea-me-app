@@ -74,8 +74,7 @@ export class Profile extends React.Component {
         this.toggleMenu();
 
         if (type === 'About App') {
-
-            // TODO
+            Actions.about();
         }
         else if (type === 'Settings') {
             Actions.settings();

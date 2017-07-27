@@ -20,6 +20,7 @@ import Categories from './pages/Categories';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
 import Settings from './pages/Settings';
+import About from './pages/About';
 
 const Scenes = Actions.create(
     <Scene
@@ -87,6 +88,10 @@ const Scenes = Actions.create(
         <Scene
             key='settings'
             component={Settings}
+            initial={false} />
+        <Scene
+            key='about'
+            component={About}
             initial={false} />
     </Scene>
 )

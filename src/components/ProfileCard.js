@@ -40,6 +40,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: styleConstants.lightGrey,
     },
+    profileImageIcon: {
+        fontSize: styleConstants.largeFont,
+        color: styleConstants.secondary,
+    },
     editImageContainer: {
         width: 75,
         height: 75,
@@ -76,25 +80,34 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileCard = (props) => {
-    const profilePhoto = props.userPhotoUrl ?
-        <Photo
-            uri={props.userPhotoUrl}
-            isThumbnail
-            photoContainerStyles={styles.profileImageContainer}
-            photoStyles={styles.profileImage}
-            errorText='Photo not found'
-            deleteOnErrorOnly
-            handleDeletePhoto={props.handleDeletePhoto} />
-        :
+    const profilePhoto = props.showIcon ?
         <View style={styles.profileImageContainer}>
-            <Touchable
-                onPress={props.handleEditImagePress}
-                style={styles.editImageContainer} >
+            <View style={styles.profileImage}>
                 <Icon
-                    name='camera'
-                    style={styles.editImageIcon} />
-            </Touchable>
-        </View>;
+                    name='lightbulb'
+                    style={styles.profileImageIcon} />
+            </View>
+        </View>
+        :
+        props.userPhotoUrl ?
+            <Photo
+                uri={props.userPhotoUrl}
+                isThumbnail
+                photoContainerStyles={styles.profileImageContainer}
+                photoStyles={styles.profileImage}
+                errorText='Photo not found'
+                deleteOnErrorOnly
+                handleDeletePhoto={props.handleDeletePhoto} />
+            :
+            <View style={styles.profileImageContainer}>
+                <Touchable
+                    onPress={props.handleEditImagePress}
+                    style={styles.editImageContainer} >
+                    <Icon
+                        name='camera'
+                        style={styles.editImageIcon} />
+                </Touchable>
+            </View>;
 
     const ideasLabelText = props.numberOfIdeas + ' excellent idea' + (props.numberOfIdeas > 1 ? 's' : '');
 

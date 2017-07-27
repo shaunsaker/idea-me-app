@@ -1,23 +1,14 @@
 TODOS
-    Geo services should give you an error and not set 'Geolocation Services not Available'
-    Home/Profile pages are popping pages on top, listening for same flag
-        Profile edit popped twice
-        Note delete popped
-    Need more settings to make the page feasible (at least 2)
     FirstTimeUser screen needs to be more exiciting
         Modal
         Semi-transparent bg image of ideas
-    About App
-        Name
-        Version
-        Developer
+    Contact Linking should check if can email, otherwise copy email address to clipboard
     Log Known Bugs to Github
     Announcement Modal
         Test with props on fb
             Announcement should have value if empty, otherwise should have at least title
     Splash Share Modal
         Sharing functionality (need to be able to share link to play store/apple store)
-    Contact Linking should check if can email, otherwise copy email address to clipboard
     Forced app updates
         InfoModal on Splash screen
     Facebook/Google Sign In  

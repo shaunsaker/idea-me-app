@@ -3,6 +3,7 @@ import { Easing } from 'react-native';
 const config = {};
 
 config.appName = 'IdeaMe';
+config.appVersion = '0.0.1';
 
 config.developer = {
     name: 'Shaun Saker',
@@ -39,11 +40,11 @@ config.images = {
         contentType: 'image/jpeg',
         contentEncoding: 'base64',
     },
-}; 
+};
 
 config.voiceNotes = {
     format: 'mp4',
-} 
+}
 
 config.googleSignIn = {
     webClientId: '',
