@@ -13,7 +13,6 @@ TODOS
         Test with props on fb
             Announcement should have value if empty, otherwise should have at least title
     Splash Share Modal
-        Share icon
         Sharing functionality (need to be able to share link to play store/apple store)
     Contact Linking should check if can email, otherwise copy email address to clipboard
     Forced app updates

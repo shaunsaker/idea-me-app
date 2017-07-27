@@ -49,7 +49,7 @@ const initialState = {
         settings: {
             shouldPlaySound: {
                 title: 'App Sounds',
-                iconName: 'bell',
+                iconName: 'music_note',
                 enabled: true,
                 uid: 'shouldPlaySound',
             },
