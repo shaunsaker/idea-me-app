@@ -8,6 +8,7 @@ import {
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 
+import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
 
@@ -330,7 +331,7 @@ export class Home extends React.Component {
 function mapStateToProps(state) {
     return ({
         uid: state.main.userAuth.uid,
-        firstTimeUser: state.main.userAuth.firstTimeUser,
+        firstTimeUser: config.testing.firstTimeUser || state.main.userAuth.firstTimeUser, // testing
         hasNetwork: state.main.appState.hasNetwork,
         currentCategory: state.main.appData.currentCategory,
         ideas: state.main.userData.ideas,

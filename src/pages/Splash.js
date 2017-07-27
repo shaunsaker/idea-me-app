@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
 import Icon from '../assets/icons/index';
 
+import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
 
@@ -118,13 +119,13 @@ export class Splash extends React.Component {
                         const currentDate = Date.now();
                         const showShareModal = (currentDate - this.props.dateJoined >= 604800 * 1000);
 
-                        if (showShareModal && !this.props.hasSeenShareModal) {
+                        if ((this.props.oneWeekUser || (showShareModal && !this.props.hasSeenShareModal)) && !this.state.showShareModal) {
                             this.toggleShareModal();
                         }
                         // else if (this.props.announcement.title) {
                         //     this.toggleAnnouncementModal();
                         // }
-                        else {
+                        else if (!this.state.showShareModal) {
                             this.props.dispatch({
                                 type: 'RESET_ERROR'
                             });
@@ -271,6 +272,7 @@ function mapStateToProps(state) {
         announcement: state.main.appData.announcement,
 
         dateJoined: state.main.userData.profile.dateJoined,
+        oneWeekUser: config.testing.oneWeekUser, // testing
         hasSeenShareModal: state.main.userData.app && state.main.userData.app.hasSeenShareModal,
     };
 }

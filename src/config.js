@@ -10,6 +10,11 @@ config.developer = {
     email: 'info@shaunsaker.com',
 };
 
+config.testing = {
+    firstTimeUser: true,
+    oneWeekUser: false,
+}
+
 config.animation = {
     duration: {
         short: 250,

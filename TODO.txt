@@ -1,4 +1,7 @@
 TODOS
+    Dev options
+        Check config for firstTimeUser prop
+        Check config for one week prop
     FirstTimeUser screen needs to be more exiciting
         Modal
         Semi-transparent bg image of ideas
