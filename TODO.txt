@@ -1,6 +1,4 @@
 TODOS
-    Splash Share Modal
-        Sharing functionality (need to be able to share link to play store/apple store)
     Forced app updates
         InfoModal on Splash screen
     Facebook/Google Sign In  

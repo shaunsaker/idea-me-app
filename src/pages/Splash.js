@@ -4,6 +4,8 @@ import {
     StatusBar,
     View,
     NetInfo,
+    Share,
+    Platform,
 } from "react-native";
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
@@ -157,9 +159,23 @@ export class Splash extends React.Component {
     }
 
     shareApp() {
-        console.log('Shared'); // TODO
+        const shareMessage = Platform.OS === 'android' ?
+            config.appShareMessage + config.appUrl
+            :
+            config.appShareMessage; // ios only
 
-        this.closeShareModal(); // TODO: On share success/cancel
+        Share.share({
+            message: shareMessage,
+            url: config.appUrl, // ios only
+            title: 'IdeaMe'
+        }, {
+                // Android only:
+                dialogTitle: 'Share IdeaMe',
+            })
+            .then(() => {
+                this.closeShareModal();
+            })
+            .catch((error) => console.log('Share error:', error.message)); // TODO: Snackbar
     }
 
     closeShareModal() {

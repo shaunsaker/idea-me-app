@@ -4,6 +4,8 @@ const config = {};
 
 config.appName = 'IdeaMe';
 config.appVersion = '0.0.1';
+config.appUrl = 'http://shaunsaker.com/showcase/IdeaMe';
+config.appShareMessage = 'Hey! Check this out... ';
 
 config.developer = {
     name: 'Shaun Saker',
