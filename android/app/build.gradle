@@ -133,12 +133,12 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fbsdk')
     compile project(':react-native-audio-toolkit')
     compile project(':react-native-fs')
     compile project(':react-native-image-resizer')
     compile project(':react-native-image-picker')
     compile project(':react-native-geocoder')
-    compile project(':react-native-fbsdk')
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile project(':react-native-vector-icons')
     compile(project(':react-native-firestack')){ exclude group: 'com.google.android.gms' }

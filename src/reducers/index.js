@@ -26,6 +26,10 @@ export default function (state = initialState, action) {
             new_state.userAuth.uid = action.uid;
             new_state.userAuth.redirectToWelcomePage = false;
 
+            if (action.userEmail) new_state.userData.profile.userEmail = action.userEmail;
+            if (action.userName) new_state.userData.profile.userName = action.userName;
+            if (action.userPhotoUrl) new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
+
             if (action.anonymous) {
                 new_state.userAuth.anonymous = true;
                 new_state.userAuth.firstTimeUser = true;

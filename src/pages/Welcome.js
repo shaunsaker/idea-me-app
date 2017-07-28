@@ -40,7 +40,7 @@ export class Welcome extends React.Component {
         // If we're authenticated, we have not yet loaded data, load/save data to db
         if (this.props.authenticated && !this.props.cloudDataSuccess) {
             this.props.dispatch({
-                type: 'loadUser',
+                type: 'loadUserData',
                 uid: this.props.uid,
 
                 // Add these for the ride in case we have a new user
@@ -55,6 +55,7 @@ export class Welcome extends React.Component {
                 }
             });
         }
+
 
         // If we have data, we have everything we need
         else if (this.props.cloudDataSuccess) {

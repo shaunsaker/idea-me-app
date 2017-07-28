@@ -1,10 +1,7 @@
 TODOS
-    Forced app updates
-        InfoModal on Splash screen
-    Facebook/Google Sign In  
+    Facebook Sign In  
+    Google Sign In
     RN Permissions  
-    User survey
-        Add link to Profile page
     Apply material styles
         See material.io
         Tooltips need more impact
@@ -45,6 +42,9 @@ WRAP UP
     App renaming
     App Icons 
     Password reset email templates on FB console
+    Landing page to download app on shaunsaker.com
+    User survey
+        Add link to Profile page
 
 V2
     Add Sketches to Ideas
