@@ -123,7 +123,7 @@ export class Home extends React.Component {
     }
 
     scrollToBeginning() {
-        this.refs.ideasList.scrollToOffset({ x: 0, y: 0, animated: false });
+        this.props.ideas && this.refs.ideasList.scrollToOffset({ x: 0, y: 0, animated: false });
     }
 
     handleMenuItemSelect(type, idea) {
