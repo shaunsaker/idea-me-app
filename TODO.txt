@@ -1,5 +1,4 @@
 TODOS
-    Facebook Sign In  
     Google Sign In
     RN Permissions  
     Apply material styles
@@ -40,7 +39,9 @@ WRAP UP
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
         Use shouldComponentUpdate where necessary 
     App renaming
+        Check facebook login
     App Icons 
+    App Screenshots
     Password reset email templates on FB console
     Landing page to download app on shaunsaker.com
     User survey

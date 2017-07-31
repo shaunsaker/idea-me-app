@@ -21,6 +21,8 @@ import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.rnfs.RNFSPackage;
 import com.futurice.rctaudiotoolkit.AudioPackage;
 
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,7 +51,8 @@ public class MainApplication extends Application implements ReactApplication {
           new ImagePickerPackage(),
           new ImageResizerPackage(),
           new RNFSPackage(),
-          new AudioPackage()
+          new AudioPackage(),
+          new RNGoogleSigninPackage() 
       );
     }
   };

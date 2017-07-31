@@ -1,6 +1,6 @@
 import firestack from '../firestack';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
-// import { GoogleSignin } from 'react-native-google-signin'; // TODO: Add this when ready
+import { GoogleSignin } from 'react-native-google-signin';
 
 import config from '../config';
 
@@ -114,49 +114,50 @@ export default class UserAuth {
         });
     }
 
-    // static signInUserWithGoogle(action) {
-    //     return new Promise(resolve => {
+    static signInUserWithGoogle(action) {
+        return new Promise(resolve => {
 
-    //         GoogleSignin.hasPlayServices({ autoResolve: true })
-    //             .then(() => {
-    //                 GoogleSignin.configure({
-    //                      ...config.googleSignIn,
-    //                 })
-    //                     .then(() => {
-    //                         GoogleSignin.signIn()
-    //                             .then((user) => {
-    //                                 firestack.auth.signInWithProvider('google', user.idToken, '')
-    //                                     .then((user) => {
-    //                                         response.authenticated = true;
-    //                                         response.message = user;
-    //                                         resolve(response);
-    //                                     })
-    //                                     .catch(error => {
-    //                                         response.authenticated = false;
-    //                                         response.message = error;
-    //                                         resolve(response);
-    //                                     });
-    //                             })
-    //                             .catch((error) => {
-    //                                 response.authenticated = false;
-    //                                 response.message = error; // TODO: check this
-    //                                 resolve(response);
-    //                             })
-    //                             .done();
-    //                     })
-    //                     .catch((error) => {
-    //                         response.authenticated = false;
-    //                         response.message = error; // TODO: check this
-    //                         resolve(response);
-    //                     });
-    //             })
-    //             .catch((error) => {
-    //                 response.authenticated = false;
-    //                 response.message = error; // TODO: check this
-    //                 resolve(response);
-    //             });
-    //     });
-    // }
+            GoogleSignin.hasPlayServices({ autoResolve: true })
+                .then(() => {
+                    GoogleSignin.configure({
+                        ...config.googleSignIn,
+                    })
+                        .then(() => {
+                            GoogleSignin.signIn()
+                                .then((user) => {
+                                    console.log(user)
+                                    firestack.auth.signInWithProvider('google', user.accessToken, '')
+                                        .then((user) => {
+                                            response.authenticated = true;
+                                            response.message = user;
+                                            resolve(response);
+                                        })
+                                        .catch(error => {
+                                            response.authenticated = false;
+                                            response.message = error;
+                                            resolve(response);
+                                        });
+                                })
+                                .catch((error) => {
+                                    response.authenticated = false;
+                                    response.message = error; // TODO: check this
+                                    resolve(response);
+                                })
+                                .done();
+                        })
+                        .catch((error) => {
+                            response.authenticated = false;
+                            response.message = error; // TODO: check this
+                            resolve(response);
+                        });
+                })
+                .catch((error) => {
+                    response.authenticated = false;
+                    response.message = error; // TODO: check this
+                    resolve(response);
+                });
+        });
+    }
 
     static signInUserAnonymously() {
         return new Promise(resolve => {

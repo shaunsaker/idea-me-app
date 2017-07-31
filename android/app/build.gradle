@@ -133,6 +133,9 @@ android {
 }
 
 dependencies {
+  compile(project(":react-native-google-signin")){         
+        exclude group: "com.google.android.gms" // very important
+    }
     compile project(':react-native-fbsdk')
     compile project(':react-native-audio-toolkit')
     compile project(':react-native-fs')
@@ -143,6 +146,7 @@ dependencies {
     compile project(':react-native-vector-icons')
     compile(project(':react-native-firestack')){ exclude group: 'com.google.android.gms' }
     compile fileTree(dir: "libs", include: ["*.jar"])
+    compile 'com.google.android.gms:play-services-auth:10.0.1'
     compile ("com.google.android.gms:play-services-base:10.0.1") {
         force = true;
     }
@@ -169,5 +173,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services' // <--- this should be the last line
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

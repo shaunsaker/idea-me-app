@@ -64,7 +64,7 @@ export function* signInUserWithEmail(action) {
 
             yield put({
                 type: 'SIGN_IN_USER',
-                uid: uid,
+                uid,
                 anonymous: false,
             });
         }
@@ -121,7 +121,7 @@ export function* signInUserWithFacebook() {
         const uid = signInFacebookResponse.message.user.uid;
         yield put({
             type: 'SIGN_IN_USER',
-            uid: uid,
+            uid,
             userEmail: signInFacebookResponse.message.user.email,
             userName: signInFacebookResponse.message.user.displayName,
             userPhotoUrl: {
@@ -134,7 +134,7 @@ export function* signInUserWithFacebook() {
         yield put({
             type: 'SET_ERROR',
             errorType: 'AUTH',
-            message: 'We were unable to connect to Facebook.',
+            message: 'We were unable to connect with Facebook.',
             retryAction: {
                 type: 'signInUserWithFacebook',
             }
@@ -148,11 +148,11 @@ export function* signInUserWithGoogle() {
     console.log('signInGoogleResponse', signInGoogleResponse);
 
     if (signInGoogleResponse.authenticated) {
-        const uid = signInGoogleResponse.message.user.uid;
+        const uid = signInGoogleResponse.message.user.id;
 
         yield put({
             type: 'SIGN_IN_USER',
-            uid: uid,
+            uid,
             userEmail: '', // TODO: Get these from the response
             userName: '',
             userPhotoUrl: {
@@ -165,7 +165,7 @@ export function* signInUserWithGoogle() {
         yield put({
             type: 'SET_ERROR',
             errorType: 'AUTH',
-            message: signInGoogleResponse.message,
+            message: 'We were unable to connect with Google.',
             retryAction: {
                 type: 'signInUserWithGoogle',
             }

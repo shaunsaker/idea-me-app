@@ -40,7 +40,7 @@ export function* sagas() {
         fork(takeLatest, 'signInUserWithEmail', signInUserWithEmail),
         fork(takeLatest, 'sendPasswordResetEmail', sendPasswordResetEmail),
         fork(takeLatest, 'signInUserWithFacebook', signInUserWithFacebook),
-        // fork(takeLatest, 'signInUserWithGoogle', signInUserWithGoogle),
+        fork(takeLatest, 'signInUserWithGoogle', signInUserWithGoogle),
         fork(takeLatest, 'signInUserAnonymously', signInUserAnonymously),
         fork(takeLatest, 'signOutUser', signOutUser),
 
