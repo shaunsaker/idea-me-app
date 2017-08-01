@@ -1,4 +1,4 @@
-import firestack from '../firestack';
+import firebase from '../firebase';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
 
@@ -13,31 +13,37 @@ const response = {
 export default class UserAuth {
     static getUserAuth() {
         return new Promise(resolve => {
-            firestack.auth.getCurrentUser()
-                .then((user) => {
-                    response.authenticated = user.authenticated;
-                    response.message = user;
-                    resolve(response);
-                })
-                .catch(error => {
-                    response.authenticated = false;
-                    response.message = error;
-                    resolve(response);
-                });
+            const user = firebase.auth().currentUser;
+
+            if (user) {
+                response.authenticated = true;
+                response.message = {
+                    uid: user._user.uid,
+                    anonymous: user._user.isAnonymous,
+                };
+                resolve(response);
+            }
+            else {
+                response.authenticated = false;
+                resolve(response);
+            }
         });
     }
 
     static signUpUserWithEmail(action) {
         return new Promise(resolve => {
-            firestack.auth.createUserWithEmail(action.userEmail, action.userPassword)
+            firebase.auth().createUserWithEmailAndPassword(action.userEmail, action.userPassword)
                 .then((user) => {
                     response.authenticated = true;
-                    response.message = user;
+                    response.message = {
+                        uid: user._user.uid,
+                        userEmail: user._user.email,
+                    };
                     resolve(response);
                 })
-                .catch(error => {
+                .catch((error) => {
                     response.authenticated = false;
-                    response.message = error;
+                    response.message = error.code;
                     resolve(response);
                 });
         });
@@ -45,15 +51,17 @@ export default class UserAuth {
 
     static signInUserWithEmail(action) {
         return new Promise(resolve => {
-            firestack.auth.signInWithEmail(action.userEmail, action.userPassword)
+            firebase.auth().signInWithEmailAndPassword(action.userEmail, action.userPassword)
                 .then((user) => {
                     response.authenticated = true;
-                    response.message = user;
+                    response.message = {
+                        uid: user._user.uid,
+                    };
                     resolve(response);
                 })
-                .catch(error => {
+                .catch((error) => {
                     response.authenticated = false;
-                    response.message = error;
+                    response.message = error.code;
                     resolve(response);
                 });
         });
@@ -61,7 +69,7 @@ export default class UserAuth {
 
     static sendPasswordResetEmail(action) {
         return new Promise(resolve => {
-            firestack.auth.sendPasswordResetWithEmail(action.userEmail)
+            firebase.auth().sendPasswordResetEmail(action.userEmail)
                 .then(() => {
                     response.success = true;
                     response.message = null;
@@ -85,11 +93,22 @@ export default class UserAuth {
                         resolve(response);
                     } else {
                         AccessToken.getCurrentAccessToken()
-                            .then((data) => {
-                                firestack.auth.signInWithProvider('facebook', data.accessToken, '')
-                                    .then((user) => {
+                            .then((user) => {
+                                const credential = {
+                                    provider: 'facebook',
+                                    token: user.accessToken,
+                                    secret: '',
+                                }
+
+                                firebase.auth().signInWithCredential(credential)
+                                    .then((currentUser) => {
                                         response.authenticated = true;
-                                        response.message = user;
+                                        response.message = {
+                                            uid: currentUser._user.uid,
+                                            userEmail: currentUser._user.email,
+                                            userName: currentUser._user.displayName,
+                                            userPhotoURL: currentUser._user.photoURL,
+                                        };
                                         resolve(response);
                                     })
                                     .catch(error => {
@@ -125,11 +144,21 @@ export default class UserAuth {
                         .then(() => {
                             GoogleSignin.signIn()
                                 .then((user) => {
-                                    console.log(user)
-                                    firestack.auth.signInWithProvider('google', user.accessToken, '')
-                                        .then((user) => {
+                                    const credential = {
+                                        provider: 'google',
+                                        token: user.idToken,
+                                        secret: user.accessToken,
+                                    }
+
+                                    firebase.auth().signInWithCredential(credential)
+                                        .then((currentUser) => {
                                             response.authenticated = true;
-                                            response.message = user;
+                                            response.message = {
+                                                uid: currentUser._user.uid,
+                                                userEmail: currentUser._user.email,
+                                                userName: currentUser._user.displayName,
+                                                userPhotoURL: currentUser._user.photoURL,
+                                            };
                                             resolve(response);
                                         })
                                         .catch(error => {
@@ -161,10 +190,12 @@ export default class UserAuth {
 
     static signInUserAnonymously() {
         return new Promise(resolve => {
-            firestack.auth.signInAnonymously()
+            firebase.auth().signInAnonymously()
                 .then((user) => {
                     response.authenticated = true;
-                    response.message = user;
+                    response.message = {
+                        uid: user._user.uid,
+                    };
                     resolve(response);
                 })
                 .catch(error => {
@@ -177,7 +208,7 @@ export default class UserAuth {
 
     static signOutUser() {
         return new Promise(resolve => {
-            firestack.auth.signOut()
+            firebase.auth().signOut()
                 .then((user) => {
                     response.success = true;
                     resolve(response);

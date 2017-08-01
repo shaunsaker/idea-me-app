@@ -33,7 +33,7 @@ export class SignInOptions extends React.Component {
             uid: PropTypes.string,
             userEmail: PropTypes.string,
             userName: PropTypes.string,
-            userPhotoUrl: PropTypes.string,
+            userPhotoUrl: PropTypes.object,
         };
     }
 

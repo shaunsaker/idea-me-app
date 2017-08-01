@@ -1,6 +1,10 @@
 TODOS
-    Google Sign In
     RN Permissions  
+    Tooltips need more work
+        Android 7 style modals with gifs?
+            Then we don't need any order, we just display the relevant tooltips on relevant pages
+    Delete button has faint square boxes
+    Low connection load did nothing
     Apply material styles
         See material.io
         Tooltips need more impact
@@ -18,6 +22,7 @@ WRAP UP
             Share
         Send errors to db  
     IOS
+        React-native-firebase
         Integrate react-native-fbsdk on iOS
         Integrate react-native-google-signin on iOS
         Icons

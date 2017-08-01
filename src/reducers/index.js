@@ -29,6 +29,7 @@ export default function (state = initialState, action) {
             if (action.userEmail) new_state.userData.profile.userEmail = action.userEmail;
             if (action.userName) new_state.userData.profile.userName = action.userName;
             if (action.userPhotoUrl) new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
+            if (action.dateJoined) new_state.userData.profile.dateJoined = action.dateJoined;
 
             if (action.anonymous) {
                 new_state.userAuth.anonymous = true;

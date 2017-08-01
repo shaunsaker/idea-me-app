@@ -19,15 +19,11 @@ import { getUserLocation } from './geolocation';
 
 // Cloud Data
 import { loadUserData } from './cloudData';
-import { loadAppData } from './cloudData';
 import { saveUserData } from './cloudData';
 import { deleteUserData } from './cloudData';
 
 // Images
 import { handleImage } from './images';
-
-// Cloud Storage
-import { uploadUserPhoto } from './cloudStorage';
 
 // File System
 import { deleteFile } from './fileSystem';
@@ -49,15 +45,11 @@ export function* sagas() {
 
         // Cloud Data
         fork(takeLatest, 'loadUserData', loadUserData),
-        fork(takeLatest, 'loadAppData', loadAppData),
         fork(takeEvery, 'saveUserData', saveUserData),
         fork(takeEvery, 'deleteUserData', deleteUserData),
 
         // Images
         fork(takeLatest, 'handleImage', handleImage),
-
-        // Cloud Storage
-        fork(takeLatest, 'uploadUserPhoto', uploadUserPhoto),
 
         // File System
         fork(takeEvery, 'deleteFile', deleteFile),

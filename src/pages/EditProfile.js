@@ -155,6 +155,7 @@ export class EditProfile extends React.Component {
             userEmail: this.state.editUserEmail,
             userLocation: this.props.currentLocation ? this.props.currentLocation : this.props.userLocation,
             userPhotoUrl,
+            dateJoined: this.props.dateJoined,
         }
 
         this.props.dispatch({
@@ -239,7 +240,6 @@ export class EditProfile extends React.Component {
                 subtitle='You will lose all the data you added.'
                 handleLeftIconPress={this.cancelEditProfile}
                 handleRightIconPress={this.toggleCancelModal} />;
-
         return (
             <Page>
 
@@ -296,6 +296,7 @@ function mapStateToProps(state) {
         userLocation: state.main.userData.profile.userLocation,
         currentLocation: state.main.appData.currentLocation,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+        dateJoined: state.main.userData.profile.dateJoined,
         temporaryImage: state.main.appData.temporaryImage,
         geolocationError: state.main.appState.error.type === 'GEOLOCATION',
     });

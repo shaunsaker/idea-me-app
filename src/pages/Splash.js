@@ -105,14 +105,10 @@ export class Splash extends React.Component {
                             type: 'loadUserData',
                             uid: this.props.uid,
                         });
-
-                        this.props.dispatch({
-                            type: 'loadAppData',
-                        });
                     }
 
                     // If we have data, we have everything we need
-                    else if (this.props.authenticated && this.props.cloudDataSuccess && this.props.dateJoined) {
+                    else if (this.props.authenticated && this.props.cloudDataSuccess) {
 
                         // If user has been using app for a week = approx 604800s
                         const currentDate = Date.now();

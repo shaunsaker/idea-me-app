@@ -17,6 +17,11 @@ config.testing = {
     oneWeekUser: false,
 }
 
+config.firebase = {
+    debug: false,
+    persistence: true,
+};
+
 config.animation = {
     duration: {
         short: 250,
@@ -43,7 +48,7 @@ config.images = {
         100,        // quality
         0,          // rotation
     ],
-    firestackStorageOptions: {
+    firebaseStorageOptions: {
         contentType: 'image/jpeg',
         contentEncoding: 'base64',
     },
@@ -54,7 +59,7 @@ config.voiceNotes = {
 }
 
 config.googleSignIn = {
-    webClientId: '',
+    webClientId: "77557779345-ap7udmcr3md8eu5c7akc1i0nkuekvi4l.apps.googleusercontent.com",
     iosClientId: '',
     offlineAccess: false,
 };

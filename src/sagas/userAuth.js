@@ -4,13 +4,13 @@ import UserAuth from '../userAuth/index';
 
 export function* getUserAuth() {
     const getUserAuthResponse = yield call(UserAuth.getUserAuth);
-    // console.log('getUserAuthResponse', getUserAuthResponse);
+    console.log('getUserAuthResponse', getUserAuthResponse);
 
     if (getUserAuthResponse.authenticated) {
         yield put({
             type: 'SIGN_IN_USER',
-            uid: getUserAuthResponse.message.user.uid,
-            anonymous: getUserAuthResponse.message.user.anonymous,
+            uid: getUserAuthResponse.message.uid,
+            anonymous: getUserAuthResponse.message.anonymous,
         });
     }
     else {
@@ -28,31 +28,16 @@ export function* signInUserWithEmail(action) {
     if (signUpUserWithEmailResponse.authenticated) {
         yield put({
             type: 'SIGN_IN_USER',
-            uid: signUpUserWithEmailResponse.message.user.uid,
-            userEmail: signUpUserWithEmailResponse.message.user.email,
+            uid: signUpUserWithEmailResponse.message.uid,
+            userEmail: signUpUserWithEmailResponse.message.userEmail,
             anonymous: false,
         });
     }
 
-    // Handle network errors, if any
-    else if (signUpUserWithEmailResponse.message.errorMessage.indexOf('A network') > -1) {
-        yield put({
-            type: 'SET_ERROR',
-            errorType: 'AUTH',
-            message: 'A network error has occured.',
-            retryAction: {
-                type: 'signInUserWithEmail',
-                data: {
-                    email: action.email,
-                    password: action.password,
-                },
-            },
-        });
-    }
     else {
         let emailInUse = false;
 
-        if (signUpUserWithEmailResponse.message.errorCode && signUpUserWithEmailResponse.message.errorCode === 'ERROR_EMAIL_ALREADY_IN_USE') {
+        if (signUpUserWithEmailResponse.message === 'auth/email-already-in-use') {
             emailInUse = true;
         }
 
@@ -60,11 +45,9 @@ export function* signInUserWithEmail(action) {
         console.log('signInUserWithEmailResponse', signInUserWithEmailResponse);
 
         if (signInUserWithEmailResponse.authenticated) {
-            const uid = signInUserWithEmailResponse.message.uid || signInUserWithEmailResponse.message.user.uid;
-
             yield put({
                 type: 'SIGN_IN_USER',
-                uid,
+                uid: signInUserWithEmailResponse.message.uid,
                 anonymous: false,
             });
         }
@@ -72,7 +55,7 @@ export function* signInUserWithEmail(action) {
             yield put({
                 type: 'SET_ERROR',
                 errorType: 'AUTH',
-                message: emailInUse ? 'This email address is already in use' : signInUserWithEmailResponse.message.errorMessage,
+                message: emailInUse ? 'This email address is already in use' : signInUserWithEmailResponse.message,
                 retryAction: {
                     type: 'signInUserWithEmail',
                     data: {
@@ -118,14 +101,13 @@ export function* signInUserWithFacebook() {
     console.log('signInFacebookResponse', signInFacebookResponse);
 
     if (signInFacebookResponse.authenticated) {
-        const uid = signInFacebookResponse.message.user.uid;
         yield put({
             type: 'SIGN_IN_USER',
-            uid,
-            userEmail: signInFacebookResponse.message.user.email,
-            userName: signInFacebookResponse.message.user.displayName,
+            uid: signInFacebookResponse.message.uid,
+            userEmail: signInFacebookResponse.message.userEmail,
+            userName: signInFacebookResponse.message.userName,
             userPhotoUrl: {
-                cropped: signInFacebookResponse.message.user.photoUrl,
+                cropped: signInFacebookResponse.message.userPhotoURL,
             },
             anonymous: false
         });
@@ -148,15 +130,13 @@ export function* signInUserWithGoogle() {
     console.log('signInGoogleResponse', signInGoogleResponse);
 
     if (signInGoogleResponse.authenticated) {
-        const uid = signInGoogleResponse.message.user.id;
-
         yield put({
             type: 'SIGN_IN_USER',
-            uid,
-            userEmail: '', // TODO: Get these from the response
-            userName: '',
+            uid: signInGoogleResponse.message.uid,
+            userEmail: signInGoogleResponse.message.userEmail,
+            userName: signInGoogleResponse.message.userName,
             userPhotoUrl: {
-                cropped: '',
+                cropped: signInGoogleResponse.message.userPhotoURL,
             },
             anonymous: false
         });
@@ -179,11 +159,9 @@ export function* signInUserAnonymously() {
     console.log('signInUserAnonymouslyResponse', signInUserAnonymouslyResponse);
 
     if (signInUserAnonymouslyResponse.authenticated) {
-        const uid = signInUserAnonymouslyResponse.message.uid || signInUserAnonymouslyResponse.message.user.uid; // TODO: check this
-
         yield put({
             type: 'SIGN_IN_USER',
-            uid: uid,
+            uid: signInUserAnonymouslyResponse.message.uid,
             anonymous: true
         });
     }
