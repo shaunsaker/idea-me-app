@@ -8,9 +8,11 @@ import {
     Animated,
 } from "react-native";
 import { Recorder } from 'react-native-audio-toolkit';
+import { Actions } from 'react-native-router-flux';
 
 import config from '../config';
 import utilities from '../utilities';
+import Permissions from '../permissions';
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
 
@@ -73,7 +75,11 @@ export default class VoiceNoteRecorder extends React.Component {
     }
 
     componentDidMount() {
-        this.reloadRecorder();
+        Permissions.handlePermission('microphone', () => {
+            this.reloadRecorder();
+        }, () => {
+            Actions.pop();
+        });
     }
 
     handleOnPressIn() {
