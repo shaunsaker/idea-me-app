@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import utilities from '../utilities';
+import Permissions from '../permissions';
 import styleConstants from '../assets/styleConstants';
 
 import Page from '../components/Page';
@@ -122,11 +123,36 @@ export class Photos extends React.Component {
     selectPhotoOption(option) {
         this.togglePhotoModal();
 
-        this.props.dispatch({
-            type: 'handleImage',
-            option, // Take a Photo / Choose a Photo
-            maxWidth: Math.ceil(styleConstants.noteCardCell),
-        });
+        if (option === 'Take a Photo') {
+            Permissions.handlePermission('camera', () => {
+                this.props.dispatch({
+                    type: 'handleImage',
+                    option,
+                    maxWidth: Math.ceil(styleConstants.noteCardCell),
+                });
+            }, () => {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'USER',
+                    message: 'We need your permission to use your camera.',
+                });
+            });
+        }
+        else {
+            Permissions.handlePermission('photo', () => {
+                this.props.dispatch({
+                    type: 'handleImage',
+                    option,
+                    maxWidth: Math.ceil(styleConstants.noteCardCell),
+                });
+            }, () => {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'USER',
+                    message: 'We need your permission to access your photo gallery.',
+                });
+            });
+        }
     }
 
     toggleDeleteModal(photo) {
@@ -137,35 +163,43 @@ export class Photos extends React.Component {
     }
 
     deletePhoto() {
-        let newPhotos = utilities.removeObjectFromDictionary(this.state.deletePhotoUID, this.props.newPhotos);
-
-        this.props.dispatch({
-            type: 'SET_NEW_PHOTOS',
-            newPhotos,
-        });
-
-        if (!this.props.addIdea) {
-            let newIdea = utilities.cloneObject(this.props.idea);
-            newIdea['photos'] = newPhotos;
-            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
-
-            // Dispatch to store
-            this.props.dispatch({
-                type: 'UPDATE_USER_DATA',
-                node: 'ideas',
-                userData: newIdeas,
-            });
-
-            // Dispatch to db
-            this.props.dispatch({
-                type: 'deleteUserData',
-                node: 'ideas/' + this.props.idea.uid + '/photos/' + this.state.deletePhotoUID,
-                uid: this.props.uid,
-                hasNetwork: this.props.hasNetwork,
-            });
-        }
-
         this.toggleDeleteModal();
+
+        Permissions.handlePermission('photo', () => {
+            let newPhotos = utilities.removeObjectFromDictionary(this.state.deletePhotoUID, this.props.newPhotos);
+
+            this.props.dispatch({
+                type: 'SET_NEW_PHOTOS',
+                newPhotos,
+            });
+
+            if (!this.props.addIdea) {
+                let newIdea = utilities.cloneObject(this.props.idea);
+                newIdea['photos'] = newPhotos;
+                const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+
+                // Dispatch to store
+                this.props.dispatch({
+                    type: 'UPDATE_USER_DATA',
+                    node: 'ideas',
+                    userData: newIdeas,
+                });
+
+                // Dispatch to db
+                this.props.dispatch({
+                    type: 'deleteUserData',
+                    node: 'ideas/' + this.props.idea.uid + '/photos/' + this.state.deletePhotoUID,
+                    uid: this.props.uid,
+                    hasNetwork: this.props.hasNetwork,
+                });
+            }
+        }, () => {
+            this.props.dispatch({
+                type: 'SET_ERROR',
+                errorType: 'USER',
+                message: 'We need your permission to access your photo gallery.',
+            });
+        });
     }
 
     render() {

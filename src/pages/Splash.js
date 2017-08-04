@@ -8,12 +8,12 @@ import {
     Platform,
 } from "react-native";
 import { connect } from 'react-redux';
-import { Actions, ActionConst } from 'react-native-router-flux';
-import Icon from '../assets/icons/index';
+import { Actions } from 'react-native-router-flux';
 
 import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
+import Icon from '../assets/icons/index';
 
 import Page from '../components/Page';
 import InfoBlock from '../components/InfoBlock';
@@ -27,7 +27,6 @@ export class Splash extends React.Component {
         this.runLogic = this.runLogic.bind(this);
         this.toggleNetworkState = this.toggleNetworkState.bind(this);
         this.toggleNetworkModal = this.toggleNetworkModal.bind(this);
-        this.toggleShareModal = this.toggleShareModal.bind(this);
         this.shareApp = this.shareApp.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
 
@@ -110,19 +109,21 @@ export class Splash extends React.Component {
                     // If we have data, we have everything we need
                     else if (this.props.authenticated && this.props.cloudDataSuccess) {
 
-                        // If user has been using app for a week = approx 604800s
+                        // If user has been using app for a week = approx 604800s   TODO: This should be a cloud/backend function
                         const currentDate = Date.now();
                         const showShareModal = (currentDate - this.props.dateJoined >= 604800 * 1000);
 
                         if ((this.props.oneWeekUser || (showShareModal && !this.props.hasSeenShareModal)) && !this.state.showShareModal) {
-                            this.toggleShareModal();
+                            this.setState({
+                                showShareModal: !this.state.showShareModal,
+                            });
                         }
                         else if (!this.state.showShareModal) {
                             this.props.dispatch({
                                 type: 'RESET_ERROR'
                             });
 
-                            Actions.home();
+                            Actions.home();;
                         }
                     }
                     else if (!this.props.authenticated) {
@@ -145,12 +146,6 @@ export class Splash extends React.Component {
     toggleNetworkModal() {
         this.setState({
             showNetworkModal: !this.state.showNetworkModal,
-        });
-    }
-
-    toggleShareModal() {
-        this.setState({
-            showShareModal: !this.state.showShareModal,
         });
     }
 

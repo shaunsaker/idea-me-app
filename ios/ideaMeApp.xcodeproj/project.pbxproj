@@ -59,6 +59,7 @@
 		1D6A36B1720F4C18979A3710 /* IdeaMe-Icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0237EBA3808A419A94D8F5C0 /* IdeaMe-Icons.ttf */; };
 		F81D9A0194FE477CB1DC05A6 /* Ranga-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3AE091FA2734591BD3FE2DB /* Ranga-Regular.ttf */; };
 		8B3EBD5C036D4983BA1D5ADF /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EACE2AB1197413CA13CAA2F /* RobotoCondensed-Regular.ttf */; };
+		BEA9DDF355DC4D7BA16B5BBC /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 098E9877BF284A79B35C6081 /* libReactNativePermissions.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -309,6 +310,8 @@
 		0237EBA3808A419A94D8F5C0 /* IdeaMe-Icons.ttf */ = {isa = PBXFileReference; name = "IdeaMe-Icons.ttf"; path = "../src/assets/fonts/IdeaMe-Icons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		B3AE091FA2734591BD3FE2DB /* Ranga-Regular.ttf */ = {isa = PBXFileReference; name = "Ranga-Regular.ttf"; path = "../src/assets/fonts/Ranga-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		2EACE2AB1197413CA13CAA2F /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; name = "RobotoCondensed-Regular.ttf"; path = "../src/assets/fonts/RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ADEA1E314D8E452FBFBD82A5 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativePermissions.xcodeproj"; path = "../node_modules/react-native-permissions/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		098E9877BF284A79B35C6081 /* libReactNativePermissions.a */ = {isa = PBXFileReference; name = "libReactNativePermissions.a"; path = "libReactNativePermissions.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +349,7 @@
 				ED1B6F0173E24AA0B87CAB41 /* SafariServices.framework in Frameworks */,
 				275CF9CC763E454A9D70182F /* SystemConfiguration.framework in Frameworks */,
 				47A6A93ABF814DA98C370C98 /* libz.tbd in Frameworks */,
+				BEA9DDF355DC4D7BA16B5BBC /* libReactNativePermissions.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +523,7 @@
 				7B61E4A6436347C8A6139874 /* RNFS.xcodeproj */,
 				3501F7B65FB24EFABE8A04E8 /* ReactNativeAudioToolkit.xcodeproj */,
 				558E2CBBC9E44CD08861F396 /* RNGoogleSignin.xcodeproj */,
+				ADEA1E314D8E452FBFBD82A5 /* ReactNativePermissions.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1094,6 +1099,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ideaMeApp.app/ideaMeApp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1104,6 +1110,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-audio-toolkit/ios/ReactNativeAudioToolkit/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 			};
 			name = Debug;
@@ -1124,6 +1131,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ideaMeApp.app/ideaMeApp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1134,6 +1142,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-audio-toolkit/ios/ReactNativeAudioToolkit/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 			};
 			name = Release;
@@ -1162,6 +1171,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-audio-toolkit/ios/ReactNativeAudioToolkit/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 			};
 			name = Debug;
@@ -1189,6 +1199,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-audio-toolkit/ios/ReactNativeAudioToolkit/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 			};
 			name = Release;
@@ -1218,6 +1229,7 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1228,6 +1240,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-audio-toolkit/ios/ReactNativeAudioToolkit/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 			};
 			name = Debug;
@@ -1257,6 +1270,7 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1267,6 +1281,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-audio-toolkit/ios/ReactNativeAudioToolkit/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 			};
 			name = Release;
@@ -1291,6 +1306,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1315,6 +1331,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;

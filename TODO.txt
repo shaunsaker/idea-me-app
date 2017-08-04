@@ -1,13 +1,11 @@
 TODOS
-    RN Permissions  
+    Delete button has faint square boxes
+    Low connection load did nothing
     Tooltips need more work
         Android 7 style modals with gifs?
             Then we don't need any order, we just display the relevant tooltips on relevant pages
-    Delete button has faint square boxes
-    Low connection load did nothing
     Apply material styles
         See material.io
-        Tooltips need more impact
         Dropdown button header/footer need work
     Responsiveness
         Use page component

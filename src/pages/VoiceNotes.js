@@ -10,6 +10,7 @@ import { Actions } from 'react-native-router-flux';
 import { Recorder } from 'react-native-audio-toolkit';
 
 import utilities from '../utilities';
+import Permissions from '../permissions';
 import styleConstants from '../assets/styleConstants';
 
 import Page from '../components/Page';
@@ -66,39 +67,47 @@ export class VoiceNotes extends React.Component {
     }
 
     addNewVoiceNote(newVoiceNoteFilePath) {
-        const newVoiceNote = {
-            uid: utilities.createUID(),
-            filePath: newVoiceNoteFilePath,
-        }
+        Permissions.handlePermission('microphone', () => {
+            const newVoiceNote = {
+                uid: utilities.createUID(),
+                filePath: newVoiceNoteFilePath,
+            }
 
-        const newVoiceNotes = utilities.pushObjectToDictionary(newVoiceNote, this.props.newVoiceNotes);
+            const newVoiceNotes = utilities.pushObjectToDictionary(newVoiceNote, this.props.newVoiceNotes);
 
-        this.props.dispatch({
-            type: 'SET_NEW_VOICE_NOTES',
-            newVoiceNotes,
+            this.props.dispatch({
+                type: 'SET_NEW_VOICE_NOTES',
+                newVoiceNotes,
+            });
+
+            if (!this.props.addIdea) {
+                let newIdea = utilities.cloneObject(this.props.idea);
+                newIdea['voiceNotes'] = newVoiceNotes;
+                const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+
+                // Dispatch to store
+                this.props.dispatch({
+                    type: 'UPDATE_USER_DATA',
+                    node: 'ideas',
+                    userData: newIdeas,
+                });
+
+                // Dispatch to db
+                this.props.dispatch({
+                    type: 'saveUserData',
+                    node: 'ideas',
+                    uid: this.props.uid,
+                    userData: newIdeas,
+                    hasNetwork: this.props.hasNetwork,
+                });
+            }
+        }, () => {
+            this.props.dispatch({
+                type: 'SET_ERROR',
+                errorType: 'USER',
+                message: 'We need your permission to use your microphone.',
+            });
         });
-
-        if (!this.props.addIdea) {
-            let newIdea = utilities.cloneObject(this.props.idea);
-            newIdea['voiceNotes'] = newVoiceNotes;
-            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
-
-            // Dispatch to store
-            this.props.dispatch({
-                type: 'UPDATE_USER_DATA',
-                node: 'ideas',
-                userData: newIdeas,
-            });
-
-            // Dispatch to db
-            this.props.dispatch({
-                type: 'saveUserData',
-                node: 'ideas',
-                uid: this.props.uid,
-                userData: newIdeas,
-                hasNetwork: this.props.hasNetwork,
-            });
-        }
     }
 
     toggleDeleteModal(voiceNote) {
@@ -109,35 +118,43 @@ export class VoiceNotes extends React.Component {
     }
 
     deleteVoiceNote() {
-        const newVoiceNotes = utilities.removeObjectFromDictionary(this.state.deleteVoiceNoteUID, this.props.newVoiceNotes);
-
-        this.props.dispatch({
-            type: 'SET_NEW_VOICE_NOTES',
-            newVoiceNotes,
-        });
-
-        if (!this.props.addIdea) {
-            let newIdea = utilities.cloneObject(this.props.idea);
-            newIdea['voiceNotes'] = newVoiceNotes;
-            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
-
-            // Dispatch to store
-            this.props.dispatch({
-                type: 'UPDATE_USER_DATA',
-                node: 'ideas',
-                userData: newIdeas,
-            });
-
-            // Dispatch to db
-            this.props.dispatch({
-                type: 'deleteUserData',
-                node: 'ideas/' + this.props.idea.uid + '/voiceNotes/' + this.state.deleteVoiceNoteUID,
-                uid: this.props.uid,
-                hasNetwork: this.props.hasNetwork,
-            });
-        }
-
         this.toggleDeleteModal();
+
+        Permissions.handlePermission('microphone', () => {
+            const newVoiceNotes = utilities.removeObjectFromDictionary(this.state.deleteVoiceNoteUID, this.props.newVoiceNotes);
+
+            this.props.dispatch({
+                type: 'SET_NEW_VOICE_NOTES',
+                newVoiceNotes,
+            });
+
+            if (!this.props.addIdea) {
+                let newIdea = utilities.cloneObject(this.props.idea);
+                newIdea['voiceNotes'] = newVoiceNotes;
+                const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+
+                // Dispatch to store
+                this.props.dispatch({
+                    type: 'UPDATE_USER_DATA',
+                    node: 'ideas',
+                    userData: newIdeas,
+                });
+
+                // Dispatch to db
+                this.props.dispatch({
+                    type: 'deleteUserData',
+                    node: 'ideas/' + this.props.idea.uid + '/voiceNotes/' + this.state.deleteVoiceNoteUID,
+                    uid: this.props.uid,
+                    hasNetwork: this.props.hasNetwork,
+                });
+            }
+        }, () => {
+            this.props.dispatch({
+                type: 'SET_ERROR',
+                errorType: 'USER',
+                message: 'We need your permission to use your microphone.',
+            });
+        });
     }
 
     render() {

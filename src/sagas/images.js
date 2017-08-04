@@ -139,10 +139,7 @@ export function* handleImage(action) {
         }
     }
     else {
-        yield put({
-            type: 'SET_ERROR',
-            errorType: 'IMAGE',
-            message: imagePickerResponse.message,
-        });
+
+        // Do nothing, user cancelled
     }
 }

@@ -11,6 +11,7 @@ import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 
 import utilities from '../utilities';
+import Permissions from '../permissions';
 import styleConstants from '../assets/styleConstants';
 
 import Page from '../components/Page';
@@ -111,10 +112,34 @@ export class EditProfile extends React.Component {
     selectPhotoOption(option) {
         this.togglePhotoModal();
 
-        this.props.dispatch({
-            type: 'handleImage',
-            option, // Take a Photo / Choose a Photo
-        });
+        if (option === 'Take a Photo') {
+            Permissions.handlePermission('camera', () => {
+                this.props.dispatch({
+                    type: 'handleImage',
+                    option,
+                });
+            }, () => {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'USER',
+                    message: 'We need your permission to use your camera.',
+                });
+            });
+        }
+        else {
+            Permissions.handlePermission('photo', () => {
+                this.props.dispatch({
+                    type: 'handleImage',
+                    option,
+                });
+            }, () => {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'USER',
+                    message: 'We need your permission to access your photo gallery.',
+                });
+            });
+        }
     }
 
     updateEditUserName(value) {
@@ -136,14 +161,22 @@ export class EditProfile extends React.Component {
     }
 
     getUserLocation() {
-        this.updateEditUserLocation('');
+        Permissions.handlePermission('location', () => {
+            this.updateEditUserLocation('');
 
-        this.setState({
-            isFetchingLocation: true,
-        });
+            this.setState({
+                isFetchingLocation: true,
+            });
 
-        this.props.dispatch({
-            type: 'getUserLocation',
+            this.props.dispatch({
+                type: 'getUserLocation',
+            });
+        }, () => {
+            this.props.dispatch({
+                type: 'SET_ERROR',
+                errorType: 'GEOLOCATION',
+                message: 'We need your permission to access your lcoation.',
+            });
         });
     }
 
