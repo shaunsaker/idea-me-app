@@ -55,12 +55,12 @@ export function* signInUserWithEmail(action) {
             yield put({
                 type: 'SET_ERROR',
                 errorType: 'AUTH',
-                message: emailInUse ? 'This email address is already in use' : signInUserWithEmailResponse.message,
+                message: emailInUse ? 'This email address is already in use' : 'We were unable to connect with email.',
                 retryAction: {
                     type: 'signInUserWithEmail',
                     data: {
-                        email: action.email,
-                        password: action.password,
+                        userEmail: action.userEmail,
+                        userPassword: action.userPassword,
                     },
                 },
             });

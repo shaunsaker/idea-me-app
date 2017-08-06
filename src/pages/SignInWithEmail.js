@@ -21,6 +21,10 @@ export class SignInWithEmail extends React.Component {
         this.updateUserEmail = this.updateUserEmail.bind(this);
         this.updateUserPassword = this.updateUserPassword.bind(this);
         this.signIn = this.signIn.bind(this);
+
+        this.state = {
+            isFetchingData: false,
+        }
     }
 
     static get propTypes() {
@@ -37,7 +41,11 @@ export class SignInWithEmail extends React.Component {
     componentDidUpdate() {
 
         // If we're authenticated and we have not yet loaded data, load/save data to db
-        if (this.props.authenticated && !this.props.cloudDataSuccess) {
+        if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
+            this.setState({
+                isFetchingData: true,
+            });
+
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid,
@@ -54,7 +62,7 @@ export class SignInWithEmail extends React.Component {
         }
 
         // If we have data, we have everything we need
-        if (this.props.cloudDataSuccess) {
+        else if (this.props.authenticated && this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_ERROR'
             });

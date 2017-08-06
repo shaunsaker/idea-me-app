@@ -1,17 +1,10 @@
 TODOS
-    Delete button has faint square boxes
-    Low connection load did nothing
-    Tooltips need more work
-        Android 7 style modals with gifs?
-            Then we don't need any order, we just display the relevant tooltips on relevant pages
+    Tooltips need work
     Apply material styles
         See material.io
         Dropdown button header/footer need work
     Responsiveness
-        Use page component
-            On enable, can test screen dimensions from Tablet
-                Width and height variations based on common devices (smallest and largest)
-                Height is important
+        Use page component and styleConstants to test screen dimensions
 
 WRAP UP  
     Test all errors
@@ -26,6 +19,7 @@ WRAP UP
         Icons
         React native keyboard spacer?
         Sounds
+        Permissions
     Optimise code
         Use FlatList/VirtualizedList for all lists > screen width/height
             shouldComponentUpdate will help render when it should
@@ -59,6 +53,7 @@ V2
     Use height animator in dropdown button?
     Email after signup detailing what app does and howtos 
     Group idea editing (sharing category boards between groups)
+    Android 7 Modal gif style tooltips
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app

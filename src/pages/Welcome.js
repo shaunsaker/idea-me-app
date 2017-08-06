@@ -21,6 +21,10 @@ export class Welcome extends React.Component {
         super(props);
 
         this.signInUserWithFacebook = this.signInUserWithFacebook.bind(this);
+
+        this.state = {
+            isFetchingData: false,
+        }
     }
 
     static get propTypes() {
@@ -38,7 +42,11 @@ export class Welcome extends React.Component {
     componentDidUpdate() {
 
         // If we're authenticated, we have not yet loaded data, load/save data to db
-        if (this.props.authenticated && !this.props.cloudDataSuccess) {
+        if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
+            this.setState({
+                isFetchingData: true,
+            });
+
             this.props.dispatch({
                 type: 'loadUserData',
                 uid: this.props.uid,
@@ -58,7 +66,7 @@ export class Welcome extends React.Component {
 
 
         // If we have data, we have everything we need
-        else if (this.props.cloudDataSuccess) {
+        else if (this.props.authenticated && this.props.cloudDataSuccess) {
             this.props.dispatch({
                 type: 'RESET_ERROR'
             });
