@@ -1,6 +1,26 @@
 TODOS
-    
-
+    Ideas empty state is a card with add icon
+    Ideas list footer is a card with add icon
+    Categories dropdown should say 'Add Category' if I don't have any (ie. as opposed to Edit Categories)
+    Notes/Photos/VoiceNotes/Categories should have title that says My X
+    NoteTaker should always be open
+        Remove close button
+    Find a unique new word for categories (eg. wall, board)
+    Categories should be coloured
+        User is able to change colours
+    Ability to sort ideas
+        Alphabetically
+        Last Edited
+        Priority
+    Tap on idea category label should SET_CURRENT_CATEGORY
+    Default categories
+    Dropdown menu needs work
+        Use height animator
+        Item heights are incorrect
+    Tooltips
+        Bite sized
+        Explain more of the features
+    Optimise data store (only reference ids)
     Apply material styles
         See material.io
     Responsiveness
@@ -53,8 +73,7 @@ V2
     Convert Voice Notes to Text
     Add Videos to Ideas
     Public ideas and collaboration
-    Full screen view photos Swipe down to close  
-    Use height animator in dropdown button?
+    Full screen view photos (Swipe down to close?)
     Email after signup detailing what app does and howtos 
     Group idea editing (sharing category boards between groups)
     Android 7 Modal gif style tooltips
