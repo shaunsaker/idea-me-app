@@ -1,10 +1,13 @@
 TODOS
-    Tooltips need work
+    
+
     Apply material styles
         See material.io
-        Dropdown button header/footer need work
     Responsiveness
         Use page component and styleConstants to test screen dimensions
+
+BUGS
+    Delete voice note did not work (half arsed voice note had no uid)
 
 WRAP UP  
     Test all errors
@@ -12,6 +15,7 @@ WRAP UP
             Voice note record
             Share
         Send errors to db  
+        Try break app, log all errors then fix them as a batch
     IOS
         React-native-firebase
         Integrate react-native-fbsdk on iOS

@@ -12,6 +12,7 @@ import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     container: {
+        ...styleConstants.regularShadow,
         height: 56,
         flexDirection: 'row',
         justifyContent: 'space-between',

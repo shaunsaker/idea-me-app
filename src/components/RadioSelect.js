@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     radioButton: {
+        ...styleConstants.smallShadow,
+        backgroundColor: styleConstants.white,
         width: 16,
         height: 16,
         borderRadius: 8,
@@ -39,6 +41,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     radioButtonInner: {
+        ...styleConstants.smallShadow,
+        backgroundColor: styleConstants.white,
         width: 8,
         height: 8,
         borderRadius: 4,

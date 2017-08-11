@@ -49,7 +49,7 @@ styleConstants.noteCardCell = (width - 122) / 3; // 3 grid incl. padding and mar
 const isEarlyAndroid = Platform.OS === 'Android' && Platform.Version <= 19;
 
 styleConstants.smallShadow = {
-    elevation: 3,
+    elevation: 2,
     borderWidth: isEarlyAndroid ? 1 : 0,
     borderColor: isEarlyAndroid ? styleConstants.lightGrey : null,
 
@@ -64,7 +64,7 @@ styleConstants.smallShadow = {
 };
 
 styleConstants.regularShadow = {
-    elevation: 5,
+    elevation: 6,
     borderWidth: isEarlyAndroid ? 1 : 0,
     borderColor: isEarlyAndroid ? styleConstants.lightGrey : null,
 
@@ -79,7 +79,7 @@ styleConstants.regularShadow = {
 };
 
 styleConstants.largeShadow = {
-    elevation: 10,
+    elevation: 12,
     borderWidth: isEarlyAndroid ? 1 : 0,
     borderColor: isEarlyAndroid ? styleConstants.lightGrey : null,
 

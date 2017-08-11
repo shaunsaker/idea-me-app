@@ -18,7 +18,7 @@ import Label from './Label';
 
 const styles = StyleSheet.create({
     cardContainer: {
-        ...styleConstants.regularShadow,
+        ...styleConstants.smallShadow,
         position: 'relative',
         width: styleConstants.windowWidth - 32,
         flex: 1,

@@ -10,6 +10,9 @@ import styleConstants from '../assets/styleConstants';
 import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
+    deleteButtonContainer: {
+
+    },
     deleteButton: {
         backgroundColor: styleConstants.lightGrey,
         width: 20,

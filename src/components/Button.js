@@ -12,7 +12,7 @@ import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     button: {
-        ...styleConstants.regularShadow,
+        ...styleConstants.smallShadow,
         width: styleConstants.windowWidth - 32,
         height: 56,
         flexDirection: 'row',
