@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
         ...styleConstants.smallShadow,
         position: 'relative',
         width: styleConstants.windowWidth - 32,
+        height: styleConstants.windowHeight - 56 - 16 - 56 - 16 - 16 - 24 - 56, // header - header/button margin - button - button/card margin - card/tabBar margin - card margin* - tabBar
         flex: 1,
         backgroundColor: styleConstants.realWhite,
         borderWidth: 1,

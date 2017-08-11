@@ -1,4 +1,9 @@
 TODOS
+    Views
+        Grid View
+            Opens as idea card in modal
+        Card View (CURRENT)
+        Can set in settings
     Ideas empty state is a card with add icon
     Ideas list footer is a card with add icon
     Categories dropdown should say 'Add Category' if I don't have any (ie. as opposed to Edit Categories)
@@ -12,6 +17,8 @@ TODOS
         Alphabetically
         Last Edited
         Priority
+        Can set default in settings 
+            Default should be Priority => Last Edited => Alphabetical
     Tap on idea category label should SET_CURRENT_CATEGORY
     Default categories
     Dropdown menu needs work
