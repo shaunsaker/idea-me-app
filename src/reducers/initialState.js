@@ -57,7 +57,20 @@ const initialState = {
             userPhotoUrl: null,
         },
         ideas: null,
-        categories: null,
+        categories: {
+            'category-1': {
+                uid: 'category-1',
+                title: 'Home',
+            },
+            'category-2': {
+                uid: 'category-2',
+                title: 'Work',
+            },
+            'category-3': {
+                uid: 'category-3',
+                title: 'Save the World',
+            },
+        },
     },
 }
 

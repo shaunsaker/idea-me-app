@@ -36,6 +36,10 @@ export class Welcome extends React.Component {
             userEmail: PropTypes.string,
             userName: PropTypes.string,
             userPhotoUrl: PropTypes.object,
+
+            userSettings: PropTypes.object,
+
+            categories: PropTypes.object,
         };
     }
 
@@ -60,6 +64,7 @@ export class Welcome extends React.Component {
                         userPhotoUrl: this.props.userPhotoUrl,
                         dateJoined: Date.now(),
                     },
+                    categories: this.props.categories,
                 }
             });
         }
@@ -133,7 +138,10 @@ function mapStateToProps(state) {
         userEmail: state.main.userData.profile.userEmail,
         userName: state.main.userData.profile.userName,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+
         userSettings: state.main.userData.settings,
+
+        categories: state.main.userData.categories,
     });
 }
 

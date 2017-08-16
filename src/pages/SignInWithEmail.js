@@ -35,6 +35,10 @@ export class SignInWithEmail extends React.Component {
             uid: PropTypes.string,
             userEmail: PropTypes.string,
             userPassword: PropTypes.string,
+
+            userSettings: PropTypes.object,
+
+            categories: PropTypes.object,
         };
     }
 
@@ -57,6 +61,7 @@ export class SignInWithEmail extends React.Component {
                         userEmail: this.props.userEmail,
                         dateJoined: Date.now(),
                     },
+                    categories: this.props.categories,
                 }
             });
         }
@@ -163,6 +168,8 @@ function mapStateToProps(state) {
         userPassword: state.main.userAuth.userPassword,
 
         userSettings: state.main.userData.settings,
+
+        categories: state.main.userData.categories,
     });
 }
 

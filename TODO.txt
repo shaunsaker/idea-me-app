@@ -1,5 +1,4 @@
 TODOS
-    Default categories
     Dropdown menu needs work
         Use height animator
         Item heights are incorrect
@@ -9,7 +8,9 @@ TODOS
     Ability to sort ideas
         Alphabetically
         Last Edited
+        Last Added
         Priority
+        Default sort is Priority => Last Edited => Last Added => Alphabetical
     Views
         Grid View
             Opens as idea card in modal
