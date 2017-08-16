@@ -151,13 +151,13 @@ export class Splash extends React.Component {
 
     shareApp() {
         const shareMessage = Platform.OS === 'android' ?
-            config.appShareMessage + config.appUrl
+            'Hey! Check this out... ' + config.app.url
             :
-            config.appShareMessage; // ios only
+            'Hey! Check this out... '; // ios only
 
         Share.share({
             message: shareMessage,
-            url: config.appUrl, // ios only
+            url: config.app.url, // ios only
             title: 'IdeaMe'
         }, {
                 // Android only:

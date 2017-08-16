@@ -22,7 +22,7 @@ export function* handleImage(action) {
     }
 
     if (imagePickerResponse.success) {
-        const appPhotosDir = RNFS.PicturesDirectoryPath + '/' + config.appName;
+        const appPhotosDir = RNFS.PicturesDirectoryPath + '/' + config.app.name;
         console.log('appPhotosDir:', appPhotosDir);
 
         const createDirectoryResponse = yield call(FileSystem.createDirectory, appPhotosDir);

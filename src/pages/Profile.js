@@ -99,7 +99,7 @@ export class Profile extends React.Component {
     }
 
     handleContact() {
-        Linking.openURL('mailto:' + config.developer.email + '?subject=IdeaMe App');
+        Linking.openURL('mailto:' + config.app.developer.email + '?subject=IdeaMe App');
     }
 
     toggleActionModal() {

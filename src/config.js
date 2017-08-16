@@ -2,15 +2,15 @@ import { Easing } from 'react-native';
 
 const config = {};
 
-config.appName = 'IdeaMe';
-config.appVersion = '0.0.1';
-config.appUrl = 'http://shaunsaker.com/showcase/IdeaMe';
-config.appShareMessage = 'Hey! Check this out... ';
-
-config.developer = {
-    name: 'Shaun Saker',
-    email: 'info@shaunsaker.com',
-};
+config.app = {
+    name: 'IdeaMe',
+    version: '0.0.1',
+    url: null,
+    developer: {
+        name: 'Shaun Saker',
+        email: 'info@shaunsaker.com',
+    },
+}
 
 config.testing = {
     firstTimeUser: false,

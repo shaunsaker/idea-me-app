@@ -1,4 +1,12 @@
 TODOS
+    True offline access
+        Test auth with firebase
+            If it doesn't work, first check localStorage
+            Else display network modal
+        Remove network modal on Splash page if necessary
+    Vertical ideas scrolling
+        Scroll to beginning needs work
+        Idea cards paging?
     Views
         Grid View
             Opens as idea card in modal

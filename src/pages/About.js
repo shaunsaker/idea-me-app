@@ -36,11 +36,11 @@ export class About extends React.Component {
 
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <ProfileCard
-                        userName={config.appName}
+                        userName={config.app.name}
                         showIcon
                         iconName='light_bulb'
-                        userEmail={config.developer.email}
-                        userLocation={'Version: ' + config.appVersion} />
+                        userEmail={config.app.developer.email}
+                        userLocation={'Version: ' + config.app.version} />
                 </View>
 
             </Page >
