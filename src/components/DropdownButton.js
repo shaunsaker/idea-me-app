@@ -207,7 +207,7 @@ export default class DropdownButton extends React.Component {
                 <Icon name='edit' style={styles.dropdownFooterIcon} />
                 <Text
                     style={[styles.dropdownFooterText, styleConstants.primaryFont]}>
-                    Edit Categories
+                    {this.props.values && this.props.values.length ? 'Edit Categories' : 'Add a Category'}
                 </Text>
             </Touchable>;
 
