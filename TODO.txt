@@ -1,18 +1,13 @@
 TODOS
-    Vertical ideas scrolling
-        Scroll to beginning needs work
-        Idea cards paging?
-    Views
-        Grid View
-            Opens as idea card in modal
-        Card View (CURRENT)
-        Can set in settings
-    Ideas empty state is a card with add icon
-    Ideas list footer is a card with add icon
     Categories dropdown should say 'Add Category' if I don't have any (ie. as opposed to Edit Categories)
     Notes/Photos/VoiceNotes/Categories should have title that says My X
-    NoteTaker should always be open
+    NoteTaker should always be open and focussed if Add Category
         Remove close button
+    Tap on idea category label should SET_CURRENT_CATEGORY
+    Default categories
+    Dropdown menu needs work
+        Use height animator
+        Item heights are incorrect
     Find a unique new word for categories (eg. wall, board)
     Categories should be coloured
         User is able to change colours
@@ -20,11 +15,11 @@ TODOS
         Alphabetically
         Last Edited
         Priority
-    Tap on idea category label should SET_CURRENT_CATEGORY
-    Default categories
-    Dropdown menu needs work
-        Use height animator
-        Item heights are incorrect
+    Views
+        Grid View
+            Opens as idea card in modal
+        Card View (CURRENT)
+        Can set in settings
     Tooltips
         Bite sized
         Explain more of the features

@@ -19,6 +19,7 @@ import DropdownButton from '../components/DropdownButton';
 import InfoBlock from '../components/InfoBlock';
 import Button from '../components/Button';
 import IdeaCard from '../components/IdeaCard';
+import AddIdeaButton from '../components/AddIdeaButton';
 import TabBar from '../components/TabBar';
 import SoundPlayer from '../components/SoundPlayer';
 import ActionModal from '../modals/ActionModal';
@@ -246,11 +247,13 @@ export class Home extends React.Component {
         const totalCount = utilities.getLengthOfObject(this.props.ideas);
 
         // Empty state
-        let ideas = <View style={{ flex: 1 }} />;
+        let ideas =
+            <AddIdeaButton
+                handlePress={() => Actions.addIdea()} />
 
         let currentCategoryIdeas;
 
-        if (this.props.ideas) {
+        if (this.props.ideas && utilities.getLengthOfObject(this.props.ideas) > 0) {
             if (this.props.currentCategory === 'All Categories') {
                 currentCategoryIdeas = this.props.ideas;
             }
@@ -268,6 +271,7 @@ export class Home extends React.Component {
                     keyExtractor={item => 'idea' + item.title}
                     data={sortedIdeasArray}
                     renderItem={this.renderItem}
+                    ListFooterComponent={() => <AddIdeaButton handlePress={() => Actions.addIdea()} />}
                     horizontal
                     pagingEnabled />
         }
