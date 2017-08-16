@@ -1,6 +1,4 @@
 TODOS
-    NoteTaker should always be open and focussed if Add Category
-        Remove close button
     Tap on idea category label should SET_CURRENT_CATEGORY
     Default categories
     Dropdown menu needs work

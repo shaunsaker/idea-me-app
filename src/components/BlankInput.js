@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     inputWrapper: {
         flex: 1,
         marginLeft: 8,
+        marginRight: 16,
         alignSelf: 'center',
     },
     inputLabelContainer: {
