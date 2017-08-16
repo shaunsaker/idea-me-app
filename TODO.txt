@@ -1,5 +1,4 @@
 TODOS
-    Tap on idea category label should SET_CURRENT_CATEGORY
     Default categories
     Dropdown menu needs work
         Use height animator

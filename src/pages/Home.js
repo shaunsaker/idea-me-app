@@ -112,7 +112,7 @@ export class Home extends React.Component {
         if (value === 'Edit Categories') {
             Actions.categories();
         }
-        else {
+        else if (this.props.currentCategory !== value) {
             this.props.dispatch({
                 type: 'SELECT_CATEGORY',
                 value,
@@ -238,7 +238,8 @@ export class Home extends React.Component {
             <IdeaCard
                 idea={item}
                 handleMenuItemSelect={this.handleMenuItemSelect}
-                handleNotePress={(noteType) => this.handleNotePress(noteType, item)} />
+                handleNotePress={(noteType) => this.handleNotePress(noteType, item)}
+                handleCategoryLabelPress={this.selectCategory} />
         );
     }
 

@@ -97,6 +97,7 @@ export default class IdeaCard extends React.Component {
             idea: PropTypes.object,
             handleMenuItemSelect: PropTypes.func,
             handleNotePress: PropTypes.func,
+            handleCategoryLabelPress: PropTypes.func,
         };
     }
 
@@ -171,7 +172,8 @@ export default class IdeaCard extends React.Component {
                     style={styles.labelsContainer} >
                     <Label
                         iconName='folder'
-                        labelText={categoryLabelText} />
+                        labelText={categoryLabelText}
+                        handlePress={this.props.idea.category ? () => this.props.handleCategoryLabelPress(this.props.idea.category) : null} />
                     <Label
                         iconName='priority'
                         labelText={priorityLabelText} />

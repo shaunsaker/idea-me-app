@@ -4,9 +4,11 @@ import {
     Text,
     StyleSheet,
 } from "react-native";
-import Icon from '../assets/icons/index';
 
+import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
+
+import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
     label: {
@@ -34,12 +36,31 @@ const styles = StyleSheet.create({
 });
 
 export default Label = (props) => {
-    return (
+
+    /*
+        PROPTYPES
+
+        handlePress: PropTypes.func,
+        iconName: PropTypes.string,
+        labelText: PropTypes.string,
+    */
+
+    const label = props.handlePress ?
+        <Touchable
+            onPress={props.handlePress}
+            style={styles.label}>
+            <Icon name={props.iconName} style={styles.labelIcon} />
+            <Text style={[styles.labelText, styleConstants.primaryFont]}>
+                {props.labelText}
+            </Text>
+        </Touchable>
+        :
         <View style={styles.label}>
             <Icon name={props.iconName} style={styles.labelIcon} />
             <Text style={[styles.labelText, styleConstants.primaryFont]}>
                 {props.labelText}
             </Text>
         </View>
-    )
+
+    return label;
 }
