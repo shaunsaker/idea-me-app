@@ -33,7 +33,6 @@ export class Settings extends React.Component {
     static get propTypes() {
         return {
             uid: PropTypes.string,
-            hasNetwork: PropTypes.bool,
             settings: PropTypes.object,
         };
     }
@@ -53,7 +52,6 @@ export class Settings extends React.Component {
             node: 'settings',
             uid: this.props.uid,
             userData: newSettings,
-            hasNetwork: this.props.hasNetwork,
         });
     }
 
@@ -94,7 +92,6 @@ export class Settings extends React.Component {
 function mapStateToProps(state) {
     return ({
         uid: state.main.userAuth.uid,
-        hasNetwork: state.main.appState.hasNetwork,
         settings: state.main.userData.settings,
     });
 }

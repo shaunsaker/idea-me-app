@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
     StatusBar,
     View,
-    NetInfo,
     Share,
     Platform,
 } from "react-native";
@@ -25,15 +24,12 @@ export class Splash extends React.Component {
         super(props);
 
         this.runLogic = this.runLogic.bind(this);
-        this.toggleNetworkState = this.toggleNetworkState.bind(this);
-        this.toggleNetworkModal = this.toggleNetworkModal.bind(this);
         this.shareApp = this.shareApp.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
 
         this.quote = utilities.getRandomItemFromDictionary(this.props.quotes);
 
         this.state = {
-            showNetworkModal: false,
             showShareModal: false,
             isFethingData: false,
         }
@@ -65,88 +61,61 @@ export class Splash extends React.Component {
 
     runLogic() {
 
-        // Check if the user is connected to a network
-        NetInfo.isConnected.fetch()
-            .then((isConnected) => {
-                if (!isConnected) {
+        // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
+        if (this.props.redirectToWelcomePage) {
+            Actions.welcome();
+        }
 
-                    // Only if a modal is not already present
-                    if (!this.state.showNetworkModal) {
-                        this.toggleNetworkState();
-                    }
-                }
-                else {
-                    if (this.state.showNetworkModal) {
-                        this.toggleNetworkState();
-                    }
-
-                    // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
-                    if (this.props.redirectToWelcomePage) {
-                        Actions.welcome();
-                    }
-
-                    // Anonymous user (no data)
-                    else if (this.props.authenticated && this.props.anonymous) {
-                        this.props.dispatch({
-                            type: 'TOGGLE_LOADING',
-                        });
-
-                        Actions.home();
-                    }
-
-                    // If we're authenticated and we have not yet loaded data, load/save data to db
-                    else if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
-                        this.setState({
-                            isFetchingData: true,
-                        });
-
-                        this.props.dispatch({
-                            type: 'loadUserData',
-                            uid: this.props.uid,
-                        });
-                    }
-
-                    // If we have data, we have everything we need
-                    else if (this.props.authenticated && this.props.cloudDataSuccess) {
-
-                        // If user has been using app for a week = approx 604800s   TODO: This should be a cloud/backend function
-                        const currentDate = Date.now();
-                        const showShareModal = (currentDate - this.props.dateJoined >= 604800 * 1000);
-
-                        if ((this.props.oneWeekUser || (showShareModal && !this.props.hasSeenShareModal)) && !this.state.showShareModal) {
-                            this.setState({
-                                showShareModal: !this.state.showShareModal,
-                            });
-                        }
-                        else if (!this.state.showShareModal) {
-                            this.props.dispatch({
-                                type: 'RESET_ERROR'
-                            });
-
-                            Actions.home();;
-                        }
-                    }
-                    else if (!this.props.authenticated) {
-                        this.props.dispatch({
-                            type: 'getUserAuth',
-                        });
-                    }
-                }
+        // Anonymous user (no data)
+        else if (this.props.authenticated && this.props.anonymous) {
+            this.props.dispatch({
+                type: 'TOGGLE_LOADING',
             });
-    }
 
-    toggleNetworkState() {
-        this.props.dispatch({
-            type: 'TOGGLE_NETWORK_STATE'
-        });
+            Actions.home();
+        }
 
-        this.toggleNetworkModal();
-    }
+        // If we're authenticated and we have not yet loaded data, load/save data to db
+        else if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
+            this.setState({
+                isFetchingData: true,
+            });
 
-    toggleNetworkModal() {
-        this.setState({
-            showNetworkModal: !this.state.showNetworkModal,
-        });
+            this.props.dispatch({
+                type: 'loadUserData',
+                uid: this.props.uid,
+            });
+        }
+
+        // If we have data, we have everything we need
+        else if (this.props.authenticated && this.props.cloudDataSuccess) {
+
+            // If user has been using app for a week = approx 604800s   TODO: This should be a cloud/backend function
+            const currentDate = Date.now();
+            const showShareModal = (currentDate - this.props.dateJoined >= 604800 * 1000);
+
+            if ((this.props.oneWeekUser || (showShareModal && !this.props.hasSeenShareModal)) && !this.state.showShareModal) {
+                this.setState({
+                    showShareModal: !this.state.showShareModal,
+                });
+            }
+            else if (!this.state.showShareModal) {
+                this.props.dispatch({
+                    type: 'RESET_ERROR'
+                });
+
+                Actions.home();;
+            }
+        }
+        else if (!this.props.authenticated) {
+
+            // getUserAuth is not initialised immediately
+            setTimeout(() => {
+                this.props.dispatch({
+                    type: 'getUserAuth',
+                });
+            }, 0);
+        }
     }
 
     shareApp() {
@@ -179,8 +148,6 @@ export class Splash extends React.Component {
             },
         });
 
-        this.toggleShareModal();
-
         // Might take a while for the hasSeenShareModal prop to come in so let's redirect immediately
         this.props.dispatch({
             type: 'RESET_ERROR'
@@ -190,16 +157,6 @@ export class Splash extends React.Component {
     }
 
     render() {
-        const networkModal = this.state.showNetworkModal &&
-            <InfoModal
-                title='Network Error'
-                subtitle='Check Your Connection and Hit Retry.'
-                buttonText='Retry'
-                buttonIconName='refresh'
-                canClose={false}
-                handlePress={this.runLogic}
-                handleClose={this.toggleNetworkModal} />
-
         const shareModal = this.state.showShareModal &&
             <InfoModal
                 title='Enjoying IdeaMe?'
@@ -230,8 +187,6 @@ export class Splash extends React.Component {
                         subtitleColor={styleConstants.lightGrey}
                         fullWidth />
                 </View>
-
-                {networkModal}
 
                 {shareModal}
 

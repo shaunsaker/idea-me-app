@@ -21,13 +21,12 @@ const styles = StyleSheet.create({
 export class Loader extends React.Component {
     static get propTypes() {
         return {
-            hasNetwork: PropTypes.bool,
             loading: PropTypes.bool,
         };
     }
 
     render() {
-        const loader = this.props.hasNetwork && this.props.loading &&
+        const loader = this.props.loading &&
             <LoaderComponent />;
 
         return (
@@ -40,7 +39,6 @@ export class Loader extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        hasNetwork: state.main.appState.hasNetwork,
         loading: state.main.appState.loading,
     }
 }

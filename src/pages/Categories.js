@@ -39,7 +39,6 @@ export class Categories extends React.Component {
             currentCategory: PropTypes.string,
             ideas: PropTypes.object,
             uid: PropTypes.string,
-            hasNetwork: PropTypes.bool,
         };
     }
 
@@ -83,7 +82,6 @@ export class Categories extends React.Component {
                 node: 'categories',
                 userData: newCategories,
                 uid: this.props.uid,
-                hasNetwork: this.props.hasNetwork,
             });
 
             this.updateNewCategory('');
@@ -135,13 +133,11 @@ export class Categories extends React.Component {
             type: 'deleteUserData',
             node: 'categories/' + this.state.deleteCategoryUID,
             uid: this.props.uid,
-            hasNetwork: this.props.hasNetwork,
             nextAction: {
                 type: 'saveUserData',
                 node: 'ideas',
                 uid: this.props.uid,
                 userData: newIdeas,
-                hasNetwork: this.props.hasNetwork,
             },
         });
 
@@ -193,7 +189,6 @@ function mapStateToProps(state) {
         currentCategory: state.main.appData.currentCategory,
         ideas: state.main.userData.ideas,
         uid: state.main.userAuth.uid,
-        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

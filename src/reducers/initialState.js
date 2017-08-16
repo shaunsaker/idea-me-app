@@ -14,7 +14,6 @@ const initialState = {
         userPassword: null,
     },
     appState: {
-        hasNetwork: true, // assume this is true on app load
         loading: false,
         showToolTips: false,
 

@@ -75,7 +75,6 @@ export class Home extends React.Component {
             categories: PropTypes.object,
             currentCategory: PropTypes.string,
             uid: PropTypes.string,
-            hasNetwork: PropTypes.bool,
             firstTimeUser: PropTypes.bool,
         };
     }
@@ -180,7 +179,6 @@ export class Home extends React.Component {
             type: 'deleteUserData',
             node: 'ideas/' + this.state.deleteIdeaUID,
             uid: this.props.uid,
-            hasNetwork: this.props.hasNetwork,
         });
 
         this.toggleDeleteModal();
@@ -342,7 +340,6 @@ function mapStateToProps(state) {
     return ({
         uid: state.main.userAuth.uid,
         firstTimeUser: config.testing.firstTimeUser || state.main.userAuth.firstTimeUser,
-        hasNetwork: state.main.appState.hasNetwork,
         currentCategory: state.main.appData.currentCategory,
         ideas: state.main.userData.ideas,
         categories: state.main.userData.categories,

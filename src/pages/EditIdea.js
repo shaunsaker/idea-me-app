@@ -50,7 +50,6 @@ export class EditIdea extends React.Component {
             categories: PropTypes.object,
             priorities: PropTypes.object,
             uid: PropTypes.string,
-            hasNetwork: PropTypes.bool,
         };
     }
 
@@ -150,7 +149,6 @@ export class EditIdea extends React.Component {
                 node: 'ideas',
                 uid: this.props.uid,
                 userData: newIdeas,
-                hasNetwork: this.props.hasNetwork,
             });
 
             Actions.pop();
@@ -343,7 +341,6 @@ function mapStateToProps(state) {
         categories: state.main.userData.categories,
         priorities: state.main.appData.priorities,
         uid: state.main.userAuth.uid,
-        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

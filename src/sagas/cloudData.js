@@ -48,14 +48,11 @@ export function* loadUserData(action) {
 }
 
 export function* saveUserData(action) {
-    const saveUserDataResponse = action.hasNetwork ?
-        yield call(CloudData.saveUserData, action)
-        :
-        CloudData.saveUserData(action); // will never yield a response if offline
-    console.log('saveUserDataResponse', saveUserDataResponse, action.hasNetwork);
+    const saveUserDataResponse = yield call(CloudData.saveUserData, action)
+    console.log('saveUserDataResponse', saveUserDataResponse);
 
-    if (saveUserDataResponse || !action.hasNetwork) {
-        if (saveUserDataResponse.success || !action.hasNetwork) {
+    if (saveUserDataResponse) {
+        if (saveUserDataResponse.success) {
 
             // We use this to dispatch another action(s) that was attached from the page
             if (action.nextAction) {
@@ -95,7 +92,6 @@ export function* saveUserData(action) {
                         node: action.node,
                         uid: action.uid,
                         userData: action.userData,
-                        hasNetwork: action.hasNetwork,
                     },
                 },
             });
@@ -104,14 +100,11 @@ export function* saveUserData(action) {
 }
 
 export function* deleteUserData(action) {
-    const deleteUserDataResponse = action.hasNetwork ?
-        yield call(CloudData.deleteUserData, action)
-        :
-        CloudData.deleteUserData(action); // will never yield a response if offline
+    const deleteUserDataResponse = yield call(CloudData.deleteUserData, action);
     console.log('deleteUserDataResponse', deleteUserDataResponse);
 
-    if (deleteUserDataResponse || !action.hasNetwork) {
-        if (deleteUserDataResponse.success || !action.hasNetwork) {
+    if (deleteUserDataResponse) {
+        if (deleteUserDataResponse.success) {
 
             // We use this to dispatch another action(s) that was attached from the page
             if (action.nextAction) {
@@ -148,7 +141,6 @@ export function* deleteUserData(action) {
                         node: action.node,
                         uid: action.uid,
                         userData: action.userData,
-                        hasNetwork: action.hasNetwork,
                     },
                 },
             });

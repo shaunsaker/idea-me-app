@@ -129,7 +129,6 @@ export class Profile extends React.Component {
             type: 'deleteUserData',
             node: 'profile/userPhotoUrl',
             uid: this.props.uid,
-            hasNetwork: this.props.hasNetwork,
         });
     }
 

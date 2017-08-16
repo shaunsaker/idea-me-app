@@ -41,7 +41,6 @@ export class VoiceNotes extends React.Component {
             newVoiceNotes: PropTypes.object,
             ideas: PropTypes.object,
             uid: PropTypes.string,
-            hasNetwork: PropTypes.bool,
         };
     }
 
@@ -98,7 +97,6 @@ export class VoiceNotes extends React.Component {
                     node: 'ideas',
                     uid: this.props.uid,
                     userData: newIdeas,
-                    hasNetwork: this.props.hasNetwork,
                 });
             }
         }, () => {
@@ -145,7 +143,6 @@ export class VoiceNotes extends React.Component {
                     type: 'deleteUserData',
                     node: 'ideas/' + this.props.idea.uid + '/voiceNotes/' + this.state.deleteVoiceNoteUID,
                     uid: this.props.uid,
-                    hasNetwork: this.props.hasNetwork,
                 });
             }
         }, () => {
@@ -201,7 +198,6 @@ function mapStateToProps(state) {
         newVoiceNotes: state.main.appData.newVoiceNotes,
         ideas: state.main.userData.ideas,
         uid: state.main.userAuth.uid,
-        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

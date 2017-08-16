@@ -41,7 +41,6 @@ export class Notes extends React.Component {
             newNotes: PropTypes.object,
             ideas: PropTypes.object,
             uid: PropTypes.string,
-            hasNetwork: PropTypes.bool,
         };
     }
 
@@ -103,7 +102,7 @@ export class Notes extends React.Component {
                 node: 'ideas',
                 uid: this.props.uid,
                 userData: newIdeas,
-                hasNetwork: this.props.hasNetwork,
+
             });
         }
 
@@ -143,7 +142,6 @@ export class Notes extends React.Component {
                 type: 'deleteUserData',
                 node: 'ideas/' + this.props.idea.uid + '/notes/' + this.state.deleteNoteUID,
                 uid: this.props.uid,
-                hasNetwork: this.props.hasNetwork,
             });
         }
 
@@ -194,7 +192,6 @@ function mapStateToProps(state) {
         newNotes: state.main.appData.newNotes,
         ideas: state.main.userData.ideas,
         uid: state.main.userAuth.uid,
-        hasNetwork: state.main.appState.hasNetwork,
     });
 }
 

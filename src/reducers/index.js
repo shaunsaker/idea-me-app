@@ -70,11 +70,6 @@ export default function (state = initialState, action) {
             return new_state;
 
         /* APP */
-        case 'TOGGLE_NETWORK_STATE':
-            new_state = utilities.cloneObject(state);
-            new_state.appState.hasNetwork = !new_state.appState.hasNetwork;
-            return new_state;
-
         case 'TOGGLE_LOADING':
             new_state = utilities.cloneObject(state);
             new_state.appState.loading = !new_state.appState.loading;
