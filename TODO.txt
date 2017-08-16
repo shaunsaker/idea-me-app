@@ -1,5 +1,4 @@
 TODOS
-    Notes/Photos/VoiceNotes/Categories should have title that says My X
     NoteTaker should always be open and focussed if Add Category
         Remove close button
     Tap on idea category label should SET_CURRENT_CATEGORY

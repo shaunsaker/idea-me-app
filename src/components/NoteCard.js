@@ -65,7 +65,6 @@ export default NoteCard = (props) => {
             notes/photos/voiceNotes/categories
             handleAdd
             handleDelete
-            hideTitle
 
             NOTES/CATEGORIES
                 inputValue
@@ -85,7 +84,7 @@ export default NoteCard = (props) => {
 
     if (props.type === 'notes') {
         notesValues = props.notes;
-        title = 'NOTES';
+        title = 'MY NOTES';
         notes =
             <BulletList
                 values={notesValues}
@@ -99,6 +98,7 @@ export default NoteCard = (props) => {
     }
     else if (props.type === 'categories') {
         notesValues = props.categories;
+        title = 'MY CATEGORIES';
         notes =
             <BulletList
                 values={notesValues}
@@ -112,7 +112,7 @@ export default NoteCard = (props) => {
     }
     else if (props.type === 'photos') {
         notesValues = props.photos;
-        title = 'PHOTOS';
+        title = 'MY PHOTOS';
         notes =
             <PhotoList
                 photos={notesValues}
@@ -127,7 +127,7 @@ export default NoteCard = (props) => {
     }
     else if (props.type === 'voiceNotes') {
         notesValues = props.voiceNotes;
-        title = 'VOICE NOTES';
+        title = 'MY VOICE NOTES';
         notes =
             <VoiceNoteList
                 voiceNotes={notesValues}
@@ -152,13 +152,6 @@ export default NoteCard = (props) => {
                 fullWidth />
         </View>;
 
-    const titleComponent = !props.hideTitle &&
-        <View style={styles.titleContainer}>
-            <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles]}>
-                {title + ' (' + notesCount + '):'}
-            </Text>
-        </View>;
-
     const buttonComponent = button &&
         <View style={styles.buttonContainer}>
             {button}
@@ -173,7 +166,11 @@ export default NoteCard = (props) => {
                 {infoBlock}
 
                 <View style={styles.notesContainer}>
-                    {titleComponent}
+                    <View style={styles.titleContainer}>
+                        <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles]}>
+                            {title + ' (' + notesCount + '):'}
+                        </Text>
+                    </View>
 
                     {notes}
 

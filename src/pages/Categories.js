@@ -166,7 +166,6 @@ export class Categories extends React.Component {
                 <NoteCard
                     type='categories'
                     categories={categoriesArray}
-                    hideTitle
                     inputValue={this.state.newCategory}
                     handleChangeText={this.updateNewCategory}
                     handleAdd={this.addCategory}
