@@ -20,8 +20,6 @@ TODOS
         Alphabetically
         Last Edited
         Priority
-        Can set default in settings 
-            Default should be Priority => Last Edited => Alphabetical
     Tap on idea category label should SET_CURRENT_CATEGORY
     Default categories
     Dropdown menu needs work

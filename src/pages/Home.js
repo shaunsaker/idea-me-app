@@ -268,7 +268,7 @@ export class Home extends React.Component {
                     keyExtractor={item => 'idea' + item.title}
                     data={sortedIdeasArray}
                     renderItem={this.renderItem}
-                    style={{ flex: 1 }}
+                    horizontal
                     pagingEnabled />
         }
 
