@@ -4,7 +4,6 @@ import {
     View,
     FlatList,
     Text,
-    Animated,
     StyleSheet,
 } from "react-native";
 import { Actions } from 'react-native-router-flux';
@@ -13,6 +12,7 @@ import config from '../config';
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
 
+import AnimateHeight from '../animators/AnimateHeight';
 import Touchable from './Touchable';
 import Button from './Button';
 import CategoriesButton from './CategoriesButton';
@@ -97,7 +97,6 @@ export default class DropdownButton extends React.Component {
 
         this.state = {
             isExpanded: false,
-            height: new Animated.Value(0)
         }
     }
 
@@ -121,41 +120,9 @@ export default class DropdownButton extends React.Component {
     }
 
     toggleExpanded() {
-
-        // We need to check how many items we have so that we can render a perfect height
-        let itemCount = (this.props.headerValue ? 1 : 0) + this.props.values.length + 1; // + 1 for Edit Categories
-        const dropdownInnerHeight = itemCount * this.itemHeight;
-        const dropdownOuterHeight = dropdownInnerHeight < this.maxHeight ? dropdownInnerHeight : this.maxHeight;
-
-        // Check if the dropdown is open/closed
-        if (!this.state.isExpanded) {
-            this.setState({
-                isExpanded: true
-            });
-
-            Animated.timing(
-                this.state.height,
-                {
-                    toValue: dropdownInnerHeight,
-                    duration: config.animation.duration.short,
-                    easing: config.animation.easing,
-                }
-            ).start();
-        }
-        else {
-            this.setState({
-                isExpanded: false
-            });
-
-            Animated.timing(
-                this.state.height,
-                {
-                    toValue: 0,
-                    duration: config.animation.duration.short,
-                    easing: config.animation.easing,
-                }
-            ).start();
-        }
+        this.setState({
+            isExpanded: !this.state.isExpanded,
+        });
     }
 
     scrollToBeginning() {
@@ -177,6 +144,11 @@ export default class DropdownButton extends React.Component {
     }
 
     render() {
+
+        // We need to check how many items we have so that we can render a perfect height
+        let itemCount = (this.props.headerValue ? 1 : 0) + this.props.values.length + 1; // + 1 for Edit Categories
+        const dropdownInnerHeight = itemCount * this.itemHeight;
+
         const pushContentStyles = this.props.pushContent ?
             {
                 position: 'relative',
@@ -212,22 +184,30 @@ export default class DropdownButton extends React.Component {
             </Touchable>;
 
         const itemList = this.props.values.length ?
-            <Animated.View
-                style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
+            <AnimateHeight
+                initialValue={0}
+                finalValue={dropdownInnerHeight}
+                shouldAnimateIn={this.state.isExpanded}
+                shouldAnimateOut={!this.state.isExpanded}
+                style={[styles.dropdownItemsWrapper, pushContentStyles]}>
                 <FlatList
                     keyExtractor={item => 'category-' + item.uid}
                     ref='itemList'
                     data={this.props.values}
                     renderItem={this.renderItem}
                     ListHeaderComponent={header ? () => header : null}
-                    ListFooterComponent={editCategories ? () => editCategories : null}
+                    ListFooterComponent={() => editCategories}
                     style={styles.dropdownItemsContainer} />
-            </Animated.View>
+            </AnimateHeight>
             :
-            <Animated.View
-                style={[styles.dropdownItemsWrapper, pushContentStyles, { height: this.state.height }]}>
+            <AnimateHeight
+                initialValue={0}
+                finalValue={dropdownInnerHeight}
+                shouldAnimateIn={this.state.isExpanded}
+                shouldAnimateOut={!this.state.isExpanded}
+                style={[styles.dropdownItemsWrapper, pushContentStyles]}>
                 {editCategories}
-            </Animated.View>
+            </AnimateHeight>
 
         const button = this.props.categoriesButton ?
             <CategoriesButton

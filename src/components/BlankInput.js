@@ -12,6 +12,7 @@ import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
 
+import AnimateOpacity from '../animators/AnimateOpacity';
 import DeleteButton from './DeleteButton';
 
 const styles = StyleSheet.create({
@@ -105,10 +106,14 @@ export default class BlankInput extends React.Component {
 
     render() {
         const clearTextButton = this.props.value ?
-            <View style={styles.clearTextButtonContainer}>
+            <AnimateOpacity
+                initialValue={0}
+                finalValue={1}
+                shouldAnimateIn
+                style={styles.clearTextButtonContainer}>
                 <DeleteButton
                     handlePress={this.clearInputText} />
-            </View>
+            </AnimateOpacity>
             :
             null;
 

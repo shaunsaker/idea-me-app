@@ -17,8 +17,8 @@ import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
 
 import AnimateBlink from '../animators/AnimateBlink';
+import AnimateOpacity from '../animators/AnimateOpacity';
 import AnimateRotate from '../animators/AnimateRotate';
-import AnimateFadeIn from '../animators/AnimateFadeIn';
 import Counter from './Counter';
 
 const styles = StyleSheet.create({
@@ -198,10 +198,14 @@ export default class VoiceNoteRecorder extends React.Component {
         }
 
         const duration = this.state.isExpanded && !this.state.isCollapsing &&
-            <AnimateFadeIn style={styles.durationTextContainer}>
+            <AnimateOpacity
+                initialValue={0}
+                finalValue={1}
+                shouldAnimateIn
+                style={styles.durationTextContainer}>
                 <Counter
                     startTimer />
-            </AnimateFadeIn>;
+            </AnimateOpacity>;
 
         return (
             <View style={styles.container}>
@@ -213,9 +217,10 @@ export default class VoiceNoteRecorder extends React.Component {
                             <AnimateBlink
                                 shouldAnimate={this.state.isExpanded && !this.state.isCompressing}>
                                 <AnimateRotate
-                                    rotateForward={this.state.isExpanding}
-                                    rotateBackward={this.state.isCompressing}
-                                    rotateTo='-360deg'
+                                    initialValue={0}
+                                    finalValue={-360}
+                                    shouldAnimateIn={this.state.isExpanding}
+                                    shouldAnimateOut={this.state.isCompressing}
                                     duration={config.animation.duration.long} >
                                     <Animated.Text style={colorStyles}>
                                         <Icon

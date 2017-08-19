@@ -10,7 +10,6 @@ import {
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
 
-import AnimateFadeIn from '../animators/AnimateFadeIn';
 import DeleteButton from './DeleteButton';
 
 const styles = StyleSheet.create({

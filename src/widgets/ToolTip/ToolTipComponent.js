@@ -11,7 +11,7 @@ import Icon from '../../assets/icons/index';
 import config from '../../config';
 import styleConstants from '../../assets/styleConstants';
 
-import AnimateFadeIn from '../../animators/AnimateFadeIn';
+import AnimateOpacity from '../../animators/AnimateOpacity';
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -168,7 +168,11 @@ export default class ToolTipComponent extends React.Component {
 
         return (
             <View style={[styles.wrapper, wrapperStyles]}>
-                <AnimateFadeIn style={styles.container}>
+                <AnimateOpacity
+                    initialValue={0}
+                    finalValue={1}
+                    shouldAnimateIn
+                    style={styles.container}>
 
                     {icon}
 
@@ -180,7 +184,7 @@ export default class ToolTipComponent extends React.Component {
 
                     {button}
 
-                </AnimateFadeIn>
+                </AnimateOpacity>
             </View>
         );
     }

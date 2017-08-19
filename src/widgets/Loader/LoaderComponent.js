@@ -2,14 +2,14 @@ import React from 'react';
 import {
     View,
     StyleSheet,
-    Animated,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 import config from '../../config';
 import styleConstants from '../../assets/styleConstants';
 
-import AnimateFadeIn from '../../animators/AnimateFadeIn';
+import AnimateOpacity from '../../animators/AnimateOpacity';
+import AnimateTranslateX from '../../animators/AnimateTranslateX';
 
 const styles = StyleSheet.create({
     container: {
@@ -19,48 +19,21 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class LoaderComponent extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.animate = this.animate.bind(this);
-
-        this.position = new Animated.Value(-100);
-    }
-
-    componentDidMount() {
-        this.animate();
-    }
-
-    animate() {
-        this.position.setValue(-100);
-
-        Animated.timing(
-            this.position,
-            {
-                toValue: styleConstants.windowWidth,
-                duration: 2000,
-                easing: config.animation.easing,
-                useNativeDriver: true,
-            }
-        ).start(() => {
-            this.animate();
-        });
-    }
-
-    render() {
-        const animatedStyles = {
-            transform: [{
-                translateX: this.position,
-            }],
-        }
-
-        return (
-            <AnimateFadeIn>
-                <Animated.View style={animatedStyles}>
-                    <View style={styles.container} />
-                </Animated.View>
-            </AnimateFadeIn>
-        );
-    }
+export default LoaderComponent = (props) => {
+    return (
+        <AnimateOpacity
+            initialValue={0}
+            finalValue={1}
+            shouldAnimateIn>
+            <AnimateTranslateX
+                initialValue={-100}
+                finalValue={styleConstants.windowWidth}
+                shouldAnimateIn
+                shouldRepeat
+                shouldLoop
+                duration={1500}>
+                <View style={styles.container} />
+            </AnimateTranslateX>
+        </AnimateOpacity>
+    );
 }

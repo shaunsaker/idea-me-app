@@ -6,7 +6,7 @@ import {
 
 import config from '../config';
 
-export default class AnimateTranslateY extends React.Component {
+export default class AnimateOpacity extends React.Component {
     constructor(props) {
         super(props);
 
@@ -108,12 +108,10 @@ export default class AnimateTranslateY extends React.Component {
 
     render() {
         const animatedStyles = {
-            transform: [{
-                translateY: this.state.animatedValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [this.props.initialValue, this.props.finalValue],
-                }),
-            }],
+            opacity: this.state.animatedValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [this.props.initialValue, this.props.finalValue],
+            }),
         }
 
         return (

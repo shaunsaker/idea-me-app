@@ -12,6 +12,7 @@ import { Actions } from 'react-native-router-flux';
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
 
+import AnimateOpacity from '../animators/AnimateOpacity';
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';
 
@@ -189,13 +190,18 @@ export default class Header extends React.Component {
                     </Touchable>
                     :
                     this.props.continueButton ?
-                        <Touchable
-                            style={styles.rightIconContainer}
-                            onPress={this.props.handleRightIconPress} >
-                            <Icon
-                                name='check'
-                                style={[styles.rightIcon, textColorStyles]} />
-                        </Touchable>
+                        <AnimateOpacity
+                            initialValue={0}
+                            finalValue={1}
+                            shouldAnimateIn
+                            style={styles.rightIconContainer}>
+                            <Touchable
+                                onPress={this.props.handleRightIconPress} >
+                                <Icon
+                                    name='check'
+                                    style={[styles.rightIcon, textColorStyles]} />
+                            </Touchable>
+                        </AnimateOpacity>
                         :
                         (this.props.textRight) ?
                             null

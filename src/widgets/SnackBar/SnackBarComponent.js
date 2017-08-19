@@ -109,11 +109,12 @@ export default class SnackBarComponent extends React.Component {
 
         return (
             <AnimateTranslateY
-                styles={styles.messageWrapper}
                 initialValue={this.height}
                 finalValue={0}
+                shouldAnimateIn
                 shouldAnimateOut={this.state.hideSnackBar}
-                animateOutCallback={this.props.handleReset}>
+                animateOutCallback={this.props.handleReset}
+                style={styles.messageWrapper}>
                 <View style={styles.messageContainer}>
                     <View style={styles.iconContainer}>
                         <Icon

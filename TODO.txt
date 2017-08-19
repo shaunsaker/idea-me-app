@@ -1,6 +1,8 @@
 TODOS
+    Voice note record start fail (permissions?)
+    Upgrade RN and outdated packages
     Dropdown menu needs work
-        Use height animator
+        Header/footer should look the same
         Item heights are incorrect
     Find a unique new word for categories (eg. wall, board)
     Categories should be coloured
@@ -22,7 +24,7 @@ TODOS
     Optimise data store (only reference ids)
     Apply material styles
         See material.io
-    Responsiveness
+    Test Responsiveness
         Use page component and styleConstants to test screen dimensions
 
 BUGS

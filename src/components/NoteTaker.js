@@ -7,6 +7,7 @@ import {
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
 
+import AnimateTranslateX from '../animators/AnimateTranslateX';
 import BlankInput from './BlankInput';
 import Touchable from './Touchable';
 
@@ -43,13 +44,18 @@ export default NoteTaker = (props) => {
     */
 
     const addButton = props.inputValue && props.inputValue.length ?
-        <Touchable
-            onPress={props.handleAdd}
-            style={styles.addButton}>
-            <Icon
-                name='add'
-                style={styles.icon} />
-        </Touchable>
+        <AnimateTranslateX
+            initialValue={40}
+            finalValue={0}
+            shouldAnimateIn>
+            <Touchable
+                onPress={props.handleAdd}
+                style={styles.addButton}>
+                <Icon
+                    name='add'
+                    style={styles.icon} />
+            </Touchable>
+        </AnimateTranslateX>
         :
         null;
 

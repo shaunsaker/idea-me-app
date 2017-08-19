@@ -6,7 +6,6 @@ import {
     TouchableWithoutFeedback,
     TextInput,
     StyleSheet,
-    Animated,
     Platform,
 } from "react-native";
 
@@ -14,9 +13,10 @@ import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
 
+import AnimateTranslateX from '../animators/AnimateTranslateX';
+import AnimateOpacity from '../animators/AnimateOpacity';
 import Touchable from './Touchable';
 import DeleteButton from './DeleteButton';
-import AnimateTranslateX from '../animators/AnimateTranslateX';
 
 const styles = StyleSheet.create({
     inputWrapper: {
@@ -180,9 +180,9 @@ export default class Input extends React.Component {
     render() {
         const togglePasswordButton = this.props.type === 'password' && this.state.showTogglePasswordButton &&
             <AnimateTranslateX
-                shouldAnimate
                 initialValue={40}
-                finalValue={0}>
+                finalValue={0}
+                shouldAnimateIn>
                 <Touchable
                     onPress={this.togglePassword}
                     style={styles.togglePasswordContainer} >
@@ -194,9 +194,9 @@ export default class Input extends React.Component {
 
         const characterCount = this.props.maxLength && this.state.showCharacterCount &&
             <AnimateTranslateX
-                shouldAnimate
                 initialValue={40}
-                finalValue={0}>
+                finalValue={0}
+                shouldAnimateIn>
                 <View style={styles.characterCountContainer}>
                     <Text style={[styles.characterCountText, styleConstants.primaryFont]}>
                         {(this.props.value ? this.props.value.length : 0) + ' / ' + this.props.maxLength}
@@ -205,10 +205,14 @@ export default class Input extends React.Component {
             </AnimateTranslateX>
 
         const clearTextButton = this.props.value ?
-            <View style={styles.clearTextButtonContainer}>
+            <AnimateOpacity
+                initialValue={0}
+                finalValue={1}
+                shouldAnimateIn
+                style={styles.clearTextButtonContainer}>
                 <DeleteButton
                     handlePress={this.clearInputText} />
-            </View>
+            </AnimateOpacity>
             :
             null;
 

@@ -31,7 +31,7 @@ import { deleteFile } from './fileSystem';
 export function* sagas() {
     yield all([
 
-        // Auth
+        // User auth
         fork(takeLatest, 'getUserAuth', getUserAuth),
         fork(takeLatest, 'signInUserWithEmail', signInUserWithEmail),
         fork(takeLatest, 'sendPasswordResetEmail', sendPasswordResetEmail),
