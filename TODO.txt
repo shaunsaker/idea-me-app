@@ -1,7 +1,6 @@
 TODOS
-    Voice note deleting is buggy
-    Voice notes should be deleted from device too
-    Photos should be deleted from device too
+    Voice note record start fail (permissions?)
+    Upgrade RN and outdated packages
     Dropdown menu needs work
         Header/footer should look the same
         Item heights are incorrect
