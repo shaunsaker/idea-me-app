@@ -118,40 +118,32 @@ export class VoiceNotes extends React.Component {
     deleteVoiceNote() {
         this.toggleDeleteModal();
 
-        Permissions.handlePermission('microphone', () => {
-            const newVoiceNotes = utilities.removeObjectFromDictionary(this.state.deleteVoiceNoteUID, this.props.newVoiceNotes);
+        const newVoiceNotes = utilities.removeObjectFromDictionary(this.state.deleteVoiceNoteUID, this.props.newVoiceNotes);
 
-            this.props.dispatch({
-                type: 'SET_NEW_VOICE_NOTES',
-                newVoiceNotes,
-            });
-
-            if (!this.props.addIdea) {
-                let newIdea = utilities.cloneObject(this.props.idea);
-                newIdea['voiceNotes'] = newVoiceNotes;
-                const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
-
-                // Dispatch to store
-                this.props.dispatch({
-                    type: 'UPDATE_USER_DATA',
-                    node: 'ideas',
-                    userData: newIdeas,
-                });
-
-                // Dispatch to db
-                this.props.dispatch({
-                    type: 'deleteUserData',
-                    node: 'ideas/' + this.props.idea.uid + '/voiceNotes/' + this.state.deleteVoiceNoteUID,
-                    uid: this.props.uid,
-                });
-            }
-        }, () => {
-            this.props.dispatch({
-                type: 'SET_ERROR',
-                errorType: 'USER',
-                message: 'We need your permission to use your microphone.',
-            });
+        this.props.dispatch({
+            type: 'SET_NEW_VOICE_NOTES',
+            newVoiceNotes,
         });
+
+        if (!this.props.addIdea) {
+            let newIdea = utilities.cloneObject(this.props.idea);
+            newIdea['voiceNotes'] = newVoiceNotes;
+            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+
+            // Dispatch to store
+            this.props.dispatch({
+                type: 'UPDATE_USER_DATA',
+                node: 'ideas',
+                userData: newIdeas,
+            });
+
+            // Dispatch to db
+            this.props.dispatch({
+                type: 'deleteUserData',
+                node: 'ideas/' + this.props.idea.uid + '/voiceNotes/' + this.state.deleteVoiceNoteUID,
+                uid: this.props.uid,
+            });
+        }
     }
 
     render() {

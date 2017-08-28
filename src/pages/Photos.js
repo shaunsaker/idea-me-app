@@ -163,40 +163,32 @@ export class Photos extends React.Component {
     deletePhoto() {
         this.toggleDeleteModal();
 
-        Permissions.handlePermission('photo', () => {
-            let newPhotos = utilities.removeObjectFromDictionary(this.state.deletePhotoUID, this.props.newPhotos);
+        let newPhotos = utilities.removeObjectFromDictionary(this.state.deletePhotoUID, this.props.newPhotos);
 
-            this.props.dispatch({
-                type: 'SET_NEW_PHOTOS',
-                newPhotos,
-            });
-
-            if (!this.props.addIdea) {
-                let newIdea = utilities.cloneObject(this.props.idea);
-                newIdea['photos'] = newPhotos;
-                const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
-
-                // Dispatch to store
-                this.props.dispatch({
-                    type: 'UPDATE_USER_DATA',
-                    node: 'ideas',
-                    userData: newIdeas,
-                });
-
-                // Dispatch to db
-                this.props.dispatch({
-                    type: 'deleteUserData',
-                    node: 'ideas/' + this.props.idea.uid + '/photos/' + this.state.deletePhotoUID,
-                    uid: this.props.uid,
-                });
-            }
-        }, () => {
-            this.props.dispatch({
-                type: 'SET_ERROR',
-                errorType: 'USER',
-                message: 'We need your permission to access your photo gallery.',
-            });
+        this.props.dispatch({
+            type: 'SET_NEW_PHOTOS',
+            newPhotos,
         });
+
+        if (!this.props.addIdea) {
+            let newIdea = utilities.cloneObject(this.props.idea);
+            newIdea['photos'] = newPhotos;
+            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+
+            // Dispatch to store
+            this.props.dispatch({
+                type: 'UPDATE_USER_DATA',
+                node: 'ideas',
+                userData: newIdeas,
+            });
+
+            // Dispatch to db
+            this.props.dispatch({
+                type: 'deleteUserData',
+                node: 'ideas/' + this.props.idea.uid + '/photos/' + this.state.deletePhotoUID,
+                uid: this.props.uid,
+            });
+        }
     }
 
     render() {
