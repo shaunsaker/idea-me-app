@@ -1,9 +1,4 @@
 TODOS
-    Voice note record start fail (permissions?)
-    After camera permission, call handleImage if possible
-    Dropdown menu needs work
-        Header/footer should look the same
-        Item heights are incorrect
     Find a unique new word for categories (eg. wall, board)
     Tooltips
         Bite sized
