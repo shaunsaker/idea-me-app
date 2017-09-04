@@ -131,7 +131,12 @@ export class Splash extends React.Component {
             .then(() => {
                 this.closeShareModal();
             })
-            .catch(error => console.log('Share error:', error.message)); // TODO: Snackbar
+            .catch(error => {
+                this.props.dispatch({
+                    errorType: 'share',
+                    message: error.message, // TODO: check this
+                });
+            });
     }
 
     closeShareModal() {
