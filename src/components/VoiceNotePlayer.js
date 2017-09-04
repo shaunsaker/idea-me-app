@@ -1,11 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    TouchableWithoutFeedback,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, TouchableWithoutFeedback, Text, StyleSheet } from 'react-native';
 import { Player } from 'react-native-audio-toolkit';
 
 import config from '../config';
@@ -27,16 +22,12 @@ const styles = StyleSheet.create({
         borderColor: styleConstants.lightGrey,
         borderRadius: 8,
     },
-    voiceNoteIconContainer: {
-
-    },
+    voiceNoteIconContainer: {},
     voiceNoteIcon: {
         fontSize: styleConstants.iconFont,
         color: styleConstants.primary,
     },
-    voiceNoteDurationTextContainer: {
-
-    },
+    voiceNoteDurationTextContainer: {},
 });
 
 export default class VoiceNotePlayer extends React.Component {
@@ -52,13 +43,13 @@ export default class VoiceNotePlayer extends React.Component {
             isPlaying: false,
             isPaused: false,
             duration: null,
-        }
+        };
     }
 
     static get propTypes() {
         return {
             voiceNote: PropTypes.object.isRequired,
-        }
+        };
     }
 
     componentDidMount() {
@@ -79,7 +70,7 @@ export default class VoiceNotePlayer extends React.Component {
         this.player = new Player(
             utilities.getFileName(this.props.voiceNote.filePath),
             {
-                autoDestroy: false
+                autoDestroy: false,
             }
         ).prepare(() => {
             this.setState({
@@ -96,17 +87,17 @@ export default class VoiceNotePlayer extends React.Component {
     }
 
     togglePlayback() {
-
         // 0 => Play || Pause => Play
-        if ((!this.state.isPlaying && !this.state.isPaused) || this.state.isPaused) {
+        if (
+            (!this.state.isPlaying && !this.state.isPaused) ||
+            this.state.isPaused
+        ) {
             this.setState({
                 isPlaying: true,
                 isPaused: false,
             });
-        }
-
-        // Play => Pause
-        else if (this.state.isPlaying) {
+        } else if (this.state.isPlaying) {
+            // Play => Pause
             this.setState({
                 isPlaying: false,
                 isPaused: true,
@@ -114,33 +105,37 @@ export default class VoiceNotePlayer extends React.Component {
         }
 
         this.player.playPause((error, paused) => {
-
-            // Do  nothing
+            if (error) {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'audio',
+                    message: error.message, // TODO: check this
+                });
+            }
         });
     }
 
     render() {
         const containerStyles = this.state.isPlaying && {
             backgroundColor: 'transparent',
-        }
+        };
 
         const iconName = this.state.isPlaying ? 'pause' : 'play';
 
         return (
             <Touchable
                 onPress={this.togglePlayback}
-                style={[styles.voiceNoteContainer, containerStyles]} >
+                style={[styles.voiceNoteContainer, containerStyles]}>
                 <View style={styles.voiceNoteIconContainer}>
-                    <Icon
-                        name={iconName}
-                        style={styles.voiceNoteIcon} />
+                    <Icon name={iconName} style={styles.voiceNoteIcon} />
                 </View>
                 <View style={styles.voiceNoteDurationTextContainer}>
                     <Counter
                         displayDuration={this.state.duration}
                         totalDuration={this.state.duration}
                         startTimer={this.state.isPlaying}
-                        pauseTimer={this.state.isPaused} />
+                        pauseTimer={this.state.isPaused}
+                    />
                 </View>
             </Touchable>
         );

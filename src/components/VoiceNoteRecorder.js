@@ -154,7 +154,7 @@ export default class VoiceNoteRecorder extends React.Component {
             if (error) {
                 this.props.dispatch({
                     type: 'SET_ERROR',
-                    errorType: 'microphone',
+                    errorType: 'audio',
                     message: error, // TODO: check this
                 });
             } else if (path) {
@@ -170,7 +170,7 @@ export default class VoiceNoteRecorder extends React.Component {
             if (error) {
                 this.props.dispatch({
                     type: 'SET_ERROR',
-                    errorType: 'microphone',
+                    errorType: 'audio',
                     message: error, // TODO: check this
                 });
             }
