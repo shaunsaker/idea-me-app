@@ -1,34 +1,15 @@
 TODOS
     Voice note record start fail (permissions?)
-    Upgrade RN and outdated packages
+    After camera permission, call handleImage if possible
     Dropdown menu needs work
         Header/footer should look the same
         Item heights are incorrect
     Find a unique new word for categories (eg. wall, board)
-    Categories should be coloured
-        User is able to change colours
-    Ability to sort ideas
-        Alphabetically
-        Last Edited
-        Last Added
-        Priority
-        Default sort is Priority => Last Edited => Last Added => Alphabetical
-    Views
-        Grid View
-            Opens as idea card in modal
-        Card View (CURRENT)
-        Can set in settings
     Tooltips
         Bite sized
         Explain more of the features
-    Optimise data store (only reference ids)
-    Apply material styles
-        See material.io
     Test Responsiveness
         Use page component and styleConstants to test screen dimensions
-
-BUGS
-    Delete voice note did not work (half arsed voice note had no uid)
 
 WRAP UP  
     Test all errors
@@ -37,14 +18,6 @@ WRAP UP
             Share
         Send errors to db  
         Try break app, log all errors then fix them as a batch
-    IOS
-        React-native-firebase
-        Integrate react-native-fbsdk on iOS
-        Integrate react-native-google-signin on iOS
-        Icons
-        React native keyboard spacer?
-        Sounds
-        Permissions
     Optimise code
         Use FlatList/VirtualizedList for all lists > screen width/height
             shouldComponentUpdate will help render when it should
@@ -69,6 +42,15 @@ WRAP UP
     User survey
         Add link to Profile page
 
+IOS
+    React-native-firebase
+    Integrate react-native-fbsdk on iOS
+    Integrate react-native-google-signin on iOS
+    Icons
+    React native keyboard spacer?
+    Sounds
+    Permissions
+
 V2
     Add Sketches to Ideas
     Convert Voice Notes to Text
@@ -78,6 +60,20 @@ V2
     Email after signup detailing what app does and howtos 
     Group idea editing (sharing category boards between groups)
     Android 7 Modal gif style tooltips
+    Upgrade RN and outdated packages
+    Categories should be coloured
+        User is able to change colours
+    Ability to sort ideas
+        Alphabetically
+        Last Edited
+        Last Added
+        Priority
+        Default sort is Priority => Last Edited => Last Added => Alphabetical
+    Views
+        Grid View
+            Opens as idea card in modal
+        Card View (CURRENT)
+        Can set in settings
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app
