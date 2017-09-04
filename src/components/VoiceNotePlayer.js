@@ -4,7 +4,6 @@ import { View, TouchableWithoutFeedback, Text, StyleSheet } from 'react-native';
 import { Player } from 'react-native-audio-toolkit';
 import { connect } from 'react-redux';
 
-import config from '../config';
 import utilities from '../utilities';
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';

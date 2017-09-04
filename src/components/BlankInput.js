@@ -7,7 +7,6 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import config from '../config';
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
 

@@ -2,7 +2,6 @@ import { call, put } from 'redux-saga/effects';
 
 import FileSystem from '../fileSystem/index';
 
-import config from '../config';
 import utilities from '../utilities';
 
 export function* deleteFile(action) {
