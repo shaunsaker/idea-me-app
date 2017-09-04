@@ -1,10 +1,7 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    StyleSheet,
-} from "react-native";
-import { connect } from "react-redux";
+import { View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
@@ -56,10 +53,11 @@ export class Settings extends React.Component {
     }
 
     render() {
-        const settingsArray = utilities.convertDictionaryToArray(this.props.settings);
+        const settingsArray = utilities.convertDictionaryToArray(
+            this.props.settings
+        );
 
-        // TODO: If settings > 3, use FlatList
-        const settings = settingsArray.map((value) => {
+        const settings = settingsArray.map(value => {
             return (
                 <ToggleButton
                     key={value.uid}
@@ -67,33 +65,26 @@ export class Settings extends React.Component {
                     title={value.title}
                     active={value.enabled}
                     uid={value.uid}
-                    handleToggle={this.toggleSetting} />
+                    handleToggle={this.toggleSetting}
+                />
             );
         });
 
         return (
-            <Page
-                fauxFooter >
+            <Page fauxFooter>
+                <Header text="Settings" headerShadow backButton />
 
-                <Header
-                    text='Settings'
-                    headerShadow
-                    backButton />
-
-                <View style={styles.settingsContainer}>
-                    {settings}
-                </View>
-
-            </Page >
+                <View style={styles.settingsContainer}>{settings}</View>
+            </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         uid: state.main.userAuth.uid,
         settings: state.main.userData.settings,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(Settings);

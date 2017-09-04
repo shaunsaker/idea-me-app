@@ -1,9 +1,6 @@
 WRAP UP  
-    Search TODOs
-    Test all errors
-        Send errors to db  
-        Try break app, log all errors then fix them as a batch
     Optimise code
+        this.props.dispatch calls should be from connected components
         Use FlatList/VirtualizedList for all lists > screen width/height
             shouldComponentUpdate will help render when it should
         Don't need ? : null, just use && (watch out for raw text bug)
@@ -63,6 +60,7 @@ V2
     Tooltips
         Bite sized
         Feature based (ie. no order, flow independent)    
+    Send errors to db  
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app

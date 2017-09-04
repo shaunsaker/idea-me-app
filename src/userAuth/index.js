@@ -7,7 +7,7 @@ import config from '../config';
 const response = {
     authenticated: null,
     message: null,
-    success: null
+    success: null,
 };
 
 export default class UserAuth {
@@ -22,8 +22,7 @@ export default class UserAuth {
                     anonymous: user._user.isAnonymous,
                 };
                 resolve(response);
-            }
-            else {
+            } else {
                 response.authenticated = false;
                 resolve(response);
             }
@@ -32,8 +31,13 @@ export default class UserAuth {
 
     static signUpUserWithEmail(action) {
         return new Promise(resolve => {
-            firebase.auth().createUserWithEmailAndPassword(action.userEmail, action.userPassword)
-                .then((user) => {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(
+                    action.userEmail,
+                    action.userPassword
+                )
+                .then(user => {
                     response.authenticated = true;
                     response.message = {
                         uid: user._user.uid,
@@ -41,7 +45,7 @@ export default class UserAuth {
                     };
                     resolve(response);
                 })
-                .catch((error) => {
+                .catch(error => {
                     response.authenticated = false;
                     response.message = error.code;
                     resolve(response);
@@ -51,15 +55,20 @@ export default class UserAuth {
 
     static signInUserWithEmail(action) {
         return new Promise(resolve => {
-            firebase.auth().signInWithEmailAndPassword(action.userEmail, action.userPassword)
-                .then((user) => {
+            firebase
+                .auth()
+                .signInWithEmailAndPassword(
+                    action.userEmail,
+                    action.userPassword
+                )
+                .then(user => {
                     response.authenticated = true;
                     response.message = {
                         uid: user._user.uid,
                     };
                     resolve(response);
                 })
-                .catch((error) => {
+                .catch(error => {
                     response.authenticated = false;
                     response.message = error.code;
                     resolve(response);
@@ -69,7 +78,9 @@ export default class UserAuth {
 
     static sendPasswordResetEmail(action) {
         return new Promise(resolve => {
-            firebase.auth().sendPasswordResetEmail(action.userEmail)
+            firebase
+                .auth()
+                .sendPasswordResetEmail(action.userEmail)
                 .then(() => {
                     response.success = true;
                     response.message = null;
@@ -86,28 +97,32 @@ export default class UserAuth {
     static signInUserWithFacebook(action) {
         return new Promise(resolve => {
             LoginManager.logInWithReadPermissions(['public_profile']).then(
-                (result) => {
+                result => {
                     if (result.isCancelled) {
                         response.authenticated = false;
                         response.message = 'Facebook login cancelled';
                         resolve(response);
                     } else {
                         AccessToken.getCurrentAccessToken()
-                            .then((user) => {
+                            .then(user => {
                                 const credential = {
                                     provider: 'facebook',
                                     token: user.accessToken,
                                     secret: '',
-                                }
+                                };
 
-                                firebase.auth().signInWithCredential(credential)
-                                    .then((currentUser) => {
+                                firebase
+                                    .auth()
+                                    .signInWithCredential(credential)
+                                    .then(currentUser => {
                                         response.authenticated = true;
                                         response.message = {
                                             uid: currentUser._user.uid,
                                             userEmail: currentUser._user.email,
-                                            userName: currentUser._user.displayName,
-                                            userPhotoURL: currentUser._user.photoURL,
+                                            userName:
+                                                currentUser._user.displayName,
+                                            userPhotoURL:
+                                                currentUser._user.photoURL,
                                         };
                                         resolve(response);
                                     })
@@ -117,25 +132,24 @@ export default class UserAuth {
                                         resolve(response);
                                     });
                             })
-                            .catch((error) => {
+                            .catch(error => {
                                 response.authenticated = false;
                                 response.message = 'Unable to get access token';
                                 resolve(response);
                             });
                     }
                 },
-                (error) => {
+                error => {
                     response.authenticated = false;
-                    response.message = error; // TODO: check this 
+                    response.message = error; // TODO: check this
                     resolve(response);
                 }
-            )
+            );
         });
     }
 
     static signInUserWithGoogle(action) {
         return new Promise(resolve => {
-
             GoogleSignin.hasPlayServices({ autoResolve: true })
                 .then(() => {
                     GoogleSignin.configure({
@@ -143,21 +157,27 @@ export default class UserAuth {
                     })
                         .then(() => {
                             GoogleSignin.signIn()
-                                .then((user) => {
+                                .then(user => {
                                     const credential = {
                                         provider: 'google',
                                         token: user.idToken,
                                         secret: user.accessToken,
-                                    }
+                                    };
 
-                                    firebase.auth().signInWithCredential(credential)
-                                        .then((currentUser) => {
+                                    firebase
+                                        .auth()
+                                        .signInWithCredential(credential)
+                                        .then(currentUser => {
                                             response.authenticated = true;
                                             response.message = {
                                                 uid: currentUser._user.uid,
-                                                userEmail: currentUser._user.email,
-                                                userName: currentUser._user.displayName,
-                                                userPhotoURL: currentUser._user.photoURL,
+                                                userEmail:
+                                                    currentUser._user.email,
+                                                userName:
+                                                    currentUser._user
+                                                        .displayName,
+                                                userPhotoURL:
+                                                    currentUser._user.photoURL,
                                             };
                                             resolve(response);
                                         })
@@ -167,20 +187,20 @@ export default class UserAuth {
                                             resolve(response);
                                         });
                                 })
-                                .catch((error) => {
+                                .catch(error => {
                                     response.authenticated = false;
                                     response.message = error; // TODO: check this
                                     resolve(response);
                                 })
                                 .done();
                         })
-                        .catch((error) => {
+                        .catch(error => {
                             response.authenticated = false;
                             response.message = error; // TODO: check this
                             resolve(response);
                         });
                 })
-                .catch((error) => {
+                .catch(error => {
                     response.authenticated = false;
                     response.message = error; // TODO: check this
                     resolve(response);
@@ -190,8 +210,10 @@ export default class UserAuth {
 
     static signInUserAnonymously() {
         return new Promise(resolve => {
-            firebase.auth().signInAnonymously()
-                .then((user) => {
+            firebase
+                .auth()
+                .signInAnonymously()
+                .then(user => {
                     response.authenticated = true;
                     response.message = {
                         uid: user._user.uid,
@@ -208,8 +230,10 @@ export default class UserAuth {
 
     static signOutUser() {
         return new Promise(resolve => {
-            firebase.auth().signOut()
-                .then((user) => {
+            firebase
+                .auth()
+                .signOut()
+                .then(user => {
                     response.success = true;
                     resolve(response);
                 })
