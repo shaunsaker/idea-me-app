@@ -1,6 +1,5 @@
 import { call, put, all } from 'redux-saga/effects';
 
-import utilities from '../utilities';
 import CloudData from '../cloudData/index';
 
 export function* loadUserData(action) {

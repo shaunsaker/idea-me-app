@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import utilities from '../utilities';
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
 

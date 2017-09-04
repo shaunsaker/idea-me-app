@@ -2,8 +2,6 @@ import { call, put } from 'redux-saga/effects';
 
 import FileSystem from '../fileSystem/index';
 
-import utilities from '../utilities';
-
 export function* deleteFile(action) {
     const deleteFileResponse = yield call(FileSystem.deleteFile, action);
     console.log('deleteFileResponse', deleteFileResponse);

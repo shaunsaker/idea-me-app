@@ -7,7 +7,6 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
 
 import AnimateOpacity from '../animators/AnimateOpacity';
