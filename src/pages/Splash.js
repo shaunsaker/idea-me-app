@@ -133,6 +133,7 @@ export class Splash extends React.Component {
             })
             .catch(error => {
                 this.props.dispatch({
+                    type: 'SET_ERROR',
                     errorType: 'share',
                     message: error.message, // TODO: check this
                 });

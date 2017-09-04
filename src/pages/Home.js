@@ -147,7 +147,13 @@ export class Home extends React.Component {
             }
         )
             .then(/* Do nothing. It's obvious to the user that his message was shared. */)
-            .catch(error => console.log('Share error:', error.message));
+            .catch(error => {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'share',
+                    message: error.message, // TODO: check this
+                });
+            });
     }
 
     toggleDeleteModal(idea) {
