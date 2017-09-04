@@ -1,12 +1,9 @@
 TODOS
-    Test Responsiveness
-        Use page component and styleConstants to test screen dimensions
+    Dispatch share error
 
 WRAP UP  
+    Search TODOs
     Test all errors
-        Dispatch errors 
-            Voice note record
-            Share
         Send errors to db  
         Try break app, log all errors then fix them as a batch
     Optimise code
@@ -41,6 +38,7 @@ IOS
     React native keyboard spacer?
     Sounds
     Permissions
+    Check dropdown item height value
 
 V2
     Add Sketches to Ideas

@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    StatusBar,
-    View,
-    Share,
-    Platform,
-} from "react-native";
+import { StatusBar, View, Share, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -32,7 +27,7 @@ export class Splash extends React.Component {
         this.state = {
             showShareModal: false,
             isFethingData: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -60,23 +55,22 @@ export class Splash extends React.Component {
     }
 
     runLogic() {
-
         // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
         if (this.props.redirectToWelcomePage) {
             Actions.welcome();
-        }
-
-        // Anonymous user (no data)
-        else if (this.props.authenticated && this.props.anonymous) {
+        } else if (this.props.authenticated && this.props.anonymous) {
+            // Anonymous user (no data)
             this.props.dispatch({
                 type: 'TOGGLE_LOADING',
             });
 
             Actions.home();
-        }
-
-        // If we're authenticated and we have not yet loaded data, load/save data to db
-        else if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
+        } else if (
+            this.props.authenticated &&
+            !this.props.cloudDataSuccess &&
+            !this.state.isFetchingData
+        ) {
+            // If we're authenticated and we have not yet loaded data, load/save data to db
             this.setState({
                 isFetchingData: true,
             });
@@ -85,30 +79,29 @@ export class Splash extends React.Component {
                 type: 'loadUserData',
                 uid: this.props.uid,
             });
-        }
-
-        // If we have data, we have everything we need
-        else if (this.props.authenticated && this.props.cloudDataSuccess) {
-
-            // If user has been using app for a week = approx 604800s   TODO: This should be a cloud/backend function
+        } else if (this.props.authenticated && this.props.cloudDataSuccess) {
+            // If we have data, we have everything we need
+            // If user has been using app for a week = approx 604800s
             const currentDate = Date.now();
-            const showShareModal = (currentDate - this.props.dateJoined >= 604800 * 1000);
+            const showShareModal =
+                currentDate - this.props.dateJoined >= 604800 * 1000;
 
-            if ((this.props.oneWeekUser || (showShareModal && !this.props.hasSeenShareModal)) && !this.state.showShareModal) {
+            if (
+                (this.props.oneWeekUser ||
+                    (showShareModal && !this.props.hasSeenShareModal)) &&
+                !this.state.showShareModal
+            ) {
                 this.setState({
                     showShareModal: !this.state.showShareModal,
                 });
-            }
-            else if (!this.state.showShareModal) {
+            } else if (!this.state.showShareModal) {
                 this.props.dispatch({
-                    type: 'RESET_ERROR'
+                    type: 'RESET_ERROR',
                 });
 
-                Actions.home();;
+                Actions.home();
             }
-        }
-        else if (!this.props.authenticated) {
-
+        } else if (!this.props.authenticated) {
             // getUserAuth is not initialised immediately
             setTimeout(() => {
                 this.props.dispatch({
@@ -119,23 +112,26 @@ export class Splash extends React.Component {
     }
 
     shareApp() {
-        const shareMessage = Platform.OS === 'android' ?
-            'Hey! Check this out... ' + config.app.url
-            :
-            'Hey! Check this out... '; // ios only
+        const shareMessage =
+            Platform.OS === 'android'
+                ? 'Hey! Check this out... ' + config.app.url
+                : 'Hey! Check this out... '; // ios only
 
-        Share.share({
-            message: shareMessage,
-            url: config.app.url, // ios only
-            title: 'IdeaMe'
-        }, {
+        Share.share(
+            {
+                message: shareMessage,
+                url: config.app.url, // ios only
+                title: 'IdeaMe',
+            },
+            {
                 // Android only:
                 dialogTitle: 'Share IdeaMe',
-            })
+            }
+        )
             .then(() => {
                 this.closeShareModal();
             })
-            .catch((error) => console.log('Share error:', error.message)); // TODO: Snackbar
+            .catch(error => console.log('Share error:', error.message)); // TODO: Snackbar
     }
 
     closeShareModal() {
@@ -150,34 +146,34 @@ export class Splash extends React.Component {
 
         // Might take a while for the hasSeenShareModal prop to come in so let's redirect immediately
         this.props.dispatch({
-            type: 'RESET_ERROR'
+            type: 'RESET_ERROR',
         });
 
         Actions.home();
     }
 
     render() {
-        const shareModal = this.state.showShareModal &&
+        const shareModal = this.state.showShareModal && (
             <InfoModal
-                title='Enjoying IdeaMe?'
-                subtitle='Help us spread the word by sharing the app with your friends.'
-                buttonText='Share'
-                buttonIconName='share'
+                title="Enjoying IdeaMe?"
+                subtitle="Help us spread the word by sharing the app with your friends."
+                buttonText="Share"
+                buttonIconName="share"
                 canClose
                 handlePress={this.shareApp}
-                handleClose={this.closeShareModal} />;
+                handleClose={this.closeShareModal}
+            />
+        );
 
         return (
-            <Page
-                justifyContent='center'
-                fauxFooter >
-
+            <Page justifyContent="center" fauxFooter>
                 <StatusBar backgroundColor={styleConstants.transPrimary} />
 
                 <Icon
-                    name='lightbulb'
+                    name="lightbulb"
                     color={styleConstants.lightGrey}
-                    size={64} />
+                    size={64}
+                />
 
                 <View style={{ position: 'absolute', bottom: 0 }}>
                     <InfoBlock
@@ -185,13 +181,13 @@ export class Splash extends React.Component {
                         subtitle={this.quote.author}
                         titleColor={styleConstants.white}
                         subtitleColor={styleConstants.lightGrey}
-                        fullWidth />
+                        fullWidth
+                    />
                 </View>
 
                 {shareModal}
 
                 <SnackBar />
-
             </Page>
         );
     }
@@ -204,13 +200,17 @@ function mapStateToProps(state) {
         redirectToWelcomePage: state.main.userAuth.redirectToWelcomePage,
         uid: state.main.userAuth.uid,
 
-        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
+        cloudDataSuccess:
+            state.main.appState.error.type === 'CLOUD_DATA' &&
+            state.main.appState.error.success,
 
         quotes: state.main.appData.quotes,
 
         dateJoined: state.main.userData.profile.dateJoined,
         oneWeekUser: config.testing.oneWeekUser,
-        hasSeenShareModal: state.main.userData.app && state.main.userData.app.hasSeenShareModal,
+        hasSeenShareModal:
+            state.main.userData.app &&
+            state.main.userData.app.hasSeenShareModal,
     };
 }
 

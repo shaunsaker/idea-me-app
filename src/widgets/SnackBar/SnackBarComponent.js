@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from '../../assets/icons/index';
 
 import config from '../../config';
@@ -15,7 +11,7 @@ import AnimateTranslateY from '../../animators/AnimateTranslateY';
 const styles = StyleSheet.create({
     messageWrapper: {
         ...styleConstants.largeShadow,
-        elevation: 100, // TODO: check if this is necessary
+        elevation: 100,
         position: 'absolute',
         bottom: 0,
         width: styleConstants.windowWidth,
@@ -55,7 +51,7 @@ const styles = StyleSheet.create({
     },
     iconContainer: {
         marginRight: 8,
-        marginTop: 2
+        marginTop: 2,
     },
     icon: {
         fontSize: styleConstants.iconFont,
@@ -76,7 +72,7 @@ export default class SnackBarComponent extends React.Component {
 
         this.state = {
             hideSnackBar: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -97,15 +93,19 @@ export default class SnackBarComponent extends React.Component {
     render() {
         const iconName = this.props.success ? 'check' : 'error';
 
-        const retryButton = this.props.handleRetryAction &&
+        const retryButton = this.props.handleRetryAction && (
             <Touchable
                 onPress={this.props.handleRetryAction}
                 style={styles.retryButton}>
                 <Text
-                    style={[styles.retryButtonText, styleConstants.primaryFont]}>
+                    style={[
+                        styles.retryButtonText,
+                        styleConstants.primaryFont,
+                    ]}>
                     RETRY
                 </Text>
             </Touchable>
+        );
 
         return (
             <AnimateTranslateY
@@ -119,11 +119,22 @@ export default class SnackBarComponent extends React.Component {
                     <View style={styles.iconContainer}>
                         <Icon
                             name={iconName}
-                            style={[styles.icon, { color: this.props.success ? styleConstants.success : styleConstants.danger }]} />
+                            style={[
+                                styles.icon,
+                                {
+                                    color: this.props.success
+                                        ? styleConstants.success
+                                        : styleConstants.danger,
+                                },
+                            ]}
+                        />
                     </View>
                     <View style={styles.messageTextContainer}>
                         <Text
-                            style={[styles.messageText, styleConstants.primaryFont]}
+                            style={[
+                                styles.messageText,
+                                styleConstants.primaryFont,
+                            ]}
                             multiline>
                             {this.props.text}
                         </Text>
@@ -133,9 +144,7 @@ export default class SnackBarComponent extends React.Component {
                 <Touchable
                     onPress={this.hideSnackBar}
                     style={styles.closeIconContainer}>
-                    <Icon
-                        name='close'
-                        style={styles.icon} />
+                    <Icon name="close" style={styles.icon} />
                 </Touchable>
             </AnimateTranslateY>
         );

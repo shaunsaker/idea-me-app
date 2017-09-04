@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
@@ -6,7 +6,7 @@ import {
     Text,
     StyleSheet,
     Animated,
-} from "react-native";
+} from 'react-native';
 import { Recorder } from 'react-native-audio-toolkit';
 import { Actions } from 'react-native-router-flux';
 
@@ -22,9 +22,7 @@ import AnimateRotate from '../animators/AnimateRotate';
 import Counter from './Counter';
 
 const styles = StyleSheet.create({
-    container: {
-
-    },
+    container: {},
     button: {
         height: 53,
         padding: 16,
@@ -65,21 +63,25 @@ export default class VoiceNoteRecorder extends React.Component {
             isCompressed: true,
             isCompressing: false,
             newVoiceNoteFilePath: null,
-        }
+        };
     }
 
     static get propTypes() {
         return {
             handleRecord: PropTypes.func.isRequired,
-        }
+        };
     }
 
     componentDidMount() {
-        Permissions.handlePermission('microphone', () => {
-            this.reloadRecorder();
-        }, () => {
-            Actions.pop();
-        });
+        Permissions.handlePermission(
+            'microphone',
+            () => {
+                this.reloadRecorder();
+            },
+            () => {
+                Actions.pop();
+            }
+        );
     }
 
     handleOnPressIn() {
@@ -87,7 +89,7 @@ export default class VoiceNoteRecorder extends React.Component {
     }
 
     handleOnPressOut() {
-        this.compressButton();;
+        this.compressButton();
     }
 
     expandButton() {
@@ -96,14 +98,11 @@ export default class VoiceNoteRecorder extends React.Component {
             isExpanding: true,
         });
 
-        Animated.timing(
-            this.state.animatedValue,
-            {
-                toValue: 1,
-                duration: config.animation.short,
-                easing: config.animation.easing,
-            }
-        ).start(() => {
+        Animated.timing(this.state.animatedValue, {
+            toValue: 1,
+            duration: config.animation.short,
+            easing: config.animation.easing,
+        }).start(() => {
             this.setState({
                 isExpanding: false,
                 isExpanded: true,
@@ -119,14 +118,11 @@ export default class VoiceNoteRecorder extends React.Component {
             isCompressing: true,
         });
 
-        Animated.timing(
-            this.state.animatedValue,
-            {
-                toValue: 0,
-                duration: config.animation.short,
-                easing: config.animation.easing,
-            }
-        ).start(() => {
+        Animated.timing(this.state.animatedValue, {
+            toValue: 0,
+            duration: config.animation.short,
+            easing: config.animation.easing,
+        }).start(() => {
             this.setState({
                 isExpanded: false, // fixes a bug when compressing mid-transition
                 isCompressing: false,
@@ -155,16 +151,28 @@ export default class VoiceNoteRecorder extends React.Component {
                 //encoder: 'aac', // autodetected from path
             }
         ).prepare((error, path) => {
-            this.setState({
-                newVoiceNoteFilePath: path,
-            })
+            if (error) {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'microphone',
+                    message: error, // TODO: check this
+                });
+            } else if (path) {
+                this.setState({
+                    newVoiceNoteFilePath: path,
+                });
+            }
         });
     }
 
     toggleRecording() {
         this.recorder.toggleRecord((error, stopped) => {
             if (error) {
-                console.log(error); // TODO: dispatch error
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'microphone',
+                    message: error, // TODO: check this
+                });
             }
             if (stopped) {
                 this.props.handleRecord(this.state.newVoiceNoteFilePath);
@@ -179,33 +187,34 @@ export default class VoiceNoteRecorder extends React.Component {
                 inputRange: [0, 1],
                 outputRange: [this.initialButtonWidth, this.finalButtonWidth],
             }),
-        }
+        };
         const backgroundColorStyles = {
             backgroundColor: this.state.animatedValue.interpolate({
                 inputRange: [0, 1],
                 outputRange: [styleConstants.primary, styleConstants.white],
             }),
-        }
+        };
         const color = this.state.animatedValue.interpolate({
             inputRange: [0, 1],
             outputRange: [styleConstants.white, styleConstants.danger],
         });
         const colorStyles = {
             color,
-        }
+        };
         const borderColorStyles = {
             borderColor: color,
-        }
+        };
 
-        const duration = this.state.isExpanded && !this.state.isCollapsing &&
+        const duration = this.state.isExpanded &&
+        !this.state.isCollapsing && (
             <AnimateOpacity
                 initialValue={0}
                 finalValue={1}
                 shouldAnimateIn
                 style={styles.durationTextContainer}>
-                <Counter
-                    startTimer />
-            </AnimateOpacity>;
+                <Counter startTimer />
+            </AnimateOpacity>
+        );
 
         return (
             <View style={styles.container}>
@@ -213,19 +222,29 @@ export default class VoiceNoteRecorder extends React.Component {
                     onPressIn={this.handleOnPressIn}
                     onPressOut={this.handleOnPressOut}>
                     <View>
-                        <Animated.View style={[styles.button, widthStyles, backgroundColorStyles, borderColorStyles]}>
+                        <Animated.View
+                            style={[
+                                styles.button,
+                                widthStyles,
+                                backgroundColorStyles,
+                                borderColorStyles,
+                            ]}>
                             <AnimateBlink
-                                shouldAnimate={this.state.isExpanded && !this.state.isCompressing}>
+                                shouldAnimate={
+                                    this.state.isExpanded &&
+                                    !this.state.isCompressing
+                                }>
                                 <AnimateRotate
                                     initialValue={0}
                                     finalValue={-360}
                                     shouldAnimateIn={this.state.isExpanding}
                                     shouldAnimateOut={this.state.isCompressing}
-                                    duration={config.animation.duration.long} >
+                                    duration={config.animation.duration.long}>
                                     <Animated.Text style={colorStyles}>
                                         <Icon
-                                            name='voice'
-                                            style={styles.buttonIcon} />
+                                            name="voice"
+                                            style={styles.buttonIcon}
+                                        />
                                     </Animated.Text>
                                 </AnimateRotate>
                             </AnimateBlink>
