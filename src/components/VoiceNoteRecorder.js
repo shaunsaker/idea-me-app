@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Recorder } from 'react-native-audio-toolkit';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import config from '../config';
 import utilities from '../utilities';
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class VoiceNoteRecorder extends React.Component {
+export class VoiceNoteRecorder extends React.Component {
     constructor(props) {
         super(props);
 
@@ -256,3 +257,5 @@ export default class VoiceNoteRecorder extends React.Component {
         );
     }
 }
+
+export default connect()(VoiceNoteRecorder);

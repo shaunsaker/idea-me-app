@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Player } from 'react-native-audio-toolkit';
+import { connect } from 'react-redux';
 
-export default class SoundPlayer extends React.Component {
+export class SoundPlayer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -65,3 +66,5 @@ export default class SoundPlayer extends React.Component {
         return <View />;
     }
 }
+
+export default connect()(SoundPlayer);

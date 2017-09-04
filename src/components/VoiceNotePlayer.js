@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, TouchableWithoutFeedback, Text, StyleSheet } from 'react-native';
 import { Player } from 'react-native-audio-toolkit';
+import { connect } from 'react-redux';
 
 import config from '../config';
 import utilities from '../utilities';
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     voiceNoteDurationTextContainer: {},
 });
 
-export default class VoiceNotePlayer extends React.Component {
+export class VoiceNotePlayer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -141,3 +142,5 @@ export default class VoiceNotePlayer extends React.Component {
         );
     }
 }
+
+export default connect()(VoiceNotePlayer);
