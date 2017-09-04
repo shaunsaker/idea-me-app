@@ -1,8 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View
-} from "react-native";
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -24,7 +22,7 @@ export class Welcome extends React.Component {
 
         this.state = {
             isFetchingData: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -44,9 +42,12 @@ export class Welcome extends React.Component {
     }
 
     componentDidUpdate() {
-
         // If we're authenticated, we have not yet loaded data, load/save data to db
-        if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
+        if (
+            this.props.authenticated &&
+            !this.props.cloudDataSuccess &&
+            !this.state.isFetchingData
+        ) {
             this.setState({
                 isFetchingData: true,
             });
@@ -65,15 +66,12 @@ export class Welcome extends React.Component {
                         dateJoined: Date.now(),
                     },
                     categories: this.props.categories,
-                }
+                },
             });
-        }
-
-
-        // If we have data, we have everything we need
-        else if (this.props.authenticated && this.props.cloudDataSuccess) {
+        } else if (this.props.authenticated && this.props.cloudDataSuccess) {
+            // If we have data, we have everything we need
             this.props.dispatch({
-                type: 'RESET_ERROR'
+                type: 'RESET_ERROR',
             });
 
             Actions.home();
@@ -82,23 +80,22 @@ export class Welcome extends React.Component {
 
     signInUserWithFacebook() {
         this.props.dispatch({
-            type: 'TOGGLE_LOADING'
+            type: 'TOGGLE_LOADING',
         });
 
         this.props.dispatch({
-            type: 'signInUserWithFacebook'
+            type: 'signInUserWithFacebook',
         });
     }
 
     render() {
         return (
-            <Page
-                fauxFooter>
-
+            <Page fauxFooter>
                 <Header
-                    text='Log In'
+                    text="Log In"
                     handleTextPress={() => Actions.signInWithEmail()}
-                    textRight />
+                    textRight
+                />
 
                 <Logo />
 
@@ -106,33 +103,37 @@ export class Welcome extends React.Component {
                     title="Have great ideas and no where to store them?"
                     subtitle="You've come to the right place."
                     titleColor={styleConstants.white}
-                    subtitleColor={styleConstants.white} />
+                    subtitleColor={styleConstants.white}
+                />
 
                 <View>
                     <Button
-                        iconName='facebook'
+                        iconName="facebook"
                         handlePress={this.signInUserWithFacebook}
-                        text='Continue with Facebook'
-                        backgroundColor={styleConstants.white} />
+                        text="Continue with Facebook"
+                        backgroundColor={styleConstants.white}
+                    />
                     <Button
                         handlePress={() => Actions.signInOptions()}
-                        text='More Options'
-                        backgroundColor='transparent' />
+                        text="More Options"
+                        backgroundColor="transparent"
+                    />
                 </View>
 
                 <SnackBar />
 
                 <Loader />
-
             </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         authenticated: state.main.userAuth.authenticated,
-        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
+        cloudDataSuccess:
+            state.main.appState.error.type === 'CLOUD_DATA' &&
+            state.main.appState.error.success,
 
         uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
@@ -142,7 +143,7 @@ function mapStateToProps(state) {
         userSettings: state.main.userData.settings,
 
         categories: state.main.userData.categories,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(Welcome);

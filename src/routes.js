@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    Actions,
-    ActionConst,
-    Scene,
-} from 'react-native-router-flux';
+import { Actions, ActionConst, Scene } from 'react-native-router-flux';
 
 import Splash from './pages/Splash';
 import Welcome from './pages/Welcome';
@@ -23,77 +19,47 @@ import Settings from './pages/Settings';
 import About from './pages/About';
 
 const Scenes = Actions.create(
-    <Scene
-        key='root'
-        hideNavBar>
+    <Scene key="root" hideNavBar>
+        <Scene key="splash" component={Splash} initial={true} />
         <Scene
-            key='splash'
-            component={Splash}
-            initial={true} />
-        <Scene
-            key='welcome'
+            key="welcome"
             component={Welcome}
             type={ActionConst.REPLACE}
-            initial={false} />
+            initial={false}
+        />
+        <Scene key="signInOptions" component={SignInOptions} initial={false} />
         <Scene
-            key='signInOptions'
-            component={SignInOptions}
-            initial={false} />
-        <Scene
-            key='signInWithEmail'
+            key="signInWithEmail"
             component={SignInWithEmail}
-            initial={false} />
+            initial={false}
+        />
         <Scene
-            key='forgotPassword'
+            key="forgotPassword"
             component={ForgotPassword}
-            initial={false} />
+            initial={false}
+        />
         <Scene
-            key='home'
+            key="home"
             component={Home}
             type={ActionConst.REPLACE}
-            initial={false} />
+            initial={false}
+        />
+        <Scene key="notes" component={Notes} initial={false} />
+        <Scene key="photos" component={Photos} initial={false} />
+        <Scene key="voiceNotes" component={VoiceNotes} initial={false} />
+        <Scene key="addIdea" component={AddIdea} initial={false} />
+        <Scene key="editIdea" component={EditIdea} initial={false} />
+        <Scene key="categories" component={Categories} initial={false} />
         <Scene
-            key='notes'
-            component={Notes}
-            initial={false} />
-        <Scene
-            key='photos'
-            component={Photos}
-            initial={false} />
-        <Scene
-            key='voiceNotes'
-            component={VoiceNotes}
-            initial={false} />
-        <Scene
-            key='addIdea'
-            component={AddIdea}
-            initial={false} />
-        <Scene
-            key='editIdea'
-            component={EditIdea}
-            initial={false} />
-        <Scene
-            key='categories'
-            component={Categories}
-            initial={false} />
-        <Scene
-            key='profile'
+            key="profile"
             component={Profile}
             initial={false}
-            type={ActionConst.REPLACE} />
-        <Scene
-            key='editProfile'
-            component={EditProfile}
-            initial={false} />
-        <Scene
-            key='settings'
-            component={Settings}
-            initial={false} />
-        <Scene
-            key='about'
-            component={About}
-            initial={false} />
+            type={ActionConst.REPLACE}
+        />
+        <Scene key="editProfile" component={EditProfile} initial={false} />
+        <Scene key="settings" component={Settings} initial={false} />
+        <Scene key="about" component={About} initial={false} />
     </Scene>
-)
+);
 
 export default Scenes;

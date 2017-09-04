@@ -1,9 +1,5 @@
-import React from "react";
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -24,7 +20,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         fontSize: styleConstants.iconFont,
-        color: styleConstants.white
+        color: styleConstants.white,
     },
     countContainer: {
         position: 'absolute',
@@ -43,10 +39,10 @@ const styles = StyleSheet.create({
     },
     disabled: {
         opacity: 0.33,
-    }
+    },
 });
 
-export default IconButton = (props) => {
+export default (IconButton = props => {
     /*
         PROPS
             backgroundColor
@@ -57,47 +53,56 @@ export default IconButton = (props) => {
             disabled
     */
 
-    const backgroundColorStyles = props.backgroundColor &&
-        {
-            backgroundColor: props.backgroundColor,
-        };
+    const backgroundColorStyles = props.backgroundColor && {
+        backgroundColor: props.backgroundColor,
+    };
 
-    const iconColorStyles = props.iconColor &&
-        {
-            color: props.iconColor,
-        };
+    const iconColorStyles = props.iconColor && {
+        color: props.iconColor,
+    };
 
-    const borderColorStyles = props.iconColor &&
-        {
-            borderColor: props.iconColor,
-        };
+    const borderColorStyles = props.iconColor && {
+        borderColor: props.iconColor,
+    };
 
-    const count = props.count || props.count === 0 ?
-        <View style={styles.countContainer}>
-            <Text style={[styles.countText, styleConstants.primaryFont]}>
-                {props.count}
-            </Text>
-        </View>
-        :
-        null;
+    const count =
+        props.count || props.count === 0 ? (
+            <View style={styles.countContainer}>
+                <Text style={[styles.countText, styleConstants.primaryFont]}>
+                    {props.count}
+                </Text>
+            </View>
+        ) : null;
 
-    const button = props.disabled ?
+    const button = props.disabled ? (
         <View
-            style={[styles.iconButton, backgroundColorStyles, borderColorStyles, styles.disabled]}>
+            style={[
+                styles.iconButton,
+                backgroundColorStyles,
+                borderColorStyles,
+                styles.disabled,
+            ]}>
             <Icon
                 name={props.iconName}
-                style={[styles.icon, iconColorStyles]} />
+                style={[styles.icon, iconColorStyles]}
+            />
             {count}
         </View>
-        :
+    ) : (
         <Touchable
             onPress={props.handlePress}
-            style={[styles.iconButton, backgroundColorStyles, borderColorStyles]}>
+            style={[
+                styles.iconButton,
+                backgroundColorStyles,
+                borderColorStyles,
+            ]}>
             <Icon
                 name={props.iconName}
-                style={[styles.icon, iconColorStyles]} />
+                style={[styles.icon, iconColorStyles]}
+            />
             {count}
-        </Touchable>;
+        </Touchable>
+    );
 
     return button;
-}
+});

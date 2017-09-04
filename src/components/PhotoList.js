@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    FlatList,
-    Image,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, FlatList, Image, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -63,7 +57,7 @@ export default class PhotoList extends React.Component {
     static get propTypes() {
         return {
             photos: PropTypes.array,
-        }
+        };
     }
 
     renderPhoto = ({ item, index }) => {
@@ -74,35 +68,37 @@ export default class PhotoList extends React.Component {
                 isThumbnail
                 photoContainerStyles={styles.photoContainer}
                 photoStyles={styles.photo}
-                errorText='Photo has been removed from device'
+                errorText="Photo has been removed from device"
                 handlePress={() => this.props.handleViewPhotos(index)}
-                handleDeletePhoto={() => this.props.handleDelete(item)} />
+                handleDeletePhoto={() => this.props.handleDelete(item)}
+            />
         );
-    }
+    };
 
     render() {
-        const photos = this.props.photos && this.props.photos.length > 0 ?
-            <FlatList
-                keyExtractor={item => 'photo-' + item.uid}
-                data={this.props.photos}
-                renderItem={this.renderPhoto}
-                style={styles.photosWrapper}
-                contentContainerStyle={styles.photosContainer}>
-            </FlatList>
-            :
-            <View style={styles.photosWrapper}>
-                <View style={styles.noteTextContainer}>
-                    <Text
-                        style={[styles.noteText, styleConstants.primaryFont]}>
-                        None
-                    </Text>
+        const photos =
+            this.props.photos && this.props.photos.length > 0 ? (
+                <FlatList
+                    keyExtractor={item => 'photo-' + item.uid}
+                    data={this.props.photos}
+                    renderItem={this.renderPhoto}
+                    style={styles.photosWrapper}
+                    contentContainerStyle={styles.photosContainer}
+                />
+            ) : (
+                <View style={styles.photosWrapper}>
+                    <View style={styles.noteTextContainer}>
+                        <Text
+                            style={[
+                                styles.noteText,
+                                styleConstants.primaryFont,
+                            ]}>
+                            None
+                        </Text>
+                    </View>
                 </View>
-            </View>;
+            );
 
-        return (
-            <View style={styles.container}>
-                {photos}
-            </View>
-        );
+        return <View style={styles.container}>{photos}</View>;
     }
 }

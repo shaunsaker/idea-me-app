@@ -1,8 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    Animated,
-} from "react-native";
+import { Animated } from 'react-native';
 
 import config from '../config';
 
@@ -15,7 +13,7 @@ export default class AnimateTranslateY extends React.Component {
 
         this.state = {
             animatedValue: new Animated.Value(0),
-        }
+        };
     }
 
     static get propTypes() {
@@ -31,60 +29,62 @@ export default class AnimateTranslateY extends React.Component {
             // style: PropTypes.number, // or array
             duration: PropTypes.number,
             easing: PropTypes.object,
-        }
+        };
     }
 
     static get defaultProps() {
         return {
             duration: config.animation.duration.short,
             easing: config.animation.easing,
-        }
+        };
     }
 
     componentDidMount() {
-
         // In cases where update needs to be used instead
-        const shouldAnimateOnMount = (this.props.initialValue || this.props.initialValue === 0) && (this.props.finalValue || this.props.finalValue === 0);
+        const shouldAnimateOnMount =
+            (this.props.initialValue || this.props.initialValue === 0) &&
+            (this.props.finalValue || this.props.finalValue === 0);
 
         this.props.shouldAnimateIn && shouldAnimateOnMount && this.animateIn();
     }
 
     componentDidUpdate(prevProps) {
-
         // Use case where update used as onMount (see componentDidMount)
-        const shouldAnimateOnUpdate = (this.props.initialValue && this.props.initialValue !== prevProps.initialValue || this.props.finalValue && this.props.finalValue !== prevProps.finalValue);
+        const shouldAnimateOnUpdate =
+            (this.props.initialValue &&
+                this.props.initialValue !== prevProps.initialValue) ||
+            (this.props.finalValue &&
+                this.props.finalValue !== prevProps.finalValue);
 
         if (shouldAnimateOnUpdate) {
             this.animateIn();
-        }
-
-        else if (this.props.shouldAnimateIn && this.props.shouldAnimateIn !== prevProps.shouldAnimateIn) {
+        } else if (
+            this.props.shouldAnimateIn &&
+            this.props.shouldAnimateIn !== prevProps.shouldAnimateIn
+        ) {
             this.animateIn();
-        }
-
-        else if (this.props.shouldAnimateOut && this.props.shouldAnimateOut !== prevProps.shouldAnimateOut) {
+        } else if (
+            this.props.shouldAnimateOut &&
+            this.props.shouldAnimateOut !== prevProps.shouldAnimateOut
+        ) {
             this.animateOut();
         }
     }
 
     animateIn() {
-        Animated.timing(
-            this.state.animatedValue,
-            {
-                toValue: 1,
-                duration: this.props.duration,
-                easing: this.props.easing,
-                useNativeDriver: true,
-            }
-        ).start(() => {
+        Animated.timing(this.state.animatedValue, {
+            toValue: 1,
+            duration: this.props.duration,
+            easing: this.props.easing,
+            useNativeDriver: true,
+        }).start(() => {
             this.props.animateInCallback && this.props.animateInCallback();
 
             if (this.props.shouldRepeat) {
                 if (this.props.shouldLoop) {
                     this.state.animatedValue.setValue(0);
                     this.animateIn();
-                }
-                else {
+                } else {
                     this.animateOut();
                 }
             }
@@ -92,15 +92,12 @@ export default class AnimateTranslateY extends React.Component {
     }
 
     animateOut() {
-        Animated.timing(
-            this.state.animatedValue,
-            {
-                toValue: 0,
-                duration: this.props.duration,
-                easing: this.props.easing,
-                useNativeDriver: true,
-            }
-        ).start(() => {
+        Animated.timing(this.state.animatedValue, {
+            toValue: 0,
+            duration: this.props.duration,
+            easing: this.props.easing,
+            useNativeDriver: true,
+        }).start(() => {
             this.props.animateOutCallback && this.props.animateOutCallback();
             this.props.shouldRepeat && this.animateIn();
         });
@@ -108,13 +105,18 @@ export default class AnimateTranslateY extends React.Component {
 
     render() {
         const animatedStyles = {
-            transform: [{
-                translateY: this.state.animatedValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [this.props.initialValue, this.props.finalValue],
-                }),
-            }],
-        }
+            transform: [
+                {
+                    translateY: this.state.animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [
+                            this.props.initialValue,
+                            this.props.finalValue,
+                        ],
+                    }),
+                },
+            ],
+        };
 
         return (
             <Animated.View style={[this.props.style, animatedStyles]}>

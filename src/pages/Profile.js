@@ -1,11 +1,8 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Linking,
-} from "react-native";
-import { Actions } from "react-native-router-flux";
-import { connect } from "react-redux";
+import { View, Linking } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import config from '../config';
 import utilities from '../utilities';
@@ -52,7 +49,7 @@ export class Profile extends React.Component {
         this.state = {
             showMenu: false,
             showActionModal: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -77,19 +74,14 @@ export class Profile extends React.Component {
 
         if (type === 'About App') {
             Actions.about();
-        }
-        else if (type === 'Settings') {
+        } else if (type === 'Settings') {
             Actions.settings();
-        }
-        else if (type === 'Give us Feedback') {
+        } else if (type === 'Give us Feedback') {
             this.handleFeedback();
-        }
-        else if (type === 'Get in Touch') {
+        } else if (type === 'Get in Touch') {
             this.handleContact();
-        }
-
-        // Logout
-        else {
+        } else {
+            // Logout
             this.toggleActionModal();
         }
     }
@@ -99,7 +91,9 @@ export class Profile extends React.Component {
     }
 
     handleContact() {
-        Linking.openURL('mailto:' + config.app.developer.email + '?subject=IdeaMe App');
+        Linking.openURL(
+            'mailto:' + config.app.developer.email + '?subject=IdeaMe App'
+        );
     }
 
     toggleActionModal() {
@@ -110,14 +104,13 @@ export class Profile extends React.Component {
 
     signOutUser() {
         this.props.dispatch({
-            type: 'signOutUser'
+            type: 'signOutUser',
         });
 
         Actions.welcome();
     }
 
     deletePhoto() {
-
         // Dispatch to store
         this.props.dispatch({
             type: 'SET_USER_PHOTO',
@@ -135,70 +128,81 @@ export class Profile extends React.Component {
     render() {
         const numberOfIdeas = utilities.getLengthOfObject(this.props.ideas);
 
-        const menu = this.state.showMenu &&
+        const menu = this.state.showMenu && (
             <Menu
-                values={['About App', 'Settings', 'Give us Feedback', 'Get in Touch', 'Log Out']}
-                handleSelect={(type) => this.selectMenuItem(type)} />;
+                values={[
+                    'About App',
+                    'Settings',
+                    'Give us Feedback',
+                    'Get in Touch',
+                    'Log Out',
+                ]}
+                handleSelect={type => this.selectMenuItem(type)}
+            />
+        );
 
-        const actionModal = this.state.showActionModal &&
+        const actionModal = this.state.showActionModal && (
             <ActionModal
-                title='Are you sure you want to Log Out?'
+                title="Are you sure you want to Log Out?"
                 handleLeftIconPress={() => this.signOutUser()}
-                handleRightIconPress={this.toggleActionModal} />;
+                handleRightIconPress={this.toggleActionModal}
+            />
+        );
 
         return (
-            <Page
-                backgroundColor={styleConstants.white}
-                removeBottomPadding>
-
+            <Page backgroundColor={styleConstants.white} removeBottomPadding>
                 <Header
-                    text='Profile'
+                    text="Profile"
                     headerShadow
-                    rightIconName='menu'
-                    handleRightIconPress={this.toggleMenu} />
+                    rightIconName="menu"
+                    handleRightIconPress={this.toggleMenu}
+                />
 
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <ProfileCard
                         userName={this.props.userName}
-                        userPhotoUrl={this.props.userPhotoUrl && this.props.userPhotoUrl.cropped}
+                        userPhotoUrl={
+                            this.props.userPhotoUrl &&
+                            this.props.userPhotoUrl.cropped
+                        }
                         userEmail={this.props.userEmail}
                         userLocation={this.props.userLocation}
                         numberOfIdeas={numberOfIdeas}
                         handleEditImagePress={() => Actions.editProfile()}
-                        handleDeletePhoto={this.deletePhoto} />
+                        handleDeletePhoto={this.deletePhoto}
+                    />
                 </View>
 
                 <View style={{ position: 'absolute', bottom: 68, right: 16 }}>
                     <IconButton
-                        iconName='edit'
+                        iconName="edit"
                         backgroundColor={styleConstants.primary}
                         iconColor={styleConstants.realWhite}
-                        handlePress={() => Actions.editProfile()} />
+                        handlePress={() => Actions.editProfile()}
+                    />
                 </View>
 
-                <TabBar
-                    tabs={this.tabs} />
+                <TabBar tabs={this.tabs} />
 
                 {menu}
 
                 {actionModal}
 
                 <SnackBar />
-
-            </Page >
+            </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         uid: state.main.userAuth.uid,
         userName: state.main.userData.profile.userName || 'Name',
         userEmail: state.main.userData.profile.userEmail || 'Email',
         userLocation: state.main.userData.profile.userLocation || 'Location',
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
         ideas: state.main.userData.ideas,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(Profile);

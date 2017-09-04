@@ -1,3 +1,3 @@
 import LoaderContainer from './LoaderContainer';
 
-export default Loader = LoaderContainer;
+export default (Loader = LoaderContainer);

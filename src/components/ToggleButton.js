@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -36,7 +32,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ToggleButton = (props) => {
+export default (ToggleButton = props => {
     const activeIconStyles = props.active && styles.toggleButtonIconActive;
     const activeTextStyles = props.active && styles.toggleButtonTextActive;
 
@@ -47,11 +43,17 @@ export default ToggleButton = (props) => {
                 style={styles.toggleButton}>
                 <Icon
                     name={'folder'}
-                    style={[styles.toggleButtonIcon, activeIconStyles]} />
-                <Text style={[styles.toggleButtonText, activeTextStyles, styleConstants.primaryFont]}>
+                    style={[styles.toggleButtonIcon, activeIconStyles]}
+                />
+                <Text
+                    style={[
+                        styles.toggleButtonText,
+                        activeTextStyles,
+                        styleConstants.primaryFont,
+                    ]}>
                     {props.title}
                 </Text>
             </Touchable>
         </View>
-    )
-}
+    );
+});

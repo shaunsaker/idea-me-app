@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
@@ -7,7 +7,7 @@ import {
     TextInput,
     StyleSheet,
     Platform,
-} from "react-native";
+} from 'react-native';
 
 import config from '../config';
 import utilities from '../utilities';
@@ -47,21 +47,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
-    togglePasswordContainer: {
-
-    },
+    togglePasswordContainer: {},
     togglePasswordText: {
         fontSize: styleConstants.smallFont,
         color: styleConstants.white,
     },
 
-    characterCountContainer: {
-
-    },
+    characterCountContainer: {},
     characterCountText: {
         fontSize: styleConstants.smallFont,
         color: styleConstants.lightGrey,
-    }
+    },
 });
 
 export default class Input extends React.Component {
@@ -81,7 +77,7 @@ export default class Input extends React.Component {
             inputHeight: this.minimumInputHeight,
             labelColour: this.inputLabelColourBlurred,
             borderColour: this.inputBorderColourBlurred,
-        }
+        };
 
         this.focusInput = this.focusInput.bind(this);
         this.blurInput = this.blurInput.bind(this);
@@ -106,7 +102,10 @@ export default class Input extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.state.labelColour !== this.inputLabelColourFocussed && this.props.value) {
+        if (
+            this.state.labelColour !== this.inputLabelColourFocussed &&
+            this.props.value
+        ) {
             this.setState({
                 labelColour: this.inputLabelColourFocussed,
                 showTogglePasswordButton: true,
@@ -116,9 +115,12 @@ export default class Input extends React.Component {
 
         // When our input has just received it's value after mounting
         if (!prevProps.value && this.props.value && this.props.multiline) {
-
             // Use utils to get input height based on inputWidth, fontSize and charCount
-            const inputHeight = utilities.getInputHeight((styleConstants.windowWidth - 32), styleConstants.regularFont, this.props.value.length)
+            const inputHeight = utilities.getInputHeight(
+                styleConstants.windowWidth - 32,
+                styleConstants.regularFont,
+                this.props.value.length
+            );
 
             if (inputHeight > this.minimumInputHeight) {
                 this.setState({
@@ -141,7 +143,9 @@ export default class Input extends React.Component {
 
     blurInput() {
         this.setState({
-            labelColour: this.props.value ? this.inputLabelColourFocussed : this.inputLabelColourBlurred,
+            labelColour: this.props.value
+                ? this.inputLabelColourFocussed
+                : this.inputLabelColourBlurred,
             borderColour: this.inputBorderColourBlurred,
             showTogglePasswordButton: this.props.value,
             showCharacterCount: this.props.value,
@@ -158,111 +162,139 @@ export default class Input extends React.Component {
 
     togglePassword() {
         this.setState({
-            hidePassword: !this.state.hidePassword
+            hidePassword: !this.state.hidePassword,
         });
     }
 
     adjustInputHeight(newInputHeight) {
         if (newInputHeight > this.minimumInputHeight) {
             this.setState({
-                inputHeight: newInputHeight
+                inputHeight: newInputHeight,
             });
-        }
-
-        // If an input was cleared
-        else if (newInputHeight <= this.minimumInputHeight) {
+        } else if (newInputHeight <= this.minimumInputHeight) {
+            // If an input was cleared
             this.setState({
-                inputHeight: this.minimumInputHeight
+                inputHeight: this.minimumInputHeight,
             });
         }
     }
 
     render() {
-        const togglePasswordButton = this.props.type === 'password' && this.state.showTogglePasswordButton &&
-            <AnimateTranslateX
-                initialValue={40}
-                finalValue={0}
-                shouldAnimateIn>
+        const togglePasswordButton = this.props.type === 'password' &&
+        this.state.showTogglePasswordButton && (
+            <AnimateTranslateX initialValue={40} finalValue={0} shouldAnimateIn>
                 <Touchable
                     onPress={this.togglePassword}
-                    style={styles.togglePasswordContainer} >
-                    <Text style={[styles.togglePasswordText, styleConstants.primaryFont]}>
+                    style={styles.togglePasswordContainer}>
+                    <Text
+                        style={[
+                            styles.togglePasswordText,
+                            styleConstants.primaryFont,
+                        ]}>
                         {this.state.hidePassword ? 'Show' : 'Hide'}
                     </Text>
                 </Touchable>
-            </AnimateTranslateX>;
+            </AnimateTranslateX>
+        );
 
-        const characterCount = this.props.maxLength && this.state.showCharacterCount &&
-            <AnimateTranslateX
-                initialValue={40}
-                finalValue={0}
-                shouldAnimateIn>
+        const characterCount = this.props.maxLength &&
+        this.state.showCharacterCount && (
+            <AnimateTranslateX initialValue={40} finalValue={0} shouldAnimateIn>
                 <View style={styles.characterCountContainer}>
-                    <Text style={[styles.characterCountText, styleConstants.primaryFont]}>
-                        {(this.props.value ? this.props.value.length : 0) + ' / ' + this.props.maxLength}
+                    <Text
+                        style={[
+                            styles.characterCountText,
+                            styleConstants.primaryFont,
+                        ]}>
+                        {(this.props.value ? this.props.value.length : 0) +
+                            ' / ' +
+                            this.props.maxLength}
                     </Text>
                 </View>
             </AnimateTranslateX>
+        );
 
-        const clearTextButton = this.props.value ?
+        const clearTextButton = this.props.value ? (
             <AnimateOpacity
                 initialValue={0}
                 finalValue={1}
                 shouldAnimateIn
                 style={styles.clearTextButtonContainer}>
-                <DeleteButton
-                    handlePress={this.clearInputText} />
+                <DeleteButton handlePress={this.clearInputText} />
             </AnimateOpacity>
-            :
-            null;
+        ) : null;
 
         const inputLabelStyles = {
             color: this.state.labelColour,
-        }
+        };
 
         // Fix for ios
-        const inputContainerStyles = Platform.OS === 'ios' &&
-            {
-                borderBottomWidth: 1,
-                borderBottomColor: this.state.borderColour,
-            };
+        const inputContainerStyles = Platform.OS === 'ios' && {
+            borderBottomWidth: 1,
+            borderBottomColor: this.state.borderColour,
+        };
 
-        // Fix for Android 
-        const androidInputStyles = Platform.OS === 'android' &&
-            {
-                borderBottomWidth: 1,
-                borderBottomColor: this.state.borderColour,
-            };
+        // Fix for Android
+        const androidInputStyles = Platform.OS === 'android' && {
+            borderBottomWidth: 1,
+            borderBottomColor: this.state.borderColour,
+        };
 
         const inputStyles = {
             height: this.state.inputHeight,
-        }
+        };
 
         return (
-            <TouchableWithoutFeedback
-                onPress={() => this.refs.input.focus()} >
+            <TouchableWithoutFeedback onPress={() => this.refs.input.focus()}>
                 <View style={[styles.inputWrapper, inputContainerStyles]}>
                     <View style={styles.inputLabelContainer}>
-                        <Text style={[styles.inputLabelText, inputLabelStyles, styleConstants.primaryFont]}>
+                        <Text
+                            style={[
+                                styles.inputLabelText,
+                                inputLabelStyles,
+                                styleConstants.primaryFont,
+                            ]}>
                             {this.props.placeholder}
                         </Text>
                         {togglePasswordButton}
                         {characterCount}
                     </View>
                     <TextInput
-                        ref='input'
+                        ref="input"
                         value={this.props.value ? this.props.value : ''}
-                        underlineColorAndroid='transparent'
-                        style={[styles.input, androidInputStyles, inputStyles, styleConstants.primaryFont]}
-                        onChangeText={(text) => this.props.handleChange(text)}
+                        underlineColorAndroid="transparent"
+                        style={[
+                            styles.input,
+                            androidInputStyles,
+                            inputStyles,
+                            styleConstants.primaryFont,
+                        ]}
+                        onChangeText={text => this.props.handleChange(text)}
                         onFocus={this.focusInput}
                         onBlur={this.blurInput}
-                        secureTextEntry={this.props.type === 'password' && this.state.hidePassword}
-                        keyboardType={this.props.keyboardType ? this.props.keyboardType : 'default'}
+                        secureTextEntry={
+                            this.props.type === 'password' &&
+                            this.state.hidePassword
+                        }
+                        keyboardType={
+                            this.props.keyboardType ? (
+                                this.props.keyboardType
+                            ) : (
+                                'default'
+                            )
+                        }
                         autoFocus={this.props.autoFocus}
                         multiline={this.props.multiline}
                         maxLength={this.props.maxLength}
-                        onChange={this.props.multiline ? (event) => this.adjustInputHeight(event.nativeEvent.contentSize.height) : null /*NOTE: this does not work with onContentSizeChange */} />
+                        onChange={
+                            this.props.multiline ? (
+                                event =>
+                                    this.adjustInputHeight(
+                                        event.nativeEvent.contentSize.height
+                                    )
+                            ) : null /*NOTE: this does not work with onContentSizeChange */
+                        }
+                    />
                     {clearTextButton}
                 </View>
             </TouchableWithoutFeedback>

@@ -1,19 +1,13 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
 import styleConstants from '../assets/styleConstants';
 
 import Touchable from './Touchable';
 
 const styles = StyleSheet.create({
-    container: {
-
-    },
+    container: {},
     titleContainer: {
         paddingVertical: 8,
     },
@@ -75,7 +69,7 @@ export default class RadioSelect extends React.Component {
             currentValue: PropTypes.string,
             values: PropTypes.array,
             handleSelect: PropTypes.func,
-        }
+        };
     }
 
     componentDidMount() {
@@ -85,7 +79,11 @@ export default class RadioSelect extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.currentValue && this.props.currentValue !== prevProps.currentValue && this.props.currentValue !== this.state.active) {
+        if (
+            this.props.currentValue &&
+            this.props.currentValue !== prevProps.currentValue &&
+            this.props.currentValue !== this.state.active
+        ) {
             this.setActive(this.props.currentValue);
         }
     }
@@ -102,26 +100,24 @@ export default class RadioSelect extends React.Component {
     }
 
     render() {
-        const activeTitleStyles = this.state.active &&
-            {
-                color: styleConstants.secondary,
+        const activeTitleStyles = this.state.active && {
+            color: styleConstants.secondary,
+        };
+
+        const radioButtons = this.props.values.map(value => {
+            const activeRadioButtonStyles = this.state.active ===
+                value.title && {
+                borderColor: styleConstants.white,
             };
 
-        const radioButtons = this.props.values.map((value) => {
-            const activeRadioButtonStyles = this.state.active === value.title &&
-                {
-                    borderColor: styleConstants.white,
-                };
+            const activeRadioButtonInnerStyles = this.state.active ===
+                value.title && {
+                backgroundColor: styleConstants.secondary,
+            };
 
-            const activeRadioButtonInnerStyles = this.state.active === value.title &&
-                {
-                    backgroundColor: styleConstants.secondary,
-                };
-
-            const activeLabelStyles = this.state.active === value.title &&
-                {
-                    color: styleConstants.white,
-                };
+            const activeLabelStyles = this.state.active === value.title && {
+                color: styleConstants.white,
+            };
 
             return (
                 <Touchable
@@ -129,10 +125,20 @@ export default class RadioSelect extends React.Component {
                     style={styles.radioButtonContainer}
                     onPress={() => this.select(value.title)}>
                     <View style={[styles.radioButton, activeRadioButtonStyles]}>
-                        <View style={[styles.radioButtonInner, activeRadioButtonInnerStyles]} />
+                        <View
+                            style={[
+                                styles.radioButtonInner,
+                                activeRadioButtonInnerStyles,
+                            ]}
+                        />
                     </View>
                     <View style={styles.labelContainer}>
-                        <Text style={[styles.label, styleConstants.primaryFont, activeLabelStyles]}>
+                        <Text
+                            style={[
+                                styles.label,
+                                styleConstants.primaryFont,
+                                activeLabelStyles,
+                            ]}>
                             {value.title}
                         </Text>
                     </View>
@@ -143,15 +149,16 @@ export default class RadioSelect extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.titleContainer}>
-                    <Text style={[styles.title, activeTitleStyles, styleConstants.primaryFont]}>
+                    <Text
+                        style={[
+                            styles.title,
+                            activeTitleStyles,
+                            styleConstants.primaryFont,
+                        ]}>
                         {this.props.displayText}
                     </Text>
                 </View>
-                <View style={styles.radioButtonsContainer}>
-
-                    {radioButtons}
-
-                </View>
+                <View style={styles.radioButtonsContainer}>{radioButtons}</View>
             </View>
         );
     }

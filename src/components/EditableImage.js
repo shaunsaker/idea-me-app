@@ -1,11 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Image,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Image, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -51,7 +46,7 @@ export default class EditableImage extends React.Component {
 
         this.state = {
             isEditable: true,
-        }
+        };
     }
 
     static get propTypes() {
@@ -76,35 +71,36 @@ export default class EditableImage extends React.Component {
     }
 
     render() {
-        const image = this.props.uri ?
-            <Image
-                source={{ uri: this.props.uri }}
-                style={styles.image} />
-            :
-            null;
+        const image = this.props.uri ? (
+            <Image source={{ uri: this.props.uri }} style={styles.image} />
+        ) : null;
 
         const editImageContainerStyles = this.state.isEditable && {
             backgroundColor: styleConstants.transPrimary,
-        }
+        };
 
-        const editIcon = this.state.isEditable &&
-            <Icon
-                name='camera'
-                style={styles.editImageIcon} />;
+        const editIcon = this.state.isEditable && (
+            <Icon name="camera" style={styles.editImageIcon} />
+        );
 
         return (
             <View style={styles.imageContainer}>
-
                 {image}
 
                 <Touchable
-                    onPress={this.state.isEditable ? this.props.handlePress : this.toggleEditMode}
-                    style={[styles.editImageContainer, editImageContainerStyles]} >
-
+                    onPress={
+                        this.state.isEditable ? (
+                            this.props.handlePress
+                        ) : (
+                            this.toggleEditMode
+                        )
+                    }
+                    style={[
+                        styles.editImageContainer,
+                        editImageContainerStyles,
+                    ]}>
                     {editIcon}
-
                 </Touchable>
-
             </View>
         );
     }

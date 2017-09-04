@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -31,26 +27,22 @@ const styles = StyleSheet.create({
         marginTop: 8,
         fontSize: styleConstants.regularFont,
         color: styleConstants.primary,
-    }
+    },
 });
 
-export default AddIdeaButton = (props) => {
-
+export default (AddIdeaButton = props => {
     /*
         PROPTYPES
         
         handlePress: func
     */
 
-
     return (
-        <Touchable
-            onPress={props.handlePress}
-            style={styles.cardContainer} >
-            <Icon
-                name='add'
-                style={styles.icon} />
-            <Text style={[styles.text, styleConstants.primaryFont]}>Add an Idea</Text>
+        <Touchable onPress={props.handlePress} style={styles.cardContainer}>
+            <Icon name="add" style={styles.icon} />
+            <Text style={[styles.text, styleConstants.primaryFont]}>
+                Add an Idea
+            </Text>
         </Touchable>
-    )
-}
+    );
+});

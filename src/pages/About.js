@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-} from "react-native";
-import { connect } from "react-redux";
+import { View } from 'react-native';
+import { connect } from 'react-redux';
 
 import config from '../config';
 import Icon from '../assets/icons/index';
@@ -19,39 +17,30 @@ export class About extends React.Component {
     }
 
     static get propTypes() {
-        return {
-
-        };
+        return {};
     }
 
     render() {
         return (
-            <Page
-                backgroundColor={styleConstants.white} >
-
-                <Header
-                    text='About App'
-                    headerShadow
-                    backButton />
+            <Page backgroundColor={styleConstants.white}>
+                <Header text="About App" headerShadow backButton />
 
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <ProfileCard
                         userName={config.app.name}
                         showIcon
-                        iconName='light_bulb'
+                        iconName="light_bulb"
                         userEmail={config.app.developer.email}
-                        userLocation={'Version: ' + config.app.version} />
+                        userLocation={'Version: ' + config.app.version}
+                    />
                 </View>
-
-            </Page >
+            </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
-
-    });
+    return {};
 }
 
 export default connect(mapStateToProps)(About);

@@ -4,22 +4,19 @@ const Permissions = {};
 
 // Checks a permission. If authorized, fires successCallback, otherwise requests permission. If that is authorized, fires successCallback, otherwise fires errorCallback
 Permissions.handlePermission = (permission, successCallback, errorCallback) => {
-    RNPermissions.check(permission).then((response) => {
+    RNPermissions.check(permission).then(response => {
         if (response === 'authorized') {
             successCallback();
-        }
-        else {
-            RNPermissions.request(permission).then((response) => {
-
+        } else {
+            RNPermissions.request(permission).then(response => {
                 if (response === 'authorized') {
                     successCallback();
-                }
-                else {
+                } else {
                     errorCallback();
                 }
             });
         }
     });
-}
+};
 
 export default Permissions;

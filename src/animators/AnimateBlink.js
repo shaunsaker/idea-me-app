@@ -1,8 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    Animated,
-} from "react-native";
+import { Animated } from 'react-native';
 
 import config from '../config';
 
@@ -15,13 +13,13 @@ export default class AnimateBlink extends React.Component {
 
         this.state = {
             animatedValue: new Animated.Value(1), // start shown
-        }
+        };
     }
 
     static get propTypes() {
         return {
             shouldAnimate: PropTypes.bool,
-        }
+        };
     }
 
     componentDidMount() {
@@ -31,35 +29,32 @@ export default class AnimateBlink extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.shouldAnimate && this.props.shouldAnimate !== prevProps.shouldAnimate) {
+        if (
+            this.props.shouldAnimate &&
+            this.props.shouldAnimate !== prevProps.shouldAnimate
+        ) {
             this.blinkOut();
         }
     }
 
     blinkIn() {
-        Animated.timing(
-            this.state.animatedValue,
-            {
-                toValue: 1,
-                duration: 500,
-                easing: config.animation.easing,
-                useNativeDriver: true,
-            }
-        ).start(() => {
+        Animated.timing(this.state.animatedValue, {
+            toValue: 1,
+            duration: 500,
+            easing: config.animation.easing,
+            useNativeDriver: true,
+        }).start(() => {
             this.props.shouldAnimate && this.blinkOut();
         });
     }
 
     blinkOut() {
-        Animated.timing(
-            this.state.animatedValue,
-            {
-                toValue: 0,
-                duration: 500,
-                easing: config.animation.easing,
-                useNativeDriver: true,
-            }
-        ).start(() => {
+        Animated.timing(this.state.animatedValue, {
+            toValue: 0,
+            duration: 500,
+            easing: config.animation.easing,
+            useNativeDriver: true,
+        }).start(() => {
             this.blinkIn();
         });
     }
@@ -67,7 +62,7 @@ export default class AnimateBlink extends React.Component {
     render() {
         const opacityStyles = {
             opacity: this.state.animatedValue,
-        }
+        };
 
         return (
             <Animated.View style={opacityStyles}>

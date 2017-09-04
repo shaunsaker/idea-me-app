@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { View, FlatList, Text, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import config from '../config';
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
 
@@ -251,7 +250,6 @@ export default class DropdownButton extends React.Component {
         return (
             <View style={styles.dropdownContainer}>
                 {button}
-
                 {itemList}
             </View>
         );

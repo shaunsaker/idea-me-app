@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    StyleSheet,
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import LoaderComponent from './LoaderComponent';
@@ -15,7 +12,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         height: 5,
-    }
+    },
 });
 
 export class Loader extends React.Component {
@@ -26,21 +23,16 @@ export class Loader extends React.Component {
     }
 
     render() {
-        const loader = this.props.loading &&
-            <LoaderComponent />;
+        const loader = this.props.loading && <LoaderComponent />;
 
-        return (
-            <View style={styles.container}>
-                {loader}
-            </View>
-        );
+        return <View style={styles.container}>{loader}</View>;
     }
-};
+}
 
 function mapStateToProps(state) {
     return {
         loading: state.main.appState.loading,
-    }
+    };
 }
 
 export default connect(mapStateToProps)(Loader);

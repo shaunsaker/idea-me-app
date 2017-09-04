@@ -1,10 +1,5 @@
-import React from "react";
-import {
-    View,
-    Text,
-    Modal,
-    StyleSheet,
-} from "react-native";
+import React from 'react';
+import { View, Text, Modal, StyleSheet } from 'react-native';
 
 import config from '../config';
 import Icon from '../assets/icons/index';
@@ -55,7 +50,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default OptionsModal = (props) => {
+export default (OptionsModal = props => {
     /*
         PROPTYPES
             title
@@ -65,13 +60,19 @@ export default OptionsModal = (props) => {
             handleClose
     */
 
-    const options = props.options.map((value) => {
+    const options = props.options.map(value => {
         return (
             <Touchable
                 key={'option-' + value}
                 onPress={() => props.handleSelect(value)}
                 style={styles.modalButton}>
-                <Text style={[styles.modalButtonText, styleConstants.primaryFont]}>{value}</Text>
+                <Text
+                    style={[
+                        styles.modalButtonText,
+                        styleConstants.primaryFont,
+                    ]}>
+                    {value}
+                </Text>
             </Touchable>
         );
     });
@@ -91,14 +92,16 @@ export default OptionsModal = (props) => {
                                 titleColor={styleConstants.white}
                                 subtitle={props.subtitle}
                                 subtitleColor={styleConstants.lightGrey}
-                                fullWidth />
+                                fullWidth
+                            />
                             <View style={styles.closeIconContainer}>
                                 <Touchable
                                     onPress={props.handleClose}
-                                    style={styles.closeIconButton} >
+                                    style={styles.closeIconButton}>
                                     <Icon
-                                        name='close'
-                                        style={styles.closeIcon} />
+                                        name="close"
+                                        style={styles.closeIcon}
+                                    />
                                 </Touchable>
                             </View>
                         </View>
@@ -108,4 +111,4 @@ export default OptionsModal = (props) => {
             </Modal>
         </View>
     );
-}
+});

@@ -5,26 +5,25 @@ WRAP UP
             shouldComponentUpdate will help render when it should
         Don't need ? : null, just use && (watch out for raw text bug)
             Need it for functions
-            Need it for some render components
-        Remove unnecessary imports/code
-        Check proptypes
-        Lifecycle methods at top with other methods following order of this bindings
-        All imports used
-        All bindings set and used
-        All methods used
-        Icons named by Icon type, ie. MaterialIcon (should be no plain Icon)
+            Need it for some render components            
+        Check all files for
+            Remove unnecessary imports/code
+            All config used
+            All utilities used
+            All mapStateToProps used
+            Check proptypes
+            Lifecycle methods at top with other methods following order of this bindings
+            All imports used
+            All bindings set and used
+            All methods used
         Check reducers
-        User errors should contain resets
+        User errors should contain resets where applicable
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
-        Use shouldComponentUpdate where necessary 
+            Use shouldComponentUpdate where necessary 
     App renaming
-        Check facebook login
-    App Icons 
-    App Screenshots
-    Password reset email templates on FB console
-    Landing page to download app on shaunsaker.com
-    User survey
-        Add link to Profile page
+        Check facebook login on fb dashboard
+    App Icons (APE)
+    App Screenshots (APE)
 
 IOS
     React-native-firebase
@@ -63,6 +62,10 @@ V2
         Bite sized
         Feature based (ie. no order, flow independent)    
     Send errors to db  
+    Password reset email templates on FB console
+    Landing page to download app on shaunsaker.com
+    User survey
+        Add link to Profile page
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app

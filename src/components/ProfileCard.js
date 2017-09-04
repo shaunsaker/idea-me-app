@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    View,
-    Image,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Image, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -79,65 +74,61 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ProfileCard = (props) => {
-    const profilePhoto = props.showIcon ?
+export default (ProfileCard = props => {
+    const profilePhoto = props.showIcon ? (
         <View style={styles.profileImageContainer}>
             <View style={styles.profileImage}>
-                <Icon
-                    name='lightbulb'
-                    style={styles.profileImageIcon} />
+                <Icon name="lightbulb" style={styles.profileImageIcon} />
             </View>
         </View>
-        :
-        props.userPhotoUrl ?
-            <Photo
-                uri={props.userPhotoUrl}
-                isThumbnail
-                photoContainerStyles={styles.profileImageContainer}
-                photoStyles={styles.profileImage}
-                errorText='Photo not found'
-                deleteOnErrorOnly
-                handleDeletePhoto={props.handleDeletePhoto} />
-            :
-            <View style={styles.profileImageContainer}>
-                <Touchable
-                    onPress={props.handleEditImagePress}
-                    style={styles.editImageContainer} >
-                    <Icon
-                        name='camera'
-                        style={styles.editImageIcon} />
-                </Touchable>
-            </View>;
+    ) : props.userPhotoUrl ? (
+        <Photo
+            uri={props.userPhotoUrl}
+            isThumbnail
+            photoContainerStyles={styles.profileImageContainer}
+            photoStyles={styles.profileImage}
+            errorText="Photo not found"
+            deleteOnErrorOnly
+            handleDeletePhoto={props.handleDeletePhoto}
+        />
+    ) : (
+        <View style={styles.profileImageContainer}>
+            <Touchable
+                onPress={props.handleEditImagePress}
+                style={styles.editImageContainer}>
+                <Icon name="camera" style={styles.editImageIcon} />
+            </Touchable>
+        </View>
+    );
 
-    const ideasLabelText = props.numberOfIdeas + ' excellent idea' + (props.numberOfIdeas > 1 ? 's' : '');
+    const ideasLabelText =
+        props.numberOfIdeas +
+        ' excellent idea' +
+        (props.numberOfIdeas > 1 ? 's' : '');
 
-    const ideasLabel = props.numberOfIdeas ?
-        <Label
-            iconName='lightbulb'
-            labelText={ideasLabelText} />
-        :
-        null;
+    const ideasLabel = props.numberOfIdeas ? (
+        <Label iconName="lightbulb" labelText={ideasLabelText} />
+    ) : null;
 
     return (
-        <View
-            style={styles.cardContainer} >
-
+        <View style={styles.cardContainer}>
             <InfoBlock
                 title={props.userName}
                 subtitle={props.userLocation}
                 titleColor={styleConstants.primary}
-                subtitleColor={styleConstants.grey} />
+                subtitleColor={styleConstants.grey}
+            />
 
             {profilePhoto}
 
             <View style={styles.emailContainer}>
-                <Icon name='mail' style={styles.emailIcon} />
-                <Text style={[styles.emailText, styleConstants.primaryFont]}>{props.userEmail}</Text>
+                <Icon name="mail" style={styles.emailIcon} />
+                <Text style={[styles.emailText, styleConstants.primaryFont]}>
+                    {props.userEmail}
+                </Text>
             </View>
 
-            <View style={styles.labelsContainer}>
-                {ideasLabel}
-            </View>
+            <View style={styles.labelsContainer}>{ideasLabel}</View>
         </View>
-    )
-}
+    );
+});

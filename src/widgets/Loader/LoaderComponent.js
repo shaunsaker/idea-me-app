@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-    View,
-    StyleSheet,
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 import config from '../../config';
@@ -19,12 +16,9 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoaderComponent = (props) => {
+export default (LoaderComponent = props => {
     return (
-        <AnimateOpacity
-            initialValue={0}
-            finalValue={1}
-            shouldAnimateIn>
+        <AnimateOpacity initialValue={0} finalValue={1} shouldAnimateIn>
             <AnimateTranslateX
                 initialValue={-100}
                 finalValue={styleConstants.windowWidth}
@@ -36,4 +30,4 @@ export default LoaderComponent = (props) => {
             </AnimateTranslateX>
         </AnimateOpacity>
     );
-}
+});

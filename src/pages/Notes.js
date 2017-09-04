@@ -1,9 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Text,
-} from "react-native";
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -30,7 +27,7 @@ export class Notes extends React.Component {
             showDeleteModal: false,
             deleteNoteModalTitle: null,
             deleteNoteUID: null,
-        }
+        };
     }
 
     static get propTypes() {
@@ -45,10 +42,11 @@ export class Notes extends React.Component {
     }
 
     componentDidMount() {
-
         // If our idea has notes or newNotes were passed in as props from add/edit idea pages
         if (this.props.idea.notes || this.props.newNotes) {
-            const newNotes = this.props.idea.notes ? this.props.idea.notes : this.props.newNotes;
+            const newNotes = this.props.idea.notes
+                ? this.props.idea.notes
+                : this.props.newNotes;
 
             this.props.dispatch({
                 type: 'SET_NEW_NOTES',
@@ -67,7 +65,7 @@ export class Notes extends React.Component {
 
     updateNewNote(value) {
         this.setState({
-            newNote: value
+            newNote: value,
         });
     }
 
@@ -77,7 +75,10 @@ export class Notes extends React.Component {
             uid: utilities.createUID(),
         };
 
-        const newNotes = utilities.pushObjectToDictionary(newNote, this.props.newNotes);
+        const newNotes = utilities.pushObjectToDictionary(
+            newNote,
+            this.props.newNotes
+        );
 
         this.props.dispatch({
             type: 'SET_NEW_NOTES',
@@ -87,7 +88,11 @@ export class Notes extends React.Component {
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
-            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(
+                this.props.idea.uid,
+                newIdea,
+                this.props.ideas
+            );
 
             // Dispatch to store
             this.props.dispatch({
@@ -102,7 +107,6 @@ export class Notes extends React.Component {
                 node: 'ideas',
                 uid: this.props.uid,
                 userData: newIdeas,
-
             });
         }
 
@@ -118,7 +122,10 @@ export class Notes extends React.Component {
     }
 
     deleteNote() {
-        const newNotes = utilities.removeObjectFromDictionary(this.state.deleteNoteUID, this.props.newNotes);
+        const newNotes = utilities.removeObjectFromDictionary(
+            this.state.deleteNoteUID,
+            this.props.newNotes
+        );
 
         this.props.dispatch({
             type: 'SET_NEW_NOTES',
@@ -128,7 +135,11 @@ export class Notes extends React.Component {
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['notes'] = newNotes;
-            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(
+                this.props.idea.uid,
+                newIdea,
+                this.props.ideas
+            );
 
             // Dispatch to store
             this.props.dispatch({
@@ -140,7 +151,11 @@ export class Notes extends React.Component {
             // Dispatch to db
             this.props.dispatch({
                 type: 'deleteUserData',
-                node: 'ideas/' + this.props.idea.uid + '/notes/' + this.state.deleteNoteUID,
+                node:
+                    'ideas/' +
+                    this.props.idea.uid +
+                    '/notes/' +
+                    this.state.deleteNoteUID,
                 uid: this.props.uid,
             });
         }
@@ -149,50 +164,48 @@ export class Notes extends React.Component {
     }
 
     render() {
-        const notesArray = utilities.convertDictionaryToArray(this.props.newNotes);
+        const notesArray = utilities.convertDictionaryToArray(
+            this.props.newNotes
+        );
 
-        const deleteModal = this.state.showDeleteModal &&
+        const deleteModal = this.state.showDeleteModal && (
             <ActionModal
-                title='Are you sure you want to delete this note?'
+                title="Are you sure you want to delete this note?"
                 subtitle={this.state.deleteNoteModalTitle}
                 handleLeftIconPress={this.deleteNote}
-                handleRightIconPress={this.toggleDeleteModal} />;
+                handleRightIconPress={this.toggleDeleteModal}
+            />
+        );
 
         return (
-            <Page
-                backgroundColor={styleConstants.white}
-                removeBottomPadding>
-
-                <Header
-                    headerShadow
-                    backButton
-                    text='Notes' />
+            <Page backgroundColor={styleConstants.white} removeBottomPadding>
+                <Header headerShadow backButton text="Notes" />
 
                 <NoteCard
                     idea={this.props.idea}
-                    type='notes'
+                    type="notes"
                     notes={notesArray}
                     displayInfo
                     handleDelete={this.toggleDeleteModal}
                     handleAdd={this.addNote}
                     inputValue={this.state.newNote}
-                    handleChangeText={this.updateNewNote} />
+                    handleChangeText={this.updateNewNote}
+                />
 
                 {deleteModal}
 
                 <SnackBar />
-
             </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         newNotes: state.main.appData.newNotes,
         ideas: state.main.userData.ideas,
         uid: state.main.userAuth.uid,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(Notes);

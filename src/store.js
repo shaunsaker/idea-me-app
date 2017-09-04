@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import createSagaMiddleware from "redux-saga";
-import main from "./reducers/index";
-import routes from "./reducers/routes";
-import { sagas } from "./sagas/index";
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import main from './reducers/index';
+import routes from './reducers/routes';
+import { sagas } from './sagas/index';
 
 // add the middlewares
 let middlewares = [];
@@ -15,7 +15,7 @@ middlewares.push(sagaMiddleware);
 let middleware = applyMiddleware(...middlewares);
 
 // create the store
-const store = createStore(combineReducers({main, routes}), middleware);
+const store = createStore(combineReducers({ main, routes }), middleware);
 sagaMiddleware.run(sagas);
 
 // export

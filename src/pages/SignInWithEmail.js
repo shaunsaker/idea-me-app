@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -24,7 +24,7 @@ export class SignInWithEmail extends React.Component {
 
         this.state = {
             isFetchingData: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -43,9 +43,12 @@ export class SignInWithEmail extends React.Component {
     }
 
     componentDidUpdate() {
-
         // If we're authenticated and we have not yet loaded data, load/save data to db
-        if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
+        if (
+            this.props.authenticated &&
+            !this.props.cloudDataSuccess &&
+            !this.state.isFetchingData
+        ) {
             this.setState({
                 isFetchingData: true,
             });
@@ -62,14 +65,12 @@ export class SignInWithEmail extends React.Component {
                         dateJoined: Date.now(),
                     },
                     categories: this.props.categories,
-                }
+                },
             });
-        }
-
-        // If we have data, we have everything we need
-        else if (this.props.authenticated && this.props.cloudDataSuccess) {
+        } else if (this.props.authenticated && this.props.cloudDataSuccess) {
+            // If we have data, we have everything we need
             this.props.dispatch({
-                type: 'RESET_ERROR'
+                type: 'RESET_ERROR',
             });
 
             Actions.home();
@@ -79,89 +80,102 @@ export class SignInWithEmail extends React.Component {
     updateUserEmail(text) {
         this.props.dispatch({
             type: 'UPDATE_USER_EMAIL',
-            value: text
+            value: text,
         });
     }
 
     updateUserPassword(text) {
         this.props.dispatch({
             type: 'UPDATE_USER_PASSWORD',
-            value: text
+            value: text,
         });
     }
 
     signIn() {
-        if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
+        if (
+            this.props.userEmail &&
+            (this.props.userPassword && this.props.userPassword.length >= 6)
+        ) {
             this.props.dispatch({
-                type: 'TOGGLE_LOADING'
+                type: 'TOGGLE_LOADING',
             });
 
             this.props.dispatch({
                 type: 'signInUserWithEmail',
                 userEmail: this.props.userEmail,
-                userPassword: this.props.userPassword
+                userPassword: this.props.userPassword,
             });
-        }
-        else if (this.props.userPassword && this.props.userPassword.length < 6) {
+        } else if (
+            this.props.userPassword &&
+            this.props.userPassword.length < 6
+        ) {
             this.props.dispatch({
                 type: 'SET_ERROR',
                 errorType: 'USER',
-                message: 'Password should be at least 6 characters long'
+                message: 'Password should be at least 6 characters long',
             });
         }
     }
 
     render() {
-        const enableContinueButton = this.props.userEmail && this.props.userEmail.indexOf('@') > 0 && this.props.userPassword;
+        const enableContinueButton =
+            this.props.userEmail &&
+            this.props.userEmail.indexOf('@') > 0 &&
+            this.props.userPassword;
 
         return (
             <Page>
-
                 <Header
-                    text='Forgot Password?'
+                    text="Forgot Password?"
                     handleTextPress={() => Actions.forgotPassword()}
                     textRight
-                    backButton />
+                    backButton
+                />
 
                 <InputContainer>
                     <InfoBlock
-                        title='Sign In'
-                        titleColor={styleConstants.white} />
+                        title="Sign In"
+                        titleColor={styleConstants.white}
+                    />
 
                     <Input
                         placeholder="EMAIL ADDRESS"
                         value={this.props.userEmail}
                         handleChange={this.updateUserEmail}
                         handleFocus={this.resetError}
-                        keyboardType='email-address' />
+                        keyboardType="email-address"
+                    />
                     <Input
                         placeholder="PASSWORD"
                         value={this.props.userPassword}
                         handleChange={this.updateUserPassword}
                         handleFocus={this.resetError}
-                        type='password' />
+                        type="password"
+                    />
                 </InputContainer>
 
                 <Button
-                    iconName='check'
+                    iconName="check"
                     handlePress={this.signIn}
-                    text='Continue'
+                    text="Continue"
                     backgroundColor={styleConstants.white}
-                    disabled={!enableContinueButton} />
+                    disabled={!enableContinueButton}
+                />
 
                 <SnackBar />
 
                 <Loader />
-
             </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         authenticated: state.main.userAuth.authenticated,
-        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
+        cloudDataSuccess:
+            state.main.appState.error.type === 'CLOUD_DATA' &&
+            state.main.appState.error.success,
 
         uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
@@ -170,7 +184,7 @@ function mapStateToProps(state) {
         userSettings: state.main.userData.settings,
 
         categories: state.main.userData.categories,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(SignInWithEmail);

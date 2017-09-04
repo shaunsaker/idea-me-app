@@ -1,10 +1,5 @@
-import React from "react";
-import {
-    View,
-    Text,
-    Modal,
-    StyleSheet,
-} from "react-native";
+import React from 'react';
+import { View, Text, Modal, StyleSheet } from 'react-native';
 
 import config from '../config';
 import Icon from '../assets/icons/index';
@@ -45,7 +40,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ActionModal = (props) => {
+export default (ActionModal = props => {
     return (
         <View>
             <Modal
@@ -61,22 +56,25 @@ export default ActionModal = (props) => {
                                 titleColor={styleConstants.white}
                                 subtitle={props.subtitle}
                                 subtitleColor={styleConstants.lightGrey}
-                                fullWidth />
+                                fullWidth
+                            />
                         </View>
                         <View style={styles.buttonsContainer}>
                             <Touchable
                                 style={styles.iconContainer}
-                                onPress={props.handleLeftIconPress} >
+                                onPress={props.handleLeftIconPress}>
                                 <Icon
-                                    name='check'
-                                    style={[styles.icon, { color: styleConstants.danger }]} />
+                                    name="check"
+                                    style={[
+                                        styles.icon,
+                                        { color: styleConstants.danger },
+                                    ]}
+                                />
                             </Touchable>
                             <Touchable
                                 style={styles.iconContainer}
-                                onPress={props.handleRightIconPress} >
-                                <Icon
-                                    name='close'
-                                    style={styles.icon} />
+                                onPress={props.handleRightIconPress}>
+                                <Icon name="close" style={styles.icon} />
                             </Touchable>
                         </View>
                     </View>
@@ -84,4 +82,4 @@ export default ActionModal = (props) => {
             </Modal>
         </View>
     );
-}
+});

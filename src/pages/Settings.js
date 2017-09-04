@@ -56,7 +56,7 @@ export class Settings extends React.Component {
         const settingsArray = utilities.convertDictionaryToArray(
             this.props.settings
         );
-
+        s;
         const settings = settingsArray.map(value => {
             return (
                 <ToggleButton

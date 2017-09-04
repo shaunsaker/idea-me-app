@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    FlatList,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, FlatList, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -65,53 +60,53 @@ export default class BulletList extends React.Component {
         return {
             notes: PropTypes.array,
             handleDelete: PropTypes.func,
-        }
+        };
     }
 
     renderBullet = ({ item }) => {
         return (
-            <View
-                style={styles.noteContainer}>
+            <View style={styles.noteContainer}>
                 <View style={styles.bulletContainer}>
                     <View style={styles.bullet} />
                 </View>
                 <View style={styles.noteTextContainer}>
-                    <Text
-                        style={[styles.noteText, styleConstants.primaryFont]}>
+                    <Text style={[styles.noteText, styleConstants.primaryFont]}>
                         {item.title}
                     </Text>
                 </View>
                 <View style={styles.deleteButtonContainer}>
                     <DeleteButton
-                        handlePress={() => this.props.handleDelete(item)} />
+                        handlePress={() => this.props.handleDelete(item)}
+                    />
                 </View>
             </View>
-        )
-    }
+        );
+    };
 
     render() {
-        const bullets = this.props.values && this.props.values.length > 0 ?
-            <FlatList
-                keyExtractor={item => 'bullet-' + item.uid}
-                data={this.props.values}
-                renderItem={this.renderBullet}
-                style={styles.notesWrapper}
-                contentContainerStyle={styles.notesContainer}>
-            </FlatList>
-            :
-            <View style={styles.notesWrapper}>
-                <View style={styles.noteTextContainer}>
-                    <Text
-                        style={[styles.noteText, styleConstants.primaryFont]}>
-                        None
-                    </Text>
+        const bullets =
+            this.props.values && this.props.values.length > 0 ? (
+                <FlatList
+                    keyExtractor={item => 'bullet-' + item.uid}
+                    data={this.props.values}
+                    renderItem={this.renderBullet}
+                    style={styles.notesWrapper}
+                    contentContainerStyle={styles.notesContainer}
+                />
+            ) : (
+                <View style={styles.notesWrapper}>
+                    <View style={styles.noteTextContainer}>
+                        <Text
+                            style={[
+                                styles.noteText,
+                                styleConstants.primaryFont,
+                            ]}>
+                            None
+                        </Text>
+                    </View>
                 </View>
-            </View>;
+            );
 
-        return (
-            <View style={styles.container}>
-                {bullets}
-            </View>
-        )
+        return <View style={styles.container}>{bullets}</View>;
     }
 }

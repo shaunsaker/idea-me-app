@@ -1,9 +1,4 @@
-import {
-    takeLatest,
-    takeEvery,
-    fork,
-    all
-} from 'redux-saga/effects';
+import { takeLatest, takeEvery, fork, all } from 'redux-saga/effects';
 
 // Auth
 import { getUserAuth } from './userAuth';
@@ -30,7 +25,6 @@ import { deleteFile } from './fileSystem';
 
 export function* sagas() {
     yield all([
-
         // User auth
         fork(takeLatest, 'getUserAuth', getUserAuth),
         fork(takeLatest, 'signInUserWithEmail', signInUserWithEmail),

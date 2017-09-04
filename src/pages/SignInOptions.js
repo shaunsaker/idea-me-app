@@ -1,8 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-} from "react-native";
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -26,7 +24,7 @@ export class SignInOptions extends React.Component {
 
         this.state = {
             isFetchingData: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -46,7 +44,6 @@ export class SignInOptions extends React.Component {
     }
 
     componentDidUpdate() {
-
         // Anonymous user (no data)
         if (this.props.authenticated && this.props.anonymous) {
             this.props.dispatch({
@@ -54,10 +51,12 @@ export class SignInOptions extends React.Component {
             });
 
             Actions.home();
-        }
-
-        // If we're authenticated, we have not yet loaded data, load/save data to db
-        else if (this.props.authenticated && !this.props.cloudDataSuccess && !this.state.isFetchingData) {
+        } else if (
+            this.props.authenticated &&
+            !this.props.cloudDataSuccess &&
+            !this.state.isFetchingData
+        ) {
+            // If we're authenticated, we have not yet loaded data, load/save data to db
             this.setState({
                 isFetchingData: true,
             });
@@ -76,14 +75,12 @@ export class SignInOptions extends React.Component {
                         dateJoined: Date.now(),
                     },
                     categories: this.props.categories,
-                }
+                },
             });
-        }
-
-        // If we have data, we have everything we need
-        else if (this.props.authenticated && this.props.cloudDataSuccess) {
+        } else if (this.props.authenticated && this.props.cloudDataSuccess) {
+            // If we have data, we have everything we need
             this.props.dispatch({
-                type: 'RESET_ERROR'
+                type: 'RESET_ERROR',
             });
 
             Actions.home();
@@ -92,21 +89,21 @@ export class SignInOptions extends React.Component {
 
     signInUserWithFacebook() {
         this.props.dispatch({
-            type: 'TOGGLE_LOADING'
+            type: 'TOGGLE_LOADING',
         });
 
         this.props.dispatch({
-            type: 'signInUserWithFacebook'
+            type: 'signInUserWithFacebook',
         });
     }
 
     signInUserWithGoogle() {
         this.props.dispatch({
-            type: 'TOGGLE_LOADING'
+            type: 'TOGGLE_LOADING',
         });
 
         this.props.dispatch({
-            type: 'signInUserWithGoogle'
+            type: 'signInUserWithGoogle',
         });
     }
 
@@ -116,59 +113,61 @@ export class SignInOptions extends React.Component {
 
     signInUserAnonymously() {
         this.props.dispatch({
-            type: 'TOGGLE_LOADING'
+            type: 'TOGGLE_LOADING',
         });
 
         this.props.dispatch({
-            type: 'signInUserAnonymously'
+            type: 'signInUserAnonymously',
         });
     }
 
     render() {
         return (
-            <Page
-                fauxFooter>
-
-                <Header
-                    backButton />
+            <Page fauxFooter>
+                <Header backButton />
 
                 <View>
                     <Button
-                        iconName='facebook'
+                        iconName="facebook"
                         handlePress={this.signInUserWithFacebook}
-                        text='Continue with Facebook'
-                        backgroundColor={styleConstants.white} />
+                        text="Continue with Facebook"
+                        backgroundColor={styleConstants.white}
+                    />
                     <Button
-                        iconName='google'
+                        iconName="google"
                         handlePress={this.signInUserWithGoogle}
-                        text='Continue with Google'
-                        backgroundColor={styleConstants.white} />
+                        text="Continue with Google"
+                        backgroundColor={styleConstants.white}
+                    />
                     <Button
-                        iconName='mail'
+                        iconName="mail"
                         handlePress={this.signInUserWithEmail}
-                        text='Continue with Email'
-                        backgroundColor='transparent' />
+                        text="Continue with Email"
+                        backgroundColor="transparent"
+                    />
                     <Button
-                        iconName='anonymous'
+                        iconName="anonymous"
                         handlePress={this.signInUserAnonymously}
-                        text='Continue Anonymously'
-                        backgroundColor='transparent' />
+                        text="Continue Anonymously"
+                        backgroundColor="transparent"
+                    />
                 </View>
 
                 <SnackBar />
 
                 <Loader />
-
             </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         authenticated: state.main.userAuth.authenticated,
         anonymous: state.main.userAuth.anonymous,
-        cloudDataSuccess: state.main.appState.error.type === 'CLOUD_DATA' && state.main.appState.error.success,
+        cloudDataSuccess:
+            state.main.appState.error.type === 'CLOUD_DATA' &&
+            state.main.appState.error.success,
 
         uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
@@ -178,7 +177,7 @@ function mapStateToProps(state) {
         userSettings: state.main.userData.settings,
 
         categories: state.main.userData.categories,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(SignInOptions);

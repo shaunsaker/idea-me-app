@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
     View,
     TouchableWithoutFeedback,
-    Text,
     StyleSheet,
     Animated,
 } from 'react-native';

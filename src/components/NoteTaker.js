@@ -1,8 +1,5 @@
-import React from "react";
-import {
-    View,
-    StyleSheet,
-} from "react-native";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -27,13 +24,10 @@ const styles = StyleSheet.create({
         fontSize: styleConstants.iconFont,
         color: styleConstants.primary,
     },
-    addButton: {
-
-    },
+    addButton: {},
 });
 
-export default NoteTaker = (props) => {
-
+export default (NoteTaker = props => {
     /* PROPTYPES
 
         text: PropTypes.string,
@@ -43,27 +37,18 @@ export default NoteTaker = (props) => {
 
     */
 
-    const addButton = props.inputValue && props.inputValue.length ?
-        <AnimateTranslateX
-            initialValue={40}
-            finalValue={0}
-            shouldAnimateIn>
-            <Touchable
-                onPress={props.handleAdd}
-                style={styles.addButton}>
-                <Icon
-                    name='add'
-                    style={styles.icon} />
-            </Touchable>
-        </AnimateTranslateX>
-        :
-        null;
+    const addButton =
+        props.inputValue && props.inputValue.length ? (
+            <AnimateTranslateX initialValue={40} finalValue={0} shouldAnimateIn>
+                <Touchable onPress={props.handleAdd} style={styles.addButton}>
+                    <Icon name="add" style={styles.icon} />
+                </Touchable>
+            </AnimateTranslateX>
+        ) : null;
 
     return (
         <View style={styles.container}>
-            <Icon
-                name='note'
-                style={styles.icon} />
+            <Icon name="note" style={styles.icon} />
             <BlankInput
                 placeholderText={props.text}
                 placeholderTextColor={styleConstants.lightGrey}
@@ -73,8 +58,9 @@ export default NoteTaker = (props) => {
                 handleFocus={null}
                 handleBlur={null}
                 autoFocus={false}
-                multiline />
+                multiline
+            />
             {addButton}
         </View>
     );
-}
+});

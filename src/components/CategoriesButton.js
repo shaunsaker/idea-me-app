@@ -1,9 +1,5 @@
-import React from "react";
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -36,39 +32,47 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: styleConstants.regularFont,
-    }
+    },
 });
 
-export default CategoriesButton = (props) => {
+export default (CategoriesButton = props => {
     const altColor =
-        props.backgroundColor === 'transparent' || props.backgroundColor === styleConstants.primary ?
-            styleConstants.white
-            :
-            styleConstants.primary;
+        props.backgroundColor === 'transparent' ||
+        props.backgroundColor === styleConstants.primary
+            ? styleConstants.white
+            : styleConstants.primary;
 
     return (
         <View>
             <Touchable
                 onPress={props.handlePress}
-                style={[styles.button, { backgroundColor: props.backgroundColor }, props.style]}
+                style={[
+                    styles.button,
+                    { backgroundColor: props.backgroundColor },
+                    props.style,
+                ]}
                 androidRipple
                 androidRippleColor={altColor}>
                 <View style={styles.container}>
                     <View style={styles.textContainer}>
-                        <Icon
-                            name='folder'
-                            style={styles.icon} />
+                        <Icon name="folder" style={styles.icon} />
                         <Text
-                            style={[styles.text, { color: altColor }, styleConstants.primaryFont]}>
+                            style={[
+                                styles.text,
+                                { color: altColor },
+                                styleConstants.primaryFont,
+                            ]}>
                             {props.currentCategory}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
-                        <Icon
-                            name='lightbulb'
-                            style={styles.icon} />
+                        <Icon name="lightbulb" style={styles.icon} />
                         <Text
-                            style={[styles.text, { color: altColor }, styleConstants.primaryFont]}>
+                            style={[
+                                styles.text,
+                                { color: altColor },
+                                styleConstants.primaryFont,
+                            ]}>
                             {props.currentCount + ' / ' + props.totalCount}
                         </Text>
                     </View>
@@ -76,4 +80,4 @@ export default CategoriesButton = (props) => {
             </Touchable>
         </View>
     );
-}
+});

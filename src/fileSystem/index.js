@@ -3,7 +3,7 @@ import RNFS from 'react-native-fs';
 const response = {
     success: null,
     message: null,
-}
+};
 
 export default class FileSystem {
     static createDirectory(dir) {
@@ -13,15 +13,15 @@ export default class FileSystem {
                     response = {
                         success: true,
                         message: dir,
-                    }
+                    };
 
                     resolve(response);
                 })
-                .catch((error) => {
+                .catch(error => {
                     response = {
                         success: false,
                         message: error.message,
-                    }
+                    };
 
                     resolve(response);
                 });
@@ -35,15 +35,15 @@ export default class FileSystem {
                     response = {
                         success: true,
                         message: action.outputPath,
-                    }
+                    };
 
                     resolve(response);
                 })
-                .catch((error) => {
+                .catch(error => {
                     response = {
                         success: false,
                         message: error.message,
-                    }
+                    };
 
                     resolve(response);
                 });
@@ -57,15 +57,15 @@ export default class FileSystem {
                     response = {
                         success: true,
                         message: action.outputPath,
-                    }
+                    };
 
                     resolve(response);
                 })
-                .catch((error) => {
+                .catch(error => {
                     response = {
                         success: false,
                         message: error.message,
-                    }
+                    };
 
                     resolve(response);
                 });
@@ -79,15 +79,15 @@ export default class FileSystem {
                     response = {
                         success: true,
                         message: action.path,
-                    }
+                    };
 
                     resolve(response);
                 })
-                .catch((error) => {
+                .catch(error => {
                     response = {
                         success: false,
                         message: error.message,
-                    }
+                    };
 
                     resolve(response);
                 });

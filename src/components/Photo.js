@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Image,
-    Text,
-    StyleSheet,
-    ActivityIndicator,
-} from "react-native";
+import { View, Image, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -56,9 +50,7 @@ const styles = StyleSheet.create({
         top: 4,
         right: 4,
     },
-    deleteButtonContainerLarge: {
-
-    },
+    deleteButtonContainerLarge: {},
 });
 
 export default class Photo extends React.Component {
@@ -72,7 +64,7 @@ export default class Photo extends React.Component {
         this.state = {
             loading: true,
             loadError: false,
-        }
+        };
     }
 
     static get PropTypes() {
@@ -80,12 +72,12 @@ export default class Photo extends React.Component {
             uri: PropTypes.string.isRequired,
             isThumbnail: PropTypes.bool, // will render smaller error text, icon and deleteButton (if applicable)
             photoContainerStyles: PropTypes.object, // used for photo and error
-            photoStyles: PropTypes.object,  // used for photo and error
+            photoStyles: PropTypes.object, // used for photo and error
             errorText: PropTypes.string, // if load error, it will display this text
             handlePress: PropTypes.func, // if provided, the thumbnail will be pressable
             deleteOnErrorOnly: PropTypes.bool, // if true, only provide delete button if there was an error loading
             handleDeletePhoto: PropTypes.func, // if provided, delete button will be provided
-        }
+        };
     }
 
     componentDidUpdate(prevProps) {
@@ -113,104 +105,103 @@ export default class Photo extends React.Component {
     }
 
     render() {
-        const photoLoadingComponent = this.state.loading &&
+        const photoLoadingComponent = this.state.loading && (
             <View style={styles.photoLoadingContainer}>
                 <ActivityIndicator
-                    size='small'
-                    color={styleConstants.primary} />
-            </View>;
+                    size="small"
+                    color={styleConstants.primary}
+                />
+            </View>
+        );
 
-        const photoErrorIconStyles = this.props.isThumbnail ?
-            [styles.photoErrorIcon, styles.photoErrorIconSmall]
-            :
-            [styles.photoErrorIcon, styles.photoErrorIconLarge];
+        const photoErrorIconStyles = this.props.isThumbnail
+            ? [styles.photoErrorIcon, styles.photoErrorIconSmall]
+            : [styles.photoErrorIcon, styles.photoErrorIconLarge];
 
-        const photoErrorTextStyles = this.props.isThumbnail ?
-            [styles.photoErrorText, styles.photoErrorTextSmall]
-            :
-            [styles.photoErrorText, styles.photoErrorTextLarge];
+        const photoErrorTextStyles = this.props.isThumbnail
+            ? [styles.photoErrorText, styles.photoErrorTextSmall]
+            : [styles.photoErrorText, styles.photoErrorTextLarge];
 
-        const deleteButton = this.props.handleDeletePhoto ?
-            this.props.isThumbnail ?
-                <View style={styles.deleteButtonContainerSmall}>
-                    <DeleteButton
-                        handlePress={this.props.handleDeletePhoto} />
-                </View>
-                :
-                <View style={styles.deleteButtonContainerLarge}>
-                    <Button
-                        text='Delete Photo Reference'
-                        iconName='camera'
-                        backgroundColor='transparent'
-                        androidRipple
-                        androidRippleColor={styleConstants.primary}
-                        handlePress={this.props.handleDeletePhoto} />
-                </View>
-            :
-            null;
+        const deleteButton = this.props.handleDeletePhoto ? this.props
+            .isThumbnail ? (
+            <View style={styles.deleteButtonContainerSmall}>
+                <DeleteButton handlePress={this.props.handleDeletePhoto} />
+            </View>
+        ) : (
+            <View style={styles.deleteButtonContainerLarge}>
+                <Button
+                    text="Delete Photo Reference"
+                    iconName="camera"
+                    backgroundColor="transparent"
+                    androidRipple
+                    androidRippleColor={styleConstants.primary}
+                    handlePress={this.props.handleDeletePhoto}
+                />
+            </View>
+        ) : null;
 
-        const image =
+        const image = (
             <Image
                 source={{ uri: this.props.uri }}
                 onLoadEnd={this.setLoadingFalse}
                 onError={this.toggleLoadError}
-                style={this.props.photoStyles} />;
+                style={this.props.photoStyles}
+            />
+        );
 
         const photo =
-
             // Load failed
-            this.state.loadError ?
-                this.props.isThumbail ?
-                    <Touchable
-                        onPress={this.props.handlePress}
-                        style={this.props.photoContainerStyles}>
-                        <View
-                            style={this.props.photoStyles}>
-                            <Icon
-                                name='error'
-                                style={photoErrorIconStyles} />
-                            <Text style={[photoErrorTextStyles, styleConstants.primaryFont]}>
-                                {this.props.errorText}
-                            </Text>
-                        </View>
-                        {deleteButton}
-                    </Touchable>
-                    :
-                    <View style={this.props.photoContainerStyles}>
-                        <View
-                            style={this.props.photoStyles}>
-                            <Icon
-                                name='error'
-                                style={photoErrorIconStyles} />
-                            <Text style={[photoErrorTextStyles, styleConstants.primaryFont]}>
-                                {this.props.errorText}
-                            </Text>
-                            {deleteButton}
-                        </View>
+            this.state.loadError ? this.props.isThumbail ? (
+                <Touchable
+                    onPress={this.props.handlePress}
+                    style={this.props.photoContainerStyles}>
+                    <View style={this.props.photoStyles}>
+                        <Icon name="error" style={photoErrorIconStyles} />
+                        <Text
+                            style={[
+                                photoErrorTextStyles,
+                                styleConstants.primaryFont,
+                            ]}>
+                            {this.props.errorText}
+                        </Text>
                     </View>
-                :
-
-                // Load succeeded
-                this.props.isThumbnail ?
-                    this.props.handlePress ?
-                        <Touchable
-                            onPress={this.props.handlePress}
-                            style={this.props.photoContainerStyles}>
-                            {image}
-                            {!this.props.deleteOnErrorOnly && deleteButton}
-                            {photoLoadingComponent}
-                        </Touchable>
-                        :
-                        <View style={this.props.photoContainerStyles}>
-                            {image}
-                            {!this.props.deleteOnErrorOnly && deleteButton}
-                            {photoLoadingComponent}
-                        </View>
-                    :
-                    <View style={this.props.photoContainerStyles}>
-                        {image}
-                        {photoLoadingComponent}
-                    </View>;
+                    {deleteButton}
+                </Touchable>
+            ) : (
+                <View style={this.props.photoContainerStyles}>
+                    <View style={this.props.photoStyles}>
+                        <Icon name="error" style={photoErrorIconStyles} />
+                        <Text
+                            style={[
+                                photoErrorTextStyles,
+                                styleConstants.primaryFont,
+                            ]}>
+                            {this.props.errorText}
+                        </Text>
+                        {deleteButton}
+                    </View>
+                </View>
+            ) : // Load succeeded
+            this.props.isThumbnail ? this.props.handlePress ? (
+                <Touchable
+                    onPress={this.props.handlePress}
+                    style={this.props.photoContainerStyles}>
+                    {image}
+                    {!this.props.deleteOnErrorOnly && deleteButton}
+                    {photoLoadingComponent}
+                </Touchable>
+            ) : (
+                <View style={this.props.photoContainerStyles}>
+                    {image}
+                    {!this.props.deleteOnErrorOnly && deleteButton}
+                    {photoLoadingComponent}
+                </View>
+            ) : (
+                <View style={this.props.photoContainerStyles}>
+                    {image}
+                    {photoLoadingComponent}
+                </View>
+            );
 
         return photo;
     }

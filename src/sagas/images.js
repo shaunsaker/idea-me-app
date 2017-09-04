@@ -13,10 +13,8 @@ export function* handleImage(action) {
     if (action.option === 'Take a Photo') {
         imagePickerResponse = yield call(Images.takePhoto);
         console.log('imagePickerResponse', imagePickerResponse);
-    }
-
-    // Choose a Photo
-    else {
+    } else {
+        // Choose a Photo
         imagePickerResponse = yield call(Images.choosePhoto);
         console.log('imagePickerResponse', imagePickerResponse);
     }
@@ -25,41 +23,56 @@ export function* handleImage(action) {
         const appPhotosDir = RNFS.PicturesDirectoryPath + '/' + config.app.name;
         console.log('appPhotosDir:', appPhotosDir);
 
-        const createDirectoryResponse = yield call(FileSystem.createDirectory, appPhotosDir);
+        const createDirectoryResponse = yield call(
+            FileSystem.createDirectory,
+            appPhotosDir
+        );
         console.log('createDirectoryResponse', createDirectoryResponse);
 
         if (createDirectoryResponse.success) {
-            const outputPath = createDirectoryResponse.message + '/' + utilities.getFileName(imagePickerResponse.message.path);
+            const outputPath =
+                createDirectoryResponse.message +
+                '/' +
+                utilities.getFileName(imagePickerResponse.message.path);
             console.log('Output path: ', outputPath);
 
             const transferFileOptions = {
                 path: imagePickerResponse.message.path,
                 outputPath,
-            }
+            };
             let transferFileResponse; // move or copy response
 
             if (action.option === 'Take a Photo') {
-                transferFileResponse = yield call(FileSystem.moveFile, transferFileOptions);
+                transferFileResponse = yield call(
+                    FileSystem.moveFile,
+                    transferFileOptions
+                );
                 console.log('transferFileResponse', transferFileResponse);
-            }
-            else {
-
+            } else {
                 // Copy the file if it was chosen from an existing directory
-                transferFileResponse = yield call(FileSystem.copyFile, transferFileOptions);
+                transferFileResponse = yield call(
+                    FileSystem.copyFile,
+                    transferFileOptions
+                );
                 console.log('transferFileResponse', transferFileResponse);
             }
 
             if (transferFileResponse.success) {
-                let maxWidth = action.maxWidth ? action.maxWidth : config.images.maxImageWidth;
+                let maxWidth = action.maxWidth
+                    ? action.maxWidth
+                    : config.images.maxImageWidth;
 
                 const imageResizerOptions = {
-                    uri: "file:" + transferFileResponse.message,
+                    uri: 'file:' + transferFileResponse.message,
                     width: imagePickerResponse.message.width,
                     height: imagePickerResponse.message.height,
                     maxWidth,
-                }
+                };
 
-                const imageResizerResponse = yield call(Images.resizeImage, imageResizerOptions);
+                const imageResizerResponse = yield call(
+                    Images.resizeImage,
+                    imageResizerOptions
+                );
                 console.log('imageResizerResponse', imageResizerResponse);
 
                 if (imageResizerResponse.success) {
@@ -69,27 +82,44 @@ export function* handleImage(action) {
                         width: imageResizerResponse.message.width,
                         height: imageResizerResponse.message.height,
                         maxWidth,
-                    }
+                    };
 
-                    const imageCropperResponse = yield call(Images.cropImage, imageCropperOptions);
+                    const imageCropperResponse = yield call(
+                        Images.cropImage,
+                        imageCropperOptions
+                    );
                     console.log('imageCropperResponse', imageCropperResponse);
 
                     if (imageCropperResponse.success) {
-                        const croppedImagePath = imageCropperResponse.message.replace('file:', '');
-                        const croppedImageOutputPath = utilities.appendStringToFileName(transferFileResponse.message, '-cropped');
+                        const croppedImagePath = imageCropperResponse.message.replace(
+                            'file:',
+                            ''
+                        );
+                        const croppedImageOutputPath = utilities.appendStringToFileName(
+                            transferFileResponse.message,
+                            '-cropped'
+                        );
 
                         const moveCroppedFileOptions = {
                             path: croppedImagePath,
                             outputPath: croppedImageOutputPath,
-                        }
+                        };
 
-                        const moveCroppedFileResponse = yield call(FileSystem.moveFile, moveCroppedFileOptions);
-                        console.log('moveCroppedFileResponse', moveCroppedFileResponse);
+                        const moveCroppedFileResponse = yield call(
+                            FileSystem.moveFile,
+                            moveCroppedFileOptions
+                        );
+                        console.log(
+                            'moveCroppedFileResponse',
+                            moveCroppedFileResponse
+                        );
 
                         if (moveCroppedFileResponse.success) {
                             const image = {
-                                fullSize: "file:" + transferFileResponse.message,
-                                cropped: "file:" + moveCroppedFileResponse.message,
+                                fullSize:
+                                    'file:' + transferFileResponse.message,
+                                cropped:
+                                    'file:' + moveCroppedFileResponse.message,
                                 uid: utilities.createUID(),
                             };
 
@@ -97,49 +127,42 @@ export function* handleImage(action) {
                                 type: 'SET_TEMPORARY_IMAGE',
                                 image,
                             });
-                        }
-                        else {
+                        } else {
                             yield put({
                                 type: 'SET_ERROR',
                                 errorType: 'IMAGE',
                                 message: moveCroppedFileResponse.message,
                             });
                         }
-                    }
-                    else {
+                    } else {
                         yield put({
                             type: 'SET_ERROR',
                             errorType: 'IMAGE',
                             message: imageCropperResponse.message,
                         });
                     }
-                }
-                else {
+                } else {
                     yield put({
                         type: 'SET_ERROR',
                         errorType: 'IMAGE',
                         message: imageResizerResponse.message,
                     });
                 }
-            }
-            else {
+            } else {
                 yield put({
                     type: 'SET_ERROR',
                     errorType: 'IMAGE',
                     message: transferFileResponse.message,
                 });
             }
-        }
-        else {
+        } else {
             yield put({
                 type: 'SET_ERROR',
                 errorType: 'IMAGE',
                 message: createDirectoryResponse.message,
             });
         }
-    }
-    else {
-
+    } else {
         // Do nothing, user cancelled
     }
 }

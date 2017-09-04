@@ -1,9 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Text,
-} from "react-native";
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -35,7 +32,7 @@ export class Photos extends React.Component {
             showPhotoModal: false,
             showDeleteModal: false,
             deletePhotoIndex: null,
-        }
+        };
     }
 
     static get propTypes() {
@@ -51,10 +48,11 @@ export class Photos extends React.Component {
     }
 
     componentDidMount() {
-
         // If our idea has photos or newPhotos were passed in as props from add/edit idea pages
         if (this.props.idea.photos || this.props.newPhotos) {
-            const newPhotos = this.props.idea.photos ? this.props.idea.photos : this.props.newPhotos;
+            const newPhotos = this.props.idea.photos
+                ? this.props.idea.photos
+                : this.props.newPhotos;
 
             this.props.dispatch({
                 type: 'SET_NEW_PHOTOS',
@@ -64,10 +62,15 @@ export class Photos extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-
         // If an image was taken/saved
-        if (this.props.temporaryImage && this.props.temporaryImage !== prevProps.temporaryImage) {
-            const newPhotos = utilities.pushObjectToDictionary(this.props.temporaryImage, this.props.newPhotos);
+        if (
+            this.props.temporaryImage &&
+            this.props.temporaryImage !== prevProps.temporaryImage
+        ) {
+            const newPhotos = utilities.pushObjectToDictionary(
+                this.props.temporaryImage,
+                this.props.newPhotos
+            );
 
             this.props.dispatch({
                 type: 'SET_NEW_PHOTOS',
@@ -77,7 +80,11 @@ export class Photos extends React.Component {
             if (!this.props.addIdea) {
                 let newIdea = utilities.cloneObject(this.props.idea);
                 newIdea['photos'] = newPhotos;
-                const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+                const newIdeas = utilities.updateObjectInDictionary(
+                    this.props.idea.uid,
+                    newIdea,
+                    this.props.ideas
+                );
 
                 // Dispatch to store
                 this.props.dispatch({
@@ -114,7 +121,7 @@ export class Photos extends React.Component {
 
     togglePhotoModal() {
         this.setState({
-            showPhotoModal: !this.state.showPhotoModal
+            showPhotoModal: !this.state.showPhotoModal,
         });
     }
 
@@ -122,34 +129,42 @@ export class Photos extends React.Component {
         this.togglePhotoModal();
 
         if (option === 'Take a Photo') {
-            Permissions.handlePermission('camera', () => {
-                this.props.dispatch({
-                    type: 'handleImage',
-                    option,
-                    maxWidth: Math.ceil(styleConstants.noteCardCell),
-                });
-            }, () => {
-                this.props.dispatch({
-                    type: 'SET_ERROR',
-                    errorType: 'USER',
-                    message: 'We need your permission to use your camera.',
-                });
-            });
-        }
-        else {
-            Permissions.handlePermission('photo', () => {
-                this.props.dispatch({
-                    type: 'handleImage',
-                    option,
-                    maxWidth: Math.ceil(styleConstants.noteCardCell),
-                });
-            }, () => {
-                this.props.dispatch({
-                    type: 'SET_ERROR',
-                    errorType: 'USER',
-                    message: 'We need your permission to access your photo gallery.',
-                });
-            });
+            Permissions.handlePermission(
+                'camera',
+                () => {
+                    this.props.dispatch({
+                        type: 'handleImage',
+                        option,
+                        maxWidth: Math.ceil(styleConstants.noteCardCell),
+                    });
+                },
+                () => {
+                    this.props.dispatch({
+                        type: 'SET_ERROR',
+                        errorType: 'USER',
+                        message: 'We need your permission to use your camera.',
+                    });
+                }
+            );
+        } else {
+            Permissions.handlePermission(
+                'photo',
+                () => {
+                    this.props.dispatch({
+                        type: 'handleImage',
+                        option,
+                        maxWidth: Math.ceil(styleConstants.noteCardCell),
+                    });
+                },
+                () => {
+                    this.props.dispatch({
+                        type: 'SET_ERROR',
+                        errorType: 'USER',
+                        message:
+                            'We need your permission to access your photo gallery.',
+                    });
+                }
+            );
         }
     }
 
@@ -163,7 +178,10 @@ export class Photos extends React.Component {
     deletePhoto() {
         this.toggleDeleteModal();
 
-        let newPhotos = utilities.removeObjectFromDictionary(this.state.deletePhotoUID, this.props.newPhotos);
+        let newPhotos = utilities.removeObjectFromDictionary(
+            this.state.deletePhotoUID,
+            this.props.newPhotos
+        );
 
         this.props.dispatch({
             type: 'SET_NEW_PHOTOS',
@@ -173,7 +191,11 @@ export class Photos extends React.Component {
         if (!this.props.addIdea) {
             let newIdea = utilities.cloneObject(this.props.idea);
             newIdea['photos'] = newPhotos;
-            const newIdeas = utilities.updateObjectInDictionary(this.props.idea.uid, newIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(
+                this.props.idea.uid,
+                newIdea,
+                this.props.ideas
+            );
 
             // Dispatch to store
             this.props.dispatch({
@@ -185,53 +207,60 @@ export class Photos extends React.Component {
             // Dispatch to db
             this.props.dispatch({
                 type: 'deleteUserData',
-                node: 'ideas/' + this.props.idea.uid + '/photos/' + this.state.deletePhotoUID,
+                node:
+                    'ideas/' +
+                    this.props.idea.uid +
+                    '/photos/' +
+                    this.state.deletePhotoUID,
                 uid: this.props.uid,
             });
         }
     }
 
     render() {
-        const photosArray = utilities.convertDictionaryToArray(this.props.newPhotos);
+        const photosArray = utilities.convertDictionaryToArray(
+            this.props.newPhotos
+        );
 
-        const photoViewer = this.state.showPhotoViewer &&
+        const photoViewer = this.state.showPhotoViewer && (
             <PhotoViewer
                 photos={photosArray}
                 scrollToIndex={this.state.photoViewerIndex}
                 handleClose={this.togglePhotoViewer}
-                handleDeletePhoto={this.toggleDeleteModal} />;
+                handleDeletePhoto={this.toggleDeleteModal}
+            />
+        );
 
-        const photoModal = this.state.showPhotoModal &&
+        const photoModal = this.state.showPhotoModal && (
             <OptionsModal
-                title='Choose an Option'
+                title="Choose an Option"
                 options={['Take a Photo', 'Choose a Photo']}
                 handleSelect={this.selectPhotoOption}
-                handleClose={this.togglePhotoModal} />;
+                handleClose={this.togglePhotoModal}
+            />
+        );
 
-        const deletePhotoModal = this.state.showDeleteModal &&
+        const deletePhotoModal = this.state.showDeleteModal && (
             <ActionModal
                 title={'Are you sure you want to delete this photo?'}
                 handleLeftIconPress={this.deletePhoto}
-                handleRightIconPress={this.toggleDeleteModal} />;
+                handleRightIconPress={this.toggleDeleteModal}
+            />
+        );
 
         return (
-            <Page
-                backgroundColor={styleConstants.white}
-                removeBottomPadding>
-
-                <Header
-                    headerShadow
-                    backButton
-                    text='Photos' />
+            <Page backgroundColor={styleConstants.white} removeBottomPadding>
+                <Header headerShadow backButton text="Photos" />
 
                 <NoteCard
                     idea={this.props.idea}
-                    type='photos'
+                    type="photos"
                     photos={photosArray}
                     displayInfo
                     handleViewPhotos={this.togglePhotoViewer}
                     handleAdd={this.togglePhotoModal}
-                    handleDelete={this.toggleDeleteModal} />
+                    handleDelete={this.toggleDeleteModal}
+                />
 
                 {photoViewer}
 
@@ -242,19 +271,18 @@ export class Photos extends React.Component {
                 <SnackBar />
 
                 <Loader />
-
             </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         temporaryImage: state.main.appData.temporaryImage,
         newPhotos: state.main.appData.newPhotos,
         ideas: state.main.userData.ideas,
         uid: state.main.userAuth.uid,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(Photos);

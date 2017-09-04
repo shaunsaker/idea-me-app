@@ -10,10 +10,8 @@ export function* deleteFile(action) {
     console.log('deleteFileResponse', deleteFileResponse);
 
     if (deleteFileResponse.success) {
-
         // Do nothing
-    }
-    else {
+    } else {
         yield put({
             type: 'SET_ERROR',
             errorType: 'FILE_SYSTEM',

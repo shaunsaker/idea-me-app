@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
-    Text,
     TouchableWithoutFeedback,
     TextInput,
     StyleSheet,
@@ -22,19 +21,11 @@ const styles = StyleSheet.create({
         marginRight: 16,
         alignSelf: 'center',
     },
-    inputLabelContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    inputLabelText: {
-        fontSize: styleConstants.smallFont,
-    },
     input: {
         fontSize: styleConstants.regularFont,
         paddingLeft: 0,
         paddingRight: 32,
     },
-
     clearTextButtonContainer: {
         position: 'absolute',
         top: 0,

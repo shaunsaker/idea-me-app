@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    FlatList,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, FlatList, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -63,45 +58,46 @@ export default class VoiceNoteList extends React.Component {
         return {
             voiceNotes: PropTypes.array,
             handleDelete: PropTypes.func,
-        }
+        };
     }
 
     renderVoiceNote = ({ item }) => {
         return (
             <View style={styles.voiceNoteContainer}>
-                <VoiceNotePlayer
-                    voiceNote={item} />
+                <VoiceNotePlayer voiceNote={item} />
                 <View style={styles.deleteButtonContainer}>
                     <DeleteButton
-                        handlePress={() => this.props.handleDelete(item)} />
+                        handlePress={() => this.props.handleDelete(item)}
+                    />
                 </View>
             </View>
-        )
-    }
+        );
+    };
 
     render() {
-        const notes = this.props.voiceNotes && this.props.voiceNotes.length > 0 ?
-            <FlatList
-                keyExtractor={item => 'voiceNote-' + item.uid}
-                data={this.props.voiceNotes}
-                renderItem={this.renderVoiceNote}
-                style={styles.voiceNotesWrapper}
-                contentContainerStyle={styles.voiceNotesContainer}>
-            </FlatList>
-            :
-            <View style={styles.voiceNotesWrapper}>
-                <View style={styles.noteTextContainer}>
-                    <Text
-                        style={[styles.noteText, styleConstants.primaryFont]}>
-                        None
-                    </Text>
+        const notes =
+            this.props.voiceNotes && this.props.voiceNotes.length > 0 ? (
+                <FlatList
+                    keyExtractor={item => 'voiceNote-' + item.uid}
+                    data={this.props.voiceNotes}
+                    renderItem={this.renderVoiceNote}
+                    style={styles.voiceNotesWrapper}
+                    contentContainerStyle={styles.voiceNotesContainer}
+                />
+            ) : (
+                <View style={styles.voiceNotesWrapper}>
+                    <View style={styles.noteTextContainer}>
+                        <Text
+                            style={[
+                                styles.noteText,
+                                styleConstants.primaryFont,
+                            ]}>
+                            None
+                        </Text>
+                    </View>
                 </View>
-            </View>;
+            );
 
-        return (
-            <View style={styles.container}>
-                {notes}
-            </View>
-        )
+        return <View style={styles.container}>{notes}</View>;
     }
 }

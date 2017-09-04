@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
 import utilities from '../utilities';
 import Icon from '../assets/icons/index';
@@ -35,9 +31,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 16,
     },
-    infoContainer: {
-
-    },
+    infoContainer: {},
     notesContainer: {
         ...styleConstants.smallShadow,
         flex: 1,
@@ -57,8 +51,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NoteCard = (props) => {
-
+export default (NoteCard = props => {
     /*
         PROPTYPES
             idea
@@ -85,100 +78,110 @@ export default NoteCard = (props) => {
     if (props.type === 'notes') {
         notesValues = props.notes;
         title = 'MY NOTES';
-        notes =
+        notes = (
             <BulletList
                 values={notesValues}
-                handleDelete={props.handleDelete} />;
-        button =
+                handleDelete={props.handleDelete}
+            />
+        );
+        button = (
             <NoteTaker
-                text='Add a Note'
+                text="Add a Note"
                 handleAdd={props.handleAdd}
                 inputValue={props.inputValue}
-                handleChangeText={props.handleChangeText} />
-    }
-    else if (props.type === 'categories') {
+                handleChangeText={props.handleChangeText}
+            />
+        );
+    } else if (props.type === 'categories') {
         notesValues = props.categories;
         title = 'MY CATEGORIES';
-        notes =
+        notes = (
             <BulletList
                 values={notesValues}
-                handleDelete={props.handleDelete} />;
-        button =
+                handleDelete={props.handleDelete}
+            />
+        );
+        button = (
             <NoteTaker
-                text='Add a Category'
+                text="Add a Category"
                 handleAdd={props.handleAdd}
                 inputValue={props.inputValue}
-                handleChangeText={props.handleChangeText} />
-    }
-    else if (props.type === 'photos') {
+                handleChangeText={props.handleChangeText}
+            />
+        );
+    } else if (props.type === 'photos') {
         notesValues = props.photos;
         title = 'MY PHOTOS';
-        notes =
+        notes = (
             <PhotoList
                 photos={notesValues}
                 handleViewPhotos={props.handleViewPhotos}
-                handleDelete={props.handleDelete} />
-        button =
+                handleDelete={props.handleDelete}
+            />
+        );
+        button = (
             <IconButton
                 handlePress={props.handleAdd}
-                iconName='camera'
+                iconName="camera"
                 iconColor={styleConstants.white}
-                disabled={props.disabled} />
-    }
-    else if (props.type === 'voiceNotes') {
+                disabled={props.disabled}
+            />
+        );
+    } else if (props.type === 'voiceNotes') {
         notesValues = props.voiceNotes;
         title = 'MY VOICE NOTES';
-        notes =
+        notes = (
             <VoiceNoteList
                 voiceNotes={notesValues}
-                handleDelete={props.handleDelete} />;
-        button =
-            <VoiceNoteRecorder
-                handleRecord={props.handleRecord} />
+                handleDelete={props.handleDelete}
+            />
+        );
+        button = <VoiceNoteRecorder handleRecord={props.handleRecord} />;
     }
 
     const notesCount = notesValues ? notesValues.length : 0;
 
-    const titleColorStyles = title && notesCount === 0 &&
-        {
-            color: styleConstants.lightGrey,
-        };
+    const titleColorStyles = title &&
+    notesCount === 0 && {
+        color: styleConstants.lightGrey,
+    };
 
-    const infoBlock = props.displayInfo &&
+    const infoBlock = props.displayInfo && (
         <View style={styles.infoContainer}>
             <InfoBlock
                 title={props.idea.title}
                 titleColor={styleConstants.primary}
-                fullWidth />
-        </View>;
+                fullWidth
+            />
+        </View>
+    );
 
-    const buttonComponent = button &&
-        <View style={styles.buttonContainer}>
-            {button}
-        </View>;
+    const buttonComponent = button && (
+        <View style={styles.buttonContainer}>{button}</View>
+    );
 
     return (
-        <View
-            style={styles.cardContainer} >
-
+        <View style={styles.cardContainer}>
             <View style={styles.contentContainer}>
-
                 {infoBlock}
 
                 <View style={styles.notesContainer}>
                     <View style={styles.titleContainer}>
-                        <Text style={[styles.title, styleConstants.primaryFont, titleColorStyles]}>
+                        <Text
+                            style={[
+                                styles.title,
+                                styleConstants.primaryFont,
+                                titleColorStyles,
+                            ]}>
                             {title + ' (' + notesCount + '):'}
                         </Text>
                     </View>
 
                     {notes}
-
                 </View>
             </View>
 
             {buttonComponent}
-
         </View>
-    )
-}
+    );
+});

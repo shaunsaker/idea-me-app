@@ -1,11 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    FlatList,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, FlatList, Text, StyleSheet } from 'react-native';
 
 import styleConstants from '../assets/styleConstants';
 
@@ -22,9 +17,7 @@ const styles = StyleSheet.create({
         width: 164,
         backgroundColor: styleConstants.white,
     },
-    menuItemsContainer: {
-
-    },
+    menuItemsContainer: {},
     menuItemContainer: {
         justifyContent: 'center',
         padding: 8,
@@ -39,7 +32,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: 1,
         backgroundColor: styleConstants.lightGrey,
-    }
+    },
 });
 
 export default class Menu extends React.Component {
@@ -55,20 +48,19 @@ export default class Menu extends React.Component {
         return {
             values: PropTypes.array.isRequired,
             handleSelect: PropTypes.func.isRequired,
-        }
+        };
     }
 
     renderItem({ item }) {
         return (
             <Touchable
                 style={styles.menuItemContainer}
-                onPress={() => this.props.handleSelect(item)} >
-                <Text
-                    style={[styles.menuItemText, styleConstants.primaryFont]}>
+                onPress={() => this.props.handleSelect(item)}>
+                <Text style={[styles.menuItemText, styleConstants.primaryFont]}>
                     {item}
                 </Text>
             </Touchable>
-        )
+        );
     }
 
     render() {
@@ -87,7 +79,10 @@ export default class Menu extends React.Component {
                             data={this.props.values}
                             renderItem={this.renderItem}
                             contentContainerStyle={styles.menuItemsContainer}
-                            ItemSeparatorComponent={() => <View style={styles.separator} />} />
+                            ItemSeparatorComponent={() => (
+                                <View style={styles.separator} />
+                            )}
+                        />
                     </AnimateHeight>
                 </AnimateTranslateX>
             </View>

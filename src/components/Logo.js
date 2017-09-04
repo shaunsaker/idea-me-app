@@ -1,9 +1,5 @@
-import React from "react";
-import {
-    Text,
-    View,
-    StyleSheet,
-} from "react-native";
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 
 import config from '../config';
 import Icon from '../assets/icons/index';
@@ -26,22 +22,18 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 28,
         color: styleConstants.white,
-    }
+    },
 });
 
-export default Logo = (props) => {
+export default (Logo = props => {
     return (
-        <View
-            style={styles.container} >
+        <View style={styles.container}>
             <Text style={styles.iconContainer}>
-                <Icon
-                    name='lightbulb'
-                    style={styles.icon} />
+                <Icon name="lightbulb" style={styles.icon} />
             </Text>
             <Text style={[styles.text, styleConstants.secondaryFont]}>
                 IdeaMe
             </Text>
         </View>
     );
-
-}
+});

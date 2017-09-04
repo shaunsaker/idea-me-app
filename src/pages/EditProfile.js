@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
@@ -6,9 +6,9 @@ import {
     TouchableOpacity,
     ActivityIndicator,
     StyleSheet,
-} from "react-native";
-import { Actions } from "react-native-router-flux";
-import { connect } from "react-redux";
+} from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import utilities from '../utilities';
 import Permissions from '../permissions';
@@ -28,9 +28,7 @@ const styles = StyleSheet.create({
     currentLocationButtonContainer: {
         marginHorizontal: 16,
     },
-    currentLocationButton: {
-
-    },
+    currentLocationButton: {},
     currentLocationButtonText: {
         fontSize: styleConstants.smallFont,
         color: styleConstants.lightGrey,
@@ -55,7 +53,7 @@ export class EditProfile extends React.Component {
             showCancelModal: false,
             hasFetchedLocation: false,
             isFetchingLocation: false,
-        }
+        };
 
         this.togglePhotoModal = this.togglePhotoModal.bind(this);
         this.selectPhotoOption = this.selectPhotoOption.bind(this);
@@ -88,15 +86,20 @@ export class EditProfile extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.currentLocation && this.props.currentLocation !== prevProps.currentLocation) {
+        if (
+            this.props.currentLocation &&
+            this.props.currentLocation !== prevProps.currentLocation
+        ) {
             this.updateEditUserLocation(this.props.currentLocation);
 
             this.setState({
                 hasFetchedLocation: true,
                 isFetchingLocation: false,
             });
-        }
-        else if (this.props.geolocationError && this.props.geolocationError !== prevProps.geolocationError) {
+        } else if (
+            this.props.geolocationError &&
+            this.props.geolocationError !== prevProps.geolocationError
+        ) {
             this.setState({
                 isFetchingLocation: false,
             });
@@ -105,7 +108,7 @@ export class EditProfile extends React.Component {
 
     togglePhotoModal() {
         this.setState({
-            showPhotoModal: !this.state.showPhotoModal
+            showPhotoModal: !this.state.showPhotoModal,
         });
     }
 
@@ -113,44 +116,52 @@ export class EditProfile extends React.Component {
         this.togglePhotoModal();
 
         if (option === 'Take a Photo') {
-            Permissions.handlePermission('camera', () => {
-                this.props.dispatch({
-                    type: 'handleImage',
-                    option,
-                });
-            }, () => {
-                this.props.dispatch({
-                    type: 'SET_ERROR',
-                    errorType: 'USER',
-                    message: 'We need your permission to use your camera.',
-                });
-            });
-        }
-        else {
-            Permissions.handlePermission('photo', () => {
-                this.props.dispatch({
-                    type: 'handleImage',
-                    option,
-                });
-            }, () => {
-                this.props.dispatch({
-                    type: 'SET_ERROR',
-                    errorType: 'USER',
-                    message: 'We need your permission to access your photo gallery.',
-                });
-            });
+            Permissions.handlePermission(
+                'camera',
+                () => {
+                    this.props.dispatch({
+                        type: 'handleImage',
+                        option,
+                    });
+                },
+                () => {
+                    this.props.dispatch({
+                        type: 'SET_ERROR',
+                        errorType: 'USER',
+                        message: 'We need your permission to use your camera.',
+                    });
+                }
+            );
+        } else {
+            Permissions.handlePermission(
+                'photo',
+                () => {
+                    this.props.dispatch({
+                        type: 'handleImage',
+                        option,
+                    });
+                },
+                () => {
+                    this.props.dispatch({
+                        type: 'SET_ERROR',
+                        errorType: 'USER',
+                        message:
+                            'We need your permission to access your photo gallery.',
+                    });
+                }
+            );
         }
     }
 
     updateEditUserName(value) {
         this.setState({
-            editUserName: value
+            editUserName: value,
         });
     }
 
     updateEditUserEmail(value) {
         this.setState({
-            editUserEmail: value
+            editUserEmail: value,
         });
     }
 
@@ -161,35 +172,45 @@ export class EditProfile extends React.Component {
     }
 
     getUserLocation() {
-        Permissions.handlePermission('location', () => {
-            this.updateEditUserLocation('');
+        Permissions.handlePermission(
+            'location',
+            () => {
+                this.updateEditUserLocation('');
 
-            this.setState({
-                isFetchingLocation: true,
-            });
+                this.setState({
+                    isFetchingLocation: true,
+                });
 
-            this.props.dispatch({
-                type: 'getUserLocation',
-            });
-        }, () => {
-            this.props.dispatch({
-                type: 'SET_ERROR',
-                errorType: 'GEOLOCATION',
-                message: 'We need your permission to access your lcoation.',
-            });
-        });
+                this.props.dispatch({
+                    type: 'getUserLocation',
+                });
+            },
+            () => {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'GEOLOCATION',
+                    message: 'We need your permission to access your lcoation.',
+                });
+            }
+        );
     }
 
     updateUserDetails() {
-        const prettyUserName = utilities.prettifyString(this.state.editUserName);
-        const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage : this.props.userPhotoUrl;
+        const prettyUserName = utilities.prettifyString(
+            this.state.editUserName
+        );
+        const userPhotoUrl = this.props.temporaryImage
+            ? this.props.temporaryImage
+            : this.props.userPhotoUrl;
         const userData = {
             userName: prettyUserName,
             userEmail: this.state.editUserEmail,
-            userLocation: this.props.currentLocation ? this.props.currentLocation : this.props.userLocation,
+            userLocation: this.props.currentLocation
+                ? this.props.currentLocation
+                : this.props.userLocation,
             userPhotoUrl,
             dateJoined: this.props.dateJoined,
-        }
+        };
 
         this.props.dispatch({
             type: 'UPDATE_USER_DATA',
@@ -217,11 +238,13 @@ export class EditProfile extends React.Component {
         if (this.props.temporaryImage) {
             let newPhotoFullSizeURI = this.props.temporaryImage.fullSize;
             let newPhotoCroppedURI = this.props.temporaryImage.cropped;
-            const newPhotosURIArray = [newPhotoFullSizeURI, newPhotoCroppedURI]
-            const newPhotosPathsArray = utilities.convertURIsToPaths(newPhotosURIArray);
+            const newPhotosURIArray = [newPhotoFullSizeURI, newPhotoCroppedURI];
+            const newPhotosPathsArray = utilities.convertURIsToPaths(
+                newPhotosURIArray
+            );
 
             this.props.dispatch({
-                type: 'CLEAR_TEMPORARY_IMAGE'
+                type: 'CLEAR_TEMPORARY_IMAGE',
             });
 
             for (let i = 0; i < newPhotosPathsArray.length; i++) {
@@ -237,77 +260,97 @@ export class EditProfile extends React.Component {
     }
 
     render() {
-        const enableContinueButton = this.state.editUserEmail && this.state.editUserName ? true : false; // location not always important
-        const userPhotoUrl = this.props.temporaryImage ? this.props.temporaryImage.cropped : this.props.userPhotoUrl && this.props.userPhotoUrl.cropped;
+        const enableContinueButton =
+            this.state.editUserEmail && this.state.editUserName ? true : false; // location not always important
+        const userPhotoUrl = this.props.temporaryImage
+            ? this.props.temporaryImage.cropped
+            : this.props.userPhotoUrl && this.props.userPhotoUrl.cropped;
 
-        const currentLocationComponent = this.state.isFetchingLocation ?
+        const currentLocationComponent = this.state.isFetchingLocation ? (
             <View style={styles.currentLocationLoadingContainer}>
                 <ActivityIndicator
                     size="small"
-                    color={styleConstants.lightGrey} />
+                    color={styleConstants.lightGrey}
+                />
             </View>
-            :
-            !this.state.hasFetchedLocation &&
-            <View style={styles.currentLocationButtonContainer}>
-                <TouchableOpacity
-                    onPress={this.getUserLocation}
-                    style={styles.currentLocationButton}>
-                    <Text style={[styles.currentLocationButtonText, styleConstants.primaryFont]}>
-                        Use Your Current location
+        ) : (
+            !this.state.hasFetchedLocation && (
+                <View style={styles.currentLocationButtonContainer}>
+                    <TouchableOpacity
+                        onPress={this.getUserLocation}
+                        style={styles.currentLocationButton}>
+                        <Text
+                            style={[
+                                styles.currentLocationButtonText,
+                                styleConstants.primaryFont,
+                            ]}>
+                            Use Your Current location
                         </Text>
-                </TouchableOpacity>
-            </View>;
+                    </TouchableOpacity>
+                </View>
+            )
+        );
 
-        const photoModal = this.state.showPhotoModal ?
+        const photoModal = this.state.showPhotoModal ? (
             <OptionsModal
-                title='Choose an Option'
+                title="Choose an Option"
                 options={['Take a Photo', 'Choose a Photo']}
                 handleSelect={this.selectPhotoOption}
-                handleClose={this.togglePhotoModal} />
-            :
-            null;
+                handleClose={this.togglePhotoModal}
+            />
+        ) : null;
 
-        const cancelModal = this.state.showCancelModal &&
+        const cancelModal = this.state.showCancelModal && (
             <ActionModal
-                title='Are you sure you want to exit without saving your profile?'
-                subtitle='You will lose all the data you added.'
+                title="Are you sure you want to exit without saving your profile?"
+                subtitle="You will lose all the data you added."
                 handleLeftIconPress={this.cancelEditProfile}
-                handleRightIconPress={this.toggleCancelModal} />;
+                handleRightIconPress={this.toggleCancelModal}
+            />
+        );
         return (
             <Page>
-
                 <Header
-                    text='Edit Profile'
+                    text="Edit Profile"
                     closeButton
-                    handleLeftIconPress={enableContinueButton ? this.toggleCancelModal : this.cancelEditProfile}
+                    handleLeftIconPress={
+                        enableContinueButton ? (
+                            this.toggleCancelModal
+                        ) : (
+                            this.cancelEditProfile
+                        )
+                    }
                     continueButton={enableContinueButton}
                     handleRightIconPress={this.updateUserDetails}
-                    headerShadow />
+                    headerShadow
+                />
 
                 <InputContainer>
-
                     <EditableImage
                         uri={userPhotoUrl}
-                        handlePress={this.togglePhotoModal} />
+                        handlePress={this.togglePhotoModal}
+                    />
 
                     <Input
                         placeholder="NAME"
                         value={this.state.editUserName}
                         handleChange={this.updateEditUserName}
-                        maxLength={16} />
+                        maxLength={16}
+                    />
 
                     <Input
                         placeholder="EMAIL ADDRESS"
                         value={this.state.editUserEmail}
-                        handleChange={this.updateEditUserEmail} />
+                        handleChange={this.updateEditUserEmail}
+                    />
 
                     <Input
                         placeholder="LOCATION"
                         value={this.state.editUserLocation}
-                        handleChange={this.updateEditUserLocation} />
+                        handleChange={this.updateEditUserLocation}
+                    />
 
                     {currentLocationComponent}
-
                 </InputContainer>
 
                 {photoModal}
@@ -315,14 +358,13 @@ export class EditProfile extends React.Component {
                 {cancelModal}
 
                 <SnackBar />
-
-            </Page >
+            </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         uid: state.main.userAuth.uid,
         userName: state.main.userData.profile.userName,
         userEmail: state.main.userData.profile.userEmail,
@@ -332,7 +374,7 @@ function mapStateToProps(state) {
         dateJoined: state.main.userData.profile.dateJoined,
         temporaryImage: state.main.appData.temporaryImage,
         geolocationError: state.main.appState.error.type === 'GEOLOCATION',
-    });
+    };
 }
 
 export default connect(mapStateToProps)(EditProfile);

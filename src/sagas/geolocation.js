@@ -3,12 +3,14 @@ import { call, put } from 'redux-saga/effects';
 import Geolocation from '../geolocation/index';
 
 export function* getUserLocation(action) {
-
     const userCoordinatesResponse = yield call(Geolocation.getUserCoordinates);
     console.log('userCoordinatesResponse', userCoordinatesResponse);
 
     if (userCoordinatesResponse.success) {
-        const userSuburbResponse = yield call(Geolocation.getUserSuburb, userCoordinatesResponse.message);
+        const userSuburbResponse = yield call(
+            Geolocation.getUserSuburb,
+            userCoordinatesResponse.message
+        );
         console.log('userSuburbResponse', userSuburbResponse);
 
         if (userSuburbResponse.success) {
@@ -16,8 +18,7 @@ export function* getUserLocation(action) {
                 type: 'SET_CURRENT_LOCATION',
                 currentLocation: userSuburbResponse.message,
             });
-        }
-        else {
+        } else {
             yield put({
                 type: 'SET_ERROR',
                 errorType: 'GEOLOCATION',
@@ -27,8 +28,7 @@ export function* getUserLocation(action) {
                 },
             });
         }
-    }
-    else {
+    } else {
         yield put({
             type: 'SET_ERROR',
             errorType: 'GEOLOCATION',

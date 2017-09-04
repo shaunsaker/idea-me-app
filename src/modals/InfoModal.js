@@ -1,10 +1,5 @@
-import React from "react";
-import {
-    View,
-    Text,
-    Modal,
-    StyleSheet,
-} from "react-native";
+import React from 'react';
+import { View, Text, Modal, StyleSheet } from 'react-native';
 
 import config from '../config';
 import Icon from '../assets/icons/index';
@@ -48,7 +43,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InfoModal = (props) => {
+export default (InfoModal = props => {
     /*
         PROPS
             title
@@ -60,16 +55,15 @@ export default InfoModal = (props) => {
             handleClose
     */
 
-    const closeButton = props.canClose &&
+    const closeButton = props.canClose && (
         <View style={styles.closeIconContainer}>
             <Touchable
                 onPress={props.handleClose}
-                style={styles.closeIconButton} >
-                <Icon
-                    name='close'
-                    style={styles.closeIcon} />
+                style={styles.closeIconButton}>
+                <Icon name="close" style={styles.closeIcon} />
             </Touchable>
         </View>
+    );
 
     return (
         <View>
@@ -86,19 +80,20 @@ export default InfoModal = (props) => {
                                 titleColor={styleConstants.white}
                                 subtitle={props.subtitle}
                                 subtitleColor={styleConstants.lightGrey}
-                                fullWidth />
+                                fullWidth
+                            />
                         </View>
                         <Button
                             text={props.buttonText}
                             iconName={props.buttonIconName}
                             backgroundColor={styleConstants.white}
-                            handlePress={props.handlePress} />
+                            handlePress={props.handlePress}
+                        />
 
                         {closeButton}
-
                     </View>
                 </View>
             </Modal>
         </View>
     );
-}
+});

@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -46,7 +42,7 @@ const styles = StyleSheet.create({
         color: styleConstants.lightGrey,
     },
     disabled: {
-        opacity: 0.33
+        opacity: 0.33,
     },
     highlight: {
         position: 'absolute',
@@ -59,69 +55,80 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TabBar = (props) => {
-    const tabs =
-        props.tabs.map((value) => {
-            const colorStyles = {
-                color: value.active ? styleConstants.secondary : props.color ? props.color : styleConstants.white
-            };
+export default (TabBar = props => {
+    const tabs = props.tabs.map(value => {
+        const colorStyles = {
+            color: value.active
+                ? styleConstants.secondary
+                : props.color ? props.color : styleConstants.white,
+        };
 
-            const count = value.count ?
-                <View style={styles.countContainer}>
-                    <Text style={[styles.countText, styleConstants.primaryFont]}>
-                        {value.count.toString()}
-                    </Text>
+        const count = value.count ? (
+            <View style={styles.countContainer}>
+                <Text style={[styles.countText, styleConstants.primaryFont]}>
+                    {value.count.toString()}
+                </Text>
+            </View>
+        ) : null;
+
+        const highlight = props.highlightProfileTab &&
+        value.title === 'Profile' &&
+        !value.active && <View style={styles.highlight} />;
+
+        const tab = value.disabled ? (
+            <View
+                style={[styles.tabContainer, styles.disabled]}
+                key={'tab-' + value.title}>
+                <View style={styles.iconContainer}>
+                    <Icon
+                        name={value.icon}
+                        style={[styles.icon, colorStyles]}
+                    />
+                    {count}
                 </View>
-                :
-                null;
-
-            const highlight = props.highlightProfileTab && value.title === 'Profile' && !value.active &&
-                <View style={styles.highlight} />;
-
-            const tab = value.disabled ?
-                <View
-                    style={[styles.tabContainer, styles.disabled]}
-                    key={'tab-' + value.title}>
-                    <View style={styles.iconContainer}>
-                        <Icon
-                            name={value.icon}
-                            style={[styles.icon, colorStyles]} />
-                        {count}
-                    </View>
-                    <Text style={[styles.text, styleConstants.primaryFont, colorStyles]}>
-                        {value.title}
-                    </Text>
+                <Text
+                    style={[
+                        styles.text,
+                        styleConstants.primaryFont,
+                        colorStyles,
+                    ]}>
+                    {value.title}
+                </Text>
+            </View>
+        ) : (
+            <Touchable
+                onPress={value.action}
+                style={styles.tabContainer}
+                key={'tab-' + value.title}>
+                <View style={styles.iconContainer}>
+                    <Icon
+                        name={value.icon}
+                        style={[styles.icon, colorStyles]}
+                    />
+                    {count}
+                    {highlight}
                 </View>
-                :
-                <Touchable
-                    onPress={value.action}
-                    style={styles.tabContainer}
-                    key={'tab-' + value.title}>
-                    <View style={styles.iconContainer}>
-                        <Icon
-                            name={value.icon}
-                            style={[styles.icon, colorStyles]} />
-                        {count}
-                        {highlight}
-                    </View>
-                    <Text style={[styles.text, styleConstants.primaryFont, colorStyles]}>
-                        {value.title}
-                    </Text>
-                </Touchable>;
+                <Text
+                    style={[
+                        styles.text,
+                        styleConstants.primaryFont,
+                        colorStyles,
+                    ]}>
+                    {value.title}
+                </Text>
+            </Touchable>
+        );
 
-            return tab;
-        });
+        return tab;
+    });
 
-    const backgroundColorStyles = props.backgroundColor ?
-        {
-            backgroundColor: props.backgroundColor,
-        }
-        :
-        null;
+    const backgroundColorStyles = props.backgroundColor
+        ? {
+              backgroundColor: props.backgroundColor,
+          }
+        : null;
 
     return (
-        <View style={[styles.container, backgroundColorStyles]}>
-            {tabs}
-        </View>
+        <View style={[styles.container, backgroundColorStyles]}>{tabs}</View>
     );
-};
+});

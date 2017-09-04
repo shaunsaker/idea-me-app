@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import { Actions } from "react-native-router-flux";
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
@@ -21,7 +21,9 @@ export class EditIdea extends React.Component {
         super(props);
 
         this.updateEditIdeaTitle = this.updateEditIdeaTitle.bind(this);
-        this.updateEditIdeaDescription = this.updateEditIdeaDescription.bind(this);
+        this.updateEditIdeaDescription = this.updateEditIdeaDescription.bind(
+            this
+        );
         this.selectCategory = this.selectCategory.bind(this);
         this.selectPriority = this.selectPriority.bind(this);
         this.updateIdea = this.updateIdea.bind(this);
@@ -34,7 +36,7 @@ export class EditIdea extends React.Component {
             editIdeaCategory: null,
             editIdeaPriority: null,
             showCancelModal: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -55,9 +57,12 @@ export class EditIdea extends React.Component {
 
     componentDidMount() {
         this.updateEditIdeaTitle(this.props.initialIdeaTitle);
-        this.props.initialIdeaDescription && this.updateEditIdeaDescription(this.props.initialIdeaDescription);
-        this.props.initialIdeaCategory && this.selectCategory(this.props.initialIdeaCategory);
-        this.props.initialIdeaPriority && this.selectPriority(this.props.initialIdeaPriority);
+        this.props.initialIdeaDescription &&
+            this.updateEditIdeaDescription(this.props.initialIdeaDescription);
+        this.props.initialIdeaCategory &&
+            this.selectCategory(this.props.initialIdeaCategory);
+        this.props.initialIdeaPriority &&
+            this.selectPriority(this.props.initialIdeaPriority);
 
         if (this.props.initialIdeaNotes) {
             this.props.dispatch({
@@ -89,38 +94,38 @@ export class EditIdea extends React.Component {
 
     updateEditIdeaTitle(value) {
         this.setState({
-            editIdeaTitle: value
+            editIdeaTitle: value,
         });
     }
 
     updateEditIdeaDescription(value) {
         this.setState({
-            editIdeaDescription: value
+            editIdeaDescription: value,
         });
     }
 
     selectCategory(value) {
-
         if (value === 'Edit Categories') {
             Actions.categories();
-        }
-        else {
+        } else {
             this.setState({
-                editIdeaCategory: value
+                editIdeaCategory: value,
             });
         }
     }
 
     selectPriority(value) {
         this.setState({
-            editIdeaPriority: value
+            editIdeaPriority: value,
         });
     }
 
     updateIdea() {
         const editedIdea = {
             title: utilities.firstCharToUppercase(this.state.editIdeaTitle),
-            description: this.state.editIdeaDescription && utilities.firstCharToUppercase(this.state.editIdeaDescription),
+            description:
+                this.state.editIdeaDescription &&
+                utilities.firstCharToUppercase(this.state.editIdeaDescription),
             category: this.state.editIdeaCategory,
             priority: this.state.editIdeaPriority,
             notes: this.props.newNotes,
@@ -130,13 +135,23 @@ export class EditIdea extends React.Component {
         };
 
         let isIdeaTitlePresent;
-        const remainingIdeas = utilities.removeObjectFromDictionary(this.props.initialIdeaUID, this.props.ideas);
+        const remainingIdeas = utilities.removeObjectFromDictionary(
+            this.props.initialIdeaUID,
+            this.props.ideas
+        );
 
         // check if the new idea title is already present (but exclude our current idea)
-        isIdeaTitlePresent = utilities.isKeyValuePairPresentInDictionary({ title: editedIdea.title }, remainingIdeas);
+        isIdeaTitlePresent = utilities.isKeyValuePairPresentInDictionary(
+            { title: editedIdea.title },
+            remainingIdeas
+        );
 
         if (!isIdeaTitlePresent) {
-            const newIdeas = utilities.updateObjectInDictionary(this.props.initialIdeaUID, editedIdea, this.props.ideas);
+            const newIdeas = utilities.updateObjectInDictionary(
+                this.props.initialIdeaUID,
+                editedIdea,
+                this.props.ideas
+            );
 
             this.props.dispatch({
                 type: 'UPDATE_USER_DATA',
@@ -152,12 +167,11 @@ export class EditIdea extends React.Component {
             });
 
             Actions.pop();
-        }
-        else {
+        } else {
             this.props.dispatch({
                 type: 'SET_ERROR',
                 errorType: 'USER',
-                message: 'An idea with this title already exists'
+                message: 'An idea with this title already exists',
             });
         }
     }
@@ -169,18 +183,29 @@ export class EditIdea extends React.Component {
     }
 
     cancelEditIdea() {
-
         // Remove unused files
         if (this.props.newPhotos) {
-
             // Get the difference between newPhotos and initial idea photos
-            const newPhotos = utilities.getDifferenceBetweenDictionarys(this.props.newPhotos, this.props.initialIdeaPhotos);
+            const newPhotos = utilities.getDifferenceBetweenDictionarys(
+                this.props.newPhotos,
+                this.props.initialIdeaPhotos
+            );
 
             if (newPhotos) {
-                let newPhotosFullSizeURIArray = utilities.getValuesThatMatchKeyFromDictionary('fullSize', newPhotos);
-                let newPhotosCroppedURIArray = utilities.getValuesThatMatchKeyFromDictionary('cropped', newPhotos);
-                const newPhotosURIArray = newPhotosFullSizeURIArray.concat(newPhotosCroppedURIArray);
-                const newPhotosPathsArray = utilities.convertURIsToPaths(newPhotosURIArray);
+                let newPhotosFullSizeURIArray = utilities.getValuesThatMatchKeyFromDictionary(
+                    'fullSize',
+                    newPhotos
+                );
+                let newPhotosCroppedURIArray = utilities.getValuesThatMatchKeyFromDictionary(
+                    'cropped',
+                    newPhotos
+                );
+                const newPhotosURIArray = newPhotosFullSizeURIArray.concat(
+                    newPhotosCroppedURIArray
+                );
+                const newPhotosPathsArray = utilities.convertURIsToPaths(
+                    newPhotosURIArray
+                );
 
                 for (let i = 0; i < newPhotosPathsArray.length; i++) {
                     this.props.dispatch({
@@ -192,10 +217,15 @@ export class EditIdea extends React.Component {
         }
 
         if (this.props.newVoiceNotes) {
-
             // Get the difference between newVoiceNotes and initial idea voiceNotes
-            const newVoiceNotes = utilities.getDifferenceBetweenDictionarys(this.props.newVoiceNotes, this.props.initialIdeaVoiceNotes);
-            const newVoiceNotesPathsArray = utilities.getValuesThatMatchKeyFromDictionary('filePath', newVoiceNotes);
+            const newVoiceNotes = utilities.getDifferenceBetweenDictionarys(
+                this.props.newVoiceNotes,
+                this.props.initialIdeaVoiceNotes
+            );
+            const newVoiceNotesPathsArray = utilities.getValuesThatMatchKeyFromDictionary(
+                'filePath',
+                newVoiceNotes
+            );
 
             for (let i = 0; i < newVoiceNotesPathsArray.length; i++) {
                 this.props.dispatch({
@@ -211,121 +241,140 @@ export class EditIdea extends React.Component {
 
     render() {
         const enableContinueButton = this.state.editIdeaTitle ? true : false;
-        const categories = utilities.convertDictionaryToArray(this.props.categories);
-        const priorities = utilities.convertDictionaryToArray(this.props.priorities);
+        const categories = utilities.convertDictionaryToArray(
+            this.props.categories
+        );
+        const priorities = utilities.convertDictionaryToArray(
+            this.props.priorities
+        );
         const editNotesCount = utilities.getLengthOfObject(this.props.newNotes);
-        const editPhotosCount = utilities.getLengthOfObject(this.props.newPhotos);
-        const editVoiceNotesCount = utilities.getLengthOfObject(this.props.newVoiceNotes);
+        const editPhotosCount = utilities.getLengthOfObject(
+            this.props.newPhotos
+        );
+        const editVoiceNotesCount = utilities.getLengthOfObject(
+            this.props.newVoiceNotes
+        );
 
-        const cancelModal = this.state.showCancelModal &&
+        const cancelModal = this.state.showCancelModal && (
             <ActionModal
-                title='Are you sure you want to exit without saving your idea?'
-                subtitle='You will lose all the data you added.'
+                title="Are you sure you want to exit without saving your idea?"
+                subtitle="You will lose all the data you added."
                 handleLeftIconPress={this.cancelEditIdea}
-                handleRightIconPress={this.toggleCancelModal} />;
+                handleRightIconPress={this.toggleCancelModal}
+            />
+        );
 
         return (
-            <Page
-                removeBottomPadding>
-
+            <Page removeBottomPadding>
                 <Header
-                    text='Edit Idea'
+                    text="Edit Idea"
                     headerShadow
                     closeButton
-                    handleLeftIconPress={enableContinueButton ? this.toggleCancelModal : this.cancelNewIdea}
+                    handleLeftIconPress={
+                        enableContinueButton ? (
+                            this.toggleCancelModal
+                        ) : (
+                            this.cancelNewIdea
+                        )
+                    }
                     continueButton={enableContinueButton}
                     handleRightIconPress={this.updateIdea}
                 />
 
-                <InputContainer
-                    style={{ alignItems: 'center' }}>
-
+                <InputContainer style={{ alignItems: 'center' }}>
                     <Input
                         placeholder="WHAT'S THE BIG IDEA?"
                         value={this.state.editIdeaTitle}
                         handleChange={this.updateEditIdeaTitle}
-                        maxLength={16} />
+                        maxLength={16}
+                    />
 
                     <Input
-                        placeholder='ENTER YOUR DESCRIPTION HERE'
+                        placeholder="ENTER YOUR DESCRIPTION HERE"
                         value={this.state.editIdeaDescription}
                         handleChange={this.updateEditIdeaDescription}
-                        multiline />
+                        multiline
+                    />
 
                     <RadioSelect
-                        displayText='SELECT A PRIORITY'
+                        displayText="SELECT A PRIORITY"
                         currentValue={this.state.editIdeaPriority}
                         values={priorities}
-                        handleSelect={this.selectPriority} />
+                        handleSelect={this.selectPriority}
+                    />
 
                     <DropdownButton
-                        displayText='Select a Category'
+                        displayText="Select a Category"
                         currentValue={this.state.editIdeaCategory}
                         values={categories}
                         handleSelect={this.selectCategory}
                         buttonBackgroundColor={styleConstants.primary}
-                        pushContent />
-
+                        pushContent
+                    />
                 </InputContainer>
 
                 <TabBar
                     backgroundColor={styleConstants.white}
                     color={styleConstants.primary}
-                    tabs={
-                        [
-                            {
-                                title: 'Note',
-                                icon: 'note',
-                                action: () => Actions.notes({
+                    tabs={[
+                        {
+                            title: 'Note',
+                            icon: 'note',
+                            action: () =>
+                                Actions.notes({
                                     idea: {
                                         title: this.state.editIdeaTitle,
-                                        description: this.state.editIdeaDescription,
+                                        description: this.state
+                                            .editIdeaDescription,
                                     },
                                     addIdea: true,
                                 }),
-                                count: editNotesCount,
-                                disabled: !this.state.editIdeaTitle,
-                            },
-                            {
-                                title: 'Photo',
-                                icon: 'camera',
-                                action: () => Actions.photos({
+                            count: editNotesCount,
+                            disabled: !this.state.editIdeaTitle,
+                        },
+                        {
+                            title: 'Photo',
+                            icon: 'camera',
+                            action: () =>
+                                Actions.photos({
                                     idea: {
                                         title: this.state.editIdeaTitle,
-                                        description: this.state.editIdeaDescription,
+                                        description: this.state
+                                            .editIdeaDescription,
                                     },
                                     addIdea: true,
                                 }),
-                                count: editPhotosCount,
-                                disabled: !this.state.editIdeaTitle,
-                            },
-                            {
-                                title: 'Voice Note',
-                                icon: 'voice',
-                                action: () => Actions.voiceNotes({
+                            count: editPhotosCount,
+                            disabled: !this.state.editIdeaTitle,
+                        },
+                        {
+                            title: 'Voice Note',
+                            icon: 'voice',
+                            action: () =>
+                                Actions.voiceNotes({
                                     idea: {
                                         title: this.state.editIdeaTitle,
-                                        description: this.state.editIdeaDescription,
+                                        description: this.state
+                                            .editIdeaDescription,
                                     },
                                     addIdea: true,
                                 }),
-                                count: editVoiceNotesCount,
-                                disabled: !this.state.editIdeaTitle,
-                            },
-                        ]
-                    } />
+                            count: editVoiceNotesCount,
+                            disabled: !this.state.editIdeaTitle,
+                        },
+                    ]}
+                />
 
                 {cancelModal}
 
                 <SnackBar />
-
-            </Page >
+            </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         initialIdeaUID: state.routes.scene.uid,
         initialIdeaTitle: state.routes.scene.title,
         initialIdeaDescription: state.routes.scene.description,
@@ -341,7 +390,7 @@ function mapStateToProps(state) {
         categories: state.main.userData.categories,
         priorities: state.main.appData.priorities,
         uid: state.main.userAuth.uid,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(EditIdea);

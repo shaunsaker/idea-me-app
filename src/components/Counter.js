@@ -1,22 +1,16 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
 import utilities from '../utilities';
 import styleConstants from '../assets/styleConstants';
 
 const styles = StyleSheet.create({
-    container: {
-
-    },
+    container: {},
     text: {
         fontSize: styleConstants.regularFont,
         color: styleConstants.transPrimary,
-    }
+    },
 });
 
 export default class Counter extends React.Component {
@@ -31,7 +25,7 @@ export default class Counter extends React.Component {
         this.state = {
             duration: 0,
             isCounting: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -39,7 +33,7 @@ export default class Counter extends React.Component {
             displayDuration: PropTypes.number, // to display initially - can be null
             totalDuration: PropTypes.number, // total to count to - can be null
             startTimer: PropTypes.bool,
-        }
+        };
     }
 
     componentDidMount() {
@@ -49,19 +43,23 @@ export default class Counter extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-
         // 0/Pause => Play
-        if (this.props.startTimer && this.props.startTimer !== prevProps.startTimer) {
+        if (
+            this.props.startTimer &&
+            this.props.startTimer !== prevProps.startTimer
+        ) {
             this.startTimer();
-        }
-
-        // Play => Pause
-        else if (this.props.pauseTimer && this.props.pauseTimer !== prevProps.pauseTimer) {
+        } else if (
+            this.props.pauseTimer &&
+            this.props.pauseTimer !== prevProps.pauseTimer
+        ) {
+            // Play => Pause
             this.clearTimer();
-        }
-
-        // Stopped
-        else if (!this.props.startTimer && this.props.startTimer !== prevProps.startTimer) {
+        } else if (
+            !this.props.startTimer &&
+            this.props.startTimer !== prevProps.startTimer
+        ) {
+            // Stopped
             this.clearTimer();
 
             this.setState({
@@ -81,26 +79,25 @@ export default class Counter extends React.Component {
         });
 
         this.timer = setInterval(() => {
-            if (this.props.totalDuration && this.state.duration < this.props.totalDuration) {
+            if (
+                this.props.totalDuration &&
+                this.state.duration < this.props.totalDuration
+            ) {
                 this.setState({
-                    duration: this.state.duration += 1,
+                    duration: (this.state.duration += 1),
                 });
-            }
-
-            // We've hit our total count
-            else if (this.props.totalDuration) {
+            } else if (this.props.totalDuration) {
+                // We've hit our total count
                 this.clearTimer();
 
                 this.setState({
                     isCounting: false,
                     duration: 0,
                 });
-            }
-
-            // No total to count to
-            else {
+            } else {
+                // No total to count to
                 this.setState({
-                    duration: this.state.duration += 1,
+                    duration: (this.state.duration += 1),
                 });
             }
         }, 1000);
@@ -111,13 +108,16 @@ export default class Counter extends React.Component {
     }
 
     render() {
-        const duration = this.state.isCounting ? Math.round(this.state.duration) : this.props.displayDuration ? Math.round(this.props.displayDuration) : 0;
+        const duration = this.state.isCounting
+            ? Math.round(this.state.duration)
+            : this.props.displayDuration
+              ? Math.round(this.props.displayDuration)
+              : 0;
         const durationText = utilities.getPrettyMinutesFromSeconds(duration);
 
         return (
             <View style={styles.container}>
-                <Text
-                    style={[styles.text, styleConstants.primaryFont]}>
+                <Text style={[styles.text, styleConstants.primaryFont]}>
                     {durationText}
                 </Text>
             </View>
