@@ -10,12 +10,13 @@ config.app = {
         name: 'Shaun Saker',
         email: 'info@shaunsaker.com',
     },
-}
+};
 
 config.testing = {
     firstTimeUser: false,
     oneWeekUser: false,
-}
+    dimensions: true,
+};
 
 config.firebase = {
     debug: false,
@@ -44,9 +45,9 @@ config.images = {
         },
     },
     imageResizerOptions: [
-        'JPEG',     // format
-        100,        // quality
-        0,          // rotation
+        'JPEG', // format
+        100, // quality
+        0, // rotation
     ],
     firebaseStorageOptions: {
         contentType: 'image/jpeg',
@@ -56,10 +57,11 @@ config.images = {
 
 config.voiceNotes = {
     format: 'mp4',
-}
+};
 
 config.googleSignIn = {
-    webClientId: "77557779345-ap7udmcr3md8eu5c7akc1i0nkuekvi4l.apps.googleusercontent.com",
+    webClientId:
+        '77557779345-ap7udmcr3md8eu5c7akc1i0nkuekvi4l.apps.googleusercontent.com',
     iosClientId: '',
     offlineAccess: false,
 };

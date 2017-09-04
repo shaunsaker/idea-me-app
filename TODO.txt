@@ -1,14 +1,4 @@
 TODOS
-    Find a unique new word for categories (eg. wall, board)
-        Rack
-        Heap
-        Panel
-        Block
-        Strip
-        Pane
-        Pile
-        Grid
-
     Test Responsiveness
         Use page component and styleConstants to test screen dimensions
 

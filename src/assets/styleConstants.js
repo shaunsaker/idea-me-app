@@ -1,17 +1,17 @@
-import {
-    Dimensions,
-    Platform,
-} from 'react-native';
+import { Dimensions, Platform } from 'react-native';
+
+import config from '../config';
+
 const styleConstants = {};
 
 /* FONT FAMILIES */
 
 styleConstants.primaryFont = {
-    fontFamily: 'RobotoCondensed-Regular'
-}
+    fontFamily: 'RobotoCondensed-Regular',
+};
 styleConstants.secondaryFont = {
-    fontFamily: 'Ranga-Regular'
-}
+    fontFamily: 'Ranga-Regular',
+};
 
 /* FONT SIZES */
 
@@ -37,7 +37,9 @@ styleConstants.transBlack = 'rgba(0, 0, 0, 0.75)';
 
 /* DIMENSIONS */
 
-const { width, height } = Dimensions.get('window');
+let { width, height } = Dimensions.get('window');
+width = config.testing.dimensions ? 320 : width;
+height = config.testing.dimensions ? 480 : height;
 
 styleConstants.windowWidth = width;
 styleConstants.windowHeight = height;
@@ -59,7 +61,7 @@ styleConstants.smallShadow = {
     shadowRadius: 2,
     shadowOffset: {
         height: 1,
-        width: 0
+        width: 0,
     },
 };
 
@@ -74,7 +76,7 @@ styleConstants.regularShadow = {
     shadowRadius: 2,
     shadowOffset: {
         height: 1,
-        width: 0
+        width: 0,
     },
 };
 
@@ -89,7 +91,7 @@ styleConstants.largeShadow = {
     shadowRadius: 4,
     shadowOffset: {
         height: 2,
-        width: 0
+        width: 0,
     },
 };
 
