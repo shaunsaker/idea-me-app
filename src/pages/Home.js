@@ -1,12 +1,8 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    FlatList,
-    Share,
-} from "react-native";
-import { Actions } from "react-native-router-flux";
-import { connect } from "react-redux";
+import { View, FlatList, Share } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import config from '../config';
 import utilities from '../utilities';
@@ -25,7 +21,6 @@ import SoundPlayer from '../components/SoundPlayer';
 import ActionModal from '../modals/ActionModal';
 import OptionsModal from '../modals/OptionsModal';
 import SnackBar from '../widgets/SnackBar';
-import ToolTip from '../widgets/ToolTip';
 
 export class Home extends React.Component {
     constructor(props) {
@@ -39,10 +34,6 @@ export class Home extends React.Component {
         this.deleteIdea = this.deleteIdea.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
         this.handleNotePress = this.handleNotePress.bind(this);
-        this.toggleFirstTimeUserModal = this.toggleFirstTimeUserModal.bind(this);
-        this.handleFirstTimeUserSelect = this.handleFirstTimeUserSelect.bind(this);
-        this.showToolTips = this.showToolTips.bind(this);
-        this.cancelOnboarding = this.cancelOnboarding.bind(this);
 
         // TabBar
         this.tabs = [
@@ -67,7 +58,7 @@ export class Home extends React.Component {
             deleteIdeaUID: null,
             highlightProfileTab: false,
             ideaAdded: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -82,8 +73,6 @@ export class Home extends React.Component {
 
     componentDidMount() {
         if (this.props.firstTimeUser) {
-            this.toggleFirstTimeUserModal();
-
             this.setState({
                 highlightProfileTab: true,
             });
@@ -94,10 +83,12 @@ export class Home extends React.Component {
         let ideaAdded;
 
         // Check if an idea has been added so we can play a sound
-        if (utilities.getLengthOfObject(this.props.ideas) > utilities.getLengthOfObject(prevProps.ideas)) {
+        if (
+            utilities.getLengthOfObject(this.props.ideas) >
+            utilities.getLengthOfObject(prevProps.ideas)
+        ) {
             ideaAdded = true;
-        }
-        else {
+        } else {
             ideaAdded = false;
         }
 
@@ -111,8 +102,7 @@ export class Home extends React.Component {
     selectCategory(value) {
         if (value === 'Edit Categories') {
             Actions.categories();
-        }
-        else if (this.props.currentCategory !== value) {
+        } else if (this.props.currentCategory !== value) {
             this.props.dispatch({
                 type: 'SELECT_CATEGORY',
                 value,
@@ -123,17 +113,16 @@ export class Home extends React.Component {
     }
 
     scrollToBeginning() {
-        this.props.ideas && this.refs.ideasList.scrollToOffset({ x: 0, y: 0, animated: false });
+        this.props.ideas &&
+            this.refs.ideasList.scrollToOffset({ x: 0, y: 0, animated: false });
     }
 
     handleMenuItemSelect(type, idea) {
         if (type === 'Edit') {
             this.editIdea(idea);
-        }
-        else if (type === 'Share') {
+        } else if (type === 'Share') {
             this.shareIdea(idea);
-        }
-        else {
+        } else {
             this.toggleDeleteModal(idea);
         }
     }
@@ -147,13 +136,18 @@ export class Home extends React.Component {
 
         Share.share(
             {
-                message: 'My new idea off the IdeaMe App: ' + idea.title + '. ' + description,
+                message:
+                    'My new idea off the IdeaMe App: ' +
+                    idea.title +
+                    '. ' +
+                    description,
             },
             {
                 dialogTitle: 'Share Your Idea',
-            })
-            .then( /* Do nothing. It's obvious to the user that his message was shared. */)
-            .catch((error) => console.log('Share error:', error.message));
+            }
+        )
+            .then(/* Do nothing. It's obvious to the user that his message was shared. */)
+            .catch(error => console.log('Share error:', error.message));
     }
 
     toggleDeleteModal(idea) {
@@ -166,7 +160,10 @@ export class Home extends React.Component {
 
     deleteIdea() {
         let newIdeas = utilities.cloneObject(this.props.ideas);
-        newIdeas = utilities.deleteObjectFromDictionary(this.state.deleteIdeaUID, newIdeas);
+        newIdeas = utilities.deleteObjectFromDictionary(
+            this.state.deleteIdeaUID,
+            newIdeas
+        );
 
         // Dispatch to store
         this.props.dispatch({
@@ -191,46 +188,15 @@ export class Home extends React.Component {
             Actions.notes({
                 idea,
             });
-        }
-        else if (noteType === 'Photo') {
+        } else if (noteType === 'Photo') {
             Actions.photos({
                 idea,
             });
-        }
-        else if (noteType === 'Voice Note') {
+        } else if (noteType === 'Voice Note') {
             Actions.voiceNotes({
                 idea,
             });
         }
-    }
-
-    toggleFirstTimeUserModal() {
-        this.setState({
-            showFirstTimeUserModal: !this.state.showFirstTimeUserModal,
-        });
-    }
-
-    handleFirstTimeUserSelect(option) {
-        if (option === 'Get Started') {
-            this.showToolTips();
-        }
-        else {
-            this.cancelOnboarding();
-        }
-
-        this.toggleFirstTimeUserModal();
-    }
-
-    showToolTips() {
-        this.props.dispatch({
-            type: 'SHOW_TOOL_TIPS',
-        });
-    }
-
-    cancelOnboarding() {
-        this.props.dispatch({
-            type: 'CANCEL_ONBOARDING',
-        });
     }
 
     renderItem = ({ item }) => {
@@ -238,77 +204,85 @@ export class Home extends React.Component {
             <IdeaCard
                 idea={item}
                 handleMenuItemSelect={this.handleMenuItemSelect}
-                handleNotePress={(noteType) => this.handleNotePress(noteType, item)}
-                handleCategoryLabelPress={this.selectCategory} />
+                handleNotePress={noteType =>
+                    this.handleNotePress(noteType, item)}
+                handleCategoryLabelPress={this.selectCategory}
+            />
         );
-    }
+    };
 
     render() {
         let currentCount = 0;
         const totalCount = utilities.getLengthOfObject(this.props.ideas);
 
         // Empty state
-        let ideas =
-            <AddIdeaButton
-                handlePress={() => Actions.addIdea()} />
+        let ideas = <AddIdeaButton handlePress={() => Actions.addIdea()} />;
 
         let currentCategoryIdeas;
 
-        if (this.props.ideas && utilities.getLengthOfObject(this.props.ideas) > 0) {
+        if (
+            this.props.ideas &&
+            utilities.getLengthOfObject(this.props.ideas) > 0
+        ) {
             if (this.props.currentCategory === 'All Categories') {
                 currentCategoryIdeas = this.props.ideas;
-            }
-            else {
-                currentCategoryIdeas = utilities.filterDictionaryByKeyValuePair({ category: this.props.currentCategory }, this.props.ideas);
+            } else {
+                currentCategoryIdeas = utilities.filterDictionaryByKeyValuePair(
+                    { category: this.props.currentCategory },
+                    this.props.ideas
+                );
             }
 
-            const sortedIdeas = utilities.sortDictionaryByKeyAndValues(currentCategoryIdeas, 'priority', ['High', 'Medium', 'Low', null]);
+            const sortedIdeas = utilities.sortDictionaryByKeyAndValues(
+                currentCategoryIdeas,
+                'priority',
+                ['High', 'Medium', 'Low', null]
+            );
             currentCount = utilities.getLengthOfObject(sortedIdeas);
-            const sortedIdeasArray = utilities.convertDictionaryToArray(sortedIdeas);
+            const sortedIdeasArray = utilities.convertDictionaryToArray(
+                sortedIdeas
+            );
 
-            ideas =
+            ideas = (
                 <FlatList
-                    ref='ideasList'
+                    ref="ideasList"
                     keyExtractor={item => 'idea' + item.title}
                     data={sortedIdeasArray}
                     renderItem={this.renderItem}
-                    ListFooterComponent={() => <AddIdeaButton handlePress={() => Actions.addIdea()} />}
+                    ListFooterComponent={() => (
+                        <AddIdeaButton handlePress={() => Actions.addIdea()} />
+                    )}
                     horizontal
-                    pagingEnabled />
+                    pagingEnabled
+                />
+            );
         }
 
-        const categories = utilities.convertDictionaryToArray(this.props.categories);
+        const categories = utilities.convertDictionaryToArray(
+            this.props.categories
+        );
 
-        const soundPlayer = this.props.shouldPlaySounds &&
-            <SoundPlayer
-                fileName='ding.mp3'
-                playSound={this.state.ideaAdded} />
+        const soundPlayer = this.props.shouldPlaySounds && (
+            <SoundPlayer fileName="ding.mp3" playSound={this.state.ideaAdded} />
+        );
 
-        const firstTimeUserModal = this.state.showFirstTimeUserModal &&
-            <OptionsModal
-                title='Get Familiar'
-                subtitle="Hey! You've made it. Continue for some handy tooltips (or skip them altogether). Good luck!"
-                options={['Get Started', 'No Thanks']}
-                handleSelect={this.handleFirstTimeUserSelect}
-                handleClose={this.toggleFirstTimeUserModal} />
-
-        const deleteModal = this.state.showDeleteModal &&
+        const deleteModal = this.state.showDeleteModal && (
             <ActionModal
-                title='Are you sure you want to delete this idea?'
+                title="Are you sure you want to delete this idea?"
                 subtitle={this.state.deleteIdeaModalTitle}
                 handleLeftIconPress={this.deleteIdea}
-                handleRightIconPress={this.toggleDeleteModal} />
+                handleRightIconPress={this.toggleDeleteModal}
+            />
+        );
 
         return (
-            <Page
-                backgroundColor={styleConstants.white}
-                removeBottomPadding >
-
+            <Page backgroundColor={styleConstants.white} removeBottomPadding>
                 <Header
                     headerShadow
                     leftComponent={() => <Logo />}
                     addButton
-                    handleRightIconPress={() => Actions.addIdea()} />
+                    handleRightIconPress={() => Actions.addIdea()}
+                />
 
                 <DropdownButton
                     buttonBackgroundColor={styleConstants.primary}
@@ -316,40 +290,44 @@ export class Home extends React.Component {
                     values={categories}
                     currentCategory={this.props.currentCategory}
                     handleSelect={this.selectCategory}
-                    headerValue={this.props.currentCategory !== 'All Categories' ? 'All Categories' : ''}
+                    headerValue={
+                        this.props.currentCategory !== 'All Categories' ? (
+                            'All Categories'
+                        ) : (
+                            ''
+                        )
+                    }
                     currentCount={currentCount}
-                    totalCount={totalCount} />
+                    totalCount={totalCount}
+                />
 
                 {ideas}
 
                 <TabBar
                     tabs={this.tabs}
-                    highlightProfileTab={this.state.highlightProfileTab} />
+                    highlightProfileTab={this.state.highlightProfileTab}
+                />
 
                 {soundPlayer}
-
-                {firstTimeUserModal}
 
                 {deleteModal}
 
                 <SnackBar />
-
-                <ToolTip />
-
-            </Page >
+            </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return ({
+    return {
         uid: state.main.userAuth.uid,
-        firstTimeUser: config.testing.firstTimeUser || state.main.userAuth.firstTimeUser,
+        firstTimeUser:
+            config.testing.firstTimeUser || state.main.userAuth.firstTimeUser,
         currentCategory: state.main.appData.currentCategory,
         ideas: state.main.userData.ideas,
         categories: state.main.userData.categories,
         shouldPlaySounds: state.main.userData.settings.shouldPlaySounds,
-    });
+    };
 }
 
 export default connect(mapStateToProps)(Home);

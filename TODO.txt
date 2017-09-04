@@ -1,8 +1,14 @@
 TODOS
     Find a unique new word for categories (eg. wall, board)
-    Tooltips
-        Bite sized
-        Explain more of the features
+        Rack
+        Heap
+        Panel
+        Block
+        Strip
+        Pane
+        Pile
+        Grid
+
     Test Responsiveness
         Use page component and styleConstants to test screen dimensions
 
@@ -69,6 +75,9 @@ V2
             Opens as idea card in modal
         Card View (CURRENT)
         Can set in settings
+    Tooltips
+        Bite sized
+        Feature based (ie. no order, flow independent)    
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app

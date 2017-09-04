@@ -1,9 +1,8 @@
 import utilities from '../utilities';
 import initialState from './initialState';
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
     switch (action.type) {
-
         /* AUTH */
         case 'UPDATE_USER_EMAIL':
             new_state = utilities.cloneObject(state);
@@ -26,10 +25,14 @@ export default function (state = initialState, action) {
             new_state.userAuth.uid = action.uid;
             new_state.userAuth.redirectToWelcomePage = false;
 
-            if (action.userEmail) new_state.userData.profile.userEmail = action.userEmail;
-            if (action.userName) new_state.userData.profile.userName = action.userName;
-            if (action.userPhotoUrl) new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
-            if (action.dateJoined) new_state.userData.profile.dateJoined = action.dateJoined;
+            if (action.userEmail)
+                new_state.userData.profile.userEmail = action.userEmail;
+            if (action.userName)
+                new_state.userData.profile.userName = action.userName;
+            if (action.userPhotoUrl)
+                new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
+            if (action.dateJoined)
+                new_state.userData.profile.dateJoined = action.dateJoined;
 
             if (action.anonymous) {
                 new_state.userAuth.anonymous = true;
@@ -46,36 +49,13 @@ export default function (state = initialState, action) {
 
             return new_state;
 
-        /*
-            TOOLTIPS
-        */
-        case 'SHOW_TOOL_TIPS':
-            new_state = utilities.cloneObject(state);
-            new_state.appState.showToolTips = true;
-
-            return new_state;
-
-        case 'SET_NEXT_TOOL_TIP':
-            new_state = utilities.cloneObject(state);
-            new_state.appData.currentToolTipUID = action.newToolTipUID;
-
-            return new_state;
-
-        case 'CANCEL_ONBOARDING':
-            new_state = utilities.cloneObject(state);
-            new_state.userAuth.firstTimeUser = false;
-            new_state.appState.showToolTips = false;
-            new_state.appData.currentToolTipUID = null;
-
-            return new_state;
-
         /* APP */
         case 'TOGGLE_LOADING':
             new_state = utilities.cloneObject(state);
             new_state.appState.loading = !new_state.appState.loading;
             return new_state;
 
-		/*
+        /*
 			SUCCESS/ERROR MESSAGES
         */
         case 'SET_SUCCESS':
@@ -105,8 +85,8 @@ export default function (state = initialState, action) {
             }
             if (action.retryAction && action.retryAction.data) {
                 new_state.appState.retryAction.data = {
-                    ...action.retryAction.data
-                }
+                    ...action.retryAction.data,
+                };
             }
 
             return new_state;
@@ -192,8 +172,7 @@ export default function (state = initialState, action) {
 
             if (action.node) {
                 new_state.userData[action.node] = action.userData;
-            }
-            else {
+            } else {
                 new_state.userData = action.userData;
             }
 

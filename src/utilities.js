@@ -2,11 +2,10 @@ const utilities = {};
 
 /* TIMING */
 
-utilities.getPrettyMinutesFromSeconds = (seconds) => {
-
+utilities.getPrettyMinutesFromSeconds = seconds => {
     // 126 => 02:06
     const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds - (minutes * 60);
+    const remainingSeconds = seconds - minutes * 60;
 
     // add zero padding for seconds, if necessary
     let zeroPaddingSeconds = '';
@@ -17,11 +16,24 @@ utilities.getPrettyMinutesFromSeconds = (seconds) => {
     const prettyMinutes = minutes + ':' + zeroPaddingSeconds + remainingSeconds;
 
     return prettyMinutes;
-}
+};
 
-utilities.getPrettyDate = (timestamp) => {
+utilities.getPrettyDate = timestamp => {
     const date = new Date(timestamp);
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ];
     const year = date.getFullYear();
     const month = months[date.getMonth()];
     let day = date.getDate();
@@ -31,27 +43,28 @@ utilities.getPrettyDate = (timestamp) => {
     let minutes = date.getMinutes();
     minutes = utilities.addZeroPadding(minutes);
 
-    let prettyDate = day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes;
+    let prettyDate =
+        day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes;
     return prettyDate;
-}
+};
 
 /* FILES */
 
-utilities.getFileName = (path) => {
+utilities.getFileName = path => {
     const pathArray = path.split('/');
     const fileName = pathArray[pathArray.length - 1];
 
     return fileName;
-}
+};
 
 utilities.appendStringToFileName = (fileName, string) => {
     const fileNameArray = fileName.split('.');
     const newFileName = fileNameArray[0] + string + '.' + fileNameArray[1];
 
     return newFileName;
-}
+};
 
-utilities.convertURIsToPaths = (array) => {
+utilities.convertURIsToPaths = array => {
     let newArray = [];
 
     for (let i = 0; i < array.length; i++) {
@@ -61,7 +74,7 @@ utilities.convertURIsToPaths = (array) => {
     }
 
     return newArray;
-}
+};
 
 /* METHODS */
 
@@ -71,70 +84,69 @@ utilities.getInputHeight = (inputWidth, inputLineHeight, charCount) => {
     const inputHeight = Math.ceil(numberOfLines * inputLineHeight);
 
     return inputHeight;
-}
+};
 
 /* STRINGS */
 
-utilities.firstCharToUppercase = (string) => {
+utilities.firstCharToUppercase = string => {
     const trimmedString = string.trim();
     return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);
 };
 
 // Takes a string and converts each word's first character to uppercase
-utilities.prettifyString = (string) => {
-    const stringArray = string.split(" ");
+utilities.prettifyString = string => {
+    const stringArray = string.split(' ');
     let prettyStringArray = [];
 
-    stringArray.map((value) => {
-
+    stringArray.map(value => {
         // Don't add blank characters
         if (value) {
             prettyStringArray.push(utilities.firstCharToUppercase(value));
         }
     });
 
-    const prettyString = prettyStringArray.join(" ");
+    const prettyString = prettyStringArray.join(' ');
     return prettyString;
-}
+};
 
 utilities.createUID = () => {
     return Date.now().toString();
-}
+};
 
-utilities.prettifyUrl = (url) => {
+utilities.prettifyUrl = url => {
     const prettyUrl = url.split('//')[1].split('/')[0];
 
     return prettyUrl;
-}
+};
 
-utilities.addZeroPadding = (number) => {
+utilities.addZeroPadding = number => {
     let zeroPaddedNumber = number.toString();
     if (zeroPaddedNumber < 10) {
         zeroPaddedNumber = '0' + zeroPaddedNumber;
     }
     return zeroPaddedNumber;
-}
+};
 
-// Eg. 'toolTip-1' => 'toolTip-2'
+// Eg. 'string-1' => 'string-2'
 utilities.incrementNumberInString = (string, delimiter) => {
     const stringArray = string.split(delimiter);
     const nextNumber = Number(stringArray[1]) + 1;
     const newString = stringArray[0] + delimiter + nextNumber;
 
     return newString;
-}
+};
 
 /* ARRAYS */
 
 utilities.filterArrayByValue = (value, array) => {
     const pattern = new RegExp(value.toLowerCase(), 'g');
 
-    const filteredArray = array.filter((item) => {
+    const filteredArray = array.filter(item => {
         return item.toLowerCase().match(pattern);
     });
 
     return filteredArray;
-}
+};
 
 // Deletes an object that matches a key value pair from an array
 utilities.deleteObjectWithKeyValuePairFromArray = (keyValuePair, array) => {
@@ -157,11 +169,11 @@ utilities.deleteObjectWithKeyValuePairFromArray = (keyValuePair, array) => {
     newArray.splice(index, 1);
 
     return newArray;
-}
+};
 
 // Takes an array and converts it into a dictionary with the uid as parent key
-utilities.convertArrayToDictionary = (array) => {
-    let dictionary = {}
+utilities.convertArrayToDictionary = array => {
+    let dictionary = {};
 
     for (let i = 0; i < array.length; i++) {
         const uid = array[i].uid;
@@ -169,15 +181,15 @@ utilities.convertArrayToDictionary = (array) => {
     }
 
     return dictionary;
-}
+};
 
 /* OBJECTS */
 
-utilities.cloneObject = (object) => {
+utilities.cloneObject = object => {
     return JSON.parse(JSON.stringify(object));
-}
+};
 
-utilities.getRandomItemFromDictionary = (dictionary) => {
+utilities.getRandomItemFromDictionary = dictionary => {
     const array = Object.values(dictionary);
     const dictionaryLength = utilities.getLengthOfObject(dictionary);
     const randomNumber = Math.round(Math.random() * (dictionaryLength - 1));
@@ -187,7 +199,7 @@ utilities.getRandomItemFromDictionary = (dictionary) => {
 };
 
 // Takes a dictionary and returns a normal array without the keys
-utilities.convertDictionaryToArray = (dictionary) => {
+utilities.convertDictionaryToArray = dictionary => {
     let array = [];
 
     for (key in dictionary) {
@@ -195,7 +207,7 @@ utilities.convertDictionaryToArray = (dictionary) => {
     }
 
     return array;
-}
+};
 
 // Takes a key value pair and checks to see if that key value pair is present in a dictionary
 utilities.isKeyValuePairPresentInDictionary = (keyValuePair, dictionary) => {
@@ -216,7 +228,7 @@ utilities.isKeyValuePairPresentInDictionary = (keyValuePair, dictionary) => {
     }
 
     return isKeyValuePairPresent;
-}
+};
 
 // Takes a new object, creates a unique id and pushes it to a dictionary
 utilities.pushObjectToDictionary = (object, dictionary) => {
@@ -228,15 +240,13 @@ utilities.pushObjectToDictionary = (object, dictionary) => {
 
     if (dictionary) {
         newDictionary = { ...dictionary, ...newObject };
-    }
-
-    // If the object array was empty/null
-    else {
+    } else {
+        // If the object array was empty/null
         newDictionary = newObject;
     }
 
     return newDictionary;
-}
+};
 
 // Removes an object from a dictionary that matches the uid/key, value or key value pair (if present)
 utilities.removeObjectFromDictionary = (uid, dictionary) => {
@@ -249,7 +259,7 @@ utilities.removeObjectFromDictionary = (uid, dictionary) => {
     }
 
     return newDictionary;
-}
+};
 
 // Deletes an object from a single tier object array that matches a key
 utilities.deleteObjectFromDictionary = (targetKey, dictionary) => {
@@ -262,10 +272,13 @@ utilities.deleteObjectFromDictionary = (targetKey, dictionary) => {
     }
 
     return newDictionary;
-}
+};
 
 // Finds a key value pair in a two tier object array and sets the keys value to null
-utilities.findKeyValuePairAndSetKeysValueToNull = (targetKeyValuePair, dictionary) => {
+utilities.findKeyValuePairAndSetKeysValueToNull = (
+    targetKeyValuePair,
+    dictionary
+) => {
     let targetKey;
     let targetValue;
     let newDictionary = dictionary;
@@ -277,15 +290,17 @@ utilities.findKeyValuePairAndSetKeysValueToNull = (targetKeyValuePair, dictionar
 
     for (key in newDictionary) {
         for (subKey in newDictionary[key]) {
-            if (subKey === targetKey && newDictionary[key][subKey] === targetValue) {
+            if (
+                subKey === targetKey &&
+                newDictionary[key][subKey] === targetValue
+            ) {
                 newDictionary[key][subKey] = null;
             }
         }
-
     }
 
     return newDictionary;
-}
+};
 
 // Updates a dictionary's object at a given uid
 utilities.updateObjectInDictionary = (uid, newObject, dictionary) => {
@@ -294,7 +309,7 @@ utilities.updateObjectInDictionary = (uid, newObject, dictionary) => {
     newDictionary[uid] = newObject;
 
     return newDictionary;
-}
+};
 
 // Returns a new object array filtered by a key value pair
 utilities.filterDictionaryByKeyValuePair = (keyValuePair, dictionary) => {
@@ -314,7 +329,7 @@ utilities.filterDictionaryByKeyValuePair = (keyValuePair, dictionary) => {
     }
 
     return newDictionary;
-}
+};
 
 // Sorts a dictionary on key name and array of values where the first value in the array will be at the top of the object array
 utilities.sortDictionaryByKeyAndValues = (dictionary, targetKey, values) => {
@@ -325,12 +340,14 @@ utilities.sortDictionaryByKeyAndValues = (dictionary, targetKey, values) => {
         for (key in dictionary) {
             if (dictionary[key].hasOwnProperty(targetKey)) {
                 for (subKey in dictionary[key]) {
-                    if (subKey === targetKey && dictionary[key][targetKey] === values[i]) {
+                    if (
+                        subKey === targetKey &&
+                        dictionary[key][targetKey] === values[i]
+                    ) {
                         newDictionary[key] = dictionary[key];
                     }
                 }
-            }
-            else {
+            } else {
                 lastSubDictionary[key] = dictionary[key];
             }
         }
@@ -341,9 +358,9 @@ utilities.sortDictionaryByKeyAndValues = (dictionary, targetKey, values) => {
     }
 
     return newDictionary;
-}
+};
 
-utilities.getLengthOfObject = (object) => {
+utilities.getLengthOfObject = object => {
     let counter = 0;
 
     for (key in object) {
@@ -361,7 +378,7 @@ utilities.getValuesThatMatchKeyFromDictionary = (targetKey, dictionary) => {
     }
 
     return valuesArray;
-}
+};
 
 // Returns a dictionary with objects missing in new object array relative to old object array (NOTE: does not account for objects in old array that are not in new array - only added objects to new array)
 utilities.getDifferenceBetweenDictionarys = (newDictionary, oldDictionary) => {
@@ -408,6 +425,6 @@ utilities.getDifferenceBetweenDictionarys = (newDictionary, oldDictionary) => {
     }
 
     return missingObjects;
-}
+};
 
 export default utilities;

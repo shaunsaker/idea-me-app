@@ -1,5 +1,4 @@
 import quotes from '../resources/quotes';
-import toolTips from '../resources/toolTips';
 import priorities from '../resources/priorities';
 
 const initialState = {
@@ -15,7 +14,6 @@ const initialState = {
     },
     appState: {
         loading: false,
-        showToolTips: false,
 
         error: {
             type: null,
@@ -28,7 +26,6 @@ const initialState = {
         },
     },
     appData: {
-        currentToolTipUID: 'tooltip-1',
         currentLocation: null,
         currentCategory: 'All Categories',
         temporaryImage: null,
@@ -38,7 +35,6 @@ const initialState = {
         newVoiceNotes: null,
 
         quotes,
-        toolTips,
         priorities,
     },
     userData: {
@@ -72,6 +68,6 @@ const initialState = {
             },
         },
     },
-}
+};
 
 export default initialState;
