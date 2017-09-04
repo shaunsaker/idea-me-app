@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
 import utilities from '../utilities';
 import Icon from '../assets/icons/index';
@@ -55,7 +51,8 @@ const styles = StyleSheet.create({
     labelsContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        marginBottom: 12,
+        flexWrap: 'wrap',
+        marginBottom: 8,
     },
     buttonsContainer: {
         ...styleConstants.smallShadow,
@@ -65,9 +62,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 4,
         padding: 8,
     },
-    buttonContainer: {
-
-    },
+    buttonContainer: {},
     countContainer: {
         position: 'absolute',
         top: 0,
@@ -89,7 +84,7 @@ export default class IdeaCard extends React.Component {
 
         this.state = {
             showMenu: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -108,13 +103,15 @@ export default class IdeaCard extends React.Component {
             nextProps.idea.description !== this.props.idea.description ||
             nextProps.idea.category !== this.props.idea.category ||
             nextProps.idea.priority !== this.props.idea.priority ||
-            utilities.getLengthOfObject(nextProps.idea.notes) !== utilities.getLengthOfObject(this.props.idea.notes) ||
-            utilities.getLengthOfObject(nextProps.idea.photos) !== utilities.getLengthOfObject(this.props.idea.photos) ||
-            utilities.getLengthOfObject(nextProps.idea.voiceNotes) !== utilities.getLengthOfObject(this.props.idea.voiceNotes)
+            utilities.getLengthOfObject(nextProps.idea.notes) !==
+                utilities.getLengthOfObject(this.props.idea.notes) ||
+            utilities.getLengthOfObject(nextProps.idea.photos) !==
+                utilities.getLengthOfObject(this.props.idea.photos) ||
+            utilities.getLengthOfObject(nextProps.idea.voiceNotes) !==
+                utilities.getLengthOfObject(this.props.idea.voiceNotes)
         ) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -126,30 +123,37 @@ export default class IdeaCard extends React.Component {
     }
 
     render() {
-        const menu = this.state.showMenu &&
+        const menu = this.state.showMenu && (
             <Menu
                 values={['Edit', 'Share', 'Delete']}
-                handleSelect={(type) => {
+                handleSelect={type => {
                     this.toggleMenu();
-                    this.props.handleMenuItemSelect(type, this.props.idea)
-                }
-                } />;
+                    this.props.handleMenuItemSelect(type, this.props.idea);
+                }}
+            />
+        );
 
-        const dateCreated = utilities.getPrettyDate(Number(this.props.idea.uid));
-        const categoryLabelText = this.props.idea.category ? this.props.idea.category : 'Uncategorised';
-        const priorityLabelText = this.props.idea.priority ? this.props.idea.priority : 'Unprioritised';
+        const dateCreated = utilities.getPrettyDate(
+            Number(this.props.idea.uid)
+        );
+        const categoryLabelText = this.props.idea.category
+            ? this.props.idea.category
+            : 'Uncategorised';
+        const priorityLabelText = this.props.idea.priority
+            ? this.props.idea.priority
+            : 'Unprioritised';
         const notesCount = utilities.getLengthOfObject(this.props.idea.notes);
         const photosCount = utilities.getLengthOfObject(this.props.idea.photos);
-        const voiceNotesCount = utilities.getLengthOfObject(this.props.idea.voiceNotes);
+        const voiceNotesCount = utilities.getLengthOfObject(
+            this.props.idea.voiceNotes
+        );
 
         return (
-            <View
-                style={styles.cardContainer} >
-
+            <View style={styles.cardContainer}>
                 <Touchable
                     onPress={this.toggleMenu}
-                    style={styles.menuIconContainer} >
-                    <Icon name='menu' style={styles.menuIcon} />
+                    style={styles.menuIconContainer}>
+                    <Icon name="menu" style={styles.menuIcon} />
                 </Touchable>
 
                 <View style={styles.infoContainer}>
@@ -159,51 +163,65 @@ export default class IdeaCard extends React.Component {
                         titleColor={styleConstants.primary}
                         subtitleColor={styleConstants.grey}
                         fullWidth
-                        limitDescriptionHeight />
+                        limitDescriptionHeight
+                    />
 
                     <View style={styles.dateContainer}>
-                        <Text style={[styles.dateText, styleConstants.primaryFont]}>
+                        <Text
+                            style={[
+                                styles.dateText,
+                                styleConstants.primaryFont,
+                            ]}>
                             {'Created: ' + dateCreated}
                         </Text>
                     </View>
                 </View>
 
-                <View
-                    style={styles.labelsContainer} >
+                <View style={styles.labelsContainer}>
                     <Label
-                        iconName='folder'
+                        iconName="folder"
                         labelText={categoryLabelText}
-                        handlePress={this.props.idea.category ? () => this.props.handleCategoryLabelPress(this.props.idea.category) : null} />
-                    <Label
-                        iconName='priority'
-                        labelText={priorityLabelText} />
+                        handlePress={
+                            this.props.idea.category ? (
+                                () =>
+                                    this.props.handleCategoryLabelPress(
+                                        this.props.idea.category
+                                    )
+                            ) : null
+                        }
+                    />
+                    <Label iconName="priority" labelText={priorityLabelText} />
                 </View>
 
-                <View
-                    style={styles.buttonsContainer}>
+                <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
                         <IconButton
-                            handlePress={() => this.props.handleNotePress('Note')}
-                            iconName='note'
-                            count={notesCount} />
+                            handlePress={() =>
+                                this.props.handleNotePress('Note')}
+                            iconName="note"
+                            count={notesCount}
+                        />
                     </View>
                     <View style={styles.buttonContainer}>
                         <IconButton
-                            handlePress={() => this.props.handleNotePress('Photo')}
-                            iconName='camera'
-                            count={photosCount} />
+                            handlePress={() =>
+                                this.props.handleNotePress('Photo')}
+                            iconName="camera"
+                            count={photosCount}
+                        />
                     </View>
                     <View style={styles.buttonContainer}>
                         <IconButton
-                            handlePress={() => this.props.handleNotePress('Voice Note')}
-                            iconName='voice'
-                            count={voiceNotesCount} />
+                            handlePress={() =>
+                                this.props.handleNotePress('Voice Note')}
+                            iconName="voice"
+                            count={voiceNotesCount}
+                        />
                     </View>
                 </View>
 
                 {menu}
-
             </View>
-        )
+        );
     }
 }

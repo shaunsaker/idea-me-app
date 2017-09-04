@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
 import Icon from '../assets/icons/index';
 import styleConstants from '../assets/styleConstants';
@@ -21,6 +17,7 @@ const styles = StyleSheet.create({
         borderRadius: 32,
         paddingVertical: 8,
         paddingHorizontal: 16,
+        marginBottom: 4,
         marginHorizontal: 4,
         height: 36,
     },
@@ -35,8 +32,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Label = (props) => {
-
+export default (Label = props => {
     /*
         PROPTYPES
 
@@ -45,22 +41,21 @@ export default Label = (props) => {
         labelText: PropTypes.string,
     */
 
-    const label = props.handlePress ?
-        <Touchable
-            onPress={props.handlePress}
-            style={styles.label}>
+    const label = props.handlePress ? (
+        <Touchable onPress={props.handlePress} style={styles.label}>
             <Icon name={props.iconName} style={styles.labelIcon} />
             <Text style={[styles.labelText, styleConstants.primaryFont]}>
                 {props.labelText}
             </Text>
         </Touchable>
-        :
+    ) : (
         <View style={styles.label}>
             <Icon name={props.iconName} style={styles.labelIcon} />
             <Text style={[styles.labelText, styleConstants.primaryFont]}>
                 {props.labelText}
             </Text>
         </View>
+    );
 
     return label;
-}
+});
