@@ -1,8 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    View,
-} from "react-native";
+import { View } from 'react-native';
 import { Player } from 'react-native-audio-toolkit';
 
 export default class SoundPlayer extends React.Component {
@@ -19,7 +17,7 @@ export default class SoundPlayer extends React.Component {
         return {
             fileName: PropTypes.string.isRequired,
             playSound: PropTypes.bool,
-        }
+        };
     }
 
     componentDidMount() {
@@ -27,7 +25,10 @@ export default class SoundPlayer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.playSound && this.props.playSound !== prevProps.playSound) {
+        if (
+            this.props.playSound &&
+            this.props.playSound !== prevProps.playSound
+        ) {
             this.playSound();
         }
     }
@@ -43,18 +44,20 @@ export default class SoundPlayer extends React.Component {
             this.player.destroy();
         }
 
-        this.player = new Player(
-            this.props.fileName,
-            {
-                autoDestroy: false
-            }
-        ).prepare();
+        this.player = new Player(this.props.fileName, {
+            autoDestroy: false,
+        }).prepare();
     }
 
     playSound() {
         this.player.playPause((error, paused) => {
-
-            // Do  nothing
+            if (error) {
+                this.props.dispatch({
+                    type: 'SET_ERROR',
+                    errorType: 'audio',
+                    message: error.message, // TODO: check this
+                });
+            }
         });
     }
 
