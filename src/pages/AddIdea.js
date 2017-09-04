@@ -20,14 +20,6 @@ export class AddIdea extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            newIdeaTitle: null,
-            newIdeaDescription: null,
-            newIdeaCategory: null,
-            newIdeaPriority: null,
-            showCancelModal: false,
-        };
-
         this.updateNewIdeaTitle = this.updateNewIdeaTitle.bind(this);
         this.updateNewIdeaDescription = this.updateNewIdeaDescription.bind(
             this
@@ -37,6 +29,14 @@ export class AddIdea extends React.Component {
         this.saveNewIdea = this.saveNewIdea.bind(this);
         this.toggleCancelModal = this.toggleCancelModal.bind(this);
         this.cancelNewIdea = this.cancelNewIdea.bind(this);
+
+        this.state = {
+            newIdeaTitle: null,
+            newIdeaDescription: null,
+            newIdeaCategory: null,
+            newIdeaPriority: null,
+            showCancelModal: false,
+        };
     }
 
     static get propTypes() {

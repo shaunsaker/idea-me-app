@@ -63,6 +63,12 @@ export default class Input extends React.Component {
     constructor(props) {
         super(props);
 
+        this.focusInput = this.focusInput.bind(this);
+        this.blurInput = this.blurInput.bind(this);
+        this.clearInputText = this.clearInputText.bind(this);
+        this.togglePassword = this.togglePassword.bind(this);
+        this.adjustInputHeight = this.adjustInputHeight.bind(this);
+
         this.minimumInputHeight = 45.5;
         this.inputLabelColourFocussed = styleConstants.secondary;
         this.inputLabelColourBlurred = styleConstants.lightGrey;
@@ -77,12 +83,6 @@ export default class Input extends React.Component {
             labelColour: this.inputLabelColourBlurred,
             borderColour: this.inputBorderColourBlurred,
         };
-
-        this.focusInput = this.focusInput.bind(this);
-        this.blurInput = this.blurInput.bind(this);
-        this.togglePassword = this.togglePassword.bind(this);
-        this.clearInputText = this.clearInputText.bind(this);
-        this.adjustInputHeight = this.adjustInputHeight.bind(this);
     }
 
     static get propTypes() {

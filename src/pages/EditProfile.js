@@ -45,16 +45,6 @@ export class EditProfile extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            editUserName: null,
-            editUserEmail: null,
-            editUserLocation: null,
-            showPhotoModal: false,
-            showCancelModal: false,
-            hasFetchedLocation: false,
-            isFetchingLocation: false,
-        };
-
         this.togglePhotoModal = this.togglePhotoModal.bind(this);
         this.selectPhotoOption = this.selectPhotoOption.bind(this);
         this.updateEditUserName = this.updateEditUserName.bind(this);
@@ -64,6 +54,16 @@ export class EditProfile extends React.Component {
         this.updateUserDetails = this.updateUserDetails.bind(this);
         this.toggleCancelModal = this.toggleCancelModal.bind(this);
         this.cancelEditProfile = this.cancelEditProfile.bind(this);
+
+        this.state = {
+            editUserName: null,
+            editUserEmail: null,
+            editUserLocation: null,
+            showPhotoModal: false,
+            showCancelModal: false,
+            hasFetchedLocation: false,
+            isFetchingLocation: false,
+        };
     }
 
     static get propTypes() {

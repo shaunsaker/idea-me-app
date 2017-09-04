@@ -42,8 +42,8 @@ export default class PhotoViewer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.renderPhoto = this.renderPhoto.bind(this);
         this.getItemLayout = this.getItemLayout.bind(this);
+        this.renderPhoto = this.renderPhoto.bind(this);
     }
 
     static get propTypes() {

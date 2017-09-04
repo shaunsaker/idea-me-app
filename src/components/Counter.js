@@ -20,7 +20,7 @@ export default class Counter extends React.Component {
         this.startTimer = this.startTimer.bind(this);
         this.clearTimer = this.clearTimer.bind(this);
 
-        this.timer;
+        this.timer = null;
 
         this.state = {
             duration: 0,

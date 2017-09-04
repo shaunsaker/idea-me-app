@@ -11,11 +11,16 @@ WRAP UP
             All config used
             All utilities used
             All mapStateToProps used
-            Check proptypes
             Lifecycle methods at top with other methods following order of this bindings
+                If no methods, it should be a dumb component
             All imports used
             All bindings set and used
             All methods used
+            Check proptypes
+                All used and declared in order
+                Use shape
+                Use eachOf
+                Dumb components should have PropTypes commented out
         Check reducers
         User errors should contain resets where applicable
         console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates

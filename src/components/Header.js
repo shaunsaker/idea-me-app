@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text, StatusBar, StyleSheet, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
@@ -54,9 +53,8 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class Header extends React.Component {
-    static get propTypes() {
-        return {
+export default (Header = props => {
+    /* PROPTYPES
             backgroundColor: PropTypes.string,
             textColor: PropTypes.string,
             headerShadow: PropTypes.bool,
@@ -76,153 +74,143 @@ export default class Header extends React.Component {
             continueButton: PropTypes.bool,
             rightComponent: PropTypes.func,
             handleRightIconPress: PropTypes.func,
-        };
-    }
+    */
 
-    render() {
-        const backgroundColorStyles = this.props.backgroundColor && {
-            backgroundColor: this.props.backgroundColor,
-        };
+    const backgroundColorStyles = props.backgroundColor && {
+        backgroundColor: props.backgroundColor,
+    };
 
-        const textColorStyles = this.props.textColor && {
-            color: this.props.textColor,
-        };
+    const textColorStyles = props.textColor && {
+        color: props.textColor,
+    };
 
-        const headerShadowStyles =
-            this.props.headerShadow && styleConstants.regularShadow;
+    const headerShadowStyles =
+        props.headerShadow && styleConstants.regularShadow;
 
-        const leftIcon = this.props.leftComponent ? (
-            <View style={styles.leftIconContainer}>
-                {this.props.leftComponent()}
-            </View>
-        ) : this.props.leftIconName ? (
-            <Touchable
-                style={
-                    this.props.textLeft ? (
-                        { justifyContent: 'center' }
-                    ) : (
-                        styles.leftIconContainer
-                    )
-                }
-                onPress={() => this.props.handleLeftIconPress}>
+    const leftIcon = props.leftComponent ? (
+        <View style={styles.leftIconContainer}>{props.leftComponent()}</View>
+    ) : props.leftIconName ? (
+        <Touchable
+            style={
+                props.textLeft ? (
+                    { justifyContent: 'center' }
+                ) : (
+                    styles.leftIconContainer
+                )
+            }
+            onPress={() => props.handleLeftIconPress}>
+            <Icon
+                name={props.leftIconName}
+                style={[styles.leftIcon, textColorStyles]}
+            />
+        </Touchable>
+    ) : props.backButton ? (
+        <Touchable
+            style={styles.leftIconContainer}
+            onPress={() => Actions.pop()}>
+            <Icon
+                name="chevron_left"
+                style={[styles.leftIcon, textColorStyles]}
+            />
+        </Touchable>
+    ) : props.closeButton ? (
+        <Touchable
+            style={styles.leftIconContainer}
+            onPress={props.handleLeftIconPress}>
+            <Icon name="close" style={[styles.leftIcon, textColorStyles]} />
+        </Touchable>
+    ) : props.textLeft ? null : (
+        <View style={styles.leftIconContainer} />
+    );
+
+    const textLeftStyles = props.textLeft
+        ? {
+              alignItems: 'flex-start',
+              paddingLeft: 8,
+          }
+        : null;
+
+    const textRightStyles = props.textRight ? { alignItems: 'flex-end' } : null;
+
+    const text = props.textComponent ? (
+        props.textComponent()
+    ) : props.handleTextPress ? (
+        <Touchable
+            style={[styles.textContainer, textLeftStyles, textRightStyles]}
+            onPress={props.handleTextPress}>
+            <Text
+                style={[
+                    styles.text,
+                    styleConstants.primaryFont,
+                    textColorStyles,
+                ]}>
+                {props.text}
+            </Text>
+        </Touchable>
+    ) : !props.text ? null : (
+        <View style={[styles.textContainer, textLeftStyles, textRightStyles]}>
+            <Text
+                style={[
+                    styles.text,
+                    styleConstants.primaryFont,
+                    textColorStyles,
+                ]}>
+                {props.text}
+            </Text>
+        </View>
+    );
+
+    const rightIcon = props.rightComponent ? (
+        <View style={styles.rightIconContainer}>{props.rightComponent()}</View>
+    ) : props.rightIconName ? (
+        <Touchable
+            style={styles.rightIconContainer}
+            onPress={props.handleRightIconPress}>
+            <Icon
+                name={props.rightIconName}
+                style={[styles.rightIcon, textColorStyles]}
+            />
+        </Touchable>
+    ) : props.addButton ? (
+        <Touchable
+            style={styles.rightIconContainer}
+            onPress={props.handleRightIconPress}>
+            <Icon name="add" style={[styles.rightIcon, textColorStyles]} />
+        </Touchable>
+    ) : props.continueButton ? (
+        <AnimateOpacity
+            initialValue={0}
+            finalValue={1}
+            shouldAnimateIn
+            style={styles.rightIconContainer}>
+            <Touchable onPress={props.handleRightIconPress}>
                 <Icon
-                    name={this.props.leftIconName}
-                    style={[styles.leftIcon, textColorStyles]}
-                />
-            </Touchable>
-        ) : this.props.backButton ? (
-            <Touchable
-                style={styles.leftIconContainer}
-                onPress={() => Actions.pop()}>
-                <Icon
-                    name="chevron_left"
-                    style={[styles.leftIcon, textColorStyles]}
-                />
-            </Touchable>
-        ) : this.props.closeButton ? (
-            <Touchable
-                style={styles.leftIconContainer}
-                onPress={this.props.handleLeftIconPress}>
-                <Icon name="close" style={[styles.leftIcon, textColorStyles]} />
-            </Touchable>
-        ) : this.props.textLeft ? null : (
-            <View style={styles.leftIconContainer} />
-        );
-
-        const textLeftStyles = this.props.textLeft
-            ? {
-                  alignItems: 'flex-start',
-                  paddingLeft: 8,
-              }
-            : null;
-
-        const textRightStyles = this.props.textRight
-            ? { alignItems: 'flex-end' }
-            : null;
-
-        const text = this.props.textComponent ? (
-            this.props.textComponent()
-        ) : this.props.handleTextPress ? (
-            <Touchable
-                style={[styles.textContainer, textLeftStyles, textRightStyles]}
-                onPress={this.props.handleTextPress}>
-                <Text
-                    style={[
-                        styles.text,
-                        styleConstants.primaryFont,
-                        textColorStyles,
-                    ]}>
-                    {this.props.text}
-                </Text>
-            </Touchable>
-        ) : !this.props.text ? null : (
-            <View
-                style={[styles.textContainer, textLeftStyles, textRightStyles]}>
-                <Text
-                    style={[
-                        styles.text,
-                        styleConstants.primaryFont,
-                        textColorStyles,
-                    ]}>
-                    {this.props.text}
-                </Text>
-            </View>
-        );
-
-        const rightIcon = this.props.rightComponent ? (
-            <View style={styles.rightIconContainer}>
-                {this.props.rightComponent()}
-            </View>
-        ) : this.props.rightIconName ? (
-            <Touchable
-                style={styles.rightIconContainer}
-                onPress={this.props.handleRightIconPress}>
-                <Icon
-                    name={this.props.rightIconName}
+                    name="check"
                     style={[styles.rightIcon, textColorStyles]}
                 />
             </Touchable>
-        ) : this.props.addButton ? (
-            <Touchable
-                style={styles.rightIconContainer}
-                onPress={this.props.handleRightIconPress}>
-                <Icon name="add" style={[styles.rightIcon, textColorStyles]} />
-            </Touchable>
-        ) : this.props.continueButton ? (
-            <AnimateOpacity
-                initialValue={0}
-                finalValue={1}
-                shouldAnimateIn
-                style={styles.rightIconContainer}>
-                <Touchable onPress={this.props.handleRightIconPress}>
-                    <Icon
-                        name="check"
-                        style={[styles.rightIcon, textColorStyles]}
-                    />
-                </Touchable>
-            </AnimateOpacity>
-        ) : this.props.textRight ? null : (
-            <View style={styles.rightIconContainer} />
-        );
+        </AnimateOpacity>
+    ) : props.textRight ? null : (
+        <View style={styles.rightIconContainer} />
+    );
 
-        return (
-            <View>
-                <StatusBar
-                    backgroundColor={styleConstants.transPrimary}
-                    barStyle="light-content"
-                />
-                <View
-                    style={[
-                        styles.container,
-                        backgroundColorStyles,
-                        headerShadowStyles,
-                        iosStyles,
-                    ]}>
-                    {leftIcon}
-                    {text}
-                    {rightIcon}
-                </View>
+    return (
+        <View>
+            <StatusBar
+                backgroundColor={styleConstants.transPrimary}
+                barStyle="light-content"
+            />
+            <View
+                style={[
+                    styles.container,
+                    backgroundColorStyles,
+                    headerShadowStyles,
+                    iosStyles,
+                ]}>
+                {leftIcon}
+                {text}
+                {rightIcon}
             </View>
-        );
-    }
-}
+        </View>
+    );
+});
