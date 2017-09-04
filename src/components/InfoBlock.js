@@ -1,10 +1,5 @@
-import React from "react";
-import {
-    View,
-    ScrollView,
-    Text,
-    StyleSheet,
-} from "react-native";
+import React from 'react';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styleConstants from '../assets/styleConstants';
@@ -21,15 +16,9 @@ const styles = StyleSheet.create({
         fontSize: styleConstants.largeFont,
         color: styleConstants.white,
     },
-    descriptionWrapper: {
-
-    },
-    descriptionContainer: {
-
-    },
-    infoTextDescriptionContainer: {
-
-    },
+    descriptionWrapper: {},
+    descriptionContainer: {},
+    infoTextDescriptionContainer: {},
     infoTextDescription: {
         marginTop: 8,
         fontSize: styleConstants.regularFont,
@@ -45,7 +34,7 @@ export default class InfoBlock extends React.Component {
 
         this.state = {
             readMoreMode: false,
-        }
+        };
     }
 
     static get propTypes() {
@@ -56,7 +45,7 @@ export default class InfoBlock extends React.Component {
             subtitleColor: PropTypes.string,
             fullWidth: PropTypes.bool,
             maxNumberOfSubtitleLines: PropTypes.number,
-        }
+        };
     }
 
     toggleReadMoreMode() {
@@ -66,18 +55,16 @@ export default class InfoBlock extends React.Component {
     }
 
     render() {
-        const fullWidthStyles = this.props.fullWidth &&
-            {
-                paddingRight: 16,
-            };
+        const fullWidthStyles = this.props.fullWidth && {
+            paddingRight: 16,
+        };
 
-        const fullWidthTitleStyles = this.props.fullWidth &&
-            {
-                marginRight: 16,
-            };
+        const fullWidthTitleStyles = this.props.fullWidth && {
+            marginRight: 16,
+        };
 
-        const subtitle = this.props.subtitle ?
-            this.props.maxNumberOfSubtitleLines ?
+        const subtitle =
+            this.props.subtitle && this.props.maxNumberOfSubtitleLines ? (
                 <ScrollView
                     style={styles.descriptionWrapper}
                     contentContainerStyle={styles.descriptionContainer}>
@@ -86,21 +73,40 @@ export default class InfoBlock extends React.Component {
                         androidRipple
                         style={styles.infoTextDescriptionContainer}>
                         <Text
-                            numberOfLines={this.state.readMoreMode ? null : this.props.maxNumberOfSubtitleLines}
-                            style={[styles.infoTextDescription, { color: this.props.subtitleColor }, styleConstants.primaryFont]}>
+                            numberOfLines={
+                                this.state.readMoreMode ? null : (
+                                    this.props.maxNumberOfSubtitleLines
+                                )
+                            }
+                            style={[
+                                styles.infoTextDescription,
+                                { color: this.props.subtitleColor },
+                                styleConstants.primaryFont,
+                            ]}>
                             {this.props.subtitle}
                         </Text>
                     </Touchable>
                 </ScrollView>
-                :
-                <Text style={[styles.infoTextDescription, { color: this.props.subtitleColor }, styleConstants.primaryFont]}>
+            ) : (
+                <Text
+                    style={[
+                        styles.infoTextDescription,
+                        { color: this.props.subtitleColor },
+                        styleConstants.primaryFont,
+                    ]}>
                     {this.props.subtitle}
                 </Text>
-            : null;
+            );
 
         return (
             <View style={[styles.infoContainer, fullWidthStyles]}>
-                <Text style={[styles.infoTextTitle, { color: this.props.titleColor }, styleConstants.primaryFont, fullWidthTitleStyles]}>
+                <Text
+                    style={[
+                        styles.infoTextTitle,
+                        { color: this.props.titleColor },
+                        styleConstants.primaryFont,
+                        fullWidthTitleStyles,
+                    ]}>
                     {this.props.title}
                 </Text>
                 {subtitle}

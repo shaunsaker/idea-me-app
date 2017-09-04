@@ -160,23 +160,22 @@ export default class DropdownButton extends React.Component {
                   maxHeight: this.maxHeight,
               };
 
-        const header =
-            this.props.headerValue &&
-            this.props.currentValue !== this.props.headerValue ? (
-                <Touchable
-                    style={styles.dropdownHeader}
-                    onPress={() => {
-                        this.handleSelect(this.props.headerValue);
-                    }}>
-                    <Text
-                        style={[
-                            styles.dropdownHeaderText,
-                            styleConstants.primaryFont,
-                        ]}>
-                        {this.props.headerValue}
-                    </Text>
-                </Touchable>
-            ) : null;
+        const header = this.props.headerValue &&
+        this.props.currentValue !== this.props.headerValue && (
+            <Touchable
+                style={styles.dropdownHeader}
+                onPress={() => {
+                    this.handleSelect(this.props.headerValue);
+                }}>
+                <Text
+                    style={[
+                        styles.dropdownHeaderText,
+                        styleConstants.primaryFont,
+                    ]}>
+                    {this.props.headerValue}
+                </Text>
+            </Touchable>
+        );
 
         const editCategories = (
             <Touchable

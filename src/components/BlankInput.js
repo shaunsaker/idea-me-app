@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
@@ -6,7 +6,7 @@ import {
     TouchableWithoutFeedback,
     TextInput,
     StyleSheet,
-} from "react-native";
+} from 'react-native';
 
 import config from '../config';
 import utilities from '../utilities';
@@ -58,7 +58,7 @@ export default class BlankInput extends React.Component {
 
         this.state = {
             inputHeight: this.minimumInputHeight,
-        }
+        };
     }
 
     static get propTypes() {
@@ -92,53 +92,59 @@ export default class BlankInput extends React.Component {
     setInputHeight(newInputHeight) {
         if (newInputHeight > this.minimumInputHeight) {
             this.setState({
-                inputHeight: newInputHeight
+                inputHeight: newInputHeight,
             });
-        }
-
-        // If an input was cleared
-        else if (newInputHeight <= this.minimumInputHeight) {
+        } else if (newInputHeight <= this.minimumInputHeight) {
+            // If an input was cleared
             this.setState({
-                inputHeight: this.minimumInputHeight
+                inputHeight: this.minimumInputHeight,
             });
         }
     }
 
     render() {
-        const clearTextButton = this.props.value ?
+        const clearTextButton = this.props.value ? (
             <AnimateOpacity
                 initialValue={0}
                 finalValue={1}
                 shouldAnimateIn
                 style={styles.clearTextButtonContainer}>
-                <DeleteButton
-                    handlePress={this.clearInputText} />
+                <DeleteButton handlePress={this.clearInputText} />
             </AnimateOpacity>
-            :
-            null;
+        ) : null;
 
         const inputStyles = {
             height: this.state.inputHeight,
             color: this.props.valueColor,
-        }
+        };
 
         return (
-            <TouchableWithoutFeedback
-                onPress={() => this.refs.input.focus()} >
+            <TouchableWithoutFeedback onPress={() => this.refs.input.focus()}>
                 <View style={styles.inputWrapper}>
                     <TextInput
-                        ref='input'
+                        ref="input"
                         placeholder={this.props.placeholderText}
                         placeholderTextColor={this.props.placeholderTextColor}
                         value={this.props.value ? this.props.value : ''}
-                        underlineColorAndroid='transparent'
-                        style={[styles.input, inputStyles, styleConstants.primaryFont]}
-                        onChangeText={(text) => this.props.handleChange(text)}
+                        underlineColorAndroid="transparent"
+                        style={[
+                            styles.input,
+                            inputStyles,
+                            styleConstants.primaryFont,
+                        ]}
+                        onChangeText={text => this.props.handleChange(text)}
                         onFocus={this.focusInput}
                         onBlur={this.blurInput}
                         autoFocus={this.props.autoFocus}
                         multiline={this.props.multiline}
-                        onChange={this.props.multiline ? (event) => this.setInputHeight(event.nativeEvent.contentSize.height) : null /*NOTE: this does not work with onContentSizeChange */} />
+                        onChange={
+                            this.props.multiline &&
+                            (event =>
+                                this.setInputHeight(
+                                    event.nativeEvent.contentSize.height
+                                )) /*NOTE: this does not work with onContentSizeChange */
+                        }
+                    />
 
                     {clearTextButton}
                 </View>

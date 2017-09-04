@@ -4,6 +4,8 @@ WRAP UP
         Use FlatList/VirtualizedList for all lists > screen width/height
             shouldComponentUpdate will help render when it should
         Don't need ? : null, just use && (watch out for raw text bug)
+            Need it for functions
+            Need it for some render components
         Remove unnecessary imports/code
         Check proptypes
         Lifecycle methods at top with other methods following order of this bindings
