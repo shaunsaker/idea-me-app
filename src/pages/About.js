@@ -39,8 +39,4 @@ export class About extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {};
-}
-
-export default connect(mapStateToProps)(About);
+export default connect()(About);
