@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
         marginRight: 4,
     },
     icon: {
-        fontSize: styleConstants.iconFont,
+        fontSize: 22,
         color: styleConstants.secondary,
     },
     text: {
-        fontSize: 28,
+        fontSize: styleConstants.largeFont,
         color: styleConstants.white,
     },
 });

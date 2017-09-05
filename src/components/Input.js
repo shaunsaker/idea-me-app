@@ -91,7 +91,7 @@ export default class Input extends React.Component {
             handleChange: PropTypes.func.isRequired,
             handleFocus: PropTypes.func,
             handleBlur: PropTypes.func,
-            value: PropTypes.string.isRequired,
+            value: PropTypes.string,
             type: PropTypes.string,
             keyboardType: PropTypes.string,
             autoFocus: PropTypes.bool,

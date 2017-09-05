@@ -39,6 +39,7 @@ WRAP UP
         Android
         iOS
         
+    Test!
     Clean Firebase
     Generate signed apk
     Deploy!
