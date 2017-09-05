@@ -1,7 +1,4 @@
-TODOS
-    Use onLayout to get input height (multiline input)
-
-WRAP UP  
+WRAP UP
     Optimise code
         this.props.dispatch calls should be from connected components
         Use FlatList/VirtualizedList for all lists > screen width/height
@@ -34,6 +31,7 @@ WRAP UP
         Check config
             All used
         User errors should contain resets where applicable
+
     App renaming
         Check facebook login on fb dashboard
     App Icons (APE)
@@ -85,6 +83,7 @@ V2
     Landing page to download app on shaunsaker.com
     User survey
         Add link to Profile page
+    Use onLayout to get input height (multiline input)
 
 KNOWN BUGS
     Forgot password when user does not exist crashes app
