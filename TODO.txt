@@ -31,15 +31,16 @@ WRAP UP
         Check config
             All used
         User errors should contain resets where applicable
-
     App renaming
-        Check facebook login on fb dashboard
+        Check facebook login on fb dashboard        
     App Icons (APE)
     App Screenshots (APE)
     Developer registrations
         Android
         iOS
+        
     Clean Firebase
+    Generate signed apk
     Deploy!
 
 IOS
