@@ -34,8 +34,6 @@ WRAP UP
         Check config
             All used
         User errors should contain resets where applicable
-        console.log componentDidUpdate on every page, component
-            Use shouldComponentUpdate where necessary (to stop unnecessary updates)
     App renaming
         Check facebook login on fb dashboard
     App Icons (APE)
