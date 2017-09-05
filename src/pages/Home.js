@@ -63,11 +63,12 @@ export class Home extends React.Component {
 
     static get propTypes() {
         return {
-            ideas: PropTypes.object,
-            categories: PropTypes.object,
-            currentCategory: PropTypes.string,
             uid: PropTypes.string,
             firstTimeUser: PropTypes.bool,
+            currentCategory: PropTypes.string,
+            ideas: PropTypes.object,
+            categories: PropTypes.object,
+            shouldPlaySounds: PropTypes.bool,
         };
     }
 

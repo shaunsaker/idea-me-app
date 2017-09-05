@@ -31,13 +31,10 @@ export class SignInWithEmail extends React.Component {
         return {
             authenticated: PropTypes.bool,
             cloudDataSuccess: PropTypes.bool,
-
             uid: PropTypes.string,
             userEmail: PropTypes.string,
             userPassword: PropTypes.string,
-
             userSettings: PropTypes.object,
-
             categories: PropTypes.object,
         };
     }
@@ -176,13 +173,10 @@ function mapStateToProps(state) {
         cloudDataSuccess:
             state.main.appState.error.type === 'CLOUD_DATA' &&
             state.main.appState.error.success,
-
         uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
         userPassword: state.main.userAuth.userPassword,
-
         userSettings: state.main.userData.settings,
-
         categories: state.main.userData.categories,
     };
 }

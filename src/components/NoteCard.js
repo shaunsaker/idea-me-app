@@ -53,20 +53,20 @@ const styles = StyleSheet.create({
 export default (NoteCard = props => {
     /*
         PROPTYPES
-            idea
-            notes/photos/voiceNotes/categories
-            handleAdd
-            handleDelete
 
-            NOTES/CATEGORIES
-                inputValue
-                handleChangeText
-
-            PHOTOS
-                handleViewPhotos   
-
-            VOICENOTES
-                handleRecord
+        idea: PropTypes.object,
+        type: PropTypes.string,
+        notes: PropTypes.array,
+        photos: PropTypes.array,
+        voiceNotes: PropTypes.array,
+        categories: Proptypes.array,
+        displayInfo: PropTypes.bool,
+        handleAdd: PropTypes.func,
+        handleDelete: PropTypes.func,
+        inputValue: PropTypes.string,
+        handleChangeText: PropTypes.func,
+        handleViewPhotos: PropTypes.func,
+        handleRecord: PropTypes.func,
     */
 
     let notesValues;

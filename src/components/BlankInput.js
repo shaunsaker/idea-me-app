@@ -54,9 +54,9 @@ export default class BlankInput extends React.Component {
         return {
             placeholderText: PropTypes.string,
             placeholderTextColor: PropTypes.string,
-            value: PropTypes.string,
+            value: PropTypes.string.isRequired,
             valueColor: PropTypes.string,
-            handleChange: PropTypes.func,
+            handleChange: PropTypes.func.isRequired,
             handleFocus: PropTypes.func,
             handleBlur: PropTypes.func,
             autoFocus: PropTypes.bool,

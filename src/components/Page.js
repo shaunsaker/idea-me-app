@@ -13,6 +13,17 @@ const styles = StyleSheet.create({
 });
 
 export default (Page = props => {
+    /* 
+        PROPTYPES
+
+        backgroundColor: Proptypes.string,
+        justifyContent: PropTypes.string,
+        removeBottomPadding: PropTypes.bool,
+        fauxFooter: PropTypes.bool,
+        children: PropTypes.node,
+
+    */
+
     const dimensionsStyles = config.testing.dimensions && {
         width: 320,
         height: 480,

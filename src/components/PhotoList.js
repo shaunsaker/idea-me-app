@@ -57,6 +57,8 @@ export default class PhotoList extends React.Component {
     static get propTypes() {
         return {
             photos: PropTypes.array,
+            handleViewPhotos: PropTypes.func,
+            handleDelete: PropTypes.func,
         };
     }
 

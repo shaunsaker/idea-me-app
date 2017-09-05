@@ -23,6 +23,12 @@ const styles = StyleSheet.create({
 });
 
 export default (DeleteButton = props => {
+    /*
+        PROPTYPES
+
+        handlePress: PropTypes.func.isRequired,
+    */
+
     return (
         <View style={styles.deleteButtonContainer}>
             <Touchable onPress={props.handlePress} style={styles.deleteButton}>

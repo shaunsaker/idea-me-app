@@ -59,7 +59,7 @@ export class Profile extends React.Component {
             userEmail: PropTypes.string,
             userLocation: PropTypes.string,
             userPhotoUrl: PropTypes.object,
-            numberOfIdeas: PropTypes.number,
+            ideas: PropTypes.object,
         };
     }
 

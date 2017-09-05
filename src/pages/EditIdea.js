@@ -41,10 +41,14 @@ export class EditIdea extends React.Component {
 
     static get propTypes() {
         return {
+            initialIdeaUID: PropTypes.string,
             initialIdeaTitle: PropTypes.string,
             initialIdeaDescription: PropTypes.string,
             initialIdeaCategory: PropTypes.string,
             initialIdeaPriority: PropTypes.string,
+            initialIdeaNotes: PropTypes.object, // TODO: check this
+            initialIdeaPhotos: PropTypes.object, // TODO: check this
+            initialIdeaVoiceNotes: PropTypes.object, // TODO: check this
             ideas: PropTypes.object,
             newNotes: PropTypes.object,
             newPhotos: PropTypes.object,
@@ -186,7 +190,7 @@ export class EditIdea extends React.Component {
         // Remove unused files
         if (this.props.newPhotos) {
             // Get the difference between newPhotos and initial idea photos
-            const newPhotos = utilities.getDifferenceBetweenDictionarys(
+            const newPhotos = utilities.getDifferenceBetweenDictionaries(
                 this.props.newPhotos,
                 this.props.initialIdeaPhotos
             );
@@ -218,7 +222,7 @@ export class EditIdea extends React.Component {
 
         if (this.props.newVoiceNotes) {
             // Get the difference between newVoiceNotes and initial idea voiceNotes
-            const newVoiceNotes = utilities.getDifferenceBetweenDictionarys(
+            const newVoiceNotes = utilities.getDifferenceBetweenDictionaries(
                 this.props.newVoiceNotes,
                 this.props.initialIdeaVoiceNotes
             );

@@ -9,7 +9,7 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import ProfileCard from '../components/ProfileCard';
 
-export default (About = props => {
+export default (About = () => {
     return (
         <Page backgroundColor={styleConstants.white}>
             <Header text="About App" headerShadow backButton />

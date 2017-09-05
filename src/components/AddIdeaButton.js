@@ -34,7 +34,7 @@ export default (AddIdeaButton = props => {
     /*
         PROPTYPES
         
-        handlePress: func
+        handlePress: PropTypes.func.isRequired
     */
 
     return (

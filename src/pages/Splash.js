@@ -36,12 +36,10 @@ export class Splash extends React.Component {
             anonymous: PropTypes.bool,
             redirectToWelcomePage: PropTypes.bool,
             uid: PropTypes.string,
-
             cloudDataSuccess: PropTypes.bool,
-
             quotes: PropTypes.object,
-
             dateJoined: PropTypes.number,
+            oneWeekUser: PropTypes.bool,
             hasSeenShareModal: PropTypes.bool,
         };
     }
@@ -205,13 +203,10 @@ function mapStateToProps(state) {
         anonymous: state.main.userAuth.anonymous,
         redirectToWelcomePage: state.main.userAuth.redirectToWelcomePage,
         uid: state.main.userAuth.uid,
-
         cloudDataSuccess:
             state.main.appState.error.type === 'CLOUD_DATA' &&
             state.main.appState.error.success,
-
         quotes: state.main.appData.quotes,
-
         dateJoined: state.main.userData.profile.dateJoined,
         oneWeekUser: config.testing.oneWeekUser,
         hasSeenShareModal:

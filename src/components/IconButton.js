@@ -44,13 +44,14 @@ const styles = StyleSheet.create({
 
 export default (IconButton = props => {
     /*
-        PROPS
-            backgroundColor
-            iconName
-            iconColor
-            handlePress
-            count
-            disabled
+        PROPTYPES
+        
+        backgroundColor: PropTypes.string,
+        iconName: PropTypes.string,
+        iconColor: PropTypes.string,
+        handlePress: PropTypes.func.isRequired,
+        count: PropTypes.number,
+        disabled: PropTypes.bool,
     */
 
     const backgroundColorStyles = props.backgroundColor && {

@@ -25,6 +25,12 @@ const styles = StyleSheet.create({
 });
 
 export default (Logo = props => {
+    /*
+        PROPTYPES
+
+        None
+    */
+
     return (
         <View style={styles.container}>
             <Text style={styles.iconContainer}>

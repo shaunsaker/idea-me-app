@@ -58,8 +58,8 @@ export default class BulletList extends React.Component {
 
     static get propTypes() {
         return {
-            notes: PropTypes.array,
-            handleDelete: PropTypes.func,
+            values: PropTypes.array.isRequired,
+            handleDelete: PropTypes.func.isRequired,
         };
     }
 

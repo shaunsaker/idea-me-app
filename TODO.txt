@@ -1,3 +1,6 @@
+TODOS
+    Use onLayout to get input height (multiline input)
+
 WRAP UP  
     Optimise code
         this.props.dispatch calls should be from connected components
@@ -22,13 +25,26 @@ WRAP UP
                 Use eachOf
                 Dumb components should have PropTypes commented out
         Check reducers
+            All used
+            Utilities used where possible
+        Check utilities
+            All used
+            Correct naming conventions used
+            All utilities documented with comments above
+        Check config
+            All used
         User errors should contain resets where applicable
-        console.log componentDidUpdate on every page, component and use shouldComponentUpdate to stop unnecessary updates
-            Use shouldComponentUpdate where necessary 
+        console.log componentDidUpdate on every page, component
+            Use shouldComponentUpdate where necessary (to stop unnecessary updates)
     App renaming
         Check facebook login on fb dashboard
     App Icons (APE)
     App Screenshots (APE)
+    Developer registrations
+        Android
+        iOS
+    Clean Firebase
+    Deploy!
 
 IOS
     React-native-firebase

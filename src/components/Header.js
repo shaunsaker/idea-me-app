@@ -54,26 +54,30 @@ const styles = StyleSheet.create({
 });
 
 export default (Header = props => {
-    /* PROPTYPES
-            backgroundColor: PropTypes.string,
-            textColor: PropTypes.string,
-            headerShadow: PropTypes.bool,
+    /* 
+        PROPTYPES
+    
+        backgroundColor: PropTypes.string,
+        textColor: PropTypes.string,
+        headerShadow: PropTypes.bool,
 
-            backButton: PropTypes.bool,
-            closeButton: PropTypes.bool,
-            leftComponent: PropTypes.func,
-            handleLeftIconPress: PropTypes.func,
+        backButton: PropTypes.bool,
+        closeButton: PropTypes.bool,
+        leftComponent: PropTypes.func,
+        leftIconName: PropTypes.string,
+        handleLeftIconPress: PropTypes.func,
 
-            textComponent: PropTypes.func,
-            text: PropTypes.string,
-            textLeft: PropTypes.bool,
-            textRight: PropTypes.bool,
-            handleTextPress: PropTypes.func,
+        textComponent: PropTypes.func,
+        text: PropTypes.string,
+        textLeft: PropTypes.bool,
+        textRight: PropTypes.bool,
+        handleTextPress: PropTypes.func,
 
-            addButton: PropTypes.bool,
-            continueButton: PropTypes.bool,
-            rightComponent: PropTypes.func,
-            handleRightIconPress: PropTypes.func,
+        addButton: PropTypes.bool,
+        continueButton: PropTypes.bool,
+        rightComponent: PropTypes.func,
+        rightIconName: PropTypes.string,
+        handleRightIconPress: PropTypes.func,
     */
 
     const backgroundColorStyles = props.backgroundColor && {

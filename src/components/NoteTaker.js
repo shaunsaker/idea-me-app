@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
 });
 
 export default (NoteTaker = props => {
-    /* PROPTYPES
+    /* 
+        PROPTYPES
 
         text: PropTypes.string,
         handleAdd: PropTypes.func,

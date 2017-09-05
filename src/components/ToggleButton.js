@@ -33,6 +33,15 @@ const styles = StyleSheet.create({
 });
 
 export default (ToggleButton = props => {
+    /* 
+        PROPTYPES
+
+        active: PropTypes.bool,
+        handleToggle: PropTypes.func.isRequired,
+        title: PropTypes.string,
+
+    */
+
     const activeIconStyles = props.active && styles.toggleButtonIconActive;
     const activeTextStyles = props.active && styles.toggleButtonTextActive;
 

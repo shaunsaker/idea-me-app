@@ -88,10 +88,10 @@ export default class Input extends React.Component {
     static get propTypes() {
         return {
             placeholder: PropTypes.string,
-            handleChange: PropTypes.func,
+            handleChange: PropTypes.func.isRequired,
             handleFocus: PropTypes.func,
             handleBlur: PropTypes.func,
-            value: PropTypes.string,
+            value: PropTypes.string.isRequired,
             type: PropTypes.string,
             keyboardType: PropTypes.string,
             autoFocus: PropTypes.bool,

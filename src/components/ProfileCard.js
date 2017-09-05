@@ -75,6 +75,20 @@ const styles = StyleSheet.create({
 });
 
 export default (ProfileCard = props => {
+    /* 
+        PROPTYPES
+
+        showIcon: PropTypes.bool,
+        userPhotoUrl: PropTypes.string,
+        handleDeletePhoto: PropTypes.func,
+        handleEditImagePress: PropTypes.func,
+        numberOfIdeas: PropTypes.number,
+        userName: PropTypes.string,
+        userLocation: PropTypes.string,
+        userEmail: PropTypes.string,
+        
+    */
+
     const profilePhoto = props.showIcon ? (
         <View style={styles.profileImageContainer}>
             <View style={styles.profileImage}>

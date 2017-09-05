@@ -36,6 +36,20 @@ const styles = StyleSheet.create({
 });
 
 export default (CategoriesButton = props => {
+    /*
+        PROPTYPES
+
+        backgroundColor: PropTypes.string,
+        currentCategory: PropTypes.string.isRequired,
+        currentCount: PropTypes.number.isRequired,
+        totalCount: ProTypes.number.isRequired,
+        handlePress: PropTypes.func.isRequired,
+        style: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.number,
+        ]),
+    */
+
     const altColor =
         props.backgroundColor === 'transparent' ||
         props.backgroundColor === styleConstants.primary

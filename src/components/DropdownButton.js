@@ -101,10 +101,13 @@ export default class DropdownButton extends React.Component {
             currentValue: PropTypes.string,
             values: PropTypes.array.isRequired,
             handleSelect: PropTypes.func.isRequired,
-            headerIconName: PropTypes.string,
             headerValue: PropTypes.string,
             pushContent: PropTypes.bool, // animate push content below
             buttonBackgroundColor: PropTypes.string,
+            categoryButton: PropTypes.bool,
+            currentCategory: PropTypes.string,
+            currentCount: PropTypes.number,
+            totalCount: PropTypes.number,
         };
     }
 

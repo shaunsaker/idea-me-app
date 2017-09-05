@@ -99,14 +99,6 @@ export default function(state = initialState, action) {
             return new_state;
 
         /* APP DATA */
-        case 'UPDATE_APP_DATA':
-            new_state = utilities.cloneObject(state);
-            new_state.appData = {
-                ...new_state.appData,
-                ...action.appData,
-            };
-            return new_state;
-
         case 'SET_CURRENT_LOCATION':
             new_state = utilities.cloneObject(state);
             new_state.appData.currentLocation = action.currentLocation;
@@ -180,11 +172,6 @@ export default function(state = initialState, action) {
             new_state.appState.error.message = null;
             new_state.appState.error.success = true;
             new_state.appState.loading = false;
-            return new_state;
-
-        case 'SET_USER_LOCATION':
-            new_state = utilities.cloneObject(state);
-            new_state.userData.profile.userLocation = action.userLocation;
             return new_state;
 
         case 'SET_USER_PHOTO':

@@ -29,14 +29,11 @@ export class Welcome extends React.Component {
         return {
             authenticated: PropTypes.bool,
             cloudDataSuccess: PropTypes.bool,
-
             uid: PropTypes.string,
             userEmail: PropTypes.string,
             userName: PropTypes.string,
             userPhotoUrl: PropTypes.object,
-
             userSettings: PropTypes.object,
-
             categories: PropTypes.object,
         };
     }
@@ -134,14 +131,11 @@ function mapStateToProps(state) {
         cloudDataSuccess:
             state.main.appState.error.type === 'CLOUD_DATA' &&
             state.main.appState.error.success,
-
         uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
         userName: state.main.userData.profile.userName,
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
-
         userSettings: state.main.userData.settings,
-
         categories: state.main.userData.categories,
     };
 }

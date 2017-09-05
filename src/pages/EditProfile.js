@@ -72,8 +72,9 @@ export class EditProfile extends React.Component {
             userName: PropTypes.string,
             userEmail: PropTypes.string,
             userLocation: PropTypes.string,
-            userPhotoUrl: PropTypes.object,
             currentLocation: PropTypes.string,
+            userPhotoUrl: PropTypes.object,
+            dateJoined: PropTypes.string,
             temporaryImage: PropTypes.object,
             geolocationError: PropTypes.bool,
         };

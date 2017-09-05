@@ -56,6 +56,16 @@ const styles = StyleSheet.create({
 });
 
 export default (TabBar = props => {
+    /* 
+        PROPTYPES
+
+        tabs: PropTypes.array.isRequired,
+        backgroundColor: PropTypes.string,
+        color: PropTypes.string,
+        highlightedProfileTab: PropTypes.bool,
+
+    */
+
     const tabs = props.tabs.map(value => {
         const colorStyles = {
             color: value.active
