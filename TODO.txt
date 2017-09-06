@@ -34,15 +34,36 @@ WRAP UP
     App renaming
         Check facebook login on fb dashboard        
     App Icons (APE)
-    App Screenshots (APE)
+    App Splash Screen (APE)
+    App Screen Shots?
     Developer registrations
         Android
-        iOS
-        
-    Test!
+        iOS        
+    Test production release!
     Clean Firebase
     Generate signed apk
+      cd android
+      ./gradlew assembleRelease
+      jarsigner -digestalg SHA1 -sigalg MD5withRSA -verbose -keystore keystores/ideaMe.keystore app/build/outputs/apk/app-release-unsigned.apk ideaMe
+      zipalign -f -v 4 app/build/outputs/apk/app-release-unsigned.apk ideaMe.apk
     Deploy!
+
+BUGS IDENTIFIED IN PRODUCTION RELEASE TESTING
+    Login errors caused by no network did not give me more info
+    Category press from All categories did not close dropdown button
+    Email address in profile card should be pressable and should take me to my email client
+    Settings press from Profile menu crashed the app
+    Remove give us feedback link from Profile menu
+    Deleting a category crashed the app
+    Super long idea descriptions (need to be limited and convert to scrollView when pressed)
+    Multiline input did not set its height correctly on mount
+    Pressing the category label opened the dropdown button
+    Attempted to add landscape photo, got 'y + height must be <= bitmap.height()'
+    Forgot password success not received or loader not reset
+    Forgot password when user does not exist does nothing
+    Used incorrect password, got 'This email address is already in use' => Should be more descriptive
+    Continue anonymously + forgot password in airplane mode did nothing
+    Splash screen should show for minimum time
 
 IOS
     React-native-firebase
@@ -86,6 +107,3 @@ V2
     User survey
         Add link to Profile page
     Use onLayout to get input height (multiline input)
-
-KNOWN BUGS
-    Forgot password when user does not exist crashes app
