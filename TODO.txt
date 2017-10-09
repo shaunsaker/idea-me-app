@@ -1,5 +1,4 @@
 BUGS IDENTIFIED IN PRODUCTION RELEASE TESTING
-    Responsive testing (see MyPatients)
 
 BUGS TO LOOK OUT FOR
     Deleting a category crashed the app
