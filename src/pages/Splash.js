@@ -1,23 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { StatusBar, View, Share, Platform } from 'react-native';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import React from "react";
+import PropTypes from "prop-types";
+import { StatusBar, View, Share, Platform } from "react-native";
+import { connect } from "react-redux";
+import { Actions } from "react-native-router-flux";
 
-import config from '../config';
-import utilities from '../utilities';
-import styleConstants from '../assets/styleConstants';
-import Icon from '../assets/icons/index';
+import config from "../config";
+import utilities from "../utilities";
+import styleConstants from "../assets/styleConstants";
+import Icon from "../assets/icons/index";
 
-import Page from '../components/Page';
-import InfoBlock from '../components/InfoBlock';
-import InfoModal from '../modals/InfoModal';
-import SnackBar from '../widgets/SnackBar';
+import Page from "../components/Page";
+import InfoBlock from "../components/InfoBlock";
+import InfoModal from "../modals/InfoModal";
+import SnackBar from "../widgets/SnackBar";
 
 export class Splash extends React.Component {
     constructor(props) {
         super(props);
 
+        this.startTimer = this.startTimer.bind(this);
         this.runLogic = this.runLogic.bind(this);
         this.shareApp = this.shareApp.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
@@ -27,12 +28,14 @@ export class Splash extends React.Component {
         this.state = {
             showShareModal: false,
             isFethingData: false,
+            time: 0,
         };
     }
 
     static get propTypes() {
         return {
             authenticated: PropTypes.bool,
+            isAuthenticating: PropTypes.bool,
             anonymous: PropTypes.bool,
             redirectToWelcomePage: PropTypes.bool,
             uid: PropTypes.string,
@@ -45,6 +48,9 @@ export class Splash extends React.Component {
     }
 
     componentDidMount() {
+        if (!config.testing.disabledLoadingDelay) {
+            this.startTimer();
+        }
         this.runLogic();
     }
 
@@ -52,14 +58,39 @@ export class Splash extends React.Component {
         this.runLogic();
     }
 
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+
+    startTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+        }
+
+        this.timer = setInterval(() => {
+            this.setState({
+                time: (this.state.time += 1),
+            });
+        }, 1000);
+    }
+
     runLogic() {
         // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
-        if (this.props.redirectToWelcomePage) {
+        if (
+            this.props.redirectToWelcomePage &&
+            (this.state.time >= 2 || config.testing.disableLoadingDelay)
+        ) {
+            !config.testing.disableLoadingDelay && clearInterval(this.timer);
             Actions.welcome();
-        } else if (this.props.authenticated && this.props.anonymous) {
+        } else if (
+            this.props.authenticated &&
+            this.props.anonymous &&
+            (this.state.time >= 2 || config.testing.disableLoadingDelay)
+        ) {
             // Anonymous user (no data)
+            !config.testing.disableLoadingDelay && clearInterval(this.timer);
             this.props.dispatch({
-                type: 'TOGGLE_LOADING',
+                type: "TOGGLE_LOADING",
             });
 
             Actions.home();
@@ -74,7 +105,7 @@ export class Splash extends React.Component {
             });
 
             this.props.dispatch({
-                type: 'loadUserData',
+                type: "loadUserData",
                 uid: this.props.uid,
             });
         } else if (this.props.authenticated && this.props.cloudDataSuccess) {
@@ -94,16 +125,21 @@ export class Splash extends React.Component {
                 });
             } else if (!this.state.showShareModal) {
                 this.props.dispatch({
-                    type: 'RESET_ERROR',
+                    type: "RESET_ERROR",
                 });
 
                 Actions.home();
             }
-        } else if (!this.props.authenticated) {
+        } else if (!this.props.authenticated && !this.state.isAuthenticating) {
+            // Set this prop so we don't reauthenticate while the timer is running
+            this.setState({
+                isAuthenticating: true,
+            });
+
             // getUserAuth is not initialised immediately
             setTimeout(() => {
                 this.props.dispatch({
-                    type: 'getUserAuth',
+                    type: "getUserAuth",
                 });
             }, 0);
         }
@@ -111,19 +147,19 @@ export class Splash extends React.Component {
 
     shareApp() {
         const shareMessage =
-            Platform.OS === 'android'
-                ? 'Hey! Check this out... ' + config.app.url
-                : 'Hey! Check this out... '; // ios only
+            Platform.OS === "android"
+                ? "Hey! Check this out... " + config.app.url
+                : "Hey! Check this out... "; // ios only
 
         Share.share(
             {
                 message: shareMessage,
                 url: config.app.url, // ios only
-                title: 'IdeaMe',
+                title: "IdeaMe",
             },
             {
                 // Android only:
-                dialogTitle: 'Share IdeaMe',
+                dialogTitle: "Share IdeaMe",
             }
         )
             .then(() => {
@@ -131,8 +167,8 @@ export class Splash extends React.Component {
             })
             .catch(error => {
                 this.props.dispatch({
-                    type: 'SET_ERROR',
-                    errorType: 'share',
+                    type: "SET_ERROR",
+                    errorType: "share",
                     message: error.message, // TODO: check this
                 });
             });
@@ -140,9 +176,9 @@ export class Splash extends React.Component {
 
     closeShareModal() {
         this.props.dispatch({
-            type: 'saveUserData',
+            type: "saveUserData",
             uid: this.props.uid,
-            node: 'app',
+            node: "app",
             userData: {
                 hasSeenShareModal: true,
             },
@@ -150,7 +186,7 @@ export class Splash extends React.Component {
 
         // Might take a while for the hasSeenShareModal prop to come in so let's redirect immediately
         this.props.dispatch({
-            type: 'RESET_ERROR',
+            type: "RESET_ERROR",
         });
 
         Actions.home();
@@ -179,7 +215,7 @@ export class Splash extends React.Component {
                     size={64}
                 />
 
-                <View style={{ position: 'absolute', bottom: 0 }}>
+                <View style={{ position: "absolute", bottom: 0 }}>
                     <InfoBlock
                         title={this.quote.title}
                         subtitle={this.quote.author}
@@ -204,7 +240,7 @@ function mapStateToProps(state) {
         redirectToWelcomePage: state.main.userAuth.redirectToWelcomePage,
         uid: state.main.userAuth.uid,
         cloudDataSuccess:
-            state.main.appState.error.type === 'CLOUD_DATA' &&
+            state.main.appState.error.type === "CLOUD_DATA" &&
             state.main.appState.error.success,
         quotes: state.main.appData.quotes,
         dateJoined: state.main.userData.profile.dateJoined,

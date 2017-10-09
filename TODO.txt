@@ -1,5 +1,4 @@
 BUGS IDENTIFIED IN PRODUCTION RELEASE TESTING
-    Splash screen should show for minimum time
     Category press from All categories did not close dropdown button
     Pressing the category label opened the dropdown button
     Email address in profile card should be pressable and should take me to my email client

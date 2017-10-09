@@ -16,6 +16,7 @@ config.testing = {
     firstTimeUser: false,
     oneWeekUser: false,
     dimensions: false,
+    disableLoadingDelay: false,
 };
 
 config.firebase = {
