@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {
     View,
     Text,
@@ -7,25 +7,25 @@ import {
     TextInput,
     StyleSheet,
     Platform,
-} from 'react-native';
+} from "react-native";
 
-import utilities from '../utilities';
-import styleConstants from '../assets/styleConstants';
+import utilities from "../utilities";
+import styleConstants from "../assets/styleConstants";
 
-import AnimateTranslateX from '../animators/AnimateTranslateX';
-import AnimateOpacity from '../animators/AnimateOpacity';
-import Touchable from './Touchable';
-import DeleteButton from './DeleteButton';
+import AnimateTranslateX from "../animators/AnimateTranslateX";
+import AnimateOpacity from "../animators/AnimateOpacity";
+import Touchable from "./Touchable";
+import DeleteButton from "./DeleteButton";
 
 const styles = StyleSheet.create({
     inputWrapper: {
         width: styleConstants.windowWidth - 32,
         marginVertical: 16,
-        alignSelf: 'center',
+        alignSelf: "center",
     },
     inputLabelContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        justifyContent: "space-between",
     },
     inputLabelText: {
         fontSize: styleConstants.smallFont,
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
     },
 
     clearTextButtonContainer: {
-        position: 'absolute',
+        position: "absolute",
         bottom: 0,
         right: 0,
         height: 45.5,
         paddingLeft: 8,
-        justifyContent: 'center',
+        justifyContent: "center",
     },
 
     togglePasswordContainer: {},
@@ -118,14 +118,10 @@ export default class Input extends React.Component {
             const inputHeight = utilities.getInputHeight(
                 styleConstants.windowWidth - 32,
                 styleConstants.regularFont,
-                this.props.value.length
+                this.props.value.length * 1.1 // 1.1, 1.2 still gives same result (necessary though)
             );
 
-            if (inputHeight > this.minimumInputHeight) {
-                this.setState({
-                    inputHeight,
-                });
-            }
+            this.adjustInputHeight(inputHeight);
         }
     }
 
@@ -155,7 +151,7 @@ export default class Input extends React.Component {
 
     clearInputText() {
         this.refs.input.focus();
-        this.props.handleChange('');
+        this.props.handleChange("");
         this.adjustInputHeight(0);
     }
 
@@ -179,7 +175,7 @@ export default class Input extends React.Component {
     }
 
     render() {
-        const togglePasswordButton = this.props.type === 'password' &&
+        const togglePasswordButton = this.props.type === "password" &&
         this.state.showTogglePasswordButton && (
             <AnimateTranslateX initialValue={40} finalValue={0} shouldAnimateIn>
                 <Touchable
@@ -190,7 +186,7 @@ export default class Input extends React.Component {
                             styles.togglePasswordText,
                             styleConstants.primaryFont,
                         ]}>
-                        {this.state.hidePassword ? 'Show' : 'Hide'}
+                        {this.state.hidePassword ? "Show" : "Hide"}
                     </Text>
                 </Touchable>
             </AnimateTranslateX>
@@ -206,7 +202,7 @@ export default class Input extends React.Component {
                             styleConstants.primaryFont,
                         ]}>
                         {(this.props.value ? this.props.value.length : 0) +
-                            ' / ' +
+                            " / " +
                             this.props.maxLength}
                     </Text>
                 </View>
@@ -228,13 +224,13 @@ export default class Input extends React.Component {
         };
 
         // Fix for ios
-        const inputContainerStyles = Platform.OS === 'ios' && {
+        const inputContainerStyles = Platform.OS === "ios" && {
             borderBottomWidth: 1,
             borderBottomColor: this.state.borderColour,
         };
 
         // Fix for Android
-        const androidInputStyles = Platform.OS === 'android' && {
+        const androidInputStyles = Platform.OS === "android" && {
             borderBottomWidth: 1,
             borderBottomColor: this.state.borderColour,
         };
@@ -260,7 +256,7 @@ export default class Input extends React.Component {
                     </View>
                     <TextInput
                         ref="input"
-                        value={this.props.value ? this.props.value : ''}
+                        value={this.props.value ? this.props.value : ""}
                         underlineColorAndroid="transparent"
                         style={[
                             styles.input,
@@ -272,14 +268,14 @@ export default class Input extends React.Component {
                         onFocus={this.focusInput}
                         onBlur={this.blurInput}
                         secureTextEntry={
-                            this.props.type === 'password' &&
+                            this.props.type === "password" &&
                             this.state.hidePassword
                         }
                         keyboardType={
                             this.props.keyboardType ? (
                                 this.props.keyboardType
                             ) : (
-                                'default'
+                                "default"
                             )
                         }
                         autoFocus={this.props.autoFocus}
