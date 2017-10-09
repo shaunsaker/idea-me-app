@@ -1,11 +1,10 @@
 BUGS IDENTIFIED IN PRODUCTION RELEASE TESTING
-    Email address in profile card should be pressable and should take me to my email client
-    Settings press from Profile menu crashed the app
-    Remove give us feedback link from Profile menu
-    Deleting a category crashed the app
     Super long idea descriptions (need to be limited and convert to scrollView when pressed)
     Multiline input did not set its height correctly on mount
-    Attempted to add landscape photo, got 'y + height must be <= bitmap.height()'
+
+BUGS TO LOOK OUT FOR
+    Deleting a category crashed the app
+    Image cropper: y + height must be <= bitmap.height() === May be caused by landscape photos that have bad data, ie. isVertical was true.
 
 WRAP UP (DONE - SAVE FOR LATER)
     Optimise code

@@ -1,8 +1,8 @@
-import { ImageEditor } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
-import ImageResizer from 'react-native-image-resizer';
+import { ImageEditor } from "react-native";
+import ImagePicker from "react-native-image-picker";
+import ImageResizer from "react-native-image-resizer";
 
-import config from '../config';
+import config from "../config";
 
 const response = {
     success: null,

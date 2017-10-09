@@ -1,22 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { View, StyleSheet } from "react-native";
+import { connect } from "react-redux";
 
-import utilities from '../utilities';
-import styleConstants from '../assets/styleConstants';
+import utilities from "../utilities";
+import styleConstants from "../assets/styleConstants";
 
-import Page from '../components/Page';
-import Header from '../components/Header';
-import ToggleButton from '../components/ToggleButton';
+import Page from "../components/Page";
+import Header from "../components/Header";
+import ToggleButton from "../components/ToggleButton";
 
 const styles = StyleSheet.create({
     settingsContainer: {
         flex: 1,
         width: styleConstants.windowWidth - 32,
         paddingVertical: 16,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        flexDirection: "row",
+        flexWrap: "wrap",
     },
 });
 
@@ -39,14 +39,14 @@ export class Settings extends React.Component {
         newSettings[settingUID].enabled = !newSettings[settingUID].enabled;
 
         this.props.dispatch({
-            type: 'UPDATE_USER_DATA',
-            node: 'settings',
+            type: "UPDATE_USER_DATA",
+            node: "settings",
             userData: newSettings,
         });
 
         this.props.dispatch({
-            type: 'saveUserData',
-            node: 'settings',
+            type: "saveUserData",
+            node: "settings",
             uid: this.props.uid,
             userData: newSettings,
         });
@@ -56,7 +56,6 @@ export class Settings extends React.Component {
         const settingsArray = utilities.convertDictionaryToArray(
             this.props.settings
         );
-        s;
         const settings = settingsArray.map(value => {
             return (
                 <ToggleButton

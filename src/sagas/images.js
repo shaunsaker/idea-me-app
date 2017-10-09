@@ -1,40 +1,40 @@
-import { call, put } from 'redux-saga/effects';
-import RNFS from 'react-native-fs';
+import { call, put } from "redux-saga/effects";
+import RNFS from "react-native-fs";
 
-import Images from '../images/index';
-import FileSystem from '../fileSystem/index';
+import Images from "../images/index";
+import FileSystem from "../fileSystem/index";
 
-import config from '../config';
-import utilities from '../utilities';
+import config from "../config";
+import utilities from "../utilities";
 
 export function* handleImage(action) {
     let imagePickerResponse;
 
-    if (action.option === 'Take a Photo') {
+    if (action.option === "Take a Photo") {
         imagePickerResponse = yield call(Images.takePhoto);
-        console.log('imagePickerResponse', imagePickerResponse);
+        console.log("imagePickerResponse", imagePickerResponse);
     } else {
         // Choose a Photo
         imagePickerResponse = yield call(Images.choosePhoto);
-        console.log('imagePickerResponse', imagePickerResponse);
+        console.log("imagePickerResponse", imagePickerResponse);
     }
 
     if (imagePickerResponse.success) {
-        const appPhotosDir = RNFS.PicturesDirectoryPath + '/' + config.app.name;
-        console.log('appPhotosDir:', appPhotosDir);
+        const appPhotosDir = RNFS.PicturesDirectoryPath + "/" + config.app.name;
+        console.log("appPhotosDir:", appPhotosDir);
 
         const createDirectoryResponse = yield call(
             FileSystem.createDirectory,
             appPhotosDir
         );
-        console.log('createDirectoryResponse', createDirectoryResponse);
+        console.log("createDirectoryResponse", createDirectoryResponse);
 
         if (createDirectoryResponse.success) {
             const outputPath =
                 createDirectoryResponse.message +
-                '/' +
+                "/" +
                 utilities.getFileName(imagePickerResponse.message.path);
-            console.log('Output path: ', outputPath);
+            console.log("Output path: ", outputPath);
 
             const transferFileOptions = {
                 path: imagePickerResponse.message.path,
@@ -42,19 +42,19 @@ export function* handleImage(action) {
             };
             let transferFileResponse; // move or copy response
 
-            if (action.option === 'Take a Photo') {
+            if (action.option === "Take a Photo") {
                 transferFileResponse = yield call(
                     FileSystem.moveFile,
                     transferFileOptions
                 );
-                console.log('transferFileResponse', transferFileResponse);
+                console.log("transferFileResponse", transferFileResponse);
             } else {
                 // Copy the file if it was chosen from an existing directory
                 transferFileResponse = yield call(
                     FileSystem.copyFile,
                     transferFileOptions
                 );
-                console.log('transferFileResponse', transferFileResponse);
+                console.log("transferFileResponse", transferFileResponse);
             }
 
             if (transferFileResponse.success) {
@@ -63,7 +63,7 @@ export function* handleImage(action) {
                     : config.images.maxImageWidth;
 
                 const imageResizerOptions = {
-                    uri: 'file:' + transferFileResponse.message,
+                    uri: "file:" + transferFileResponse.message,
                     width: imagePickerResponse.message.width,
                     height: imagePickerResponse.message.height,
                     maxWidth,
@@ -73,7 +73,7 @@ export function* handleImage(action) {
                     Images.resizeImage,
                     imageResizerOptions
                 );
-                console.log('imageResizerResponse', imageResizerResponse);
+                console.log("imageResizerResponse", imageResizerResponse);
 
                 if (imageResizerResponse.success) {
                     const imageCropperOptions = {
@@ -88,16 +88,16 @@ export function* handleImage(action) {
                         Images.cropImage,
                         imageCropperOptions
                     );
-                    console.log('imageCropperResponse', imageCropperResponse);
+                    console.log("imageCropperResponse", imageCropperResponse);
 
                     if (imageCropperResponse.success) {
                         const croppedImagePath = imageCropperResponse.message.replace(
-                            'file:',
-                            ''
+                            "file:",
+                            ""
                         );
                         const croppedImageOutputPath = utilities.appendStringToFileName(
                             transferFileResponse.message,
-                            '-cropped'
+                            "-cropped"
                         );
 
                         const moveCroppedFileOptions = {
@@ -110,55 +110,56 @@ export function* handleImage(action) {
                             moveCroppedFileOptions
                         );
                         console.log(
-                            'moveCroppedFileResponse',
+                            "moveCroppedFileResponse",
                             moveCroppedFileResponse
                         );
 
                         if (moveCroppedFileResponse.success) {
                             const image = {
                                 fullSize:
-                                    'file:' + transferFileResponse.message,
+                                    "file:" + transferFileResponse.message,
                                 cropped:
-                                    'file:' + moveCroppedFileResponse.message,
+                                    "file:" + moveCroppedFileResponse.message,
                                 uid: utilities.createUID(),
                             };
 
                             yield put({
-                                type: 'SET_TEMPORARY_IMAGE',
+                                type: "SET_TEMPORARY_IMAGE",
                                 image,
                             });
                         } else {
                             yield put({
-                                type: 'SET_ERROR',
-                                errorType: 'IMAGE',
+                                type: "SET_ERROR",
+                                errorType: "IMAGE",
                                 message: moveCroppedFileResponse.message,
                             });
                         }
                     } else {
                         yield put({
-                            type: 'SET_ERROR',
-                            errorType: 'IMAGE',
-                            message: imageCropperResponse.message,
+                            type: "SET_ERROR",
+                            errorType: "IMAGE",
+                            message:
+                                "We were unable to crop your image. Please try again with a different image.",
                         });
                     }
                 } else {
                     yield put({
-                        type: 'SET_ERROR',
-                        errorType: 'IMAGE',
+                        type: "SET_ERROR",
+                        errorType: "IMAGE",
                         message: imageResizerResponse.message,
                     });
                 }
             } else {
                 yield put({
-                    type: 'SET_ERROR',
-                    errorType: 'IMAGE',
+                    type: "SET_ERROR",
+                    errorType: "IMAGE",
                     message: transferFileResponse.message,
                 });
             }
         } else {
             yield put({
-                type: 'SET_ERROR',
-                errorType: 'IMAGE',
+                type: "SET_ERROR",
+                errorType: "IMAGE",
                 message: createDirectoryResponse.message,
             });
         }

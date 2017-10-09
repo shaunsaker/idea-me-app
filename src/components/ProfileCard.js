@@ -1,18 +1,18 @@
-import React from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Image, Text, StyleSheet } from "react-native";
 
-import Icon from '../assets/icons/index';
-import styleConstants from '../assets/styleConstants';
+import Icon from "../assets/icons/index";
+import styleConstants from "../assets/styleConstants";
 
-import Photo from './Photo';
-import Touchable from './Touchable';
-import InfoBlock from './InfoBlock';
-import Label from './Label';
+import Photo from "./Photo";
+import Touchable from "./Touchable";
+import InfoBlock from "./InfoBlock";
+import Label from "./Label";
 
 const styles = StyleSheet.create({
     cardContainer: {
         ...styleConstants.smallShadow,
-        position: 'relative',
+        position: "relative",
         width: styleConstants.windowWidth - 32,
         backgroundColor: styleConstants.realWhite,
         borderWidth: 1,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
     },
     profileImageContainer: {
-        position: 'absolute',
+        position: "absolute",
         top: 16,
         right: 16,
     },
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 37.5,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         borderWidth: 1,
         borderColor: styleConstants.lightGrey,
     },
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 37.5,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         backgroundColor: styleConstants.transPrimary,
     },
     editImageIcon: {
@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
         color: styleConstants.white,
     },
     emailContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         padding: 16,
     },
     emailIcon: {
@@ -67,10 +67,10 @@ const styles = StyleSheet.create({
         color: styleConstants.primary,
     },
     labelsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
+        flexDirection: "row",
+        justifyContent: "flex-end",
         marginTop: 16,
-        alignItems: 'flex-end',
+        alignItems: "flex-end",
     },
 });
 
@@ -86,6 +86,7 @@ export default (ProfileCard = props => {
         userName: PropTypes.string,
         userLocation: PropTypes.string,
         userEmail: PropTypes.string,
+        handleEmailPress: PropTypes.func,
         
     */
 
@@ -117,12 +118,30 @@ export default (ProfileCard = props => {
 
     const ideasLabelText =
         props.numberOfIdeas +
-        ' excellent idea' +
-        (props.numberOfIdeas > 1 ? 's' : '');
+        " excellent idea" +
+        (props.numberOfIdeas > 1 ? "s" : "");
 
     const ideasLabel = props.numberOfIdeas ? (
         <Label iconName="lightbulb" labelText={ideasLabelText} />
     ) : null;
+
+    const email = props.handleEmailPress ? (
+        <Touchable
+            onPress={props.handleEmailPress}
+            style={styles.emailContainer}>
+            <Icon name="mail" style={styles.emailIcon} />
+            <Text style={[styles.emailText, styleConstants.primaryFont]}>
+                {props.userEmail}
+            </Text>
+        </Touchable>
+    ) : (
+        <View style={styles.emailContainer}>
+            <Icon name="mail" style={styles.emailIcon} />
+            <Text style={[styles.emailText, styleConstants.primaryFont]}>
+                {props.userEmail}
+            </Text>
+        </View>
+    );
 
     return (
         <View style={styles.cardContainer}>
@@ -135,12 +154,7 @@ export default (ProfileCard = props => {
 
             {profilePhoto}
 
-            <View style={styles.emailContainer}>
-                <Icon name="mail" style={styles.emailIcon} />
-                <Text style={[styles.emailText, styleConstants.primaryFont]}>
-                    {props.userEmail}
-                </Text>
-            </View>
+            {email}
 
             <View style={styles.labelsContainer}>{ideasLabel}</View>
         </View>

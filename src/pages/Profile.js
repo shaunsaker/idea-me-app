@@ -1,22 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, Linking } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { View, Linking } from "react-native";
+import { Actions } from "react-native-router-flux";
+import { connect } from "react-redux";
 
-import config from '../config';
-import utilities from '../utilities';
-import Icon from '../assets/icons/index';
-import styleConstants from '../assets/styleConstants';
+import config from "../config";
+import utilities from "../utilities";
+import Icon from "../assets/icons/index";
+import styleConstants from "../assets/styleConstants";
 
-import Page from '../components/Page';
-import Header from '../components/Header';
-import Menu from '../components/Menu';
-import ProfileCard from '../components/ProfileCard';
-import IconButton from '../components/IconButton';
-import TabBar from '../components/TabBar';
-import ActionModal from '../modals/ActionModal';
-import SnackBar from '../widgets/SnackBar';
+import Page from "../components/Page";
+import Header from "../components/Header";
+import Menu from "../components/Menu";
+import ProfileCard from "../components/ProfileCard";
+import IconButton from "../components/IconButton";
+import TabBar from "../components/TabBar";
+import ActionModal from "../modals/ActionModal";
+import SnackBar from "../widgets/SnackBar";
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -24,7 +24,6 @@ export class Profile extends React.Component {
 
         this.toggleMenu = this.toggleMenu.bind(this);
         this.selectMenuItem = this.selectMenuItem.bind(this);
-        this.handleFeedback = this.handleFeedback.bind(this);
         this.handleContact = this.handleContact.bind(this);
         this.signOutUser = this.signOutUser.bind(this);
         this.toggleActionModal = this.toggleActionModal.bind(this);
@@ -33,14 +32,14 @@ export class Profile extends React.Component {
         // TabBar
         this.tabs = [
             {
-                title: 'Home',
-                icon: 'home',
+                title: "Home",
+                icon: "home",
                 action: () => Actions.home(),
                 active: false,
             },
             {
-                title: 'Profile',
-                icon: 'person',
+                title: "Profile",
+                icon: "person",
                 action: () => Actions.profile(),
                 active: true,
             },
@@ -72,13 +71,11 @@ export class Profile extends React.Component {
     selectMenuItem(type) {
         this.toggleMenu();
 
-        if (type === 'About App') {
+        if (type === "About App") {
             Actions.about();
-        } else if (type === 'Settings') {
+        } else if (type === "Settings") {
             Actions.settings();
-        } else if (type === 'Give us Feedback') {
-            this.handleFeedback();
-        } else if (type === 'Get in Touch') {
+        } else if (type === "Get in Touch") {
             this.handleContact();
         } else {
             // Logout
@@ -86,13 +83,9 @@ export class Profile extends React.Component {
         }
     }
 
-    handleFeedback() {
-        Linking.openURL('www.google.com');
-    }
-
     handleContact() {
         Linking.openURL(
-            'mailto:' + config.app.developer.email + '?subject=IdeaMe App'
+            "mailto:" + config.app.developer.email + "?subject=IdeaMe App"
         );
     }
 
@@ -104,7 +97,7 @@ export class Profile extends React.Component {
 
     signOutUser() {
         this.props.dispatch({
-            type: 'signOutUser',
+            type: "signOutUser",
         });
 
         Actions.welcome();
@@ -113,14 +106,14 @@ export class Profile extends React.Component {
     deletePhoto() {
         // Dispatch to store
         this.props.dispatch({
-            type: 'SET_USER_PHOTO',
+            type: "SET_USER_PHOTO",
             userPhotoUrl: null,
         });
 
         // Dispatch to db
         this.props.dispatch({
-            type: 'deleteUserData',
-            node: 'profile/userPhotoUrl',
+            type: "deleteUserData",
+            node: "profile/userPhotoUrl",
             uid: this.props.uid,
         });
     }
@@ -130,13 +123,7 @@ export class Profile extends React.Component {
 
         const menu = this.state.showMenu && (
             <Menu
-                values={[
-                    'About App',
-                    'Settings',
-                    'Give us Feedback',
-                    'Get in Touch',
-                    'Log Out',
-                ]}
+                values={["About App", "Settings", "Get in Touch", "Log Out"]}
                 handleSelect={type => this.selectMenuItem(type)}
             />
         );
@@ -158,7 +145,7 @@ export class Profile extends React.Component {
                     handleRightIconPress={this.toggleMenu}
                 />
 
-                <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={{ flex: 1, justifyContent: "center" }}>
                     <ProfileCard
                         userName={this.props.userName}
                         userPhotoUrl={
@@ -173,7 +160,7 @@ export class Profile extends React.Component {
                     />
                 </View>
 
-                <View style={{ position: 'absolute', bottom: 68, right: 16 }}>
+                <View style={{ position: "absolute", bottom: 68, right: 16 }}>
                     <IconButton
                         iconName="edit"
                         backgroundColor={styleConstants.primary}
@@ -197,9 +184,9 @@ export class Profile extends React.Component {
 function mapStateToProps(state) {
     return {
         uid: state.main.userAuth.uid,
-        userName: state.main.userData.profile.userName || 'Name',
-        userEmail: state.main.userData.profile.userEmail || 'Email',
-        userLocation: state.main.userData.profile.userLocation || 'Location',
+        userName: state.main.userData.profile.userName || "Name",
+        userEmail: state.main.userData.profile.userEmail || "Email",
+        userLocation: state.main.userData.profile.userLocation || "Location",
         userPhotoUrl: state.main.userData.profile.userPhotoUrl,
         ideas: state.main.userData.ideas,
     };
