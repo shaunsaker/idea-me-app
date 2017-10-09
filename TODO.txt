@@ -1,4 +1,16 @@
-WRAP UP
+BUGS IDENTIFIED IN PRODUCTION RELEASE TESTING
+    Splash screen should show for minimum time
+    Category press from All categories did not close dropdown button
+    Pressing the category label opened the dropdown button
+    Email address in profile card should be pressable and should take me to my email client
+    Settings press from Profile menu crashed the app
+    Remove give us feedback link from Profile menu
+    Deleting a category crashed the app
+    Super long idea descriptions (need to be limited and convert to scrollView when pressed)
+    Multiline input did not set its height correctly on mount
+    Attempted to add landscape photo, got 'y + height must be <= bitmap.height()'
+
+WRAP UP (DONE - SAVE FOR LATER)
     Optimise code
         this.props.dispatch calls should be from connected components
         Use FlatList/VirtualizedList for all lists > screen width/height
@@ -40,6 +52,7 @@ WRAP UP
         Android
         iOS        
     Test production release!
+        Airplane mode testing
     Clean Firebase
     Generate signed apk
       cd android
@@ -47,23 +60,6 @@ WRAP UP
       jarsigner -digestalg SHA1 -sigalg MD5withRSA -verbose -keystore keystores/ideaMe.keystore app/build/outputs/apk/app-release-unsigned.apk ideaMe
       zipalign -f -v 4 app/build/outputs/apk/app-release-unsigned.apk ideaMe.apk
     Deploy!
-
-BUGS IDENTIFIED IN PRODUCTION RELEASE TESTING
-    Login errors caused by no network did not give me more info
-    Category press from All categories did not close dropdown button
-    Email address in profile card should be pressable and should take me to my email client
-    Settings press from Profile menu crashed the app
-    Remove give us feedback link from Profile menu
-    Deleting a category crashed the app
-    Super long idea descriptions (need to be limited and convert to scrollView when pressed)
-    Multiline input did not set its height correctly on mount
-    Pressing the category label opened the dropdown button
-    Attempted to add landscape photo, got 'y + height must be <= bitmap.height()'
-    Forgot password success not received or loader not reset
-    Forgot password when user does not exist does nothing
-    Used incorrect password, got 'This email address is already in use' => Should be more descriptive
-    Continue anonymously + forgot password in airplane mode did nothing
-    Splash screen should show for minimum time
 
 IOS
     React-native-firebase
