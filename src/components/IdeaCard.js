@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import PropTypes from "prop-types";
+import { View, Text, StyleSheet } from "react-native";
 
-import utilities from '../utilities';
-import Icon from '../assets/icons/index';
-import styleConstants from '../assets/styleConstants';
+import utilities from "../utilities";
+import Icon from "../assets/icons/index";
+import styleConstants from "../assets/styleConstants";
 
-import Touchable from './Touchable';
-import InfoBlock from './InfoBlock';
-import Menu from './Menu';
-import IconButton from './IconButton';
-import Label from './Label';
+import Touchable from "./Touchable";
+import InfoBlock from "./InfoBlock";
+import Menu from "./Menu";
+import IconButton from "./IconButton";
+import Label from "./Label";
 
 const styles = StyleSheet.create({
     cardContainer: {
         ...styleConstants.smallShadow,
-        position: 'relative',
+        position: "relative",
         width: styleConstants.windowWidth - 32,
         flex: 1,
         backgroundColor: styleConstants.realWhite,
@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
     },
     menuIconContainer: {
-        position: 'absolute',
+        position: "absolute",
         top: 0,
         right: 0,
         width: 42,
         height: 42,
-        justifyContent: 'flex-end',
+        justifyContent: "flex-end",
     },
     menuIcon: {
         fontSize: styleConstants.iconFont,
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     },
     infoContainer: {
         flex: 1,
+        marginBottom: 8,
     },
     dateContainer: {
         marginHorizontal: 16,
@@ -49,22 +50,22 @@ const styles = StyleSheet.create({
         color: styleConstants.lightGrey,
     },
     labelsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        flexWrap: 'wrap',
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        flexWrap: "wrap",
         marginBottom: 8,
     },
     buttonsContainer: {
         ...styleConstants.smallShadow,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        justifyContent: "space-between",
         backgroundColor: styleConstants.white,
         marginHorizontal: 4,
         padding: 8,
     },
     buttonContainer: {},
     countContainer: {
-        position: 'absolute',
+        position: "absolute",
         top: 0,
         right: 0,
         backgroundColor: styleConstants.white,
@@ -125,7 +126,7 @@ export default class IdeaCard extends React.Component {
     render() {
         const menu = this.state.showMenu && (
             <Menu
-                values={['Edit', 'Share', 'Delete']}
+                values={["Edit", "Share", "Delete"]}
                 handleSelect={type => {
                     this.toggleMenu();
                     this.props.handleMenuItemSelect(type, this.props.idea);
@@ -138,10 +139,10 @@ export default class IdeaCard extends React.Component {
         );
         const categoryLabelText = this.props.idea.category
             ? this.props.idea.category
-            : 'Uncategorised';
+            : "Uncategorised";
         const priorityLabelText = this.props.idea.priority
             ? this.props.idea.priority
-            : 'Unprioritised';
+            : "Unprioritised";
         const notesCount = utilities.getLengthOfObject(this.props.idea.notes);
         const photosCount = utilities.getLengthOfObject(this.props.idea.photos);
         const voiceNotesCount = utilities.getLengthOfObject(
@@ -157,14 +158,16 @@ export default class IdeaCard extends React.Component {
                 </Touchable>
 
                 <View style={styles.infoContainer}>
-                    <InfoBlock
-                        title={this.props.idea.title}
-                        subtitle={this.props.idea.description}
-                        titleColor={styleConstants.primary}
-                        subtitleColor={styleConstants.grey}
-                        fullWidth
-                        limitDescriptionHeight
-                    />
+                    <View style={{ flex: 1 }}>
+                        <InfoBlock
+                            title={this.props.idea.title}
+                            subtitle={this.props.idea.description}
+                            titleColor={styleConstants.primary}
+                            subtitleColor={styleConstants.grey}
+                            fullWidth
+                            flex
+                        />
+                    </View>
 
                     <View style={styles.dateContainer}>
                         <Text
@@ -172,7 +175,7 @@ export default class IdeaCard extends React.Component {
                                 styles.dateText,
                                 styleConstants.primaryFont,
                             ]}>
-                            {'Created: ' + dateCreated}
+                            {"Created: " + dateCreated}
                         </Text>
                     </View>
                 </View>
@@ -197,7 +200,7 @@ export default class IdeaCard extends React.Component {
                     <View style={styles.buttonContainer}>
                         <IconButton
                             handlePress={() =>
-                                this.props.handleNotePress('Note')}
+                                this.props.handleNotePress("Note")}
                             iconName="note"
                             count={notesCount}
                         />
@@ -205,7 +208,7 @@ export default class IdeaCard extends React.Component {
                     <View style={styles.buttonContainer}>
                         <IconButton
                             handlePress={() =>
-                                this.props.handleNotePress('Photo')}
+                                this.props.handleNotePress("Photo")}
                             iconName="camera"
                             count={photosCount}
                         />
@@ -213,7 +216,7 @@ export default class IdeaCard extends React.Component {
                     <View style={styles.buttonContainer}>
                         <IconButton
                             handlePress={() =>
-                                this.props.handleNotePress('Voice Note')}
+                                this.props.handleNotePress("Voice Note")}
                             iconName="voice"
                             count={voiceNotesCount}
                         />
