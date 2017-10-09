@@ -1,23 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import React from "react";
+import PropTypes from "prop-types";
+import { View, FlatList, Text, StyleSheet } from "react-native";
+import { Actions } from "react-native-router-flux";
 
-import Icon from '../assets/icons/index';
-import styleConstants from '../assets/styleConstants';
+import Icon from "../assets/icons/index";
+import styleConstants from "../assets/styleConstants";
 
-import AnimateHeight from '../animators/AnimateHeight';
-import Touchable from './Touchable';
-import Button from './Button';
-import CategoriesButton from './CategoriesButton';
+import AnimateHeight from "../animators/AnimateHeight";
+import Touchable from "./Touchable";
+import Button from "./Button";
+import CategoriesButton from "./CategoriesButton";
 
 const styles = StyleSheet.create({
     dropdownContainer: {
-        position: 'relative',
+        position: "relative",
     },
     dropdownItemsWrapper: {
         ...styleConstants.regularShadow,
-        position: 'absolute',
+        position: "absolute",
         top: 76,
         left: 0,
         right: 0,
@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     dropdownHeader: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
         paddingVertical: 8,
         paddingHorizontal: 16,
         backgroundColor: styleConstants.realWhite,
@@ -43,23 +43,23 @@ const styles = StyleSheet.create({
     dropdownHeaderText: {
         color: styleConstants.primary,
         fontSize: styleConstants.regularFont,
-        textAlign: 'center',
+        textAlign: "center",
     },
     dropdownItem: {
-        flexDirection: 'row',
-        justifyContent: 'center',
+        flexDirection: "row",
+        justifyContent: "center",
         paddingVertical: 8,
         width: styleConstants.windowWidth - 32,
     },
     dropdownItemText: {
         color: styleConstants.primary,
         fontSize: styleConstants.regularFont,
-        textAlign: 'center',
+        textAlign: "center",
     },
     dropdownFooter: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
         paddingVertical: 8,
         paddingHorizontal: 16,
         backgroundColor: styleConstants.realWhite,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     dropdownFooterText: {
         color: styleConstants.primary,
         fontSize: styleConstants.regularFont,
-        textAlign: 'center',
+        textAlign: "center",
     },
 });
 
@@ -154,7 +154,7 @@ export default class DropdownButton extends React.Component {
 
         const pushContentStyles = this.props.pushContent
             ? {
-                  position: 'relative',
+                  position: "relative",
                   top: 8,
                   marginTop: 0,
               }
@@ -183,7 +183,7 @@ export default class DropdownButton extends React.Component {
             <Touchable
                 style={styles.dropdownFooter}
                 onPress={() => {
-                    this.handleSelect('Edit Categories');
+                    this.handleSelect("Edit Categories");
                 }}>
                 <Icon name="edit" style={styles.dropdownFooterIcon} />
                 <Text
@@ -192,9 +192,9 @@ export default class DropdownButton extends React.Component {
                         styleConstants.primaryFont,
                     ]}>
                     {this.props.values && this.props.values.length ? (
-                        'Edit Categories'
+                        "Edit Categories"
                     ) : (
-                        'Add a Category'
+                        "Add a Category"
                     )}
                 </Text>
             </Touchable>
@@ -208,7 +208,7 @@ export default class DropdownButton extends React.Component {
                 shouldAnimateOut={!this.state.isExpanded}
                 style={[styles.dropdownItemsWrapper, pushContentStyles]}>
                 <FlatList
-                    keyExtractor={item => 'category-' + item.uid}
+                    keyExtractor={item => "category-" + item.uid}
                     ref="itemList"
                     data={this.props.values}
                     renderItem={this.renderItem}

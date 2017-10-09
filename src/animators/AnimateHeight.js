@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Animated } from 'react-native';
+import React from "react";
+import PropTypes from "prop-types";
+import { Animated } from "react-native";
 
-import config from '../config';
+import config from "../config";
 
 export default class AnimateHeight extends React.Component {
     constructor(props) {
@@ -51,10 +51,11 @@ export default class AnimateHeight extends React.Component {
     componentDidUpdate(prevProps) {
         // Use case where update used as onMount (see componentDidMount)
         const shouldAnimateOnUpdate =
-            (this.props.initialValue &&
+            !this.props.shouldAnimateOut &&
+            ((this.props.initialValue &&
                 this.props.initialValue !== prevProps.initialValue) ||
-            (this.props.finalValue &&
-                this.props.finalValue !== prevProps.finalValue);
+                (this.props.finalValue &&
+                    this.props.finalValue !== prevProps.finalValue));
 
         if (shouldAnimateOnUpdate) {
             this.animateIn();
